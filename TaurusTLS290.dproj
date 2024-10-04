@@ -235,6 +235,7 @@
         <DCCReference Include="TaurusTLSHeaders_x509v3.pas"/>
         <DCCReference Include="IdSSLTaurusTLSExceptionHandlers.pas"/>
         <DCCReference Include="IdSSLTaurusTLSFIPS.pas"/>
+        <DCCReference Include="IdNTLMTaurusTLS.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

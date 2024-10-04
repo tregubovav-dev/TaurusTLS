@@ -122,7 +122,8 @@ contains
   TaurusTLSHeaders_x509err in 'TaurusTLSHeaders_x509err.pas',
   TaurusTLSHeaders_x509v3 in 'TaurusTLSHeaders_x509v3.pas',
   IdSSLTaurusTLSExceptionHandlers in 'IdSSLTaurusTLSExceptionHandlers.pas',
-  IdSSLTaurusTLSFIPS in 'IdSSLTaurusTLSFIPS.pas';
+  IdSSLTaurusTLSFIPS in 'IdSSLTaurusTLSFIPS.pas',
+  IdNTLMTaurusTLS in 'IdNTLMTaurusTLS.pas';
 
 end.
 

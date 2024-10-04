@@ -34,7 +34,7 @@ unit TaurusTLSHeaders_sslerr;
 
 interface
 
-// Headers for TaurusTLS 1.1.1
+// Headers for OpenSSL 1.1.1
 // sslerr.h
 
 

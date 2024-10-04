@@ -33,7 +33,8 @@ requires
   dclIndyProtocols290,
   IndyCore290,
   IndyProtocols290,
-  IndySystem290;
+  IndySystem290,
+  TaurusTLS290;
 
 contains
   IdRegisterTaurusTLS in 'IdRegisterTaurusTLS.pas';

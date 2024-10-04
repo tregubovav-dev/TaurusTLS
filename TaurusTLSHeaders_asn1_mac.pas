@@ -34,7 +34,7 @@ unit TaurusTLSHeaders_asn1_mac;
 
 interface
 
-// Headers for TaurusTLS 1.1.1
+// Headers for OpenSSL 1.1.1
 // asn1_mac.h
 
 {.$i IdCompilerDefines.inc}

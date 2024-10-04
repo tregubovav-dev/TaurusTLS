@@ -1,4 +1,4 @@
-  (* This unit was generated using the script genTaurusTLSHdrs.sh from the source file TaurusTLSHeaders_aes.h2pas
+﻿  (* This unit was generated using the script genTaurusTLSHdrs.sh from the source file TaurusTLSHeaders_aes.h2pas
      It should not be modified directly. All changes should be made to TaurusTLSHeaders_aes.h2pas
      and this file regenerated. TaurusTLSHeaders_aes.h2pas is distributed with the full Indy
      Distribution.
@@ -34,7 +34,7 @@ unit TaurusTLSHeaders_aes;
 
 interface
 
-// Headers for TaurusTLS 1.1.1
+// Headers for OpenSSL 1.1.1
 // aes.h
 
 

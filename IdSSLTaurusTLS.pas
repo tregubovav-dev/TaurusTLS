@@ -2905,10 +2905,10 @@ initialization
   SSLIsLoaded := TIdThreadSafeBoolean.Create;
 
   {$I IdSymbolDeprecatedOff.inc}
-  RegisterSSL('TaurusTLS','Indy Pit Crew',                                  {do not localize}
-    'Copyright '+Char(169)+' 1993 - 2014'#10#13 +                         {do not localize}
-    'Chad Z. Hower (Kudzu) and the Indy Pit Crew. All rights reserved.',  {do not localize}
-    'Open SSL Support DLL Delphi and C++Builder interface',               {do not localize}
+  RegisterSSL('TaurusTLS','TaurusTLS Developers',                                  {do not localize}
+    'Copyright '+Char(169)+' 2014'#10#13 +                         {do not localize}
+    'TaurusTLS Developers. All rights reserved.',  {do not localize}
+    'Open SSL 1.1.1 and 3.x DLL Delphi and C++Builder interface',               {do not localize}
     'http://www.indyproject.org/'#10#13 +                                 {do not localize}
     'Original Author - Gregor Ibic',                                      {do not localize}
     TIdSSLIOHandlerSocketTaurusTLS,

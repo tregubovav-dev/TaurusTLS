@@ -34,7 +34,7 @@ unit TaurusTLSHeaders_x509err;
 
 interface
 
-// Headers for TaurusTLS 1.1.1
+// Headers for OpenSSL 1.1.1
 // x509err.h
 
 

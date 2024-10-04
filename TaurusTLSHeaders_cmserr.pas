@@ -34,7 +34,7 @@ unit TaurusTLSHeaders_cmserr;
 
 interface
 
-// Headers for TaurusTLS 1.1.1
+// Headers for OpenSSl 1.1.1
 // cmserr.h
 
 

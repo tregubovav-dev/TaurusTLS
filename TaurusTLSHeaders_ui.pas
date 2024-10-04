@@ -34,7 +34,7 @@ unit TaurusTLSHeaders_ui;
 
 interface
 
-// Headers for TaurusTLS 1.1.1
+// Headers for OpenSSL 1.1.1
 // ui.h
 
 

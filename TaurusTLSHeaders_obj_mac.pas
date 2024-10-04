@@ -34,7 +34,7 @@ unit TaurusTLSHeaders_obj_mac;
 
 interface
 
-// Headers for TaurusTLS 1.1.1
+// Headers for OpenSSL 1.1.1
 // obj_mac.h
 
 

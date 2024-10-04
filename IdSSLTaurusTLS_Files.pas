@@ -5,7 +5,10 @@ interface
 {*  TaurusTLS                                                                 *}
 {*           https://github.com/JPeterMugaas/TaurusTLS                        *}
 {*                                                                            *}
-{*  Copyright (c) 2024 Taurus Developers, All Rights Reserved                 *}
+{*  Copyright (c) 2024 TaurusTLS Developers, All Rights Reserved              *}
+{*                                                                            *}
+{* Portions of this software are Copyright (c) 1993 – 2018,                   *}
+{* Chad Z. Hower (Kudzu) and the Indy Pit Crew – http://www.IndyProject.org/  *}
 {******************************************************************************}
 {$I IdCompilerDefines.inc}
 {$i IdSSLTaurusTLSDefines.inc}

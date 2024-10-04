@@ -1,12 +1,12 @@
-{
-  This file is part of the Indy (Internet Direct) project, and is offered
-  under the dual-licensing agreement described on the Indy website.
-  (http://www.indyproject.org/)
-
-  Copyright:
-   (c) 1993-2024, Chad Z. Hower and the Indy Pit Crew. All rights reserved.
-}
-
+{******************************************************************************}
+{*  TaurusTLS                                                                 *}
+{*           https://github.com/JPeterMugaas/TaurusTLS                        *}
+{*                                                                            *}
+{*  Copyright (c) 2024 TaurusTLS Developers, All Rights Reserved              *}
+{*                                                                            *}
+{* Portions of this software are Copyright (c) 1993 – 2018,                   *}
+{* Chad Z. Hower (Kudzu) and the Indy Pit Crew – http://www.IndyProject.org/  *}
+{******************************************************************************}
 unit IdRegisterTaurusTLS;
 
 

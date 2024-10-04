@@ -3,26 +3,15 @@ unit TaurusTLSHeaders_safestack;
 {$i IdCompilerDefines.inc}
 {$i IdSSLTaurusTLSDefines.inc}
 
-{ ****************************************************************************** }
-{ }
-{ Indy (Internet Direct) - Internet Protocols Simplified }
-{ }
-{ https://www.indyproject.org/ }
-{ https://gitter.im/IndySockets/Indy }
-{ }
-{ ****************************************************************************** }
-{ }
-{ This file is part of the Indy (Internet Direct) project, and is offered }
-{ under the dual-licensing agreement described on the Indy website. }
-{ (https://www.indyproject.org/license/) }
-{ }
-{ Copyright: }
-{ (c) 1993-2020, Chad Z. Hower and the Indy Pit Crew. All rights reserved. }
-{ }
-{ ****************************************************************************** }
-{ }
-{ }
-{ ****************************************************************************** }
+{******************************************************************************}
+{*  TaurusTLS                                                                 *}
+{*           https://github.com/JPeterMugaas/TaurusTLS                        *}
+{*                                                                            *}
+{*  Copyright (c) 2024 TaurusTLS Developers, All Rights Reserved              *}
+{*                                                                            *}
+{* Portions of this software are Copyright (c) 1993 – 2018,                   *}
+{* Chad Z. Hower (Kudzu) and the Indy Pit Crew – http://www.IndyProject.org/  *}
+{******************************************************************************}
 interface
 
 uses

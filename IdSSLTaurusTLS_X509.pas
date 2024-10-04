@@ -1,4 +1,10 @@
 unit IdSSLTaurusTLS_X509;
+{******************************************************************************}
+{*  TaurusTLS                                                                 *}
+{*           https://github.com/JPeterMugaas/TaurusTLS                        *}
+{*                                                                            *}
+{*  Copyright (c) 2024 Taurus Developers, All Rights Reserved                 *}
+{******************************************************************************}
 {$I IdCompilerDefines.inc}
 {$i IdSSLTaurusTLSDefines.inc}
 interface

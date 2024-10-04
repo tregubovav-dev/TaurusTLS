@@ -1,6 +1,12 @@
 unit IdSSLTaurusTLS_Files;
 
 interface
+{******************************************************************************}
+{*  TaurusTLS                                                                 *}
+{*           https://github.com/JPeterMugaas/TaurusTLS                        *}
+{*                                                                            *}
+{*  Copyright (c) 2024 Taurus Developers, All Rights Reserved                 *}
+{******************************************************************************}
 {$I IdCompilerDefines.inc}
 {$i IdSSLTaurusTLSDefines.inc}
 uses

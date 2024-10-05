@@ -4173,7 +4173,7 @@ begin
 
 
   X509_REQ_get1_email := LoadLibFunction(ADllHandle,  X509_REQ_get1_email_procname);
-  FuncLoadError := not assigned(X509_get1_email);
+  FuncLoadError := not assigned(X509_REQ_get1_email);
   if FuncLoadError then
   begin
     {$if not defined(X509_REQ_get1_email_allownil)}

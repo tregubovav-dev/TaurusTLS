@@ -52,6 +52,9 @@
 //Define for Delphi cross-compiler targetting Posix
 {$UNDEF USE_VCL_POSIX}
 
+//Define for Delphi 10.3 inline variable declarion availability
+{$UNDEF USE_INLINE_VAR}
+
 // detect compiler versions
 
 {$IFNDEF FPC}
@@ -670,6 +673,7 @@
 
 {$IFDEF VCL_10_3_OR_ABOVE}
   {$DEFINE VCL_10_2_OR_ABOVE}
+  {$DEFINE USE_INLINE_VAR}
 {$ELSE}
   {$IFDEF VCL_10_2}
     {$DEFINE VCL_10_2_OR_ABOVE}

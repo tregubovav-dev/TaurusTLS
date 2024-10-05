@@ -157,13 +157,13 @@ begin
   inherited;
 end;
 
+function DoLoadLibrary(const FullLibName: string): TIdLibHandle;
+{$IFDEF USE_INLINE}inline;{$ENDIF}
+begin
+  Result := SafeLoadLibrary(FullLibName, {$IFDEF WINDOWS}SEM_FAILCRITICALERRORS {$ELSE} 0 {$ENDIF});
+end;
+
 function TOpenSSLLoader.FindLibrary(const LibName, LibVersions: string): TIdLibHandle;
-
-  function DoLoadLibrary(const FullLibName: string): TIdLibHandle;
-  begin
-    Result := SafeLoadLibrary(FullLibName, {$IFDEF WINDOWS}SEM_FAILCRITICALERRORS {$ELSE} 0 {$ENDIF});
-  end;
-
 var LibVersionsList: TStringList;
   i: integer;
 begin

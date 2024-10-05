@@ -49,7 +49,7 @@ type
  * turns a 56 bit key into the 64 bit, odd parity key and sets the key.
  * The key schedule ks is also set.
  */}
-procedure setup_des_key(key_56: des_cblock; Var ks: des_key_schedule);
+procedure setup_des_key(const key_56: des_cblock; Var ks: des_key_schedule);
 Var
   key: des_cblock;
 begin

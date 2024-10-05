@@ -6,10 +6,10 @@
         <FrameworkType>FMX</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
-        <ProjectName Condition="'$(ProjectName)'==''">TaurusTLS290</ProjectName>
+        <Platform Condition="'$(Platform)'==''">Win64x</Platform>
         <TargetedPlatforms>1048579</TargetedPlatforms>
         <AppType>Package</AppType>
+        <ProjectName Condition="'$(ProjectName)'==''">TaurusTLS290</ProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -81,6 +81,8 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=TarusTLS Developers;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=$(MSBuildProjectName);LegalCopyright=Copyright (c) 2024 TaurusTLS Developers;LegalTrademarks=;OriginalFilename=$(MSBuildProjectName).bpl;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <RuntimeOnlyPackage>true</RuntimeOnlyPackage>
+        <DCC_Description>TaurusTLS Run-Time package</DCC_Description>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
         <DCC_CBuilderOutput>None</DCC_CBuilderOutput>
@@ -129,8 +131,7 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -146,13 +147,13 @@
         <DCCReference Include="IndyProtocols290.dcp"/>
         <DCCReference Include="IndySystem290.dcp"/>
         <DCCReference Include="IndyCore290.dcp"/>
-        <DCCReference Include="IdResourceStringsTaurusTLS.pas"/>
-        <DCCReference Include="IdSSLTaurusTLS.pas"/>
-        <DCCReference Include="IdSSLTaurusTLS_Files.pas"/>
-        <DCCReference Include="IdSSLTaurusTLS_Utils.pas"/>
-        <DCCReference Include="IdSSLTaurusTLS_X509.pas"/>
-        <DCCReference Include="IdSSLTaurusTLSConsts.pas"/>
-        <DCCReference Include="IdSSLTaurusTLSLoader.pas"/>
+        <DCCReference Include="TaurusTLS_ResourceStrings.pas"/>
+        <DCCReference Include="TaurusTLS.pas"/>
+        <DCCReference Include="TaurusTLS_Files.pas"/>
+        <DCCReference Include="TaurusTLS_Utils.pas"/>
+        <DCCReference Include="TaurusTLS_X509.pas"/>
+        <DCCReference Include="TaurusTLSConsts.pas"/>
+        <DCCReference Include="TaurusTLSLoader.pas"/>
         <DCCReference Include="TaurusTLS_FIPS.pas"/>
         <DCCReference Include="TaurusTLSHeaders_aes.pas"/>
         <DCCReference Include="TaurusTLSHeaders_asn1.pas"/>
@@ -233,9 +234,9 @@
         <DCCReference Include="TaurusTLSHeaders_x509_vfy.pas"/>
         <DCCReference Include="TaurusTLSHeaders_x509err.pas"/>
         <DCCReference Include="TaurusTLSHeaders_x509v3.pas"/>
-        <DCCReference Include="IdSSLTaurusTLSExceptionHandlers.pas"/>
-        <DCCReference Include="IdSSLTaurusTLSFIPS.pas"/>
-        <DCCReference Include="IdNTLMTaurusTLS.pas"/>
+        <DCCReference Include="TaurusTLSExceptionHandlers.pas"/>
+        <DCCReference Include="TaurusTLSFIPS.pas"/>
+        <DCCReference Include="ITaurusTLS_NTLM.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -257,6 +258,7 @@
                     <Source Name="MainSource">TaurusTLS290.dpk</Source>
                 </Source>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\23.0\Bpl\TaurusTLS290.bpl">(untitled)</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclemsedge290.bpl">Embarcadero RAD Server Edge Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k290.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp290.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>

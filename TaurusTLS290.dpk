@@ -25,6 +25,8 @@ package TaurusTLS290;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'TaurusTLS Run-Time package'}
+{$RUNONLY}
 {$IMPLICITBUILD ON}
 
 requires
@@ -34,13 +36,13 @@ requires
   IndyCore290;
 
 contains
-  IdResourceStringsTaurusTLS in 'IdResourceStringsTaurusTLS.pas',
-  IdSSLTaurusTLS in 'IdSSLTaurusTLS.pas',
-  IdSSLTaurusTLS_Files in 'IdSSLTaurusTLS_Files.pas',
-  IdSSLTaurusTLS_Utils in 'IdSSLTaurusTLS_Utils.pas',
-  IdSSLTaurusTLS_X509 in 'IdSSLTaurusTLS_X509.pas',
-  IdSSLTaurusTLSConsts in 'IdSSLTaurusTLSConsts.pas',
-  IdSSLTaurusTLSLoader in 'IdSSLTaurusTLSLoader.pas',
+  TaurusTLS_ResourceStrings in 'TaurusTLS_ResourceStrings.pas',
+  TaurusTLS in 'TaurusTLS.pas',
+  TaurusTLS_Files in 'TaurusTLS_Files.pas',
+  TaurusTLS_Utils in 'TaurusTLS_Utils.pas',
+  TaurusTLS_X509 in 'TaurusTLS_X509.pas',
+  TaurusTLSConsts in 'TaurusTLSConsts.pas',
+  TaurusTLSLoader in 'TaurusTLSLoader.pas',
   TaurusTLS_FIPS in 'TaurusTLS_FIPS.pas',
   TaurusTLSHeaders_aes in 'TaurusTLSHeaders_aes.pas',
   TaurusTLSHeaders_asn1 in 'TaurusTLSHeaders_asn1.pas',
@@ -121,9 +123,9 @@ contains
   TaurusTLSHeaders_x509_vfy in 'TaurusTLSHeaders_x509_vfy.pas',
   TaurusTLSHeaders_x509err in 'TaurusTLSHeaders_x509err.pas',
   TaurusTLSHeaders_x509v3 in 'TaurusTLSHeaders_x509v3.pas',
-  IdSSLTaurusTLSExceptionHandlers in 'IdSSLTaurusTLSExceptionHandlers.pas',
-  IdSSLTaurusTLSFIPS in 'IdSSLTaurusTLSFIPS.pas',
-  IdNTLMTaurusTLS in 'IdNTLMTaurusTLS.pas';
+  TaurusTLSExceptionHandlers in 'TaurusTLSExceptionHandlers.pas',
+  TaurusTLSFIPS in 'TaurusTLSFIPS.pas',
+  ITaurusTLS_NTLM in 'ITaurusTLS_NTLM.pas';
 
 end.
 

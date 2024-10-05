@@ -8,7 +8,7 @@
 {* Chad Z. Hower (Kudzu) and the Indy Pit Crew – http://www.IndyProject.org/  *}
 {******************************************************************************}
 
-unit IdSSLTaurusTLSLoader;
+unit TaurusTLSLoader;
 
 {$IFDEF MSWINDOWS}
 {$DEFINE WINDOWS}
@@ -54,14 +54,14 @@ procedure Register_SSLUnloader(UnloadProc: TOpenSSLUnloadProc);
 implementation
 
 uses
-  IdSSLTaurusTLSExceptionHandlers,
-  IdResourceStringsTaurusTLS
+  TaurusTLSExceptionHandlers,
+  TaurusTLS_ResourceStrings
 
 {$IFNDEF OPENSSL_STATIC_LINK_MODEL}
   {$IFDEF WINDOWS},Windows{$ENDIF}
   {$IFDEF FPC},dynlibs{$ENDIF}
 
-  ,IdSSLTaurusTLSConsts,
+  ,TaurusTLSConsts,
   IdThreadSafe,
   SysUtils
 {$ENDIF}

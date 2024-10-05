@@ -7,7 +7,7 @@
 {* Portions of this software are Copyright (c) 1993 – 2018,                   *}
 {* Chad Z. Hower (Kudzu) and the Indy Pit Crew – http://www.IndyProject.org/  *}
 {******************************************************************************}
-unit IdSSLTaurusTLSFIPS;
+unit TaurusTLSFIPS;
 
 {$i IdCompilerDefines.inc}
 {$i IdSSLTaurusTLSDefines.inc}
@@ -24,8 +24,8 @@ uses
   IdGlobal,
   IdCTypes,
   IdFIPS,
-  IdSSLTaurusTLSExceptionHandlers,
-  IdResourceStringsTaurusTLS,
+  TaurusTLSExceptionHandlers,
+  TaurusTLS_ResourceStrings,
   TaurusTLSHeaders_evp,
   TaurusTLSHeaders_crypto,
   TaurusTLSHeaders_hmac,

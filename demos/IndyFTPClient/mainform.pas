@@ -15,7 +15,7 @@ uses
   IdIntercept, IdLogBase, IdLogEvent, Vcl.Menus, Vcl.StdActns,
   IdZLibCompressorBase, IdCompressorZLib, IdSync, IdConnectThroughHttpProxy,
   IdCustomTransparentProxy, IdSocks,
-  TaurusTLSHeaders_ossl_typ, IdSSLTaurusTLS_X509, IdSSLTaurusTLS;
+  TaurusTLSHeaders_ossl_typ, TaurusTLS_X509, TaurusTLS;
 
 type
   TfrmMainForm = class(TForm)
@@ -421,7 +421,7 @@ uses dkgFTPConnect, settingsdlg, frmAbout, frmBookmarks, CertViewer,
   IdException,
   IdAllFTPListParsers,
   IdFTPCommon,
-  IdFTPList, IdGlobal, IdGlobalProtocols, IdReplyRFC, IdSSLTaurusTLSLoader,
+  IdFTPList, IdGlobal, IdGlobalProtocols, IdReplyRFC, TaurusTLSLoader,
   System.IOUtils, System.IniFiles, System.UITypes,
   Winapi.CommCtrl, ProgUtils, AcceptableCerts;
 

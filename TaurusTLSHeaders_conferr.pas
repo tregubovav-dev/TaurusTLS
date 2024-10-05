@@ -1,23 +1,23 @@
-  (* This unit was generated using the script genTaurusTLSHdrs.sh from the source file TaurusTLSHeaders_conferr.h2pas
-     It should not be modified directly. All changes should be made to TaurusTLSHeaders_conferr.h2pas
-     and this file regenerated. TaurusTLSHeaders_conferr.h2pas is distributed with the full Indy
-     Distribution.
-   *)
-   
-{$i IdCompilerDefines.inc} 
-{$i IdSSLTaurusTLSDefines.inc} 
+(* This unit was generated using the script genTaurusTLSHdrs.sh from the source file TaurusTLSHeaders_conferr.h2pas
+  It should not be modified directly. All changes should be made to TaurusTLSHeaders_conferr.h2pas
+  and this file regenerated. TaurusTLSHeaders_conferr.h2pas is distributed with the full Indy
+  Distribution.
+*)
+
+{$I IdCompilerDefines.inc}
+{$I IdSSLTaurusTLSDefines.inc}
 {$IFNDEF USE_OPENSSL}
-  { error Should not compile if USE_OPENSSL is not defined!!!}
+{ error Should not compile if USE_OPENSSL is not defined!!! }
 {$ENDIF}
-{******************************************************************************}
-{*  TaurusTLS                                                                 *}
-{*           https://github.com/JPeterMugaas/TaurusTLS                        *}
-{*                                                                            *}
-{*  Copyright (c) 2024 TaurusTLS Developers, All Rights Reserved              *}
-{*                                                                            *}
-{* Portions of this software are Copyright (c) 1993 – 2018,                   *}
-{* Chad Z. Hower (Kudzu) and the Indy Pit Crew – http://www.IndyProject.org/  *}
-{******************************************************************************}
+{ ****************************************************************************** }
+{ *  TaurusTLS                                                                 * }
+{ *           https://github.com/JPeterMugaas/TaurusTLS                        * }
+{ *                                                                            * }
+{ *  Copyright (c) 2024 TaurusTLS Developers, All Rights Reserved              * }
+{ *                                                                            * }
+{ * Portions of this software are Copyright (c) 1993 – 2018,                   * }
+{ * Chad Z. Hower (Kudzu) and the Indy Pit Crew – http://www.IndyProject.org/  * }
+{ ****************************************************************************** }
 
 unit TaurusTLSHeaders_conferr;
 
@@ -26,14 +26,13 @@ interface
 // Headers for OpenSSL 1.1.1
 // conferr.h
 
-
 uses
   IdCTypes,
   IdGlobal,
-  IdSSLTaurusTLSConsts;
+  TaurusTLSConsts;
 
 const
-  ///*
+  /// *
   // * CONF function codes.
   // */
   CONF_F_CONF_DUMP_FP = 104;
@@ -60,7 +59,7 @@ const
   CONF_F_SSL_MODULE_INIT = 123;
   CONF_F_STR_COPY = 101;
 
-  ///*
+  /// *
   // * CONF reason codes.
   // */
   CONF_R_ERROR_LOADING_DSO = 110;
@@ -86,84 +85,85 @@ const
   CONF_R_VARIABLE_EXPANSION_TOO_LONG = 116;
   CONF_R_VARIABLE_HAS_NO_VALUE = 104;
 
-    { The EXTERNALSYM directive is ignored by FPC, however, it is used by Delphi as follows:
-		
-  	  The EXTERNALSYM directive prevents the specified Delphi symbol from appearing in header 
-	  files generated for C++. }
-	  
-  {$EXTERNALSYM ERR_load_CONF_strings}
+  { The EXTERNALSYM directive is ignored by FPC, however, it is used by Delphi as follows:
 
+    The EXTERNALSYM directive prevents the specified Delphi symbol from appearing in header
+    files generated for C++. }
+
+{$EXTERNALSYM ERR_load_CONF_strings}
 {$IFNDEF OPENSSL_STATIC_LINK_MODEL}
+
 var
-  ERR_load_CONF_strings: function : TIdC_INT; cdecl = nil;
+  ERR_load_CONF_strings: function: TIdC_INT;
+cdecl = nil;
 
 {$ELSE}
-  function ERR_load_CONF_strings: TIdC_INT cdecl; external CLibCrypto;
+function ERR_load_CONF_strings: TIdC_INT cdecl; external CLibCrypto;
 
 {$ENDIF}
 
 implementation
 
-  uses
-    classes, 
-    IdSSLTaurusTLSExceptionHandlers, 
-    IdResourceStringsTaurusTLS
-  {$IFNDEF OPENSSL_STATIC_LINK_MODEL}
-    ,IdSSLTaurusTLSLoader
-  {$ENDIF};
-  
+uses
+  classes,
+  TaurusTLSExceptionHandlers,
+  TaurusTLS_ResourceStrings
+{$IFNDEF OPENSSL_STATIC_LINK_MODEL}
+    , TaurusTLSLoader
+{$ENDIF};
 
 {$IFNDEF OPENSSL_STATIC_LINK_MODEL}
+
 const
   ERR_load_CONF_strings_procname = 'ERR_load_CONF_strings';
 
-
 {$WARN  NO_RETVAL OFF}
-function  ERR_ERR_load_CONF_strings: TIdC_INT; 
+
+function ERR_ERR_load_CONF_strings: TIdC_INT;
 begin
   EIdAPIFunctionNotPresent.RaiseException(ERR_load_CONF_strings_procname);
 end;
 
-
-
 {$WARN  NO_RETVAL ON}
 
-procedure Load(const ADllHandle: TIdLibHandle; LibVersion: TIdC_UINT; const AFailed: TStringList);
+procedure Load(const ADllHandle: TIdLibHandle; LibVersion: TIdC_UINT;
+  const AFailed: TStringList);
 
-var FuncLoadError: boolean;
+var
+  FuncLoadError: boolean;
 
 begin
-  ERR_load_CONF_strings := LoadLibFunction(ADllHandle, ERR_load_CONF_strings_procname);
+  ERR_load_CONF_strings := LoadLibFunction(ADllHandle,
+    ERR_load_CONF_strings_procname);
   FuncLoadError := not assigned(ERR_load_CONF_strings);
   if FuncLoadError then
   begin
-    {$if not defined(ERR_load_CONF_strings_allownil)}
+{$IF not defined(ERR_load_CONF_strings_allownil)}
     ERR_load_CONF_strings := @ERR_ERR_load_CONF_strings;
-    {$ifend}
-    {$if declared(ERR_load_CONF_strings_introduced)}
+{$IFEND}
+{$IF declared(ERR_load_CONF_strings_introduced)}
     if LibVersion < ERR_load_CONF_strings_introduced then
     begin
-      {$if declared(FC_ERR_load_CONF_strings)}
+{$IF declared(FC_ERR_load_CONF_strings)}
       ERR_load_CONF_strings := @FC_ERR_load_CONF_strings;
-      {$ifend}
+{$IFEND}
       FuncLoadError := false;
     end;
-    {$ifend}
-    {$if declared(ERR_load_CONF_strings_removed)}
+{$IFEND}
+{$IF declared(ERR_load_CONF_strings_removed)}
     if ERR_load_CONF_strings_removed <= LibVersion then
     begin
-      {$if declared(_ERR_load_CONF_strings)}
+{$IF declared(_ERR_load_CONF_strings)}
       ERR_load_CONF_strings := @_ERR_load_CONF_strings;
-      {$ifend}
+{$IFEND}
       FuncLoadError := false;
     end;
-    {$ifend}
-    {$if not defined(ERR_load_CONF_strings_allownil)}
+{$IFEND}
+{$IF not defined(ERR_load_CONF_strings_allownil)}
     if FuncLoadError then
       AFailed.Add('ERR_load_CONF_strings');
-    {$ifend}
+{$IFEND}
   end;
-
 
 end;
 
@@ -173,10 +173,12 @@ begin
 end;
 {$ELSE}
 {$ENDIF}
-
 {$IFNDEF OPENSSL_STATIC_LINK_MODEL}
+
 initialization
-  Register_SSLLoader(@Load,'LibCrypto');
-  Register_SSLUnloader(@Unload);
+
+Register_SSLLoader(@Load, 'LibCrypto');
+Register_SSLUnloader(@Unload);
 {$ENDIF}
+
 end.

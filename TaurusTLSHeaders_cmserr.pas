@@ -29,7 +29,7 @@ interface
 uses
   IdCTypes,
   IdGlobal,
-  IdSSLTaurusTLSConsts;
+  TaurusTLSConsts;
 
 const
   //
@@ -226,10 +226,10 @@ implementation
 
   uses
     classes, 
-    IdSSLTaurusTLSExceptionHandlers, 
-    IdResourceStringsTaurusTLS
+    TaurusTLSExceptionHandlers,
+    TaurusTLS_ResourceStrings
   {$IFNDEF OPENSSL_STATIC_LINK_MODEL}
-    ,IdSSLTaurusTLSLoader
+    ,TaurusTLSLoader
   {$ENDIF};
   
 
@@ -239,7 +239,7 @@ const
 
 
 {$WARN  NO_RETVAL OFF}
-function  ERR_ERR_load_CMS_strings: TIdC_INT; 
+function  ERR_ERR_load_CMS_strings: TIdC_INT;
 begin
   EIdAPIFunctionNotPresent.RaiseException(ERR_load_CMS_strings_procname);
 end;

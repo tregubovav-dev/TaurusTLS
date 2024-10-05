@@ -7,7 +7,7 @@
 {* Portions of this software are Copyright (c) 1993 – 2018,                   *}
 {* Chad Z. Hower (Kudzu) and the Indy Pit Crew – http://www.IndyProject.org/  *}
 {******************************************************************************}
-unit IdSSLTaurusTLSExceptionHandlers;
+unit TaurusTLSExceptionHandlers;
 
 {$I IdCompilerDefines.inc}
 
@@ -60,7 +60,7 @@ implementation
 
 uses TaurusTLSHeaders_err, IdGlobal, TaurusTLSHeaders_ssl,
   TaurusTLSHeaders_ossl_typ, IdResourceStringsProtocols,
-  IdStack, IdResourceStringsTaurusTLS;
+  IdStack, TaurusTLS_ResourceStrings;
 
 function GetErrorMessage(const AErr : TIdC_ULONG) : String;
 {$IFDEF USE_INLINE} inline; {$ENDIF}

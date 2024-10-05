@@ -15,7 +15,7 @@ uses
   IdFTPServerContextBase,
   IdStack,
   IdSSL,
-  IdSSLTaurusTLS,
+  TaurusTLS,
   System.Classes,
   System.IniFiles,
   System.SysUtils,

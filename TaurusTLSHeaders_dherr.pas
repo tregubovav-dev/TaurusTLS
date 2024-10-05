@@ -30,7 +30,7 @@ interface
 uses
   IdCTypes,
   IdGlobal,
-  IdSSLTaurusTLSConsts;
+  TaurusTLSConsts;
 
 const
   // DH function codes
@@ -108,11 +108,11 @@ var
 implementation
 
   uses
-    classes, 
-    IdSSLTaurusTLSExceptionHandlers, 
-    IdResourceStringsTaurusTLS
+    classes,
+    TaurusTLSExceptionHandlers,
+    TaurusTLS_ResourceStrings
   {$IFNDEF OPENSSL_STATIC_LINK_MODEL}
-    ,IdSSLTaurusTLSLoader
+    ,TaurusTLSLoader
   {$ENDIF};
   
 

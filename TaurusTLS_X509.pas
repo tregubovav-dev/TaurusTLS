@@ -1,4 +1,4 @@
-unit IdSSLTaurusTLS_X509;
+unit TaurusTLS_X509;
 {******************************************************************************}
 {*  TaurusTLS                                                                 *}
 {*           https://github.com/JPeterMugaas/TaurusTLS                        *}
@@ -19,7 +19,7 @@ uses
   TaurusTLSHeaders_ossl_typ,
   TaurusTLSHeaders_x509,
   TaurusTLSHeaders_x509v3,
-  IdSSLTaurusTLS_Utils,
+  TaurusTLS_Utils,
   System.Classes;
 
 type

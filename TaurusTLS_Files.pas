@@ -1,4 +1,4 @@
-unit IdSSLTaurusTLS_Files;
+unit TaurusTLS_Files;
 
 interface
 {******************************************************************************}

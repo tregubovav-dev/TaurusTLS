@@ -29,7 +29,7 @@ interface
 uses
   IdCTypes,
   IdGlobal,
-  IdSSLTaurusTLSConsts,
+  TaurusTLSConsts,
   TaurusTLSHeaders_asn1,
   TaurusTLSHeaders_bio,
   TaurusTLSHeaders_evp,
@@ -2155,10 +2155,10 @@ implementation
 
   uses
     classes, 
-    IdSSLTaurusTLSExceptionHandlers, 
-    IdResourceStringsTaurusTLS
+    TaurusTLSExceptionHandlers,
+    TaurusTLS_ResourceStrings
   {$IFNDEF OPENSSL_STATIC_LINK_MODEL}
-    ,IdSSLTaurusTLSLoader
+    ,TaurusTLSLoader
   {$ENDIF};
   
 const
@@ -2946,7 +2946,7 @@ X509 = record
     aux : PX509_CERT_AUX;
   end;   
 
-procedure  FC_X509_get0_signature(var sig: PASN1_BIT_STRING; var alg: PX509_ALGOR; const x: PX509); cdecl;
+procedure  FC_X509_get0_signature(out sig: PASN1_BIT_STRING; out alg: PX509_ALGOR; const x: PX509); cdecl;
 begin
   sig := _PX509(x)^.signature;
   alg := _PX509(x)^.sig_alg;

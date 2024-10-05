@@ -8,7 +8,7 @@
 {* Chad Z. Hower (Kudzu) and the Indy Pit Crew – http://www.IndyProject.org/  *}
 {******************************************************************************}
 
-unit IdNTLMTaurusTLS;
+unit ITaurusTLS_NTLM;
 
 interface
 
@@ -16,7 +16,7 @@ implementation
 
 uses
   IdGlobal, IdFIPS, IdHashMessageDigest,
-  IdSSLTaurusTLSLoader,
+  TaurusTLSLoader,
   TaurusTLSHeaders_des,
   SysUtils;
 

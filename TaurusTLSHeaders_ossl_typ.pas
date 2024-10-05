@@ -29,7 +29,7 @@ interface
 uses
   IdCTypes,
   IdGlobal,
-  IdSSLTaurusTLSConsts;
+  TaurusTLSConsts;
 
 type
 // moved from unit "asn1" to prevent circular references

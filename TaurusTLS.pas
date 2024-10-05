@@ -160,7 +160,7 @@
 
   Rev 1.0    11/13/2002 08:01:24 AM  JPMugaas
 }
-unit IdSSLTaurusTLS;
+unit TaurusTLS;
 {
   Author: Gregor Ibic (gregor.ibic@intelicom.si)
   Copyright: (c) Gregor Ibic, Intelicom d.o.o and Indy Working Group.
@@ -250,11 +250,11 @@ uses
   IdSocks,
   IdScheduler,
   IdYarn,
-  IdSSLTaurusTLSExceptionHandlers,
+  TaurusTLSExceptionHandlers,
   TaurusTLSHeaders_ossl_typ,
   TaurusTLSHeaders_ssl,
-  IdSSLTaurusTLS_X509,
-  IdSSLTaurusTLSFIPS {Ensure FIPS functions initialised};
+  TaurusTLS_X509,
+  TaurusTLSFIPS {Ensure FIPS functions initialised};
 
 type
   TIdSSLVersion = (sslUnknown,sslvSSLv2, sslvSSLv23, sslvSSLv3, sslvTLSv1,sslvTLSv1_1,
@@ -601,7 +601,7 @@ uses
   IdFIPS,
   IdResourceStringsCore,
   IdResourceStringsProtocols,
-  IdResourceStringsTaurusTLS,
+  TaurusTLS_ResourceStrings,
   IdStack,
   IdStackBSDBase,
   IdAntiFreezeBase,
@@ -628,9 +628,9 @@ uses
   TaurusTLSHeaders_objects,
   TaurusTLSHeaders_ssl3,
   TaurusTLSHeaders_x509,
-  IdSSLTaurusTLSConsts,
-  IdSSLTaurusTLS_Files,
-  IdSSLTaurusTLSLoader;
+  TaurusTLSConsts,
+  TaurusTLS_Files,
+  TaurusTLSLoader;
 
 type
   TRAND_bytes = function(buf : PIdAnsiChar; num : integer) : integer; cdecl;

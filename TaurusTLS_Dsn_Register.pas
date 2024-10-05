@@ -7,7 +7,7 @@
 {* Portions of this software are Copyright (c) 1993 – 2018,                   *}
 {* Chad Z. Hower (Kudzu) and the Indy Pit Crew – http://www.IndyProject.org/  *}
 {******************************************************************************}
-unit IdRegisterTaurusTLS;
+unit TaurusTLS_Dsn_Register;
 
 
 interface
@@ -52,7 +52,7 @@ uses
   IdDsnResourceStrings,     // for RSProt in dclIndyProtocols package
   LResources,
   {$ENDIF}
-  IdSSLTaurusTLS;
+  TaurusTLS;
 
 {$IFNDEF FPC}
 //  {$R IdRegisterTaurusTLS.dcr}
@@ -68,7 +68,7 @@ begin
   //for new callback event
   Proc('IdCTypes'); {Do not localize}
   Proc('TaurusTLSHeaders_ossl_typ'); {Do not localize}
-  Proc('IdSSLTaurusTLS_X509');
+  Proc('TaurusTLS_X509');
 end;
 
 {$ENDIF}

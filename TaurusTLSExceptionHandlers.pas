@@ -9,7 +9,7 @@
 {******************************************************************************}
 unit TaurusTLSExceptionHandlers;
 
-{$I IdCompilerDefines.inc}
+{$I TaurusTLSCompilerDefines.inc}
 
 
 interface

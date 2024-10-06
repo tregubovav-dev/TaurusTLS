@@ -8,8 +8,8 @@ unit TaurusTLS_X509;
 {* Portions of this software are Copyright (c) 1993 – 2018,                   *}
 {* Chad Z. Hower (Kudzu) and the Indy Pit Crew – http://www.IndyProject.org/  *}
 {******************************************************************************}
-{$I IdCompilerDefines.inc}
-{$i IdSSLTaurusTLSDefines.inc}
+{$I TaurusTLSCompilerDefines.inc}
+{$i TaurusTLSLinkDefines.inc}
 interface
 uses
   IdCTypes,

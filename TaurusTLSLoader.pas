@@ -14,8 +14,8 @@ unit TaurusTLSLoader;
 {$DEFINE WINDOWS}
 {$ENDIF}
 
-{$i IdCompilerDefines.inc}
-{$i IdSSLTaurusTLSDefines.inc}
+{$i TaurusTLSCompilerDefines.inc}
+{$i TaurusTLSLinkDefines.inc}
 
 interface
 

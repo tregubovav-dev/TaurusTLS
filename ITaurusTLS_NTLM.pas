@@ -20,7 +20,7 @@ uses
   TaurusTLSHeaders_des,
   SysUtils;
 
-{$I IdCompilerDefines.inc}
+{$I TaurusTLSCompilerDefines.inc}
 
 function LoadTaurusTLS: Boolean;
 begin

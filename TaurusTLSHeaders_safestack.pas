@@ -1,7 +1,7 @@
 unit TaurusTLSHeaders_safestack;
 
-{$i IdCompilerDefines.inc}
-{$i IdSSLTaurusTLSDefines.inc}
+{$i TaurusTLSCompilerDefines.inc}
+{$i TaurusTLSLinkDefines.inc}
 
 {******************************************************************************}
 {*  TaurusTLS                                                                 *}

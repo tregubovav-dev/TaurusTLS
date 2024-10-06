@@ -12,7 +12,7 @@ unit TaurusTLS_Dsn_Register;
 
 interface
 
-{$i IdCompilerDefines.inc}
+{$i TaurusTLSCompilerDefines.inc}
 
 uses
   Classes,

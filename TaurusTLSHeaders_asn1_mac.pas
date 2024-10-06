@@ -4,8 +4,8 @@
      Distribution.
    *)
    
-{$i IdCompilerDefines.inc} 
-{$i IdSSLTaurusTLSDefines.inc} 
+{$i TaurusTLSCompilerDefines.inc} 
+{$i TaurusTLSLinkDefines.inc} 
 {$IFNDEF USE_OPENSSL}
   { error Should not compile if USE_OPENSSL is not defined!!!}
 {$ENDIF}
@@ -25,7 +25,7 @@ interface
 // Headers for OpenSSL 1.1.1
 // asn1_mac.h
 
-{.$i IdCompilerDefines.inc}
+{.$i TaurusTLSCompilerDefines.inc}
 
 //#error "This file is obsolete; please update your software."
 

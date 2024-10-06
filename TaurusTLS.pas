@@ -215,8 +215,8 @@ unit TaurusTLS;
 
 interface
 
-{$I IdCompilerDefines.inc}
-{$I IdSSLTaurusTLSDefines.inc}
+{$I TaurusTLSCompilerDefines.inc}
+{$I TaurusTLSLinkDefines.inc}
 {$IFDEF WINDOWS}
 {$IFNDEF OPENSSL_DONT_USE_WINDOWS_CERT_STORE}
 {$DEFINE USE_WINDOWS_CERT_STORE}
@@ -3162,14 +3162,14 @@ type
     end;
   end;
 
-{$I IdSymbolDeprecatedOff.inc}
+{$I TaurusTLSSymbolDeprecatedOff.inc}
 
 initialization
 
 Assert(SSLIsLoaded = nil);
 SSLIsLoaded := TIdThreadSafeBoolean.Create;
 
-{$I IdSymbolDeprecatedOff.inc}
+{$I TaurusTLSSymbolDeprecatedOff.inc}
 RegisterSSL('TaurusTLS', 'TaurusTLS Developers', { do not localize }
   'Copyright ' + Char(169) + ' 2014'#10#13 + { do not localize }
   'TaurusTLS Developers. All rights reserved.', { do not localize }
@@ -3178,7 +3178,7 @@ RegisterSSL('TaurusTLS', 'TaurusTLS Developers', { do not localize }
   'http://www.indyproject.org/'#10#13 + { do not localize }
   'Original Author - Gregor Ibic', { do not localize }
   TIdSSLIOHandlerSocketTaurusTLS, TIdServerIOHandlerSSLTaurusTLS);
-{$I IdSymbolDeprecatedOn.inc}
+{$I TaurusTLSSymbolDeprecatedOn.inc}
 TIdSSLIOHandlerSocketTaurusTLS.RegisterIOHandler;
 
 finalization

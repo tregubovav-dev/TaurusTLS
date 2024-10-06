@@ -11,8 +11,8 @@ unit TaurusTLSConsts;
 
 interface
 
-{$i IdCompilerDefines.inc}
-{$i IdSSLTaurusTLSDefines.inc}
+{$i TaurusTLSCompilerDefines.inc}
+{$i TaurusTLSLinkDefines.inc}
 
 
 const

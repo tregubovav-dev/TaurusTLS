@@ -4,8 +4,8 @@
   Distribution.
 *)
 
-{$I IdCompilerDefines.inc}
-{$I IdSSLTaurusTLSDefines.inc}
+{$I TaurusTLSCompilerDefines.inc}
+{$I TaurusTLSLinkDefines.inc}
 {$IFNDEF USE_OPENSSL}
 { error Should not compile if USE_OPENSSL is not defined!!! }
 {$ENDIF}

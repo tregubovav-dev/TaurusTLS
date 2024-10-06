@@ -4,8 +4,8 @@
      Distribution.
    *)
    
-{$i IdCompilerDefines.inc} 
-{$i IdSSLTaurusTLSDefines.inc} 
+{$i TaurusTLSCompilerDefines.inc} 
+{$i TaurusTLSLinkDefines.inc} 
 {$IFNDEF USE_OPENSSL}
   { error Should not compile if USE_OPENSSL is not defined!!!}
 {$ENDIF}
@@ -478,6 +478,7 @@ type
   {$EXTERNALSYM ASN1_OBJECT_free}
   {$EXTERNALSYM i2d_ASN1_OBJECT}
   {$EXTERNALSYM d2i_ASN1_OBJECT}
+  {$EXTERNALSYM d2i_ASN1_BIT_STRING}
   {$EXTERNALSYM ASN1_STRING_new}
   {$EXTERNALSYM ASN1_STRING_free}
   {$EXTERNALSYM ASN1_STRING_clear_free}

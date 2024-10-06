@@ -706,28 +706,28 @@ begin
   Result := [];
   if X509_get_extension_flags(FX509) and EXFLAG_XKUSAGE = EXFLAG_XKUSAGE then begin
     LFlags := X509_get_extended_key_usage(FX509);
-    if  (LFlags and XKU_SSL_SERVER = XKU_SSL_SERVER) then begin
+    if  LFlags and XKU_SSL_SERVER = XKU_SSL_SERVER then begin
       Result := Result + [Server];
     end;
-    if (LFlags and XKU_SSL_CLIENT = XKU_SSL_CLIENT) then begin
+    if LFlags and XKU_SSL_CLIENT = XKU_SSL_CLIENT then begin
       Result := Result + [Client];
     end;
-    if (LFlags and XKU_SMIME = XKU_SMIME) then begin
+    if LFlags and XKU_SMIME = XKU_SMIME then begin
       Result := Result + [SMIME];
     end;
-    if (LFlags and XKU_CODE_SIGN = XKU_CODE_SIGN) then begin
+    if LFlags and XKU_CODE_SIGN = XKU_CODE_SIGN then begin
       Result := Result + [CodeSign];
     end;
-    if (LFlags and XKU_OCSP_SIGN = XKU_OCSP_SIGN) then begin
+    if LFlags and XKU_OCSP_SIGN = XKU_OCSP_SIGN then begin
       Result := Result +  [OCSPSign];
     end;
-    if (LFlags and XKU_TIMESTAMP = XKU_TIMESTAMP) then begin
+    if LFlags and XKU_TIMESTAMP = XKU_TIMESTAMP then begin
       Result := Result + [TimeStamp];
     end;
-    if (LFlags and XKU_DVCS  = XKU_DVCS) then begin
+    if LFlags and XKU_DVCS  = XKU_DVCS then begin
       Result := Result + [DVCS];
     end;
-    if (LFlags and XKU_ANYEKU = XKU_ANYEKU) then begin
+    if LFlags and XKU_ANYEKU = XKU_ANYEKU then begin
       Result := Result + [AnyEKU];
     end;
   end;

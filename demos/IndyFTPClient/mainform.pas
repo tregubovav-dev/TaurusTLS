@@ -113,7 +113,6 @@ type
     procedure FIdLogSent(ASender: TComponent; const AText, AData: string);
     procedure iosslFTPStatusInfoEx(ASender: TObject; const AsslSocket: PSSL;
       const AWhere, Aret: TIdC_INT; const AType, AMsg: string);
-    procedure iosslFTPOnSSLNegotiated(ASender: TIdSSLIOHandlerSocketTaurusTLS);
     procedure actHelpAboutExecute(Sender: TObject);
     procedure actViewSettingExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -148,7 +147,7 @@ type
     procedure actFileRemoteMakeDirectoryUpdate(Sender: TObject);
     procedure actFileLocalMakeDirectoryExecute(Sender: TObject);
     procedure actFileLocalMakeDirectoryUpdate(Sender: TObject);
-  strict protected
+  protected
     { Private declarations }
     LocalColumnToSort: Integer;
     LocalAscending: Boolean;
@@ -171,6 +170,9 @@ type
     FLogDirOutput: Boolean;
 
     FProgressIndicator: TfrmFileProgress;
+    //event handlers
+    procedure iosslFTPOnSSLNegotiated(ASender: TIdSSLIOHandlerSocketTaurusTLS);
+
     procedure InitLog;
     // Thread procedure starts
     procedure ConnectFTP;
@@ -191,16 +193,17 @@ type
     procedure LocalMakeDir(const ADir: String);
     procedure RemoteMakeDir(const ADir: String);
     procedure SetProxyType(const AType: Integer);
-  public
-    { Public declarations }
+
     procedure PopulateLocalFiles;
     procedure PopulateRemoteFiles(const ACurDir: String);
+
     procedure SetupPRogressIndicator(const AFileName: String;
       const AWorkMode: TWorkMode; const AWorkCount, AWorkMax: Int64);
     procedure UpdateProgressIndicator(const AFileName: String;
       const AWorkMode: TWorkMode; const AWorkCount, AWorkMax: Int64);
     procedure CloseProgressIndicator;
-
+  public
+    { Public declarations }
     property LogDirOutput: Boolean read FLogDirOutput write FLogDirOutput;
     property LogDebugOutput: Boolean read FLogDebugOutput write FLogDebugOutput;
     property ThreadRunning : Boolean read FThreadRunning write FThreadRunning;
@@ -335,6 +338,26 @@ type
     class procedure NotifyString(const AStr: String); override;
   end;
 
+var
+  frmMainForm: TfrmMainForm;
+
+implementation
+{$I ..\..\TaurusTLSCompilerDefines.inc}
+uses dkgFTPConnect, settingsdlg, frmAbout, frmBookmarks, CertViewer,
+  IdException,
+  IdAllFTPListParsers,
+  IdFTPCommon,
+  IdFTPList, IdGlobal, IdGlobalProtocols, IdReplyRFC, TaurusTLSLoader,
+  System.IOUtils, System.IniFiles, System.UITypes,
+  Winapi.CommCtrl, ProgUtils, AcceptableCerts;
+
+const
+  DIR_IMAGE_IDX = 6;
+  FILE_IMAGE_IDX = 7;
+  ARROW_UP_IMAGE_IDX = 8;
+  ARROW_DOWN_IMAGE_IDX = 9;
+
+type
   TStatusBarEvent = class(TLogEventNotify)
   protected
     procedure DoNotify; override;
@@ -365,18 +388,17 @@ type
     class procedure LogDirListing(AStrings: TStrings);
   end;
 
-  TThreadStartNotify = class(TIdNotify)
-  protected
-    procedure DoNotify; override;
-  public
-    class procedure StartThread;
-  end;
-
   TThreadFinishedNotify = class(TIdNotify)
   protected
     procedure DoNotify; override;
   public
     class procedure EndThread;
+  end;
+  TThreadStartNotify = class(TIdNotify)
+  protected
+    procedure DoNotify; override;
+  public
+    class procedure StartThread;
   end;
 
   TWorkEventNotify = class(TIdNotify)
@@ -411,25 +433,6 @@ type
     class procedure WorkNotify(const AWorkMode: TWorkMode;
       AWorkCount, AWorkCountMax: Int64);
   end;
-
-var
-  frmMainForm: TfrmMainForm;
-
-implementation
-
-uses dkgFTPConnect, settingsdlg, frmAbout, frmBookmarks, CertViewer,
-  IdException,
-  IdAllFTPListParsers,
-  IdFTPCommon,
-  IdFTPList, IdGlobal, IdGlobalProtocols, IdReplyRFC, TaurusTLSLoader,
-  System.IOUtils, System.IniFiles, System.UITypes,
-  Winapi.CommCtrl, ProgUtils, AcceptableCerts;
-
-const
-  DIR_IMAGE_IDX = 6;
-  FILE_IMAGE_IDX = 7;
-  ARROW_UP_IMAGE_IDX = 8;
-  ARROW_DOWN_IMAGE_IDX = 9;
 
 {$R *.dfm}
 
@@ -517,7 +520,7 @@ end;
 
 procedure TfrmMainForm.actFileFTPSitesUpdate(Sender: TObject);
 begin
-  actFileFTPSites.Enabled := (not FThreadRunning) and not IdFTPClient.Connected;
+  actFileFTPSites.Enabled := (not FThreadRunning) and (not IdFTPClient.Connected);
 end;
 
 procedure TfrmMainForm.actFileLocalDeleteExecute(Sender: TObject);
@@ -658,13 +661,18 @@ end;
 procedure TfrmMainForm.actFileRemoteRenameExecute(Sender: TObject);
 var
   Li: TListItem;
+  {$IFNDEF USE_INLINE_VAR}
   LNewName: String;
+  {$ENDIF}
 begin
   if lvRemoteFiles.ItemIndex > -1 then
   begin
     Li := lvRemoteFiles.Items[lvRemoteFiles.ItemIndex];
     if Li.ImageIndex in [FILE_IMAGE_IDX, DIR_IMAGE_IDX] then
     begin
+      {$IFDEF USE_INLINE_VAR}
+      var LNewName : String;
+      {$ENDIF}
       if InputQuery('Rename', 'Rename ' + Li.Caption + ' to:', LNewName) then
       begin
         if LNewName <> '' then
@@ -772,7 +780,12 @@ begin
         end
         else
         begin
+
           case SocksInfo.Version of
+            svNoSocks:
+              begin
+                LFrm.ProxyType := 0;
+              end;
             // 2 - SOCKS4
             svSocks4:
               begin
@@ -993,7 +1006,7 @@ end;
 
 procedure TfrmMainForm.actFileConnectUpdate(Sender: TObject);
 begin
-  actFileConnect.Enabled := (not FThreadRunning) and not IdFTPClient.Connected;
+  actFileConnect.Enabled := (not FThreadRunning) and (not IdFTPClient.Connected);
 end;
 
 procedure TfrmMainForm.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -1167,11 +1180,16 @@ end;
 procedure TfrmMainForm.iosslFTPOnSSLNegotiated
   (ASender: TIdSSLIOHandlerSocketTaurusTLS);
 var
+  {$IFNDEF USE_INLINE_VAR}
   LStr: String;
+  {$ENDIF}
   LNo: Integer;
 begin
   if Assigned(ASender.SSLSocket) then
   begin
+    {$IFDEF USE_INLINE_VAR}
+    var LStr: String;
+    {$ENDIF}
     LStr := ASender.SSLSocket.SSLProtocolVersionStr;
     if LStr <> '' then
     begin
@@ -1396,7 +1414,9 @@ end;
 procedure TfrmMainForm.lvLocalFilesDblClick(Sender: TObject);
 var
   Li: TListItem;
+  {$IFNDEF USE_INLINE_VAR}
   LCurDir: String;
+  {$ENDIF}
 begin
   //
   if lvLocalFiles.ItemIndex > -1 then
@@ -1404,6 +1424,9 @@ begin
     Li := lvLocalFiles.Items[lvLocalFiles.ItemIndex];
     if Li.ImageIndex = DIR_IMAGE_IDX then
     begin
+      {$IFDEF USE_INLINE_VAR}
+      var LCurDir: String;
+      {$ENDIF}
       LCurDir := GetCurrentDir;
       LCurDir := LCurDir + '\' + Li.Caption;
       ChangeLocalDir(LCurDir);
@@ -1853,10 +1876,8 @@ begin
     TLogDirListingEvent.LogDirListing(FFTP.ListResult);
     TPopulateRemoteListNotify.PopulateRemoteList(LCurDir);
   except
-    on E: EIdReplyRFCError do
-    begin
-      // This is already reported in the FTP log Window
-    end;
+    // This is already reported in the FTP log Window
+    on E: EIdReplyRFCError do ;
     on E: Exception do
       TLogFTPError.NotifyString(E.Message);
   end;
@@ -1886,10 +1907,8 @@ begin
     TLogDirListingEvent.LogDirListing(FFTP.ListResult);
     TPopulateRemoteListNotify.PopulateRemoteList(LCurDir);
   except
-    on E: EIdReplyRFCError do
-    begin
-      // This is already reported in the FTP log Window
-    end;
+    // This is already reported in the FTP log Window
+    on E: EIdReplyRFCError do ;
     on E: Exception do
       TLogFTPError.NotifyString(E.Message);
   end;
@@ -1957,10 +1976,8 @@ begin
     TFile.SetLastWriteTime(FFile, FFTP.FileDate(FFile));
     TPopulateLocalListNotify.PopulateLocalList;
   except
-    on E: EIdReplyRFCError do
-    begin
-      // This is already reported in the FTP log Window
-    end;
+    // This is already reported in the FTP log Window
+    on E: EIdReplyRFCError do ;
     on E: Exception do
       TLogFTPError.NotifyString(E.Message);
   end;
@@ -1999,10 +2016,8 @@ begin
     TLogDirListingEvent.LogDirListing(FFTP.ListResult);
     TPopulateRemoteListNotify.PopulateRemoteList(LCurDir);
   except
-    on E: EIdReplyRFCError do
-    begin
-      // This is already reported in the FTP log Window
-    end;
+    // This is already reported in the FTP log Window
+    on E: EIdReplyRFCError do ;
     on E: Exception do
       TLogFTPError.NotifyString(E.Message);
   end;
@@ -2029,10 +2044,8 @@ begin
     TLogDirListingEvent.LogDirListing(FFTP.ListResult);
     TPopulateRemoteListNotify.PopulateRemoteList(LCurDir);
   except
-    on E: EIdReplyRFCError do
-    begin
-      // This is already reported in the FTP log Window
-    end;
+    // This is already reported in the FTP log Window
+    on E: EIdReplyRFCError do ;
     on E: Exception do
       TLogFTPError.NotifyString(E.Message);
   end;
@@ -2056,10 +2069,8 @@ begin
     TLogDirListingEvent.LogDirListing(FFTP.ListResult);
     TPopulateRemoteListNotify.PopulateRemoteList(LCurDir);
   except
-    on E: EIdReplyRFCError do
-    begin
-      // This is already reported in the FTP log Window
-    end;
+    // This is already reported in the FTP log Window
+    on E: EIdReplyRFCError do ;
     on E: Exception do
       TLogFTPError.NotifyString(E.Message);
   end;
@@ -2091,10 +2102,8 @@ begin
     TLogDirListingEvent.LogDirListing(FFTP.ListResult);
     TPopulateRemoteListNotify.PopulateRemoteList(LCurDir);
   except
-    on E: EIdReplyRFCError do
-    begin
-      // This is already reported in the FTP log Window
-    end;
+    // This is already reported in the FTP log Window
+    on E: EIdReplyRFCError do ;
     on E: Exception do
       TLogFTPError.NotifyString(E.Message);
   end;
@@ -2119,10 +2128,8 @@ begin
     TLogDirListingEvent.LogDirListing(FFTP.ListResult);
     TPopulateRemoteListNotify.PopulateRemoteList(LCurDir);
   except
-    on E: EIdReplyRFCError do
-    begin
-      // This is already reported in the FTP log Window
-    end;
+    //EIdReplyRFCError exceptions reported in log Window
+    on E: EIdReplyRFCError do ;
     on E: Exception do
       TLogFTPError.NotifyString(E.Message);
   end;

@@ -60,11 +60,6 @@ type
     procedure cboDirOutputBackgroundChange(Sender: TObject);
     procedure cboDebugForegroundSelect(Sender: TObject);
     procedure cboDebugBackgroundSelect(Sender: TObject);
-    procedure edtExternalIPAddressChange(Sender: TObject);
-    procedure spnedtPortMinimumChange(Sender: TObject);
-    procedure spnedtPortMaxChange(Sender: TObject);
-    procedure cboProxyTypeChange(Sender: TObject);
-    procedure edtProxyServerNameChange(Sender: TObject);
     procedure btnNATSettingsClick(Sender: TObject);
     procedure btnTransparentProxyClick(Sender: TObject);
     procedure btnFTPProxySettingsClick(Sender: TObject);
@@ -95,7 +90,6 @@ type
     FFTPProxyHost: String;
     FFTPProxyUsername: String;
     //
-    procedure ValidateFeilds;
     function GetUsePortTransferType: Boolean;
     procedure SetUsePortTransferType(const Value: Boolean);
     procedure EnableDisableCheckBoxes;
@@ -160,7 +154,7 @@ var
 
 implementation
 
-uses IdSSLTaurusTLS, ProgUtils, dlgNATSettings, dlgFTPProxySettings, dlgProxySettings;
+uses TaurusTLS, ProgUtils, dlgNATSettings, dlgFTPProxySettings, dlgProxySettings;
 
 {$R *.dfm}
 { TfrmSettings }
@@ -198,11 +192,6 @@ procedure TfrmSettings.cboErrorForegroundChange(Sender: TObject);
 begin
   FErrorForeground := cboErrorForeground.Selected;
   DisplaySampleTexts;
-end;
-
-procedure TfrmSettings.cboProxyTypeChange(Sender: TObject);
-begin
-  ValidateFeilds;
 end;
 
 procedure TfrmSettings.cboTLSMessageBackgroundChange(Sender: TObject);
@@ -327,16 +316,6 @@ begin
   ScrollToTop(redtTextSamples);
 end;
 
-procedure TfrmSettings.edtExternalIPAddressChange(Sender: TObject);
-begin
-  ValidateFeilds;
-end;
-
-procedure TfrmSettings.edtProxyServerNameChange(Sender: TObject);
-begin
-  ValidateFeilds;
-end;
-
 procedure TfrmSettings.EnableDisableCheckBoxes;
 begin
   if chklbAdvancedOptions.Checked[1] = False then
@@ -369,7 +348,6 @@ end;
 procedure TfrmSettings.FormShow(Sender: TObject);
 begin
   EnableDisableCheckBoxes;
-  ValidateFeilds;
 end;
 
 function TfrmSettings.GetConnected: Boolean;
@@ -491,21 +469,6 @@ begin
   begin
     cboTransferTypes.ItemIndex := 0;
   end;
-end;
-
-procedure TfrmSettings.spnedtPortMaxChange(Sender: TObject);
-begin
-  ValidateFeilds;
-end;
-
-procedure TfrmSettings.spnedtPortMinimumChange(Sender: TObject);
-begin
-  ValidateFeilds;
-end;
-
-procedure TfrmSettings.ValidateFeilds;
-begin
-
 end;
 
 end.

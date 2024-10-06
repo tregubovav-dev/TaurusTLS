@@ -23,13 +23,13 @@
   TIdSSLOptions.UseSystemRootCertificateStore is true then
   Windows Root Certificate store is also loaded into SSL Context X.509 certificate store.
 
-  e. Direct access to TaurusTLS internal data structures (exposed in earlier versions,
+  e. Direct access to OpenSSL internal data structures (exposed in earlier versions,
   but now opaque (typically 1.1.1 onwards) now uses getter and setter functions
   provided by later versions of TaurusTLS libraries with forwards compatibility
   functions (in appropriate SSL Header unit) used to provide getters and setters
   for earlier versions.
 
-  f. New functions: TaurusTLSVersion and TaurusTLSDir. These are information access
+  f. New functions: OPenSSLVersion and OpenSSLDir. These are information access
   that return, respectively, the TaurusTLS Version string and the TaurusTLS Directory.
 
   Rev 1.40    03/11/2009 09:04:00  AWinkelsdorf
@@ -255,8 +255,8 @@ uses
   TaurusTLSFIPS {Ensure FIPS functions initialised};
 
 type
-  TIdSSLVersion = (sslUnknown, sslvSSLv2, sslvSSLv23, sslvSSLv3, sslvTLSv1,
-    sslvTLSv1_1, sslvTLSv1_2, sslvTLSv1_3);
+  TIdSSLVersion = (Unknown, SSLv2, SSLv23, SSLv3, TLSv1,
+    TLSv1_1, TLSv1_2, TLSv1_3);
   { May need to update constants below if adding to this set }
   TIdSSLVersions = set of TIdSSLVersion;
   TIdSSLMode = (sslmUnassigned, sslmClient, sslmServer, sslmBoth);
@@ -266,9 +266,9 @@ type
   TIdSSLAction = (sslRead, sslWrite);
 
 const
-  DEF_SSLVERSION = sslvTLSv1_2;
-  DEF_SSLVERSIONS = [sslvTLSv1_2, sslvTLSv1_3];
-  MAX_SSLVERSION = sslvTLSv1_3;
+  DEF_SSLVERSION = TLSv1_2;
+  DEF_SSLVERSIONS = [TLSv1_2, TLSv1_3];
+  MAX_SSLVERSION = TLSv1_3;
   P12_FILETYPE = 3;
 
 type
@@ -290,12 +290,12 @@ type
   TIdSSLOptions = class(TPersistent)
   private
     fUseSystemRootCertificateStore: Boolean;
-  protected
     fsRootCertFile, fsCertFile, fsKeyFile, fsDHParamsFile: String;
-    fMethod: TIdSSLVersion;
-    fSSLVersions: TIdSSLVersions;
     fMode: TIdSSLMode;
+    fSSLVersions: TIdSSLVersions;
     fVerifyDepth: Integer;
+    fMethod: TIdSSLVersion;
+  protected
     fVerifyMode: TIdSSLVerifyModeSet;
     // fVerifyFile,
     fVerifyDirs: String;
@@ -336,6 +336,9 @@ type
     procedure LoadWindowsCertStore;
 {$ENDIF}
   protected
+{$IFDEF USE_OBJECT_ARC}[Weak]
+{$ENDIF} FParent: TObject;
+
     fMethod: TIdSSLVersion;
     fSSLVersions: TIdSSLVersions;
     fMode: TIdSSLMode;
@@ -353,12 +356,11 @@ type
     fCtxMode: TIdSSLCtxMode;
     procedure DestroyContext;
     function SetSSLMethod: PSSL_METHOD;
-    procedure SetVerifyMode(Mode: TIdSSLVerifyModeSet; CheckRoutine: Boolean);
+    procedure SetVerifyMode(AMode: TIdSSLVerifyModeSet; ACheckRoutine: Boolean);
     function GetVerifyMode: TIdSSLVerifyModeSet;
     procedure InitContext(CtxMode: TIdSSLCtxMode);
   public
-{$IFDEF USE_OBJECT_ARC}[Weak]
-{$ENDIF} Parent: TObject;
+
     constructor Create;
     destructor Destroy; override;
     function Clone: TIdSSLContext;
@@ -414,7 +416,7 @@ type
     procedure Connect(const pHandle: TIdStackSocketHandle);
     function Send(const ABuffer: TIdBytes; AOffset, ALength: Integer): Integer;
     function Recv(var ABuffer: TIdBytes): Integer;
-    function GetSessionID: TIdSSLByteArray;
+    function _GetSessionID: TIdSSLByteArray;
     function GetSessionIDAsString: String;
     procedure SetCipherList(CipherList: String);
     //
@@ -450,7 +452,7 @@ type
     fOnGetPassword: TPasswordEvent;
     fOnGetPasswordEx: TPasswordEventEx;
     fOnVerifyPeer: TVerifyPeerEvent;
-    fSSLLayerClosed: Boolean;
+//    fSSLLayerClosed: Boolean;
     fOnBeforeConnect: TIOHandlerNotify;
     FOnSSLNegotiated: TIOHandlerNotify;
     // function GetPeerCert: TIdX509;
@@ -675,9 +677,11 @@ type
   // avoid a change in the public interface above.  This should be rolled into
   // the public interface at some point...
   TIdSSLOptions_Internal = class(TIdSSLOptions)
-  public
+  protected
 {$IFDEF USE_OBJECT_ARC}[Weak]
-{$ENDIF} Parent: TObject;
+{$ENDIF} FParent: TObject;
+  public
+
   end;
 
 var
@@ -690,29 +694,33 @@ var
 procedure GetStateVars(const SSLSocket: PSSL; AWhere, Aret: TIdC_INT;
   var VTypeStr, VMsg: String);
 {$IFDEF USE_INLINE}inline; {$ENDIF}
+var LState, LAlert : String;
 begin
+  LState := String(SSL_state_string_long(SSLSocket));
+  LAlert := String(SSL_alert_type_string_long(Aret));
+
   case AWhere of
     SSL_CB_ALERT:
       begin
         VTypeStr := IndyFormat(RSOSSLAlert, [SSL_alert_type_string_long(Aret)]);
-        VMsg := String(SSL_alert_type_string_long(Aret));
+        VMsg := LAlert;
       end;
     SSL_CB_READ_ALERT:
       begin
         VTypeStr := IndyFormat(RSOSSLReadAlert,
           [SSL_alert_type_string_long(Aret)]);
-        VMsg := String(SSL_alert_desc_string_long(Aret));
+        VMsg := LAlert;
       end;
     SSL_CB_WRITE_ALERT:
       begin
         VTypeStr := IndyFormat(RSOSSLWriteAlert,
-          [SSL_alert_type_string_long(Aret)]);
+          [LAlert]);
         VMsg := String(SSL_alert_desc_string_long(Aret));
       end;
     SSL_CB_ACCEPT_LOOP:
       begin
         VTypeStr := RSOSSLAcceptLoop;
-        VMsg := String(SSL_state_string_long(SSLSocket));
+        VMsg := LState;
       end;
     SSL_CB_ACCEPT_EXIT:
       begin
@@ -731,12 +739,12 @@ begin
             VTypeStr := RSOSSLAcceptExit;
           end;
         end;
-        VMsg := String(SSL_state_string_long(SSLSocket));
+        VMsg := LState;
       end;
     SSL_CB_CONNECT_LOOP:
       begin
         VTypeStr := RSOSSLConnectLoop;
-        VMsg := String(SSL_state_string_long(SSLSocket));
+        VMsg := LState;
       end;
     SSL_CB_CONNECT_EXIT:
       begin
@@ -755,17 +763,17 @@ begin
             VTypeStr := RSOSSLConnectExit;
           end;
         end;
-        VMsg := String(SSL_state_string_long(SSLSocket));
+        VMsg := LState;
       end;
     SSL_CB_HANDSHAKE_START:
       begin
         VTypeStr := RSOSSLHandshakeStart;
-        VMsg := String(SSL_state_string_long(SSLSocket));
+        VMsg := LState;
       end;
     SSL_CB_HANDSHAKE_DONE:
       begin
         VTypeStr := RSOSSLHandshakeDone;
-        VMsg := String(SSL_state_string_long(SSLSocket));
+        VMsg := LState;
       end;
   end;
 end;
@@ -793,7 +801,7 @@ begin
     try
       Password := ''; { Do not Localize }
       IdSSLContext := TIdSSLContext(userdata);
-      if Supports(IdSSLContext.Parent, IIdSSLTaurusTLSCallbackHelper,
+      if Supports(IdSSLContext.FParent, IIdSSLTaurusTLSCallbackHelper,
         IInterface(LHelper)) then
       begin
         Password := LHelper.GetPassword(rwflag > 0);
@@ -827,7 +835,7 @@ end;
 
 procedure InfoCallback(const SSLSocket: PSSL; where, ret: TIdC_INT); cdecl;
 var
-  IdSSLSocket: TIdSSLSocket;
+  LIdSSLSocket: TIdSSLSocket;
 {$IFNDEF USE_INLINE_VAR}
   LStatusStr: String;
 {$ENDIF}
@@ -838,7 +846,7 @@ begin
     You have to save the value of WSGetLastError as some Operating System API
     function calls will reset that value and we can't know what a programmer will
     do in this event.  We need the value of WSGetLastError so we can report
-    an underlying socket error when the TaurusTLS function returns.
+    an underlying socket error when the OpenSSL function returns.
 
     JPM.
   }
@@ -846,8 +854,8 @@ begin
   try
     LockInfoCB.Enter;
     try
-      IdSSLSocket := TIdSSLSocket(SSL_get_app_data(SSLSocket));
-      if Supports(IdSSLSocket.fParent, IIdSSLTaurusTLSCallbackHelper,
+      LIdSSLSocket := TIdSSLSocket(SSL_get_app_data(SSLSocket));
+      if Supports(LIdSSLSocket.fParent, IIdSSLTaurusTLSCallbackHelper,
         IInterface(LHelper)) then
       begin
 {$IFDEF USE_INLINE_VAR}
@@ -894,7 +902,7 @@ var
   // str: String;
   VerifiedOK: Boolean;
   Depth: Integer;
-  Error: Integer;
+  LError: Integer;
   LOk: Boolean;
   LHelper: IIdSSLTaurusTLSCallbackHelper;
 begin
@@ -913,9 +921,9 @@ begin
       // the certificate is owned by the store
       try
         IdSSLSocket := TIdSSLSocket(SSL_get_app_data(hSSL));
-        Error := X509_STORE_CTX_get_error(ctx);
+        LError := X509_STORE_CTX_get_error(ctx);
         Depth := X509_STORE_CTX_get_error_depth(ctx);
-        if not((Ok > 0) and (IdSSLSocket.fSSLContext.VerifyDepth >= Depth)) then
+        if not( (Ok > 0) and (IdSSLSocket.fSSLContext.VerifyDepth >= Depth)) then
         begin
           Ok := 0;
           { if Error = X509_V_OK then begin
@@ -930,7 +938,7 @@ begin
         if Supports(IdSSLSocket.fParent, IIdSSLTaurusTLSCallbackHelper,
           IInterface(LHelper)) then
         begin
-          VerifiedOK := LHelper.VerifyPeer(Certificate, LOk, Depth, Error);
+          VerifiedOK := LHelper.VerifyPeer(Certificate, LOk, Depth, LError);
           LHelper := nil;
         end;
       finally
@@ -1240,9 +1248,9 @@ end;
 procedure TIdSSLOptions.SetMethod(const AValue: TIdSSLVersion);
 begin
   fMethod := AValue;
-  if AValue = sslvSSLv23 then
+  if AValue = SSLv23 then
   begin
-    fSSLVersions := [sslvSSLv2, sslvSSLv3, sslvTLSv1, sslvTLSv1_1, sslvTLSv1_2];
+    fSSLVersions := [SSLv2, SSLv3, TLSv1, TLSv1_1, TLSv1_2];
   end
   else
   begin
@@ -1253,43 +1261,43 @@ end;
 procedure TIdSSLOptions.SetSSLVersions(const AValue: TIdSSLVersions);
 begin
   fSSLVersions := AValue;
-  if fSSLVersions = [sslvSSLv2] then
+  if fSSLVersions = [SSLv2] then
   begin
-    fMethod := sslvSSLv2;
+    fMethod := SSLv2;
   end
-  else if fSSLVersions = [sslvSSLv3] then
+  else if fSSLVersions = [SSLv3] then
   begin
-    fMethod := sslvSSLv3;
+    fMethod := SSLv3;
   end
-  else if fSSLVersions = [sslvTLSv1] then
+  else if fSSLVersions = [TLSv1] then
   begin
-    fMethod := sslvTLSv1;
+    fMethod := TLSv1;
   end
-  else if fSSLVersions = [sslvTLSv1_1] then
+  else if fSSLVersions = [TLSv1_1] then
   begin
-    fMethod := sslvTLSv1_1;
+    fMethod := TLSv1_1;
   end
-  else if fSSLVersions = [sslvTLSv1_2] then
+  else if fSSLVersions = [TLSv1_2] then
   begin
-    fMethod := sslvTLSv1_2;
+    fMethod := TLSv1_2;
   end
-  else if fSSLVersions = [sslvTLSv1_3] then
+  else if fSSLVersions = [TLSv1_3] then
   begin
     if HasTLS_method then
-      fMethod := sslvTLSv1_3
+      fMethod := TLSv1_3
     else
-      fMethod := sslvTLSv1_2;
+      fMethod := TLSv1_2;
   end
   else
   begin
-    fMethod := sslvSSLv23;
-    if sslvSSLv23 in fSSLVersions then
+    fMethod := SSLv23;
+    if SSLv23 in fSSLVersions then
     begin
-      Exclude(fSSLVersions, sslvSSLv23);
+      Exclude(fSSLVersions, SSLv23);
       if fSSLVersions = [] then
       begin
-        fSSLVersions := [sslvSSLv2, sslvSSLv3, sslvTLSv1, sslvTLSv1_1,
-          sslvTLSv1_2];
+        fSSLVersions := [SSLv2, SSLv3, TLSv1, TLSv1_1,
+          TLSv1_2,TLSv1_3];
       end;
     end;
   end;
@@ -1331,7 +1339,7 @@ procedure TIdServerIOHandlerSSLTaurusTLS.InitComponent;
 begin
   inherited InitComponent;
   fxSSLOptions := TIdSSLOptions_Internal.Create;
-  TIdSSLOptions_Internal(fxSSLOptions).Parent := Self;
+  TIdSSLOptions_Internal(fxSSLOptions).FParent := Self;
 end;
 
 destructor TIdServerIOHandlerSSLTaurusTLS.Destroy;
@@ -1346,7 +1354,7 @@ begin
   // ensure Init isn't called twice
   Assert(fSSLContext = nil);
   fSSLContext := TIdSSLContext.Create;
-  fSSLContext.Parent := Self;
+  fSSLContext.FParent := Self;
   fSSLContext.RootCertFile := SSLOptions.RootCertFile;
   fSSLContext.CertFile := SSLOptions.CertFile;
   fSSLContext.KeyFile := SSLOptions.KeyFile;
@@ -1599,8 +1607,8 @@ begin
   inherited InitComponent;
   IsPeer := False;
   fxSSLOptions := TIdSSLOptions_Internal.Create;
-  TIdSSLOptions_Internal(fxSSLOptions).Parent := Self;
-  fSSLLayerClosed := true;
+  TIdSSLOptions_Internal(fxSSLOptions).FParent := Self;
+//  fSSLLayerClosed := true;
   fSSLContext := nil;
 end;
 
@@ -1609,12 +1617,12 @@ begin
   FreeAndNil(fSSLSocket);
   // we do not destroy these if their Parent is not Self
   // because these do not belong to us when we are in a server.
-  if (fSSLContext <> nil) and (fSSLContext.Parent = Self) then
+  if (fSSLContext <> nil) and (fSSLContext.FParent = Self) then
   begin
     FreeAndNil(fSSLContext);
   end;
   if (fxSSLOptions <> nil) and (fxSSLOptions is TIdSSLOptions_Internal) and
-    (TIdSSLOptions_Internal(fxSSLOptions).Parent = Self) then
+    (TIdSSLOptions_Internal(fxSSLOptions).FParent = Self) then
   begin
     FreeAndNil(fxSSLOptions);
   end;
@@ -1665,7 +1673,7 @@ begin
   FreeAndNil(fSSLSocket);
   if fSSLContext <> nil then
   begin
-    if fSSLContext.Parent = Self then
+    if fSSLContext.FParent = Self then
     begin
       FreeAndNil(fSSLContext);
     end
@@ -1782,7 +1790,7 @@ begin
   if not Assigned(fSSLContext) then
   begin
     fSSLContext := TIdSSLContext.Create;
-    fSSLContext.Parent := Self;
+    fSSLContext.FParent := Self;
     fSSLContext.RootCertFile := SSLOptions.RootCertFile;
     fSSLContext.CertFile := SSLOptions.CertFile;
     fSSLContext.KeyFile := SSLOptions.KeyFile;
@@ -2048,7 +2056,7 @@ end;
 
 procedure TIdSSLIOHandlerSocketTaurusTLS.RaiseError(AError: Integer);
 begin
-  if (PassThrough) or (AError = Id_WSAESHUTDOWN) or
+  if PassThrough or (AError = Id_WSAESHUTDOWN) or
     (AError = Id_WSAECONNABORTED) or (AError = Id_WSAECONNRESET) then
   begin
     inherited RaiseError(AError);
@@ -2133,17 +2141,17 @@ const
 
 type
   HCERTSTORE = THandle;
-  HCRYPTPROV_LEGACY = PIdC_LONG;
-  PCERT_INFO = Pointer; { don't need to know this structure }
-  PCCERT_CONTEXT = ^CERT_CONTEXT;
+  PHCRYPTPROV_LEGACY = PIdC_LONG;
+//  PCERT_INFO = Pointer; { don't need to know this structure }
+//  PCCERT_CONTEXT = ^CERT_CONTEXT;
 
-  CERT_CONTEXT = record
+{  CERT_CONTEXT = record
     dwCertEncodingType: DWORD;
     pbCertEncoded: PByte;
     cbCertEncoded: DWORD;
     CertInfo: PCERT_INFO;
     certstore: HCERTSTORE end;
-
+}
 {$IFDEF STRING_IS_ANSI}
 {$EXTERNALSYM CertOpenSystemStoreA}
     function CertOpenSystemStoreA(hProv: HCRYPTPROV_LEGACY;
@@ -2151,7 +2159,7 @@ type
       external wincryptdll;
 {$ELSE}
 {$EXTERNALSYM CertOpenSystemStoreW}
-    function CertOpenSystemStoreW(hProv: HCRYPTPROV_LEGACY;
+    function CertOpenSystemStoreW(hProv: PHCRYPTPROV_LEGACY;
       szSubsystemProtocol: PCHar): HCERTSTORE; stdcall; external wincryptdll;
 {$ENDIF}
 {$EXTERNALSYM CertCloseStore}
@@ -2170,7 +2178,7 @@ type
     WinCertStore: HCERTSTORE;
     X509Cert: PX509;
     CERT_CONTEXT: PCCERT_CONTEXT;
-    Error: Integer;
+    LError: Integer;
     SSLCertStore: PX509_STORE;
     CertEncoded: PByte;
   begin
@@ -2192,9 +2200,9 @@ type
         X509Cert := d2i_X509(nil, @CertEncoded, CERT_CONTEXT^.cbCertEncoded);
         if X509Cert <> nil then
         begin
-          Error := X509_STORE_add_cert(SSLCertStore, X509Cert);
+          LError := X509_STORE_add_cert(SSLCertStore, X509Cert);
           // Ignore if cert already in store
-          if (Error = 0) and
+          if (LError = 0) and
             (ERR_GET_REASON(ERR_get_error) <> X509_R_CERT_ALREADY_IN_HASH_TABLE)
           then
             ETaurusTLSAPICryptoError.RaiseException
@@ -2229,7 +2237,7 @@ type
 
   var
     SSLMethod: PSSL_METHOD;
-    Error: TIdC_INT;
+    LError: TIdC_INT;
     v: TIdSSLVersion;
     // pCAname: PSTACK_X509_NAME;
 {$IFDEF USE_MARSHALLED_PTRS}
@@ -2263,7 +2271,7 @@ type
     begin
       if SSLVersions <> [] then
       begin
-        for v := sslvSSLv3 to MAX_SSLVERSION do
+        for v := SSLv3 to MAX_SSLVERSION do
         begin
           if v in SSLVersions then
           begin
@@ -2271,7 +2279,7 @@ type
             Break;
           end;
         end;
-        for v := MAX_SSLVERSION downto sslvSSLv3 do
+        for v := MAX_SSLVERSION downto SSLv3 do
         begin
           if v in SSLVersions then
           begin
@@ -2294,11 +2302,11 @@ type
 
       if IsTaurusTLS_SSLv2_Available then
       begin
-        if not(sslvSSLv2 in SSLVersions) then
+        if not(SSLv2 in SSLVersions) then
         begin
           SSL_CTX_set_options(fContext, SSL_OP_NO_SSLv2);
         end
-        else if (fMethod = sslvSSLv23) then
+        else if fMethod = SSLv23 then
         begin
           SSL_CTX_clear_options(fContext, SSL_OP_NO_SSLv2);
         end;
@@ -2306,11 +2314,11 @@ type
       // SSLv3 might also be disabled as well..
       if IsTaurusTLS_SSLv3_Available then
       begin
-        if not(sslvSSLv3 in SSLVersions) then
+        if not(SSLv3 in SSLVersions) then
         begin
           SSL_CTX_set_options(fContext, SSL_OP_NO_SSLv3);
         end
-        else if (fMethod = sslvSSLv23) then
+        else if fMethod = SSLv23 then
         begin
           SSL_CTX_clear_options(fContext, SSL_OP_NO_SSLv3);
         end;
@@ -2318,11 +2326,11 @@ type
       // may as well do the same for all of them...
       if IsTaurusTLS_TLSv1_0_Available then
       begin
-        if not(sslvTLSv1 in SSLVersions) then
+        if not(TLSv1 in SSLVersions) then
         begin
           SSL_CTX_set_options(fContext, SSL_OP_NO_TLSv1);
         end
-        else if (fMethod = sslvSSLv23) then
+        else if fMethod = SSLv23 then
         begin
           SSL_CTX_clear_options(fContext, SSL_OP_NO_TLSv1);
         end;
@@ -2333,22 +2341,22 @@ type
         an invalid MAC when doing SSL. }
       if IsTaurusTLS_TLSv1_1_Available then
       begin
-        if not(sslvTLSv1_1 in SSLVersions) then
+        if not(TLSv1_1 in SSLVersions) then
         begin
           SSL_CTX_set_options(fContext, SSL_OP_NO_TLSv1_1);
         end
-        else if (fMethod = sslvSSLv23) then
+        else if fMethod = SSLv23 then
         begin
           SSL_CTX_clear_options(fContext, SSL_OP_NO_TLSv1_1);
         end;
       end;
       if IsTaurusTLS_TLSv1_2_Available then
       begin
-        if not(sslvTLSv1_2 in SSLVersions) then
+        if not(TLSv1_2 in SSLVersions) then
         begin
           SSL_CTX_set_options(fContext, SSL_OP_NO_TLSv1_2);
         end
-        else if (fMethod = sslvSSLv23) then
+        else if fMethod = SSLv23 then
         begin
           SSL_CTX_clear_options(fContext, SSL_OP_NO_TLSv1_2);
         end;
@@ -2407,7 +2415,7 @@ type
     // if_SSL_CTX_set_tmp_rsa_callback(hSSLContext, @RSACallback);
     if fCipherList <> '' then
     begin { Do not Localize }
-      Error := SSL_CTX_set_cipher_list(fContext,
+      LError := SSL_CTX_set_cipher_list(fContext,
 {$IFDEF USE_MARSHALLED_PTRS}
         M.AsAnsi(fCipherList).ToPointer
 {$ELSE}
@@ -2436,9 +2444,9 @@ type
         {$ENDIF}
         );
       *)
-      Error := 1;
+      LError := 1;
     end;
-    if Error <= 0 then
+    if LError <= 0 then
     begin
       // TODO: should this be using EIdOSSLSettingCipherError.RaiseException() instead?
       raise EIdOSSLSettingCipherError.Create(RSSSLSettingCipherError);
@@ -2462,8 +2470,8 @@ type
     // TODO: provide an event so users can apply their own settings as needed...
   end;
 
-  procedure TIdSSLContext.SetVerifyMode(Mode: TIdSSLVerifyModeSet;
-    CheckRoutine: Boolean);
+  procedure TIdSSLContext.SetVerifyMode(AMode: TIdSSLVerifyModeSet;
+    ACheckRoutine: Boolean);
 
   var
     Func: TSSL_CTX_set_verify_callback;
@@ -2471,7 +2479,7 @@ type
     if fContext <> nil then
     begin
       // SSL_CTX_set_default_verify_paths(fContext);
-      if CheckRoutine then
+      if ACheckRoutine then
       begin
         Func := VerifyCallback;
       end
@@ -2479,7 +2487,7 @@ type
       begin
         Func := nil;
       end;
-      SSL_CTX_set_verify(fContext, TranslateInternalVerifyToSSL(Mode), Func);
+      SSL_CTX_set_verify(fContext, TranslateInternalVerifyToSSL(AMode), Func);
       SSL_CTX_set_verify_depth(fContext, fVerifyDepth);
     end;
   end;
@@ -2531,6 +2539,7 @@ type
     end;
   end;
 {$ENDIF}
+
   function TIdSSLContext.SetSSLMethod: PSSL_METHOD;
   begin
     Result := nil;
@@ -2735,7 +2744,7 @@ type
 
   // Accept and Connect have a lot of duplicated code
   var
-    Error: Integer;
+    LError: Integer;
 {$IFNDEF USE_INLINE_VAR}
     LStatusStr: String;
 {$ENDIF}
@@ -2749,14 +2758,14 @@ type
     begin
       raise EIdOSSLCreatingSessionError.Create(RSSSLCreatingSessionError);
     end;
-    Error := SSL_set_app_data(fSSL, Self);
-    if Error <= 0 then
+    LError := SSL_set_app_data(fSSL, Self);
+    if LError <= 0 then
     begin
       EIdOSSLDataBindingError.RaiseException(fSSL, Error,
         RSSSLDataBindingError);
     end;
-    Error := SSL_set_fd(fSSL, pHandle);
-    if Error <= 0 then
+    LError := SSL_set_fd(fSSL, pHandle);
+    if LError <= 0 then
     begin
       EIdOSSLFDSetError.RaiseException(fSSL, Error, RSSSLFDSetError);
     end;
@@ -2774,8 +2783,8 @@ type
       SSL_copy_session_id(fSSL, LParentIO.fSSLSocket.fSSL);
       end;
     }
-    Error := SSL_accept(fSSL);
-    if Error <= 0 then
+    LError := SSL_accept(fSSL);
+    if LError <= 0 then
     begin
       EIdOSSLAcceptError.RaiseException(fSSL, Error, RSSSLAcceptError);
     end;
@@ -2804,7 +2813,7 @@ type
   procedure TIdSSLSocket.Connect(const pHandle: TIdStackSocketHandle);
 
   var
-    Error: Integer;
+    LError: Integer;
 {$IFNDEF USE_INLINE_VAR}
     LStatusStr: String;
 {$ENDIF}
@@ -2827,14 +2836,14 @@ type
     begin
       raise EIdOSSLCreatingSessionError.Create(RSSSLCreatingSessionError);
     end;
-    Error := SSL_set_app_data(fSSL, Self);
-    if Error <= 0 then
+    LError := SSL_set_app_data(fSSL, Self);
+    if LError <= 0 then
     begin
       EIdOSSLDataBindingError.RaiseException(fSSL, Error,
         RSSSLDataBindingError);
     end;
-    Error := SSL_set_fd(fSSL, pHandle);
-    if Error <= 0 then
+    LError := SSL_set_fd(fSSL, pHandle);
+    if LError <= 0 then
     begin
       EIdOSSLFDSetError.RaiseException(fSSL, Error, RSSSLFDSetError);
     end;
@@ -2848,17 +2857,17 @@ type
 {$IFNDEF OPENSSL_NO_TLSEXT}
     { Delphi appears to need the extra AnsiString coerction. Otherwise, only the
       first character to the hostname is passed }
-    Error := SSL_set_tlsext_host_name(fSSL, PIdAnsiChar(AnsiString(fHostName)));
-    if Error <= 0 then
+    LError := SSL_set_tlsext_host_name(fSSL, PIdAnsiChar(AnsiString(fHostName)));
+    if LError <= 0 then
     begin
       // RLebeau: for the time being, not raising an exception on error, as I don't
-      // know which TaurusTLS versions support this extension, and which error code(s)
+      // know which OpenSSL versions support this extension, and which error code(s)
       // are safe to ignore on those versions...
       // EIdOSSLSettingTLSHostNameError.RaiseException(fSSL, error, RSSSLSettingTLSHostNameError);
     end;
 {$ENDIF}
-    Error := SSL_connect(fSSL);
-    if Error <= 0 then
+    LError := SSL_connect(fSSL);
+    if LError <= 0 then
     begin
       // TODO: if sslv23 is being used, but sslv23 is not being used on the
       // remote side, SSL_connect() will fail. In that case, before giving up,
@@ -2974,21 +2983,21 @@ type
   function TIdSSLSocket.GetProtocolVersion: TIdSSLVersion;
   begin
     if fSession = nil then
-      Result := sslUnknown
+      Result := Unknown
     else
       case SSL_SESSION_get_protocol_version(fSession) of
         SSL3_VERSION:
-          Result := sslvSSLv3;
+          Result := SSLv3;
         TLS1_VERSION:
-          Result := sslvTLSv1;
+          Result := TLSv1;
         TLS1_1_VERSION:
-          Result := sslvTLSv1_1;
+          Result := TLSv1_1;
         TLS1_2_VERSION:
-          Result := sslvTLSv1_2;
+          Result := TLSv1_2;
         TLS1_3_VERSION:
-          Result := sslvTLSv1_3;
+          Result := TLSv1_3;
       else
-        Result := sslUnknown;
+        Result := Unknown;
       end;
   end;
 
@@ -2996,21 +3005,21 @@ type
   begin
     Result := 'Unknown';
     case SSLProtocolVersion of
-      sslUnknown:
+      Unknown:
         Result := 'Unknown';
-      sslvSSLv23 :
+      SSLv23 :
         Result := 'SSLv2 or SSLv3';
-      sslvSSLv2:
+      SSLv2:
         Result := 'SSLv2';
-      sslvSSLv3:
+      SSLv3:
         Result := 'SSLv3';
-      sslvTLSv1:
+      TLSv1:
         Result := 'TLS';
-      sslvTLSv1_1:
+      TLSv1_1:
         Result := 'TLSv1.1';
-      sslvTLSv1_2:
+      TLSv1_2:
         Result := 'TLSv1.2';
-      sslvTLSv1_3:
+      TLSv1_3:
         Result := 'TLSv1.3';
     end;
   end;
@@ -3039,7 +3048,7 @@ type
     Result := fSSLCipher;
   end;
 
-  function TIdSSLSocket.GetSessionID: TIdSSLByteArray;
+  function TIdSSLSocket._GetSessionID: TIdSSLByteArray;
 
   var
     pSession: PSSL_SESSION;
@@ -3055,7 +3064,7 @@ type
         pSession := SSL_get_session(fSSL);
         if pSession <> nil then
         begin
-          Result.Data := PByte(SSL_SESSION_get_id(pSession, @Result.Length));
+          Result.Data := SSL_SESSION_get_id(pSession, @Result.Length);
         end;
       end;
     end;
@@ -3064,18 +3073,18 @@ type
   function TIdSSLSocket.GetSessionIDAsString: String;
 
   var
-    Data: TIdSSLByteArray;
+    LData: TIdSSLByteArray;
     i: TIdC_UINT;
     LDataPtr: PByte;
   begin
     Result := ''; { Do not Localize }
-    Data := GetSessionID;
-    if Data.Length > 0 then
+    LData := _GetSessionID;
+    if LData.Length > 0 then
     begin
-      for i := 0 to Data.Length - 1 do
+      for i := 0 to LData.Length - 1 do
       begin
         // RLebeau: not all Delphi versions support indexed access using PByte
-        LDataPtr := Data.Data;
+        LDataPtr := LData.Data;
         Inc(LDataPtr, i);
         Result := Result + IndyFormat('%.2x', [LDataPtr^]); { do not localize }
       end;

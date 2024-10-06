@@ -71,7 +71,7 @@
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
         <SanitizedProjectName>IndyFTPClient</SanitizedProjectName>
-        <DCC_UnitSearchPath>..\..\$(Platform)\$(Config);C:\msys64\home\jpmugaas\Indy\Indy-Indy-10.6.3.4\Lib\System\$(Platform)\$(Config);C:\msys64\home\jpmugaas\Indy\Indy-Indy-10.6.3.4\Lib\System;C:\msys64\home\jpmugaas\Indy\Indy-Indy-10.6.3.4\Lib\Core\$(Platform)\$(Config);C:\msys64\home\jpmugaas\Indy\Indy-Indy-10.6.3.4\Lib\Core;C:\msys64\home\jpmugaas\Indy\Indy-Indy-10.6.3.4\Lib\Protocols\$(Platform)\$(Config);C:\msys64\home\jpmugaas\Indy\Indy-Indy-10.6.3.4\Lib\Protocols;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>..\..\$(Platform)\$(Config);C:\msys64\home\jpmugaas\Indy\Indy-Indy-10.6.3.4\Lib\System\$(Platform)\$(Config);C:\msys64\home\jpmugaas\Indy\Indy-Indy-10.6.3.4\Lib\System;C:\msys64\home\jpmugaas\Indy\Indy-Indy-10.6.3.4\Lib\Core\$(Platform)\$(Config);C:\msys64\home\jpmugaas\Indy\Indy-Indy-10.6.3.4\Lib\Core;C:\msys64\home\jpmugaas\Indy\Indy-Indy-10.6.3.4\Lib\Protocols\$(Platform)\$(Config);C:\msys64\home\jpmugaas\Indy\Indy-Indy-10.6.3.4\Lib\Protocols;..\..\;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=Indy Pitt Crew;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=Copyright (c) 2024 Indy Pitt Crew;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -191,6 +191,7 @@
                     <Source Name="MainSource">IndyFTPClient.dpr</Source>
                 </Source>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\23.0\Bpl\TaurusTLS290.bpl">TaurusTLS Run-Time package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclemsedge290.bpl">Embarcadero RAD Server Edge Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k290.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp290.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>

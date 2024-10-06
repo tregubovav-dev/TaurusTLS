@@ -376,8 +376,8 @@ begin
               LX := PEM_read_bio_X509_AUX(Lin, nil, nil, nil);
               if not Assigned(LX) then
               begin
-                if ((ERR_GET_REASON(ERR_peek_last_error())
-                  = PEM_R_NO_START_LINE) and (count > 0)) then
+                if (ERR_GET_REASON(ERR_peek_last_error())
+                  = PEM_R_NO_START_LINE) and (count > 0) then
                 begin
                   ERR_clear_error();
                   Break;
@@ -790,7 +790,7 @@ begin
       else
       begin
         Result := SSL_CTX_use_certificate(ctx, LX);
-        if (ERR_peek_error() <> 0) then
+        if ERR_peek_error() <> 0 then
         begin
           Result := 0; // * Key/certificate mismatch doesn't imply
           // * ret==0 ... */

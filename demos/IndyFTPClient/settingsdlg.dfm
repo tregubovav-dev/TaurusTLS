@@ -29,12 +29,11 @@ object frmSettings: TfrmSettings
       Left = 5
       Top = 5
       Width = 498
-      Height = 340
+      Height = 338
       ActivePage = tbshtFont
       Align = alClient
       Images = VirtualImageList1
       TabOrder = 0
-      ExplicitHeight = 338
       object tbshtFont: TTabSheet
         Caption = 'F&ont'
         ImageIndex = 1

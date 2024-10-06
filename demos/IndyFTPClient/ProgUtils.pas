@@ -238,11 +238,7 @@ begin
   Result := '';
   if ALen > Length(AText) then
   begin
-    for i := 0 to ALen - Length(AText) do
-    begin
-      Result := Result + ' ';
-    end;
-    Result := Result + AText;
+    Result := StringOfChar(' ',ALen - Length(AText)) + AText;
   end
   else
   begin

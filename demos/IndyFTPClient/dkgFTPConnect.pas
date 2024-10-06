@@ -69,7 +69,6 @@ type
     function GetUseTLS: TIdUseTLS;
     procedure SetUseTLS(const Value: TIdUseTLS);
     function GetUsePortTransferType: Boolean;
-    procedure SetUsePortTransferType(const Value: Boolean);
     function GetQuickConnect: Boolean;
     procedure SetQuickConnect(const Value: Boolean);
     function IsAnonymousOrLoginCompleted: Boolean;
@@ -84,8 +83,7 @@ type
     property Username: String read GetUsername write SetUsername;
     property Password: String read GetPassword write SetPassword;
     property UseTLS: TIdUseTLS read GetUseTLS write SetUseTLS;
-    property UsePortTransferType: Boolean read GetUsePortTransferType
-      write SetUsePortTransferType;
+    property UsePortTransferType: Boolean read GetUsePortTransferType;
   end;
 
 var
@@ -282,16 +280,7 @@ begin
     Self.lblPassword.Top := 127;
     Self.cboConnectionType.Top := 161;
     Self.lblConnectionType.Top := 165;
-  end
-  else
-  begin
-
   end;
-end;
-
-procedure TfrmConnect.SetUsePortTransferType(const Value: Boolean);
-begin
-
 end;
 
 procedure TfrmConnect.SetUsername(const Value: String);

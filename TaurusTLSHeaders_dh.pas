@@ -122,7 +122,7 @@ type
 	  files generated for C++. }
 	  
   {$EXTERNALSYM DHparams_dup}
-  {$EXTERNALSYM DH_TaurusTLS}
+  {$EXTERNALSYM DH_OpenSSL}
   {$EXTERNALSYM DH_set_default_method}
   {$EXTERNALSYM DH_get_default_method}
   {$EXTERNALSYM DH_set_method}
@@ -197,7 +197,7 @@ type
 var
   DHparams_dup: function (dh: PDH): PDH; cdecl = nil;
 
-  DH_TaurusTLS: function : PDH_Method; cdecl = nil;
+  DH_OpenSSL: function : PDH_Method; cdecl = nil;
 
   DH_set_default_method: procedure (const meth: PDH_Method); cdecl = nil;
   DH_get_default_method: function : PDH_Method; cdecl = nil;
@@ -371,7 +371,7 @@ var
 {$ELSE}
   function DHparams_dup(dh: PDH): PDH cdecl; external CLibCrypto;
 
-  function DH_TaurusTLS: PDH_Method cdecl; external CLibCrypto;
+  function DH_OpenSSL: PDH_Method cdecl; external CLibCrypto;
 
   procedure DH_set_default_method(const meth: PDH_Method) cdecl; external CLibCrypto;
   function DH_get_default_method: PDH_Method cdecl; external CLibCrypto;
@@ -607,7 +607,7 @@ const
 const
   DHparams_dup_procname = 'DHparams_dup';
 
-  DH_TaurusTLS_procname = 'DH_TaurusTLS';
+  DH_OpenSSL_procname = 'DH_OpenSSL';
 
   DH_set_default_method_procname = 'DH_set_default_method';
   DH_get_default_method_procname = 'DH_get_default_method';
@@ -786,12 +786,10 @@ begin
 end;
 
 
-
-function  ERR_DH_TaurusTLS: PDH_Method; 
+function  ERR_DH_OpenSSL: PDH_Method;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DH_TaurusTLS_procname);
+  EIdAPIFunctionNotPresent.RaiseException(DH_OpenSSL_procname);
 end;
-
 
 
 procedure  ERR_DH_set_default_method(const meth: PDH_Method); 
@@ -1352,34 +1350,34 @@ begin
   end;
 
 
-  DH_TaurusTLS := LoadLibFunction(ADllHandle, DH_TaurusTLS_procname);
-  FuncLoadError := not assigned(DH_TaurusTLS);
+  DH_OpenSSL := LoadLibFunction(ADllHandle, DH_OpenSSL_procname);
+  FuncLoadError := not assigned(DH_OpenSSL);
   if FuncLoadError then
   begin
-    {$if not defined(DH_TaurusTLS_allownil)}
-    DH_TaurusTLS := @ERR_DH_TaurusTLS;
+    {$if not defined(DH_OpenSSL_allownil)}
+    DH_OpenSSL := @ERR_DH_OpenSSL;
     {$ifend}
-    {$if declared(DH_TaurusTLS_introduced)}
-    if LibVersion < DH_TaurusTLS_introduced then
+    {$if declared(DH_OpenSSL_introduced)}
+    if LibVersion < DH_OpenSSL_introduced then
     begin
-      {$if declared(FC_DH_TaurusTLS)}
-      DH_TaurusTLS := @FC_DH_TaurusTLS;
+      {$if declared(FC_DH_OpenSSL)}
+      DH_OpenSSL := @FC_DH_OpenSSL;
       {$ifend}
       FuncLoadError := false;
     end;
     {$ifend}
-    {$if declared(DH_TaurusTLS_removed)}
-    if DH_TaurusTLS_removed <= LibVersion then
+    {$if declared(DH_OpenSSL_removed)}
+    if DH_OpenSSL_removed <= LibVersion then
     begin
-      {$if declared(_DH_TaurusTLS)}
-      DH_TaurusTLS := @_DH_TaurusTLS;
+      {$if declared(_DH_OpenSSL)}
+      DH_OpenSSL := @_DH_OpenSSL;
       {$ifend}
       FuncLoadError := false;
     end;
     {$ifend}
-    {$if not defined(DH_TaurusTLS_allownil)}
+    {$if not defined(DH_OpenSSL_allownil)}
     if FuncLoadError then
-      AFailed.Add('DH_TaurusTLS');
+      AFailed.Add('DH_OpenSSL');
     {$ifend}
   end;
 
@@ -3597,7 +3595,7 @@ end;
 procedure Unload;
 begin
   DHparams_dup := nil;
-  DH_TaurusTLS := nil;
+  DH_OpenSSL := nil;
   DH_set_default_method := nil;
   DH_get_default_method := nil;
   DH_set_method := nil;

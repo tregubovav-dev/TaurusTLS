@@ -272,7 +272,7 @@ type
   {$EXTERNALSYM i2o_ECPublicKey}
   {$EXTERNALSYM ECParameters_print}
   {$EXTERNALSYM EC_KEY_print}
-  {$EXTERNALSYM EC_KEY_TaurusTLS} {introduced 1.1.0}
+  {$EXTERNALSYM EC_KEY_OpenSSL} {introduced 1.1.0}
   {$EXTERNALSYM EC_KEY_get_default_method} {introduced 1.1.0}
   {$EXTERNALSYM EC_KEY_set_default_method} {introduced 1.1.0}
   {$EXTERNALSYM EC_KEY_get_method} {introduced 1.1.0}
@@ -476,7 +476,7 @@ var
   ECParameters_print: function (bp: PBIO; const key: PEC_KEY): TIdC_INT; cdecl = nil;
   EC_KEY_print: function (bp: PBIO; const key: PEC_KEY; off: TIdC_INT): TIdC_INT; cdecl = nil;
 
-  EC_KEY_TaurusTLS: function : PEC_KEY_METHOD; cdecl = nil; {introduced 1.1.0}
+  EC_KEY_OpenSSL: function : PEC_KEY_METHOD; cdecl = nil; {introduced 1.1.0}
   EC_KEY_get_default_method: function : PEC_KEY_METHOD; cdecl = nil; {introduced 1.1.0}
   EC_KEY_set_default_method: procedure (const meth: PEC_KEY_METHOD); cdecl = nil; {introduced 1.1.0}
   EC_KEY_get_method: function (const key: PEC_KEY): PEC_KEY_METHOD; cdecl = nil; {introduced 1.1.0}
@@ -677,7 +677,7 @@ var
   function ECParameters_print(bp: PBIO; const key: PEC_KEY): TIdC_INT cdecl; external CLibCrypto;
   function EC_KEY_print(bp: PBIO; const key: PEC_KEY; off: TIdC_INT): TIdC_INT cdecl; external CLibCrypto;
 
-  function EC_KEY_TaurusTLS: PEC_KEY_METHOD cdecl; external CLibCrypto; {introduced 1.1.0}
+  function EC_KEY_OpenSSL: PEC_KEY_METHOD cdecl; external CLibCrypto; {introduced 1.1.0}
   function EC_KEY_get_default_method: PEC_KEY_METHOD cdecl; external CLibCrypto; {introduced 1.1.0}
   procedure EC_KEY_set_default_method(const meth: PEC_KEY_METHOD) cdecl; external CLibCrypto; {introduced 1.1.0}
   function EC_KEY_get_method(const key: PEC_KEY): PEC_KEY_METHOD cdecl; external CLibCrypto; {introduced 1.1.0}
@@ -756,7 +756,7 @@ const
   EC_KEY_oct2priv_introduced = (byte(1) shl 8 or byte(1)) shl 8 or byte(0);
   EC_KEY_priv2oct_introduced = (byte(1) shl 8 or byte(1)) shl 8 or byte(0);
   EC_KEY_priv2buf_introduced = (byte(1) shl 8 or byte(1)) shl 8 or byte(0);
-  EC_KEY_TaurusTLS_introduced = (byte(1) shl 8 or byte(1)) shl 8 or byte(0);
+  EC_KEY_OpenSSL_introduced = (byte(1) shl 8 or byte(1)) shl 8 or byte(0);
   EC_KEY_get_default_method_introduced = (byte(1) shl 8 or byte(1)) shl 8 or byte(0);
   EC_KEY_set_default_method_introduced = (byte(1) shl 8 or byte(1)) shl 8 or byte(0);
   EC_KEY_get_method_introduced = (byte(1) shl 8 or byte(1)) shl 8 or byte(0);
@@ -946,7 +946,7 @@ const
   ECParameters_print_procname = 'ECParameters_print';
   EC_KEY_print_procname = 'EC_KEY_print';
 
-  EC_KEY_TaurusTLS_procname = 'EC_KEY_TaurusTLS'; {introduced 1.1.0}
+  EC_KEY_OpenSSL_procname = 'EC_KEY_OpenSSL'; {introduced 1.1.0}
   EC_KEY_get_default_method_procname = 'EC_KEY_get_default_method'; {introduced 1.1.0}
   EC_KEY_set_default_method_procname = 'EC_KEY_set_default_method'; {introduced 1.1.0}
   EC_KEY_get_method_procname = 'EC_KEY_get_method'; {introduced 1.1.0}
@@ -1844,11 +1844,9 @@ begin
   EIdAPIFunctionNotPresent.RaiseException(EC_KEY_print_procname);
 end;
 
-
-
-function  ERR_EC_KEY_TaurusTLS: PEC_KEY_METHOD; 
+function  ERR_EC_KEY_OpenSSL: PEC_KEY_METHOD;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EC_KEY_TaurusTLS_procname);
+  EIdAPIFunctionNotPresent.RaiseException(EC_KEY_OpenSSL_procname);
 end;
 
  {introduced 1.1.0}
@@ -6522,34 +6520,34 @@ begin
   end;
 
 
-  EC_KEY_TaurusTLS := LoadLibFunction(ADllHandle, EC_KEY_TaurusTLS_procname);
-  FuncLoadError := not assigned(EC_KEY_TaurusTLS);
+  EC_KEY_OpenSSL := LoadLibFunction(ADllHandle, EC_KEY_OpenSSL_procname);
+  FuncLoadError := not assigned(EC_KEY_OpenSSL);
   if FuncLoadError then
   begin
-    {$if not defined(EC_KEY_TaurusTLS_allownil)}
-    EC_KEY_TaurusTLS := @ERR_EC_KEY_TaurusTLS;
+    {$if not defined(EC_KEY_OpenSSL_allownil)}
+    EC_KEY_OpenSSL := @ERR_EC_KEY_OpenSSL;
     {$ifend}
-    {$if declared(EC_KEY_TaurusTLS_introduced)}
-    if LibVersion < EC_KEY_TaurusTLS_introduced then
+    {$if declared(EC_KEY_OpenSSL_introduced)}
+    if LibVersion < EC_KEY_OpenSSL_introduced then
     begin
-      {$if declared(FC_EC_KEY_TaurusTLS)}
-      EC_KEY_TaurusTLS := @FC_EC_KEY_TaurusTLS;
+      {$if declared(FC_EC_KEY_OpenSSL)}
+      EC_KEY_OpenSSL := @FC_EC_KEY_OpenSSL;
       {$ifend}
       FuncLoadError := false;
     end;
     {$ifend}
-    {$if declared(EC_KEY_TaurusTLS_removed)}
-    if EC_KEY_TaurusTLS_removed <= LibVersion then
+    {$if declared(EC_KEY_OpenSSL_removed)}
+    if EC_KEY_OpenSSL_removed <= LibVersion then
     begin
-      {$if declared(_EC_KEY_TaurusTLS)}
-      EC_KEY_TaurusTLS := @_EC_KEY_TaurusTLS;
+      {$if declared(_EC_KEY_OpenSSL)}
+      EC_KEY_OpenSSL := @_EC_KEY_OpenSSL;
       {$ifend}
       FuncLoadError := false;
     end;
     {$ifend}
-    {$if not defined(EC_KEY_TaurusTLS_allownil)}
+    {$if not defined(EC_KEY_OpenSSL_allownil)}
     if FuncLoadError then
-      AFailed.Add('EC_KEY_TaurusTLS');
+      AFailed.Add('EC_KEY_OpenSSL');
     {$ifend}
   end;
 
@@ -7817,7 +7815,7 @@ begin
   i2o_ECPublicKey := nil;
   ECParameters_print := nil;
   EC_KEY_print := nil;
-  EC_KEY_TaurusTLS := nil; {introduced 1.1.0}
+  EC_KEY_OpenSSL := nil; {introduced 1.1.0}
   EC_KEY_get_default_method := nil; {introduced 1.1.0}
   EC_KEY_set_default_method := nil; {introduced 1.1.0}
   EC_KEY_get_method := nil; {introduced 1.1.0}

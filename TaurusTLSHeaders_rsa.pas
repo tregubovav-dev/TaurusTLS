@@ -292,7 +292,7 @@ type
   {$EXTERNALSYM RSA_null_method}
   {$EXTERNALSYM RSA_get_method}
   {$EXTERNALSYM RSA_set_method}
-  {$EXTERNALSYM RSA_PKCS1_TaurusTLS}
+  {$EXTERNALSYM RSA_PKCS1_OpenSSL}
   {$EXTERNALSYM RSA_pkey_ctx_ctrl}
   {$EXTERNALSYM RSA_print}
   {$EXTERNALSYM RSA_sign}
@@ -409,7 +409,7 @@ var
   RSA_set_method: function (rsa: PRSA; const meth: PRSA_METHOD): TIdC_INT; cdecl = nil;
 
   (* these are the actual RSA functions *)
-  RSA_PKCS1_TaurusTLS: function : PRSA_METHOD; cdecl = nil;
+  RSA_PKCS1_OpenSSL: function : PRSA_METHOD; cdecl = nil;
 
   RSA_pkey_ctx_ctrl: function (ctx: PEVP_PKEY_CTX; optype: TIdC_INT; cmd: TIdC_INT; p1: TIdC_INT; p2: Pointer): TIdC_INT; cdecl = nil;
 
@@ -590,7 +590,7 @@ var
   function RSA_set_method(rsa: PRSA; const meth: PRSA_METHOD): TIdC_INT cdecl; external CLibCrypto;
 
   (* these are the actual RSA functions *)
-  function RSA_PKCS1_TaurusTLS: PRSA_METHOD cdecl; external CLibCrypto;
+  function RSA_PKCS1_OpenSSL: PRSA_METHOD cdecl; external CLibCrypto;
 
   function RSA_pkey_ctx_ctrl(ctx: PEVP_PKEY_CTX; optype: TIdC_INT; cmd: TIdC_INT; p1: TIdC_INT; p2: Pointer): TIdC_INT cdecl; external CLibCrypto;
 
@@ -785,7 +785,7 @@ const
   RSA_set_method_procname = 'RSA_set_method';
 
   (* these are the actual RSA functions *)
-  RSA_PKCS1_TaurusTLS_procname = 'RSA_PKCS1_TaurusTLS';
+  RSA_PKCS1_OpenSSL_procname = 'RSA_PKCS1_OpenSSL';
 
   RSA_pkey_ctx_ctrl_procname = 'RSA_pkey_ctx_ctrl';
 
@@ -1182,9 +1182,9 @@ end;
 
 
   (* these are the actual RSA functions *)
-function  ERR_RSA_PKCS1_TaurusTLS: PRSA_METHOD; 
+function  ERR_RSA_PKCS1_OpenSSL: PRSA_METHOD;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RSA_PKCS1_TaurusTLS_procname);
+  EIdAPIFunctionNotPresent.RaiseException(RSA_PKCS1_OpenSSL_procname);
 end;
 
 
@@ -2943,34 +2943,34 @@ begin
   end;
 
 
-  RSA_PKCS1_TaurusTLS := LoadLibFunction(ADllHandle, RSA_PKCS1_TaurusTLS_procname);
-  FuncLoadError := not assigned(RSA_PKCS1_TaurusTLS);
+  RSA_PKCS1_OpenSSL := LoadLibFunction(ADllHandle, RSA_PKCS1_OpenSSL_procname);
+  FuncLoadError := not assigned(RSA_PKCS1_OpenSSL);
   if FuncLoadError then
   begin
-    {$if not defined(RSA_PKCS1_TaurusTLS_allownil)}
-    RSA_PKCS1_TaurusTLS := @ERR_RSA_PKCS1_TaurusTLS;
+    {$if not defined(RSA_PKCS1_OpenSSL_allownil)}
+    RSA_PKCS1_OpenSSL := @ERR_RSA_PKCS1_OpenSSL;
     {$ifend}
-    {$if declared(RSA_PKCS1_TaurusTLS_introduced)}
-    if LibVersion < RSA_PKCS1_TaurusTLS_introduced then
+    {$if declared(RSA_PKCS1_OpenSSL_introduced)}
+    if LibVersion < RSA_PKCS1_OpenSSL_introduced then
     begin
-      {$if declared(FC_RSA_PKCS1_TaurusTLS)}
-      RSA_PKCS1_TaurusTLS := @FC_RSA_PKCS1_TaurusTLS;
+      {$if declared(FC_RSA_PKCS1_OpenSSL)}
+      RSA_PKCS1_OpenSSL := @FC_RSA_PKCS1_OpenSSL;
       {$ifend}
       FuncLoadError := false;
     end;
     {$ifend}
-    {$if declared(RSA_PKCS1_TaurusTLS_removed)}
-    if RSA_PKCS1_TaurusTLS_removed <= LibVersion then
+    {$if declared(RSA_PKCS1_OpenSSL_removed)}
+    if RSA_PKCS1_OpenSSL_removed <= LibVersion then
     begin
-      {$if declared(_RSA_PKCS1_TaurusTLS)}
-      RSA_PKCS1_TaurusTLS := @_RSA_PKCS1_TaurusTLS;
+      {$if declared(_RSA_PKCS1_OpenSSL)}
+      RSA_PKCS1_OpenSSL := @_RSA_PKCS1_OpenSSL;
       {$ifend}
       FuncLoadError := false;
     end;
     {$ifend}
-    {$if not defined(RSA_PKCS1_TaurusTLS_allownil)}
+    {$if not defined(RSA_PKCS1_OpenSSL_allownil)}
     if FuncLoadError then
-      AFailed.Add('RSA_PKCS1_TaurusTLS');
+      AFailed.Add('RSA_PKCS1_OpenSSL');
     {$ifend}
   end;
 
@@ -4654,7 +4654,7 @@ begin
   RSA_null_method := nil;
   RSA_get_method := nil;
   RSA_set_method := nil;
-  RSA_PKCS1_TaurusTLS := nil;
+  RSA_PKCS1_OpenSSL := nil;
   RSA_pkey_ctx_ctrl := nil;
   RSA_print := nil;
   RSA_sign := nil;

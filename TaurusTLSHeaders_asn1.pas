@@ -3267,7 +3267,7 @@ begin
   end;
 
   i2d_ASN1_BIT_STRING := LoadLibFunction(ADllHandle, i2d_ASN1_BIT_STRING_procname);
-  FuncLoadError := not assigned(d2i_ASN1_OBJECT);
+  FuncLoadError := not assigned(i2d_ASN1_BIT_STRING);
   if FuncLoadError then
   begin
     {$if not defined(i2d_ASN1_BIT_STRING_allownil)}
@@ -8718,6 +8718,8 @@ begin
   ASN1_OBJECT_free := nil;
   i2d_ASN1_OBJECT := nil;
   d2i_ASN1_OBJECT := nil;
+  i2d_ASN1_BIT_STRING := nil;
+  d2i_ASN1_BIT_STRING := nil;
   ASN1_STRING_new := nil;
   ASN1_STRING_free := nil;
   ASN1_STRING_clear_free := nil;

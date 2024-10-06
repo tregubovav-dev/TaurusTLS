@@ -661,49 +661,6 @@ uses
   TaurusTLSLoader;
 
 type
-  TRAND_bytes = function(buf: PIdAnsiChar; num: Integer): Integer; cdecl;
-  TRAND_pseudo_bytes = function(buf: PIdAnsiChar; num: Integer): Integer; cdecl;
-  TRAND_seed = procedure(buf: PIdAnsiChar; num: Integer); cdecl;
-  TRAND_add = procedure(buf: PIdAnsiChar; num: Integer;
-    entropy: Integer); cdecl;
-  TRAND_status = function(): Integer; cdecl;
-{$IFDEF SYS_WIN}
-  TRAND_event = function(iMsg: UINT; wp: wparam; lp: lparam): Integer; cdecl;
-{$ENDIF}
-  TRAND_cleanup = procedure; cdecl;
-
-var
-  _RAND_cleanup: TRAND_cleanup = nil;
-  _RAND_bytes: TRAND_bytes = nil;
-  _RAND_pseudo_bytes: TRAND_pseudo_bytes = nil;
-  _RAND_seed: TRAND_seed = nil;
-  _RAND_add: TRAND_add = nil;
-  _RAND_status: TRAND_status = nil;
-{$IFDEF SYS_WIN}
-  // LIBEAY functions - open SSL 0.9.6a
-  _RAND_screen: procedure cdecl = nil;
-  _RAND_event: TRAND_event = nil;
-{$ENDIF}
-
-procedure InitializeRandom;
-begin
-{$IFDEF SYS_WIN}
-  if Assigned(_RAND_screen) then
-  begin
-    _RAND_screen;
-  end;
-{$ENDIF}
-end;
-
-procedure CleanupRandom;
-begin
-  if Assigned(_RAND_cleanup) then
-  begin
-    _RAND_cleanup;
-  end;
-end;
-
-type
   // TODO: TIdThreadSafeObjectList instead?
 {$IFDEF HAS_GENERICS_TThreadList}
   TIdCriticalSectionThreadList = TThreadList<TIdCriticalSection>;
@@ -1149,7 +1106,6 @@ begin
       OPENSSL_INIT_LOAD_CRYPTO_STRINGS or OPENSSL_INIT_LOAD_CONFIG or
       OPENSSL_INIT_ASYNC or OPENSSL_INIT_ENGINE_ALL_BUILTIN, nil);
 
-    InitializeRandom;
     // Create locking structures, we need them for callback routines
     Assert(LockInfoCB = nil);
     LockInfoCB := TIdCriticalSection.Create;
@@ -1198,7 +1154,6 @@ begin
 {$ENDIF}
       CRYPTO_set_locking_callback(nil);
 
-    CleanupRandom;
     // <-- RLebeau: why is this here and not in IdSSLTaurusTLSHeaders.Unload()?
 {$IFNDEF OPENSSL_STATIC_LINK_MODEL}
     GetOpenSSLLoader.Unload;
@@ -2605,7 +2560,7 @@ type
       sslmServer:
         Result := TLS_server_method();
 
-      sslmBoth:
+      sslmBoth, sslmUnassigned:
         Result := TLS_Method();
 
     end;
@@ -3041,6 +2996,10 @@ type
   begin
     Result := 'Unknown';
     case SSLProtocolVersion of
+      sslUnknown:
+        Result := 'Unknown';
+      sslvSSLv23 :
+        Result := 'SSLv2 or SSLv3';
       sslvSSLv2:
         Result := 'SSLv2';
       sslvSSLv3:

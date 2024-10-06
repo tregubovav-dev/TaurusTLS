@@ -124,11 +124,14 @@ http://csrc.nist.gov/CryptoToolkit/tkhash.html
 
   TIdX509SigInfo = class(TIdX509Info)
   protected
+    Fsig_alg : PX509_ALGOR;
+    Fsignature : PASN1_BIT_STRING;
     function GetSignature : String;
     function GetSigType : TIdC_INT;
     function GetSigTypeAsString : String;
     function GetAlgorithm : String;
   public
+    constructor Create( aX509: PX509); override;
     property Signature : String read GetSignature;
     property Algorithm : String read GetAlgorithm;
     property SigType : TIdC_INT read  GetSigType ;
@@ -532,24 +535,30 @@ end;
 
 { TIdX509SigInfo }
 
+constructor TIdX509SigInfo.Create(aX509: PX509);
+begin
+  inherited;
+  Fsig_alg := nil;
+  Fsignature := nil;
+end;
+
 function TIdX509SigInfo.GetAlgorithm: String;
 var
-  sig_alg : PX509_ALGOR;
-  signature : PASN1_BIT_STRING;
   lalgorithm : PASN1_OBJECT;
 begin
-  X509_get0_signature(signature,sig_alg, FX509);
-  X509_ALGOR_get0(@lalgorithm, nil, nil, sig_alg);
+  if not assigned(Fsig_alg) then begin
+    X509_get0_signature(Fsignature,Fsig_alg, FX509);
+  end;
+  X509_ALGOR_get0(@lalgorithm, nil, nil, Fsig_alg);
   Result :=  ASN1_OBJECT_ToStr(lalgorithm);
 end;
 
 function TIdX509SigInfo.GetSignature: String;
-var
-  sig_alg : PX509_ALGOR;
-  signature : PASN1_BIT_STRING;
 begin
-  X509_get0_signature(signature, sig_alg, FX509);
-  Result := BytesToHexString( signature^.data, signature^.length);
+  if not assigned(Fsignature) then begin
+    X509_get0_signature(Fsignature, Fsig_alg, FX509);
+  end;
+  Result := BytesToHexString( Fsignature^.data, Fsignature^.length);
 end;
 
 function TIdX509SigInfo.GetSigType: TIdC_INT;

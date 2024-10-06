@@ -49,7 +49,7 @@ object frmCertViewer: TfrmCertViewer
     Font.Style = []
     ParentColor = True
     ParentFont = False
-    TabOrder = 0
+    TabOrder = 2
     DesignSize = (
       558
       34)
@@ -92,7 +92,7 @@ object frmCertViewer: TfrmCertViewer
     ParentFont = False
     ReadOnly = True
     ScrollBars = ssBoth
-    TabOrder = 1
+    TabOrder = 0
     WantTabs = True
     WantReturns = False
     WordWrap = False
@@ -106,6 +106,6 @@ object frmCertViewer: TfrmCertViewer
     Caption = '&Accept Certificate Only Once'
     Checked = True
     State = cbChecked
-    TabOrder = 2
+    TabOrder = 1
   end
 end

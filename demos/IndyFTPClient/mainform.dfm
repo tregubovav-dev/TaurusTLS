@@ -191,7 +191,7 @@ object frmMainForm: TfrmMainForm
         PopupMenu = ppmnuLocal
         SmallImages = vimglstSmall
         SortType = stBoth
-        TabOrder = 0
+        TabOrder = 1
         ViewStyle = vsReport
         OnColumnClick = lvLocalFilesColumnClick
         OnCompare = lvLocalFilesCompare
@@ -203,7 +203,7 @@ object frmMainForm: TfrmMainForm
         Width = 214
         Height = 23
         Anchors = [akLeft, akTop, akRight]
-        TabOrder = 1
+        TabOrder = 0
         OnKeyDown = cboLocalCurrentDirKeyDown
       end
     end
@@ -260,7 +260,7 @@ object frmMainForm: TfrmMainForm
         PopupMenu = ppmnuRemote
         SmallImages = vimglstSmall
         SortType = stData
-        TabOrder = 0
+        TabOrder = 1
         ViewStyle = vsReport
         OnColumnClick = lvRemoteFilesColumnClick
         OnCompare = lvRemoteFilesCompare
@@ -273,7 +273,7 @@ object frmMainForm: TfrmMainForm
         Height = 23
         Anchors = [akLeft, akTop, akRight]
         Enabled = False
-        TabOrder = 1
+        TabOrder = 0
         OnKeyDown = cboRemoteCurrentDirKeyDown
       end
     end

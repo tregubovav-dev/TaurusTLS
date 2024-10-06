@@ -40,7 +40,7 @@ object frmFTPSites: TfrmFTPSites
     Font.Style = []
     ParentColor = True
     ParentFont = False
-    TabOrder = 0
+    TabOrder = 4
     DesignSize = (
       267
       34)
@@ -74,34 +74,34 @@ object frmFTPSites: TfrmFTPSites
     Height = 228
     Anchors = [akLeft, akTop, akRight, akBottom]
     ItemHeight = 15
-    TabOrder = 1
+    TabOrder = 0
   end
-  object Button1: TButton
+  object btnNew: TButton
     Left = 187
     Top = 32
     Width = 75
     Height = 25
     Action = actFTPSitesNew
     Anchors = [akTop, akRight]
-    TabOrder = 2
+    TabOrder = 1
   end
-  object Button2: TButton
+  object btnEdit: TButton
     Left = 187
     Top = 63
     Width = 75
     Height = 25
     Action = actFTPSitesEdit
     Anchors = [akTop, akRight]
-    TabOrder = 3
+    TabOrder = 2
   end
-  object Button4: TButton
+  object btnDelete: TButton
     Left = 187
     Top = 94
     Width = 75
     Height = 25
     Action = actFTPSiteDelete
     Anchors = [akTop, akRight]
-    TabOrder = 4
+    TabOrder = 3
   end
   object actLstFTPSites: TActionList
     Left = 160

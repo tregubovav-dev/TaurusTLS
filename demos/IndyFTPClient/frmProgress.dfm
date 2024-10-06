@@ -43,7 +43,7 @@ object frmFileProgress: TfrmFileProgress
     Font.Style = []
     ParentColor = True
     ParentFont = False
-    TabOrder = 0
+    TabOrder = 1
     DesignSize = (
       386
       34)
@@ -66,6 +66,6 @@ object frmFileProgress: TfrmFileProgress
     Top = 45
     Width = 370
     Height = 17
-    TabOrder = 1
+    TabOrder = 0
   end
 end

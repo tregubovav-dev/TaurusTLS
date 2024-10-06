@@ -35,8 +35,8 @@ function MDAsString(const AMD: TIdSSLEVP_MD): String;
 procedure DumpCert(AOut: TStrings; AX509: PX509);
 function UTCTime2DateTime(UTCtime: PASN1_UTCTIME): TDateTime;
 function UTC_Time_Decode(UTCtime: PASN1_UTCTIME;
-  var year, month, day, hour, min, sec: Word;
-  var tz_hour, tz_min: Integer): Integer;
+  out year, month, day, hour, min, sec: Word;
+  out tz_hour, tz_min: Integer): Integer;
 function AddMins(const DT: TDateTime; const Mins: Extended): TDateTime;
 function AddHrs(const DT: TDateTime; const Hrs: Extended): TDateTime;
 
@@ -59,8 +59,8 @@ begin
 end;
 
 function UTC_Time_Decode(UTCtime: PASN1_UTCTIME;
-  var year, month, day, hour, min, sec: Word;
-  var tz_hour, tz_min: Integer): Integer;
+  out year, month, day, hour, min, sec: Word;
+  out tz_hour, tz_min: Integer): Integer;
 var
   i, tz_dir: Integer;
   time_str: string;

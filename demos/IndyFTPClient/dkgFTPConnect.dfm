@@ -39,26 +39,32 @@ object frmConnect: TfrmConnect
           409
           226)
         object lblHost: TLabel
-          Left = 62
+          Left = 18
           Top = 53
-          Width = 28
+          Width = 72
           Height = 15
+          Alignment = taRightJustify
+          AutoSize = False
           Caption = '&Host:'
           FocusControl = edtHostname
         end
         object lblUsername: TLabel
-          Left = 31
+          Left = 18
           Top = 127
-          Width = 59
+          Width = 72
           Height = 15
+          Alignment = taRightJustify
+          AutoSize = False
           Caption = '&User name:'
           FocusControl = edtUsername
         end
         object lblPassword: TLabel
-          Left = 37
+          Left = 18
           Top = 166
-          Width = 53
+          Width = 72
           Height = 15
+          Alignment = taRightJustify
+          AutoSize = False
           Caption = '&Password:'
           FocusControl = edtPassword
         end
@@ -67,13 +73,17 @@ object frmConnect: TfrmConnect
           Top = 16
           Width = 72
           Height = 15
+          AutoSize = False
           Caption = 'P&rofile Name:'
+          FocusControl = edtProfileName
         end
         object lblConnectionType: TLabel
-          Left = 40
+          Left = 18
           Top = 201
-          Width = 48
+          Width = 72
           Height = 15
+          Alignment = taRightJustify
+          AutoSize = False
           Caption = 'Pro&tocol:'
           FocusControl = cboConnectionType
         end
@@ -159,18 +169,24 @@ object frmConnect: TfrmConnect
           409
           226)
         object lblPrivateKeyFile: TLabel
-          Left = 29
+          Left = 18
           Top = 16
-          Width = 61
+          Width = 72
           Height = 15
+          Alignment = taRightJustify
+          AutoSize = False
           Caption = 'Private &Key:'
+          FocusControl = edtPrivateKeyFile
         end
         object lblPublicKey: TLabel
-          Left = 29
+          Left = 18
           Top = 46
-          Width = 58
+          Width = 72
           Height = 15
+          Alignment = taRightJustify
+          AutoSize = False
           Caption = 'P&ublic Key:'
+          FocusControl = edtPublicKey
         end
         object spdbtnPrivateKeyFile: TSpeedButton
           Left = 368
@@ -206,11 +222,14 @@ object frmConnect: TfrmConnect
           OnClick = spdbtnCAKeyClick
         end
         object lblCAKey: TLabel
-          Left = 41
+          Left = 18
           Top = 76
-          Width = 41
+          Width = 72
           Height = 15
+          Alignment = taRightJustify
+          AutoSize = False
           Caption = 'CA Key:'
+          FocusControl = edtCAKey
         end
         object edtPublicKey: TEdit
           Left = 96
@@ -248,26 +267,32 @@ object frmConnect: TfrmConnect
           409
           226)
         object lblTransferType: TLabel
-          Left = 15
+          Left = 19
           Top = 45
           Width = 71
           Height = 15
+          Alignment = taRightJustify
           Caption = '&Transfer Type:'
           FocusControl = cboTransferTypes
         end
         object lblAccount: TLabel
-          Left = 38
+          Left = 18
           Top = 16
-          Width = 48
+          Width = 72
           Height = 15
+          Alignment = taRightJustify
+          AutoSize = False
           Caption = 'A&ccount:'
+          FocusControl = edtAccount
         end
         object lblPort: TLabel
-          Left = 61
+          Left = 65
           Top = 75
           Width = 25
           Height = 15
+          Alignment = taRightJustify
           Caption = 'Po&rt:'
+          FocusControl = spnedtPort
         end
         object cboTransferTypes: TComboBox
           Left = 96

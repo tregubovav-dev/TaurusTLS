@@ -14,45 +14,56 @@ object frmFTPProxySettings: TfrmFTPProxySettings
   Position = poDesktopCenter
   TextHeight = 15
   object lblProxyPort: TLabel
-    Left = 64
+    Left = 18
     Top = 132
-    Width = 25
+    Width = 72
     Height = 15
+    Alignment = taRightJustify
+    AutoSize = False
     Caption = 'P&ort:'
     Enabled = False
+    FocusControl = spededtProxyPort
   end
   object lblProxyServerPassword: TLabel
-    Left = 40
+    Left = 18
     Top = 103
-    Width = 53
+    Width = 72
     Height = 15
+    Alignment = taRightJustify
+    AutoSize = False
     Caption = 'Password:'
     Enabled = False
     FocusControl = edtProxyServerPassword
   end
   object lblProxyServerUserName: TLabel
-    Left = 38
+    Left = 18
     Top = 74
-    Width = 56
+    Width = 72
     Height = 15
+    Alignment = taRightJustify
+    AutoSize = False
     Caption = 'Username:'
     Enabled = False
     FocusControl = edtProxyServerUserName
   end
   object lblProxyServerName: TLabel
-    Left = 26
+    Left = 18
     Top = 46
-    Width = 68
+    Width = 72
     Height = 15
+    Alignment = taRightJustify
+    AutoSize = False
     Caption = 'Proxy &Server:'
     Enabled = False
     FocusControl = edtProxyServerName
   end
   object lblProxyType: TLabel
-    Left = 64
+    Left = 18
     Top = 16
-    Width = 27
+    Width = 72
     Height = 15
+    Alignment = taRightJustify
+    AutoSize = False
     Caption = '&Type:'
     FocusControl = cboProxyType
   end
@@ -70,7 +81,7 @@ object frmFTPProxySettings: TfrmFTPProxySettings
     Font.Style = []
     ParentColor = True
     ParentFont = False
-    TabOrder = 0
+    TabOrder = 5
     DesignSize = (
       472
       34)
@@ -98,14 +109,14 @@ object frmFTPProxySettings: TfrmFTPProxySettings
     end
   end
   object spededtProxyPort: TSpinEdit
-    Left = 95
+    Left = 97
     Top = 129
     Width = 121
     Height = 24
     Enabled = False
     MaxValue = 65535
     MinValue = 1
-    TabOrder = 5
+    TabOrder = 4
     Value = 1
   end
   object edtProxyServerPassword: TEdit
@@ -115,15 +126,15 @@ object frmFTPProxySettings: TfrmFTPProxySettings
     Height = 23
     Enabled = False
     PasswordChar = '*'
-    TabOrder = 4
+    TabOrder = 3
   end
   object edtProxyServerUserName: TEdit
-    Left = 95
+    Left = 97
     Top = 71
     Width = 369
     Height = 23
     Enabled = False
-    TabOrder = 3
+    TabOrder = 2
   end
   object edtProxyServerName: TEdit
     Left = 97
@@ -131,7 +142,7 @@ object frmFTPProxySettings: TfrmFTPProxySettings
     Width = 369
     Height = 23
     Enabled = False
-    TabOrder = 2
+    TabOrder = 1
   end
   object cboProxyType: TComboBox
     Left = 97
@@ -139,7 +150,7 @@ object frmFTPProxySettings: TfrmFTPProxySettings
     Width = 369
     Height = 23
     Style = csDropDownList
-    TabOrder = 1
+    TabOrder = 0
     OnChange = cboProxyTypeChange
     Items.Strings = (
       'None'

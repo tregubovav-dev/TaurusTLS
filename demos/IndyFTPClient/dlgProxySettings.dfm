@@ -14,45 +14,56 @@ object frmProxySettings: TfrmProxySettings
   Position = poDesktopCenter
   TextHeight = 15
   object lblProxyPort: TLabel
-    Left = 64
+    Left = 18
     Top = 132
-    Width = 25
+    Width = 72
     Height = 15
+    Alignment = taRightJustify
+    AutoSize = False
     Caption = 'P&ort:'
     Enabled = False
+    FocusControl = spededtProxyPort
   end
   object lblProxyServerPassword: TLabel
-    Left = 40
+    Left = 18
     Top = 103
-    Width = 53
+    Width = 72
     Height = 15
+    Alignment = taRightJustify
+    AutoSize = False
     Caption = 'Password:'
     Enabled = False
     FocusControl = edtProxyServerPassword
   end
   object lblProxyServerUserName: TLabel
-    Left = 38
+    Left = 18
     Top = 74
-    Width = 56
+    Width = 72
     Height = 15
+    Alignment = taRightJustify
+    AutoSize = False
     Caption = 'Username:'
     Enabled = False
     FocusControl = edtProxyServerUserName
   end
   object lblProxyServerName: TLabel
-    Left = 26
+    Left = 18
     Top = 46
-    Width = 68
+    Width = 72
     Height = 15
+    Alignment = taRightJustify
+    AutoSize = False
     Caption = 'Proxy &Server:'
     Enabled = False
     FocusControl = edtProxyServerName
   end
   object lblProxyType: TLabel
-    Left = 64
+    Left = 18
     Top = 16
-    Width = 27
+    Width = 72
     Height = 15
+    Alignment = taRightJustify
+    AutoSize = False
     Caption = '&Type:'
     FocusControl = cboProxyType
   end
@@ -98,7 +109,7 @@ object frmProxySettings: TfrmProxySettings
     end
   end
   object spededtProxyPort: TSpinEdit
-    Left = 95
+    Left = 97
     Top = 129
     Width = 121
     Height = 24
@@ -118,7 +129,7 @@ object frmProxySettings: TfrmProxySettings
     TabOrder = 3
   end
   object edtProxyServerUserName: TEdit
-    Left = 95
+    Left = 97
     Top = 71
     Width = 369
     Height = 23

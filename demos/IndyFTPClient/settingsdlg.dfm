@@ -46,6 +46,7 @@ object frmSettings: TfrmSettings
           Top = 55
           Width = 458
           Height = 94
+          TabStop = False
           Anchors = [akLeft, akTop, akRight, akBottom]
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -55,7 +56,7 @@ object frmSettings: TfrmSettings
           ParentFont = False
           ReadOnly = True
           ScrollBars = ssBoth
-          TabOrder = 0
+          TabOrder = 1
           WantReturns = False
           WordWrap = False
         end
@@ -65,7 +66,7 @@ object frmSettings: TfrmSettings
           Width = 75
           Height = 25
           Caption = 'Fon&t...'
-          TabOrder = 1
+          TabOrder = 0
           OnClick = btnFontSelectClick
         end
         object redtTextSamples: TRichEdit
@@ -73,6 +74,7 @@ object frmSettings: TfrmSettings
           Top = 155
           Width = 156
           Height = 150
+          TabStop = False
           Anchors = [akLeft, akBottom]
           Font.Charset = ANSI_CHARSET
           Font.Color = clBtnText
@@ -91,110 +93,118 @@ object frmSettings: TfrmSettings
           Top = 155
           Width = 296
           Height = 150
-          HorzScrollBar.Position = 46
+          VertScrollBar.Position = 13
           Anchors = [akLeft, akRight, akBottom]
           TabOrder = 3
           object lblErrors: TLabel
-            Left = -30
-            Top = 39
-            Width = 28
+            Left = 16
+            Top = 26
+            Width = 72
             Height = 15
+            Alignment = taRightJustify
+            AutoSize = False
             Caption = 'Error:'
           end
           object lblTLSMessages: TLabel
-            Left = -30
-            Top = 67
-            Width = 70
+            Left = 16
+            Top = 54
+            Width = 72
             Height = 15
+            Alignment = taRightJustify
+            AutoSize = False
             Caption = 'TLS Message:'
           end
           object lblDirOutput: TLabel
-            Left = -30
-            Top = 95
-            Width = 59
+            Left = 16
+            Top = 82
+            Width = 72
             Height = 15
+            Alignment = taRightJustify
+            AutoSize = False
             Caption = 'Dir Output:'
           end
           object lblForeground: TLabel
-            Left = 46
-            Top = 16
+            Left = 92
+            Top = 3
             Width = 65
             Height = 15
             Caption = 'Foreground:'
           end
           object lblBackground: TLabel
-            Left = 162
-            Top = 16
+            Left = 208
+            Top = 3
             Width = 64
             Height = 15
             Caption = 'Background'
           end
           object lblDebugOutput: TLabel
-            Left = -30
-            Top = 123
-            Width = 38
+            Left = 16
+            Top = 111
+            Width = 72
             Height = 15
+            Alignment = taRightJustify
+            AutoSize = False
             Caption = 'Debug:'
           end
           object cboErrorForeground: TColorBox
-            Left = 46
-            Top = 36
+            Left = 92
+            Top = 23
             Width = 113
             Height = 22
             TabOrder = 0
             OnChange = cboErrorForegroundChange
           end
           object cboErrorBackground: TColorBox
-            Left = 162
-            Top = 36
+            Left = 208
+            Top = 23
             Width = 113
             Height = 22
             TabOrder = 1
             OnChange = cboErrorBackgroundChange
           end
           object cboTLSMessageForeground: TColorBox
-            Left = 43
-            Top = 64
+            Left = 92
+            Top = 51
             Width = 113
             Height = 22
             TabOrder = 2
             OnChange = cboTLSMessageForegroundChange
           end
           object cboTLSMessageBackground: TColorBox
-            Left = 162
-            Top = 64
+            Left = 208
+            Top = 51
             Width = 113
             Height = 22
             TabOrder = 3
             OnChange = cboTLSMessageBackgroundChange
           end
           object cboDirOutputForeground: TColorBox
-            Left = 43
-            Top = 92
+            Left = 92
+            Top = 79
             Width = 113
             Height = 22
             TabOrder = 4
             OnChange = cboDirOutputForegroundChange
           end
           object cboDirOutputBackground: TColorBox
-            Left = 162
-            Top = 92
+            Left = 208
+            Top = 79
             Width = 113
             Height = 22
             TabOrder = 5
             OnChange = cboDirOutputBackgroundChange
           end
           object cboDebugForeground: TColorBox
-            Left = 42
-            Top = 120
+            Left = 92
+            Top = 107
             Width = 113
             Height = 22
             TabOrder = 6
             OnSelect = cboDebugForegroundSelect
           end
           object cboDebugBackground: TColorBox
-            Left = 162
-            Top = 120
+            Left = 208
+            Top = 107
             Width = 113
             Height = 22
             TabOrder = 7
@@ -209,19 +219,24 @@ object frmSettings: TfrmSettings
           490
           308)
         object lblTransferType: TLabel
-          Left = 15
+          Left = 18
           Top = 16
-          Width = 71
+          Width = 72
           Height = 15
+          Alignment = taRightJustify
+          AutoSize = False
           Caption = '&Transfer Type:'
           FocusControl = cboTransferTypes
         end
         object lblAdvancedOptions: TLabel
-          Left = 30
+          Left = 18
           Top = 51
-          Width = 56
+          Width = 72
           Height = 15
+          Alignment = taRightJustify
+          AutoSize = False
           Caption = '&Advanced:'
+          FocusControl = chklbAdvancedOptions
         end
         object cboTransferTypes: TComboBox
           Left = 92
@@ -265,7 +280,7 @@ object frmSettings: TfrmSettings
           OnClick = btnNATSettingsClick
         end
         object btnTransparentProxy: TButton
-          Left = 104
+          Left = 103
           Top = 48
           Width = 210
           Height = 25
@@ -630,8 +645,8 @@ object frmSettings: TfrmSettings
               7F615AA43C9816E9B610F23F3CD251B86388BFA10000000049454E44AE426082}
           end>
       end>
-    Left = 305
-    Top = 199
+    Left = 313
+    Top = 151
   end
   object VirtualImageList1: TVirtualImageList
     Images = <

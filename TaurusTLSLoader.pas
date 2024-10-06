@@ -112,7 +112,7 @@ type
   { TOpenSSLLoader }
 
   TOpenSSLLoader = class(TInterfacedObject, IOpenSSLLoader)
-  private
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} private
     FLibCrypto: TIdLibHandle;
     FLibSSL: TIdLibHandle;
     FOpenSSLPath: string;
@@ -206,14 +206,20 @@ begin                                  //FI:C101
     begin
       FLibCrypto := FindLibrary(CLibCryptoBase + LibSuffix,FSSLLibVersions);
       FLibSSL := FindLibrary(CLibSSLBase + LibSuffix,FSSLLibVersions);
-      Result := not (FLibCrypto = IdNilHandle) and not (FLibSSL = IdNilHandle);
+      Result := not (FLibCrypto = IdNilHandle);
+      if Result then begin
+        Result := not (FLibSSL = IdNilHandle);
+      end;
       {$IFDEF WINDOWS}
       if not Result then
       begin
         {try the legacy dll names}
         FLibCrypto := FindLibrary(LegacyLibCrypto,'');
         FLibSSL := FindLibrary(LegacyLibssl,'');
-        Result := not (FLibCrypto = IdNilHandle) and not (FLibSSL = IdNilHandle);
+        Result := not (FLibCrypto = IdNilHandle);
+        if Result then begin
+          Result := not (FLibSSL = IdNilHandle);
+        end;
       end;
       {$ENDIF}
       if not Result then

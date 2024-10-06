@@ -49,13 +49,13 @@ type
     CancelBtn: TButton;
     lbxFTPSites: TListBox;
     lblFTPSites: TLabel;
-    Button1: TButton;
-    Button2: TButton;
+    btnNew: TButton;
+    btnEdit: TButton;
     actLstFTPSites: TActionList;
     actFTPSitesNew: TAction;
     actFTPSitesEdit: TAction;
     actFTPSiteDelete: TAction;
-    Button4: TButton;
+    btnDelete: TButton;
     procedure actFTPSitesNewExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);

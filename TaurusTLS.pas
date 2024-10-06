@@ -288,18 +288,17 @@ type
   { TIdSSLOptions }
 
   TIdSSLOptions = class(TPersistent)
-  private
+ {$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} private
     fUseSystemRootCertificateStore: Boolean;
     fsRootCertFile, fsCertFile, fsKeyFile, fsDHParamsFile: String;
     fMode: TIdSSLMode;
     fSSLVersions: TIdSSLVersions;
     fVerifyDepth: Integer;
     fMethod: TIdSSLVersion;
-  protected
-    fVerifyMode: TIdSSLVerifyModeSet;
-    // fVerifyFile,
     fVerifyDirs: String;
     fCipherList: String;
+    fVerifyMode: TIdSSLVerifyModeSet;
+ {$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} protected
     procedure AssignTo(Destination: TPersistent); override;
     procedure SetSSLVersions(const AValue: TIdSSLVersions);
     procedure SetMethod(const AValue: TIdSSLVersion);
@@ -330,12 +329,8 @@ type
   { TIdSSLContext }
 
   TIdSSLContext = class(TObject)
-  private
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} private
     fUseSystemRootCertificateStore: Boolean;
-{$IFDEF USE_WINDOWS_CERT_STORE}
-    procedure LoadWindowsCertStore;
-{$ENDIF}
-  protected
 {$IFDEF USE_OBJECT_ARC}[Weak]
 {$ENDIF} FParent: TObject;
 
@@ -353,21 +348,27 @@ type
     // fPasswordRoutineOn: Boolean;
     fVerifyOn: Boolean;
     fSessionId: Integer;
-    fCtxMode: TIdSSLCtxMode;
+{$IFDEF USE_WINDOWS_CERT_STORE}
+    procedure LoadWindowsCertStore;
+{$ENDIF}
+ {$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} protected
+
     procedure DestroyContext;
     function SetSSLMethod: PSSL_METHOD;
     procedure SetVerifyMode(AMode: TIdSSLVerifyModeSet; ACheckRoutine: Boolean);
     function GetVerifyMode: TIdSSLVerifyModeSet;
-    procedure InitContext(CtxMode: TIdSSLCtxMode);
   public
-
     constructor Create;
     destructor Destroy; override;
+    procedure InitContext(CtxMode: TIdSSLCtxMode);
+
     function Clone: TIdSSLContext;
     function LoadRootCert: Boolean;
     function LoadCert: Boolean;
     function LoadKey: Boolean;
     function LoadDHParams: Boolean;
+    property Context : PSSL_CTX read FContext;
+    property Parent : TObject read FParent write FParent;
     property StatusInfoOn: Boolean read fStatusInfoOn write fStatusInfoOn;
     // property PasswordRoutineOn: Boolean read fPasswordRoutineOn write fPasswordRoutineOn;
     property VerifyOn: Boolean read fVerifyOn write fVerifyOn;
@@ -394,11 +395,12 @@ type
   { TIdSSLSocket }
 
   TIdSSLSocket = class(TObject)
-  private
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} private
+
     fSession: PSSL_SESSION;
     function GetProtocolVersion: TIdSSLVersion;
     function GetSSLProtocolVersionStr: string;
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict {$ENDIF}protected
 {$IFDEF USE_OBJECT_ARC}[Weak]
 {$ENDIF} fParent: TObject;
     fPeerCert: TIdX509;
@@ -407,11 +409,12 @@ type
     fSSLContext: TIdSSLContext;
     fHostName: String;
     function GetPeerCert: TIdX509;
-    function GetSSLError(retCode: Integer): Integer;
+
     function GetSSLCipher: TIdSSLCipher;
   public
-    constructor Create(Parent: TObject);
+    constructor Create(AParent: TObject);
     destructor Destroy; override;
+    function GetSSLError(retCode: Integer): Integer;
     procedure Accept(const pHandle: TIdStackSocketHandle);
     procedure Connect(const pHandle: TIdStackSocketHandle);
     function Send(const ABuffer: TIdBytes; AOffset, ALength: Integer): Integer;
@@ -420,9 +423,12 @@ type
     function GetSessionIDAsString: String;
     procedure SetCipherList(CipherList: String);
     //
+    property SSL : PSSL read FSSL;
+    property SSLContext : TIdSSLContext read FSSLContext write FSSLContext;
+    property Parent : TObject read FParent;
     property PeerCert: TIdX509 read GetPeerCert;
     property Cipher: TIdSSLCipher read GetSSLCipher;
-    property HostName: String read fHostName;
+    property HostName: String read fHostName write fHostName;
     property SSLProtocolVersion: TIdSSLVersion read GetProtocolVersion;
     property SSLProtocolVersionStr: string read GetSSLProtocolVersionStr;
   end;
@@ -442,7 +448,7 @@ type
 
   TIdSSLIOHandlerSocketTaurusTLS = class(TIdSSLIOHandlerSocketBase,
     IIdSSLTaurusTLSCallbackHelper)
-  protected
+   {$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} protected
     fSSLContext: TIdSSLContext;
     fxSSLOptions: TIdSSLOptions;
     fSSLSocket: TIdSSLSocket;
@@ -460,7 +466,7 @@ type
     //
     procedure SetPassThrough(const Value: Boolean); override;
     procedure DoBeforeConnect(ASender: TIdSSLIOHandlerSocketTaurusTLS);
-    procedure DoStatusInfo(const AMsg: String);
+
     procedure DoStatusInfoEx(const AsslSocket: PSSL;
       const AWhere, Aret: TIdC_INT; const AWhereStr, ARetStr: String);
     procedure DoGetPassword(var Password: String);
@@ -486,7 +492,8 @@ type
     function VerifyPeer(ACertificate: TIdX509; AOk: Boolean;
       ADepth, AError: Integer): Boolean;
     function GetIOHandlerSelf: TIdSSLIOHandlerSocketTaurusTLS;
-
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}protected{$ENDIF}
+    procedure DoStatusInfo(const AMsg: String);
   public
     destructor Destroy; override;
     // TODO: add an AOwner parameter
@@ -518,7 +525,7 @@ type
 
   TIdServerIOHandlerSSLTaurusTLS = class(TIdServerIOHandlerSSLBase,
     IIdSSLTaurusTLSCallbackHelper)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} protected
     fxSSLOptions: TIdSSLOptions;
     fSSLContext: TIdSSLContext;
     fOnStatusInfo: TCallbackEvent;
@@ -577,7 +584,7 @@ type
   end;
 
   TIdSSLCipher = class(TObject)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} private
     fSSLSocket: TIdSSLSocket;
     function GetDescription: String;
     function GetName: String;
@@ -801,7 +808,7 @@ begin
     try
       Password := ''; { Do not Localize }
       IdSSLContext := TIdSSLContext(userdata);
-      if Supports(IdSSLContext.FParent, IIdSSLTaurusTLSCallbackHelper,
+      if Supports(IdSSLContext.Parent, IIdSSLTaurusTLSCallbackHelper,
         IInterface(LHelper)) then
       begin
         Password := LHelper.GetPassword(rwflag > 0);
@@ -855,7 +862,7 @@ begin
     LockInfoCB.Enter;
     try
       LIdSSLSocket := TIdSSLSocket(SSL_get_app_data(SSLSocket));
-      if Supports(LIdSSLSocket.fParent, IIdSSLTaurusTLSCallbackHelper,
+      if Supports(LIdSSLSocket.Parent, IIdSSLTaurusTLSCallbackHelper,
         IInterface(LHelper)) then
       begin
 {$IFDEF USE_INLINE_VAR}
@@ -923,7 +930,7 @@ begin
         IdSSLSocket := TIdSSLSocket(SSL_get_app_data(hSSL));
         LError := X509_STORE_CTX_get_error(ctx);
         Depth := X509_STORE_CTX_get_error_depth(ctx);
-        if not( (Ok > 0) and (IdSSLSocket.fSSLContext.VerifyDepth >= Depth)) then
+        if not( (Ok > 0) and (IdSSLSocket.SSLContext.VerifyDepth >= Depth)) then
         begin
           Ok := 0;
           { if Error = X509_V_OK then begin
@@ -935,7 +942,7 @@ begin
         begin
           LOk := true;
         end;
-        if Supports(IdSSLSocket.fParent, IIdSSLTaurusTLSCallbackHelper,
+        if Supports(IdSSLSocket.Parent, IIdSSLTaurusTLSCallbackHelper,
           IInterface(LHelper)) then
         begin
           VerifiedOK := LHelper.VerifyPeer(Certificate, LOk, Depth, LError);
@@ -1354,25 +1361,25 @@ begin
   // ensure Init isn't called twice
   Assert(fSSLContext = nil);
   fSSLContext := TIdSSLContext.Create;
-  fSSLContext.FParent := Self;
+  fSSLContext.Parent := Self;
   fSSLContext.RootCertFile := SSLOptions.RootCertFile;
   fSSLContext.CertFile := SSLOptions.CertFile;
   fSSLContext.KeyFile := SSLOptions.KeyFile;
   fSSLContext.DHParamsFile := SSLOptions.DHParamsFile;
-  fSSLContext.fVerifyDepth := SSLOptions.fVerifyDepth;
-  fSSLContext.fVerifyMode := SSLOptions.fVerifyMode;
+  fSSLContext.VerifyDepth := SSLOptions.VerifyDepth;
+  fSSLContext.VerifyMode := SSLOptions.VerifyMode;
   // fSSLContext.fVerifyFile := SSLOptions.fVerifyFile;
-  fSSLContext.fUseSystemRootCertificateStore :=
-    SSLOptions.fUseSystemRootCertificateStore;
-  fSSLContext.fVerifyDirs := SSLOptions.fVerifyDirs;
-  fSSLContext.fCipherList := SSLOptions.fCipherList;
+  fSSLContext.UseSystemRootCertificateStore :=
+    SSLOptions.UseSystemRootCertificateStore;
+  fSSLContext.VerifyDirs := SSLOptions.VerifyDirs;
+  fSSLContext.CipherList := SSLOptions.CipherList;
   fSSLContext.VerifyOn := Assigned(fOnVerifyPeer);
   fSSLContext.StatusInfoOn := Assigned(fOnStatusInfo) or
     Assigned(FOnStatusInfoEx);
   // fSSLContext.PasswordRoutineOn := Assigned(fOnGetPassword);
-  fSSLContext.fMethod := SSLOptions.Method;
-  fSSLContext.fMode := SSLOptions.Mode;
-  fSSLContext.fSSLVersions := SSLOptions.SSLVersions;
+  fSSLContext.Method := SSLOptions.Method;
+  fSSLContext.Mode := SSLOptions.Mode;
+  fSSLContext.SSLVersions := SSLOptions.SSLVersions;
 
   fSSLContext.InitContext(sslCtxServer);
 end;
@@ -1404,11 +1411,11 @@ begin
           // TODO: wouldn't it be easier to just Assign() the server's SSLOptions
           // here? Do we really need to share ownership of it?
           // LIO.fxSSLOptions.Assign(fxSSLOptions);
-          FreeAndNil(LIO.fxSSLOptions);
+          FreeAndNil(LIO.SSLOptions);
           LIO.IsPeer := true;
-          LIO.fxSSLOptions := fxSSLOptions;
-          LIO.fSSLSocket := TIdSSLSocket.Create(Self);
-          LIO.fSSLContext := fSSLContext;
+          LIO.SSLOptions := fxSSLOptions;
+          LIO.SSLSocket := TIdSSLSocket.Create(Self);
+          LIO.SSLContext := fSSLContext;
           // TODO: to enable server-side SNI, we need to:
           // - Set up an additional SSL_CTX for each different certificate;
           // - Add a servername callback to each SSL_CTX using SSL_CTX_set_tlsext_servername_callback();
@@ -1617,7 +1624,7 @@ begin
   FreeAndNil(fSSLSocket);
   // we do not destroy these if their Parent is not Self
   // because these do not belong to us when we are in a server.
-  if (fSSLContext <> nil) and (fSSLContext.FParent = Self) then
+  if (fSSLContext <> nil) and (fSSLContext.Parent = Self) then
   begin
     FreeAndNil(fSSLContext);
   end;
@@ -1673,7 +1680,7 @@ begin
   FreeAndNil(fSSLSocket);
   if fSSLContext <> nil then
   begin
-    if fSSLContext.FParent = Self then
+    if fSSLContext.Parent = Self then
     begin
       FreeAndNil(fSSLContext);
     end
@@ -1696,7 +1703,7 @@ function TIdSSLIOHandlerSocketTaurusTLS.Readable
 begin
   if not fPassThrough then
   begin
-    Result := (fSSLSocket <> nil) and (ssl_pending(fSSLSocket.fSSL) > 0);
+    Result := (fSSLSocket <> nil) and (ssl_pending(fSSLSocket.SSL) > 0);
     if Result then
       Exit;
   end;
@@ -1728,13 +1735,13 @@ begin
       // This is for FTP when handling CCC and REIN commands. The SSL/TLS session needs to be
       // shutdown cleanly on both ends without closing the underlying socket connection because
       // it is going to be used for continued unsecure communications!
-      if (fSSLSocket <> nil) and (fSSLSocket.fSSL <> nil) then
+      if (fSSLSocket <> nil) and (fSSLSocket.SSL <> nil) then
       begin
         // if SSL_shutdown() returns 0, a "close notify" was sent to the peer and SSL_shutdown()
         // needs to be called again to receive the peer's "close notify" in response...
-        if SSL_shutdown(fSSLSocket.fSSL) = 0 then
+        if SSL_shutdown(fSSLSocket.SSL) = 0 then
         begin
-          SSL_shutdown(fSSLSocket.fSSL);
+          SSL_shutdown(fSSLSocket.SSL);
         end;
       end;
 {$IFDEF WIN32_OR_WIN64}
@@ -1790,25 +1797,25 @@ begin
   if not Assigned(fSSLContext) then
   begin
     fSSLContext := TIdSSLContext.Create;
-    fSSLContext.FParent := Self;
+    fSSLContext.Parent := Self;
     fSSLContext.RootCertFile := SSLOptions.RootCertFile;
     fSSLContext.CertFile := SSLOptions.CertFile;
     fSSLContext.KeyFile := SSLOptions.KeyFile;
     fSSLContext.DHParamsFile := SSLOptions.DHParamsFile;
-    fSSLContext.fVerifyDepth := SSLOptions.fVerifyDepth;
-    fSSLContext.fVerifyMode := SSLOptions.fVerifyMode;
+    fSSLContext.VerifyDepth := SSLOptions.VerifyDepth;
+    fSSLContext.VerifyMode := SSLOptions.VerifyMode;
     // fSSLContext.fVerifyFile := SSLOptions.fVerifyFile;
-    fSSLContext.fUseSystemRootCertificateStore :=
-      SSLOptions.fUseSystemRootCertificateStore;
-    fSSLContext.fVerifyDirs := SSLOptions.fVerifyDirs;
-    fSSLContext.fCipherList := SSLOptions.fCipherList;
+    fSSLContext.UseSystemRootCertificateStore :=
+      SSLOptions.UseSystemRootCertificateStore;
+    fSSLContext.VerifyDirs := SSLOptions.VerifyDirs;
+    fSSLContext.CipherList := SSLOptions.CipherList;
     fSSLContext.VerifyOn := Assigned(fOnVerifyPeer);
     fSSLContext.StatusInfoOn := Assigned(fOnStatusInfo) or
       Assigned(FOnStatusInfoEx);
     // fSSLContext.PasswordRoutineOn := Assigned(fOnGetPassword);
-    fSSLContext.fMethod := SSLOptions.Method;
-    fSSLContext.fSSLVersions := SSLOptions.SSLVersions;
-    fSSLContext.fMode := SSLOptions.Mode;
+    fSSLContext.Method := SSLOptions.Method;
+    fSSLContext.SSLVersions := SSLOptions.SSLVersions;
+    fSSLContext.Mode := SSLOptions.Mode;
     fSSLContext.InitContext(sslCtxClient);
   end;
 end;
@@ -1927,8 +1934,8 @@ begin
   begin
     fSSLSocket := TIdSSLSocket.Create(Self);
   end;
-  Assert(fSSLSocket.fSSLContext = nil);
-  fSSLSocket.fSSLContext := fSSLContext;
+  Assert(fSSLSocket.SSLContext = nil);
+  fSSLSocket.SSLContext := fSSLContext;
 {$IFDEF WIN32_OR_WIN64}
   // begin bug fix
   if IndyCheckWindowsVersion(6) then
@@ -1986,12 +1993,12 @@ begin
         LHost := Self.Host;
       end;
     end;
-    fSSLSocket.fHostName := LHost;
+    fSSLSocket.HostName := LHost;
     fSSLSocket.Connect(Binding.Handle);
   end
   else
   begin
-    fSSLSocket.fHostName := '';
+    fSSLSocket.HostName := '';
     fSSLSocket.Accept(Binding.Handle);
   end;
   DoOnSSLNegotiated;
@@ -2063,7 +2070,7 @@ begin
   end
   else
   begin
-    ETaurusTLSAPISSLError.RaiseException(fSSLSocket.fSSL, AError, '');
+    ETaurusTLSAPISSLError.RaiseException(fSSLSocket.SSL, AError, '');
   end;
 end;
 
@@ -2653,10 +2660,10 @@ type
 
   { TIdSSLSocket }
 
-  constructor TIdSSLSocket.Create(Parent: TObject);
+  constructor TIdSSLSocket.Create(AParent: TObject);
   begin
     inherited Create;
-    fParent := Parent;
+    fParent := AParent;
   end;
 
   destructor TIdSSLSocket.Destroy;
@@ -2753,7 +2760,7 @@ type
   begin
     Assert(fSSL = nil);
     Assert(fSSLContext <> nil);
-    fSSL := SSL_new(fSSLContext.fContext);
+    fSSL := SSL_new(fSSLContext.Context);
     if fSSL = nil then
     begin
       raise EIdOSSLCreatingSessionError.Create(RSSSLCreatingSessionError);
@@ -2831,7 +2838,7 @@ type
     begin
       LParentIO := nil;
     end;
-    fSSL := SSL_new(fSSLContext.fContext);
+    fSSL := SSL_new(fSSLContext.Context);
     if fSSL = nil then
     begin
       raise EIdOSSLCreatingSessionError.Create(RSSSLCreatingSessionError);
@@ -2849,10 +2856,10 @@ type
     end;
     // RLebeau: if this socket's IOHandler was cloned, reuse the
     // original IOHandler's active session ID...
-    if (LParentIO <> nil) and (LParentIO.fSSLSocket <> nil) and
-      (LParentIO.fSSLSocket <> Self) then
+    if (LParentIO <> nil) and (LParentIO.SSLSocket <> nil) and
+      (LParentIO.SSLSocket <> Self) then
     begin
-      SSL_copy_session_id(fSSL, LParentIO.fSSLSocket.fSSL);
+      SSL_copy_session_id(fSSL, LParentIO.SSLSocket.SSL);
     end;
 {$IFNDEF OPENSSL_NO_TLSEXT}
     { Delphi appears to need the extra AnsiString coerction. Otherwise, only the
@@ -3071,7 +3078,6 @@ type
   end;
 
   function TIdSSLSocket.GetSessionIDAsString: String;
-
   var
     LData: TIdSSLByteArray;
     i: TIdC_UINT;
@@ -3124,7 +3130,7 @@ type
     LSSLCipher: PSSL_CIPHER;
   begin
     Result := '';
-    LSSLCipher := SSL_get_current_cipher(fSSLSocket.fSSL);
+    LSSLCipher := SSL_get_current_cipher(fSSLSocket.SSL);
     if Assigned(LSSLCipher) then
     begin
       Result := String(SSL_CIPHER_description(LSSLCipher, @buf[0],
@@ -3138,7 +3144,7 @@ type
     LSSLCipher: PSSL_CIPHER;
   begin
     Result := '';
-    LSSLCipher := SSL_get_current_cipher(fSSLSocket.fSSL);
+    LSSLCipher := SSL_get_current_cipher(fSSLSocket.SSL);
     if Assigned(LSSLCipher) then
     begin
       Result := String(SSL_CIPHER_get_name(LSSLCipher));
@@ -3151,7 +3157,7 @@ type
     LSSLCipher: PSSL_CIPHER;
   begin
     Result := 0;
-    LSSLCipher := SSL_get_current_cipher(fSSLSocket.fSSL);
+    LSSLCipher := SSL_get_current_cipher(fSSLSocket.SSL);
     if Assigned(LSSLCipher) then
     begin
       SSL_CIPHER_get_bits(LSSLCipher, Result);
@@ -3164,7 +3170,7 @@ type
     LSSLCipher: PSSL_CIPHER;
   begin
     Result := '';
-    LSSLCipher := SSL_get_current_cipher(fSSLSocket.fSSL);
+    LSSLCipher := SSL_get_current_cipher(fSSLSocket.SSL);
     if Assigned(LSSLCipher) then
     begin
       Result := String(SSL_CIPHER_get_version(LSSLCipher));

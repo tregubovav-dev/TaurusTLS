@@ -27,7 +27,6 @@ object AboutBox: TAboutBox
     BevelOuter = bvLowered
     ParentColor = True
     TabOrder = 0
-    ExplicitHeight = 199
     DesignSize = (
       281
       222)
@@ -103,7 +102,6 @@ object AboutBox: TAboutBox
     Default = True
     ModalResult = 1
     TabOrder = 1
-    ExplicitTop = 214
   end
   object ImageCollection1: TImageCollection
     Images = <

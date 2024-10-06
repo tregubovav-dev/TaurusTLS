@@ -105,13 +105,20 @@ end;
 class procedure ETaurusTLSAPICryptoError.RaiseExceptionCode(
   const AErrCode: TIdC_ULONG; const AMsg: String);
 var
+  {$IFNDEF USE_INLINE_VAR}
   LMsg: String;
+  LErrMsg : String;
+  {$ENDIF}
   LException : ETaurusTLSAPICryptoError;
 begin
+  {$IFDEF USE_INLINE_VAR}
+  var LMsg, LErrMsg : String;
+  {$ENDIF}
+  LErrMsg :=  GetErrorMessage(AErrCode);
   if AMsg <> '' then begin
-    LMsg := AMsg + sLineBreak + String(GetErrorMessage(AErrCode));
+    LMsg := AMsg + sLineBreak + LErrMsg;
   end else begin
-    LMsg := String(GetErrorMessage(AErrCode));
+    LMsg := LErrMsg;
   end;
   LException := Create(LMsg);
   LException.FErrorCode := AErrCode;
@@ -131,8 +138,13 @@ class procedure ETaurusTLSAPISSLError.RaiseExceptionCode(const AErrCode, ARetCod
 var
   LErrQueue : TIdC_ULONG;
   LException : ETaurusTLSAPISSLError;
+  {$IFNDEF USE_INLINE_VAR}
   LErrStr : String;
+  {$ENDIF}
 begin
+  {$IFDEF USE_INLINE_VAR}
+  var LErrStr : String;
+  {$ENDIF}
   if AMsg <> '' then begin
     LErrStr := AMsg + sLineBreak;
   end else begin

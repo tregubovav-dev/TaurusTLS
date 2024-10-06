@@ -1,7 +1,7 @@
 unit mainform;
 
 interface
-
+{$I ..\..\TaurusTLSCompilerDefines.inc}
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
@@ -147,13 +147,13 @@ type
     procedure actFileRemoteMakeDirectoryUpdate(Sender: TObject);
     procedure actFileLocalMakeDirectoryExecute(Sender: TObject);
     procedure actFileLocalMakeDirectoryUpdate(Sender: TObject);
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} private
     { Private declarations }
-    LocalColumnToSort: Integer;
-    LocalAscending: Boolean;
+    FLocalColumnToSort: Integer;
+    FLocalAscending: Boolean;
 
-    RemoteColumnToSort: Integer;
-    RemoteAscending: Boolean;
+    FRemoteColumnToSort: Integer;
+    FRemoteAscending: Boolean;
 
     FThreadRunning: Boolean;
 
@@ -170,6 +170,7 @@ type
     FLogDirOutput: Boolean;
 
     FProgressIndicator: TfrmFileProgress;
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     //event handlers
     procedure iosslFTPOnSSLNegotiated(ASender: TIdSSLIOHandlerSocketTaurusTLS);
 
@@ -193,17 +194,17 @@ type
     procedure LocalMakeDir(const ADir: String);
     procedure RemoteMakeDir(const ADir: String);
     procedure SetProxyType(const AType: Integer);
-
+  public
+    { Public declarations }
+    //accessed by worker threads
     procedure PopulateLocalFiles;
     procedure PopulateRemoteFiles(const ACurDir: String);
-
     procedure SetupPRogressIndicator(const AFileName: String;
       const AWorkMode: TWorkMode; const AWorkCount, AWorkMax: Int64);
     procedure UpdateProgressIndicator(const AFileName: String;
       const AWorkMode: TWorkMode; const AWorkCount, AWorkMax: Int64);
     procedure CloseProgressIndicator;
-  public
-    { Public declarations }
+    //
     property LogDirOutput: Boolean read FLogDirOutput write FLogDirOutput;
     property LogDebugOutput: Boolean read FLogDebugOutput write FLogDebugOutput;
     property ThreadRunning : Boolean read FThreadRunning write FThreadRunning;
@@ -228,7 +229,7 @@ type
   end;
 
   TFTPThread = class(TThread)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     FVerifyResult: Boolean;
     FKeyPassword: String;
     FError: Integer;
@@ -252,7 +253,7 @@ type
   end;
 
   TRemoteChangeDirThread = class(TFTPThread)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     FNewDir: String;
   public
     constructor Create(AFTP: TIdFTP; const ANewDir: String); reintroduce;
@@ -260,7 +261,7 @@ type
   end;
 
   TFileThread = class(TFTPThread)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     FFile: String;
     FSize: Int64;
   public
@@ -268,7 +269,7 @@ type
   end;
 
   TFileOnWorkThread = class(TFileThread)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     procedure OnWorkBegin(ASender: TObject; AWorkMode: TWorkMode;
       AWorkCountMax: Int64);
     procedure OnWork(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int64);
@@ -296,7 +297,7 @@ type
   end;
 
   TRenamePathThread = class(TFileThread)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     FNewName: String;
   public
     constructor Create(AFTP: TIdFTP; const AOldName, ANewName: String);
@@ -310,7 +311,7 @@ type
   end;
 
   TLogEventNotify = class(TIdNotify)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     FStr: String;
     procedure DoNotify; override;
   public
@@ -318,21 +319,21 @@ type
   end;
 
   TLogFTPError = class(TLogEventNotify)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     procedure DoNotify; override;
   public
     class procedure NotifyString(const AStr: String); override;
   end;
 
   TSSLEvent = class(TLogEventNotify)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     procedure DoNotify; override;
   public
     class procedure NotifyString(const AStr: String); override;
   end;
 
   TSSLCipherEvent = class(TLogEventNotify)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     procedure DoNotify; override;
   public
     class procedure NotifyString(const AStr: String); override;
@@ -342,7 +343,7 @@ var
   frmMainForm: TfrmMainForm;
 
 implementation
-{$I ..\..\TaurusTLSCompilerDefines.inc}
+
 uses dkgFTPConnect, settingsdlg, frmAbout, frmBookmarks, CertViewer,
   IdException,
   IdAllFTPListParsers,
@@ -359,14 +360,14 @@ const
 
 type
   TStatusBarEvent = class(TLogEventNotify)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     procedure DoNotify; override;
   public
     class procedure NotifyString(const AStr: String); override;
   end;
 
   TPopulateRemoteListNotify = class(TIdNotify)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     FCurrentDir: String;
     procedure DoNotify; override;
   public
@@ -374,14 +375,14 @@ type
   end;
 
   TPopulateLocalListNotify = class(TIdNotify)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     procedure DoNotify; override;
   public
     class procedure PopulateLocalList;
   end;
 
   TLogDirListingEvent = class(TIdNotify)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     FDirListing: TStrings;
     procedure DoNotify; override;
   public
@@ -389,20 +390,20 @@ type
   end;
 
   TThreadFinishedNotify = class(TIdNotify)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     procedure DoNotify; override;
   public
     class procedure EndThread;
   end;
   TThreadStartNotify = class(TIdNotify)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     procedure DoNotify; override;
   public
     class procedure StartThread;
   end;
 
   TWorkEventNotify = class(TIdNotify)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     FFileName: String;
     FWorkMode: TWorkMode;
     FWorkCount: Int64;
@@ -411,7 +412,7 @@ type
   end;
 
   TOnWorkNotify = class(TWorkEventNotify)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     procedure DoNotify; override;
   public
     class procedure WorkNotify(const AFileName: String;
@@ -419,7 +420,7 @@ type
   end;
 
   TOnWorkNotifyBegin = class(TWorkEventNotify)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     procedure DoNotify; override;
   public
     class procedure WorkNotify(const AFileName: String;
@@ -427,7 +428,7 @@ type
   end;
 
   TOnWorkNotifyEnd = class(TWorkEventNotify)
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     procedure DoNotify; override;
   public
     class procedure WorkNotify(const AWorkMode: TWorkMode;
@@ -574,13 +575,18 @@ end;
 procedure TfrmMainForm.actFileLocalRenameExecute(Sender: TObject);
 var
   Li: TListItem;
+  {$IFNDEF USE_INLINE_VAR}
   LNewName: String;
+  {$ENDIF}
 begin
   if lvLocalFiles.ItemIndex > -1 then
   begin
     Li := lvLocalFiles.Items[lvLocalFiles.ItemIndex];
     if Li.ImageIndex in [FILE_IMAGE_IDX, DIR_IMAGE_IDX] then
     begin
+      {$IFDEF USE_INLINE_VAR}
+      var LNewName: String;
+      {$ENDIF}
       if InputQuery('Rename', 'Rename ' + Li.Caption + ' to:', LNewName) then
       begin
         if LNewName <> '' then
@@ -1027,11 +1033,11 @@ var
   i: Integer;
 begin
   FThreadRunning := False;
-  LocalColumnToSort := 0;
-  LocalAscending := True;
+  FLocalColumnToSort := 0;
+  FLocalAscending := True;
 
-  RemoteColumnToSort := 0;
-  RemoteAscending := True;
+  FRemoteColumnToSort := 0;
+  FRemoteAscending := True;
 
   LocalClearArrows;
   PopulateLocalFiles;
@@ -1236,13 +1242,13 @@ begin
     begin
       lvLocalFiles.Columns[i].ImageIndex := -1;
     end;
-    if RemoteAscending then
+    if FRemoteAscending then
     begin
-      lvLocalFiles.Columns[LocalColumnToSort].ImageIndex := ARROW_UP_IMAGE_IDX;
+      lvLocalFiles.Columns[FLocalColumnToSort].ImageIndex := ARROW_UP_IMAGE_IDX;
     end
     else
     begin
-      lvLocalFiles.Columns[LocalColumnToSort].ImageIndex :=
+      lvLocalFiles.Columns[FLocalColumnToSort].ImageIndex :=
         ARROW_DOWN_IMAGE_IDX;
     end;
   finally
@@ -1304,13 +1310,13 @@ end;
 procedure TfrmMainForm.lvLocalFilesColumnClick(Sender: TObject;
   Column: TListColumn);
 begin
-  if Column.Index = LocalColumnToSort then
+  if Column.Index = FLocalColumnToSort then
   begin
-    LocalAscending := not LocalAscending
+    FLocalAscending := not FLocalAscending
   end
   else
   begin
-    LocalColumnToSort := Column.Index;
+    FLocalColumnToSort := Column.Index;
   end;
   LocalClearArrows;
   lvLocalFiles.Items.BeginUpdate;
@@ -1322,7 +1328,7 @@ procedure TfrmMainForm.lvLocalFilesCompare(Sender: TObject;
   Item1, Item2: TListItem; Data: Integer; var Compare: Integer);
 begin
   //
-  case LocalColumnToSort of
+  case FLocalColumnToSort of
     0: // file name
       begin
         Compare := CompareCaptions(Item1, Item2);
@@ -1404,7 +1410,7 @@ begin
         end;
       end;
   end;
-  if LocalAscending then
+  if FLocalAscending then
   begin
     Compare := 0 - Compare;
   end;
@@ -1442,13 +1448,13 @@ procedure TfrmMainForm.lvRemoteFilesColumnClick(Sender: TObject;
   Column: TListColumn);
 
 begin
-  if Column.Index = RemoteColumnToSort then
+  if Column.Index = FRemoteColumnToSort then
   begin
-    RemoteAscending := not RemoteAscending
+    FRemoteAscending := not FRemoteAscending
   end
   else
   begin
-    RemoteColumnToSort := Column.Index;
+    FRemoteColumnToSort := Column.Index;
   end;
   RemoteLvClearArrows;
   lvRemoteFiles.Items.BeginUpdate;
@@ -1460,7 +1466,7 @@ procedure TfrmMainForm.lvRemoteFilesCompare(Sender: TObject;
   Item1, Item2: TListItem; Data: Integer; var Compare: Integer);
 begin
   //
-  case RemoteColumnToSort of
+  case FRemoteColumnToSort of
     0: // file name
       begin
         Compare := CompareCaptions(Item1, Item2);
@@ -1542,7 +1548,7 @@ begin
         end;
       end;
   end;
-  if RemoteAscending then
+  if FRemoteAscending then
   begin
     Compare := 0 - Compare;
   end;
@@ -1697,14 +1703,14 @@ begin
     begin
       lvRemoteFiles.Columns[i].ImageIndex := -1;
     end;
-    if RemoteAscending then
+    if FRemoteAscending then
     begin
-      lvRemoteFiles.Columns[RemoteColumnToSort].ImageIndex :=
+      lvRemoteFiles.Columns[FRemoteColumnToSort].ImageIndex :=
         ARROW_UP_IMAGE_IDX;
     end
     else
     begin
-      lvRemoteFiles.Columns[RemoteColumnToSort].ImageIndex :=
+      lvRemoteFiles.Columns[FRemoteColumnToSort].ImageIndex :=
         ARROW_DOWN_IMAGE_IDX;
     end;
   finally
@@ -1834,7 +1840,7 @@ begin
         LFrm.ErrorForeground := frmMainForm.ErrorForeground;
         LFrm.ErrorBackground := frmMainForm.ErrorBackground;
         LFrm.X509 := FX509;
-        LFrm.Error := FError;
+        LFrm.ErrorCode := FError;
         FVerifyResult := LFrm.ShowModal = mrYes;
         if FVerifyResult and (LFrm.chkacceptOnlyOnce.Checked = False) then
         begin

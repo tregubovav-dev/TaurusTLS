@@ -52,6 +52,9 @@
 //Define for Delphi cross-compiler targetting Posix
 {$UNDEF USE_VCL_POSIX}
 
+//Define for Delphi 10.1 strict private and strict protected usage
+{$UNDEF USE_STRICT_PRIVATE_PROTECTED}
+
 //Define for Delphi 10.3 inline variable declarion availability
 {$UNDEF USE_INLINE_VAR}
 
@@ -689,6 +692,7 @@
 {$ENDIF}
 
 {$IFDEF VCL_10_1_OR_ABOVE}
+  {$DEFINE USE_STRICT_PRIVATE_PROTECTED}
   {$DEFINE VCL_10_0_OR_ABOVE}
 {$ELSE}
   {$IFDEF VCL_10_0}

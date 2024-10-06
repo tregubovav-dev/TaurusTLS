@@ -1,7 +1,7 @@
 unit CertViewer;
 
 interface
-
+{$I ..\..\TaurusTLSCompilerDefines.inc}
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
@@ -19,15 +19,15 @@ type
     chkacceptOnlyOnce: TCheckBox;
     lblAcceptThisCertificate: TLabel;
     procedure FormCreate(Sender: TObject);
-  private
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} private
     function GetErrorBackground: TColor;
     function GetErrorForeground: TColor;
     procedure SetErrorBackground(const Value: TColor);
     procedure SetErrorForeground(const Value: TColor);
-  protected
+  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     { Private declarations }
     FX509: TIdX509;
-    FError: Integer;
+    FErrorCode: Integer;
     FErrorForeground : TColor;
     FErrorBackground : TColor;
     function GetX509: TIdX509;
@@ -38,11 +38,11 @@ type
     procedure DumpX509Name(AX509Name: TIdX509Name);
     procedure DumpX509KeyUsage(AX509: TIdX509);
     procedure DumpX509ExtKeyUsage(AX509: TIdX509);
-    procedure SetError(const Value: Integer);
+    procedure SetErrorCode(const Value: Integer);
   public
     { Public declarations }
     property X509: TIdX509 read GetX509 write SetX509;
-    property Error: Integer read FError write SetError;
+    property ErrorCode: Integer read FErrorCode write SetErrorCode;
     property ErrorForeground : TColor read GetErrorForeground write SetErrorForeground;
     property ErrorBackground : TColor read GetErrorBackground write SetErrorBackground;
   end;
@@ -128,35 +128,35 @@ begin
       (DigitalSignature, NonRepudiation, KeyEncipherment,
       DataEncipherment, KeyAgreement, CertSign, CRLSign, EncipherOnly, DecipherOnly);
     }
-    if (DigitalSignature in LKeyUsage) then
+    if DigitalSignature in LKeyUsage then
     begin
       LStr := LStr + ', Digital Signature';
     end;
-    if (NonRepudiation in LKeyUsage) then
+    if NonRepudiation in LKeyUsage then
     begin
       LStr := LStr + ', Non-Repudiation';
     end;
-    if (KeyEncipherment in LKeyUsage) then
+    if KeyEncipherment in LKeyUsage then
     begin
       LStr := LStr + ', Key Encipherment';
     end;
-    if (DataEncipherment in LKeyUsage) then
+    if DataEncipherment in LKeyUsage then
     begin
       LStr := LStr + ', Data Encipherment';
     end;
-    if (CertSign in LKeyUsage) then
+    if CertSign in LKeyUsage then
     begin
       LStr := LStr + ', Certificate Signing';
     end;
-    if (CRLSign in LKeyUsage) then
+    if CRLSign in LKeyUsage then
     begin
       LStr := LStr + ', CRL Signing';
     end;
-    if (EncipherOnly in LKeyUsage) then
+    if EncipherOnly in LKeyUsage then
     begin
       LStr := LStr + ', Encipher-Only';
     end;
-    if (DecipherOnly in LKeyUsage) then
+    if DecipherOnly in LKeyUsage then
     begin
       LStr := LStr + ', Decipher Only';
     end;
@@ -424,10 +424,10 @@ begin
 
 end;
 
-procedure TfrmCertViewer.SetError(const Value: Integer);
+procedure TfrmCertViewer.SetErrorCode(const Value: Integer);
 begin
-  FError := Value;
-  Caption := string(X509_verify_cert_error_string(FError));
+  FErrorCode := Value;
+  Caption := string(X509_verify_cert_error_string(FErrorCode));
   lblErrorMessage.Caption := ProgUtils.CertErrorToStr(Value);
 end;
 

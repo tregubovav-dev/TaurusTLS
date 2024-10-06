@@ -3957,6 +3957,7 @@ function IsTaurusTLS_SSLv2_Available : Boolean;
 function HasTLS_method: boolean;
 begin
   {$IFNDEF OPENSSL_STATIC_LINK_MODEL}
+  Result := False;
   if Assigned(SSLeay) then
     Result := TLS_method_introduced <= (SSLeay shr 12);
   {$ELSE}

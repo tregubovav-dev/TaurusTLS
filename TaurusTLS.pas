@@ -457,21 +457,20 @@ type
     // procedure CreateSSLContext(axMode: TIdSSLMode);
     //
     procedure SetPassThrough(const Value: Boolean); override;
-    procedure DoBeforeConnect(ASender: TIdSSLIOHandlerSocketTaurusTLS); virtual;
-    procedure DoStatusInfo(const AMsg: String); virtual;
+    procedure DoBeforeConnect(ASender: TIdSSLIOHandlerSocketTaurusTLS);
+    procedure DoStatusInfo(const AMsg: String);
     procedure DoStatusInfoEx(const AsslSocket: PSSL;
       const AWhere, Aret: TIdC_INT; const AWhereStr, ARetStr: String);
-    procedure DoGetPassword(var Password: String); virtual;
-    procedure DoGetPasswordEx(var VPassword: String;
-      const AIsWrite: Boolean); virtual;
-    procedure DoOnSSLNegotiated; virtual;
+    procedure DoGetPassword(var Password: String);
+    procedure DoGetPasswordEx(var VPassword: String; const AIsWrite: Boolean);
+    procedure DoOnSSLNegotiated;
     function DoVerifyPeer(Certificate: TIdX509; AOk: Boolean;
-      ADepth, AError: Integer): Boolean; virtual;
+      ADepth, AError: Integer): Boolean;
     function RecvEnc(var VBuffer: TIdBytes): Integer; override;
     function SendEnc(const ABuffer: TIdBytes; const AOffset, ALength: Integer)
       : Integer; override;
     procedure Init;
-    procedure OpenEncodedConnection; virtual;
+    procedure OpenEncodedConnection;
     // some overrides from base classes
     procedure InitComponent; override;
     procedure ConnectClient; override;
@@ -529,15 +528,14 @@ type
     // procedure CreateSSLContext(axMode: TIdSSLMode);
     // procedure CreateSSLContext;
     //
-    procedure DoStatusInfo(const AMsg: String); virtual;
+    procedure DoStatusInfo(const AMsg: String);
     procedure DoStatusInfoEx(const AsslSocket: PSSL;
       const AWhere, Aret: TIdC_INT; const AWhereStr, ARetStr: String);
-    procedure DoGetPassword(var Password: String); virtual;
+    procedure DoGetPassword(var Password: String);
     // TPasswordEventEx
-    procedure DoGetPasswordEx(var VPassword: String;
-      const AIsWrite: Boolean); virtual;
+    procedure DoGetPasswordEx(var VPassword: String; const AIsWrite: Boolean);
     function DoVerifyPeer(Certificate: TIdX509; AOk: Boolean;
-      ADepth, AError: Integer): Boolean; virtual;
+      ADepth, AError: Integer): Boolean;
     procedure InitComponent; override;
 
     { IIdSSLTaurusTLSCallbackHelper }
@@ -2956,6 +2954,7 @@ type
   var
     ret, err: Integer;
   begin
+    Result := 0;
     repeat
       ret := SSL_read(fSSL, PByte(ABuffer), Length(ABuffer));
       if ret > 0 then
@@ -3040,9 +3039,8 @@ type
 
   function TIdSSLSocket.GetSSLProtocolVersionStr: string;
   begin
+    Result := 'Unknown';
     case SSLProtocolVersion of
-      sslUnknown:
-        Result := 'Unknown';
       sslvSSLv2:
         Result := 'SSLv2';
       sslvSSLv3:
@@ -3059,7 +3057,6 @@ type
   end;
 
   function TIdSSLSocket.GetPeerCert: TIdX509;
-
   var
     LX509: PX509;
   begin

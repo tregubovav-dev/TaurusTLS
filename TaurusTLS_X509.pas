@@ -234,12 +234,12 @@ http://csrc.nist.gov/CryptoToolkit/tkhash.html
     FAuthorityKeyID : TIdX509AuthorityKeyID;
     FAltSubjectNames : TIdX509AltSubjectAltNames;
     function GetExtensionCount: TIdC_LONG;
-    function RSubject:TIdX509Name;
-    function RIssuer:TIdX509Name;
-    function RnotBefore:TDateTime;
-    function RnotAfter:TDateTime;
-    function RFingerprint:TIdSSLEVP_MD;
-    function RFingerprintAsString:String;
+    function GetSubject:TIdX509Name;
+    function GetIssuer:TIdX509Name;
+    function GetnotBefore:TDateTime;
+    function GetnotAfter:TDateTime;
+    function GetFingerprint:TIdSSLEVP_MD;
+    function GetFingerprintAsString:String;
     function GetSerialNumber: String;
 
     function GetVersion : TIdC_LONG;
@@ -263,13 +263,13 @@ http://csrc.nist.gov/CryptoToolkit/tkhash.html
     property SigInfo : TIdX509SigInfo read FSigInfo;
     property Fingerprints : TIdX509Fingerprints read FFingerprints;
     //
-    property Fingerprint: TIdSSLEVP_MD read RFingerprint;
-    property FingerprintAsString: String read RFingerprintAsString;
-    property Subject: TIdX509Name read RSubject;
+    property Fingerprint: TIdSSLEVP_MD read GetFingerprint;
+    property FingerprintAsString: String read GetFingerprintAsString;
+    property Subject: TIdX509Name read GetSubject;
     property AltSubjectNames : TIdX509AltSubjectAltNames read  FAltSubjectNames;
-    property Issuer: TIdX509Name read RIssuer;
-    property notBefore: TDateTime read RnotBefore;
-    property notAfter: TDateTime read RnotAfter;
+    property Issuer: TIdX509Name read GetIssuer;
+    property notBefore: TDateTime read GetnotBefore;
+    property notAfter: TDateTime read GetnotAfter;
     property SerialNumber : string read GetSerialNumber;
     property DisplayInfo : TStrings read GetDisplayInfo;
 
@@ -411,7 +411,7 @@ end;
 function TIdX509Fingerprints.GetMD5: TIdSSLEVP_MD;
 begin
   CheckMD5Permitted;
-  X509_digest(FX509, EVP_md5, PByte(@Result.MD), Result.Length);
+  X509_digest(FX509, EVP_md5, PByte(@Result.MD), Result._Length);
 end;
 
 function TIdX509Fingerprints.GetMD5AsString: String;
@@ -421,7 +421,7 @@ end;
 
 function TIdX509Fingerprints.GetSHA1: TIdSSLEVP_MD;
 begin
-  X509_digest(FX509, EVP_sha1, PByte(@Result.MD), Result.Length);
+  X509_digest(FX509, EVP_sha1, PByte(@Result.MD), Result._Length);
 end;
 
 function TIdX509Fingerprints.GetSHA1AsString: String;
@@ -432,10 +432,10 @@ end;
 function TIdX509Fingerprints.GetSHA224 : TIdSSLEVP_MD;
 begin
   {$IFDEF OPENSSL_STATIC_LINK_MODEL}
-    X509_digest(FX509, EVP_sha224, PByte(@Result.MD), Result.Length);
+    X509_digest(FX509, EVP_sha224, PByte(@Result.MD), Result._Length);
   {$ELSE}
   if Assigned(EVP_sha224) then begin
-    X509_digest(FX509, EVP_sha224, PByte(@Result.MD), Result.Length);
+    X509_digest(FX509, EVP_sha224, PByte(@Result.MD), Result._Length);
   end else begin
     FillChar(Result, SizeOf(Result), 0);
   end;
@@ -458,10 +458,10 @@ end;
 function TIdX509Fingerprints.GetSHA256 : TIdSSLEVP_MD;
 begin
   {$IFDEF OPENSSL_STATIC_LINK_MODEL}
-  X509_digest(FX509, EVP_sha256, PByte(@Result.MD), Result.Length);
+  X509_digest(FX509, EVP_sha256, PByte(@Result.MD), Result._Length);
   {$ELSE}
   if Assigned(EVP_sha256) then begin
-    X509_digest(FX509, EVP_sha256, PByte(@Result.MD), Result.Length);
+    X509_digest(FX509, EVP_sha256, PByte(@Result.MD), Result._Length);
   end else begin
     FillChar(Result, SizeOf(Result), 0);
   end;
@@ -484,10 +484,10 @@ end;
 function TIdX509Fingerprints.GetSHA384 : TIdSSLEVP_MD;
 begin
   {$IFDEF OPENSSL_STATIC_LINK_MODEL}
-  X509_digest(FX509, EVP_SHA384, PByte(@Result.MD), Result.Length);
+  X509_digest(FX509, EVP_SHA384, PByte(@Result.MD), Result._Length);
   {$ELSE}
   if Assigned(EVP_SHA384) then begin
-    X509_digest(FX509, EVP_SHA384, PByte(@Result.MD), Result.Length);
+    X509_digest(FX509, EVP_SHA384, PByte(@Result.MD), Result._Length);
   end else begin
     FillChar(Result, SizeOf(Result), 0);
   end;
@@ -510,10 +510,10 @@ end;
 function TIdX509Fingerprints.GetSHA512 : TIdSSLEVP_MD;
 begin
   {$IFDEF OPENSSL_STATIC_LINK_MODEL}
-  X509_digest(FX509, EVP_sha512, PByte(@Result.MD), Result.Length);
+  X509_digest(FX509, EVP_sha512, PByte(@Result.MD), Result._Length);
   {$ELSE}
   if Assigned(EVP_sha512) then begin
-    X509_digest(FX509, EVP_sha512, PByte(@Result.MD), Result.Length);
+    X509_digest(FX509, EVP_sha512, PByte(@Result.MD), Result._Length);
   end else begin
     FillChar(Result, SizeOf(Result), 0);
   end;
@@ -797,7 +797,7 @@ begin
   Result := X509_get_version(FX509);
 end;
 
-function TIdX509.RSubject: TIdX509Name;
+function TIdX509.GetSubject: TIdX509Name;
 var
   Lx509_name: PX509_NAME;
 Begin
@@ -812,7 +812,7 @@ Begin
   Result := FSubject;
 end;
 
-function TIdX509.RIssuer: TIdX509Name;
+function TIdX509.GetIssuer: TIdX509Name;
 var
   Lx509_name: PX509_NAME;
 begin
@@ -827,17 +827,17 @@ begin
   Result := FIssuer;
 end;
 
-function TIdX509.RFingerprint: TIdSSLEVP_MD;
+function TIdX509.GetFingerprint: TIdSSLEVP_MD;
 begin
-  X509_digest(FX509, EVP_md5, PByte(@Result.MD), Result.Length);
+  X509_digest(FX509, EVP_md5, PByte(@Result.MD), Result._Length);
 end;
 
-function TIdX509.RFingerprintAsString: String;
+function TIdX509.GetFingerprintAsString: String;
 begin
   Result := MDAsString(Fingerprint);
 end;
 
-function TIdX509.RnotBefore: TDateTime;
+function TIdX509.GetnotBefore: TDateTime;
 begin
   if FX509 = nil then begin
     Result := 0
@@ -848,7 +848,7 @@ begin
   end;
 end;
 
-function TIdX509.RnotAfter:TDateTime;
+function TIdX509.GetnotAfter:TDateTime;
 begin
   if FX509 = nil then begin
     Result := 0
@@ -987,6 +987,7 @@ begin
 end;
 
 function ASN1_ToIPAddress(a : PASN1_OCTET_STRING) : String;
+{$IFDEF USE_INLINE}inline; {$ENDIF}
 var
   LIPv6 : TIdIPv6Address;
   i : Integer;

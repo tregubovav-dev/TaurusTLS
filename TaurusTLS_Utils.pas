@@ -24,7 +24,7 @@ uses
 
 type
   TIdSSLEVP_MD = record
-    Length: TIdC_UINT;
+    _Length: TIdC_UINT;
     MD: Array [0 .. EVP_MAX_MD_SIZE - 1] of TIdAnsiChar;
   end;
 
@@ -34,7 +34,7 @@ function BytesToHexString(APtr: Pointer; ALen: Integer): String;
 function MDAsString(const AMD: TIdSSLEVP_MD): String;
 procedure DumpCert(AOut: TStrings; AX509: PX509);
 function UTCTime2DateTime(UTCtime: PASN1_UTCTIME): TDateTime;
-function UTC_Time_Decode(UTCtime: PASN1_UTCTIME;
+function UTC_Time_Decode(const UTCtime: PASN1_UTCTIME;
   out year, month, day, hour, min, sec: Word;
   out tz_hour, tz_min: Integer): Integer;
 function AddMins(const DT: TDateTime; const Mins: Extended): TDateTime;
@@ -49,16 +49,16 @@ uses TaurusTLSHeaders_bio, TaurusTLSHeaders_objects, TaurusTLSHeaders_x509,
 function AddMins(const DT: TDateTime; const Mins: Extended): TDateTime;
 {$IFDEF USE_INLINE} inline; {$ENDIF}
 begin
-  Result := DT + Mins / (60 * 24)
+  Result := DT + (Mins / (60 * 24));
 end;
 
 function AddHrs(const DT: TDateTime; const Hrs: Extended): TDateTime;
 {$IFDEF USE_INLINE} inline; {$ENDIF}
 begin
-  Result := DT + Hrs / 24.0;
+  Result := DT + (Hrs / 24.0);
 end;
 
-function UTC_Time_Decode(UTCtime: PASN1_UTCTIME;
+function UTC_Time_Decode(const UTCtime: PASN1_UTCTIME;
   out year, month, day, hour, min, sec: Word;
   out tz_hour, tz_min: Integer): Integer;
 var
@@ -83,7 +83,7 @@ begin
   SetString(time_str, PAnsiChar(UTCtime^.data), UTCtime^.Length);
 {$ELSE}
   SetString(LTemp, PAnsiChar(UTCtime^.data), UTCtime^.Length);
-  { Note: UTCtime is a type defined by TaurusTLS and hence is ansistring and not UCS-2 }
+  { Note: UTCtime is a type defined by OpenSSL and hence is ansistring and not UCS-2 }
   // TODO: do we need to use SetCodePage() here?
   time_str := String(LTemp); // explicit convert to Unicode
 {$ENDIF}
@@ -142,7 +142,7 @@ var
 begin
   Result := '';
   LPtr := PByte(APtr);
-  for i := 0 to (ALen - 1) do
+  for i := 0 to ALen - 1 do
   begin
     if i <> 0 then
     begin
@@ -159,7 +159,7 @@ var
   i: Integer;
 begin
   Result := '';
-  for i := 0 to AMD.Length - 1 do
+  for i := 0 to AMD._Length - 1 do
   begin
     if i <> 0 then
     begin
@@ -173,10 +173,8 @@ end;
 function ASN1_OBJECT_ToStr(a: PASN1_OBJECT): String;
 var
   LBuf: array [0 .. 1024] of TIdAnsiChar;
-  LNoName: TIdC_INT;
 begin
-  LNoName := 0;
-  OBJ_obj2txt(@LBuf[0], 1024, a, LNoName);
+  OBJ_obj2txt(@LBuf[0], 1024, a, 0);
   Result := String(LBuf);
 end;
 

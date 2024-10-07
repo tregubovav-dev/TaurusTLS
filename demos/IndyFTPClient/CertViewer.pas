@@ -271,11 +271,11 @@ begin
     begin
       WriteErrorString('Unhandled Critical Extention - Reject this certificated');
     end;
-    if FX509.Warnings.IsObsoleteV1 then
+    if FX509.Warnings.ObsoleteV1 then
     begin
       WriteWarningString('Certificate is Obsolete Version 1');
     end;
-    if FX509.Warnings.IsSelfSigned then
+    if FX509.Warnings.SelfSigned then
     begin
       WriteWarningString('Certificate is Self-Signed');
     end

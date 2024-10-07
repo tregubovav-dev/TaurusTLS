@@ -3060,7 +3060,7 @@ type
   var
     pSession: PSSL_SESSION;
   begin
-    Result.Length := 0;
+    Result._Length := 0;
     Result.Data := nil;
 {$IFNDEF OPENSSL_STATIC_LINK_MODEL}
     if Assigned(SSL_get_session) and Assigned(SSL_SESSION_get_id) then
@@ -3071,7 +3071,7 @@ type
         pSession := SSL_get_session(fSSL);
         if pSession <> nil then
         begin
-          Result.Data := SSL_SESSION_get_id(pSession, @Result.Length);
+          Result.Data := SSL_SESSION_get_id(pSession, @Result._Length);
         end;
       end;
     end;
@@ -3085,9 +3085,9 @@ type
   begin
     Result := ''; { Do not Localize }
     LData := _GetSessionID;
-    if LData.Length > 0 then
+    if LData._Length > 0 then
     begin
-      for i := 0 to LData.Length - 1 do
+      for i := 0 to LData._Length - 1 do
       begin
         // RLebeau: not all Delphi versions support indexed access using PByte
         LDataPtr := LData.Data;

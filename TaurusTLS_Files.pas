@@ -783,7 +783,7 @@ begin
     try
       LX := PEM_read_bio_X509_AUX(b, nil, SSL_CTX_get_default_passwd_cb(ctx),
         SSL_CTX_get_default_passwd_cb_userdata(ctx));
-      if (LX = nil) then
+      if LX = nil then
       begin
         SSLerr(SSL_F_SSL_CTX_USE_CERTIFICATE_CHAIN_FILE, ERR_R_PEM_LIB);
       end
@@ -869,8 +869,8 @@ begin
     // we are using Unicode strings here.  So casting the UnicodeString to a
     // raw Pointer and then passing that to X509_LOOKUP_load_file() as PAnsiChar.
     // Indy_Unicode_X509_LOOKUP_file will cast it back to PWideChar for processing...
-    if (X509_LOOKUP_load_file(lookup, PAnsiChar(Pointer(AFileName)),
-      X509_FILETYPE_PEM) <> 1) then
+    if X509_LOOKUP_load_file(lookup, PAnsiChar(Pointer(AFileName)),
+      X509_FILETYPE_PEM) <> 1 then
     begin
       Exit;
     end;
@@ -878,8 +878,8 @@ begin
   if APathName <> '' then
   begin
     { TODO: Figure out how to do the hash dir lookup with a Unicode path. }
-    if (X509_STORE_load_locations(ctx, nil, PAnsiChar(AnsiString(APathName)))
-      <> 1) then
+    if X509_STORE_load_locations(ctx, nil, PAnsiChar(AnsiString(APathName)))
+      <> 1 then
     begin
       Exit;
     end;

@@ -23,9 +23,6 @@ type
     lblProxyServerName: TLabel;
     cboProxyType: TComboBox;
     lblProxyType: TLabel;
-    procedure edtExternalIPAddressChange(Sender: TObject);
-    procedure spnedtPortMinimumChange(Sender: TObject);
-    procedure spnedtPortMaximumChange(Sender: TObject);
     procedure cboProxyTypeChange(Sender: TObject);
   private
     { Private declarations }
@@ -45,21 +42,6 @@ uses IdIPAddress, ProgUtils;
 { TfrmNATSettings }
 
 procedure TfrmProxySettings.cboProxyTypeChange(Sender: TObject);
-begin
-  ValidateFeilds;
-end;
-
-procedure TfrmProxySettings.edtExternalIPAddressChange(Sender: TObject);
-begin
-  ValidateFeilds;
-end;
-
-procedure TfrmProxySettings.spnedtPortMaximumChange(Sender: TObject);
-begin
-  ValidateFeilds;
-end;
-
-procedure TfrmProxySettings.spnedtPortMinimumChange(Sender: TObject);
 begin
   ValidateFeilds;
 end;

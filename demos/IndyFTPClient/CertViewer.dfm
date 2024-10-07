@@ -81,6 +81,7 @@ object frmCertViewer: TfrmCertViewer
     Top = 104
     Width = 542
     Height = 217
+    TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText

@@ -18,39 +18,45 @@ object frmNATSettings: TfrmNATSettings
   TextHeight = 15
   object lblMaximumPort: TLabel
     Left = 230
-    Top = 79
+    Top = 76
     Width = 58
-    Height = 15
+    Height = 23
     Anchors = [akTop, akRight]
     Caption = 'M&aximum:'
     FocusControl = spnedtPortMaximum
+    Layout = tlCenter
   end
   object lblMinPort: TLabel
     Left = 18
-    Top = 79
+    Top = 76
     Width = 72
-    Height = 15
+    Height = 23
     Alignment = taRightJustify
     AutoSize = False
     Caption = '&Minimum:'
     FocusControl = spnedtPortMinimum
+    Layout = tlCenter
   end
   object lblPorts: TLabel
-    Left = 41
-    Top = 55
-    Width = 215
-    Height = 15
+    Left = 18
+    Top = 47
+    Width = 348
+    Height = 23
+    Alignment = taCenter
+    AutoSize = False
     Caption = 'Data Port Range for PORT/EPRT transfers.'
+    Layout = tlCenter
   end
   object lblNATIPAddress: TLabel
     Left = 18
-    Top = 16
+    Top = 13
     Width = 72
-    Height = 15
+    Height = 23
     Alignment = taRightJustify
     AutoSize = False
     Caption = '&IP Address:'
     FocusControl = edtExternalIPAddress
+    Layout = tlCenter
   end
   object Panel2: TPanel
     Left = 0

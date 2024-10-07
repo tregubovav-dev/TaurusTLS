@@ -40,52 +40,57 @@ object frmConnect: TfrmConnect
           226)
         object lblHost: TLabel
           Left = 18
-          Top = 53
+          Top = 50
           Width = 72
-          Height = 15
+          Height = 23
           Alignment = taRightJustify
           AutoSize = False
           Caption = '&Host:'
           FocusControl = edtHostname
+          Layout = tlCenter
         end
         object lblUsername: TLabel
           Left = 18
-          Top = 127
+          Top = 124
           Width = 72
-          Height = 15
+          Height = 23
           Alignment = taRightJustify
           AutoSize = False
           Caption = '&User name:'
           FocusControl = edtUsername
+          Layout = tlCenter
         end
         object lblPassword: TLabel
           Left = 18
-          Top = 166
+          Top = 161
           Width = 72
-          Height = 15
+          Height = 23
           Alignment = taRightJustify
           AutoSize = False
           Caption = '&Password:'
           FocusControl = edtPassword
+          Layout = tlCenter
         end
         object lblProfileName: TLabel
           Left = 18
-          Top = 16
+          Top = 13
           Width = 72
-          Height = 15
+          Height = 23
           AutoSize = False
           Caption = 'P&rofile Name:'
           FocusControl = edtProfileName
+          Layout = tlCenter
         end
         object lblConnectionType: TLabel
           Left = 18
-          Top = 201
+          Top = 198
           Width = 72
-          Height = 15
+          Height = 23
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'Pro&tocol:'
           FocusControl = cboConnectionType
+          Layout = tlCenter
         end
         object edtHostname: TEdit
           Left = 96

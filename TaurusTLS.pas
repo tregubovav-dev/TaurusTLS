@@ -278,7 +278,7 @@ type
   TCallbackExEvent = procedure(ASender: TObject; const AsslSocket: PSSL;
     const AWhere, Aret: TIdC_INT; const AType, AMsg: String) of object;
   TPasswordEvent = procedure(var Password: String) of object;
-  TPasswordEventEx = procedure(ASender: TObject; var VPassword: String;
+  TPasswordEventEx = procedure(ASender: TObject; out VPassword: String;
     const AIsWrite: Boolean) of object;
   TVerifyPeerEvent = function(Certificate: TIdX509; AOk: Boolean;
     ADepth, AError: Integer): Boolean of object;

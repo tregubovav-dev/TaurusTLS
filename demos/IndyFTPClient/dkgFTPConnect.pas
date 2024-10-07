@@ -272,14 +272,14 @@ begin
     edtProfileName.Visible := False;
     lblProfileName.Visible := False;
     edtHostname.Top := 13;
-    lblHost.Top := 16;
-    Self.chkAnonymousFTP.Top := 50;
-    Self.edtUsername.Top := 87;
-    Self.lblUsername.Top := 90;
-    Self.edtPassword.Top := 124;
-    Self.lblPassword.Top := 127;
-    Self.cboConnectionType.Top := 161;
-    Self.lblConnectionType.Top := 165;
+    lblHost.Top := 13;
+    chkAnonymousFTP.Top := 50;
+    edtUsername.Top := 87;
+    lblUsername.Top := 87;
+    edtPassword.Top := 124;
+    lblPassword.Top := 124;
+    cboConnectionType.Top := 161;
+    lblConnectionType.Top := 161;
   end;
 end;
 

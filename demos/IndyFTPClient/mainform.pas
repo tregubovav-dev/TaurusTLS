@@ -238,7 +238,7 @@ type
     FFTP: TIdFTP;
     procedure PromptVerifyCert;
     procedure PromptPassword;
-    procedure DoPasswordEx(ASender: TObject; var VPassword: String;
+    procedure DoPasswordEx(ASender: TObject; out VPassword: String;
       const AIsWrite: Boolean);
     function DoVerifyPeer(Certificate: TIdX509; AOk: Boolean;
       ADepth, AError: Integer): Boolean;
@@ -1805,7 +1805,7 @@ begin
   inherited;
 end;
 
-procedure TFTPThread.DoPasswordEx(ASender: TObject; var VPassword: String;
+procedure TFTPThread.DoPasswordEx(ASender: TObject; out VPassword: String;
   const AIsWrite: Boolean);
 begin
   Synchronize(Self, PromptPassword);

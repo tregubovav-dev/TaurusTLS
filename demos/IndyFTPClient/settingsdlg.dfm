@@ -220,23 +220,25 @@ object frmSettings: TfrmSettings
           308)
         object lblTransferType: TLabel
           Left = 18
-          Top = 16
+          Top = 13
           Width = 72
-          Height = 15
+          Height = 23
           Alignment = taRightJustify
           AutoSize = False
           Caption = '&Transfer Type:'
           FocusControl = cboTransferTypes
+          Layout = tlCenter
         end
         object lblAdvancedOptions: TLabel
           Left = 18
           Top = 51
           Width = 72
-          Height = 15
+          Height = 23
           Alignment = taRightJustify
           AutoSize = False
           Caption = '&Advanced:'
           FocusControl = chklbAdvancedOptions
+          Layout = tlCenter
         end
         object cboTransferTypes: TComboBox
           Left = 92

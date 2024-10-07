@@ -15,57 +15,62 @@ object frmProxySettings: TfrmProxySettings
   TextHeight = 15
   object lblProxyPort: TLabel
     Left = 18
-    Top = 132
+    Top = 129
     Width = 72
-    Height = 15
+    Height = 23
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'P&ort:'
     Enabled = False
     FocusControl = spededtProxyPort
+    Layout = tlCenter
   end
   object lblProxyServerPassword: TLabel
     Left = 18
-    Top = 103
+    Top = 100
     Width = 72
-    Height = 15
+    Height = 23
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Password:'
     Enabled = False
     FocusControl = edtProxyServerPassword
+    Layout = tlCenter
   end
   object lblProxyServerUserName: TLabel
     Left = 18
-    Top = 74
+    Top = 71
     Width = 72
-    Height = 15
+    Height = 23
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Username:'
     Enabled = False
     FocusControl = edtProxyServerUserName
+    Layout = tlCenter
   end
   object lblProxyServerName: TLabel
     Left = 18
-    Top = 46
+    Top = 42
     Width = 72
-    Height = 15
+    Height = 23
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Proxy &Server:'
     Enabled = False
     FocusControl = edtProxyServerName
+    Layout = tlCenter
   end
   object lblProxyType: TLabel
     Left = 18
-    Top = 16
+    Top = 13
     Width = 72
-    Height = 15
+    Height = 23
     Alignment = taRightJustify
     AutoSize = False
     Caption = '&Type:'
     FocusControl = cboProxyType
+    Layout = tlCenter
   end
   object Panel2: TPanel
     Left = 0

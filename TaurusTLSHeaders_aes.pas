@@ -166,7 +166,6 @@ begin
 end;
 
 
-
 function  ERR_AES_set_encrypt_key(const userKey: PByte; const bits: TIdC_INT; const key: PAES_KEY): TIdC_INT; 
 begin
   EIdAPIFunctionNotPresent.RaiseException(AES_set_encrypt_key_procname);
@@ -190,7 +189,6 @@ procedure  ERR_AES_decrypt(const in_: PByte; out_: PByte; const key: PAES_KEY);
 begin
   EIdAPIFunctionNotPresent.RaiseException(AES_decrypt_procname);
 end;
-
 
 
 procedure  ERR_AES_ecb_encrypt(const in_: PByte; out_: PByte; const key: PAES_KEY; const enc: TIdC_INT); 
@@ -217,31 +215,30 @@ begin
 end;
 
 
-procedure  ERR_AES_cfb8_encrypt(const in_: PByte; out_: PByte; length: TIdC_SIZET; const key: PAES_KEY; ivec: PByte; num: PIdC_INT; const enc: TIdC_INT); 
+procedure  ERR_AES_cfb8_encrypt(const in_: PByte; out_: PByte; length: TIdC_SIZET; const key: PAES_KEY; ivec: PByte; num: PIdC_INT; const enc: TIdC_INT);
 begin
   EIdAPIFunctionNotPresent.RaiseException(AES_cfb8_encrypt_procname);
 end;
 
 
-procedure  ERR_AES_ofb128_encrypt(const in_: PByte; out_: PByte; length: TIdC_SIZET; const key: PAES_KEY; ivec: PByte; num: PIdC_INT); 
+procedure  ERR_AES_ofb128_encrypt(const in_: PByte; out_: PByte; length: TIdC_SIZET; const key: PAES_KEY; ivec: PByte; num: PIdC_INT);
 begin
   EIdAPIFunctionNotPresent.RaiseException(AES_ofb128_encrypt_procname);
 end;
 
 
   (* NB: the IV is _two_ blocks long *)
-procedure  ERR_AES_ige_encrypt(const in_: PByte; out_: PByte; length: TIdC_SIZET; const key: PAES_KEY; ivec: PByte; const enc: TIdC_INT); 
+procedure  ERR_AES_ige_encrypt(const in_: PByte; out_: PByte; length: TIdC_SIZET; const key: PAES_KEY; ivec: PByte; const enc: TIdC_INT);
 begin
   EIdAPIFunctionNotPresent.RaiseException(AES_ige_encrypt_procname);
 end;
 
 
   (* NB: the IV is _four_ blocks long *)
-procedure  ERR_AES_bi_ige_encrypt(const in_: PByte; out_: PByte; length: TIdC_SIZET; const key: PAES_KEY; const key2: PAES_KEY; ivec: PByte; const enc: TIdC_INT); 
+procedure  ERR_AES_bi_ige_encrypt(const in_: PByte; out_: PByte; length: TIdC_SIZET; const key: PAES_KEY; const key2: PAES_KEY; ivec: PByte; const enc: TIdC_INT);
 begin
   EIdAPIFunctionNotPresent.RaiseException(AES_bi_ige_encrypt_procname);
 end;
-
 
 
 function  ERR_AES_wrap_key(key: PAES_KEY; const iv: PByte; out_: PByte; const in_: PByte; inlen: TIdC_UINT): TIdC_INT; 

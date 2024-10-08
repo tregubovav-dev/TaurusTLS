@@ -2925,7 +2925,6 @@ type
   var
     ret, err: Integer;
   begin
-    Result := 0;
     repeat
       ret := SSL_read(fSSL, PByte(ABuffer), Length(ABuffer));
       if ret > 0 then
@@ -3190,8 +3189,8 @@ RegisterSSL('TaurusTLS', 'TaurusTLS Developers', { do not localize }
   'TaurusTLS Developers. All rights reserved.', { do not localize }
   'Open SSL 1.1.1 and 3.x DLL Delphi and C++Builder interface',
   { do not localize }
-  'http://www.indyproject.org/'#10#13 + { do not localize }
-  'Original Author - Gregor Ibic', { do not localize }
+  'https://github.com/JPeterMugaas/TaurusTLS'#10#13 + { do not localize }
+  'Original Authors - J. Peter Mugaas and Tony Whyman', { do not localize }
   TIdSSLIOHandlerSocketTaurusTLS, TIdServerIOHandlerSSLTaurusTLS);
 {$I TaurusTLSSymbolDeprecatedOn.inc}
 TIdSSLIOHandlerSocketTaurusTLS.RegisterIOHandler;

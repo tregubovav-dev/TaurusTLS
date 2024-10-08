@@ -1120,7 +1120,6 @@ end;
 
 function  FC_OPENSSL_init_crypto(opts: TIdC_UINT64; const settings: POPENSSL_INIT_SETTINGS): TIdC_INT; cdecl;
 begin
-  Result := 0;
   if opts and OPENSSL_INIT_ADD_ALL_CIPHERS <> 0 then
     OpenSSL_add_all_ciphers;
   if opts and OPENSSL_INIT_ADD_ALL_DIGESTS <> 0 then

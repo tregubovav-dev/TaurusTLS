@@ -1524,7 +1524,6 @@ begin
 end;
 
 
-
 function  ERR_TS_MSG_IMPRINT_dup(a: PTS_MSG_IMPRINT): PTS_MSG_IMPRINT; 
 begin
   EIdAPIFunctionNotPresent.RaiseException(TS_MSG_IMPRINT_dup_procname);

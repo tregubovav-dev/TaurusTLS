@@ -962,6 +962,8 @@ begin
   end
   else
   begin
+    // This is a safe typecast since PASN1_UTCTIME and PASN1_TIME are really
+    // pointers to ASN1 strings since ASN1_UTCTIME amd ASM1_TIME are ASN1_STRING.
     Result := UTCTime2DateTime(PASN1_UTCTIME(X509_get0_notAfter(FX509)));
   end;
 end;

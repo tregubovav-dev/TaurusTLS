@@ -219,6 +219,7 @@ begin
     begin
       try
         X509_print(LMem, AX509);
+        LBufPtr := nil;
         LLen := BIO_get_mem_data(LMem, LBufPtr);
         if (LLen > 0) and (LBufPtr <> nil) then
         begin

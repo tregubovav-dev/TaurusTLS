@@ -129,7 +129,7 @@ begin
     try
       SetLength(LPassword, MAX_SSL_PASSWORD_LENGTH + 1);
       LPassword[MAX_SSL_PASSWORD_LENGTH] := TIdAnsiChar(0);
-      LPasswordPtr := PIdAnsiChar(LPassword);
+      LPasswordPtr := @LPassword[0];
       default_passwd_cb := SSL_CTX_get_default_passwd_cb(ctx);
       if Assigned(default_passwd_cb) then
       begin
@@ -210,7 +210,7 @@ begin
     try
       SetLength(LPassword, MAX_SSL_PASSWORD_LENGTH + 1);
       LPassword[MAX_SSL_PASSWORD_LENGTH] := TIdAnsiChar(0);
-      LPasswordPtr := PIdAnsiChar(LPassword);
+      LPasswordPtr := @LPassword[0];
       default_passwd_callback := SSL_CTX_get_default_passwd_cb(ctx);
       if Assigned(default_passwd_callback) then
       begin
@@ -478,7 +478,7 @@ begin
   try
     for i := 0 to sk_X509_INFO_num(Linf) - 1 do
     begin
-      Litmp := PX509_INFO(sk_X509_INFO_value(Linf, i));
+      Litmp := sk_X509_INFO_value(Linf, i);
       if Assigned(Litmp^.x509) then
       begin
         X509_STORE_add_cert(X509_LOOKUP_get_store(ctx), Litmp^.x509);

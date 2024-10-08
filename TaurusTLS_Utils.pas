@@ -218,12 +218,12 @@ begin
     if LMem <> nil then
     begin
       try
-        X509_print(LMem, AX509);
-        LBufPtr := nil;
-        LLen := BIO_get_mem_data(LMem, LBufPtr);
-        if (LLen > 0) and (LBufPtr <> nil) then
-        begin
-          AOut.Text := IndyTextEncoding_UTF8.GetString(
+        if X509_print_ex(LMem, AX509,XN_FLAG_COMPAT, X509_FLAG_COMPAT) = 1 then begin
+          LBufPtr := nil;
+          LLen := BIO_get_mem_data(LMem, @LBufPtr);
+          if (LLen > 0) and (LBufPtr <> nil) then
+          begin
+            AOut.Text := IndyTextEncoding_UTF8.GetString(
 {$IFNDEF VCL_6_OR_ABOVE}
             // RLebeau: for some reason, Delphi 5 causes a "There is no overloaded
             // version of 'GetString' that can be called with these arguments" compiler
@@ -235,6 +235,7 @@ begin
             PByte(LBufPtr), LLen
 {$ENDIF}
             );
+          end;
         end;
       finally
         BIO_free(LMem);

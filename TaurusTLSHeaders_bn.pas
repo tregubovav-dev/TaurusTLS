@@ -1308,13 +1308,13 @@ const
 {$WARN  NO_RETVAL OFF}
 procedure  ERR_BN_set_flags(b: PBIGNUM; n: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_set_flags_procname);
 end;
 
 
 function  ERR_BN_get_flags(b: PBIGNUM; n: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_get_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_get_flags_procname);
 end;
 
 
@@ -1327,27 +1327,27 @@ end;
    *)
 procedure  ERR_BN_with_flags(dest: PBIGNUM; b: PBIGNUM; flags: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_with_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_with_flags_procname);
 end;
 
 
   (* Wrapper function to make using BN_GENCB easier *)
 function  ERR_BN_GENCB_call(cb: PBN_GENCB; a: TIdC_INT; b: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_GENCB_call_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_GENCB_call_procname);
 end;
 
 
 
 function  ERR_BN_GENCB_new: PBN_GENCB; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_GENCB_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_GENCB_new_procname);
 end;
 
 
 procedure  ERR_BN_GENCB_free(cb: PBN_GENCB); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_GENCB_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_GENCB_free_procname);
 end;
 
 
@@ -1355,7 +1355,7 @@ end;
   (* Populate a PBN_GENCB structure with an "old"-style callback *)
 procedure  ERR_BN_GENCB_set_old(gencb: PBN_GENCB; callback: BN_GENCB_set_old_cb; cb_arg: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_GENCB_set_old_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_GENCB_set_old_procname);
 end;
 
 
@@ -1363,14 +1363,14 @@ end;
   (* Populate a PBN_GENCB structure with a "new"-style callback *)
 procedure  ERR_BN_GENCB_set(gencb: PBN_GENCB; callback: BN_GENCB_set_cb; cb_arg: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_GENCB_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_GENCB_set_procname);
 end;
 
 
 
 function  ERR_BN_GENCB_get_arg(cb: PBN_GENCB): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_GENCB_get_arg_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_GENCB_get_arg_procname);
 end;
 
 
@@ -1451,31 +1451,31 @@ end;
 
 function  ERR_BN_abs_is_word(a: PBIGNUM; w: BN_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_abs_is_word_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_abs_is_word_procname);
 end;
 
 
 function  ERR_BN_is_zero(a: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_is_zero_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_is_zero_procname);
 end;
 
 
 function  ERR_BN_is_one(a: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_is_one_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_is_one_procname);
 end;
 
 
 function  ERR_BN_is_word(a: PBIGNUM; w: BN_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_is_word_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_is_word_procname);
 end;
 
 
 function  ERR_BN_is_odd(a: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_is_odd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_is_odd_procname);
 end;
 
 
@@ -1484,218 +1484,218 @@ end;
 
 procedure  ERR_BN_zero_ex(a: PBIGNUM); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_zero_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_zero_ex_procname);
 end;
 
 
 
 function  ERR_BN_value_one: PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_value_one_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_value_one_procname);
 end;
 
 
 function  ERR_BN_options: PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_options_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_options_procname);
 end;
 
 
 function  ERR_BN_CTX_new: PBN_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_CTX_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_CTX_new_procname);
 end;
 
 
 function  ERR_BN_CTX_secure_new: PBN_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_CTX_secure_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_CTX_secure_new_procname);
 end;
 
 
 procedure  ERR_BN_CTX_free(c: PBN_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_CTX_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_CTX_free_procname);
 end;
 
 
 procedure  ERR_BN_CTX_start(ctx: PBN_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_CTX_start_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_CTX_start_procname);
 end;
 
 
 function  ERR_BN_CTX_get(ctx: PBN_CTX): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_CTX_get_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_CTX_get_procname);
 end;
 
 
 procedure  ERR_BN_CTX_end(ctx: PBN_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_CTX_end_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_CTX_end_procname);
 end;
 
 
 function  ERR_BN_rand(rnd: PBIGNUM; bits: TIdC_INT; top: TIdC_INT; bottom: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_rand_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_rand_procname);
 end;
 
 
 function  ERR_BN_priv_rand(rnd: PBIGNUM; bits: TIdC_INT; top: TIdC_INT; bottom: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_priv_rand_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_priv_rand_procname);
 end;
 
 
 function  ERR_BN_rand_range(rnd: PBIGNUM; range: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_rand_range_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_rand_range_procname);
 end;
 
 
 function  ERR_BN_priv_rand_range(rnd: PBIGNUM; range: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_priv_rand_range_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_priv_rand_range_procname);
 end;
 
 
 function  ERR_BN_pseudo_rand(rnd: PBIGNUM; bits: TIdC_INT; top: TIdC_INT; bottom: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_pseudo_rand_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_pseudo_rand_procname);
 end;
 
 
 function  ERR_BN_pseudo_rand_range(rnd: PBIGNUM; range: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_pseudo_rand_range_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_pseudo_rand_range_procname);
 end;
 
 
 function  ERR_BN_num_bits(a: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_num_bits_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_num_bits_procname);
 end;
 
 
 function  ERR_BN_num_bits_word(l: BN_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_num_bits_word_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_num_bits_word_procname);
 end;
 
 
 function  ERR_BN_security_bits(L: TIdC_INT; N: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_security_bits_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_security_bits_procname);
 end;
 
 
 function  ERR_BN_new: PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_new_procname);
 end;
 
 
 function  ERR_BN_secure_new: PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_secure_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_secure_new_procname);
 end;
 
 
 procedure  ERR_BN_clear_free(a: PBIGNUM); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_clear_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_clear_free_procname);
 end;
 
 
 function  ERR_BN_copy(a: PBIGNUM; b: PBIGNUM): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_copy_procname);
 end;
 
 
 procedure  ERR_BN_swap(a: PBIGNUM; b: PBIGNUM); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_swap_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_swap_procname);
 end;
 
 
 function  ERR_BN_bin2bn(const s: PByte; len: TIdC_INT; ret: PBIGNUM): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_bin2bn_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_bin2bn_procname);
 end;
 
 
 function  ERR_BN_bn2bin(const a: PBIGNUM; to_: PByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_bn2bin_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_bn2bin_procname);
 end;
 
 
 function  ERR_BN_bn2binpad(const a: PBIGNUM; to_: PByte; tolen: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_bn2binpad_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_bn2binpad_procname);
 end;
 
 
 function  ERR_BN_lebin2bn(const s: PByte; len: TIdC_INT; ret: PBIGNUM): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_lebin2bn_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_lebin2bn_procname);
 end;
 
 
 function  ERR_BN_bn2lebinpad(a: PBIGNUM; to_: PByte; tolen: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_bn2lebinpad_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_bn2lebinpad_procname);
 end;
 
 
 function  ERR_BN_mpi2bn(const s: PByte; len: TIdC_INT; ret: PBIGNUM): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mpi2bn_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mpi2bn_procname);
 end;
 
 
 function  ERR_BN_bn2mpi(a: PBIGNUM; to_: PByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_bn2mpi_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_bn2mpi_procname);
 end;
 
 
 function  ERR_BN_sub(r: PBIGNUM; const a: PBIGNUM; const b: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_sub_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_sub_procname);
 end;
 
 
 function  ERR_BN_usub(r: PBIGNUM; const a: PBIGNUM; const b: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_usub_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_usub_procname);
 end;
 
 
 function  ERR_BN_uadd(r: PBIGNUM; const a: PBIGNUM; const b: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_uadd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_uadd_procname);
 end;
 
 
 function  ERR_BN_add(r: PBIGNUM; const a: PBIGNUM; const b: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_add_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_add_procname);
 end;
 
 
 function  ERR_BN_mul(r: PBIGNUM; const a: PBIGNUM; const b: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mul_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mul_procname);
 end;
 
 
 function  ERR_BN_sqr(r: PBIGNUM; const a: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_sqr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_sqr_procname);
 end;
 
 
@@ -1706,7 +1706,7 @@ end;
    *)
 procedure  ERR_BN_set_negative(b: PBIGNUM; n: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_set_negative_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_set_negative_procname);
 end;
 
 
@@ -1716,400 +1716,400 @@ end;
    *)
 function  ERR_BN_is_negative(b: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_is_negative_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_is_negative_procname);
 end;
 
 
 
 function  ERR_BN_div(dv: PBIGNUM; rem: PBIGNUM; const m: PBIGNUM; const d: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_div_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_div_procname);
 end;
 
 
 //  # define BN_mod(rem,m,d,ctx) BN_div(NULL,(rem),(m),(d),(ctx))
 function  ERR_BN_nnmod(r: PBIGNUM; const m: PBIGNUM; const d: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_nnmod_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_nnmod_procname);
 end;
 
 
 function  ERR_BN_mod_add(r: PBIGNUM; const a: PBIGNUM; const b: PBIGNUM; const m: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_add_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_add_procname);
 end;
 
 
 function  ERR_BN_mod_add_quick(r: PBIGNUM; const a: PBIGNUM; const b: PBIGNUM; const m: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_add_quick_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_add_quick_procname);
 end;
 
 
 function  ERR_BN_mod_sub(r: PBIGNUM; const a: PBIGNUM; const b: PBIGNUM; const m: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_sub_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_sub_procname);
 end;
 
 
 function  ERR_BN_mod_sub_quick(r: PBIGNUM; const a: PBIGNUM; const b: PBIGNUM; const m: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_sub_quick_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_sub_quick_procname);
 end;
 
 
 function  ERR_BN_mod_mul(r: PBIGNUM; const a: PBIGNUM; const b: PBIGNUM; const m: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_mul_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_mul_procname);
 end;
 
 
 function  ERR_BN_mod_sqr(r: PBIGNUM; const a: PBIGNUM; const m: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_sqr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_sqr_procname);
 end;
 
 
 function  ERR_BN_mod_lshift1(r: PBIGNUM; const a: PBIGNUM; const m: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_lshift1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_lshift1_procname);
 end;
 
 
 function  ERR_BN_mod_lshift1_quick(r: PBIGNUM; const a: PBIGNUM; const m: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_lshift1_quick_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_lshift1_quick_procname);
 end;
 
 
 function  ERR_BN_mod_lshift(r: PBIGNUM; const a: PBIGNUM; n: TIdC_INT; const m: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_lshift_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_lshift_procname);
 end;
 
 
 function  ERR_BN_mod_lshift_quick(r: PBIGNUM; const a: PBIGNUM; n: TIdC_INT; const m: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_lshift_quick_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_lshift_quick_procname);
 end;
 
 
 
 function  ERR_BN_mod_word(const a: PBIGNUM; w: BN_ULONG): BN_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_word_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_word_procname);
 end;
 
 
 function  ERR_BN_div_word(a: PBIGNUM; w: BN_ULONG): BN_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_div_word_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_div_word_procname);
 end;
 
 
 function  ERR_BN_mul_word(a: PBIGNUM; w: BN_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mul_word_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mul_word_procname);
 end;
 
 
 function  ERR_BN_add_word(a: PBIGNUM; w: BN_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_add_word_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_add_word_procname);
 end;
 
 
 function  ERR_BN_sub_word(a: PBIGNUM; w: BN_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_sub_word_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_sub_word_procname);
 end;
 
 
 function  ERR_BN_set_word(a: PBIGNUM; w: BN_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_set_word_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_set_word_procname);
 end;
 
 
 function  ERR_BN_get_word(const a: PBIGNUM): BN_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_get_word_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_get_word_procname);
 end;
 
 
 
 function  ERR_BN_cmp(const a: PBIGNUM; const b: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_cmp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_cmp_procname);
 end;
 
 
 procedure  ERR_BN_free(a: PBIGNUM); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_free_procname);
 end;
 
 
 function  ERR_BN_is_bit_set(const a: PBIGNUM; n: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_is_bit_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_is_bit_set_procname);
 end;
 
 
 function  ERR_BN_lshift(r: PBIGNUM; const a: PBIGNUM; n: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_lshift_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_lshift_procname);
 end;
 
 
 function  ERR_BN_lshift1(r: PBIGNUM; const a: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_lshift1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_lshift1_procname);
 end;
 
 
 function  ERR_BN_exp(r: PBIGNUM; a: PBIGNUM; p: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_exp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_exp_procname);
 end;
 
 
 
 function  ERR_BN_mod_exp(r: PBIGNUM; a: PBIGNUM; p: PBIGNUM; const m: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_exp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_exp_procname);
 end;
 
 
 function  ERR_BN_mod_exp_mont(r: PBIGNUM; a: PBIGNUM; p: PBIGNUM; m: PBIGNUM; ctx: PBN_CTX; m_ctx: PBN_MONT_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_exp_mont_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_exp_mont_procname);
 end;
 
 
 function  ERR_BN_mod_exp_mont_consttime(rr: PBIGNUM; a: PBIGNUM; p: PBIGNUM; m: PBIGNUM; ctx: PBN_CTX; in_mont: PBN_MONT_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_exp_mont_consttime_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_exp_mont_consttime_procname);
 end;
 
 
 function  ERR_BN_mod_exp_mont_word(r: PBIGNUM; a: BN_ULONG; p: PBIGNUM; m: PBIGNUM; ctx: PBN_CTX; m_ctx: PBN_MONT_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_exp_mont_word_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_exp_mont_word_procname);
 end;
 
 
 function  ERR_BN_mod_exp2_mont(r: PBIGNUM; const a1: PBIGNUM; const p1: PBIGNUM; const a2: PBIGNUM; const p2: PBIGNUM; const m: PBIGNUM; ctx: PBN_CTX; m_ctx: PBN_MONT_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_exp2_mont_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_exp2_mont_procname);
 end;
 
 
 function  ERR_BN_mod_exp_simple(r: PBIGNUM; a: PBIGNUM; p: PBIGNUM; m: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_exp_simple_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_exp_simple_procname);
 end;
 
 
 
 function  ERR_BN_mask_bits(a: PBIGNUM; n: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mask_bits_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mask_bits_procname);
 end;
 
 
 function  ERR_BN_print(bio: PBIO; a: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_print_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_print_procname);
 end;
 
 
 function  ERR_BN_reciprocal(r: PBIGNUM; m: PBIGNUM; len: TIdC_INT; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_reciprocal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_reciprocal_procname);
 end;
 
 
 function  ERR_BN_rshift(r: PBIGNUM; a: PBIGNUM; n: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_rshift_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_rshift_procname);
 end;
 
 
 function  ERR_BN_rshift1(r: PBIGNUM; a: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_rshift1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_rshift1_procname);
 end;
 
 
 procedure  ERR_BN_clear(a: PBIGNUM); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_clear_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_clear_procname);
 end;
 
 
 function  ERR_BN_dup(const a: PBIGNUM): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_dup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_dup_procname);
 end;
 
 
 function  ERR_BN_ucmp(a: PBIGNUM; b: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_ucmp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_ucmp_procname);
 end;
 
 
 function  ERR_BN_set_bit(a: PBIGNUM; n: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_set_bit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_set_bit_procname);
 end;
 
 
 function  ERR_BN_clear_bit(a: PBIGNUM; n: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_clear_bit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_clear_bit_procname);
 end;
 
 
 function  ERR_BN_bn2hex(a: PBIGNUM): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_bn2hex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_bn2hex_procname);
 end;
 
 
 function  ERR_BN_bn2dec(a: PBIGNUM): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_bn2dec_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_bn2dec_procname);
 end;
 
 
 function  ERR_BN_hex2bn(a: PPBIGNUM; str: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_hex2bn_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_hex2bn_procname);
 end;
 
 
 function  ERR_BN_dec2bn(a: PPBIGNUM; str: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_dec2bn_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_dec2bn_procname);
 end;
 
 
 function  ERR_BN_asc2bn(a: PPBIGNUM; str: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_asc2bn_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_asc2bn_procname);
 end;
 
 
 function  ERR_BN_gcd(r: PBIGNUM; a: PBIGNUM; b: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_gcd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_gcd_procname);
 end;
 
 
 function  ERR_BN_kronecker(a: PBIGNUM; b: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_kronecker_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_kronecker_procname);
 end;
 
 
 
 function  ERR_BN_mod_inverse(ret: PBIGNUM; a: PBIGNUM; const n: PBIGNUM; ctx: PBN_CTX): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_inverse_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_inverse_procname);
 end;
 
 
 function  ERR_BN_mod_sqrt(ret: PBIGNUM; a: PBIGNUM; const n: PBIGNUM; ctx: PBN_CTX): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_sqrt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_sqrt_procname);
 end;
 
 
 
 procedure  ERR_BN_consttime_swap(swap: BN_ULONG; a: PBIGNUM; b: PBIGNUM; nwords: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_consttime_swap_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_consttime_swap_procname);
 end;
 
 
 
 function  ERR_BN_generate_prime_ex(ret: PBIGNUM; bits: TIdC_INT; safe: TIdC_INT; const add: PBIGNUM; const rem: PBIGNUM; cb: PBN_GENCB): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_generate_prime_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_generate_prime_ex_procname);
 end;
 
 
 function  ERR_BN_is_prime_ex(const p: PBIGNUM; nchecks: TIdC_INT; ctx: PBN_CTX; cb: PBN_GENCB): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_is_prime_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_is_prime_ex_procname);
 end;
 
 
 function  ERR_BN_is_prime_fasttest_ex(const p: PBIGNUM; nchecks: TIdC_INT; ctx: PBN_CTX; do_trial_division: TIdC_INT; cb: PBN_GENCB): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_is_prime_fasttest_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_is_prime_fasttest_ex_procname);
 end;
 
 
 function  ERR_BN_X931_generate_Xpq(Xp: PBIGNUM; Xq: PBIGNUM; nbits: TIdC_INT; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_X931_generate_Xpq_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_X931_generate_Xpq_procname);
 end;
 
 
 function  ERR_BN_X931_derive_prime_ex(p: PBIGNUM; p1: PBIGNUM; p2: PBIGNUM; const Xp: PBIGNUM; const Xp1: PBIGNUM; const Xp2: PBIGNUM; const e: PBIGNUM; ctx: PBN_CTX; cb: PBN_GENCB): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_X931_derive_prime_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_X931_derive_prime_ex_procname);
 end;
 
 
 function  ERR_BN_X931_generate_prime_ex(p: PBIGNUM; p1: PBIGNUM; p2: PBIGNUM; Xp1: PBIGNUM; Xp2: PBIGNUM; Xp: PBIGNUM; const e: PBIGNUM; ctx: PBN_CTX; cb: PBN_GENCB): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_X931_generate_prime_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_X931_generate_prime_ex_procname);
 end;
 
 
 function  ERR_BN_MONT_CTX_new: PBN_MONT_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_MONT_CTX_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_MONT_CTX_new_procname);
 end;
 
 
 function  ERR_BN_mod_mul_montgomery(r: PBIGNUM; const a: PBIGNUM; const b: PBIGNUM; mont: PBN_MONT_CTX; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_mul_montgomery_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_mul_montgomery_procname);
 end;
 
 
 function  ERR_BN_to_montgomery(r: PBIGNUM; a: PBIGNUM; mont: PBN_MONT_CTX; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_to_montgomery_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_to_montgomery_procname);
 end;
 
 
 function  ERR_BN_from_montgomery(r: PBIGNUM; a: PBIGNUM; mont: PBN_MONT_CTX; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_from_montgomery_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_from_montgomery_procname);
 end;
 
 
 procedure  ERR_BN_MONT_CTX_free(mont: PBN_MONT_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_MONT_CTX_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_MONT_CTX_free_procname);
 end;
 
 
 function  ERR_BN_MONT_CTX_set(mont: PBN_MONT_CTX; mod_: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_MONT_CTX_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_MONT_CTX_set_procname);
 end;
 
 
 function  ERR_BN_MONT_CTX_copy(to_: PBN_MONT_CTX; from: PBN_MONT_CTX): PBN_MONT_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_MONT_CTX_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_MONT_CTX_copy_procname);
 end;
 
 
@@ -2117,81 +2117,81 @@ end;
 
 function  ERR_BN_BLINDING_new(const A: PBIGNUM; const Ai: PBIGNUM; mod_: PBIGNUM): PBN_BLINDING; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_BLINDING_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_BLINDING_new_procname);
 end;
 
 
 procedure  ERR_BN_BLINDING_free(b: PBN_BLINDING); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_BLINDING_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_BLINDING_free_procname);
 end;
 
 
 function  ERR_BN_BLINDING_update(b: PBN_BLINDING; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_BLINDING_update_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_BLINDING_update_procname);
 end;
 
 
 function  ERR_BN_BLINDING_convert(n: PBIGNUM; b: PBN_BLINDING; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_BLINDING_convert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_BLINDING_convert_procname);
 end;
 
 
 function  ERR_BN_BLINDING_invert(n: PBIGNUM; b: PBN_BLINDING; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_BLINDING_invert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_BLINDING_invert_procname);
 end;
 
 
 function  ERR_BN_BLINDING_convert_ex(n: PBIGNUM; r: PBIGNUM; b: PBN_BLINDING; v4: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_BLINDING_convert_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_BLINDING_convert_ex_procname);
 end;
 
 
 function  ERR_BN_BLINDING_invert_ex(n: PBIGNUM; r: PBIGNUM; b: PBN_BLINDING; v2: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_BLINDING_invert_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_BLINDING_invert_ex_procname);
 end;
 
 
 
 function  ERR_BN_BLINDING_is_current_thread(b: PBN_BLINDING): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_BLINDING_is_current_thread_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_BLINDING_is_current_thread_procname);
 end;
 
 
 procedure  ERR_BN_BLINDING_set_current_thread(b: PBN_BLINDING); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_BLINDING_set_current_thread_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_BLINDING_set_current_thread_procname);
 end;
 
 
 function  ERR_BN_BLINDING_lock(b: PBN_BLINDING): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_BLINDING_lock_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_BLINDING_lock_procname);
 end;
 
 
 function  ERR_BN_BLINDING_unlock(b: PBN_BLINDING): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_BLINDING_unlock_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_BLINDING_unlock_procname);
 end;
 
 
 
 function  ERR_BN_BLINDING_get_flags(v1: PBN_BLINDING): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_BLINDING_get_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_BLINDING_get_flags_procname);
 end;
 
 
 procedure  ERR_BN_BLINDING_set_flags(v1: PBN_BLINDING; v2: TIdC_ULONG); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_BLINDING_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_BLINDING_set_flags_procname);
 end;
 
 
@@ -2208,31 +2208,31 @@ end;
 
 procedure  ERR_BN_RECP_CTX_free(recp: PBN_RECP_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_RECP_CTX_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_RECP_CTX_free_procname);
 end;
 
 
 function  ERR_BN_RECP_CTX_set(recp: PBN_RECP_CTX; rdiv: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_RECP_CTX_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_RECP_CTX_set_procname);
 end;
 
 
 function  ERR_BN_mod_mul_reciprocal(r: PBIGNUM; x: PBIGNUM; y: PBIGNUM; recp: PBN_RECP_CTX; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_mul_reciprocal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_mul_reciprocal_procname);
 end;
 
 
 function  ERR_BN_mod_exp_recp(r: PBIGNUM; a: PBIGNUM; p: PBIGNUM; m: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_mod_exp_recp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_mod_exp_recp_procname);
 end;
 
 
 function  ERR_BN_div_recp(dv: PBIGNUM; rem: PBIGNUM; m: PBIGNUM; recp: PBN_RECP_CTX; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_div_recp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_div_recp_procname);
 end;
 
 
@@ -2249,7 +2249,7 @@ end;
    *)
 function  ERR_BN_GF2m_add(r: PBIGNUM; a: PBIGNUM; b: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_GF2m_add_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_GF2m_add_procname);
 end;
 
 
@@ -2259,56 +2259,56 @@ end;
    *)
 function  ERR_BN_GF2m_mod(r: PBIGNUM; a: PBIGNUM; p: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_GF2m_mod_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_GF2m_mod_procname);
 end;
 
 
   (* r = (a * b) mod p *)
 function  ERR_BN_GF2m_mod_mul(r: PBIGNUM; a: PBIGNUM; b: PBIGNUM; p: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_GF2m_mod_mul_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_GF2m_mod_mul_procname);
 end;
 
 
   (* r = (a * a) mod p *)
 function  ERR_BN_GF2m_mod_sqr(r: PBIGNUM; a: PBIGNUM; p: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_GF2m_mod_sqr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_GF2m_mod_sqr_procname);
 end;
 
 
   (* r = (1 / b) mod p *)
 function  ERR_BN_GF2m_mod_inv(r: PBIGNUM; b: PBIGNUM; p: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_GF2m_mod_inv_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_GF2m_mod_inv_procname);
 end;
 
 
   (* r = (a / b) mod p *)
 function  ERR_BN_GF2m_mod_div(r: PBIGNUM; a: PBIGNUM; b: PBIGNUM; p: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_GF2m_mod_div_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_GF2m_mod_div_procname);
 end;
 
 
   (* r = (a ^ b) mod p *)
 function  ERR_BN_GF2m_mod_exp(r: PBIGNUM; a: PBIGNUM; b: PBIGNUM; p: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_GF2m_mod_exp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_GF2m_mod_exp_procname);
 end;
 
 
   (* r = sqrt(a) mod p *)
 function  ERR_BN_GF2m_mod_sqrt(r: PBIGNUM; a: PBIGNUM; p: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_GF2m_mod_sqrt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_GF2m_mod_sqrt_procname);
 end;
 
 
   (* r^2 + r = a mod p *)
 function  ERR_BN_GF2m_mod_solve_quad(r: PBIGNUM; a: PBIGNUM; p: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_GF2m_mod_solve_quad_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_GF2m_mod_solve_quad_procname);
 end;
 
 
@@ -2343,62 +2343,62 @@ end;
    *)
 function  ERR_BN_nist_mod_192(r: PBIGNUM; a: PBIGNUM; p: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_nist_mod_192_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_nist_mod_192_procname);
 end;
 
 
 function  ERR_BN_nist_mod_224(r: PBIGNUM; a: PBIGNUM; p: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_nist_mod_224_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_nist_mod_224_procname);
 end;
 
 
 function  ERR_BN_nist_mod_256(r: PBIGNUM; a: PBIGNUM; p: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_nist_mod_256_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_nist_mod_256_procname);
 end;
 
 
 function  ERR_BN_nist_mod_384(r: PBIGNUM; a: PBIGNUM; p: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_nist_mod_384_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_nist_mod_384_procname);
 end;
 
 
 function  ERR_BN_nist_mod_521(r: PBIGNUM; a: PBIGNUM; p: PBIGNUM; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_nist_mod_521_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_nist_mod_521_procname);
 end;
 
 
 
 function  ERR_BN_get0_nist_prime_192: PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_get0_nist_prime_192_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_get0_nist_prime_192_procname);
 end;
 
 
 function  ERR_BN_get0_nist_prime_224: PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_get0_nist_prime_224_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_get0_nist_prime_224_procname);
 end;
 
 
 function  ERR_BN_get0_nist_prime_256: PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_get0_nist_prime_256_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_get0_nist_prime_256_procname);
 end;
 
 
 function  ERR_BN_get0_nist_prime_384: PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_get0_nist_prime_384_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_get0_nist_prime_384_procname);
 end;
 
 
 function  ERR_BN_get0_nist_prime_521: PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_get0_nist_prime_521_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_get0_nist_prime_521_procname);
 end;
 
 
@@ -2408,7 +2408,7 @@ end;
 
 function  ERR_BN_generate_dsa_nonce(out_: PBIGNUM; range: PBIGNUM; priv: PBIGNUM; const message_: PByte; message_len: TIdC_SIZET; ctx: PBN_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_generate_dsa_nonce_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_generate_dsa_nonce_procname);
 end;
 
 
@@ -2416,13 +2416,13 @@ end;
   (* Primes from RFC 2409 *)
 function  ERR_BN_get_rfc2409_prime_768(bn: PBIGNUM ): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_get_rfc2409_prime_768_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_get_rfc2409_prime_768_procname);
 end;
 
 
 function  ERR_BN_get_rfc2409_prime_1024(bn: PBIGNUM): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_get_rfc2409_prime_1024_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_get_rfc2409_prime_1024_procname);
 end;
 
 
@@ -2430,44 +2430,44 @@ end;
   (* Primes from RFC 3526 *)
 function  ERR_BN_get_rfc3526_prime_1536(bn: PBIGNUM): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_get_rfc3526_prime_1536_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_get_rfc3526_prime_1536_procname);
 end;
 
 
 function  ERR_BN_get_rfc3526_prime_2048(bn: PBIGNUM): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_get_rfc3526_prime_2048_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_get_rfc3526_prime_2048_procname);
 end;
 
 
 function  ERR_BN_get_rfc3526_prime_3072(bn: PBIGNUM): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_get_rfc3526_prime_3072_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_get_rfc3526_prime_3072_procname);
 end;
 
 
 function  ERR_BN_get_rfc3526_prime_4096(bn: PBIGNUM): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_get_rfc3526_prime_4096_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_get_rfc3526_prime_4096_procname);
 end;
 
 
 function  ERR_BN_get_rfc3526_prime_6144(bn: PBIGNUM): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_get_rfc3526_prime_6144_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_get_rfc3526_prime_6144_procname);
 end;
 
 
 function  ERR_BN_get_rfc3526_prime_8192(bn: PBIGNUM): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_get_rfc3526_prime_8192_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_get_rfc3526_prime_8192_procname);
 end;
 
 
 
 function  ERR_BN_bntest_rand(rnd: PBIGNUM; bits: TIdC_INT; top: TIdC_INT; bottom: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_bntest_rand_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_bntest_rand_procname);
 end;
 
 

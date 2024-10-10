@@ -114,14 +114,14 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR__CONF_new_section(conf: PCONF; const section: PAnsiChar): PCONF_VALUE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(_CONF_new_section_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(_CONF_new_section_procname);
 end;
 
 
   //* Up until TaurusTLS 0.9.5a, this was get_section */
 function  ERR__CONF_get_section(const conf: PCONF; const section: PAnsiChar): PCONF_VALUE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(_CONF_get_section_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(_CONF_get_section_procname);
 end;
 
 
@@ -131,32 +131,32 @@ end;
 
 function  ERR__CONF_add_string(conf: PCONF; section: PCONF_VALUE; value: PCONF_VALUE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(_CONF_add_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(_CONF_add_string_procname);
 end;
 
 
 function  ERR__CONF_get_string(const conf: PCONF; const section: PAnsiChar; const name: PAnsiChar): PAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(_CONF_get_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(_CONF_get_string_procname);
 end;
 
 
 function  ERR__CONF_get_number(const conf: PCONF; const section: PAnsiChar; const name: PAnsiChar): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(_CONF_get_number_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(_CONF_get_number_procname);
 end;
 
 
 
 function  ERR__CONF_new_data(conf: PCONF): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(_CONF_new_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(_CONF_new_data_procname);
 end;
 
 
 procedure  ERR__CONF_free_data(conf: PCONF); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(_CONF_free_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(_CONF_free_data_procname);
 end;
 
 

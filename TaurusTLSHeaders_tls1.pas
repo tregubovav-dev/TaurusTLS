@@ -1428,33 +1428,33 @@ end;
 {$WARN  NO_RETVAL OFF}
 function  ERR_SSL_set_tlsext_host_name(s: PSSL; const name: PIdAnsiChar): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_tlsext_host_name_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_tlsext_host_name_procname);
 end;
 
  
 
 function  ERR_SSL_CTX_set_tlsext_max_fragment_length(ctx: PSSL_CTx; mode: TIdC_UINT8): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_tlsext_max_fragment_length_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_tlsext_max_fragment_length_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_set_tlsext_max_fragment_length(ssl: PSSL; mode: TIdC_UINT8): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_tlsext_max_fragment_length_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_tlsext_max_fragment_length_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_SSL_get_servername(const s: PSSL; const type_: TIdC_INT): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_servername_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_servername_procname);
 end;
 
 
 function  ERR_SSL_get_servername_type(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_servername_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_servername_type_procname);
 end;
 
 
@@ -1467,7 +1467,7 @@ end;
    *)
 function  ERR_SSL_export_keying_material(s: PSSL; out_: PByte; olen: TIdC_SIZET; const label_: PIdAnsiChar; llen: TIdC_SIZET; const context: PByte; contextlen: TIdC_SIZET; use_context: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_export_keying_material_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_export_keying_material_procname);
 end;
 
 
@@ -1481,32 +1481,32 @@ end;
    *)
 function  ERR_SSL_export_keying_material_early(s: PSSL; out_: PByte; olen: TIdC_SIZET; const label_: PIdAnsiChar; llen: TIdC_SIZET; const context: PByte; contextlen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_export_keying_material_early_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_export_keying_material_early_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_SSL_get_peer_signature_type_nid(const s: PSSl; pnid: PIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_peer_signature_type_nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_peer_signature_type_nid_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get_signature_type_nid(const s: PSSl; pnid: PIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_signature_type_nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_signature_type_nid_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get_sigalgs(s: PSSl; idx: TIdC_INT; psign: PIdC_INT; phash: PIdC_INT; psignandhash: PIdC_INT; rsig: PByte; rhash: PByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_sigalgs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_sigalgs_procname);
 end;
 
 
 function  ERR_SSL_get_shared_sigalgs(s: PSSl; idx: TIdC_INT; psign: PIdC_INT; phash: PIdC_INT; psignandhash: PIdC_INT; rsig: PByte; rhash: PByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_shared_sigalgs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_shared_sigalgs_procname);
 end;
 
 

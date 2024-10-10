@@ -162,103 +162,103 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_RAND_set_rand_method(const meth: PRAND_METHOD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RAND_set_rand_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_set_rand_method_procname);
 end;
 
 
 function  ERR_RAND_get_rand_method: PRAND_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RAND_get_rand_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_get_rand_method_procname);
 end;
 
 
 function  ERR_RAND_set_rand_engine(engine: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RAND_set_rand_engine_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_set_rand_engine_procname);
 end;
 
 
 
 function  ERR_RAND_TaurusTLS: PRAND_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RAND_TaurusTLS_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_TaurusTLS_procname);
 end;
 
 
 
 function  ERR_RAND_bytes(buf: PByte; num: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RAND_bytes_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_bytes_procname);
 end;
 
 
 function  ERR_RAND_priv_bytes(buf: PByte; num: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RAND_priv_bytes_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_priv_bytes_procname);
 end;
 
 
 
 procedure  ERR_RAND_seed(const buf: Pointer; num: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RAND_seed_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_seed_procname);
 end;
 
 
 procedure  ERR_RAND_keep_random_devices_open(keep: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RAND_keep_random_devices_open_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_keep_random_devices_open_procname);
 end;
 
 
 
 procedure  ERR_RAND_add(const buf: Pointer; num: TIdC_INT; randomness: TIdC_DOUBLE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RAND_add_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_add_procname);
 end;
 
 
 function  ERR_RAND_load_file(const file_: PIdAnsiChar; max_bytes: TIdC_LONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RAND_load_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_load_file_procname);
 end;
 
 
 function  ERR_RAND_write_file(const file_: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RAND_write_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_write_file_procname);
 end;
 
 
 function  ERR_RAND_status: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RAND_status_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_status_procname);
 end;
 
 
 
 function  ERR_RAND_query_egd_bytes(const path: PIdAnsiChar; buf: PByte; bytes: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RAND_query_egd_bytes_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_query_egd_bytes_procname);
 end;
 
 
 function  ERR_RAND_egd(const path: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RAND_egd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_egd_procname);
 end;
 
 
 function  ERR_RAND_egd_bytes(const path: PIdAnsiChar; bytes: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RAND_egd_bytes_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_egd_bytes_procname);
 end;
 
 
 
 function  ERR_RAND_poll: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RAND_poll_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_poll_procname);
 end;
 
 

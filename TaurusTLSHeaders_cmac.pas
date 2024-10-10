@@ -107,55 +107,55 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_CMAC_CTX_new: PCMAC_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMAC_CTX_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMAC_CTX_new_procname);
 end;
 
 
 procedure  ERR_CMAC_CTX_cleanup(ctx: PCMAC_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMAC_CTX_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMAC_CTX_cleanup_procname);
 end;
 
 
 procedure  ERR_CMAC_CTX_free(ctx: PCMAC_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMAC_CTX_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMAC_CTX_free_procname);
 end;
 
 
 function  ERR_CMAC_CTX_get0_cipher_ctx(ctx: PCMAC_CTX): PEVP_CIPHER_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMAC_CTX_get0_cipher_ctx_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMAC_CTX_get0_cipher_ctx_procname);
 end;
 
 
 function  ERR_CMAC_CTX_copy(out_: PCMAC_CTX; const in_: PCMAC_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMAC_CTX_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMAC_CTX_copy_procname);
 end;
 
 
 function  ERR_CMAC_Init(ctx: PCMAC_CTX; const key: Pointer; keylen: TIdC_SIZET; const cipher: PEVP_Cipher; impl: PENGINe): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMAC_Init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMAC_Init_procname);
 end;
 
 
 function  ERR_CMAC_Update(ctx: PCMAC_CTX; const data: Pointer; dlen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMAC_Update_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMAC_Update_procname);
 end;
 
 
 function  ERR_CMAC_Final(ctx: PCMAC_CTX; out_: PByte; poutlen: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMAC_Final_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMAC_Final_procname);
 end;
 
 
 function  ERR_CMAC_resume(ctx: PCMAC_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMAC_resume_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMAC_resume_procname);
 end;
 
 

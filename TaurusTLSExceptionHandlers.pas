@@ -33,7 +33,7 @@ type
     property RetCode : TIdC_INT read FRetCode;
   end;
 
-  TIdSSLTaurusTLSAPICryptoError = class of ETaurusTLSAPICryptoError;
+  TTaurusTLSAPICryptoError = class of ETaurusTLSAPICryptoError;
   ETaurusTLSAPICryptoError = class(ETaurusTLSError)
   protected
     FErrorCode : TIdC_ULONG;
@@ -42,16 +42,16 @@ type
     class procedure RaiseException(const AMsg : String = '');
     property ErrorCode : TIdC_ULONG read FErrorCode;
   end;
-  EIdOSSLUnderlyingCryptoError = class(ETaurusTLSAPICryptoError);
+  ETaurusTLSUnderlyingCryptoError = class(ETaurusTLSAPICryptoError);
 
   EIdDigestError = class(ETaurusTLSAPICryptoError);
   EIdDigestFinalEx = class(EIdDigestError);
   EIdDigestInitEx = class(EIdDigestError);
   EIdDigestUpdate = class(EIdDigestError);
 
-  { EIdAPIFunctionNotPresent }
+  { ETaurusTLSAPIFunctionNotPresent }
 
-  EIdAPIFunctionNotPresent = class(ETaurusTLSError)
+  ETaurusTLSAPIFunctionNotPresent = class(ETaurusTLSError)
   public
     class procedure RaiseException(const functionName: string);
   end;
@@ -70,30 +70,34 @@ var
   LErrMsg: array [0..sMaxErrMsg] of TIdAnsiChar;
   {$IFDEF USE_MARSHALLED_PTRS}
   LErrMsgPtr: TPtrWrapper;
+  {$ELSE}
+  LErrMsgPtr : PAnsiChar;
   {$ENDIF}
 begin
   {$IFDEF USE_MARSHALLED_PTRS}
   LErrMsgPtr := TPtrWrapper.Create(@LErrMsg[0]);
+  {$ELSE}
+  LErrMsgPtr := @LErrMsg[0];
   {$ENDIF}
   ERR_error_string_n(AErr,
     {$IFDEF USE_MARSHALLED_PTRS}
     LErrMsgPtr.ToPointer
     {$ELSE}
-    LErrMsg
+    LErrMsgPtr
     {$ENDIF}, sMaxErrMsg);
   LErrMsg[sMaxErrMsg] := TIdAnsiChar(0);
   {$IFDEF USE_MARSHALLED_PTRS}
   Result := TMarshal.ReadStringAsAnsi(LErrMsgPtr);
   {$ELSE}
-  Result := String(LErrMsg);
+  Result := String(LErrMsgPtr);
   {$ENDIF}
 end;
 
-{ EIdAPIFunctionNotPresent }
+{ ETaurusTLSAPIFunctionNotPresent }
 
-class procedure EIdAPIFunctionNotPresent.RaiseException(const functionName: string);
+class procedure ETaurusTLSAPIFunctionNotPresent.RaiseException(const functionName: string);
 begin
-  raise EIdAPIFunctionNotPresent.CreateFmt(ROSSLAPIFunctionNotPresent,[functionName]);
+  raise ETaurusTLSAPIFunctionNotPresent.CreateFmt(ROSSLAPIFunctionNotPresent,[functionName]);
 end;
 
 { ETaurusTLSAPICryptoError }
@@ -155,7 +159,7 @@ begin
     begin
       LErrQueue := ERR_get_error;
       if LErrQueue <> 0 then begin
-        EIdOSSLUnderlyingCryptoError.RaiseExceptionCode(LErrQueue, AMsg);
+        ETaurusTLSUnderlyingCryptoError.RaiseExceptionCode(LErrQueue, AMsg);
       end;
       if ARetCode = 0 then begin
         LException := Create(LErrStr + RSSSLEOFViolation);
@@ -172,7 +176,7 @@ begin
       end;
     end;
     SSL_ERROR_SSL : begin
-      EIdOSSLUnderlyingCryptoError.RaiseException(AMsg);
+      ETaurusTLSUnderlyingCryptoError.RaiseException(AMsg);
     end
   end;
   // everything else...

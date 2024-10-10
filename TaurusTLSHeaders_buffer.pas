@@ -99,37 +99,37 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_BUF_MEM_new: PBUF_MEM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BUF_MEM_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BUF_MEM_new_procname);
 end;
 
 
 function  ERR_BUF_MEM_new_ex(flags: TIdC_ULONG): PBUF_MEM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BUF_MEM_new_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BUF_MEM_new_ex_procname);
 end;
 
 
 procedure  ERR_BUF_MEM_free(a: PBUF_MEM); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BUF_MEM_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BUF_MEM_free_procname);
 end;
 
 
 function  ERR_BUF_MEM_grow(str: PBUF_MEM; len: TIdC_SIZET): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BUF_MEM_grow_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BUF_MEM_grow_procname);
 end;
 
 
 function  ERR_BUF_MEM_grow_clean(str: PBUF_MEM; len: TIdC_SIZET): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BUF_MEM_grow_clean_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BUF_MEM_grow_clean_procname);
 end;
 
 
 procedure  ERR_BUF_reverse(out_: PByte; const in_: PByte; siz: TIdC_SIZET); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BUF_reverse_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BUF_reverse_procname);
 end;
 
 

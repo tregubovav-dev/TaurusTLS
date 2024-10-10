@@ -939,7 +939,7 @@ type
   SSL_custom_ext_parse_cb_ex = function (s: PSSL; ext_type: TIdC_UINT; context: TIdC_UINT; const in_: PByte; inlen: TIdC_SIZET; x: Px509; chainidx: TIdC_SIZET; al: PIdC_INT; parse_arg: Pointer): TIdC_INT; cdecl;
 
   (* Typedef for verification callback *)
-  SSL_verify_cb = function (preverify_ok: TIdC_INT; x509_ctx: PX509_STORE_CTX): TIdC_INT; cdecl;
+  SSL_verify_cb = function (const preverify_ok: TIdC_INT; x509_ctx: PX509_STORE_CTX): TIdC_INT; cdecl;
 
   tls_session_ticket_ext_cb_fn = function (s: PSSL; const data: PByte; len: TIdC_INT; arg: Pointer): TIdC_INT; cdecl;
 
@@ -5733,12 +5733,12 @@ begin
   Result := _PSSL_CTX(ctx)^.default_passwd_callback_userdata;
 end;
 
-procedure  FC_SSL_CTX_set_default_passwd_cb(ctx: PSSL_CTX; cb: pem_password_cb); cdecl;
+procedure  FC_SSL_CTX_set_default_passwd_cb(out ctx: PSSL_CTX; cb: pem_password_cb); cdecl;
 begin
   _PSSL_CTX(ctx)^.default_passwd_callback := cb;
 end;
 
-procedure  FC_SSL_CTX_set_default_passwd_cb_userdata(ctx: PSSL_CTX; u: Pointer); cdecl;
+procedure  FC_SSL_CTX_set_default_passwd_cb_userdata(out ctx: PSSL_CTX; u: Pointer); cdecl;
 begin
   _PSSL_CTX(ctx)^.default_passwd_callback_userdata := u;
 end;
@@ -5858,405 +5858,405 @@ end;
 {$WARN  NO_RETVAL OFF}
 function  ERR_SSL_CTX_set_mode(ctx: PSSL_CTX; op: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_mode_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_mode_procname);
 end;
 
  
 function  ERR_SSL_CTX_clear_mode(ctx: PSSL_CTX; op: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_clear_mode_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_clear_mode_procname);
 end;
 
  
 
 function  ERR_SSL_CTX_sess_set_cache_size(ctx: PSSL_CTX; t: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_sess_set_cache_size_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_sess_set_cache_size_procname);
 end;
 
  
 function  ERR_SSL_CTX_sess_get_cache_size(ctx: PSSL_CTX): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_sess_get_cache_size_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_sess_get_cache_size_procname);
 end;
 
  
 function  ERR_SSL_CTX_set_session_cache_mode(ctx: PSSL_CTX; m: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_session_cache_mode_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_session_cache_mode_procname);
 end;
 
  
 function  ERR_SSL_CTX_get_session_cache_mode(ctx: PSSL_CTX): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_session_cache_mode_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_session_cache_mode_procname);
 end;
 
  
 
 function  ERR_SSL_clear_num_renegotiations(ssl: PSSL): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_clear_num_renegotiations_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_clear_num_renegotiations_procname);
 end;
 
  
 function  ERR_SSL_total_renegotiations(ssl: PSSL): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_total_renegotiations_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_total_renegotiations_procname);
 end;
 
  
 function  ERR_SSL_CTX_set_tmp_dh(ctx: PSSL_CTX; dh: PDH): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_tmp_dh_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_tmp_dh_procname);
 end;
 
  
 function  ERR_SSL_CTX_set_tmp_ecdh(ctx: PSSL_CTX; ecdh: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_tmp_ecdh_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_tmp_ecdh_procname);
 end;
 
  
 function  ERR_SSL_CTX_set_dh_auto(ctx: PSSL_CTX; onoff: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_dh_auto_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_dh_auto_procname);
 end;
 
  
 function  ERR_SSL_set_dh_auto(s: PSSL; onoff: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_dh_auto_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_dh_auto_procname);
 end;
 
  
 function  ERR_SSL_set_tmp_dh(ssl: PSSL; dh: PDH): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_tmp_dh_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_tmp_dh_procname);
 end;
 
  
 function  ERR_SSL_set_tmp_ecdh(ssl: PSSL; ecdh: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_tmp_ecdh_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_tmp_ecdh_procname);
 end;
 
  
 function  ERR_SSL_CTX_add_extra_chain_cert(ctx: PSSL_CTX; x509: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_add_extra_chain_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_add_extra_chain_cert_procname);
 end;
 
  
 function  ERR_SSL_CTX_get_extra_chain_certs(ctx: PSSL_CTX; px509: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_extra_chain_certs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_extra_chain_certs_procname);
 end;
 
  
 function  ERR_SSL_CTX_get_extra_chain_certs_only(ctx: PSSL_CTX; px509: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_extra_chain_certs_only_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_extra_chain_certs_only_procname);
 end;
 
  
 function  ERR_SSL_CTX_clear_extra_chain_certs(ctx: PSSL_CTX): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_clear_extra_chain_certs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_clear_extra_chain_certs_procname);
 end;
 
  
 function  ERR_SSL_CTX_set0_chain(ctx: PSSL_CTX; sk: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set0_chain_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set0_chain_procname);
 end;
 
  
 function  ERR_SSL_CTX_set1_chain(ctx: PSSL_CTX; sk: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_chain_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_chain_procname);
 end;
 
  
 function  ERR_SSL_CTX_add0_chain_cert(ctx: PSSL_CTX; x509: PX509): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_add0_chain_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_add0_chain_cert_procname);
 end;
 
  
 function  ERR_SSL_CTX_add1_chain_cert(ctx: PSSL_CTX; x509: PX509): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_add1_chain_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_add1_chain_cert_procname);
 end;
 
  
 function  ERR_SSL_CTX_get0_chain_certs(ctx: PSSL_CTX; px509: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get0_chain_certs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get0_chain_certs_procname);
 end;
 
  
 function  ERR_SSL_CTX_clear_chain_certs(ctx: PSSL_CTX): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_clear_chain_certs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_clear_chain_certs_procname);
 end;
 
  
 function  ERR_SSL_CTX_build_cert_chain(ctx: PSSL_CTX; flags: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_build_cert_chain_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_build_cert_chain_procname);
 end;
 
  
 function  ERR_SSL_CTX_select_current_cert(ctx: PSSL_CTX; x509: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_select_current_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_select_current_cert_procname);
 end;
 
  
 function  ERR_SSL_CTX_set_current_cert(ctx: PSSL_CTX; op: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_current_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_current_cert_procname);
 end;
 
  
 function  ERR_SSL_CTX_set0_verify_cert_store(ctx: PSSL_CTX; st: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set0_verify_cert_store_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set0_verify_cert_store_procname);
 end;
 
  
 function  ERR_SSL_CTX_set1_verify_cert_store(ctx: PSSL_CTX; st: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_verify_cert_store_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_verify_cert_store_procname);
 end;
 
  
 function  ERR_SSL_CTX_set0_chain_cert_store(ctx: PSSL_CTX; st: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set0_chain_cert_store_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set0_chain_cert_store_procname);
 end;
 
  
 function  ERR_SSL_CTX_set1_chain_cert_store(ctx: PSSL_CTX; st: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_chain_cert_store_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_chain_cert_store_procname);
 end;
 
  
 function  ERR_SSL_set0_chain(s: PSSL; sk: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set0_chain_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set0_chain_procname);
 end;
 
  
 function  ERR_SSL_set1_chain(s: PSSL; sk: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set1_chain_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set1_chain_procname);
 end;
 
  
 function  ERR_SSL_add0_chain_cert(s: PSSL; x509: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_add0_chain_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_add0_chain_cert_procname);
 end;
 
  
 function  ERR_SSL_add1_chain_cert(s: PSSL; x509: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_add1_chain_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_add1_chain_cert_procname);
 end;
 
  
 function  ERR_SSL_get0_chain_certs(s: PSSL; px509: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get0_chain_certs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get0_chain_certs_procname);
 end;
 
  
 function  ERR_SSL_clear_chain_certs(s: PSSL): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_clear_chain_certs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_clear_chain_certs_procname);
 end;
 
  
 function  ERR_SSL_build_cert_chain(s: PSSL; flags: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_build_cert_chain_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_build_cert_chain_procname);
 end;
 
  
 function  ERR_SSL_select_current_cert(s: PSSL; x509: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_select_current_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_select_current_cert_procname);
 end;
 
  
 function  ERR_SSL_set_current_cert(s: PSSL; op: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_current_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_current_cert_procname);
 end;
 
  
 function  ERR_SSL_set0_verify_cert_store(s: PSSL; st: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set0_verify_cert_store_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set0_verify_cert_store_procname);
 end;
 
  
 function  ERR_SSL_set1_verify_cert_store(s: PSSL; st: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set1_verify_cert_store_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set1_verify_cert_store_procname);
 end;
 
  
 function  ERR_SSL_set0_chain_cert_store(s: PSSL; st: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set0_chain_cert_store_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set0_chain_cert_store_procname);
 end;
 
  
 function  ERR_SSL_set1_chain_cert_store(s: PSSL; st: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set1_chain_cert_store_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set1_chain_cert_store_procname);
 end;
 
  
 function  ERR_SSL_get1_groups(s: PSSL; glist: PIdC_INT): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get1_groups_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get1_groups_procname);
 end;
 
  
 function  ERR_SSL_CTX_set1_groups(ctx: PSSL_CTX; glist: PByte; glistlen: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_groups_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_groups_procname);
 end;
 
  
 function  ERR_SSL_CTX_set1_groups_list(ctx: PSSL_CTX; s: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_groups_list_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_groups_list_procname);
 end;
 
  
 function  ERR_SSL_set1_groups(s: PSSL; glist: PByte; glistlen: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set1_groups_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set1_groups_procname);
 end;
 
  
 function  ERR_SSL_set1_groups_list(s: PSSL; str: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set1_groups_list_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set1_groups_list_procname);
 end;
 
  
 function  ERR_SSL_get_shared_group(s: PSSL; n: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_shared_group_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_shared_group_procname);
 end;
 
  
 function  ERR_SSL_CTX_set1_sigalgs(ctx: PSSL_CTX; slist: PIdC_INT; slistlen: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_sigalgs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_sigalgs_procname);
 end;
 
  
 function  ERR_SSL_CTX_set1_sigalgs_list(ctx: PSSL_CTX; s: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_sigalgs_list_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_sigalgs_list_procname);
 end;
 
  
 function  ERR_SSL_set1_sigalgs(s: PSSL; slist: PIdC_INT; slistlen: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set1_sigalgs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set1_sigalgs_procname);
 end;
 
  
 function  ERR_SSL_set1_sigalgs_list(s: PSSL; str: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set1_sigalgs_list_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set1_sigalgs_list_procname);
 end;
 
  
 function  ERR_SSL_CTX_set1_client_sigalgs(ctx: PSSL_CTX; slist: PIdC_INT; slistlen: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_client_sigalgs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_client_sigalgs_procname);
 end;
 
  
 function  ERR_SSL_CTX_set1_client_sigalgs_list(ctx: PSSL_CTX; s: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_client_sigalgs_list_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_client_sigalgs_list_procname);
 end;
 
  
 function  ERR_SSL_set1_client_sigalgs(s: PSSL; slist: PIdC_INT; slistlen: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set1_client_sigalgs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set1_client_sigalgs_procname);
 end;
 
  
 function  ERR_SSL_set1_client_sigalgs_list(s: PSSL; str: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set1_client_sigalgs_list_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set1_client_sigalgs_list_procname);
 end;
 
  
 function  ERR_SSL_get0_certificate_types(s: PSSL; clist: PByte): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get0_certificate_types_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get0_certificate_types_procname);
 end;
 
  
 function  ERR_SSL_CTX_set1_client_certificate_types(ctx: PSSL_CTX; clist: PByte; clistlen: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_client_certificate_types_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_client_certificate_types_procname);
 end;
 
  
 function  ERR_SSL_set1_client_certificate_types(s: PSSL; clist: PByte; clistlen: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set1_client_certificate_types_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set1_client_certificate_types_procname);
 end;
 
  
 function  ERR_SSL_get_signature_nid(s: PSSL; pn: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_signature_nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_signature_nid_procname);
 end;
 
  
 function  ERR_SSL_get_peer_signature_nid(s: PSSL; pn: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_peer_signature_nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_peer_signature_nid_procname);
 end;
 
  
 function  ERR_SSL_get_peer_tmp_key(s: PSSL; pk: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_peer_tmp_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_peer_tmp_key_procname);
 end;
 
  
 function  ERR_SSL_get_tmp_key(s: PSSL; pk: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_tmp_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_tmp_key_procname);
 end;
 
  
 function  ERR_SSL_get0_raw_cipherlist(s: PSSL; plst: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get0_raw_cipherlist_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get0_raw_cipherlist_procname);
 end;
 
  
 function  ERR_SSL_get0_ec_point_formats(s: PSSL; plst: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get0_ec_point_formats_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get0_ec_point_formats_procname);
 end;
 
  
@@ -6267,37 +6267,37 @@ end;
 
 function  ERR_SSL_CTX_get_options(const ctx: PSSL_CTX): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_options_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_options_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get_options(const s: PSSL): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_options_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_options_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_clear_options(ctx: PSSL_CTX; op: TIdC_ULONG): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_clear_options_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_clear_options_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_clear_options(s: PSSL; op: TIdC_ULONG): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_clear_options_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_clear_options_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_set_options(ctx: PSSL_CTX; op: TIdC_ULONG): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_options_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_options_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_set_options(s: PSSL; op: TIdC_ULONG): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_options_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_options_procname);
 end;
 
  {introduced 1.1.0}
@@ -6392,25 +6392,25 @@ end;
 
 procedure  ERR_SSL_CTX_sess_set_new_cb(ctx: PSSL_CTX; new_session_cb: SSL_CTX_sess_new_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_sess_set_new_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_sess_set_new_cb_procname);
 end;
 
 
 function  ERR_SSL_CTX_sess_get_new_cb(ctx: PSSL_CTX): SSL_CTX_sess_new_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_sess_get_new_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_sess_get_new_cb_procname);
 end;
 
 
 procedure  ERR_SSL_CTX_sess_set_remove_cb(ctx: PSSL_CTX; remove_session_cb: SSL_CTX_sess_remove_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_sess_set_remove_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_sess_set_remove_cb_procname);
 end;
 
 
 function  ERR_SSL_CTX_sess_get_remove_cb(ctx: PSSL_CTX): SSL_CTX_sess_remove_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_sess_get_remove_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_sess_get_remove_cb_procname);
 end;
 
 
@@ -6426,56 +6426,56 @@ end;
   //                                                       TIdC_INT len, TIdC_INT *copy);
 procedure  ERR_SSL_CTX_set_info_callback(ctx: PSSL_CTX; cb: SSL_CTX_info_callback); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_info_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_info_callback_procname);
 end;
 
 
 function  ERR_SSL_CTX_get_info_callback(ctx: PSSL_CTX): SSL_CTX_info_callback; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_info_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_info_callback_procname);
 end;
 
 
 procedure  ERR_SSL_CTX_set_client_cert_cb(ctx: PSSL_CTX; client_cert_cb: SSL_CTX_client_cert_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_client_cert_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_client_cert_cb_procname);
 end;
 
 
 function  ERR_SSL_CTX_get_client_cert_cb(ctx: PSSL_CTX): SSL_CTX_client_cert_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_client_cert_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_client_cert_cb_procname);
 end;
 
 
 function  ERR_SSL_CTX_set_client_cert_engine(ctx: PSSL_CTX; e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_client_cert_engine_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_client_cert_engine_procname);
 end;
 
 
 
 procedure  ERR_SSL_CTX_set_cookie_generate_cb(ctx: PSSL_CTX; app_gen_cookie_cb: SSL_CTX_cookie_verify_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_cookie_generate_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_cookie_generate_cb_procname);
 end;
 
 
 procedure  ERR_SSL_CTX_set_cookie_verify_cb(ctx: PSSL_CTX; app_verify_cookie_cb: SSL_CTX_set_cookie_verify_cb_app_verify_cookie_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_cookie_verify_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_cookie_verify_cb_procname);
 end;
 
 
 procedure  ERR_SSL_CTX_set_stateless_cookie_generate_cb(ctx: PSSL_CTX; gen_stateless_cookie_cb: SSL_CTX_set_stateless_cookie_generate_cb_gen_stateless_cookie_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_stateless_cookie_generate_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_stateless_cookie_generate_cb_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_CTX_set_stateless_cookie_verify_cb(ctx: PSSL_CTX; verify_stateless_cookie_cb: SSL_CTX_set_stateless_cookie_verify_cb_verify_stateless_cookie_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_stateless_cookie_verify_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_stateless_cookie_verify_cb_procname);
 end;
 
  {introduced 1.1.0}
@@ -6487,37 +6487,37 @@ end;
 
 procedure  ERR_SSL_CTX_set_alpn_select_cb(ctx: PSSL_CTX; cb: SSL_CTX_alpn_select_cb_func; arg: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_alpn_select_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_alpn_select_cb_procname);
 end;
 
 
 procedure  ERR_SSL_get0_alpn_selected(const ssl: PSSL; const data: PPByte; len: PIdC_UINT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get0_alpn_selected_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get0_alpn_selected_procname);
 end;
 
 
 procedure  ERR_SSL_CTX_set_psk_client_callback(ctx: PSSL_CTX; cb: SSL_psk_client_cb_func); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_psk_client_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_psk_client_callback_procname);
 end;
 
 
 procedure  ERR_SSL_set_psk_client_callback(ssl: PSSL; cb: SSL_psk_client_cb_func); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_psk_client_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_psk_client_callback_procname);
 end;
 
 
 procedure  ERR_SSL_CTX_set_psk_server_callback(ctx: PSSL_CTX; cb: SSL_psk_server_cb_func); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_psk_server_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_psk_server_callback_procname);
 end;
 
 
 procedure  ERR_SSL_set_psk_server_callback(ssl: PSSL; cb: SSL_psk_server_cb_func); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_psk_server_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_psk_server_callback_procname);
 end;
 
 
@@ -6529,25 +6529,25 @@ end;
 
 procedure  ERR_SSL_set_psk_find_session_callback(s: PSSL; cb: SSL_psk_find_session_cb_func); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_psk_find_session_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_psk_find_session_callback_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_CTX_set_psk_find_session_callback(ctx: PSSL_CTX; cb: SSL_psk_find_session_cb_func); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_psk_find_session_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_psk_find_session_callback_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_set_psk_use_session_callback(s: PSSL; cb: SSL_psk_use_session_cb_func); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_psk_use_session_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_psk_use_session_callback_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_CTX_set_psk_use_session_callback(ctx: PSSL_CTX; cb: SSL_psk_use_session_cb_func); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_psk_use_session_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_psk_use_session_callback_procname);
 end;
 
  {introduced 1.1.0}
@@ -6600,7 +6600,7 @@ end;
    *)
 procedure  ERR_SSL_CTX_set_keylog_callback(ctx: PSSL_CTX; cb: SSL_CTX_keylog_cb_func); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_keylog_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_keylog_callback_procname);
 end;
 
  {introduced 1.1.0}
@@ -6610,55 +6610,55 @@ end;
    *)
 function  ERR_SSL_CTX_get_keylog_callback(const ctx: PSSL_CTX): SSL_CTX_keylog_cb_func; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_keylog_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_keylog_callback_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_set_max_early_data(ctx: PSSL_CTX; max_early_data: TIdC_UINT32): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_max_early_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_max_early_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_get_max_early_data(const ctx: PSSL_CTX): TIdC_UINT32; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_max_early_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_max_early_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_set_max_early_data(s: PSSL; max_early_data: TIdC_UINT32): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_max_early_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_max_early_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get_max_early_data(const s: PSSL): TIdC_UINT32; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_max_early_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_max_early_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_set_recv_max_early_data(ctx: PSSL_CTX; recv_max_early_data: TIdC_UINT32): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_recv_max_early_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_recv_max_early_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_get_recv_max_early_data(const ctx: PSSL_CTX): TIdC_UINT32; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_recv_max_early_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_recv_max_early_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_set_recv_max_early_data(s: PSSL; recv_max_early_data: TIdC_UINT32): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_recv_max_early_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_recv_max_early_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get_recv_max_early_data(const s: PSSL): TIdC_UINT32; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_recv_max_early_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_recv_max_early_data_procname);
 end;
 
  {introduced 1.1.0}
@@ -6681,13 +6681,13 @@ end;
   //                                                            (PIdAnsiChar *)(arg)))
 function  ERR_SSL_get_app_data(const ssl: PSSL): Pointer ; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_app_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_app_data_procname);
 end;
 
   
 function  ERR_SSL_set_app_data(ssl: PSSL; data: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_app_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_app_data_procname);
 end;
 
  
@@ -6697,19 +6697,19 @@ end;
   //# define SSL_in_accept_init(a)           (SSL_in_init(a) && SSL_is_server(a))
 function  ERR_SSL_in_init(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_in_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_in_init_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_in_before(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_in_before_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_in_before_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_is_init_finished(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_is_init_finished_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_is_init_finished_procname);
 end;
 
  {introduced 1.1.0}
@@ -6722,13 +6722,13 @@ end;
    *)
 function  ERR_SSL_get_finished(const s: PSSL; buf: Pointer; count: TIdC_SIZET): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_finished_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_finished_procname);
 end;
 
 
 function  ERR_SSL_get_peer_finished(const s: PSSL; buf: Pointer; count: TIdC_SIZET): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_peer_finished_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_peer_finished_procname);
 end;
 
 
@@ -6739,7 +6739,7 @@ end;
   //# endif
 function  ERR_SSLeay_add_ssl_algorithms: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSLeay_add_ssl_algorithms_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSLeay_add_ssl_algorithms_procname);
 end;
 
  
@@ -6792,342 +6792,342 @@ end;
   //
 function  ERR_BIO_f_ssl: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_f_ssl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_f_ssl_procname);
 end;
 
 
 function  ERR_BIO_new_ssl(ctx: PSSL_CTX; client: TIdC_INT): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_new_ssl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_new_ssl_procname);
 end;
 
 
 function  ERR_BIO_new_ssl_connect(ctx: PSSL_CTX): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_new_ssl_connect_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_new_ssl_connect_procname);
 end;
 
 
 function  ERR_BIO_new_buffer_ssl_connect(ctx: PSSL_CTX): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_new_buffer_ssl_connect_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_new_buffer_ssl_connect_procname);
 end;
 
 
 function  ERR_BIO_ssl_copy_session_id(to_: PBIO; from: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ssl_copy_session_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ssl_copy_session_id_procname);
 end;
 
 
 
 function  ERR_SSL_CTX_set_cipher_list(v1: PSSL_CTX; const str: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_cipher_list_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_cipher_list_procname);
 end;
 
 
 function  ERR_SSL_CTX_new(const meth: PSSL_METHOD): PSSL_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_new_procname);
 end;
 
 
 function  ERR_SSL_CTX_set_timeout(ctx: PSSL_CTX; t: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_timeout_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_timeout_procname);
 end;
 
 
 function  ERR_SSL_CTX_get_timeout(const ctx: PSSL_CTX): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_timeout_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_timeout_procname);
 end;
 
 
 function  ERR_SSL_CTX_get_cert_store(const v1: PSSL_CTX): PX509_STORE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_cert_store_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_cert_store_procname);
 end;
 
 
 function  ERR_SSL_want(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_want_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_want_procname);
 end;
 
 
 function  ERR_SSL_clear(s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_clear_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_clear_procname);
 end;
 
 
 
 procedure  ERR_BIO_ssl_shutdown(ssl_bio: PBIO); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ssl_shutdown_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ssl_shutdown_procname);
 end;
 
 
 function  ERR_SSL_CTX_up_ref(ctx: PSSL_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_up_ref_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_up_ref_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_CTX_free(v1: PSSL_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_free_procname);
 end;
 
 
 procedure  ERR_SSL_CTX_set_cert_store(v1: PSSL_CTX; v2: PX509_STORE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_cert_store_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_cert_store_procname);
 end;
 
 
 procedure  ERR_SSL_CTX_set1_cert_store(v1: PSSL_CTX; v2: PX509_STORE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_cert_store_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_cert_store_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_SSL_CTX_flush_sessions(ctx: PSSL_CTX; tm: TIdC_LONG); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_flush_sessions_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_flush_sessions_procname);
 end;
 
 
 
 function  ERR_SSL_get_current_cipher(const s: PSSL): PSSL_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_current_cipher_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_current_cipher_procname);
 end;
 
 
 function  ERR_SSL_get_pending_cipher(const s: PSSL): PSSL_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_pending_cipher_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_pending_cipher_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CIPHER_get_bits(const c: PSSL_CIPHER; var alg_bits: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_bits_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_bits_procname);
 end;
 
 
 function  ERR_SSL_CIPHER_get_version(const c: PSSL_CIPHER): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_version_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_version_procname);
 end;
 
 
 function  ERR_SSL_CIPHER_get_name(const c: PSSL_CIPHER): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_name_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_name_procname);
 end;
 
 
 function  ERR_SSL_CIPHER_standard_name(const c: PSSL_CIPHER): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CIPHER_standard_name_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CIPHER_standard_name_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_cipher_name(const rfc_name: PIdAnsiChar): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_cipher_name_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_cipher_name_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CIPHER_get_id(const c: PSSL_CIPHER): TIdC_UINT32; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_id_procname);
 end;
 
 
 function  ERR_SSL_CIPHER_get_protocol_id(const c: PSSL_CIPHER): TIdC_UINT16; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_protocol_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_protocol_id_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CIPHER_get_kx_nid(const c: PSSL_CIPHER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_kx_nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_kx_nid_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CIPHER_get_auth_nid(const c: PSSL_CIPHER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_auth_nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_auth_nid_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CIPHER_get_handshake_digest(const c: PSSL_CIPHER): PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_handshake_digest_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_handshake_digest_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CIPHER_is_aead(const c: PSSL_CIPHER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CIPHER_is_aead_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CIPHER_is_aead_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_SSL_get_fd(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_fd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_fd_procname);
 end;
 
 
 function  ERR_SSL_get_rfd(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_rfd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_rfd_procname);
 end;
 
 
 function  ERR_SSL_get_wfd(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_wfd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_wfd_procname);
 end;
 
 
 function  ERR_SSL_get_cipher_list(const s: PSSL; n: TIdC_INT): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_cipher_list_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_cipher_list_procname);
 end;
 
 
 function  ERR_SSL_get_shared_ciphers(const s: PSSL; buf: PIdAnsiChar; size: TIdC_INT): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_shared_ciphers_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_shared_ciphers_procname);
 end;
 
 
 function  ERR_SSL_get_read_ahead(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_read_ahead_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_read_ahead_procname);
 end;
 
 
 function  ERR_SSL_pending(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_pending_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_pending_procname);
 end;
 
 
 function  ERR_SSL_has_pending(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_has_pending_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_has_pending_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_set_fd(s: PSSL; fd: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_fd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_fd_procname);
 end;
 
 
 function  ERR_SSL_set_rfd(s: PSSL; fd: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_rfd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_rfd_procname);
 end;
 
 
 function  ERR_SSL_set_wfd(s: PSSL; fd: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_wfd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_wfd_procname);
 end;
 
 
 procedure  ERR_SSL_set0_rbio(s: PSSL; rbio: PBIO); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set0_rbio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set0_rbio_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_set0_wbio(s: PSSL; wbio: PBIO); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set0_wbio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set0_wbio_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_set_bio(s: PSSL; rbio: PBIO; wbio: PBIO); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_bio_procname);
 end;
 
 
 function  ERR_SSL_get_rbio(const s: PSSL): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_rbio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_rbio_procname);
 end;
 
 
 function  ERR_SSL_get_wbio(const s: PSSL): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_wbio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_wbio_procname);
 end;
 
 
 function  ERR_SSL_set_cipher_list(s: PSSL; const str: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_cipher_list_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_cipher_list_procname);
 end;
 
 
 function  ERR_SSL_CTX_set_ciphersuites(ctx: PSSL_CTX; const str: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_ciphersuites_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_ciphersuites_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_set_ciphersuites(s: PSSL; const str: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_ciphersuites_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_ciphersuites_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get_verify_mode(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_verify_mode_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_verify_mode_procname);
 end;
 
 
 function  ERR_SSL_get_verify_depth(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_verify_depth_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_verify_depth_procname);
 end;
 
 
 function  ERR_SSL_get_verify_callback(const s: PSSL): SSL_verify_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_verify_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_verify_callback_procname);
 end;
 
 
 procedure  ERR_SSL_set_read_ahead(s: PSSL; yes: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_read_ahead_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_read_ahead_procname);
 end;
 
 
 procedure  ERR_SSL_set_verify(s: PSSL; mode: TIdC_INT; callback: SSL_verify_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_verify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_verify_procname);
 end;
 
 
 procedure  ERR_SSL_set_verify_depth(s: PSSL; depth: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_verify_depth_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_verify_depth_procname);
 end;
 
 
@@ -7135,37 +7135,37 @@ end;
 
 function  ERR_SSL_use_RSAPrivateKey(ssl: PSSL; rsa: PRSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_use_RSAPrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_use_RSAPrivateKey_procname);
 end;
 
 
 function  ERR_SSL_use_RSAPrivateKey_ASN1(ssl: PSSL; const d: PByte; len: TIdC_LONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_use_RSAPrivateKey_ASN1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_use_RSAPrivateKey_ASN1_procname);
 end;
 
 
 function  ERR_SSL_use_PrivateKey(ssl: PSSL; pkey: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_use_PrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_use_PrivateKey_procname);
 end;
 
 
 function  ERR_SSL_use_PrivateKey_ASN1(pk: TIdC_INT; ssl: PSSL; const d: PByte; len: TIdC_LONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_use_PrivateKey_ASN1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_use_PrivateKey_ASN1_procname);
 end;
 
 
 function  ERR_SSL_use_certificate(ssl: PSSL; x: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_use_certificate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_use_certificate_procname);
 end;
 
 
 function  ERR_SSL_use_certificate_ASN1(ssl: PSSL; const d: PByte; len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_use_certificate_ASN1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_use_certificate_ASN1_procname);
 end;
 
 
@@ -7175,90 +7175,90 @@ end;
   (* Set serverinfo data for the current active cert. *)
 function  ERR_SSL_CTX_use_serverinfo(ctx: PSSL_CTX; const serverinfo: PByte; serverinfo_length: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_use_serverinfo_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_use_serverinfo_procname);
 end;
 
 
 function  ERR_SSL_CTX_use_serverinfo_ex(ctx: PSSL_CTX; version: TIdC_UINT; const serverinfo: PByte; serverinfo_length: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_use_serverinfo_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_use_serverinfo_ex_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_use_serverinfo_file(ctx: PSSL_CTX; const file_: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_use_serverinfo_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_use_serverinfo_file_procname);
 end;
 
 
 
 function  ERR_SSL_use_RSAPrivateKey_file(ssl: PSSL; const file_: PIdAnsiChar; type_: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_use_RSAPrivateKey_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_use_RSAPrivateKey_file_procname);
 end;
 
 
 
 function  ERR_SSL_use_PrivateKey_file(ssl: PSSL; const file_: PIdAnsiChar; type_: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_use_PrivateKey_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_use_PrivateKey_file_procname);
 end;
 
 
 function  ERR_SSL_use_certificate_file(ssl: PSSL; const file_: PIdAnsiChar; type_: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_use_certificate_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_use_certificate_file_procname);
 end;
 
 
 
 function  ERR_SSL_CTX_use_RSAPrivateKey_file(ctx: PSSL_CTX; const file_: PIdAnsiChar; type_: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_use_RSAPrivateKey_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_use_RSAPrivateKey_file_procname);
 end;
 
 
 
 function  ERR_SSL_CTX_use_PrivateKey_file(ctx: PSSL_CTX; const file_: PIdAnsiChar; type_: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_use_PrivateKey_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_use_PrivateKey_file_procname);
 end;
 
 
 function  ERR_SSL_CTX_use_certificate_file(ctx: PSSL_CTX; const file_: PIdAnsiChar; type_: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_use_certificate_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_use_certificate_file_procname);
 end;
 
 
   (* PEM type *)
 function  ERR_SSL_CTX_use_certificate_chain_file(ctx: PSSL_CTX; const file_: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_use_certificate_chain_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_use_certificate_chain_file_procname);
 end;
 
 
 function  ERR_SSL_use_certificate_chain_file(ssl: PSSL; const file_: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_use_certificate_chain_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_use_certificate_chain_file_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_load_client_CA_file(const file_: PIdAnsiChar): PSTACK_OF_X509_NAME; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_load_client_CA_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_load_client_CA_file_procname);
 end;
 
 
 function  ERR_SSL_add_file_cert_subjects_to_stack(stackCAs: PSTACK_OF_X509_NAME; const file_: PIdAnsiChar):TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_add_file_cert_subjects_to_stack_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_add_file_cert_subjects_to_stack_procname);
 end;
 
 
 function  ERR_SSL_add_dir_cert_subjects_to_stack(stackCAs: PSTACK_OF_X509_NAME; const dir_: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_add_dir_cert_subjects_to_stack_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_add_dir_cert_subjects_to_stack_procname);
 end;
 
 
@@ -7270,270 +7270,270 @@ end;
   //# endif
 procedure  ERR_SSL_load_error_strings; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_load_error_strings_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_load_error_strings_procname);
 end;
 
  
 
 function  ERR_SSL_state_string(const s: PSSL): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_state_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_state_string_procname);
 end;
 
 
 function  ERR_SSL_rstate_string(const s: PSSL): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_rstate_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_rstate_string_procname);
 end;
 
 
 function  ERR_SSL_state_string_long(const s: PSSL): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_state_string_long_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_state_string_long_procname);
 end;
 
 
 function  ERR_SSL_rstate_string_long(const s: PSSL): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_rstate_string_long_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_rstate_string_long_procname);
 end;
 
 
 function  ERR_SSL_SESSION_get_time(const s: PSSL_SESSION): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_time_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_time_procname);
 end;
 
 
 function  ERR_SSL_SESSION_set_time(s: PSSL_SESSION; t: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_set_time_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_set_time_procname);
 end;
 
 
 function  ERR_SSL_SESSION_get_timeout(const s: PSSL_SESSION): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_timeout_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_timeout_procname);
 end;
 
 
 function  ERR_SSL_SESSION_set_timeout(s: PSSL_SESSION; t: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_set_timeout_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_set_timeout_procname);
 end;
 
 
 function  ERR_SSL_SESSION_get_protocol_version(const s: PSSL_SESSION): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_protocol_version_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_protocol_version_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_set_protocol_version(s: PSSL_SESSION; version: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_set_protocol_version_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_set_protocol_version_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_SSL_SESSION_get0_hostname(const s: PSSL_SESSION): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get0_hostname_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get0_hostname_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_set1_hostname(s: PSSL_SESSION; const hostname: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_set1_hostname_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_set1_hostname_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_SESSION_get0_alpn_selected(const s: PSSL_SESSION; const alpn: PPByte; len: PIdC_SIZET); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get0_alpn_selected_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get0_alpn_selected_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_set1_alpn_selected(s: PSSL_SESSION; const alpn: PByte; len: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_set1_alpn_selected_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_set1_alpn_selected_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_get0_cipher(const s: PSSL_SESSION): PSSL_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get0_cipher_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get0_cipher_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_set_cipher(s: PSSL_SESSION; const cipher: PSSL_CIPHER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_set_cipher_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_set_cipher_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_has_ticket(const s: PSSL_SESSION): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_has_ticket_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_has_ticket_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_get_ticket_lifetime_hint(const s: PSSL_SESSION): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_ticket_lifetime_hint_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_ticket_lifetime_hint_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_SESSION_get0_ticket(const s: PSSL_SESSION; const tick: PPByte; len: PIdC_SIZET); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get0_ticket_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get0_ticket_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_get_max_early_data(const s: PSSL_SESSION): TIdC_UINT32; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_max_early_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_max_early_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_set_max_early_data(s: PSSL_SESSION; max_early_data: TIdC_UINT32): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_set_max_early_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_set_max_early_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_copy_session_id(to_: PSSL; const from: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_copy_session_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_copy_session_id_procname);
 end;
 
 
 function  ERR_SSL_SESSION_get0_peer(s: PSSL_SESSION): PX509; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get0_peer_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get0_peer_procname);
 end;
 
 
 function  ERR_SSL_SESSION_set1_id_context(s: PSSL_SESSION; const sid_ctx: PByte; sid_ctx_len: TIdC_UINT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_set1_id_context_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_set1_id_context_procname);
 end;
 
 
 function  ERR_SSL_SESSION_set1_id(s: PSSL_SESSION; const sid: PByte; sid_len: TIdC_UINT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_set1_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_set1_id_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_is_resumable(const s: PSSL_SESSION): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_is_resumable_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_is_resumable_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_SSL_SESSION_new: PSSL_SESSION; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_new_procname);
 end;
 
 
 function  ERR_SSL_SESSION_dup(src: PSSL_SESSION): PSSL_SESSION; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_dup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_dup_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_get_id(const s: PSSL_SESSION; len: PIdC_UINT): PByte; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_id_procname);
 end;
 
 
 function  ERR_SSL_SESSION_get0_id_context(const s: PSSL_SESSION; len: PIdC_UINT): PByte; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get0_id_context_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get0_id_context_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_get_compress_id(const s: PSSL_SESSION): TIdC_UINT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_compress_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_compress_id_procname);
 end;
 
 
 function  ERR_SSL_SESSION_print(fp: PBIO; const ses: PSSL_SESSION): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_print_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_print_procname);
 end;
 
 
 function  ERR_SSL_SESSION_print_keylog(bp: PBIO; const x: PSSL_SESSION): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_print_keylog_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_print_keylog_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_up_ref(ses: PSSL_SESSION): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_up_ref_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_up_ref_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_SESSION_free(ses: PSSL_SESSION); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_free_procname);
 end;
 
 
   //__owur TIdC_INT i2d_SSL_SESSION(SSL_SESSION *in_, Byte **pp);
 function  ERR_SSL_set_session(to_: PSSL; session: PSSL_SESSION): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_session_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_session_procname);
 end;
 
 
 function  ERR_SSL_CTX_add_session(ctx: PSSL_CTX; session: PSSL_SESSION): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_add_session_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_add_session_procname);
 end;
 
 
 function  ERR_SSL_CTX_remove_session(ctx: PSSL_CTX; session: PSSL_SESSION): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_remove_session_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_remove_session_procname);
 end;
 
 
 function  ERR_SSL_CTX_set_generate_session_id(ctx: PSSL_CTX; cb: GEN_SESSION_CB): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_generate_session_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_generate_session_id_procname);
 end;
 
 
 function  ERR_SSL_set_generate_session_id(s: PSSL; cb: GEN_SESSION_CB): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_generate_session_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_generate_session_id_procname);
 end;
 
 
 function  ERR_SSL_has_matching_session_id(const s: PSSL; const id: PByte; id_len: TIdC_UINT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_has_matching_session_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_has_matching_session_id_procname);
 end;
 
 
 function  ERR_d2i_SSL_SESSION(a: PPSSL_SESSION; const pp: PPByte; length: TIdC_LONG): PSSL_SESSION; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_SSL_SESSION_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_SSL_SESSION_procname);
 end;
 
 
 
 function  ERR_SSL_get_peer_certificate(const s: PSSL): PX509; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_peer_certificate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_peer_certificate_procname);
 end;
 
  
@@ -7542,79 +7542,79 @@ end;
   //
 function  ERR_SSL_CTX_get_verify_mode(const ctx: PSSL_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_verify_mode_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_verify_mode_procname);
 end;
 
 
 function  ERR_SSL_CTX_get_verify_depth(const ctx: PSSL_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_verify_depth_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_verify_depth_procname);
 end;
 
 
 function  ERR_SSL_CTX_get_verify_callback(const ctx: PSSL_CTX): SSL_verify_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_verify_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_verify_callback_procname);
 end;
 
 
 procedure  ERR_SSL_CTX_set_verify(ctx: PSSL_CTX; mode: TIdC_INT; callback: SSL_verify_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_verify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_verify_procname);
 end;
 
 
 procedure  ERR_SSL_CTX_set_verify_depth(ctx: PSSL_CTX; depth: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_verify_depth_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_verify_depth_procname);
 end;
 
 
 procedure  ERR_SSL_CTX_set_cert_verify_callback(ctx: PSSL_CTX; cb: SSL_CTX_set_cert_verify_callback_cb; arg: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_cert_verify_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_cert_verify_callback_procname);
 end;
 
 
 procedure  ERR_SSL_CTX_set_cert_cb(c: PSSL_CTX; cb: SSL_CTX_set_cert_cb_cb; arg: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_cert_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_cert_cb_procname);
 end;
 
 
 function  ERR_SSL_CTX_use_RSAPrivateKey(ctx: PSSL_CTX; rsa: PRSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_use_RSAPrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_use_RSAPrivateKey_procname);
 end;
 
 
 function  ERR_SSL_CTX_use_RSAPrivateKey_ASN1(ctx: PSSL_CTX; const d: PByte; len: TIdC_LONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_use_RSAPrivateKey_ASN1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_use_RSAPrivateKey_ASN1_procname);
 end;
 
 
 function  ERR_SSL_CTX_use_PrivateKey(ctx: PSSL_CTX; pkey: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_use_PrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_use_PrivateKey_procname);
 end;
 
 
 function  ERR_SSL_CTX_use_PrivateKey_ASN1(pk: TIdC_INT; ctx: PSSL_CTX; const d: PByte; len: TIdC_LONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_use_PrivateKey_ASN1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_use_PrivateKey_ASN1_procname);
 end;
 
 
 function  ERR_SSL_CTX_use_certificate(ctx: PSSL_CTX; x: X509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_use_certificate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_use_certificate_procname);
 end;
 
 
 function  ERR_SSL_CTX_use_certificate_ASN1(ctx: PSSL_CTX; len: TIdC_INT; const d: PByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_use_certificate_ASN1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_use_certificate_ASN1_procname);
 end;
 
 
@@ -7622,181 +7622,181 @@ end;
 
 procedure  ERR_SSL_CTX_set_default_passwd_cb(ctx: PSSL_CTX; cb: pem_password_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_default_passwd_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_default_passwd_cb_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_CTX_set_default_passwd_cb_userdata(ctx: PSSL_CTX; u: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_default_passwd_cb_userdata_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_default_passwd_cb_userdata_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_get_default_passwd_cb(ctx: PSSL_CTX): pem_password_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_default_passwd_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_default_passwd_cb_procname);
 end;
 
   {introduced 1.1.0}
 function  ERR_SSL_CTX_get_default_passwd_cb_userdata(ctx: PSSL_CTX): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_default_passwd_cb_userdata_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_default_passwd_cb_userdata_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_set_default_passwd_cb(s: PSSL; cb: pem_password_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_default_passwd_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_default_passwd_cb_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_set_default_passwd_cb_userdata(s: PSSL; u: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_default_passwd_cb_userdata_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_default_passwd_cb_userdata_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get_default_passwd_cb(s: PSSL): pem_password_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_default_passwd_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_default_passwd_cb_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get_default_passwd_cb_userdata(s: PSSL): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_default_passwd_cb_userdata_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_default_passwd_cb_userdata_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_SSL_CTX_check_private_key(const ctx: PSSL_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_check_private_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_check_private_key_procname);
 end;
 
 
 function  ERR_SSL_check_private_key(const ctx: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_check_private_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_check_private_key_procname);
 end;
 
 
 
 function  ERR_SSL_CTX_set_session_id_context(ctx: PSSL_CTX; const sid_ctx: PByte; sid_ctx_len: TIdC_UINT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_session_id_context_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_session_id_context_procname);
 end;
 
 
 
 function  ERR_SSL_new(ctx: PSSL_CTX): PSSL; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_new_procname);
 end;
 
 
 function  ERR_SSL_up_ref(s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_up_ref_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_up_ref_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_is_dtls(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_is_dtls_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_is_dtls_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_set_session_id_context(ssl: PSSL; const sid_ctx: PByte; sid_ctx_len: TIdC_UINT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_session_id_context_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_session_id_context_procname);
 end;
 
 
 
 function  ERR_SSL_CTX_set_purpose(ctx: PSSL_CTX; purpose: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_purpose_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_purpose_procname);
 end;
 
 
 function  ERR_SSL_set_purpose(ssl: PSSL; purpose: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_purpose_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_purpose_procname);
 end;
 
 
 function  ERR_SSL_CTX_set_trust(ctx: PSSL_CTX; trust: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_trust_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_trust_procname);
 end;
 
 
 function  ERR_SSL_set_trust(ssl: PSSL; trust: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_trust_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_trust_procname);
 end;
 
 
 
 function  ERR_SSL_set1_host(s: PSSL; const hostname: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set1_host_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set1_host_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_add1_host(s: PSSL; const hostname: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_add1_host_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_add1_host_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get0_peername(s: PSSL): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get0_peername_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get0_peername_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_set_hostflags(s: PSSL; flags: TIdC_UINT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_hostflags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_hostflags_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_SSL_CTX_dane_enable(ctx: PSSL_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_dane_enable_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_dane_enable_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_dane_mtype_set(ctx: PSSL_CTX; const md: PEVP_MD; mtype: TIdC_UINT8; ord: TIdC_UINT8): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_dane_mtype_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_dane_mtype_set_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_dane_enable(s: PSSL; const basedomain: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_dane_enable_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_dane_enable_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_dane_tlsa_add(s: PSSL; usage: TIdC_UINT8; selector: TIdC_UINT8; mtype: TIdC_UINT8; const data: PByte; dlen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_dane_tlsa_add_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_dane_tlsa_add_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get0_dane_authority(s: PSSL; mcert: PPX509; mspki: PPEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get0_dane_authority_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get0_dane_authority_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get0_dane_tlsa(s: PSSL; usage: PIdC_UINT8; selector: PIdC_UINT8; mtype: PIdC_UINT8; const data: PPByte; dlen: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get0_dane_tlsa_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get0_dane_tlsa_procname);
 end;
 
  {introduced 1.1.0}
@@ -7806,7 +7806,7 @@ end;
    *)
 function  ERR_SSL_get0_dane(ssl: PSSL): PSSL_DANE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get0_dane_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get0_dane_procname);
 end;
 
  {introduced 1.1.0}
@@ -7816,108 +7816,108 @@ end;
    *)
 function  ERR_SSL_CTX_dane_set_flags(ctx: PSSL_CTX; flags: TIdC_ULONG): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_dane_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_dane_set_flags_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_dane_clear_flags(ctx: PSSL_CTX; flags: TIdC_ULONG): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_dane_clear_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_dane_clear_flags_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_dane_set_flags(ssl: PSSL; flags: TIdC_ULONG): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_dane_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_dane_set_flags_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_dane_clear_flags(ssl: PSSL; flags: TIdC_ULONG): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_dane_clear_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_dane_clear_flags_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_SSL_CTX_set1_param(ctx: PSSL_CTX; vpm: PX509_VERIFY_PARAM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_param_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set1_param_procname);
 end;
 
 
 function  ERR_SSL_set1_param(ssl: PSSL; vpm: PX509_VERIFY_PARAM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set1_param_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set1_param_procname);
 end;
 
 
 
 function  ERR_SSL_CTX_get0_param(ctx: PSSL_CTX): PX509_VERIFY_PARAM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get0_param_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get0_param_procname);
 end;
 
 
 function  ERR_SSL_get0_param(ssl: PSSL): PX509_VERIFY_PARAM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get0_param_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get0_param_procname);
 end;
 
 
 
 function  ERR_SSL_CTX_set_srp_username(ctx: PSSL_CTX; name: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_srp_username_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_srp_username_procname);
 end;
 
 
 function  ERR_SSL_CTX_set_srp_password(ctx: PSSL_CTX; password: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_srp_password_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_srp_password_procname);
 end;
 
 
 function  ERR_SSL_CTX_set_srp_strength(ctx: PSSL_CTX; strength: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_srp_strength_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_srp_strength_procname);
 end;
 
 
 
 function  ERR_SSL_CTX_set_srp_client_pwd_callback(ctx: PSSL_CTX; cb: SSL_CTX_set_srp_client_pwd_callback_cb): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_srp_client_pwd_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_srp_client_pwd_callback_procname);
 end;
 
 
 function  ERR_SSL_CTX_set_srp_verify_param_callback(ctx: PSSL_CTX; cb: SSL_CTX_set_srp_verify_param_callback_cb): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_srp_verify_param_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_srp_verify_param_callback_procname);
 end;
 
 
 function  ERR_SSL_CTX_set_srp_username_callback(ctx: PSSL_CTX; cb: SSL_CTX_set_srp_username_callback_cb): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_srp_username_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_srp_username_callback_procname);
 end;
 
 
 
 function  ERR_SSL_CTX_set_srp_cb_arg(ctx: PSSL_CTX; arg: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_srp_cb_arg_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_srp_cb_arg_procname);
 end;
 
 
 function  ERR_SSL_set_srp_server_param(s: PSSL; const N: PBIGNUm; const g: PBIGNUm; sa: PBIGNUm; v: PBIGNUm; info: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_srp_server_param_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_srp_server_param_procname);
 end;
 
 
 function  ERR_SSL_set_srp_server_param_pw(s: PSSL; const user: PIdAnsiChar; const pass: PIdAnsiChar; const grp: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_srp_server_param_pw_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_srp_server_param_pw_procname);
 end;
 
 
@@ -7933,67 +7933,67 @@ end;
   // */
 procedure  ERR_SSL_CTX_set_client_hello_cb(c: PSSL_CTX; cb: SSL_client_hello_cb_fn; arg: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_client_hello_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_client_hello_cb_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_client_hello_isv2(s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_client_hello_isv2_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_client_hello_isv2_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_client_hello_get0_legacy_version(s: PSSL): TIdC_UINT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_client_hello_get0_legacy_version_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_client_hello_get0_legacy_version_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_client_hello_get0_random(s: PSSL; const out_: PPByte): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_client_hello_get0_random_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_client_hello_get0_random_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_client_hello_get0_session_id(s: PSSL; const out_: PPByte): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_client_hello_get0_session_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_client_hello_get0_session_id_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_client_hello_get0_ciphers(s: PSSL; const out_: PPByte): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_client_hello_get0_ciphers_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_client_hello_get0_ciphers_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_client_hello_get0_compression_methods(s: PSSL; const out_: PPByte): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_client_hello_get0_compression_methods_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_client_hello_get0_compression_methods_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_client_hello_get1_extensions_present(s: PSSL; out_: PPIdC_INT; outlen: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_client_hello_get1_extensions_present_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_client_hello_get1_extensions_present_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_client_hello_get0_ext(s: PSSL; type_: TIdC_UINT; const out_: PPByte; outlen: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_client_hello_get0_ext_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_client_hello_get0_ext_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_certs_clear(s: PSSL); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_certs_clear_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_certs_clear_procname);
 end;
 
 
 procedure  ERR_SSL_free(ssl: PSSL); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_free_procname);
 end;
 
 
@@ -8003,131 +8003,131 @@ end;
    *)
 function  ERR_SSL_waiting_for_async(s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_waiting_for_async_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_waiting_for_async_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get_all_async_fds(s: PSSL; fds: POSSL_ASYNC_FD; numfds: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_all_async_fds_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_all_async_fds_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get_changed_async_fds(s: PSSL; addfd: POSSL_ASYNC_FD; numaddfds: PIdC_SIZET; delfd: POSSL_ASYNC_FD; numdelfds: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_changed_async_fds_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_changed_async_fds_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_accept(ssl: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_accept_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_accept_procname);
 end;
 
 
 function  ERR_SSL_stateless(s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_stateless_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_stateless_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_connect(ssl: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_connect_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_connect_procname);
 end;
 
 
 function  ERR_SSL_read(ssl: PSSL; buf: Pointer; num: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_read_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_read_procname);
 end;
 
 
 function  ERR_SSL_read_ex(ssl: PSSL; buf: Pointer; num: TIdC_SIZET; readbytes: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_read_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_read_ex_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_SSL_read_early_data(s: PSSL; buf: Pointer; num: TIdC_SIZET; readbytes: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_read_early_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_read_early_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_peek(ssl: PSSL; buf: Pointer; num: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_peek_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_peek_procname);
 end;
 
 
 function  ERR_SSL_peek_ex(ssl: PSSL; buf: Pointer; num: TIdC_SIZET; readbytes: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_peek_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_peek_ex_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_write(ssl: PSSL; const buf: Pointer; num: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_write_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_write_procname);
 end;
 
 
 function  ERR_SSL_write_ex(s: PSSL; const buf: Pointer; num: TIdC_SIZET; written: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_write_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_write_ex_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_write_early_data(s: PSSL; const buf: Pointer; num: TIdC_SIZET; written: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_write_early_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_write_early_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_callback_ctrl(v1: PSSL; v2: TIdC_INT; v3: SSL_callback_ctrl_v3): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_callback_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_callback_ctrl_procname);
 end;
 
 
 
 function  ERR_SSL_ctrl(ssl: PSSL; cmd: TIdC_INT; larg: TIdC_LONG; parg: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_ctrl_procname);
 end;
 
 
 function  ERR_SSL_CTX_ctrl(ctx: PSSL_CTX; cmd: TIdC_INT; larg: TIdC_LONG; parg: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_ctrl_procname);
 end;
 
 
 function  ERR_SSL_CTX_callback_ctrl(v1: PSSL_CTX; v2: TIdC_INT; v3: SSL_CTX_callback_ctrl_v3): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_callback_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_callback_ctrl_procname);
 end;
 
 
 
 function  ERR_SSL_get_early_data_status(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_early_data_status_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_early_data_status_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_SSL_get_error(const s: PSSL; ret_code: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_error_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_error_procname);
 end;
 
 
 function  ERR_SSL_get_version(const s: PSSL): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_version_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_version_procname);
 end;
 
 
@@ -8135,7 +8135,7 @@ end;
   (* This sets the 'default' SSL version that SSL_new() will create *)
 function  ERR_SSL_CTX_set_ssl_version(ctx: PSSL_CTX; const meth: PSSL_METHOD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_ssl_version_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_ssl_version_procname);
 end;
 
 
@@ -8143,19 +8143,19 @@ end;
   ///* Negotiate highest available SSL/TLS version */
 function  ERR_TLS_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TLS_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TLS_method_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_TLS_server_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TLS_server_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TLS_server_method_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_TLS_client_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TLS_client_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TLS_client_method_procname);
 end;
 
  {introduced 1.1.0}
@@ -8174,99 +8174,99 @@ end;
   //__owur TIdC_INT SSL_do_handshake(s: PSSL);
 function  ERR_SSL_key_update(s: PSSL; updatetype: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_key_update_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_key_update_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get_key_update_type(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_key_update_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_key_update_type_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_renegotiate(s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_renegotiate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_renegotiate_procname);
 end;
 
 
 function  ERR_SSL_renegotiate_abbreviated(s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_renegotiate_abbreviated_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_renegotiate_abbreviated_procname);
 end;
 
 
 function  ERR_SSL_shutdown(s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_shutdown_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_shutdown_procname);
 end;
 
 
 procedure  ERR_SSL_CTX_set_post_handshake_auth(ctx: PSSL_CTX; val: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_post_handshake_auth_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_post_handshake_auth_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_set_post_handshake_auth(s: PSSL; val: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_post_handshake_auth_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_post_handshake_auth_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_SSL_renegotiate_pending(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_renegotiate_pending_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_renegotiate_pending_procname);
 end;
 
 
 function  ERR_SSL_verify_client_post_handshake(s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_verify_client_post_handshake_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_verify_client_post_handshake_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_SSL_CTX_get_ssl_method(const ctx: PSSL_CTX): PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_ssl_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_ssl_method_procname);
 end;
 
 
 function  ERR_SSL_get_ssl_method(const s: PSSL): PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_ssl_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_ssl_method_procname);
 end;
 
 
 function  ERR_SSL_set_ssl_method(s: PSSL; const method: PSSL_METHOD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_ssl_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_ssl_method_procname);
 end;
 
 
 function  ERR_SSL_alert_type_string_long(value: TIdC_INT): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_alert_type_string_long_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_alert_type_string_long_procname);
 end;
 
 
 function  ERR_SSL_alert_type_string(value: TIdC_INT): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_alert_type_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_alert_type_string_procname);
 end;
 
 
 function  ERR_SSL_alert_desc_string_long(value: TIdC_INT): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_alert_desc_string_long_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_alert_desc_string_long_procname);
 end;
 
 
 function  ERR_SSL_alert_desc_string(value: TIdC_INT): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_alert_desc_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_alert_desc_string_procname);
 end;
 
 
@@ -8286,32 +8286,32 @@ end;
 
 procedure  ERR_SSL_CTX_set_client_CA_list(ctx: PSSL_CTX; name_list: PSTACK_OF_X509_NAME); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_client_CA_list_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_client_CA_list_procname);
 end;
 
 
 function  ERR_SSL_add_client_CA(ssl: PSSL; x: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_add_client_CA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_add_client_CA_procname);
 end;
 
 
 function  ERR_SSL_CTX_add_client_CA(ctx: PSSL_CTX; x: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_add_client_CA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_add_client_CA_procname);
 end;
 
 
 
 procedure  ERR_SSL_set_connect_state(s: PSSL); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_connect_state_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_connect_state_procname);
 end;
 
 
 procedure  ERR_SSL_set_accept_state(s: PSSL); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_accept_state_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_accept_state_procname);
 end;
 
 
@@ -8323,7 +8323,7 @@ end;
   //# endif
 function  ERR_SSL_library_init: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_library_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_library_init_procname);
 end;
 
  
@@ -8332,21 +8332,21 @@ end;
   //__owur STACK_OF(X509_NAME) *SSL_dup_CA_list(const STACK_OF(X509_NAME) *sk);
 function  ERR_SSL_CIPHER_description(cipher: PSSL_CIPHER; buf: PIdAnsiChar; size_ :TIdC_INT): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CIPHER_description_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CIPHER_description_procname);
 end;
 
 
 
 function  ERR_SSL_dup(ssl: PSSL): PSSL; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_dup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_dup_procname);
 end;
 
 
 
 function  ERR_SSL_get_certificate(const ssl: PSSL): PX509; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_certificate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_certificate_procname);
 end;
 
 
@@ -8355,150 +8355,150 @@ end;
    *)
 function  ERR_SSL_get_privatekey(const ssl: PSSL): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_privatekey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_privatekey_procname);
 end;
 
 
 
 function  ERR_SSL_CTX_get0_certificate(const ctx: PSSL_CTX): PX509; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get0_certificate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get0_certificate_procname);
 end;
 
 
 function  ERR_SSL_CTX_get0_privatekey(const ctx: PSSL_CTX): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get0_privatekey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get0_privatekey_procname);
 end;
 
 
 
 procedure  ERR_SSL_CTX_set_quiet_shutdown(ctx: PSSL_CTX; mode: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_quiet_shutdown_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_quiet_shutdown_procname);
 end;
 
 
 function  ERR_SSL_CTX_get_quiet_shutdown(const ctx: PSSL_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_quiet_shutdown_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_quiet_shutdown_procname);
 end;
 
 
 procedure  ERR_SSL_set_quiet_shutdown(ssl: PSSL; mode: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_quiet_shutdown_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_quiet_shutdown_procname);
 end;
 
 
 function  ERR_SSL_get_quiet_shutdown(const ssl: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_quiet_shutdown_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_quiet_shutdown_procname);
 end;
 
 
 procedure  ERR_SSL_set_shutdown(ssl: PSSL; mode: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_shutdown_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_shutdown_procname);
 end;
 
 
 function  ERR_SSL_get_shutdown(const ssl: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_shutdown_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_shutdown_procname);
 end;
 
 
 function  ERR_SSL_version(const ssl: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_version_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_version_procname);
 end;
 
 
 function  ERR_SSL_client_version(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_client_version_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_client_version_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_set_default_verify_paths(ctx: PSSL_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_default_verify_paths_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_default_verify_paths_procname);
 end;
 
 
 function  ERR_SSL_CTX_set_default_verify_dir(ctx: PSSL_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_default_verify_dir_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_default_verify_dir_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_set_default_verify_file(ctx: PSSL_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_default_verify_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_default_verify_file_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_load_verify_locations(ctx: PSSL_CTX; const CAfile: PIdAnsiChar; const CApath: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_load_verify_locations_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_load_verify_locations_procname);
 end;
 
 
   //# define SSL_get0_session SSL_get_session/* just peek at pointer */
 function  ERR_SSL_get_session(const ssl: PSSL): PSSL_SESSION; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_session_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_session_procname);
 end;
 
 
   (* obtain a reference count *)
 function  ERR_SSL_get1_session(ssl: PSSL): PSSL_SESSION; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get1_session_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get1_session_procname);
 end;
 
 
 function  ERR_SSL_get_SSL_CTX(const ssl: PSSL): PSSL_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_SSL_CTX_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_SSL_CTX_procname);
 end;
 
 
 function  ERR_SSL_set_SSL_CTX(ssl: PSSL; ctx: PSSL_CTX): PSSL_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_SSL_CTX_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_SSL_CTX_procname);
 end;
 
 
 procedure  ERR_SSL_set_info_callback(ssl: PSSL; cb: SSL_info_callback); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_info_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_info_callback_procname);
 end;
 
 
 function  ERR_SSL_get_info_callback(const ssl: PSSL): SSL_info_callback; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_info_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_info_callback_procname);
 end;
 
 
 function  ERR_SSL_get_state(const ssl: PSSL): OSSL_HANDSHAKE_STATE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_state_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_state_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_SSL_set_verify_result(ssl: PSSL; v: TIdC_LONG); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_verify_result_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_verify_result_procname);
 end;
 
 
 function  ERR_SSL_get_verify_result(const ssl: PSSL): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_verify_result_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_verify_result_procname);
 end;
 
 
@@ -8506,31 +8506,31 @@ end;
 
 function  ERR_SSL_get_client_random(const ssl: PSSL; out_: PByte; outlen: TIdC_SIZET): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_client_random_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_client_random_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get_server_random(const ssl: PSSL; out_: PByte; outlen: TIdC_SIZET): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_server_random_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_server_random_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_get_master_key(const sess: PSSL_SESSION; out_: PByte; outlen: TIdC_SIZET): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_master_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_master_key_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_set1_master_key(sess: PSSL_SESSION; const in_: PByte; len: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_set1_master_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_set1_master_key_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_get_max_fragment_length(const sess: PSSL_SESSION): TIdC_UINT8; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_max_fragment_length_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_max_fragment_length_procname);
 end;
 
  {introduced 1.1.0}
@@ -8539,13 +8539,13 @@ end;
   //    CRYPTO_get_ex_new_index(CRYPTO_EX_INDEX_SSL, l, p, newf, dupf, freef)
 function  ERR_SSL_set_ex_data(ssl: PSSL; idx: TIdC_INT; data: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_ex_data_procname);
 end;
 
 
 function  ERR_SSL_get_ex_data(const ssl: PSSL; idx: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_ex_data_procname);
 end;
 
 
@@ -8553,13 +8553,13 @@ end;
   //    CRYPTO_get_ex_new_index(CRYPTO_EX_INDEX_SSL_SESSION, l, p, newf, dupf, freef)
 function  ERR_SSL_SESSION_set_ex_data(ss: PSSL_SESSION; idx: TIdC_INT; data: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_set_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_set_ex_data_procname);
 end;
 
 
 function  ERR_SSL_SESSION_get_ex_data(const ss: PSSL_SESSION; idx: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get_ex_data_procname);
 end;
 
 
@@ -8567,20 +8567,20 @@ end;
   //    CRYPTO_get_ex_new_index(CRYPTO_EX_INDEX_SSL_CTX, l, p, newf, dupf, freef)
 function  ERR_SSL_CTX_set_ex_data(ssl: PSSL_CTX; idx: TIdC_INT; data: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_ex_data_procname);
 end;
 
 
 function  ERR_SSL_CTX_get_ex_data(const ssl: PSSL_CTX; idx: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_ex_data_procname);
 end;
 
 
 
 function  ERR_SSL_get_ex_data_X509_STORE_CTX_idx: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_ex_data_X509_STORE_CTX_idx_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_ex_data_X509_STORE_CTX_idx_procname);
 end;
 
 
@@ -8615,26 +8615,26 @@ end;
 
 procedure  ERR_SSL_CTX_set_default_read_buffer_len(ctx: PSSL_CTX; len: TIdC_SIZET); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_default_read_buffer_len_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_default_read_buffer_len_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_set_default_read_buffer_len(s: PSSL; len: TIdC_SIZET); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_default_read_buffer_len_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_default_read_buffer_len_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_SSL_CTX_set_tmp_dh_callback(ctx: PSSL_CTX; dh: SSL_CTX_set_tmp_dh_callback_dh); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_tmp_dh_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_tmp_dh_callback_procname);
 end;
 
 
 procedure  ERR_SSL_set_tmp_dh_callback(ssl: PSSL; dh: SSL_set_tmp_dh_callback_dh); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_tmp_dh_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_tmp_dh_callback_procname);
 end;
 
 
@@ -8654,19 +8654,19 @@ end;
 
 function  ERR_SSL_CIPHER_find(ssl: PSSL; const ptr: PByte): PSSL_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CIPHER_find_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CIPHER_find_procname);
 end;
 
 
 function  ERR_SSL_CIPHER_get_cipher_nid(const c: PSSL_CIPHEr): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_cipher_nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_cipher_nid_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CIPHER_get_digest_nid(const c: PSSL_CIPHEr): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_digest_nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CIPHER_get_digest_nid_procname);
 end;
 
  {introduced 1.1.0}
@@ -8677,14 +8677,14 @@ end;
   (* TLS extensions functions *)
 function  ERR_SSL_set_session_ticket_ext(s: PSSL; ext_data: Pointer; ext_len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_session_ticket_ext_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_session_ticket_ext_procname);
 end;
 
 
   //
 function  ERR_SSL_set_session_ticket_ext_cb(s: PSSL; cb: tls_session_ticket_ext_cb_fn; arg: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_session_ticket_ext_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_session_ticket_ext_cb_procname);
 end;
 
 
@@ -8696,88 +8696,88 @@ end;
 
 procedure  ERR_SSL_CTX_set_not_resumable_session_callback(ctx: PSSL_CTX; cb: SSL_CTX_set_not_resumable_session_callback_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_not_resumable_session_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_not_resumable_session_callback_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_set_not_resumable_session_callback(ssl: PSSL; cb: SSL_set_not_resumable_session_callback_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_not_resumable_session_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_not_resumable_session_callback_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_CTX_set_record_padding_callback(ctx: PSSL_CTX; cb: SSL_CTX_set_record_padding_callback_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_record_padding_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_record_padding_callback_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_SSL_CTX_set_record_padding_callback_arg(ctx: PSSL_CTX; arg: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_record_padding_callback_arg_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_record_padding_callback_arg_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_get_record_padding_callback_arg(const ctx: PSSL_CTX): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_record_padding_callback_arg_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_record_padding_callback_arg_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_set_block_padding(ctx: PSSL_CTX; block_size: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_block_padding_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_block_padding_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_SSL_set_record_padding_callback(ssl: PSSL; cb: SSL_set_record_padding_callback_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_record_padding_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_record_padding_callback_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_SSL_set_record_padding_callback_arg(ssl: PSSL; arg: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_record_padding_callback_arg_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_record_padding_callback_arg_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get_record_padding_callback_arg(const ssl: PSSL): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_record_padding_callback_arg_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_record_padding_callback_arg_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_set_block_padding(ssl: PSSL; block_size: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_block_padding_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_block_padding_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_set_num_tickets(s: PSSL; num_tickets: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_num_tickets_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_num_tickets_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get_num_tickets(const s: PSSL): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_num_tickets_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_num_tickets_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_set_num_tickets(ctx: PSSL_CTX; num_tickets: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_num_tickets_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_num_tickets_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_get_num_tickets(const ctx: PSSL_CTX): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_num_tickets_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_num_tickets_procname);
 end;
 
  {introduced 1.1.0}
@@ -8788,99 +8788,99 @@ end;
 
 function  ERR_SSL_session_reused(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_session_reused_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_session_reused_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_is_server(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_is_server_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_is_server_procname);
 end;
 
 
 
 function  ERR_SSL_CONF_CTX_new: PSSL_CONF_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CONF_CTX_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CONF_CTX_new_procname);
 end;
 
 
 function  ERR_SSL_CONF_CTX_finish(cctx: PSSL_CONF_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CONF_CTX_finish_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CONF_CTX_finish_procname);
 end;
 
 
 procedure  ERR_SSL_CONF_CTX_free(cctx: PSSL_CONF_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CONF_CTX_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CONF_CTX_free_procname);
 end;
 
 
 function  ERR_SSL_CONF_CTX_set_flags(cctx: PSSL_CONF_CTX; flags: TIdC_UINT): TIdC_UINT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CONF_CTX_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CONF_CTX_set_flags_procname);
 end;
 
 
 function  ERR_SSL_CONF_CTX_clear_flags(cctx: PSSL_CONF_CTX; flags: TIdC_UINT): TIdC_UINT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CONF_CTX_clear_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CONF_CTX_clear_flags_procname);
 end;
 
 
 function  ERR_SSL_CONF_CTX_set1_prefix(cctx: PSSL_CONF_CTX; const pre: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CONF_CTX_set1_prefix_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CONF_CTX_set1_prefix_procname);
 end;
 
 
 function  ERR_SSL_CONF_cmd(cctx: PSSL_CONF_CTX; const cmd: PIdAnsiChar; const value: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CONF_cmd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CONF_cmd_procname);
 end;
 
 
 function  ERR_SSL_CONF_cmd_argv(cctx: PSSL_CONF_CTX; pargc: PIdC_INT; pargv: PPPIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CONF_cmd_argv_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CONF_cmd_argv_procname);
 end;
 
 
 function  ERR_SSL_CONF_cmd_value_type(cctx: PSSL_CONF_CTX; const cmd: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CONF_cmd_value_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CONF_cmd_value_type_procname);
 end;
 
 
 
 procedure  ERR_SSL_CONF_CTX_set_ssl(cctx: PSSL_CONF_CTX; ssl: PSSL); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CONF_CTX_set_ssl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CONF_CTX_set_ssl_procname);
 end;
 
 
 procedure  ERR_SSL_CONF_CTX_set_ssl_ctx(cctx: PSSL_CONF_CTX; ctx: PSSL_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CONF_CTX_set_ssl_ctx_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CONF_CTX_set_ssl_ctx_procname);
 end;
 
 
 procedure  ERR_SSL_add_ssl_module; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_add_ssl_module_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_add_ssl_module_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_config(s: PSSL; const name: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_config_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_config_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_config(ctx: PSSL_CTX; const name: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_config_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_config_procname);
 end;
 
  {introduced 1.1.0}
@@ -8889,7 +8889,7 @@ end;
 
 function  ERR_DTLSv1_listen(s: PSSL; client: PBIO_ADDr): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DTLSv1_listen_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DTLSv1_listen_procname);
 end;
 
  {introduced 1.1.0}
@@ -8941,13 +8941,13 @@ end;
   // */
 function  ERR_SSL_enable_ct(s: PSSL; validation_mode: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_enable_ct_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_enable_ct_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_enable_ct(ctx: PSSL_CTX; validation_mode: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_enable_ct_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_enable_ct_procname);
 end;
 
  {introduced 1.1.0}
@@ -8957,13 +8957,13 @@ end;
   // */
 function  ERR_SSL_ct_is_enabled(const s: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_ct_is_enabled_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_ct_is_enabled_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_ct_is_enabled(const ctx: PSSL_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_ct_is_enabled_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_ct_is_enabled_procname);
 end;
 
  {introduced 1.1.0}
@@ -8973,19 +8973,19 @@ end;
 
 function  ERR_SSL_CTX_set_default_ctlog_list_file(ctx: PSSL_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_default_ctlog_list_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_default_ctlog_list_file_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_set_ctlog_list_file(ctx: PSSL_CTX; const path: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_ctlog_list_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_ctlog_list_file_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_CTX_set0_ctlog_store(ctx: PSSL_CTX; logs: PCTLOG_STORE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set0_ctlog_store_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set0_ctlog_store_procname);
 end;
 
  {introduced 1.1.0}
@@ -8996,7 +8996,7 @@ end;
 
 procedure  ERR_SSL_set_security_level(s: PSSL; level: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_security_level_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_security_level_procname);
 end;
 
  {introduced 1.1.0}
@@ -9004,37 +9004,37 @@ end;
   ////__owur TIdC_INT SSL_get_security_level(const s: PSSL);
 procedure  ERR_SSL_set_security_callback(s: PSSL; cb: SSL_security_callback); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_security_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_security_callback_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get_security_callback(const s: PSSL): SSL_security_callback; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_security_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_security_callback_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_set0_security_ex_data(s: PSSL; ex: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set0_security_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set0_security_ex_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_get0_security_ex_data(const s: PSSL): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get0_security_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get0_security_ex_data_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_CTX_set_security_level(ctx: PSSL_CTX; level: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_security_level_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_security_level_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_CTX_get_security_level(const ctx: PSSL_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get_security_level_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get_security_level_procname);
 end;
 
  {introduced 1.1.0}
@@ -9051,21 +9051,21 @@ end;
 
 function  ERR_SSL_CTX_get0_security_ex_data(const ctx: PSSL_CTX): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_get0_security_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_get0_security_ex_data_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_SSL_CTX_set0_security_ex_data(ctx: PSSL_CTX; ex: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set0_security_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set0_security_ex_data_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_OPENSSL_init_ssl(opts: TIdC_UINT64; const settings: POPENSSL_INIT_SETTINGS): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_init_ssl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_init_ssl_procname);
 end;
 
  {introduced 1.1.0}
@@ -9076,33 +9076,33 @@ end;
 
 function  ERR_SSL_free_buffers(ssl: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_free_buffers_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_free_buffers_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_alloc_buffers(ssl: PSSL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_alloc_buffers_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_alloc_buffers_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_SSL_CTX_set_session_ticket_cb(ctx: PSSL_CTX; gen_cb: SSL_CTX_generate_session_ticket_fn; dec_cb: SSL_CTX_decrypt_session_ticket_fn; arg: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_session_ticket_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_session_ticket_cb_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_SSL_SESSION_set1_ticket_appdata(ss: PSSL_SESSION; const data: Pointer; len: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_set1_ticket_appdata_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_set1_ticket_appdata_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_SSL_SESSION_get0_ticket_appdata(ss: PSSL_SESSION; data: PPointer; len: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_SESSION_get0_ticket_appdata_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_SESSION_get0_ticket_appdata_procname);
 end;
 
  {introduced 1.1.0}
@@ -9111,128 +9111,128 @@ end;
 
 procedure  ERR_DTLS_set_timer_cb(s: PSSL; cb: DTLS_timer_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DTLS_set_timer_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DTLS_set_timer_cb_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_CTX_set_allow_early_data_cb(ctx: PSSL_CTX; cb: SSL_allow_early_data_cb_fN; arg: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_allow_early_data_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_allow_early_data_cb_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_SSL_set_allow_early_data_cb(s: PSSL; cb: SSL_allow_early_data_cb_fN; arg: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_allow_early_data_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_allow_early_data_cb_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_SSLv2_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSLv2_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSLv2_method_procname);
 end;
 
  {removed 1.1.0 allow_nil} // SSLv2
 function  ERR_SSLv2_server_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSLv2_server_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSLv2_server_method_procname);
 end;
 
  {removed 1.1.0 allow_nil} // SSLv2
 function  ERR_SSLv2_client_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSLv2_client_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSLv2_client_method_procname);
 end;
 
  {removed 1.1.0 allow_nil} // SSLv2
 function  ERR_SSLv3_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSLv3_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSLv3_method_procname);
 end;
 
  {removed 1.1.0 allow_nil} // SSLv3
 function  ERR_SSLv3_server_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSLv3_server_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSLv3_server_method_procname);
 end;
 
  {removed 1.1.0 allow_nil} // SSLv3
 function  ERR_SSLv3_client_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSLv3_client_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSLv3_client_method_procname);
 end;
 
  {removed 1.1.0 allow_nil} // SSLv3
 function  ERR_SSLv23_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSLv23_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSLv23_method_procname);
 end;
 
  {removed 1.1.0 allow_nil} // SSLv3 but can rollback to v2
 function  ERR_SSLv23_server_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSLv23_server_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSLv23_server_method_procname);
 end;
 
  {removed 1.1.0 allow_nil} // SSLv3 but can rollback to v2
 function  ERR_SSLv23_client_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSLv23_client_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSLv23_client_method_procname);
 end;
 
  {removed 1.1.0 allow_nil} // SSLv3 but can rollback to v2
 function  ERR_TLSv1_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TLSv1_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TLSv1_method_procname);
 end;
 
  {removed 1.1.0 allow_nil} // TLSv1.0
 function  ERR_TLSv1_server_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TLSv1_server_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TLSv1_server_method_procname);
 end;
 
  {removed 1.1.0 allow_nil} // TLSv1.0
 function  ERR_TLSv1_client_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TLSv1_client_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TLSv1_client_method_procname);
 end;
 
  {removed 1.1.0 allow_nil} // TLSv1.0
 function  ERR_TLSv1_1_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TLSv1_1_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TLSv1_1_method_procname);
 end;
 
  {removed 1.1.0 allow_nil} //TLS1.1
 function  ERR_TLSv1_1_server_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TLSv1_1_server_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TLSv1_1_server_method_procname);
 end;
 
  {removed 1.1.0 allow_nil} //TLS1.1
 function  ERR_TLSv1_1_client_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TLSv1_1_client_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TLSv1_1_client_method_procname);
 end;
 
  {removed 1.1.0 allow_nil} //TLS1.1
 function  ERR_TLSv1_2_method:  PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TLSv1_2_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TLSv1_2_method_procname);
 end;
 
  {removed 1.1.0 allow_nil}		// TLSv1.2
 function  ERR_TLSv1_2_server_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TLSv1_2_server_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TLSv1_2_server_method_procname);
 end;
 
  {removed 1.1.0 allow_nil}	// TLSv1.2 
 function  ERR_TLSv1_2_client_method: PSSL_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TLSv1_2_client_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TLSv1_2_client_method_procname);
 end;
 
  {removed 1.1.0 allow_nil}	// TLSv1.2
@@ -9240,14 +9240,14 @@ end;
   //X509 *SSL_get0_peer_certificate(const SSL *s);
 function  ERR_SSL_get0_peer_certificate(const s: PSSL): PX509; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get0_peer_certificate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get0_peer_certificate_procname);
 end;
 
  {introduced 3.3.0}
   // X509 *SSL_get1_peer_certificate(const SSL *s);
 function  ERR_SSL_get1_peer_certificate(const s: PSSL): PX509; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get1_peer_certificate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get1_peer_certificate_procname);
 end;
 
  {introduced 3.3.0}

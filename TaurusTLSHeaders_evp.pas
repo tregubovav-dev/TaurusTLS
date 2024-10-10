@@ -3569,21 +3569,21 @@ end;
 {$IFNDEF OPENSSL_NO_MD2}
 function  _EVP_md2: PEVP_MD; cdecl;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ROSUnsupported);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ROSUnsupported);
 end;
 {$ENDIF}
 
 {$IFNDEF OPENSSL_NO_MD4}
 function  _EVP_md4: PEVP_MD; cdecl;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ROSUnsupported);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ROSUnsupported);
 end;
 {$ENDIF}
 
 {$IFNDEF OPENSSL_NO_MD5}
 function  _EVP_md5: PEVP_MD; cdecl;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ROSUnsupported);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ROSUnsupported);
 end;
 {$ENDIF}
 
@@ -3605,288 +3605,288 @@ end;
 {$WARN  NO_RETVAL OFF}
 function  ERR_EVP_PKEY_assign_RSA(pkey: PEVP_PKEY; rsa: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_assign_RSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_assign_RSA_procname);
 end;
 
  
 function  ERR_EVP_PKEY_assign_DSA(pkey: PEVP_PKEY; dsa: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_assign_DSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_assign_DSA_procname);
 end;
 
  
 function  ERR_EVP_PKEY_assign_DH(pkey: PEVP_PKEY; dh: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_assign_DH_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_assign_DH_procname);
 end;
 
  
 function  ERR_EVP_PKEY_assign_EC_KEY(pkey: PEVP_PKEY; eckey: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_assign_EC_KEY_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_assign_EC_KEY_procname);
 end;
 
  
 function  ERR_EVP_PKEY_assign_SIPHASH(pkey: PEVP_PKEY; shkey: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_assign_SIPHASH_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_assign_SIPHASH_procname);
 end;
 
  
 function  ERR_EVP_PKEY_assign_POLY1305(pkey: PEVP_PKEY; polykey: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_assign_POLY1305_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_assign_POLY1305_procname);
 end;
 
  
 
 function  ERR_EVP_MD_meth_new(md_type: TIdC_INT; pkey_type: TIdC_INT): PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_new_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_dup(const md: PEVP_MD): PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_dup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_dup_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_EVP_MD_meth_free(md: PEVP_MD); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_free_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_MD_meth_set_input_blocksize(md: PEVP_MD; blocksize: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_input_blocksize_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_input_blocksize_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_set_result_size(md: PEVP_MD; resultsize: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_result_size_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_result_size_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_set_app_datasize(md: PEVP_MD; datasize: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_app_datasize_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_app_datasize_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_set_flags(md: PEVP_MD; flags: TIdC_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_flags_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_set_init(md: PEVP_MD; init: EVP_MD_meth_init): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_init_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_set_update(md: PEVP_MD; update: EVP_MD_meth_update): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_update_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_update_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_set_final(md: PEVP_MD; final_: EVP_MD_meth_final): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_final_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_final_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_set_copy(md: PEVP_MD; copy: EVP_MD_meth_copy): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_copy_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_set_cleanup(md: PEVP_MD; cleanup: EVP_MD_meth_cleanup): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_cleanup_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_set_ctrl(md: PEVP_MD; ctrl: EVP_MD_meth_ctrl): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_set_ctrl_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_MD_meth_get_input_blocksize(const md: PEVP_MD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_input_blocksize_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_input_blocksize_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_get_result_size(const md: PEVP_MD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_result_size_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_result_size_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_get_app_datasize(const md: PEVP_MD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_app_datasize_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_app_datasize_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_get_flags(const md: PEVP_MD): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_flags_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_get_init(const md: PEVP_MD): EVP_MD_meth_init; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_init_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_get_update(const md: PEVP_MD): EVP_MD_meth_update; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_update_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_update_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_get_final(const md: PEVP_MD): EVP_MD_meth_final; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_final_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_final_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_get_copy(const md: PEVP_MD): EVP_MD_meth_copy; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_copy_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_get_cleanup(const md: PEVP_MD): EVP_MD_meth_cleanup; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_cleanup_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_meth_get_ctrl(const md: PEVP_MD): EVP_MD_meth_ctrl; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_meth_get_ctrl_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_CIPHER_meth_new(cipher_type: TIdC_INT; block_size: TIdC_INT; key_len: TIdC_INT): PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_new_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_meth_dup(const cipher: PEVP_CIPHER): PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_dup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_dup_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_EVP_CIPHER_meth_free(cipher: PEVP_CIPHER); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_free_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_CIPHER_meth_set_iv_length(cipher: PEVP_CIPHER; iv_len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_iv_length_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_iv_length_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_meth_set_flags(cipher: PEVP_CIPHER; flags: TIdC_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_flags_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_meth_set_impl_ctx_size(cipher: PEVP_CIPHER; ctx_size: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_impl_ctx_size_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_impl_ctx_size_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_meth_set_init(cipher: PEVP_CIPHER; init: EVP_CIPHER_meth_init): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_init_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_meth_set_do_cipher(cipher: PEVP_CIPHER; do_cipher: EVP_CIPHER_meth_do_cipher): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_do_cipher_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_do_cipher_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_meth_set_cleanup(cipher: PEVP_CIPHER; cleanup: EVP_CIPHER_meth_cleanup): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_cleanup_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_meth_set_set_asn1_params(cipher: PEVP_CIPHER; set_asn1_parameters: EVP_CIPHER_meth_set_asn1_params): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_set_asn1_params_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_set_asn1_params_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_meth_set_get_asn1_params(cipher: PEVP_CIPHER; get_asn1_parameters: EVP_CIPHER_meth_get_asn1_params): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_get_asn1_params_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_get_asn1_params_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_meth_set_ctrl(cipher: PEVP_CIPHER; ctrl: EVP_CIPHER_meth_ctrl): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_set_ctrl_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_meth_get_init(const cipher: PEVP_CIPHER): EVP_CIPHER_meth_init; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_get_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_get_init_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_meth_get_do_cipher(const cipher: PEVP_CIPHER): EVP_CIPHER_meth_do_cipher; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_get_do_cipher_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_get_do_cipher_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_meth_get_cleanup(const cipher: PEVP_CIPHER): EVP_CIPHER_meth_cleanup; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_get_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_get_cleanup_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_meth_get_set_asn1_params(const cipher: PEVP_CIPHER): EVP_CIPHER_meth_set_asn1_params; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_get_set_asn1_params_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_get_set_asn1_params_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_meth_get_get_asn1_params(const cipher: PEVP_CIPHER): EVP_CIPHER_meth_get_asn1_params; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_get_get_asn1_params_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_get_get_asn1_params_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_meth_get_ctrl(const cipher: PEVP_CIPHER): EVP_CIPHER_meth_ctrl; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_get_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_meth_get_ctrl_procname);
 end;
 
  {introduced 1.1.0}
@@ -3899,7 +3899,7 @@ end;
 
 function  ERR_EVP_MD_type(const md: PEVP_MD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_type_procname);
 end;
 
  
@@ -3907,44 +3907,44 @@ end;
   //# define EVP_MD_name(e)                  OBJ_nid2sn(EVP_MD_nid(e))
 function  ERR_EVP_MD_pkey_type(const md: PEVP_MD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_pkey_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_pkey_type_procname);
 end;
 
  
 function  ERR_EVP_MD_size(const md: PEVP_MD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_size_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_size_procname);
 end;
 
  
 function  ERR_EVP_MD_block_size(const md: PEVP_MD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_block_size_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_block_size_procname);
 end;
 
  
 function  ERR_EVP_MD_flags(const md: PEVP_MD): PIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_flags_procname);
 end;
 
  
 
 function  ERR_EVP_MD_CTX_md(ctx: PEVP_MD_CTX): PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_md_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_md_procname);
 end;
 
 
 function  ERR_EVP_MD_CTX_update_fn(ctx: PEVP_MD_CTX): EVP_MD_CTX_update; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_update_fn_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_update_fn_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_EVP_MD_CTX_set_update_fn(ctx: PEVP_MD_CTX; update: EVP_MD_CTX_update); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_set_update_fn_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_set_update_fn_procname);
 end;
 
  {introduced 1.1.0}
@@ -3953,57 +3953,57 @@ end;
   //  EVP_MD_CTX_type(e)              EVP_MD_type(EVP_MD_CTX_md(e))
 function  ERR_EVP_MD_CTX_pkey_ctx(const ctx: PEVP_MD_CTX): PEVP_PKEY_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_pkey_ctx_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_pkey_ctx_procname);
 end;
 
  
 procedure  ERR_EVP_MD_CTX_set_pkey_ctx(ctx: PEVP_MD_CTX; pctx: PEVP_PKEY_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_set_pkey_ctx_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_set_pkey_ctx_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_CTX_md_data(const ctx: PEVP_MD_CTX): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_md_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_md_data_procname);
 end;
 
  
 
 function  ERR_EVP_CIPHER_nid(const ctx: PEVP_MD_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_nid_procname);
 end;
 
  
   //# define EVP_CIPHER_name(e)              OBJ_nid2sn(EVP_CIPHER_nid(e))
 function  ERR_EVP_CIPHER_block_size(const cipher: PEVP_CIPHER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_block_size_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_block_size_procname);
 end;
 
  
 function  ERR_EVP_CIPHER_impl_ctx_size(const cipher: PEVP_CIPHER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_impl_ctx_size_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_impl_ctx_size_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_key_length(const cipher: PEVP_CIPHER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_key_length_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_key_length_procname);
 end;
 
  
 function  ERR_EVP_CIPHER_iv_length(const cipher: PEVP_CIPHER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_iv_length_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_iv_length_procname);
 end;
 
  
 function  ERR_EVP_CIPHER_flags(const cipher: PEVP_CIPHER): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_flags_procname);
 end;
 
  
@@ -4011,103 +4011,103 @@ end;
 
 function  ERR_EVP_CIPHER_CTX_cipher(const ctx: PEVP_CIPHER_CTX): PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_cipher_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_cipher_procname);
 end;
 
 
 function  ERR_EVP_CIPHER_CTX_encrypting(const ctx: PEVP_CIPHER_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_encrypting_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_encrypting_procname);
 end;
 
  
 function  ERR_EVP_CIPHER_CTX_nid(const ctx: PEVP_CIPHER_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_nid_procname);
 end;
 
  
 function  ERR_EVP_CIPHER_CTX_block_size(const ctx: PEVP_CIPHER_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_block_size_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_block_size_procname);
 end;
 
  
 function  ERR_EVP_CIPHER_CTX_key_length(const ctx: PEVP_CIPHER_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_key_length_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_key_length_procname);
 end;
 
  
 function  ERR_EVP_CIPHER_CTX_iv_length(const ctx: PEVP_CIPHER_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_iv_length_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_iv_length_procname);
 end;
 
  
 function  ERR_EVP_CIPHER_CTX_iv(const ctx: PEVP_CIPHER_CTX): PByte; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_iv_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_iv_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_CTX_original_iv(const ctx: PEVP_CIPHER_CTX): PByte; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_original_iv_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_original_iv_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_CTX_iv_noconst(ctx: PEVP_CIPHER_CTX): PByte; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_iv_noconst_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_iv_noconst_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_CTX_buf_noconst(ctx: PEVP_CIPHER_CTX): PByte; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_buf_noconst_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_buf_noconst_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_CTX_num(const ctx: PEVP_CIPHER_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_num_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_num_procname);
 end;
 
  
 procedure  ERR_EVP_CIPHER_CTX_set_num(ctx: PEVP_CIPHER_CTX; num: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_set_num_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_set_num_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_CTX_copy(out_: PEVP_CIPHER_CTX; const in_: PEVP_CIPHER_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_copy_procname);
 end;
 
 
 function  ERR_EVP_CIPHER_CTX_get_app_data(const ctx: PEVP_CIPHER_CTX): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_get_app_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_get_app_data_procname);
 end;
 
 
 procedure  ERR_EVP_CIPHER_CTX_set_app_data(ctx: PEVP_CIPHER_CTX; data: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_set_app_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_set_app_data_procname);
 end;
 
 
 function  ERR_EVP_CIPHER_CTX_get_cipher_data(const ctx: PEVP_CIPHER_CTX): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_get_cipher_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_get_cipher_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_CIPHER_CTX_set_cipher_data(ctx: PEVP_CIPHER_CTX; cipher_data: Pointer): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_set_cipher_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_set_cipher_data_procname);
 end;
 
  {introduced 1.1.0}
@@ -4134,7 +4134,7 @@ end;
 
 procedure  ERR_BIO_set_md(v1: PBIO; const md: PEVP_MD); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_md_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_md_procname);
 end;
 
  
@@ -4155,38 +4155,38 @@ end;
   //int EVP_MD_CTX_cleanup(EVP_MD_CTX *ctx);
 procedure  ERR_EVP_MD_CTX_init(ctx : PEVP_MD_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_init_procname);
 end;
 
  
 function  ERR_EVP_MD_CTX_cleanup(ctx : PEVP_MD_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_cleanup_procname);
 end;
 
  
 
 function  ERR_EVP_MD_CTX_ctrl(ctx: PEVP_MD_CTX; cmd: TIdC_INT; p1: TIdC_INT; p2: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_ctrl_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_CTX_new: PEVP_MD_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_new_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_MD_CTX_reset(ctx: PEVP_MD_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_reset_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_reset_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_EVP_MD_CTX_free(ctx: PEVP_MD_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_free_procname);
 end;
 
  {introduced 1.1.0}
@@ -4195,556 +4195,556 @@ end;
   //# define EVP_MD_CTX_destroy(ctx) EVP_MD_CTX_free((ctx))
 function  ERR_EVP_MD_CTX_copy_ex(out_: PEVP_MD_CTX; const in_: PEVP_MD_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_copy_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_copy_ex_procname);
 end;
 
 
 procedure  ERR_EVP_MD_CTX_set_flags(ctx: PEVP_MD_CTX; flags: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_set_flags_procname);
 end;
 
 
 procedure  ERR_EVP_MD_CTX_clear_flags(ctx: PEVP_MD_CTX; flags: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_clear_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_clear_flags_procname);
 end;
 
 
 function  ERR_EVP_MD_CTX_test_flags(const ctx: PEVP_MD_CTX; flags: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_test_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_test_flags_procname);
 end;
 
 
 function  ERR_EVP_DigestInit_ex(ctx: PEVP_MD_CTX; const type_: PEVP_MD; impl: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DigestInit_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DigestInit_ex_procname);
 end;
 
 
 function  ERR_EVP_DigestUpdate(ctx: PEVP_MD_CTX; const d: Pointer; cnt: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DigestUpdate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DigestUpdate_procname);
 end;
 
 
 function  ERR_EVP_DigestFinal_ex(ctx: PEVP_MD_CTX; md: PByte; var s: TIdC_UINT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DigestFinal_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DigestFinal_ex_procname);
 end;
 
 
 function  ERR_EVP_Digest(const data: Pointer; count: TIdC_SIZET; md: PByte; size: PIdC_UINT; const type_: PEVP_MD; impl: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_Digest_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_Digest_procname);
 end;
 
 
 
 function  ERR_EVP_MD_CTX_copy(out_: PEVP_MD_CTX; const in_: PEVP_MD_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_CTX_copy_procname);
 end;
 
 
 function  ERR_EVP_DigestInit(ctx: PEVP_MD_CTX; const type_: PEVP_MD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DigestInit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DigestInit_procname);
 end;
 
 
 function  ERR_EVP_DigestFinal(ctx: PEVP_MD_CTX; md: PByte; var s: TIdC_UINT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DigestFinal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DigestFinal_procname);
 end;
 
 
 function  ERR_EVP_DigestFinalXOF(ctx: PEVP_MD_CTX; md: PByte; len: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DigestFinalXOF_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DigestFinalXOF_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_read_pw_string(buf: PIdAnsiChar; length: TIdC_INT; const prompt: PIdAnsiChar; verify: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_read_pw_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_read_pw_string_procname);
 end;
 
 
 function  ERR_EVP_read_pw_string_min(buf: PIdAnsiChar; minlen: TIdC_INT; maxlen: TIdC_INT; const prompt: PIdAnsiChar; verify: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_read_pw_string_min_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_read_pw_string_min_procname);
 end;
 
 
 procedure  ERR_EVP_set_pw_prompt(const prompt: PIdAnsiChar); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_set_pw_prompt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_set_pw_prompt_procname);
 end;
 
 
 function  ERR_EVP_get_pw_prompt: PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_get_pw_prompt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_get_pw_prompt_procname);
 end;
 
 
 function  ERR_EVP_BytesToKey(const type_: PEVP_CIPHER; const md: PEVP_MD; const salt: PByte; const data: PByte; data1: TIdC_INT; count: TIdC_INT; key: PByte; iv: PByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_BytesToKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_BytesToKey_procname);
 end;
 
 
 
 procedure  ERR_EVP_CIPHER_CTX_set_flags(ctx: PEVP_CIPHER_CTX; flags: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_set_flags_procname);
 end;
 
 
 procedure  ERR_EVP_CIPHER_CTX_clear_flags(ctx: PEVP_CIPHER_CTX; flags: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_clear_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_clear_flags_procname);
 end;
 
 
 function  ERR_EVP_CIPHER_CTX_test_flags(const ctx: PEVP_CIPHER_CTX; flags: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_test_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_test_flags_procname);
 end;
 
 
 
 function  ERR_EVP_EncryptInit(ctx: PEVP_CIPHER_CTX; const cipher: PEVP_CIPHER; const key: PByte; const iv: PByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_EncryptInit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_EncryptInit_procname);
 end;
 
 
 function  ERR_EVP_EncryptInit_ex(ctx: PEVP_CIPHER_CTX; const cipher: PEVP_CIPHER; impl: PENGINE; const key: PByte; const iv: PByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_EncryptInit_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_EncryptInit_ex_procname);
 end;
 
 
 function  ERR_EVP_EncryptUpdate(ctx: PEVP_CIPHER_CTX; out_: PByte; out1: PIdC_INT; const in_: PByte; in_1: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_EncryptUpdate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_EncryptUpdate_procname);
 end;
 
 
 function  ERR_EVP_EncryptFinal_ex(ctx: PEVP_CIPHER_CTX; out_: PByte; out1: PIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_EncryptFinal_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_EncryptFinal_ex_procname);
 end;
 
 
 function  ERR_EVP_EncryptFinal(ctx: PEVP_CIPHER_CTX; out_: PByte; out1: PIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_EncryptFinal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_EncryptFinal_procname);
 end;
 
 
 
 function  ERR_EVP_DecryptInit(ctx: PEVP_CIPHER_CTX; out_: PByte; out1: PidC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DecryptInit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DecryptInit_procname);
 end;
 
 
 function  ERR_EVP_DecryptInit_ex(ctx: PEVP_CIPHER_CTX; const cipher: PEVP_CIPHER; impl: PENGINE; const key: PByte; const iv: PByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DecryptInit_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DecryptInit_ex_procname);
 end;
 
 
 function  ERR_EVP_DecryptUpdate(ctx: PEVP_CIPHER_CTX; out_: PByte; out1: PIdC_INT; const in_: PByte; in_1: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DecryptUpdate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DecryptUpdate_procname);
 end;
 
 
 function  ERR_EVP_DecryptFinal(ctx: PEVP_CIPHER_CTX; outm: PByte; out1: PIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DecryptFinal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DecryptFinal_procname);
 end;
 
 
 function  ERR_EVP_DecryptFinal_ex(ctx: PEVP_MD_CTX; outm: PByte; out1: PIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DecryptFinal_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DecryptFinal_ex_procname);
 end;
 
 
 
 function  ERR_EVP_CipherInit(ctx: PEVP_CIPHER_CTX; const cipher: PEVP_CIPHER; const key: PByte; const iv: PByte; enc: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CipherInit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CipherInit_procname);
 end;
 
 
 function  ERR_EVP_CipherInit_ex(ctx: PEVP_CIPHER_CTX; const cipher: PEVP_CIPHER; impl: PENGINE; const key: PByte; const iv: PByte; enc: TidC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CipherInit_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CipherInit_ex_procname);
 end;
 
 
 function  ERR_EVP_CipherUpdate(ctx: PEVP_CIPHER_CTX; out_: PByte; out1: PIdC_INT; const in_: PByte; in1: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CipherUpdate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CipherUpdate_procname);
 end;
 
 
 function  ERR_EVP_CipherFinal(ctx: PEVP_CIPHER_CTX; outm: PByte; out1: PIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CipherFinal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CipherFinal_procname);
 end;
 
 
 function  ERR_EVP_CipherFinal_ex(ctx: PEVP_CIPHER_CTX; outm: PByte; out1: PIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CipherFinal_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CipherFinal_ex_procname);
 end;
 
 
 
 function  ERR_EVP_SignFinal(ctx: PEVP_CIPHER_CTX; md: PByte; s: PIdC_UINT; pkey: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_SignFinal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_SignFinal_procname);
 end;
 
 
 
 function  ERR_EVP_DigestSign(ctx: PEVP_CIPHER_CTX; sigret: PByte; siglen: PIdC_SIZET; const tbs: PByte; tbslen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DigestSign_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DigestSign_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_VerifyFinal(ctx: PEVP_MD_CTX; const sigbuf: PByte; siglen: TIdC_UINT; pkey: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_VerifyFinal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_VerifyFinal_procname);
 end;
 
 
 
 function  ERR_EVP_DigestVerify(ctx: PEVP_CIPHER_CTX; const sigret: PByte; siglen: TIdC_SIZET; const tbs: PByte; tbslen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DigestVerify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DigestVerify_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_DigestSignInit(ctx: PEVP_MD_CTX; pctx: PPEVP_PKEY_CTX; const type_: PEVP_MD; e: PENGINE; pkey: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DigestSignInit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DigestSignInit_procname);
 end;
 
 
 function  ERR_EVP_DigestSignFinal(ctx: PEVP_MD_CTX; sigret: PByte; siglen: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DigestSignFinal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DigestSignFinal_procname);
 end;
 
 
 
 function  ERR_EVP_DigestVerifyInit(ctx: PEVP_MD_CTX; ppctx: PPEVP_PKEY_CTX; const type_: PEVP_MD; e: PENGINE; pkey: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DigestVerifyInit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DigestVerifyInit_procname);
 end;
 
 
 function  ERR_EVP_DigestVerifyFinal(ctx: PEVP_MD_CTX; const sig: PByte; siglen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DigestVerifyFinal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DigestVerifyFinal_procname);
 end;
 
 
 
 function  ERR_EVP_OpenInit(ctx: PEVP_CIPHER_CTX; const type_: PEVP_CIPHER; const ek: PByte; ek1: TIdC_INT; const iv: PByte; priv: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_OpenInit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_OpenInit_procname);
 end;
 
 
 function  ERR_EVP_OpenFinal(ctx: PEVP_CIPHER_CTX; out_: PByte; out1: PIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_OpenFinal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_OpenFinal_procname);
 end;
 
 
 
 function  ERR_EVP_SealInit(ctx: PEVP_CIPHER_CTX; const type_: EVP_CIPHER; ek: PPByte; ek1: PIdC_INT; iv: PByte; pubk: PPEVP_PKEY; npubk: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_SealInit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_SealInit_procname);
 end;
 
 
 function  ERR_EVP_SealFinal(ctx: PEVP_CIPHER_CTX; out_: PByte; out1: PIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_SealFinal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_SealFinal_procname);
 end;
 
 
 
 function  ERR_EVP_ENCODE_CTX_new: PEVP_ENCODE_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_ENCODE_CTX_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_ENCODE_CTX_new_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_EVP_ENCODE_CTX_free(ctx: PEVP_ENCODE_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_ENCODE_CTX_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_ENCODE_CTX_free_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_ENCODE_CTX_copy(dctx: PEVP_ENCODE_CTX; sctx: PEVP_ENCODE_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_ENCODE_CTX_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_ENCODE_CTX_copy_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_ENCODE_CTX_num(ctx: PEVP_ENCODE_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_ENCODE_CTX_num_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_ENCODE_CTX_num_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_EVP_EncodeInit(ctx: PEVP_ENCODE_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_EncodeInit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_EncodeInit_procname);
 end;
 
 
 function  ERR_EVP_EncodeUpdate(ctx: PEVP_ENCODE_CTX; out_: PByte; out1: PIdC_INT; const in_: PByte; in1: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_EncodeUpdate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_EncodeUpdate_procname);
 end;
 
 
 procedure  ERR_EVP_EncodeFinal(ctx: PEVP_ENCODE_CTX; out_: PByte; out1: PIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_EncodeFinal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_EncodeFinal_procname);
 end;
 
 
 function  ERR_EVP_EncodeBlock(t: PByte; const f: PByte; n: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_EncodeBlock_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_EncodeBlock_procname);
 end;
 
 
 
 procedure  ERR_EVP_DecodeInit(ctx: PEVP_ENCODE_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DecodeInit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DecodeInit_procname);
 end;
 
 
 function  ERR_EVP_DecodeUpdate(ctx: PEVP_ENCODE_CTX; out_: PByte; out1: PIdC_INT; const in_: PByte; in1: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DecodeUpdate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DecodeUpdate_procname);
 end;
 
 
 function  ERR_EVP_DecodeFinal(ctx: PEVP_ENCODE_CTX; out_: PByte; out1: PIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DecodeFinal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DecodeFinal_procname);
 end;
 
 
 function  ERR_EVP_DecodeBlock(t: PByte; const f: PByte; n: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_DecodeBlock_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_DecodeBlock_procname);
 end;
 
 
 
 function  ERR_EVP_CIPHER_CTX_new: PEVP_CIPHER_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_new_procname);
 end;
 
 
 function  ERR_EVP_CIPHER_CTX_reset(c: PEVP_CIPHER_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_reset_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_reset_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_EVP_CIPHER_CTX_free(c: PEVP_CIPHER_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_free_procname);
 end;
 
 
 function  ERR_EVP_CIPHER_CTX_set_key_length(x: PEVP_CIPHER_CTX; keylen: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_set_key_length_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_set_key_length_procname);
 end;
 
 
 function  ERR_EVP_CIPHER_CTX_set_padding(c: PEVP_CIPHER_CTX; pad: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_set_padding_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_set_padding_procname);
 end;
 
 
 function  ERR_EVP_CIPHER_CTX_ctrl(ctx: PEVP_CIPHER_CTX; type_: TIdC_INT; arg: TIdC_INT; ptr: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_ctrl_procname);
 end;
 
 
 function  ERR_EVP_CIPHER_CTX_rand_key(ctx: PEVP_CIPHER_CTX; key: PByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_rand_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_CTX_rand_key_procname);
 end;
 
 
 
 function  ERR_BIO_f_md: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_f_md_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_f_md_procname);
 end;
 
 
 function  ERR_BIO_f_base64: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_f_base64_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_f_base64_procname);
 end;
 
 
 function  ERR_BIO_f_cipher: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_f_cipher_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_f_cipher_procname);
 end;
 
 
 function  ERR_BIO_f_reliable: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_f_reliable_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_f_reliable_procname);
 end;
 
 
 function  ERR_BIO_set_cipher(b: PBIO; c: PEVP_CIPHER; const k: PByte; const i: PByte; enc: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_cipher_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_cipher_procname);
 end;
 
 
 
 function  ERR_EVP_md_null: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_md_null_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_md_null_procname);
 end;
 
 
 
 function  ERR_EVP_md2: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_md2_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_md2_procname);
 end;
 
  {removed 1.1.0 allow_nil}
 function  ERR_EVP_md4: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_md4_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_md4_procname);
 end;
 
  {removed 1.1.0 allow_nil}
 function  ERR_EVP_md5: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_md5_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_md5_procname);
 end;
 
  {removed 1.1.0 allow_nil}
 function  ERR_EVP_md5_sha1: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_md5_sha1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_md5_sha1_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_sha1: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_sha1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_sha1_procname);
 end;
 
 
 function  ERR_EVP_sha224: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_sha224_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_sha224_procname);
 end;
 
 
 function  ERR_EVP_sha256: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_sha256_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_sha256_procname);
 end;
 
 
 function  ERR_EVP_sha384: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_sha384_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_sha384_procname);
 end;
 
 
 function  ERR_EVP_sha512: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_sha512_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_sha512_procname);
 end;
 
 
 function  ERR_EVP_sha512_224: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_sha512_224_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_sha512_224_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_sha512_256: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_sha512_256_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_sha512_256_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_sha3_224: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_sha3_224_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_sha3_224_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_sha3_256: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_sha3_256_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_sha3_256_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_sha3_384: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_sha3_384_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_sha3_384_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_sha3_512: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_sha3_512_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_sha3_512_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_shake128: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_shake128_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_shake128_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_shake256: PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_shake256_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_shake256_procname);
 end;
 
  {introduced 1.1.0}
@@ -4752,130 +4752,130 @@ end;
   (* does nothing :-) *)
 function  ERR_EVP_enc_null: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_enc_null_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_enc_null_procname);
 end;
 
 
 
 function  ERR_EVP_des_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_ecb_procname);
 end;
 
 
 function  ERR_EVP_des_ede: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_ede_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_ede_procname);
 end;
 
 
 function  ERR_EVP_des_ede3: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_ede3_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_ede3_procname);
 end;
 
 
 function  ERR_EVP_des_ede_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_ede_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_ede_ecb_procname);
 end;
 
 
 function  ERR_EVP_des_ede3_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_ede3_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_ede3_ecb_procname);
 end;
 
 
 function  ERR_EVP_des_cfb64: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_cfb64_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_cfb64_procname);
 end;
 
 
   //EVP_des_cfb EVP_des_cfb64
 function  ERR_EVP_des_cfb1: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_cfb1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_cfb1_procname);
 end;
 
 
 function  ERR_EVP_des_cfb8: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_cfb8_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_cfb8_procname);
 end;
 
 
 function  ERR_EVP_des_ede_cfb64: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_ede_cfb64_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_ede_cfb64_procname);
 end;
 
 
 function  ERR_EVP_des_ede3_cfb64: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_ede3_cfb64_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_ede3_cfb64_procname);
 end;
 
 
   //EVP_des_ede3_cfb EVP_des_ede3_cfb64
 function  ERR_EVP_des_ede3_cfb1: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_ede3_cfb1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_ede3_cfb1_procname);
 end;
 
 
 function  ERR_EVP_des_ede3_cfb8: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_ede3_cfb8_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_ede3_cfb8_procname);
 end;
 
 
 function  ERR_EVP_des_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_ofb_procname);
 end;
 
 
 function  ERR_EVP_des_ede_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_ede_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_ede_ofb_procname);
 end;
 
 
 function  ERR_EVP_des_ede3_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_ede3_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_ede3_ofb_procname);
 end;
 
 
 function  ERR_EVP_des_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_cbc_procname);
 end;
 
 
 function  ERR_EVP_des_ede_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_ede_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_ede_cbc_procname);
 end;
 
 
 function  ERR_EVP_des_ede3_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_ede3_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_ede3_cbc_procname);
 end;
 
 
 function  ERR_EVP_desx_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_desx_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_desx_cbc_procname);
 end;
 
 
 function  ERR_EVP_des_ede3_wrap: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_des_ede3_wrap_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_des_ede3_wrap_procname);
 end;
 
 
@@ -4886,13 +4886,13 @@ end;
   //
 function  ERR_EVP_rc4: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_rc4_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_rc4_procname);
 end;
 
 
 function  ERR_EVP_rc4_40: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_rc4_40_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_rc4_40_procname);
 end;
 
 
@@ -4903,88 +4903,88 @@ end;
  // function EVP_idea_cbc: PEVP_CIPHER;
 function  ERR_EVP_rc2_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_rc2_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_rc2_ecb_procname);
 end;
 
 
 function  ERR_EVP_rc2_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_rc2_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_rc2_cbc_procname);
 end;
 
 
 function  ERR_EVP_rc2_40_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_rc2_40_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_rc2_40_cbc_procname);
 end;
 
 
 function  ERR_EVP_rc2_64_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_rc2_64_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_rc2_64_cbc_procname);
 end;
 
 
 function  ERR_EVP_rc2_cfb64: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_rc2_cfb64_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_rc2_cfb64_procname);
 end;
 
 
   //EVP_rc2_cfb EVP_rc2_cfb64
 function  ERR_EVP_rc2_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_rc2_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_rc2_ofb_procname);
 end;
 
 
 function  ERR_EVP_bf_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_bf_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_bf_ecb_procname);
 end;
 
 
 function  ERR_EVP_bf_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_bf_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_bf_cbc_procname);
 end;
 
 
 function  ERR_EVP_bf_cfb64: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_bf_cfb64_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_bf_cfb64_procname);
 end;
 
 
   //EVP_bf_cfb EVP_bf_cfb64
 function  ERR_EVP_bf_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_bf_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_bf_ofb_procname);
 end;
 
 
 function  ERR_EVP_cast5_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_cast5_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_cast5_ecb_procname);
 end;
 
 
 function  ERR_EVP_cast5_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_cast5_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_cast5_cbc_procname);
 end;
 
 
 function  ERR_EVP_cast5_cfb64: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_cast5_cfb64_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_cast5_cfb64_procname);
 end;
 
 
   //EVP_cast5_cfb EVP_cast5_cfb64
 function  ERR_EVP_cast5_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_cast5_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_cast5_ofb_procname);
 end;
 
 
@@ -4996,990 +4996,990 @@ end;
 
 function  ERR_EVP_aes_128_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_128_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_128_ecb_procname);
 end;
 
 
 function  ERR_EVP_aes_128_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_128_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_128_cbc_procname);
 end;
 
 
 function  ERR_EVP_aes_128_cfb1: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_128_cfb1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_128_cfb1_procname);
 end;
 
 
 function  ERR_EVP_aes_128_cfb8: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_128_cfb8_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_128_cfb8_procname);
 end;
 
 
 function  ERR_EVP_aes_128_cfb128: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_128_cfb128_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_128_cfb128_procname);
 end;
 
 
   //EVP_aes_128_cfb EVP_aes_128_cfb128
 function  ERR_EVP_aes_128_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_128_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_128_ofb_procname);
 end;
 
 
 function  ERR_EVP_aes_128_ctr: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_128_ctr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_128_ctr_procname);
 end;
 
 
 function  ERR_EVP_aes_128_ccm: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_128_ccm_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_128_ccm_procname);
 end;
 
 
 function  ERR_EVP_aes_128_gcm: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_128_gcm_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_128_gcm_procname);
 end;
 
 
 function  ERR_EVP_aes_128_xts: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_128_xts_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_128_xts_procname);
 end;
 
 
 function  ERR_EVP_aes_128_wrap: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_128_wrap_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_128_wrap_procname);
 end;
 
 
 function  ERR_EVP_aes_128_wrap_pad: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_128_wrap_pad_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_128_wrap_pad_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aes_128_ocb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_128_ocb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_128_ocb_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aes_192_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_192_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_192_ecb_procname);
 end;
 
 
 function  ERR_EVP_aes_192_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_192_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_192_cbc_procname);
 end;
 
 
 function  ERR_EVP_aes_192_cfb1: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_192_cfb1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_192_cfb1_procname);
 end;
 
 
 function  ERR_EVP_aes_192_cfb8: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_192_cfb8_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_192_cfb8_procname);
 end;
 
 
 function  ERR_EVP_aes_192_cfb128: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_192_cfb128_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_192_cfb128_procname);
 end;
 
 
   //EVP_aes_192_cfb EVP_aes_192_cfb128
 function  ERR_EVP_aes_192_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_192_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_192_ofb_procname);
 end;
 
 
 function  ERR_EVP_aes_192_ctr: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_192_ctr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_192_ctr_procname);
 end;
 
 
 function  ERR_EVP_aes_192_ccm: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_192_ccm_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_192_ccm_procname);
 end;
 
 
 function  ERR_EVP_aes_192_gcm: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_192_gcm_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_192_gcm_procname);
 end;
 
 
 function  ERR_EVP_aes_192_wrap: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_192_wrap_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_192_wrap_procname);
 end;
 
 
 function  ERR_EVP_aes_192_wrap_pad: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_192_wrap_pad_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_192_wrap_pad_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aes_192_ocb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_192_ocb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_192_ocb_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aes_256_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_256_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_256_ecb_procname);
 end;
 
 
 function  ERR_EVP_aes_256_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_256_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_256_cbc_procname);
 end;
 
 
 function  ERR_EVP_aes_256_cfb1: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_256_cfb1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_256_cfb1_procname);
 end;
 
 
 function  ERR_EVP_aes_256_cfb8: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_256_cfb8_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_256_cfb8_procname);
 end;
 
 
 function  ERR_EVP_aes_256_cfb128: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_256_cfb128_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_256_cfb128_procname);
 end;
 
 
   //EVP_aes_256_cfb EVP_aes_256_cfb128
 function  ERR_EVP_aes_256_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_256_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_256_ofb_procname);
 end;
 
 
 function  ERR_EVP_aes_256_ctr: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_256_ctr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_256_ctr_procname);
 end;
 
 
 function  ERR_EVP_aes_256_ccm: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_256_ccm_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_256_ccm_procname);
 end;
 
 
 function  ERR_EVP_aes_256_gcm: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_256_gcm_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_256_gcm_procname);
 end;
 
 
 function  ERR_EVP_aes_256_xts: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_256_xts_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_256_xts_procname);
 end;
 
 
 function  ERR_EVP_aes_256_wrap: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_256_wrap_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_256_wrap_procname);
 end;
 
 
 function  ERR_EVP_aes_256_wrap_pad: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_256_wrap_pad_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_256_wrap_pad_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aes_256_ocb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_256_ocb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_256_ocb_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aes_128_cbc_hmac_sha1: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_128_cbc_hmac_sha1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_128_cbc_hmac_sha1_procname);
 end;
 
 
 function  ERR_EVP_aes_256_cbc_hmac_sha1: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_256_cbc_hmac_sha1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_256_cbc_hmac_sha1_procname);
 end;
 
 
 function  ERR_EVP_aes_128_cbc_hmac_sha256: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_128_cbc_hmac_sha256_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_128_cbc_hmac_sha256_procname);
 end;
 
 
 function  ERR_EVP_aes_256_cbc_hmac_sha256: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aes_256_cbc_hmac_sha256_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aes_256_cbc_hmac_sha256_procname);
 end;
 
 
 
 function  ERR_EVP_aria_128_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_128_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_128_ecb_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_128_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_128_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_128_cbc_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_128_cfb1: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_128_cfb1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_128_cfb1_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_128_cfb8: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_128_cfb8_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_128_cfb8_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_128_cfb128: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_128_cfb128_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_128_cfb128_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_128_ctr: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_128_ctr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_128_ctr_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_128_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_128_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_128_ofb_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_128_gcm: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_128_gcm_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_128_gcm_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_128_ccm: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_128_ccm_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_128_ccm_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_192_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_192_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_192_ecb_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_192_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_192_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_192_cbc_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_192_cfb1: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_192_cfb1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_192_cfb1_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_192_cfb8: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_192_cfb8_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_192_cfb8_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_192_cfb128: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_192_cfb128_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_192_cfb128_procname);
 end;
 
  {introduced 1.1.0}
   //EVP_aria_192_cfb EVP_aria_192_cfb128
 function  ERR_EVP_aria_192_ctr: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_192_ctr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_192_ctr_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_192_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_192_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_192_ofb_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_192_gcm: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_192_gcm_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_192_gcm_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_192_ccm: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_192_ccm_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_192_ccm_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_256_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_256_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_256_ecb_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_256_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_256_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_256_cbc_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_256_cfb1: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_256_cfb1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_256_cfb1_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_256_cfb8: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_256_cfb8_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_256_cfb8_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_256_cfb128: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_256_cfb128_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_256_cfb128_procname);
 end;
 
  {introduced 1.1.0}
   //EVP_aria_256_cfb EVP_aria_256_cfb128
 function  ERR_EVP_aria_256_ctr: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_256_ctr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_256_ctr_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_256_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_256_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_256_ofb_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_256_gcm: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_256_gcm_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_256_gcm_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_aria_256_ccm: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_aria_256_ccm_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_aria_256_ccm_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_camellia_128_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_128_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_128_ecb_procname);
 end;
 
 
 function  ERR_EVP_camellia_128_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_128_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_128_cbc_procname);
 end;
 
 
 function  ERR_EVP_camellia_128_cfb1: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_128_cfb1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_128_cfb1_procname);
 end;
 
 
 function  ERR_EVP_camellia_128_cfb8: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_128_cfb8_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_128_cfb8_procname);
 end;
 
 
 function  ERR_EVP_camellia_128_cfb128: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_128_cfb128_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_128_cfb128_procname);
 end;
 
 
   //EVP_camellia_128_cfb EVP_camellia_128_cfb128
 function  ERR_EVP_camellia_128_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_128_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_128_ofb_procname);
 end;
 
 
 function  ERR_EVP_camellia_128_ctr: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_128_ctr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_128_ctr_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_camellia_192_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_192_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_192_ecb_procname);
 end;
 
 
 function  ERR_EVP_camellia_192_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_192_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_192_cbc_procname);
 end;
 
 
 function  ERR_EVP_camellia_192_cfb1: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_192_cfb1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_192_cfb1_procname);
 end;
 
 
 function  ERR_EVP_camellia_192_cfb8: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_192_cfb8_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_192_cfb8_procname);
 end;
 
 
 function  ERR_EVP_camellia_192_cfb128: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_192_cfb128_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_192_cfb128_procname);
 end;
 
 
   //EVP_camellia_192_cfb EVP_camellia_192_cfb128
 function  ERR_EVP_camellia_192_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_192_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_192_ofb_procname);
 end;
 
 
 function  ERR_EVP_camellia_192_ctr: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_192_ctr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_192_ctr_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_camellia_256_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_256_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_256_ecb_procname);
 end;
 
 
 function  ERR_EVP_camellia_256_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_256_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_256_cbc_procname);
 end;
 
 
 function  ERR_EVP_camellia_256_cfb1: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_256_cfb1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_256_cfb1_procname);
 end;
 
 
 function  ERR_EVP_camellia_256_cfb8: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_256_cfb8_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_256_cfb8_procname);
 end;
 
 
 function  ERR_EVP_camellia_256_cfb128: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_256_cfb128_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_256_cfb128_procname);
 end;
 
 
   //EVP_camellia_256_cfb EVP_camellia_256_cfb128
 function  ERR_EVP_camellia_256_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_256_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_256_ofb_procname);
 end;
 
 
 function  ERR_EVP_camellia_256_ctr: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_camellia_256_ctr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_camellia_256_ctr_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_chacha20: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_chacha20_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_chacha20_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_chacha20_poly1305: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_chacha20_poly1305_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_chacha20_poly1305_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_seed_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_seed_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_seed_ecb_procname);
 end;
 
 
 function  ERR_EVP_seed_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_seed_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_seed_cbc_procname);
 end;
 
 
 function  ERR_EVP_seed_cfb128: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_seed_cfb128_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_seed_cfb128_procname);
 end;
 
 
   //EVP_seed_cfb EVP_seed_cfb128
 function  ERR_EVP_seed_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_seed_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_seed_ofb_procname);
 end;
 
 
 
 function  ERR_EVP_sm4_ecb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_sm4_ecb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_sm4_ecb_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_sm4_cbc: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_sm4_cbc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_sm4_cbc_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_sm4_cfb128: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_sm4_cfb128_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_sm4_cfb128_procname);
 end;
 
  {introduced 1.1.0}
   //EVP_sm4_cfb EVP_sm4_cfb128
 function  ERR_EVP_sm4_ofb: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_sm4_ofb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_sm4_ofb_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_sm4_ctr: PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_sm4_ctr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_sm4_ctr_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_add_cipher(const cipher: PEVP_CIPHER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_add_cipher_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_add_cipher_procname);
 end;
 
 
 function  ERR_EVP_add_digest(const digest: PEVP_MD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_add_digest_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_add_digest_procname);
 end;
 
 
 
 function  ERR_EVP_get_cipherbyname(const name: PIdAnsiChar): PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_get_cipherbyname_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_get_cipherbyname_procname);
 end;
 
 
 function  ERR_EVP_get_digestbyname(const name: PIdAnsiChar): PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_get_digestbyname_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_get_digestbyname_procname);
 end;
 
 
 
 procedure  ERR_EVP_CIPHER_do_all(AFn: fn; arg: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_do_all_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_do_all_procname);
 end;
 
 
 procedure  ERR_EVP_CIPHER_do_all_sorted(AFn: fn; arg: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_do_all_sorted_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_do_all_sorted_procname);
 end;
 
 
 
 procedure  ERR_EVP_MD_do_all(AFn: fn; arg: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_do_all_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_do_all_procname);
 end;
 
 
 procedure  ERR_EVP_MD_do_all_sorted(AFn: fn; arg: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_MD_do_all_sorted_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_MD_do_all_sorted_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_decrypt_old(dec_key: PByte; const enc_key: PByte; enc_key_len: TIdC_INT; private_key: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_decrypt_old_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_decrypt_old_procname);
 end;
 
 
 function  ERR_EVP_PKEY_encrypt_old(dec_key: PByte; const enc_key: PByte; key_len: TIdC_INT; pub_key: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_encrypt_old_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_encrypt_old_procname);
 end;
 
 
 function  ERR_EVP_PKEY_type(type_: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_type_procname);
 end;
 
 
 function  ERR_EVP_PKEY_id(const pkey: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_id_procname);
 end;
 
  
 function  ERR_EVP_PKEY_base_id(const pkey: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_base_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_base_id_procname);
 end;
 
  
 function  ERR_EVP_PKEY_bits(const pkey: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_bits_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_bits_procname);
 end;
 
  
 function  ERR_EVP_PKEY_security_bits(const pkey: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_security_bits_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_security_bits_procname);
 end;
 
  
 function  ERR_EVP_PKEY_size(const pkey: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_size_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_size_procname);
 end;
 
  
 function  ERR_EVP_PKEY_set_type(pkey: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_set_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_set_type_procname);
 end;
 
 
 function  ERR_EVP_PKEY_set_type_str(pkey: PEVP_PKEY; const str: PIdAnsiChar; len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_set_type_str_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_set_type_str_procname);
 end;
 
 
 function  ERR_EVP_PKEY_set_alias_type(pkey: PEVP_PKEY; type_: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_set_alias_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_set_alias_type_procname);
 end;
 
  
 
 function  ERR_EVP_PKEY_set1_engine(pkey: PEVP_PKEY; e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_set1_engine_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_set1_engine_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_PKEY_get0_engine(const pkey: PEVP_PKEY): PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_engine_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_engine_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_PKEY_assign(pkey: PEVP_PKEY; type_: TIdC_INT; key: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_assign_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_assign_procname);
 end;
 
 
 function  ERR_EVP_PKEY_get0(const pkey: PEVP_PKEY): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_procname);
 end;
 
 
 function  ERR_EVP_PKEY_get0_hmac(const pkey: PEVP_PKEY; len: PIdC_SIZET): PByte; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_hmac_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_hmac_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_PKEY_get0_poly1305(const pkey: PEVP_PKEY; len: PIdC_SIZET): PByte; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_poly1305_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_poly1305_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_PKEY_get0_siphash(const pkey: PEVP_PKEY; len: PIdC_SIZET): PByte; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_siphash_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_siphash_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_PKEY_set1_RSA(pkey: PEVP_PKEY; key: PRSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_set1_RSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_set1_RSA_procname);
 end;
 
 
 function  ERR_EVP_PKEY_get0_RSA(pkey: PEVP_PKEY): PRSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_RSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_RSA_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_PKEY_get1_RSA(pkey: PEVP_PKEY): PRSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get1_RSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get1_RSA_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_set1_DSA(pkey: PEVP_PKEY; key: PDSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_set1_DSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_set1_DSA_procname);
 end;
 
 
 function  ERR_EVP_PKEY_get0_DSA(pkey: PEVP_PKEY): PDSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_DSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_DSA_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_PKEY_get1_DSA(pkey: PEVP_PKEY): PDSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get1_DSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get1_DSA_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_set1_DH(pkey: PEVP_PKEY; key: PDH): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_set1_DH_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_set1_DH_procname);
 end;
 
 
 function  ERR_EVP_PKEY_get0_DH(pkey: PEVP_PKEY): PDH; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_DH_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_DH_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_PKEY_get1_DH(pkey: PEVP_PKEY): PDH; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get1_DH_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get1_DH_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_set1_EC_KEY(pkey: PEVP_PKEY; key: PEC_KEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_set1_EC_KEY_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_set1_EC_KEY_procname);
 end;
 
 
 function  ERR_EVP_PKEY_get0_EC_KEY(pkey: PEVP_PKEY): PEC_KEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_EC_KEY_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_EC_KEY_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_PKEY_get1_EC_KEY(pkey: PEVP_PKEY): PEC_KEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get1_EC_KEY_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get1_EC_KEY_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_new: PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_new_procname);
 end;
 
 
 function  ERR_EVP_PKEY_up_ref(pkey: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_up_ref_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_up_ref_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_EVP_PKEY_free(pkey: PEVP_PKEY); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_free_procname);
 end;
 
 
 
 function  ERR_d2i_PublicKey(type_: TIdC_INT; a: PPEVP_PKEY; const pp: PPByte; length: TIdC_LONG): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_PublicKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_PublicKey_procname);
 end;
 
 
 function  ERR_i2d_PublicKey(a: PEVP_PKEY; pp: PPByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_PublicKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_PublicKey_procname);
 end;
 
 
 
 function  ERR_d2i_PrivateKey(type_: TIdC_INT; a: PEVP_PKEY; const pp: PPByte; length: TIdC_LONG): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_PrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_PrivateKey_procname);
 end;
 
 
 function  ERR_d2i_AutoPrivateKey(a: PPEVP_PKEY; const pp: PPByte; length: TIdC_LONG): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_AutoPrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_AutoPrivateKey_procname);
 end;
 
 
 function  ERR_i2d_PrivateKey(a: PEVP_PKEY; pp: PPByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_PrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_PrivateKey_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_copy_parameters(to_: PEVP_PKEY; const from: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_copy_parameters_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_copy_parameters_procname);
 end;
 
 
 function  ERR_EVP_PKEY_missing_parameters(const pkey: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_missing_parameters_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_missing_parameters_procname);
 end;
 
 
 function  ERR_EVP_PKEY_save_parameters(pkey: PEVP_PKEY; mode: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_save_parameters_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_save_parameters_procname);
 end;
 
 
 function  ERR_EVP_PKEY_cmp_parameters(const a: PEVP_PKEY; const b: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_cmp_parameters_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_cmp_parameters_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_cmp(const a: PEVP_PKEY; const b: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_cmp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_cmp_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_print_public(out_: PBIO; const pkey: PEVP_PKEY; indent: TIdC_INT; pctx: PASN1_PCTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_print_public_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_print_public_procname);
 end;
 
 
 function  ERR_EVP_PKEY_print_private(out_: PBIO; const pkey: PEVP_PKEY; indent: TIdC_INT; pctx: PASN1_PCTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_print_private_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_print_private_procname);
 end;
 
 
 function  ERR_EVP_PKEY_print_params(out_: PBIO; const pkey: PEVP_PKEY; indent: TIdC_INT; pctx: PASN1_PCTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_print_params_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_print_params_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_get_default_digest_nid(pkey: PEVP_PKEY; pnid: PIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get_default_digest_nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get_default_digest_nid_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_set1_tls_encodedpoint(pkey: PEVP_PKEY; const pt: PByte; ptlen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_set1_tls_encodedpoint_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_set1_tls_encodedpoint_procname);
 end;
 
  
 function  ERR_EVP_PKEY_get1_tls_encodedpoint(pkey: PEVP_PKEY; ppt: PPByte): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get1_tls_encodedpoint_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get1_tls_encodedpoint_procname);
 end;
 
  
 
 function  ERR_EVP_CIPHER_type(const ctx: PEVP_CIPHER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_type_procname);
 end;
 
  
@@ -5987,13 +5987,13 @@ end;
   (* calls methods *)
 function  ERR_EVP_CIPHER_param_to_asn1(c: PEVP_CIPHER_CTX; type_: PASN1_TYPE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_param_to_asn1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_param_to_asn1_procname);
 end;
 
 
 function  ERR_EVP_CIPHER_asn1_to_param(c: PEVP_CIPHER_CTX; type_: PASN1_TYPE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_asn1_to_param_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_asn1_to_param_procname);
 end;
 
 
@@ -6001,13 +6001,13 @@ end;
   (* These are used by EVP_CIPHER methods *)
 function  ERR_EVP_CIPHER_set_asn1_iv(c: PEVP_CIPHER_CTX; type_: PASN1_TYPE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_set_asn1_iv_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_set_asn1_iv_procname);
 end;
 
 
 function  ERR_EVP_CIPHER_get_asn1_iv(c: PEVP_CIPHER_CTX; type_: PASN1_TYPE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_CIPHER_get_asn1_iv_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_get_asn1_iv_procname);
 end;
 
 
@@ -6015,53 +6015,53 @@ end;
   (* PKCS5 password based encryption *)
 function  ERR_PKCS5_PBE_keyivgen(ctx: PEVP_CIPHER_CTX; const pass: PIdAnsiChar; passlen: TIdC_INT; param: PASN1_TYPE; const cipher: PEVP_CIPHER; const md: PEVP_MD; en_de: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS5_PBE_keyivgen_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS5_PBE_keyivgen_procname);
 end;
 
 
 function  ERR_PKCS5_PBKDF2_HMAC_SHA1(const pass: PIdAnsiChar; passlen: TIdC_INT; const salt: PByte; saltlen: TIdC_INT; iter: TIdC_INT; keylen: TIdC_INT; out_: PByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS5_PBKDF2_HMAC_SHA1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS5_PBKDF2_HMAC_SHA1_procname);
 end;
 
 
 function  ERR_PKCS5_PBKDF2_HMAC(const pass: PIdAnsiChar; passlen: TIdC_INT; const salt: PByte; saltlen: TIdC_INT; iter: TIdC_INT; const digest: PEVP_MD; keylen: TIdC_INT; out_: PByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS5_PBKDF2_HMAC_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS5_PBKDF2_HMAC_procname);
 end;
 
 
 function  ERR_PKCS5_v2_PBE_keyivgen(ctx: PEVP_CIPHER_CTX; const pass: PIdAnsiChar; passlen: TIdC_INT; param: PASN1_TYPE; const cipher: PEVP_CIPHER; const md: PEVP_MD; en_de: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS5_v2_PBE_keyivgen_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS5_v2_PBE_keyivgen_procname);
 end;
 
 
 
 function  ERR_EVP_PBE_scrypt(const pass: PIdAnsiChar; passlen: TIdC_SIZET; const salt: PByte; saltlen: TIdC_SIZET; N: TIdC_UINT64; r: TIdC_UINT64; p: TIdC_UINT64; maxmem: TIdC_UINT64; key: PByte; keylen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PBE_scrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PBE_scrypt_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_PKCS5_v2_scrypt_keyivgen(ctx: PEVP_CIPHER_CTX; const pass: PIdAnsiChar; passlen: TIdC_INT; param: PASN1_TYPE; const c: PEVP_CIPHER; const md: PEVP_MD; en_de: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS5_v2_scrypt_keyivgen_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS5_v2_scrypt_keyivgen_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_PKCS5_PBE_add; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS5_PBE_add_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS5_PBE_add_procname);
 end;
 
 
 
 function  ERR_EVP_PBE_CipherInit(pbe_obj: PASN1_OBJECT; const pass: PIdAnsiChar; passlen: TIdC_INT; param: PASN1_TYPE; ctx: PEVP_CIPHER_CTX; en_de: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PBE_CipherInit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PBE_CipherInit_procname);
 end;
 
 
@@ -6069,857 +6069,857 @@ end;
   (* PBE type *)
 function  ERR_EVP_PBE_alg_add_type(pbe_type: TIdC_INT; pbe_nid: TIdC_INT; cipher_nid: TIdC_INT; md_nid: TIdC_INT; keygen: PEVP_PBE_KEYGEN): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PBE_alg_add_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PBE_alg_add_type_procname);
 end;
 
 
 function  ERR_EVP_PBE_alg_add(nid: TIdC_INT; const cipher: PEVP_CIPHER; const md: PEVP_MD; keygen: PEVP_PBE_KEYGEN): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PBE_alg_add_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PBE_alg_add_procname);
 end;
 
 
 function  ERR_EVP_PBE_find(type_: TIdC_INT; pbe_nid: TIdC_INT; pcnid: PIdC_INT; pmnid: PIdC_INT; pkeygen: PPEVP_PBE_KEYGEN): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PBE_find_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PBE_find_procname);
 end;
 
 
 procedure  ERR_EVP_PBE_cleanup; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PBE_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PBE_cleanup_procname);
 end;
 
 
 function  ERR_EVP_PBE_get(ptype: PIdC_INT; ppbe_nid: PIdC_INT; num: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PBE_get_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PBE_get_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_PKEY_asn1_get_count: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_get_count_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_get_count_procname);
 end;
 
 
 function  ERR_EVP_PKEY_asn1_get0(idx: TIdC_INT): PEVP_PKEY_ASN1_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_get0_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_get0_procname);
 end;
 
 
 function  ERR_EVP_PKEY_asn1_find(pe: PPENGINE; type_: TIdC_INT): PEVP_PKEY_ASN1_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_find_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_find_procname);
 end;
 
 
 function  ERR_EVP_PKEY_asn1_find_str(pe: PPENGINE; const str: PIdAnsiChar; len: TIdC_INT): PEVP_PKEY_ASN1_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_find_str_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_find_str_procname);
 end;
 
 
 function  ERR_EVP_PKEY_asn1_add0(const ameth: PEVP_PKEY_ASN1_METHOD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_add0_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_add0_procname);
 end;
 
 
 function  ERR_EVP_PKEY_asn1_add_alias(to_: TIdC_INT; from: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_add_alias_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_add_alias_procname);
 end;
 
 
 function  ERR_EVP_PKEY_asn1_get0_info(ppkey_id: PIdC_INT; pkey_base_id: PIdC_INT; ppkey_flags: PIdC_INT; const pinfo: PPIdAnsiChar; const ppem_str: PPIdAnsiChar; const ameth: PEVP_PKEY_ASN1_METHOD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_get0_info_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_get0_info_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_get0_asn1(const pkey: PEVP_PKEY): PEVP_PKEY_ASN1_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_asn1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get0_asn1_procname);
 end;
 
 
 function  ERR_EVP_PKEY_asn1_new(id: TIdC_INT; flags: TIdC_INT; const pem_str: PIdAnsiChar; const info: PIdAnsiChar): PEVP_PKEY_ASN1_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_new_procname);
 end;
 
 
 procedure  ERR_EVP_PKEY_asn1_copy(dst: PEVP_PKEY_ASN1_METHOD; const src: PEVP_PKEY_ASN1_METHOD); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_copy_procname);
 end;
 
 
 procedure  ERR_EVP_PKEY_asn1_free(ameth: PEVP_PKEY_ASN1_METHOD); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_free_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_asn1_set_public(ameth: PEVP_PKEY_ASN1_METHOD; APub_decode: pub_decode; APub_encode: pub_encode; APub_cmd: pub_cmd; APub_print: pub_print; APkey_size: pkey_size; APkey_bits: pkey_bits); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_public_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_public_procname);
 end;
 
 
 procedure  ERR_EVP_PKEY_asn1_set_private(ameth: PEVP_PKEY_ASN1_METHOD; APriv_decode: priv_decode; APriv_encode: priv_encode; APriv_print: priv_print); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_private_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_private_procname);
 end;
 
 
 procedure  ERR_EVP_PKEY_asn1_set_param(ameth: PEVP_PKEY_ASN1_METHOD; AParam_decode: param_decode; AParam_encode: param_encode; AParam_missing: param_missing; AParam_copy: param_copy; AParam_cmp: param_cmp; AParam_print: param_print); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_param_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_param_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_asn1_set_free(ameth: PEVP_PKEY_ASN1_METHOD; APkey_free: pkey_free); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_free_procname);
 end;
 
 
 procedure  ERR_EVP_PKEY_asn1_set_ctrl(ameth: PEVP_PKEY_ASN1_METHOD; APkey_ctrl: pkey_ctrl); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_ctrl_procname);
 end;
 
 
 procedure  ERR_EVP_PKEY_asn1_set_item(ameth: PEVP_PKEY_ASN1_METHOD; AItem_verify: item_verify; AItem_sign: item_sign); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_item_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_item_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_asn1_set_siginf(ameth: PEVP_PKEY_ASN1_METHOD; ASiginf_set: siginf_set); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_siginf_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_siginf_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_asn1_set_check(ameth: PEVP_PKEY_ASN1_METHOD; APkey_check: pkey_check); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_check_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_check_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_asn1_set_public_check(ameth: PEVP_PKEY_ASN1_METHOD; APkey_pub_check: pkey_pub_check); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_public_check_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_public_check_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_asn1_set_param_check(ameth: PEVP_PKEY_ASN1_METHOD; APkey_param_check: pkey_param_check); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_param_check_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_param_check_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_asn1_set_set_priv_key(ameth: PEVP_PKEY_ASN1_METHOD; ASet_priv_key: set_priv_key); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_set_priv_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_set_priv_key_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_EVP_PKEY_asn1_set_set_pub_key(ameth: PEVP_PKEY_ASN1_METHOD; ASet_pub_key: set_pub_key); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_set_pub_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_set_pub_key_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_EVP_PKEY_asn1_set_get_priv_key(ameth: PEVP_PKEY_ASN1_METHOD; AGet_priv_key: get_priv_key); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_get_priv_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_get_priv_key_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_EVP_PKEY_asn1_set_get_pub_key(ameth: PEVP_PKEY_ASN1_METHOD; AGet_pub_key: get_pub_key); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_get_pub_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_get_pub_key_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_asn1_set_security_bits(ameth: PEVP_PKEY_ASN1_METHOD; APkey_security_bits: pkey_security_bits); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_security_bits_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_asn1_set_security_bits_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_PKEY_meth_find(type_: TIdC_INT): PEVP_PKEY_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_find_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_find_procname);
 end;
 
 
 function  ERR_EVP_PKEY_meth_new(id: TIdC_INT; flags: TIdC_INT): PEVP_PKEY_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_new_procname);
 end;
 
 
 procedure  ERR_EVP_PKEY_meth_get0_info(ppkey_id: PIdC_INT; pflags: PIdC_INT; const meth: PEVP_PKEY_METHOD); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get0_info_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get0_info_procname);
 end;
 
 
 procedure  ERR_EVP_PKEY_meth_copy(dst: PEVP_PKEY_METHOD; const src: PEVP_PKEY_METHOD); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_copy_procname);
 end;
 
 
 procedure  ERR_EVP_PKEY_meth_free(pmeth: PEVP_PKEY_METHOD); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_free_procname);
 end;
 
 
 function  ERR_EVP_PKEY_meth_add0(const pmeth: PEVP_PKEY_METHOD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_add0_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_add0_procname);
 end;
 
 
 function  ERR_EVP_PKEY_meth_remove(const pmeth: PEVP_PKEY_METHOD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_remove_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_remove_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_PKEY_meth_get_count: TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_count_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_count_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_PKEY_meth_get0(idx: TIdC_SIZET): PEVP_PKEY_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get0_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get0_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_PKEY_CTX_new(pkey: PEVP_PKEY; e: PENGINE): PEVP_PKEY_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_new_procname);
 end;
 
 
 function  ERR_EVP_PKEY_CTX_new_id(id: TIdC_INT; e: PENGINE): PEVP_PKEY_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_new_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_new_id_procname);
 end;
 
 
 function  ERR_EVP_PKEY_CTX_dup(ctx: PEVP_PKEY_CTX): PEVP_PKEY_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_dup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_dup_procname);
 end;
 
 
 procedure  ERR_EVP_PKEY_CTX_free(ctx: PEVP_PKEY_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_free_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_CTX_ctrl(ctx: PEVP_PKEY_CTX; keytype: TIdC_INT; optype: TIdC_INT; cmd: TIdC_INT; p1: TIdC_INT; p2: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_ctrl_procname);
 end;
 
 
 function  ERR_EVP_PKEY_CTX_ctrl_str(ctx: PEVP_PKEY_CTX; const type_: PIdAnsiChar; const value: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_ctrl_str_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_ctrl_str_procname);
 end;
 
 
 function  ERR_EVP_PKEY_CTX_ctrl_uint64(ctx: PEVP_PKEY_CTX; keytype: TIdC_INT; optype: TIdC_INT; cmd: TIdC_INT; value: TIdC_UINT64): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_ctrl_uint64_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_ctrl_uint64_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_PKEY_CTX_str2ctrl(ctx: PEVP_PKEY_CTX; cmd: TIdC_INT; const str: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_str2ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_str2ctrl_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_PKEY_CTX_hex2ctrl(ctx: PEVP_PKEY_CTX; cmd: TIdC_INT; const hex: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_hex2ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_hex2ctrl_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_PKEY_CTX_md(ctx: PEVP_PKEY_CTX; optype: TIdC_INT; cmd: TIdC_INT; const md: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_md_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_md_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_PKEY_CTX_get_operation(ctx: PEVP_PKEY_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_get_operation_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_get_operation_procname);
 end;
 
 
 procedure  ERR_EVP_PKEY_CTX_set0_keygen_info(ctx: PEVP_PKEY_CTX; dat: PIdC_INT; datlen: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_set0_keygen_info_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_set0_keygen_info_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_new_mac_key(type_: TIdC_INT; e: PENGINE; const key: PByte; keylen: TIdC_INT): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_new_mac_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_new_mac_key_procname);
 end;
 
 
 function  ERR_EVP_PKEY_new_raw_private_key(type_: TIdC_INT; e: PENGINE; const priv: PByte; len: TIdC_SIZET): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_new_raw_private_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_new_raw_private_key_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_PKEY_new_raw_public_key(type_: TIdC_INT; e: PENGINE; const pub: PByte; len: TIdC_SIZET): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_new_raw_public_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_new_raw_public_key_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_PKEY_get_raw_private_key(const pkey: PEVP_PKEY; priv: PByte; len: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get_raw_private_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get_raw_private_key_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_PKEY_get_raw_public_key(const pkey: PEVP_PKEY; pub: PByte; len: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_get_raw_public_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_get_raw_public_key_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_EVP_PKEY_new_CMAC_key(e: PENGINE; const priv: PByte; len: TIdC_SIZET; const cipher: PEVP_CIPHER): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_new_CMAC_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_new_CMAC_key_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_CTX_set_data(ctx: PEVP_PKEY_CTX; data: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_set_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_set_data_procname);
 end;
 
 
 function  ERR_EVP_PKEY_CTX_get_data(ctx: PEVP_PKEY_CTX): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_get_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_get_data_procname);
 end;
 
 
 function  ERR_EVP_PKEY_CTX_get0_pkey(ctx: PEVP_PKEY_CTX): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_get0_pkey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_get0_pkey_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_CTX_get0_peerkey(ctx: PEVP_PKEY_CTX): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_get0_peerkey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_get0_peerkey_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_CTX_set_app_data(ctx: PEVP_PKEY_CTX; data: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_set_app_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_set_app_data_procname);
 end;
 
 
 function  ERR_EVP_PKEY_CTX_get_app_data(ctx: PEVP_PKEY_CTX): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_get_app_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_get_app_data_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_sign_init(ctx: PEVP_PKEY_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_sign_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_sign_init_procname);
 end;
 
 
 function  ERR_EVP_PKEY_sign(ctx: PEVP_PKEY_CTX; sig: PByte; siglen: PIdC_SIZET; const tbs: PByte; tbslen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_sign_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_sign_procname);
 end;
 
 
 function  ERR_EVP_PKEY_verify_init(ctx: PEVP_PKEY_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_verify_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_verify_init_procname);
 end;
 
 
 function  ERR_EVP_PKEY_verify(ctx: PEVP_PKEY_CTX; const sig: PByte; siglen: TIdC_SIZET; const tbs: PByte; tbslen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_verify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_verify_procname);
 end;
 
 
 function  ERR_EVP_PKEY_verify_recover_init(ctx: PEVP_PKEY_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_verify_recover_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_verify_recover_init_procname);
 end;
 
 
 function  ERR_EVP_PKEY_verify_recover(ctx: PEVP_PKEY_CTX; rout: PByte; routlen: PIdC_SIZET; const sig: PByte; siglen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_verify_recover_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_verify_recover_procname);
 end;
 
 
 function  ERR_EVP_PKEY_encrypt_init(ctx: PEVP_PKEY_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_encrypt_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_encrypt_init_procname);
 end;
 
 
 function  ERR_EVP_PKEY_encrypt(ctx: PEVP_PKEY_CTX; out_: PByte; outlen: PIdC_SIZET; const in_: PByte; inlen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_encrypt_procname);
 end;
 
 
 function  ERR_EVP_PKEY_decrypt_init(ctx: PEVP_PKEY_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_decrypt_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_decrypt_init_procname);
 end;
 
 
 function  ERR_EVP_PKEY_decrypt(ctx: PEVP_PKEY_CTX; out_: PByte; outlen: PIdC_SIZET; const in_: PByte; inlen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_decrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_decrypt_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_derive_init(ctx: PEVP_PKEY_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_derive_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_derive_init_procname);
 end;
 
 
 function  ERR_EVP_PKEY_derive_set_peer(ctx: PEVP_PKEY_CTX; peer: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_derive_set_peer_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_derive_set_peer_procname);
 end;
 
 
 function  ERR_EVP_PKEY_derive(ctx: PEVP_PKEY_CTX; key: PByte; keylen: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_derive_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_derive_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_paramgen_init(ctx: PEVP_PKEY_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_paramgen_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_paramgen_init_procname);
 end;
 
 
 function  ERR_EVP_PKEY_paramgen(ctx: PEVP_PKEY_CTX; ppkey: PPEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_paramgen_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_paramgen_procname);
 end;
 
 
 function  ERR_EVP_PKEY_keygen_init(ctx: PEVP_PKEY_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_keygen_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_keygen_init_procname);
 end;
 
 
 function  ERR_EVP_PKEY_keygen(ctx: PEVP_PKEY_CTX; ppkey: PPEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_keygen_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_keygen_procname);
 end;
 
 
 function  ERR_EVP_PKEY_check(ctx: PEVP_PKEY_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_check_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_check_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_PKEY_public_check(ctx: PEVP_PKEY_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_public_check_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_public_check_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_EVP_PKEY_param_check(ctx: PEVP_PKEY_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_param_check_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_param_check_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_CTX_set_cb(ctx: PEVP_PKEY_CTX; cb: EVP_PKEY_gen_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_set_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_set_cb_procname);
 end;
 
 
 function  ERR_EVP_PKEY_CTX_get_cb(ctx: PEVP_PKEY_CTX): EVP_PKEY_gen_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_get_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_get_cb_procname);
 end;
 
 
 
 function  ERR_EVP_PKEY_CTX_get_keygen_info(ctx: PEVP_PKEY_CTX; idx: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_get_keygen_info_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_CTX_get_keygen_info_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_set_init(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_init: EVP_PKEY_meth_init); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_init_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_set_copy(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_copy_cb: EVP_PKEY_meth_copy_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_copy_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_set_cleanup(pmeth: PEVP_PKEY_METHOD; PEVP_PKEY_meth_cleanup: EVP_PKEY_meth_cleanup); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_cleanup_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_set_paramgen(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_paramgen_init: EVP_PKEY_meth_paramgen_init; AEVP_PKEY_meth_paramgen: EVP_PKEY_meth_paramgen_init); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_paramgen_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_paramgen_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_set_keygen(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_keygen_init: EVP_PKEY_meth_keygen_init; AEVP_PKEY_meth_keygen: EVP_PKEY_meth_keygen); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_keygen_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_keygen_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_set_sign(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_sign_init: EVP_PKEY_meth_sign_init; AEVP_PKEY_meth_sign: EVP_PKEY_meth_sign); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_sign_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_sign_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_set_verify(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_verify_init: EVP_PKEY_meth_verify_init; AEVP_PKEY_meth_verify: EVP_PKEY_meth_verify_init); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_verify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_verify_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_set_verify_recover(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_verify_recover_init: EVP_PKEY_meth_verify_recover_init; AEVP_PKEY_meth_verify_recover: EVP_PKEY_meth_verify_recover_init); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_verify_recover_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_verify_recover_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_set_signctx(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_signctx_init: EVP_PKEY_meth_signctx_init; AEVP_PKEY_meth_signctx: EVP_PKEY_meth_signctx); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_signctx_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_signctx_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_set_verifyctx(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_verifyctx_init: EVP_PKEY_meth_verifyctx_init; AEVP_PKEY_meth_verifyctx: EVP_PKEY_meth_verifyctx); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_verifyctx_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_verifyctx_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_set_encrypt(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_encrypt_init: EVP_PKEY_meth_encrypt_init; AEVP_PKEY_meth_encrypt: EVP_PKEY_meth_encrypt); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_encrypt_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_set_decrypt(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_decrypt_init: EVP_PKEY_meth_decrypt_init; AEVP_PKEY_meth_decrypt: EVP_PKEY_meth_decrypt); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_decrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_decrypt_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_set_derive(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_derive_init: EVP_PKEY_meth_derive_init; AEVP_PKEY_meth_derive: EVP_PKEY_meth_derive); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_derive_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_derive_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_set_ctrl(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_ctrl: EVP_PKEY_meth_ctrl; AEVP_PKEY_meth_ctrl_str: EVP_PKEY_meth_ctrl_str); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_ctrl_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_set_digestsign(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_digestsign: EVP_PKEY_meth_digestsign); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_digestsign_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_digestsign_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_meth_set_digestverify(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_digestverify: EVP_PKEY_meth_digestverify); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_digestverify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_digestverify_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_meth_set_check(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_check: EVP_PKEY_meth_check); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_check_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_check_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_meth_set_public_check(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_public_check: EVP_PKEY_meth_public_check); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_public_check_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_public_check_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_meth_set_param_check(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_param_check: EVP_PKEY_meth_param_check); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_param_check_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_param_check_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_meth_set_digest_custom(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_digest_custom: EVP_PKEY_meth_digest_custom); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_digest_custom_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_set_digest_custom_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_meth_get_init(const pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_init: PEVP_PKEY_meth_init); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_init_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_get_copy(const pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_copy: PEVP_PKEY_meth_copy); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_copy_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_get_cleanup(const pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_cleanup: PEVP_PKEY_meth_cleanup); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_cleanup_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_get_paramgen(const pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_paramgen_init: EVP_PKEY_meth_paramgen_init; AEVP_PKEY_meth_paramgen: PEVP_PKEY_meth_paramgen); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_paramgen_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_paramgen_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_get_keygen(const pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_keygen_init: EVP_PKEY_meth_keygen_init; AEVP_PKEY_meth_keygen: PEVP_PKEY_meth_keygen); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_keygen_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_keygen_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_get_sign(const pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_sign_init: PEVP_PKEY_meth_sign_init; AEVP_PKEY_meth_sign: PEVP_PKEY_meth_sign); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_sign_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_sign_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_get_verify(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_verify_init: PEVP_PKEY_meth_verify_init; AEVP_PKEY_meth_verify: PEVP_PKEY_meth_verify_init); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_verify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_verify_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_get_verify_recover(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_verify_recover_init: PEVP_PKEY_meth_verify_recover_init; AEVP_PKEY_meth_verify_recover: PEVP_PKEY_meth_verify_recover_init); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_verify_recover_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_verify_recover_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_get_signctx(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_signctx_init: PEVP_PKEY_meth_signctx_init; AEVP_PKEY_meth_signctx: PEVP_PKEY_meth_signctx); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_signctx_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_signctx_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_get_verifyctx(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_verifyctx_init: PEVP_PKEY_meth_verifyctx_init; AEVP_PKEY_meth_verifyctx: PEVP_PKEY_meth_verifyctx); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_verifyctx_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_verifyctx_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_get_encrypt(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_encrypt_init: PEVP_PKEY_meth_encrypt_init; AEVP_PKEY_meth_encrypt: PEVP_PKEY_meth_encrypt); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_encrypt_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_get_decrypt(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_decrypt_init: PEVP_PKEY_meth_decrypt_init; AEVP_PKEY_meth_decrypt: PEVP_PKEY_meth_decrypt); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_decrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_decrypt_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_get_derive(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_derive_init: PEVP_PKEY_meth_derive_init; AEVP_PKEY_meth_derive: PEVP_PKEY_meth_derive); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_derive_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_derive_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_get_ctrl(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_ctrl: PEVP_PKEY_meth_ctrl; AEVP_PKEY_meth_ctrl_str: PEVP_PKEY_meth_ctrl_str); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_ctrl_procname);
 end;
 
 
 
 procedure  ERR_EVP_PKEY_meth_get_digestsign(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_digestsign: PEVP_PKEY_meth_digestsign); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_digestsign_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_digestsign_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_meth_get_digestverify(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_digestverify: PEVP_PKEY_meth_digestverify); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_digestverify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_digestverify_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_meth_get_check(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_check: PEVP_PKEY_meth_check); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_check_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_check_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_meth_get_public_check(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_public_check: PEVP_PKEY_meth_public_check); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_public_check_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_public_check_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_meth_get_param_check(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_param_check: PEVP_PKEY_meth_param_check); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_param_check_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_param_check_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_PKEY_meth_get_digest_custom(pmeth: PEVP_PKEY_METHOD; AEVP_PKEY_meth_digest_custom: PEVP_PKEY_meth_digest_custom); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_digest_custom_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_PKEY_meth_get_digest_custom_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_EVP_add_alg_module; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_add_alg_module_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_add_alg_module_procname);
 end;
 
 
 
 procedure  ERR_OpenSSL_add_all_ciphers;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OpenSSL_add_all_ciphers_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OpenSSL_add_all_ciphers_procname);
 end;
 
  
 
 procedure  ERR_OpenSSL_add_all_digests;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OpenSSL_add_all_digests_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OpenSSL_add_all_digests_procname);
 end;
 
  
 
 procedure  ERR_EVP_cleanup; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(EVP_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_cleanup_procname);
 end;
 
  
@@ -24038,21 +24038,21 @@ end;
 {$IFNDEF OPENSSL_NO_MD2}
 function EVP_md2: PEVP_MD;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ROSUnsupported);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ROSUnsupported);
 end;
 {$ENDIF}
 
 {$IFNDEF OPENSSL_NO_MD4}
 function EVP_md4: PEVP_MD;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ROSUnsupported);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ROSUnsupported);
 end;
 {$ENDIF}
 
 {$IFNDEF OPENSSL_NO_MD5}
 function EVP_md5: PEVP_MD;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ROSUnsupported);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ROSUnsupported);
 end;
 {$ENDIF}
 

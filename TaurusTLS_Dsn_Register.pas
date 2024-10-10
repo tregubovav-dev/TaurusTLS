@@ -76,13 +76,13 @@ end;
 procedure Register;
 begin
   RegisterComponents(RSRegIndyIOHandlers{$IFDEF FPC}+RSProt{$ENDIF}, [
-    TIdServerIOHandlerSSLTaurusTLS,
-    TIdSSLIOHandlerSocketTaurusTLS
+    TTaurusTLSServerIOHandler,
+    TTaurusTLSIOHandlerSocket
   ]);
 
   {$IFDEF HAS_TSelectionEditor}
-  RegisterSelectionEditor(TIdServerIOHandlerSSLTaurusTLS, TTaurusTLSSelectionEditor);
-  RegisterSelectionEditor(TIdSSLIOHandlerSocketTaurusTLS, TTaurusTLSSelectionEditor);
+  RegisterSelectionEditor(TTaurusTLSServerIOHandler, TTaurusTLSSelectionEditor);
+  RegisterSelectionEditor(TTaurusTLSIOHandlerSocket, TTaurusTLSSelectionEditor);
   {$ENDIF}
 end;
 

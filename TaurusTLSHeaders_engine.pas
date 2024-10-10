@@ -1510,50 +1510,50 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_ENGINE_get_first: PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_first_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_first_procname);
 end;
 
 
 function  ERR_ENGINE_get_last: PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_last_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_last_procname);
 end;
 
 
 function  ERR_ENGINE_get_next(e: PENGINE): PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_next_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_next_procname);
 end;
 
 
 function  ERR_ENGINE_get_prev(e: PENGINE): PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_prev_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_prev_procname);
 end;
 
 
 function  ERR_ENGINE_add(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_add_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_add_procname);
 end;
 
 
 function  ERR_ENGINE_remove(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_remove_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_remove_procname);
 end;
 
 
 function  ERR_ENGINE_by_id(const id: PIdAnsiChar): PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_by_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_by_id_procname);
 end;
 
 
 
 procedure  ERR_ENGINE_load_builtin_engines; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_load_builtin_engines_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_load_builtin_engines_procname);
 end;
 
 
@@ -1564,13 +1564,13 @@ end;
   //
 function  ERR_ENGINE_get_table_flags: TIdC_UINT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_table_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_table_flags_procname);
 end;
 
 
 procedure  ERR_ENGINE_set_table_flags(flags: TIdC_UINT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_table_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_table_flags_procname);
 end;
 
 
@@ -1585,171 +1585,171 @@ end;
 
 function  ERR_ENGINE_register_RSA(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_RSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_RSA_procname);
 end;
 
 
 procedure  ERR_ENGINE_unregister_RSA(e: PENGINE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_unregister_RSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_unregister_RSA_procname);
 end;
 
 
 procedure  ERR_ENGINE_register_all_RSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_all_RSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_all_RSA_procname);
 end;
 
 
 
 function  ERR_ENGINE_register_DSA(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_DSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_DSA_procname);
 end;
 
 
 procedure  ERR_ENGINE_unregister_DSA(e: PENGINE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_unregister_DSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_unregister_DSA_procname);
 end;
 
 
 procedure  ERR_ENGINE_register_all_DSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_all_DSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_all_DSA_procname);
 end;
 
 
 
 function  ERR_ENGINE_register_EC(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_EC_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_EC_procname);
 end;
 
 
 procedure  ERR_ENGINE_unregister_EC(e: PENGINE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_unregister_EC_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_unregister_EC_procname);
 end;
 
 
 procedure  ERR_ENGINE_register_all_EC; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_all_EC_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_all_EC_procname);
 end;
 
 
 
 function  ERR_ENGINE_register_DH(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_DH_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_DH_procname);
 end;
 
 
 procedure  ERR_ENGINE_unregister_DH(e: PENGINE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_unregister_DH_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_unregister_DH_procname);
 end;
 
 
 procedure  ERR_ENGINE_register_all_DH; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_all_DH_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_all_DH_procname);
 end;
 
 
 
 function  ERR_ENGINE_register_RAND(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_RAND_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_RAND_procname);
 end;
 
 
 procedure  ERR_ENGINE_unregister_RAND(e: PENGINE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_unregister_RAND_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_unregister_RAND_procname);
 end;
 
 
 procedure  ERR_ENGINE_register_all_RAND; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_all_RAND_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_all_RAND_procname);
 end;
 
 
 
 function  ERR_ENGINE_register_ciphers(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_ciphers_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_ciphers_procname);
 end;
 
 
 procedure  ERR_ENGINE_unregister_ciphers(e: PENGINE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_unregister_ciphers_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_unregister_ciphers_procname);
 end;
 
 
 procedure  ERR_ENGINE_register_all_ciphers; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_all_ciphers_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_all_ciphers_procname);
 end;
 
 
 
 function  ERR_ENGINE_register_digests(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_digests_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_digests_procname);
 end;
 
 
 procedure  ERR_ENGINE_unregister_digests(e: PENGINE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_unregister_digests_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_unregister_digests_procname);
 end;
 
 
 procedure  ERR_ENGINE_register_all_digests; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_all_digests_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_all_digests_procname);
 end;
 
 
 
 function  ERR_ENGINE_register_pkey_meths(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_pkey_meths_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_pkey_meths_procname);
 end;
 
 
 procedure  ERR_ENGINE_unregister_pkey_meths(e: PENGINE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_unregister_pkey_meths_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_unregister_pkey_meths_procname);
 end;
 
 
 procedure  ERR_ENGINE_register_all_pkey_meths; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_all_pkey_meths_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_all_pkey_meths_procname);
 end;
 
 
 
 function  ERR_ENGINE_register_pkey_asn1_meths(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_pkey_asn1_meths_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_pkey_asn1_meths_procname);
 end;
 
 
 procedure  ERR_ENGINE_unregister_pkey_asn1_meths(e: PENGINE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_unregister_pkey_asn1_meths_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_unregister_pkey_asn1_meths_procname);
 end;
 
 
 procedure  ERR_ENGINE_register_all_pkey_asn1_meths; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_all_pkey_asn1_meths_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_all_pkey_asn1_meths_procname);
 end;
 
 
@@ -1762,13 +1762,13 @@ end;
   //
 function  ERR_ENGINE_register_complete(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_complete_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_complete_procname);
 end;
 
 
 function  ERR_ENGINE_register_all_complete: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_register_all_complete_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_register_all_complete_procname);
 end;
 
 
@@ -1785,7 +1785,7 @@ end;
   //
 function  ERR_ENGINE_ctrl(e: PENGINE; cmd: TIdC_INT; i: TIdC_LONG; p: Pointer; v1: f): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_ctrl_procname);
 end;
 
 
@@ -1798,7 +1798,7 @@ end;
   //
 function  ERR_ENGINE_cmd_is_executable(e: PENGINE; cmd: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_cmd_is_executable_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_cmd_is_executable_procname);
 end;
 
 
@@ -1811,7 +1811,7 @@ end;
   //
 function  ERR_ENGINE_ctrl_cmd(e: PENGINE; const cmd_name: PIdAnsiChar; i: TIdC_LONG; p: Pointer; v1: f; cmd_optional: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_ctrl_cmd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_ctrl_cmd_procname);
 end;
 
 
@@ -1840,7 +1840,7 @@ end;
   //
 function  ERR_ENGINE_ctrl_cmd_string(e: PENGINE; const cmd_name: PIdAnsiChar; const arg: PIdAnsiChar; cmd_optional: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_ctrl_cmd_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_ctrl_cmd_string_procname);
 end;
 
 
@@ -1855,134 +1855,134 @@ end;
   //
 function  ERR_ENGINE_new: PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_new_procname);
 end;
 
 
 function  ERR_ENGINE_free(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_free_procname);
 end;
 
 
 function  ERR_ENGINE_up_ref(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_up_ref_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_up_ref_procname);
 end;
 
 
 function  ERR_ENGINE_set_id(e: PENGINE; const id: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_id_procname);
 end;
 
 
 function  ERR_ENGINE_set_name(e: PENGINE; const name: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_name_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_name_procname);
 end;
 
 
 function  ERR_ENGINE_set_RSA(e: PENGINE; const rsa_meth: PRSA_METHOD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_RSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_RSA_procname);
 end;
 
 
 function  ERR_ENGINE_set_DSA(e: PENGINE; const dsa_meth: PDSA_METHOD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_DSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_DSA_procname);
 end;
 
 
 function  ERR_ENGINE_set_EC(e: PENGINE; const ecdsa_meth: PEC_KEY_METHOD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_EC_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_EC_procname);
 end;
 
 
 function  ERR_ENGINE_set_DH(e: PENGINE; const dh_meth: PDH_METHOD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_DH_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_DH_procname);
 end;
 
 
 function  ERR_ENGINE_set_RAND(e: PENGINE; const rand_meth: PRAND_METHOD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_RAND_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_RAND_procname);
 end;
 
 
 function  ERR_ENGINE_set_destroy_function(e: PENGINE; destroy_f: ENGINE_GEN_INT_FUNC_PTR): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_destroy_function_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_destroy_function_procname);
 end;
 
 
 function  ERR_ENGINE_set_init_function(e: PENGINE; init_f: ENGINE_GEN_INT_FUNC_PTR): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_init_function_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_init_function_procname);
 end;
 
 
 function  ERR_ENGINE_set_finish_function(e: PENGINE; finish_f: ENGINE_GEN_INT_FUNC_PTR): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_finish_function_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_finish_function_procname);
 end;
 
 
 function  ERR_ENGINE_set_ctrl_function(e: PENGINE; ctrl_f: ENGINE_CTRL_FUNC_PTR): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_ctrl_function_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_ctrl_function_procname);
 end;
 
 
 function  ERR_ENGINE_set_load_privkey_function(e: PENGINE; loadpriv_f: ENGINE_LOAD_KEY_PTR): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_load_privkey_function_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_load_privkey_function_procname);
 end;
 
 
 function  ERR_ENGINE_set_load_pubkey_function(e: PENGINE; loadpub_f: ENGINE_LOAD_KEY_PTR): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_load_pubkey_function_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_load_pubkey_function_procname);
 end;
 
 
   //function ENGINE_set_load_ssl_client_cert_function(e: PENGINE; loadssl_f: ENGINE_SSL_CLIENT_CERT_PTR): TIdC_INT;
 function  ERR_ENGINE_set_ciphers(e: PENGINE; f: ENGINE_CIPHERS_PTR): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_ciphers_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_ciphers_procname);
 end;
 
 
 function  ERR_ENGINE_set_digests(e: PENGINE; f: ENGINE_DIGESTS_PTR): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_digests_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_digests_procname);
 end;
 
 
 function  ERR_ENGINE_set_pkey_meths(e: PENGINE; f: ENGINE_PKEY_METHS_PTR): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_pkey_meths_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_pkey_meths_procname);
 end;
 
 
 function  ERR_ENGINE_set_pkey_asn1_meths(e: PENGINE; f: ENGINE_PKEY_ASN1_METHS_PTR): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_pkey_asn1_meths_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_pkey_asn1_meths_procname);
 end;
 
 
 function  ERR_ENGINE_set_flags(e: PENGINE; flags: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_flags_procname);
 end;
 
 
 function  ERR_ENGINE_set_cmd_defns(e: PENGINE; const defns: PENGINE_CMD_DEFN): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_cmd_defns_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_cmd_defns_procname);
 end;
 
 
@@ -1990,13 +1990,13 @@ end;
   //#define ENGINE_get_ex_new_index(l, p, newf, dupf, freef) CRYPTO_get_ex_new_index(CRYPTO_EX_INDEX_ENGINE, l, p, newf, dupf, freef)
 function  ERR_ENGINE_set_ex_data(e: PENGINE; idx: TIdC_INT; arg: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_ex_data_procname);
 end;
 
 
 function  ERR_ENGINE_get_ex_data(const e: PENGINE; idx: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_ex_data_procname);
 end;
 
 
@@ -2009,79 +2009,79 @@ end;
   //
 function  ERR_ENGINE_get_id(const e: PENGINE): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_id_procname);
 end;
 
 
 function  ERR_ENGINE_get_name(const e: PENGINE): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_name_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_name_procname);
 end;
 
 
 function  ERR_ENGINE_get_RSA(const e: PENGINE): PRSA_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_RSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_RSA_procname);
 end;
 
 
 function  ERR_ENGINE_get_DSA(const e: PENGINE): PDSA_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_DSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_DSA_procname);
 end;
 
 
 function  ERR_ENGINE_get_EC(const e: PENGINE): PEC_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_EC_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_EC_procname);
 end;
 
 
 function  ERR_ENGINE_get_DH(const e: PENGINE): PDH_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_DH_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_DH_procname);
 end;
 
 
 function  ERR_ENGINE_get_RAND(const e: PENGINE): PRAND_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_RAND_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_RAND_procname);
 end;
 
 
 function  ERR_ENGINE_get_destroy_function(const e: PENGINE): ENGINE_GEN_INT_FUNC_PTR; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_destroy_function_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_destroy_function_procname);
 end;
 
 
 function  ERR_ENGINE_get_init_function(const e: PENGINE): ENGINE_GEN_INT_FUNC_PTR; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_init_function_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_init_function_procname);
 end;
 
 
 function  ERR_ENGINE_get_finish_function(const e: PENGINE): ENGINE_GEN_INT_FUNC_PTR; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_finish_function_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_finish_function_procname);
 end;
 
 
 function  ERR_ENGINE_get_ctrl_function(const e: PENGINE): ENGINE_CTRL_FUNC_PTR; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_ctrl_function_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_ctrl_function_procname);
 end;
 
 
 function  ERR_ENGINE_get_load_privkey_function(const e: PENGINE): ENGINE_LOAD_KEY_PTR; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_load_privkey_function_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_load_privkey_function_procname);
 end;
 
 
 function  ERR_ENGINE_get_load_pubkey_function(const e: PENGINE): ENGINE_LOAD_KEY_PTR; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_load_pubkey_function_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_load_pubkey_function_procname);
 end;
 
 
@@ -2089,73 +2089,73 @@ end;
   
 function  ERR_ENGINE_get_ciphers(const e: PENGINE): ENGINE_CIPHERS_PTR; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_ciphers_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_ciphers_procname);
 end;
 
 
 function  ERR_ENGINE_get_digests(const e: PENGINE): ENGINE_DIGESTS_PTR; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_digests_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_digests_procname);
 end;
 
 
 function  ERR_ENGINE_get_pkey_meths(const e: PENGINE): ENGINE_PKEY_METHS_PTR; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_pkey_meths_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_pkey_meths_procname);
 end;
 
 
 function  ERR_ENGINE_get_pkey_asn1_meths(const e: PENGINE): ENGINE_PKEY_ASN1_METHS_PTR; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_pkey_asn1_meths_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_pkey_asn1_meths_procname);
 end;
 
 
 function  ERR_ENGINE_get_cipher(e: PENGINE; nid: TIdC_INT): PEVP_CIPHER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_cipher_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_cipher_procname);
 end;
 
 
 function  ERR_ENGINE_get_digest(e: PENGINE; nid: TIdC_INT): PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_digest_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_digest_procname);
 end;
 
 
 function  ERR_ENGINE_get_pkey_meth(e: PENGINE; nid: TIdC_INT): PEVP_PKEY_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_pkey_meth_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_pkey_meth_procname);
 end;
 
 
 function  ERR_ENGINE_get_pkey_asn1_meth(e: PENGINE; nid: TIdC_INT): PEVP_PKEY_ASN1_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_pkey_asn1_meth_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_pkey_asn1_meth_procname);
 end;
 
 
 function  ERR_ENGINE_get_pkey_asn1_meth_str(e: PENGINE; const str: PIdAnsiChar; len: TIdC_INT): PEVP_PKEY_ASN1_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_pkey_asn1_meth_str_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_pkey_asn1_meth_str_procname);
 end;
 
 
 function  ERR_ENGINE_pkey_asn1_find_str(pe: PPENGINE; const str: PIdAnsiChar; len: TIdC_INT): PEVP_PKEY_ASN1_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_pkey_asn1_find_str_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_pkey_asn1_find_str_procname);
 end;
 
 
 function  ERR_ENGINE_get_cmd_defns(const e: PENGINE): PENGINE_CMD_DEFN; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_cmd_defns_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_cmd_defns_procname);
 end;
 
 
 function  ERR_ENGINE_get_flags(const e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_flags_procname);
 end;
 
 
@@ -2180,7 +2180,7 @@ end;
   // */
 function  ERR_ENGINE_init(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_init_procname);
 end;
 
 
@@ -2191,7 +2191,7 @@ end;
   // */
 function  ERR_ENGINE_finish(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_finish_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_finish_procname);
 end;
 
 
@@ -2203,13 +2203,13 @@ end;
   // */
 function  ERR_ENGINE_load_private_key(e: PENGINE; const key_id: PIdAnsiChar; ui_method: PUI_METHOD; callback_data: Pointer): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_load_private_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_load_private_key_procname);
 end;
 
 
 function  ERR_ENGINE_load_public_key(e: PENGINE; const key_id: PIdAnsiChar; ui_method: PUI_METHOD; callback_data: Pointer): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_load_public_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_load_public_key_procname);
 end;
 
 
@@ -2225,32 +2225,32 @@ end;
   // */
 function  ERR_ENGINE_get_default_RSA: PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_default_RSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_default_RSA_procname);
 end;
 
 
   //* Same for the other "methods" */
 function  ERR_ENGINE_get_default_DSA: PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_default_DSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_default_DSA_procname);
 end;
 
 
 function  ERR_ENGINE_get_default_EC: PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_default_EC_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_default_EC_procname);
 end;
 
 
 function  ERR_ENGINE_get_default_DH: PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_default_DH_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_default_DH_procname);
 end;
 
 
 function  ERR_ENGINE_get_default_RAND: PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_default_RAND_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_default_RAND_procname);
 end;
 
 
@@ -2260,25 +2260,25 @@ end;
   // */
 function  ERR_ENGINE_get_cipher_engine(nid: TIdC_INT): PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_cipher_engine_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_cipher_engine_procname);
 end;
 
 
 function  ERR_ENGINE_get_digest_engine(nid: TIdC_INT): PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_digest_engine_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_digest_engine_procname);
 end;
 
 
 function  ERR_ENGINE_get_pkey_meth_engine(nid: TIdC_INT): PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_pkey_meth_engine_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_pkey_meth_engine_procname);
 end;
 
 
 function  ERR_ENGINE_get_pkey_asn1_meth_engine(nid: TIdC_INT): PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_pkey_asn1_meth_engine_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_pkey_asn1_meth_engine_procname);
 end;
 
 
@@ -2290,62 +2290,62 @@ end;
   // */
 function  ERR_ENGINE_set_default_RSA(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_default_RSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_default_RSA_procname);
 end;
 
 
 function  ERR_ENGINE_set_default_string(e: PENGINE; const def_list: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_default_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_default_string_procname);
 end;
 
 
   // Same for the other "methods"
 function  ERR_ENGINE_set_default_DSA(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_default_DSA_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_default_DSA_procname);
 end;
 
 
 function  ERR_ENGINE_set_default_EC(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_default_EC_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_default_EC_procname);
 end;
 
 
 function  ERR_ENGINE_set_default_DH(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_default_DH_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_default_DH_procname);
 end;
 
 
 function  ERR_ENGINE_set_default_RAND(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_default_RAND_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_default_RAND_procname);
 end;
 
 
 function  ERR_ENGINE_set_default_ciphers(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_default_ciphers_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_default_ciphers_procname);
 end;
 
 
 function  ERR_ENGINE_set_default_digests(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_default_digests_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_default_digests_procname);
 end;
 
 
 function  ERR_ENGINE_set_default_pkey_meths(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_default_pkey_meths_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_default_pkey_meths_procname);
 end;
 
 
 function  ERR_ENGINE_set_default_pkey_asn1_meths(e: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_default_pkey_asn1_meths_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_default_pkey_asn1_meths_procname);
 end;
 
 
@@ -2359,14 +2359,14 @@ end;
   // */
 function  ERR_ENGINE_set_default(e: PENGINE; flags: TIdC_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_set_default_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_set_default_procname);
 end;
 
 
 
 procedure  ERR_ENGINE_add_conf_module; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_add_conf_module_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_add_conf_module_procname);
 end;
 
 
@@ -2425,7 +2425,7 @@ end;
   // */
 function  ERR_ENGINE_get_static_state: Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ENGINE_get_static_state_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ENGINE_get_static_state_procname);
 end;
 
 

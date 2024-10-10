@@ -177,81 +177,81 @@ end;
 {$WARN  NO_RETVAL OFF}
 procedure  ERR_HMAC_CTX_init(ctx : PHMAC_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(HMAC_CTX_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(HMAC_CTX_init_procname);
 end;
 
  
 function  ERR_HMAC_size(const e: PHMAC_CTX): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(HMAC_size_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(HMAC_size_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_HMAC_CTX_new: PHMAC_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(HMAC_CTX_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(HMAC_CTX_new_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_HMAC_CTX_reset(ctx: PHMAC_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(HMAC_CTX_reset_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(HMAC_CTX_reset_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_HMAC_CTX_cleanup(ctx : PHMAC_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(HMAC_CTX_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(HMAC_CTX_cleanup_procname);
 end;
 
  
 procedure  ERR_HMAC_CTX_free(ctx: PHMAC_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(HMAC_CTX_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(HMAC_CTX_free_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_HMAC_Init_ex(ctx: PHMAC_CTX; const key: Pointer; len: TIdC_INT; const md: PEVP_MD; impl: PENGINE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(HMAC_Init_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(HMAC_Init_ex_procname);
 end;
 
 
 function  ERR_HMAC_Update(ctx: PHMAC_CTX; const data: PByte; len: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(HMAC_Update_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(HMAC_Update_procname);
 end;
 
 
 function  ERR_HMAC_Final(ctx: PHMAC_CTX; md: PByte; len: PByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(HMAC_Final_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(HMAC_Final_procname);
 end;
 
 
 function  ERR_HMAC(const evp_md: PEVP_MD; const key: Pointer; key_len: TIdC_INT; const d: PByte; n: TIdC_SIZET; md: PByte; md_len: PIdC_INT): PByte; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(HMAC_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(HMAC_procname);
 end;
 
 
 function  ERR_HMAC_CTX_copy(dctx: PHMAC_CTX; sctx: PHMAC_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(HMAC_CTX_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(HMAC_CTX_copy_procname);
 end;
 
 
 
 procedure  ERR_HMAC_CTX_set_flags(ctx: PHMAC_CTX; flags: TIdC_ULONG); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(HMAC_CTX_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(HMAC_CTX_set_flags_procname);
 end;
 
 
 function  ERR_HMAC_CTX_get_md(const ctx: PHMAC_CTX): PEVP_MD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(HMAC_CTX_get_md_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(HMAC_CTX_get_md_procname);
 end;
 
  {introduced 1.1.0}

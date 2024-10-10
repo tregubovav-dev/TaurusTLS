@@ -473,7 +473,7 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_OBJ_NAME_init: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_NAME_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_NAME_init_procname);
 end;
 
 
@@ -482,25 +482,25 @@ end;
   //                       void (*free_func) (const PIdAnsiChar *; TIdC_INT; const PIdAnsiChar *));
 function  ERR_OBJ_NAME_get(const name: PIdAnsiChar; type_: TIdC_INT): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_NAME_get_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_NAME_get_procname);
 end;
 
 
 function  ERR_OBJ_NAME_add(const name: PIdAnsiChar; type_: TIdC_INT; const data: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_NAME_add_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_NAME_add_procname);
 end;
 
 
 function  ERR_OBJ_NAME_remove(const name: PIdAnsiChar; type_: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_NAME_remove_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_NAME_remove_procname);
 end;
 
 
 procedure  ERR_OBJ_NAME_cleanup(type_: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_NAME_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_NAME_cleanup_procname);
 end;
 
 
@@ -512,67 +512,67 @@ end;
 
 function  ERR_OBJ_dup(const o: PASN1_OBJECT): PASN1_OBJECT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_dup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_dup_procname);
 end;
 
 
 function  ERR_OBJ_nid2obj(n: TIdC_INT): PASN1_OBJECT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_nid2obj_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_nid2obj_procname);
 end;
 
 
 function  ERR_OBJ_nid2ln(n: TIdC_INT): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_nid2ln_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_nid2ln_procname);
 end;
 
 
 function  ERR_OBJ_nid2sn(n: TIdC_INT): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_nid2sn_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_nid2sn_procname);
 end;
 
 
 function  ERR_OBJ_obj2nid(const o: PASN1_OBJECT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_obj2nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_obj2nid_procname);
 end;
 
 
 function  ERR_OBJ_txt2obj(const s: PIdAnsiChar; no_name: TIdC_INT): PASN1_OBJECT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_txt2obj_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_txt2obj_procname);
 end;
 
 
 function  ERR_OBJ_obj2txt(buf: PIdAnsiChar; buf_len: TIdC_INT; const a: PASN1_OBJECT; no_name: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_obj2txt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_obj2txt_procname);
 end;
 
 
 function  ERR_OBJ_txt2nid(const s: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_txt2nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_txt2nid_procname);
 end;
 
 
 function  ERR_OBJ_ln2nid(const s: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_ln2nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_ln2nid_procname);
 end;
 
 
 function  ERR_OBJ_sn2nid(const s: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_sn2nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_sn2nid_procname);
 end;
 
 
 function  ERR_OBJ_cmp(const a: PASN1_OBJECT; const b: PASN1_OBJECT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_cmp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_cmp_procname);
 end;
 
 
@@ -664,63 +664,63 @@ end;
 
 function  ERR_OBJ_new_nid(num: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_new_nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_new_nid_procname);
 end;
 
 
 function  ERR_OBJ_add_object(const obj: PASN1_OBJECT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_add_object_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_add_object_procname);
 end;
 
 
 function  ERR_OBJ_create(const oid: PIdAnsiChar; const sn: PIdAnsiChar; const ln: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_create_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_create_procname);
 end;
 
 
 function  ERR_OBJ_create_objects(in_: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_create_objects_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_create_objects_procname);
 end;
 
 
 
 function  ERR_OBJ_length(const obj: PASN1_OBJECT): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_length_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_length_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OBJ_get0_data(const obj: PASN1_OBJECT): PByte; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_get0_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_get0_data_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_OBJ_find_sigid_algs(signid: TIdC_INT; pdig_nid: PIdC_INT; ppkey_nid: PIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_find_sigid_algs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_find_sigid_algs_procname);
 end;
 
 
 function  ERR_OBJ_find_sigid_by_algs(psignid: PIdC_INT; dig_nid: TIdC_INT; pkey_nid: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_find_sigid_by_algs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_find_sigid_by_algs_procname);
 end;
 
 
 function  ERR_OBJ_add_sigid(signid: TIdC_INT; dig_id: TIdC_INT; pkey_id: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_add_sigid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_add_sigid_procname);
 end;
 
 
 procedure  ERR_OBJ_sigid_free; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OBJ_sigid_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OBJ_sigid_free_procname);
 end;
 
 

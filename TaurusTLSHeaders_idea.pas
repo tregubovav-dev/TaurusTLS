@@ -112,49 +112,49 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_IDEA_options: PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(IDEA_options_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(IDEA_options_procname);
 end;
 
 
 procedure  ERR_IDEA_ecb_encrypt(const in_: PByte; out_: PByte; ks: PIDEA_KEY_SCHEDULE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(IDEA_ecb_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(IDEA_ecb_encrypt_procname);
 end;
 
 
 procedure  ERR_IDEA_set_encrypt_key(const key: PByte; ks: PIDEA_KEY_SCHEDULE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(IDEA_set_encrypt_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(IDEA_set_encrypt_key_procname);
 end;
 
 
 procedure  ERR_IDEA_set_decrypt_key(ek: PIDEA_KEY_SCHEDULE; dk: PIDEA_KEY_SCHEDULE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(IDEA_set_decrypt_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(IDEA_set_decrypt_key_procname);
 end;
 
 
 procedure  ERR_IDEA_cbc_encrypt(const in_: PByte; out_: PByte; length: TIdC_LONG; ks: PIDEA_KEY_SCHEDULE; iv: PByte; enc: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(IDEA_cbc_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(IDEA_cbc_encrypt_procname);
 end;
 
 
 procedure  ERR_IDEA_cfb64_encrypt(const in_: PByte; out_: PByte; length: TIdC_LONG; ks: PIDEA_KEY_SCHEDULE; iv: PByte; num: PIdC_INT; enc: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(IDEA_cfb64_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(IDEA_cfb64_encrypt_procname);
 end;
 
 
 procedure  ERR_IDEA_ofb64_encrypt(const in_: PByte; out_: PByte; length: TIdC_LONG; ks: PIDEA_KEY_SCHEDULE; iv: PByte; num: PIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(IDEA_ofb64_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(IDEA_ofb64_encrypt_procname);
 end;
 
 
 procedure  ERR_IDEA_encrypt(in_: PIdC_LONG; ks: PIDEA_KEY_SCHEDULE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(IDEA_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(IDEA_encrypt_procname);
 end;
 
 

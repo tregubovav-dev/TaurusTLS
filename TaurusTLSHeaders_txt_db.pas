@@ -115,32 +115,32 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_TXT_DB_read(in_: PBIO; num: TIdC_INT): PTXT_DB; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TXT_DB_read_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TXT_DB_read_procname);
 end;
 
 
 function  ERR_TXT_DB_write(out_: PBIO; db: PTXT_DB): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TXT_DB_write_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TXT_DB_write_procname);
 end;
 
 
   //function TXT_DB_create_index(db: PTXT_DB; field: TIdC_INT; qual: TXT_DB_create_index_qual; hash: OPENSSL_LH_HashFunc; cmp: OPENSSL_LH_COMPFUNC): TIdC_INT;
 procedure  ERR_TXT_DB_free(db: PTXT_DB); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TXT_DB_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TXT_DB_free_procname);
 end;
 
 
 function  ERR_TXT_DB_get_by_index(db: PTXT_DB; idx: TIdC_INT; value: POPENSSL_STRING): POPENSSL_STRING; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TXT_DB_get_by_index_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TXT_DB_get_by_index_procname);
 end;
 
 
 function  ERR_TXT_DB_insert(db: PTXT_DB; value: POPENSSL_STRING): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(TXT_DB_insert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(TXT_DB_insert_procname);
 end;
 
 

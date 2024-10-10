@@ -387,7 +387,7 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_CONF_set_default_method(meth: PCONF_METHOD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CONF_set_default_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CONF_set_default_method_procname);
 end;
 
 
@@ -433,44 +433,44 @@ end;
 
 function  ERR_NCONF_new(meth: PCONF_METHOD): PCONF; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(NCONF_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(NCONF_new_procname);
 end;
 
 
 function  ERR_NCONF_default: PCONF_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(NCONF_default_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(NCONF_default_procname);
 end;
 
 
 function  ERR_NCONF_WIN32: PCONF_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(NCONF_WIN32_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(NCONF_WIN32_procname);
 end;
 
 
 procedure  ERR_NCONF_free(conf: PCONF); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(NCONF_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(NCONF_free_procname);
 end;
 
 
 procedure  ERR_NCONF_free_data(conf: PCONF); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(NCONF_free_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(NCONF_free_data_procname);
 end;
 
 
 
 function  ERR_NCONF_load(conf: PCONF; const file_: PAnsiChar; eline: PIdC_LONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(NCONF_load_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(NCONF_load_procname);
 end;
 
 
 function  ERR_NCONF_load_bio(conf: PCONF; bp: PBIO; eline: PIdC_LONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(NCONF_load_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(NCONF_load_bio_procname);
 end;
 
 
@@ -478,19 +478,19 @@ end;
   //                                        const char *section);
 function  ERR_NCONF_get_string(const conf: PCONF; const group: PAnsiChar; const name: PAnsiChar): PAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(NCONF_get_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(NCONF_get_string_procname);
 end;
 
 
 function  ERR_NCONF_get_number_e(const conf: PCONF; const group: PAnsiChar; const name: PAnsiChar; _result: PIdC_LONG): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(NCONF_get_number_e_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(NCONF_get_number_e_procname);
 end;
 
 
 function  ERR_NCONF_dump_bio(const conf: PCONf; out_: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(NCONF_dump_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(NCONF_dump_bio_procname);
 end;
 
 
@@ -501,32 +501,32 @@ end;
 
 function  ERR_CONF_modules_load(const cnf: PCONF; const appname: PAnsiChar; flags: TIdC_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CONF_modules_load_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CONF_modules_load_procname);
 end;
 
 
 function  ERR_CONF_modules_load_file(const filename: PAnsiChar; const appname: PAnsiChar; flags: TIdC_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CONF_modules_load_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CONF_modules_load_file_procname);
 end;
 
 
 
 procedure  ERR_CONF_modules_unload(all: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CONF_modules_unload_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CONF_modules_unload_procname);
 end;
 
 
 procedure  ERR_CONF_modules_finish; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CONF_modules_finish_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CONF_modules_finish_procname);
 end;
 
 
 function  ERR_CONF_module_add(const name: PAnsiChar; ifunc: conf_init_func; ffunc: conf_finish_func): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CONF_module_add_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CONF_module_add_procname);
 end;
 
 
@@ -535,63 +535,63 @@ end;
   //const char *CONF_imodule_get_value(const CONF_IMODULE *md);
 function  ERR_CONF_imodule_get_usr_data(const md: PCONF_IMODULE): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CONF_imodule_get_usr_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CONF_imodule_get_usr_data_procname);
 end;
 
 
 procedure  ERR_CONF_imodule_set_usr_data(md: PCONF_IMODULE; usr_data: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CONF_imodule_set_usr_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CONF_imodule_set_usr_data_procname);
 end;
 
 
 function  ERR_CONF_imodule_get_module(const md: PCONF_IMODULE): PCONF_MODULE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CONF_imodule_get_module_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CONF_imodule_get_module_procname);
 end;
 
 
 function  ERR_CONF_imodule_get_flags(const md: PCONF_IMODULE): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CONF_imodule_get_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CONF_imodule_get_flags_procname);
 end;
 
 
 procedure  ERR_CONF_imodule_set_flags(md: PCONF_IMODULE; flags: TIdC_ULONG); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CONF_imodule_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CONF_imodule_set_flags_procname);
 end;
 
 
 function  ERR_CONF_module_get_usr_data(pmod: PCONF_MODULE): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CONF_module_get_usr_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CONF_module_get_usr_data_procname);
 end;
 
 
 procedure  ERR_CONF_module_set_usr_data(pmod: PCONF_MODULE; usr_data: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CONF_module_set_usr_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CONF_module_set_usr_data_procname);
 end;
 
 
 
 function  ERR_CONF_get1_default_config_file: PAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CONF_get1_default_config_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CONF_get1_default_config_file_procname);
 end;
 
 
 function  ERR_CONF_parse_list(const list: PAnsiChar; sep: TIdC_INT; nospc: TIdC_INT; list_cb: CONF_parse_list_list_cb; arg: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CONF_parse_list_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CONF_parse_list_procname);
 end;
 
 
 
 procedure  ERR_OPENSSL_load_builtin_modules; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_load_builtin_modules_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_load_builtin_modules_procname);
 end;
 
 

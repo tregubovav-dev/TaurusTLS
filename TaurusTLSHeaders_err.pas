@@ -252,8 +252,8 @@ var
   ERR_peek_last_error_line_data: function (file_: PPIdAnsiChar; line: PIdC_INT; data: PPIdAnsiChar; flags: PIdC_INT): TIdC_ULONG; cdecl = nil;
 
   ERR_clear_error: procedure ; cdecl = nil;
-  ERR_error_string: function (e: TIdC_ULONG; buf: PIdAnsiChar): PIdAnsiChar; cdecl = nil;
-  ERR_error_string_n: procedure (e: TIdC_ULONG; buf: PIdAnsiChar; len: TIdC_SIZET); cdecl = nil;
+  ERR_error_string: function (e: TIdC_ULONG; var buf: PIdAnsiChar): PIdAnsiChar; cdecl = nil;
+  ERR_error_string_n: procedure (e: TIdC_ULONG; var buf: PIdAnsiChar; len: TIdC_SIZET); cdecl = nil;
   ERR_lib_error_string: function (e: TIdC_ULONG): PIdAnsiChar; cdecl = nil;
   ERR_func_error_string: function (e: TIdC_ULONG): PIdAnsiChar; cdecl = nil;
   ERR_reason_error_string: function (e: TIdC_ULONG): PIdAnsiChar; cdecl = nil;
@@ -447,7 +447,7 @@ end;
 {$WARN  NO_RETVAL OFF}
 procedure  ERR_ERR_put_error(lib: TIdC_INT; func: TIdC_INT; reason: TIdC_INT; file_: PIdAnsiChar; line: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_put_error_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_put_error_procname);
 end;
 
  
@@ -460,19 +460,19 @@ end;
 
 procedure  ERR_ERR_new; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_new_procname);
 end;
 
  {introduced 3.0.0}
 procedure  ERR_ERR_set_debug(const file_: PIdAnsiChar; line: integer; const func: PIdAnsiChar); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_set_debug_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_set_debug_procname);
 end;
 
   {introduced 3.0.0}
 procedure  ERR_ERR_set_error(lib: integer; reason: integer; fmt: PIdAnsiChar; args: array of const); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_set_error_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_set_error_procname);
 end;
 
  {introduced 3.0.0}
@@ -480,114 +480,114 @@ end;
 
 procedure  ERR_ERR_set_error_data(data: PIdAnsiChar; flags: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_set_error_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_set_error_data_procname);
 end;
 
 
   
 function  ERR_ERR_get_error: TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_get_error_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_get_error_procname);
 end;
 
 
 function  ERR_ERR_get_error_line(file_: PPIdAnsiChar; line: PIdC_INT): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_get_error_line_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_get_error_line_procname);
 end;
 
 
 function  ERR_ERR_get_error_line_data(file_: PPIdAnsiChar; line: PIdC_INT; data: PPIdAnsiChar; flags: PIdC_INT): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_get_error_line_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_get_error_line_data_procname);
 end;
 
 
 
 function  ERR_ERR_peek_error: TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_peek_error_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_peek_error_procname);
 end;
 
 
 function  ERR_ERR_peek_error_line(file_: PPIdAnsiChar; line: PIdC_INT): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_peek_error_line_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_peek_error_line_procname);
 end;
 
 
 function  ERR_ERR_peek_error_line_data(file_: PPIdAnsiChar; line: PIdC_INT; data: PPIdAnsiChar; flags: PIdC_INT): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_peek_error_line_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_peek_error_line_data_procname);
 end;
 
 
 
 function  ERR_ERR_peek_last_error: TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_peek_last_error_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_peek_last_error_procname);
 end;
 
 
 function  ERR_ERR_peek_last_error_line(file_: PPIdAnsiChar; line: PIdC_INT): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_peek_last_error_line_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_peek_last_error_line_procname);
 end;
 
 
 function  ERR_ERR_peek_last_error_line_data(file_: PPIdAnsiChar; line: PIdC_INT; data: PPIdAnsiChar; flags: PIdC_INT): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_peek_last_error_line_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_peek_last_error_line_data_procname);
 end;
 
 
 
 procedure  ERR_ERR_clear_error; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_clear_error_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_clear_error_procname);
 end;
 
 
 function  ERR_ERR_error_string(e: TIdC_ULONG; buf: PIdAnsiChar): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_error_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_error_string_procname);
 end;
 
 
 procedure  ERR_ERR_error_string_n(e: TIdC_ULONG; buf: PIdAnsiChar; len: TIdC_SIZET); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_error_string_n_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_error_string_n_procname);
 end;
 
 
 function  ERR_ERR_lib_error_string(e: TIdC_ULONG): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_lib_error_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_lib_error_string_procname);
 end;
 
 
 function  ERR_ERR_func_error_string(e: TIdC_ULONG): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_func_error_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_func_error_string_procname);
 end;
 
 
 function  ERR_ERR_reason_error_string(e: TIdC_ULONG): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_reason_error_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_reason_error_string_procname);
 end;
 
 
 procedure  ERR_ERR_print_errors_cb(cb: ERR_print_errors_cb_cb; u: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_print_errors_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_print_errors_cb_procname);
 end;
 
 
 
 procedure  ERR_ERR_print_errors(bp: PBIO); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_print_errors_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_print_errors_procname);
 end;
 
 
@@ -595,75 +595,75 @@ end;
   // procedure ERR_add_error_vdata(num: TIdC_INT; args: va_list);
 function  ERR_ERR_load_strings(lib: TIdC_INT; str: PERR_STRING_DATA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_load_strings_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_load_strings_procname);
 end;
 
 
 function  ERR_ERR_load_strings_const(str: PERR_STRING_DATA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_load_strings_const_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_load_strings_const_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ERR_unload_strings(lib: TIdC_INT; str: PERR_STRING_DATA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_unload_strings_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_unload_strings_procname);
 end;
 
 
 function  ERR_ERR_load_ERR_strings: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_load_ERR_strings_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_load_ERR_strings_procname);
 end;
 
 
 
 function  ERR_ERR_get_state: PERR_STATE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_get_state_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_get_state_procname);
 end;
 
 
 function  ERR_ERR_get_next_error_library: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_get_next_error_library_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_get_next_error_library_procname);
 end;
 
 
 function  ERR_ERR_set_mark: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_set_mark_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_set_mark_procname);
 end;
 
 
 function  ERR_ERR_pop_to_mark: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_pop_to_mark_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_pop_to_mark_procname);
 end;
 
 
 function  ERR_ERR_clear_last_mark: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_clear_last_mark_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_clear_last_mark_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_SSLErr(func: TIdC_INT; reason: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSLErr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSLErr_procname);
 end;
 
  
 procedure  ERR_X509err(const f,r : TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509err_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509err_procname);
 end;
 
  
 function  ERR_ERR_GET_REASON(const l : TIdC_INT) : TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_GET_REASON_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_GET_REASON_procname);
 end;
 
  

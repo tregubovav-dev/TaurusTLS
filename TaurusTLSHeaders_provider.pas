@@ -198,93 +198,93 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_OSSL_PROVIDER_set_default_search_path(ctx: POSSL_LIB_CTX; path: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_set_default_search_path_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_set_default_search_path_procname);
 end;
 
  {introduced 3.0.0}
     { Load and unload a provider  }
 function  ERR_OSSL_PROVIDER_load(_para1:POSSL_LIB_CTX; name: PIdAnsiChar):POSSL_PROVIDER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_load_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_load_procname);
 end;
 
  {introduced 3.0.0}
 function  ERR_OSSL_PROVIDER_try_load(_para1:POSSL_LIB_CTX; name: PIdAnsiChar; retain_fallbacks: TIdC_LONG):POSSL_PROVIDER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_try_load_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_try_load_procname);
 end;
 
  {introduced 3.0.0}
 function  ERR_OSSL_PROVIDER_unload(prov:POSSL_PROVIDER):TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_unload_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_unload_procname);
 end;
 
  {introduced 3.0.0}
 function  ERR_OSSL_PROVIDER_available(_para1:POSSL_LIB_CTX; name:PIdAnsiChar):TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_available_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_available_procname);
 end;
 
  {introduced 3.0.0}
 function  ERR_OSSL_PROVIDER_do_all(ctx:POSSL_LIB_CTX; cb:TDo_AllCallback; cbdata:pointer):TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_do_all_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_do_all_procname);
 end;
 
  {introduced 3.0.0}
 function  ERR_OSSL_PROVIDER_gettable_params(prov:POSSL_PROVIDER):POSSL_PARAM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_gettable_params_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_gettable_params_procname);
 end;
 
  {introduced 3.0.0}
 function  ERR_OSSL_PROVIDER_get_params(prov:POSSL_PROVIDER; params:POSSL_PARAM):TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_get_params_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_get_params_procname);
 end;
 
  {introduced 3.0.0}
 function  ERR_OSSL_PROVIDER_self_test(prov:POSSL_PROVIDER):TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_self_test_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_self_test_procname);
 end;
 
 {introduced 3.0.0}
 function  ERR_OSSL_PROVIDER_get_capabilities(prov:POSSL_PROVIDER; capability:PIdAnsiChar; cb:POSSL_CALLBACK; arg:pointer):TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_get_capabilities_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_get_capabilities_procname);
 end;
 
 {introduced 3.0.0}
 function  ERR_OSSL_PROVIDER_query_operation(prov:POSSL_PROVIDER; operation_id:TIdC_LONG; no_cache:PIdC_LONG):POSSL_ALGORITHM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_query_operation_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_query_operation_procname);
 end;
 
  {introduced 3.0.0}
 procedure  ERR_OSSL_PROVIDER_unquery_operation(prov:POSSL_PROVIDER; operation_id:TIdC_LONG; algs:POSSL_ALGORITHM); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_unquery_operation_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_unquery_operation_procname);
 end;
 
  {introduced 3.0.0}
 function  ERR_OSSL_PROVIDER_get0_provider_ctx(prov:POSSL_PROVIDER):pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_get0_provider_ctx_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_get0_provider_ctx_procname);
 end;
 
  {introduced 3.0.0}
 function  ERR_OSSL_PROVIDER_get0_dispatch(prov:POSSL_PROVIDER):POSSL_DISPATCH; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_get0_dispatch_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_get0_dispatch_procname);
 end;
 
  {introduced 3.0.0}
     { Add a built in providers  }
 function  ERR_OSSL_PROVIDER_add_builtin(_para1:POSSL_LIB_CTX; name:PIdAnsiChar; init_fn:POSSL_provider_init_fn):TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_add_builtin_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_add_builtin_procname);
 end;
 
  {introduced 3.0.0}
@@ -292,25 +292,25 @@ end;
     { Information  }
 function  ERR_OSSL_PROVIDER_get0_name(prov:POSSL_PROVIDER):PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_get0_name_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_get0_name_procname);
 end;
 
  {introduced 3.0.0}
 function  ERR_OSSL_PROVIDER_get0_default_search_path(libctx: POSSL_LIB_CTX): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_get0_default_search_path_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_get0_default_search_path_procname);
 end;
 
  {introduced 3.2.0}
 function  ERR_OSSL_PROVIDER_try_load_ex(_para1:POSSL_LIB_CTX; name: PIdAnsiChar; params:POSSL_PARAM; retain_fallbacks:TIdC_LONG):POSSL_PROVIDER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_try_load_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_try_load_ex_procname);
 end;
 
  {introduced 3.2.0}
 function  ERR_OSSL_PROVIDER_load_ex(_para1:POSSL_LIB_CTX; name: PIdAnsiChar; params: POSSL_PARAM):POSSL_PROVIDER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_load_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_PROVIDER_load_ex_procname);
 end;
 
  {introduced 3.2.0}

@@ -75,13 +75,13 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_ebcdic2ascii(dest: Pointer; const srce: Pointer; count: TIdC_SIZET): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ebcdic2ascii_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ebcdic2ascii_procname);
 end;
 
 
 function  ERR_ascii2ebcdic(dest: Pointer; const srce: Pointer; count: TIdC_SIZET): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ascii2ebcdic_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ascii2ebcdic_procname);
 end;
 
 

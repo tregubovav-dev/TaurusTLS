@@ -1024,27 +1024,27 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_ASN1_item_ex_new(pval: PPASN1_VALUE; const it: PASN1_ITEM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_item_ex_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_ex_new_procname);
 end;
 
 
 procedure  ERR_ASN1_item_ex_free(pval: PPASN1_VALUE; const it: PASN1_ITEM); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_item_ex_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_ex_free_procname);
 end;
 
 
 
 function  ERR_ASN1_item_ex_d2i(pval: PPASN1_VALUE; const AIn: PPByte; len: TIdC_LONG; const it: PASN1_ITEM; tag: TIdC_INT; aclass: TIdC_INT; opt: AnsiChar; ctx: PASN1_TLC): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_item_ex_d2i_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_ex_d2i_procname);
 end;
 
 
 
 function  ERR_ASN1_item_ex_i2d(pval: PPASN1_VALUE; AOut: PPByte; const it: PASN1_ITEM; tag: TIdC_INT; aclass: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_item_ex_i2d_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_ex_i2d_procname);
 end;
 
 

@@ -111,7 +111,7 @@ const
 
 function ERR_ERR_load_DSA_strings: TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_load_DSA_strings_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_load_DSA_strings_procname);
 end;
 
 {$WARN  NO_RETVAL ON}

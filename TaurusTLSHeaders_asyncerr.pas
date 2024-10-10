@@ -86,7 +86,7 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_ERR_load_ASYNC_strings: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_load_ASYNC_strings_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_load_ASYNC_strings_procname);
 end;
 
 

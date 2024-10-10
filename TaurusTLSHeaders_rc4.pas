@@ -159,25 +159,25 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_RC4_options: PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RC4_options_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RC4_options_procname);
 end;
 
  {allow_nil}
 procedure  ERR_RC4_set_key(key:PRC4_KEY; len: TIdC_LONG; const data:Pbyte); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RC4_set_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RC4_set_key_procname);
 end;
 
  {allow_nil}
 procedure  ERR_private_RC4_set_key(key:PRC4_KEY; len: TIdC_LONG; const data:Pbyte); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(private_RC4_set_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(private_RC4_set_key_procname);
 end;
 
  {allow_nil}
 procedure  ERR_RC4(key:PRC4_KEY; len: TIdC_SIZET; const indata: Pbyte; outdata: Pbyte); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(RC4_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RC4_procname);
 end;
 
  {allow_nil}

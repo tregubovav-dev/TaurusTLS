@@ -94,13 +94,13 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_SSL_CTX_set_tlsext_use_srtp(ctx: PSSL_CTX; const profiles: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_CTX_set_tlsext_use_srtp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_CTX_set_tlsext_use_srtp_procname);
 end;
 
 
 function  ERR_SSL_set_tlsext_use_srtp(ctx: PSSL_CTX; const profiles: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_set_tlsext_use_srtp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_set_tlsext_use_srtp_procname);
 end;
 
 
@@ -108,7 +108,7 @@ end;
   //function SSL_get_srtp_profiles(s: PSSL): PSTACK_OF_SRTP_PROTECTION_PROFILE;
 function  ERR_SSL_get_selected_srtp_profile(s: PSSL): PSRTP_PROTECTION_PROFILE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSL_get_selected_srtp_profile_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSL_get_selected_srtp_profile_procname);
 end;
 
 

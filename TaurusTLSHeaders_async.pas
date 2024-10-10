@@ -178,101 +178,101 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_ASYNC_init_thread(max_size: TIdC_SIZET; init_size: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASYNC_init_thread_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASYNC_init_thread_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_ASYNC_cleanup_thread; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASYNC_cleanup_thread_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASYNC_cleanup_thread_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_ASYNC_WAIT_CTX_new: PASYNC_WAIT_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASYNC_WAIT_CTX_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASYNC_WAIT_CTX_new_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_ASYNC_WAIT_CTX_free(ctx: PASYNC_WAIT_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASYNC_WAIT_CTX_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASYNC_WAIT_CTX_free_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASYNC_WAIT_CTX_set_wait_fd(ctx: PASYNC_WAIT_CTX; const key: Pointer; fd: OSSL_ASYNC_FD; custom_data: Pointer; cleanup_cb: ASYNC_WAIT_CTX_set_wait_fd_cleanup): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASYNC_WAIT_CTX_set_wait_fd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASYNC_WAIT_CTX_set_wait_fd_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASYNC_WAIT_CTX_get_fd(ctx: PASYNC_WAIT_CTX; const key: Pointer; fd: POSSL_ASYNC_FD; custom_data: PPointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASYNC_WAIT_CTX_get_fd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASYNC_WAIT_CTX_get_fd_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASYNC_WAIT_CTX_get_all_fds(ctx: PASYNC_WAIT_CTX; fd: POSSL_ASYNC_FD; numfds: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASYNC_WAIT_CTX_get_all_fds_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASYNC_WAIT_CTX_get_all_fds_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASYNC_WAIT_CTX_get_changed_fds(ctx: PASYNC_WAIT_CTX; addfd: POSSL_ASYNC_FD; numaddfds: PIdC_SIZET; delfd: POSSL_ASYNC_FD; numdelfds: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASYNC_WAIT_CTX_get_changed_fds_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASYNC_WAIT_CTX_get_changed_fds_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASYNC_WAIT_CTX_clear_fd(ctx: PASYNC_WAIT_CTX; const key: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASYNC_WAIT_CTX_clear_fd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASYNC_WAIT_CTX_clear_fd_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_ASYNC_is_capable: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASYNC_is_capable_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASYNC_is_capable_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_ASYNC_start_job(job: PPASYNC_JOB; ctx: PASYNC_WAIT_CTX; ret: PIdC_INT; func: ASYNC_start_job_cb; args: Pointer; size: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASYNC_start_job_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASYNC_start_job_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASYNC_pause_job: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASYNC_pause_job_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASYNC_pause_job_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_ASYNC_get_current_job: PASYNC_JOB; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASYNC_get_current_job_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASYNC_get_current_job_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASYNC_get_wait_ctx(job: PASYNC_JOB): PASYNC_WAIT_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASYNC_get_wait_ctx_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASYNC_get_wait_ctx_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_ASYNC_block_pause; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASYNC_block_pause_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASYNC_block_pause_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_ASYNC_unblock_pause; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASYNC_unblock_pause_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASYNC_unblock_pause_procname);
 end;
 
  {introduced 1.1.0}

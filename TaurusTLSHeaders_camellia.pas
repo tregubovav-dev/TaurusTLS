@@ -139,63 +139,63 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_Camellia_set_key(const userKey: PByte; const bits: TIdC_INT; key: PCAMELLIA_KEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(Camellia_set_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(Camellia_set_key_procname);
 end;
 
 
 
 procedure  ERR_Camellia_encrypt(const in_: PByte; const out_: PByte; const key: PCAMELLIA_KEY); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(Camellia_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(Camellia_encrypt_procname);
 end;
 
 
 procedure  ERR_Camellia_decrypt(const in_: PByte; const out_: PByte; const key: PCAMELLIA_KEY); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(Camellia_decrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(Camellia_decrypt_procname);
 end;
 
 
 
 procedure  ERR_Camellia_ecb_encrypt( const in_: PByte; const out_: PByte; const key: PCAMELLIA_KEY; const enc: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(Camellia_ecb_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(Camellia_ecb_encrypt_procname);
 end;
 
 
 procedure  ERR_Camellia_cbc_encrypt( const in_: PByte; const out_: PByte; length: TIdC_SIZET; const key: PCAMELLIA_KEY; ivec: PByte; const enc: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(Camellia_cbc_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(Camellia_cbc_encrypt_procname);
 end;
 
 
 procedure  ERR_Camellia_cfb128_encrypt( const in_: PByte; const out_: PByte; length: TIdC_SIZET; const key: PCAMELLIA_KEY; ivec: PByte; num: PIdC_INT; const enc: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(Camellia_cfb128_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(Camellia_cfb128_encrypt_procname);
 end;
 
 
 procedure  ERR_Camellia_cfb1_encrypt( const in_: PByte; const out_: PByte; length: TIdC_SIZET; const key: PCAMELLIA_KEY; ivec: PByte; num: PIdC_INT; const enc: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(Camellia_cfb1_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(Camellia_cfb1_encrypt_procname);
 end;
 
 
 procedure  ERR_Camellia_cfb8_encrypt( const in_: PByte; const out_: PByte; length: TIdC_SIZET; const key: PCAMELLIA_KEY; ivec: PByte; num: PIdC_INT; const enc: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(Camellia_cfb8_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(Camellia_cfb8_encrypt_procname);
 end;
 
 
 procedure  ERR_Camellia_ofb128_encrypt( const in_: PByte; const out_: PByte; length: TIdC_SIZET; const key: PCAMELLIA_KEY; ivec: PByte; num: PIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(Camellia_ofb128_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(Camellia_ofb128_encrypt_procname);
 end;
 
 
 procedure  ERR_Camellia_ctr128_encrypt( const in_: PByte; const out_: PByte; length: TIdC_SIZET; const key: PCAMELLIA_KEY; ivec: TCamellia_ctr128_encrypt_ivec; ecount_buf: TCamellia_ctr128_encrypt_ecount_buf; num: PIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(Camellia_ctr128_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(Camellia_ctr128_encrypt_procname);
 end;
 
 

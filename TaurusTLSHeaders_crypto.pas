@@ -1136,167 +1136,167 @@ end;
 {$WARN  NO_RETVAL OFF}
 function  ERR_OPENSSL_malloc(num: TIdC_SIZET): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_malloc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_malloc_procname);
 end;
 
  
 function  ERR_OPENSSL_zalloc(num: TIdC_SIZET): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_zalloc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_zalloc_procname);
 end;
 
  
 function  ERR_OPENSSL_realloc(addr: Pointer; num: TIdC_SIZET): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_realloc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_realloc_procname);
 end;
 
  
 function  ERR_OPENSSL_clear_realloc(addr: Pointer; old_num: TIdC_SIZET; num: TIdC_SIZET): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_clear_realloc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_clear_realloc_procname);
 end;
 
  
 procedure  ERR_OPENSSL_clear_free(addr: Pointer; num: TIdC_SIZET); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_clear_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_clear_free_procname);
 end;
 
  
 procedure  ERR_OPENSSL_free(addr: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_free_procname);
 end;
 
  
 function  ERR_OPENSSL_memdup(const str: Pointer; s: TIdC_SIZET): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_memdup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_memdup_procname);
 end;
 
  
 function  ERR_OPENSSL_strdup(const str: PIdAnsiChar): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_strdup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_strdup_procname);
 end;
 
  
 function  ERR_OPENSSL_strndup(const str: PIdAnsiChar; n: TIdC_SIZET): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_strndup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_strndup_procname);
 end;
 
  
 function  ERR_OPENSSL_secure_malloc(num: TIdC_SIZET): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_secure_malloc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_secure_malloc_procname);
 end;
 
  
 function  ERR_OPENSSL_secure_zalloc(num: TIdC_SIZET): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_secure_zalloc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_secure_zalloc_procname);
 end;
 
  
 procedure  ERR_OPENSSL_secure_free(addr: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_secure_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_secure_free_procname);
 end;
 
  
 procedure  ERR_OPENSSL_secure_clear_free(addr: Pointer; num: TIdC_SIZET); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_secure_clear_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_secure_clear_free_procname);
 end;
 
  
 function  ERR_OPENSSL_secure_actual_size(ptr: Pointer): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_secure_actual_size_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_secure_actual_size_procname);
 end;
 
  
 
 function  ERR_CRYPTO_THREAD_lock_new: PCRYPTO_RWLOCK; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_lock_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_lock_new_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_CRYPTO_THREAD_read_lock(lock: PCRYPTO_RWLOCK): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_read_lock_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_read_lock_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_CRYPTO_THREAD_write_lock(lock: PCRYPTO_RWLOCK): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_write_lock_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_write_lock_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_CRYPTO_THREAD_unlock(lock: PCRYPTO_RWLOCK): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_unlock_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_unlock_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_CRYPTO_THREAD_lock_free(lock: PCRYPTO_RWLOCK); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_lock_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_lock_free_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_CRYPTO_atomic_add(val: PIdC_INT; amount: TIdC_INT; ret: PIdC_INT; lock: PCRYPTO_RWLOCK): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_atomic_add_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_atomic_add_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_CRYPTO_mem_ctrl(mode: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_mem_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_mem_ctrl_procname);
 end;
 
  
 
 function  ERR_OPENSSL_strlcpy(dst: PIdAnsiChar; const src: PIdAnsiChar; siz: TIdC_SIZET): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_strlcpy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_strlcpy_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_strlcat(dst: PIdAnsiChar; const src: PIdAnsiChar; siz: TIdC_SIZET): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_strlcat_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_strlcat_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_strnlen(const str: PIdAnsiChar; maxlen: TIdC_SIZET): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_strnlen_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_strnlen_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_buf2hexstr(const buffer: PByte; len: TIdC_LONG): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_buf2hexstr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_buf2hexstr_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_hexstr2buf(const str: PIdAnsiChar; len: PIdC_LONG): PByte; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_hexstr2buf_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_hexstr2buf_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_hexchar2int(c: Byte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_hexchar2int_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_hexchar2int_procname);
 end;
 
  {introduced 1.1.0}
@@ -1305,20 +1305,20 @@ end;
 
 function  ERR_OpenSSL_version_num: TIdC_ULONG;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OpenSSL_version_num_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OpenSSL_version_num_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OpenSSL_version(type_: TIdC_INT): PIdAnsiChar;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OpenSSL_version_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OpenSSL_version_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_OPENSSL_issetugid: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_issetugid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_issetugid_procname);
 end;
 
 
@@ -1332,20 +1332,20 @@ end;
    *)
 function  ERR_CRYPTO_new_ex_data(class_index: TIdC_INT; obj: Pointer; ad: PCRYPTO_EX_DATA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_new_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_new_ex_data_procname);
 end;
 
 
 function  ERR_CRYPTO_dup_ex_data(class_index: TIdC_INT; to_: PCRYPTO_EX_DATA; const from: PCRYPTO_EX_DATA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_dup_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_dup_ex_data_procname);
 end;
 
 
 
 procedure  ERR_CRYPTO_free_ex_data(class_index: TIdC_INT; obj: Pointer; ad: PCRYPTO_EX_DATA); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_free_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_free_ex_data_procname);
 end;
 
 
@@ -1356,13 +1356,13 @@ end;
    *)
 function  ERR_CRYPTO_set_ex_data(ad: PCRYPTO_EX_DATA; idx: TIdC_INT; val: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_set_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_set_ex_data_procname);
 end;
 
 
 function  ERR_CRYPTO_get_ex_data(const ad: PCRYPTO_EX_DATA; idx: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_get_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_get_ex_data_procname);
 end;
 
 
@@ -1380,7 +1380,7 @@ end;
   //#  define CRYPTO_num_locks()            (1)
 function  ERR_CRYPTO_num_locks: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_num_locks_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_num_locks_procname);
 end;
 
  
@@ -1390,7 +1390,7 @@ end;
   //#  define CRYPTO_get_add_lock_callback()        (NULL)
 procedure  ERR_CRYPTO_set_locking_callback(func: TIdSslLockingCallback); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_set_locking_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_set_locking_callback_procname);
 end;
 
  
@@ -1399,7 +1399,7 @@ end;
   //#  define CRYPTO_THREADID_set_numeric(id, val)
 procedure  ERR_CRYPTO_THREADID_set_numeric(id : PCRYPTO_THREADID; val: TIdC_ULONG); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_THREADID_set_numeric_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_THREADID_set_numeric_procname);
 end;
 
  
@@ -1407,7 +1407,7 @@ end;
   //#  define CRYPTO_THREADID_set_callback(threadid_func)   (0)
 procedure  ERR_CRYPTO_THREADID_set_callback(threadid_func: Tthreadid_func); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_THREADID_set_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_THREADID_set_callback_procname);
 end;
 
  
@@ -1419,7 +1419,7 @@ end;
 
 procedure  ERR_CRYPTO_set_id_callback(func: TIdSslIdCallback); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_set_id_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_set_id_callback_procname);
 end;
 
  
@@ -1434,13 +1434,13 @@ end;
 
 function  ERR_CRYPTO_set_mem_functions(m: CRYPTO_set_mem_functions_m; r: CRYPTO_set_mem_functions_r; f: CRYPTO_set_mem_functions_f): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_set_mem_functions_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_set_mem_functions_procname);
 end;
 
 
 function  ERR_CRYPTO_set_mem_debug(flag: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_set_mem_debug_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_set_mem_debug_procname);
 end;
 
  
@@ -1451,123 +1451,123 @@ end;
 
 function  ERR_CRYPTO_malloc(num: TIdC_SIZET; const file_: PIdAnsiChar; line: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_malloc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_malloc_procname);
 end;
 
 
 function  ERR_CRYPTO_zalloc(num: TIdC_SIZET; const file_: PIdAnsiChar; line: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_zalloc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_zalloc_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_CRYPTO_memdup(const str: Pointer; siz: TIdC_SIZET; const file_: PIdAnsiChar; line: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_memdup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_memdup_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_CRYPTO_strdup(const str: PIdAnsiChar; const file_: PIdAnsiChar; line: TIdC_INT): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_strdup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_strdup_procname);
 end;
 
 
 function  ERR_CRYPTO_strndup(const str: PIdAnsiChar; s: TIdC_SIZET; const file_: PIdAnsiChar; line: TIdC_INT): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_strndup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_strndup_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_CRYPTO_free(ptr: Pointer; const file_: PIdAnsiChar; line: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_free_procname);
 end;
 
 
 procedure  ERR_CRYPTO_clear_free(ptr: Pointer; num: TIdC_SIZET; const file_: PIdAnsiChar; line: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_clear_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_clear_free_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_CRYPTO_realloc(addr: Pointer; num: TIdC_SIZET; const file_: PIdAnsiChar; line: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_realloc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_realloc_procname);
 end;
 
 
 function  ERR_CRYPTO_clear_realloc(addr: Pointer; old_num: TIdC_SIZET; num: TIdC_SIZET; const file_: PIdAnsiChar; line: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_clear_realloc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_clear_realloc_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_CRYPTO_secure_malloc_init(sz: TIdC_SIZET; minsize: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_secure_malloc_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_secure_malloc_init_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_CRYPTO_secure_malloc_done: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_secure_malloc_done_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_secure_malloc_done_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_CRYPTO_secure_malloc(num: TIdC_SIZET; const file_: PIdAnsiChar; line: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_secure_malloc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_secure_malloc_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_CRYPTO_secure_zalloc(num: TIdC_SIZET; const file_: PIdAnsiChar; line: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_secure_zalloc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_secure_zalloc_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_CRYPTO_secure_free(ptr: Pointer; const file_: PIdAnsiChar; line: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_secure_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_secure_free_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_CRYPTO_secure_clear_free(ptr: Pointer; num: TIdC_SIZET; const file_: PIdAnsiChar; line: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_secure_clear_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_secure_clear_free_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_CRYPTO_secure_allocated(const ptr: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_secure_allocated_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_secure_allocated_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_CRYPTO_secure_malloc_initialized: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_secure_malloc_initialized_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_secure_malloc_initialized_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_CRYPTO_secure_actual_size(ptr: Pointer): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_secure_actual_size_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_secure_actual_size_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_CRYPTO_secure_used: TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_secure_used_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_secure_used_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_OPENSSL_cleanse(ptr: Pointer; len: TIdC_SIZET); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_cleanse_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_cleanse_procname);
 end;
 
 
@@ -1601,27 +1601,27 @@ end;
 
 function  ERR_OPENSSL_isservice: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_isservice_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_isservice_procname);
 end;
 
 
 
 function  ERR_FIPS_mode: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(FIPS_mode_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(FIPS_mode_procname);
 end;
 
  
 function  ERR_FIPS_mode_set(r: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(FIPS_mode_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(FIPS_mode_set_procname);
 end;
 
  
 
 procedure  ERR_OPENSSL_init; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_init_procname);
 end;
 
 
@@ -1640,7 +1640,7 @@ end;
    *)
 function  ERR_CRYPTO_memcmp(const in_a: Pointer; const in_b: Pointer; len: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_memcmp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_memcmp_procname);
 end;
 
 
@@ -1648,20 +1648,20 @@ end;
   (* Library initialisation functions *)
 procedure  ERR_OPENSSL_cleanup; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_cleanup_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_init_crypto(opts: TIdC_UINT64; const settings: POPENSSL_INIT_SETTINGS): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_init_crypto_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_init_crypto_procname);
 end;
 
  {introduced 1.1.0}
   // int OPENSSL_atexit(void (*handler)(void));
 procedure  ERR_OPENSSL_thread_stop; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_thread_stop_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_thread_stop_procname);
 end;
 
  {introduced 1.1.0}
@@ -1669,7 +1669,7 @@ end;
   (* Low-level control of initialization *)
 function  ERR_OPENSSL_INIT_new: POPENSSL_INIT_SETTINGS; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_INIT_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_INIT_new_procname);
 end;
 
  {introduced 1.1.0}
@@ -1681,14 +1681,14 @@ end;
   //                                    const char *config_appname);
 procedure  ERR_OPENSSL_INIT_free(settings: POPENSSL_INIT_SETTINGS); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_INIT_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_INIT_free_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_CRYPTO_THREAD_run_once(once: PCRYPTO_ONCE; init: CRYPTO_THREAD_run_once_init): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_run_once_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_run_once_procname);
 end;
 
  {introduced 1.1.0}
@@ -1699,45 +1699,45 @@ end;
   //function CRYPTO_THREAD_init_local(key: PCRYPTO_THREAD_LOCAL; cleanup: CRYPTO_THREAD_init_local_cleanup): TIdC_INT;
 function  ERR_CRYPTO_THREAD_get_local(key: PCRYPTO_THREAD_LOCAL): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_get_local_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_get_local_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_CRYPTO_THREAD_set_local(key: PCRYPTO_THREAD_LOCAL; val: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_set_local_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_set_local_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_CRYPTO_THREAD_cleanup_local(key: PCRYPTO_THREAD_LOCAL): TidC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_cleanup_local_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_cleanup_local_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_CRYPTO_THREAD_get_current_id: CRYPTO_THREAD_ID; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_get_current_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_get_current_id_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_CRYPTO_THREAD_compare_id(a: CRYPTO_THREAD_ID; b: CRYPTO_THREAD_ID): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_compare_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CRYPTO_THREAD_compare_id_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_SSLeay_version(type_ : TIdC_INT) : PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSLeay_version_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSLeay_version_procname);
 end;
 
  
 function  ERR_SSLeay: TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SSLeay_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SSLeay_procname);
 end;
 
  

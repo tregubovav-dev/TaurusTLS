@@ -558,88 +558,88 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_PEM_get_EVP_CIPHER_INFO(header: PIdAnsiChar; cipher: PEVP_CIPHER_INFO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_get_EVP_CIPHER_INFO_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_get_EVP_CIPHER_INFO_procname);
 end;
 
 
 function  ERR_PEM_do_header(cipher: PEVP_CIPHER_INFO; data: PByte; len: PIdC_LONG; callback: pem_password_cb; u: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_do_header_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_do_header_procname);
 end;
 
 
 
 function  ERR_PEM_read_bio(bp: PBIO; name: PPIdAnsiChar; header: PPIdAnsiChar; data: PPByte; len: PIdC_LONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_procname);
 end;
 
 
 function  ERR_PEM_read_bio_ex(bp: PBIO; name: PPIdAnsiChar; header: PPIdAnsiChar; data: PPByte; len: PIdC_LONG; flags: TIdC_UINT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_ex_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_PEM_bytes_read_bio_secmem(pdata: PPByte; plen: PIdC_LONG; pnm: PPIdAnsiChar; const name: PIdAnsiChar; bp: PBIO; cb: pem_password_cb; u: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_bytes_read_bio_secmem_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_bytes_read_bio_secmem_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_PEM_write_bio(bp: PBIO; const name: PIdAnsiChar; const hdr: PIdAnsiChar; const data: PByte; len: TIdC_LONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_procname);
 end;
 
 
 function  ERR_PEM_bytes_read_bio(pdata: PPByte; plen: PIdC_LONG; pnm: PPIdAnsiChar; const name: PIdAnsiChar; bp: PBIO; cb: pem_password_cb; u: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_bytes_read_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_bytes_read_bio_procname);
 end;
 
 
 function  ERR_PEM_ASN1_read_bio(d2i: d2i_of_void; const name: PIdAnsiChar; bp: PBIO; x: PPointer; cb: pem_password_cb; u: Pointer): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_ASN1_read_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_ASN1_read_bio_procname);
 end;
 
 
 function  ERR_PEM_ASN1_write_bio(i2d: i2d_of_void; const name: PIdAnsiChar; bp: PBIO; x: Pointer; const enc: PEVP_CIPHER; kstr: PByte; klen: TIdC_INT; cb: pem_password_cb; u: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_ASN1_write_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_ASN1_write_bio_procname);
 end;
 
 
 
 function  ERR_PEM_X509_INFO_read_bio(bp: PBIO; sk: PSTACK_OF_X509_INFO; cb: pem_password_cb; u: Pointer): PSTACK_OF_X509_INFO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_X509_INFO_read_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_X509_INFO_read_bio_procname);
 end;
 
 
 function  ERR_PEM_X509_INFO_write_bio(bp: PBIO; xi: PX509_INFO; enc: PEVP_CIPHER; kstr: PByte; klen: TIdC_INT; cd: pem_password_cb; u: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_X509_INFO_write_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_X509_INFO_write_bio_procname);
 end;
 
 
 
 function  ERR_PEM_SignInit(ctx: PEVP_MD_CTX; type_: PEVP_MD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_SignInit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_SignInit_procname);
 end;
 
 
 function  ERR_PEM_SignUpdate(ctx: PEVP_MD_CTX; d: PByte; cnt: Byte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_SignUpdate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_SignUpdate_procname);
 end;
 
 
 function  ERR_PEM_SignFinal(ctx: PEVP_MD_CTX; sigret: PByte; siglen: PIdC_UINT; pkey: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_SignFinal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_SignFinal_procname);
 end;
 
 
@@ -647,91 +647,91 @@ end;
   (* The default pem_password_cb that's used internally *)
 function  ERR_PEM_def_callback(buf: PIdAnsiChar; num: TIdC_INT; rwflag: TIdC_INT; userdata: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_def_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_def_callback_procname);
 end;
 
 
 procedure  ERR_PEM_proc_type(buf: PIdAnsiChar; type_: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_proc_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_proc_type_procname);
 end;
 
 
 procedure  ERR_PEM_dek_info(buf: PIdAnsiChar; const type_: PIdAnsiChar; len: TIdC_INT; str: PIdAnsiChar); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_dek_info_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_dek_info_procname);
 end;
 
 
 
 function  ERR_PEM_read_bio_X509(bp: PBIO; x: PPX509; cb: pem_password_cb; u: Pointer): PX509; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_X509_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_X509_procname);
 end;
 
 
 function  ERR_PEM_write_bio_X509(bp: PBIO; x: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_X509_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_X509_procname);
 end;
 
 
 
 function  ERR_PEM_read_bio_X509_AUX(bp: PBIO; x: PPX509; cb: pem_password_cb; u: Pointer): PX509; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_X509_AUX_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_X509_AUX_procname);
 end;
 
 
 function  ERR_PEM_write_bio_X509_AUX(bp: PBIO; x: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_X509_AUX_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_X509_AUX_procname);
 end;
 
 
 
 function  ERR_PEM_read_bio_X509_REQ(bp: PBIO; x: PPX509_REQ; cb: pem_password_cb; u: Pointer): PX509_REQ; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_X509_REQ_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_X509_REQ_procname);
 end;
 
 
 function  ERR_PEM_write_bio_X509_REQ(bp: PBIO; x: PX509_REQ): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_X509_REQ_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_X509_REQ_procname);
 end;
 
 
 
 function  ERR_PEM_write_bio_X509_REQ_NEW(bp: PBIO; x: PX509_REQ): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_X509_REQ_NEW_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_X509_REQ_NEW_procname);
 end;
 
 
 
 function  ERR_PEM_read_bio_X509_CRL(bp: PBIO; x: PPX509_CRL; cb: pem_password_cb; u: Pointer): PX509_CRL; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_X509_CRL_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_X509_CRL_procname);
 end;
 
 
 function  ERR_PEM_write_bio_X509_CRL(bp: PBIO; x: PX509_CRL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_X509_CRL_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_X509_CRL_procname);
 end;
 
 
 
 function  ERR_PEM_read_bio_PKCS7(bp: PBIO; x: PPPKCS7; cb: pem_password_cb; u: Pointer): PPKCS7; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_PKCS7_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_PKCS7_procname);
 end;
 
 
 function  ERR_PEM_write_bio_PKCS7(bp: PBIO; x: PPKCS7): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_PKCS7_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_PKCS7_procname);
 end;
 
 
@@ -741,26 +741,26 @@ end;
 
 function  ERR_PEM_read_bio_PKCS8(bp: PBIO; x: PPX509_SIG; cb: pem_password_cb; u: Pointer): PX509_SIG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_PKCS8_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_PKCS8_procname);
 end;
 
 
 function  ERR_PEM_write_bio_PKCS8(bp: PBIO; x: PX509_SIG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_PKCS8_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_PKCS8_procname);
 end;
 
 
 
 function  ERR_PEM_read_bio_PKCS8_PRIV_KEY_INFO(bp: PBIO; x: PPPKCS8_PRIV_KEY_INFO; cb: pem_password_cb; u: Pointer): PPKCS8_PRIV_KEY_INFO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_PKCS8_PRIV_KEY_INFO_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_PKCS8_PRIV_KEY_INFO_procname);
 end;
 
 
 function  ERR_PEM_write_bio_PKCS8_PRIV_KEY_INFO(bp: PBIO; x: PPKCS8_PRIV_KEY_INFO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_PKCS8_PRIV_KEY_INFO_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_PKCS8_PRIV_KEY_INFO_procname);
 end;
 
 
@@ -768,39 +768,39 @@ end;
   // RSA
 function  ERR_PEM_read_bio_RSAPrivateKey(bp: PBIO; x: PPRSA; cb: pem_password_cb; u: Pointer): PRSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_RSAPrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_RSAPrivateKey_procname);
 end;
 
 
 function  ERR_PEM_write_bio_RSAPrivateKey(bp: PBIO; x: PRSA; const enc: PEVP_CIPHER; kstr: PByte; klen: TIdC_INT; cb: pem_password_cb; u: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_RSAPrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_RSAPrivateKey_procname);
 end;
 
 
 
 function  ERR_PEM_read_bio_RSAPublicKey(bp: PBIO; x: PPRSA; cb: pem_password_cb; u: Pointer): PRSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_RSAPublicKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_RSAPublicKey_procname);
 end;
 
 
 function  ERR_PEM_write_bio_RSAPublicKey(bp: PBIO; const x: PRSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_RSAPublicKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_RSAPublicKey_procname);
 end;
 
 
 
 function  ERR_PEM_read_bio_RSA_PUBKEY(bp: PBIO; x: PPRSA; cb: pem_password_cb; u: Pointer): PRSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_RSA_PUBKEY_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_RSA_PUBKEY_procname);
 end;
 
 
 function  ERR_PEM_write_bio_RSA_PUBKEY(bp: PBIO; x: PRSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_RSA_PUBKEY_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_RSA_PUBKEY_procname);
 end;
 
 
@@ -809,39 +809,39 @@ end;
   // DSA
 function  ERR_PEM_read_bio_DSAPrivateKey(bp: PBIO; x: PPDSA; cb: pem_password_cb; u: Pointer): PDSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_DSAPrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_DSAPrivateKey_procname);
 end;
 
 
 function  ERR_PEM_write_bio_DSAPrivateKey(bp: PBIO; x: PDSA; const enc: PEVP_CIPHER; kstr: PByte; klen: TIdC_INT; cb: pem_password_cb; u: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_DSAPrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_DSAPrivateKey_procname);
 end;
 
 
 
 function  ERR_PEM_read_bio_DSA_PUBKEY(bp: PBIO; x: PPDSA; cb: pem_password_cb; u: Pointer): PDSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_DSA_PUBKEY_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_DSA_PUBKEY_procname);
 end;
 
 
 function  ERR_PEM_write_bio_DSA_PUBKEY(bp: PBIO; x: PDSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_DSA_PUBKEY_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_DSA_PUBKEY_procname);
 end;
 
 
 
 function  ERR_PEM_read_bio_DSAparams(bp: PBIO; x: PPDSA; cb: pem_password_cb; u: Pointer): PDSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_DSAparams_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_DSAparams_procname);
 end;
 
 
 function  ERR_PEM_write_bio_DSAparams(bp: PBIO; const x: PDSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_DSAparams_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_DSAparams_procname);
 end;
 
 
@@ -850,39 +850,39 @@ end;
   // EC
 function  ERR_PEM_read_bio_ECPKParameters(bp: PBIO; x: PPEC_GROUP; cb: pem_password_cb; u: Pointer): PEC_GROUP; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_ECPKParameters_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_ECPKParameters_procname);
 end;
 
 
 function  ERR_PEM_write_bio_ECPKParameters(bp: PBIO; const x: PEC_GROUP): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_ECPKParameters_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_ECPKParameters_procname);
 end;
 
 
 
 function  ERR_PEM_read_bio_ECPrivateKey(bp: PBIO; x: PPEC_KEY; cb: pem_password_cb; u: Pointer): PEC_KEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_ECPrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_ECPrivateKey_procname);
 end;
 
 
 function  ERR_PEM_write_bio_ECPrivateKey(bp: PBIO; x: PEC_KEY; const enc: PEVP_CIPHER; kstr: PByte; klen: TIdC_INT; cb: pem_password_cb; u: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_ECPrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_ECPrivateKey_procname);
 end;
 
 
 
 function  ERR_PEM_read_bio_EC_PUBKEY(bp: PBIO; x: PPEC_KEY; cb: pem_password_cb; u: Pointer): PEC_KEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_EC_PUBKEY_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_EC_PUBKEY_procname);
 end;
 
 
 function  ERR_PEM_write_bio_EC_PUBKEY(bp: PBIO; x: PEC_KEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_EC_PUBKEY_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_EC_PUBKEY_procname);
 end;
 
 
@@ -891,20 +891,20 @@ end;
   // DH
 function  ERR_PEM_read_bio_DHparams(bp: PBIO; x: PPDH; cb: pem_password_cb; u: Pointer): PDH; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_DHparams_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_DHparams_procname);
 end;
 
 
 function  ERR_PEM_write_bio_DHparams(bp: PBIO; const x: PDH): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_DHparams_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_DHparams_procname);
 end;
 
 
 
 function  ERR_PEM_write_bio_DHxparams(bp: PBIO; const x: PDH): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_DHxparams_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_DHxparams_procname);
 end;
 
 
@@ -912,125 +912,125 @@ end;
 
 function  ERR_PEM_read_bio_PrivateKey(bp: PBIO; x: PPEVP_PKEY; cb: pem_password_cb; u: Pointer): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_PrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_PrivateKey_procname);
 end;
 
 
 function  ERR_PEM_write_bio_PrivateKey(bp: PBIO; x: PEVP_PKEY; const enc: PEVP_CIPHER; kstr: PByte; klen: TIdC_INT; cb: pem_password_cb; u: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_PrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_PrivateKey_procname);
 end;
 
 
 
 function  ERR_PEM_read_bio_PUBKEY(bp: PBIO; x: PPEVP_PKEY; cb: pem_password_cb; u: Pointer): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_PUBKEY_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_PUBKEY_procname);
 end;
 
 
 function  ERR_PEM_write_bio_PUBKEY(bp: PBIO; x: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_PUBKEY_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_PUBKEY_procname);
 end;
 
 
 
 function  ERR_PEM_write_bio_PrivateKey_traditional(bp: PBIO; x: PEVP_PKEY; const enc: PEVP_CIPHER; kstr: PByte; klen: TIdC_INT; cb: pem_password_cb; u: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_PrivateKey_traditional_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_PrivateKey_traditional_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_PEM_write_bio_PKCS8PrivateKey_nid(bp: PBIO; x: PEVP_PKEY; nid: TIdC_INT; kstr: PIdAnsiChar; klen: TIdC_INT; cb: pem_password_cb; u: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_PKCS8PrivateKey_nid_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_PKCS8PrivateKey_nid_procname);
 end;
 
 
 function  ERR_PEM_write_bio_PKCS8PrivateKey(bp: PBIO; x: PEVP_PKEY_METHOD; const enc: PEVP_CIPHER; kstr: PIdAnsiChar; klen: TIdC_INT; cb: pem_password_cb; u: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_PKCS8PrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_PKCS8PrivateKey_procname);
 end;
 
 
 function  ERR_i2d_PKCS8PrivateKey_bio(bp: PBIO; x: PEVP_PKEY; const enc: PEVP_CIPHER_CTX; kstr: PIdAnsiChar; klen: TIdC_INT; cb: pem_password_cb; u: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_PKCS8PrivateKey_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_PKCS8PrivateKey_bio_procname);
 end;
 
 
 function  ERR_i2d_PKCS8PrivateKey_nid_bio(bp: PBIO; x: PEVP_PKEY; nid: TIdC_INT; kstr: PIdAnsiChar; klen: TIdC_INT; cb: pem_password_cb; u: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_PKCS8PrivateKey_nid_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_PKCS8PrivateKey_nid_bio_procname);
 end;
 
 
 function  ERR_d2i_PKCS8PrivateKey_bio(bp: PBIO; x: PPEVP_PKEY_CTX; cb: pem_password_cb; u: Pointer): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_PKCS8PrivateKey_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_PKCS8PrivateKey_bio_procname);
 end;
 
 
 
 function  ERR_PEM_read_bio_Parameters(bp: PBIO; x: PPEVP_PKEY): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_read_bio_Parameters_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_read_bio_Parameters_procname);
 end;
 
 
 function  ERR_PEM_write_bio_Parameters(bp: PBIO; x: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_Parameters_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_Parameters_procname);
 end;
 
 
 
 function  ERR_b2i_PrivateKey(const in_: PPByte; length: TIdC_LONG): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(b2i_PrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(b2i_PrivateKey_procname);
 end;
 
 
 function  ERR_b2i_PublicKey(const in_: PPByte; length: TIdC_LONG): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(b2i_PublicKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(b2i_PublicKey_procname);
 end;
 
 
 function  ERR_b2i_PrivateKey_bio(in_: PBIO): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(b2i_PrivateKey_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(b2i_PrivateKey_bio_procname);
 end;
 
 
 function  ERR_b2i_PublicKey_bio(in_: PBIO): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(b2i_PublicKey_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(b2i_PublicKey_bio_procname);
 end;
 
 
 function  ERR_i2b_PrivateKey_bio(out_: PBIO; pk: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2b_PrivateKey_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2b_PrivateKey_bio_procname);
 end;
 
 
 function  ERR_i2b_PublicKey_bio(out_: PBIO; pk: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2b_PublicKey_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2b_PublicKey_bio_procname);
 end;
 
 
 function  ERR_b2i_PVK_bio(in_: PBIO; cb: pem_password_cb; u: Pointer): PEVP_PKEY; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(b2i_PVK_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(b2i_PVK_bio_procname);
 end;
 
 
 function  ERR_i2b_PVK_bio(out_: PBIO; pk: PEVP_PKEY; enclevel: TIdC_INT; cb: pem_password_cb; u: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2b_PVK_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2b_PVK_bio_procname);
 end;
 
 

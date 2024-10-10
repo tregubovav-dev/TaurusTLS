@@ -449,290 +449,290 @@ end;
 {$WARN  NO_RETVAL OFF}
 function  ERR_OPENSSL_sk_num(_para1:POPENSSL_STACK):longint; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_num_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_num_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_value(_para1:POPENSSL_STACK; _para2:longint):pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_value_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_value_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_set(st:POPENSSL_STACK; i:longint; data:pointer):pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_set_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_new(cmp:TOPENSSL_sk_compfunc):POPENSSL_STACK; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_new_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_new_null:POPENSSL_STACK; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_new_null_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_new_null_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_new_reserve(c:TOPENSSL_sk_compfunc; n:longint):POPENSSL_STACK; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_new_reserve_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_new_reserve_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_reserve(st:POPENSSL_STACK; n:longint):longint; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_reserve_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_reserve_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_OPENSSL_sk_free(_para1:POPENSSL_STACK); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_free_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_OPENSSL_sk_pop_free(st:POPENSSL_STACK; func:TOPENSSL_sk_freefunc); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_pop_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_pop_free_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_deep_copy(_para1:POPENSSL_STACK; c:TOPENSSL_sk_copyfunc; f:TOPENSSL_sk_freefunc):POPENSSL_STACK; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_deep_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_deep_copy_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_insert(sk:POPENSSL_STACK; data:pointer; where:longint):longint; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_insert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_insert_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_delete(st:POPENSSL_STACK; loc:longint):pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_delete_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_delete_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_delete_ptr(st:POPENSSL_STACK; p:pointer):pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_delete_ptr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_delete_ptr_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_find(st:POPENSSL_STACK; data:pointer):longint; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_find_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_find_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_find_ex(st:POPENSSL_STACK; data:pointer):longint; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_find_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_find_ex_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_push(st:POPENSSL_STACK; data:pointer):longint; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_push_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_push_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_unshift(st:POPENSSL_STACK; data:pointer):longint; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_unshift_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_unshift_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_shift(st:POPENSSL_STACK):pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_shift_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_shift_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_pop(st:POPENSSL_STACK):pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_pop_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_pop_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_OPENSSL_sk_zero(st:POPENSSL_STACK); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_zero_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_zero_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_set_cmp_func(sk:POPENSSL_STACK; cmp:TOPENSSL_sk_compfunc):TOPENSSL_sk_compfunc; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_set_cmp_func_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_set_cmp_func_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_dup(st:POPENSSL_STACK):POPENSSL_STACK; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_dup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_dup_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_OPENSSL_sk_sort(st:POPENSSL_STACK); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_sort_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_sort_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_OPENSSL_sk_is_sorted(st:POPENSSL_STACK):longint; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(OPENSSL_sk_is_sorted_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(OPENSSL_sk_is_sorted_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_sk_num(_para1:POPENSSL_STACK):longint; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_num_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_num_procname);
 end;
 
  
 function  ERR_sk_value(_para1:POPENSSL_STACK; _para2:longint):pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_value_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_value_procname);
 end;
 
  
 function  ERR_sk_set(st:POPENSSL_STACK; i:longint; data:pointer):pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_set_procname);
 end;
 
  
 function  ERR_sk_new(cmp:TOPENSSL_sk_compfunc):POPENSSL_STACK; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_new_procname);
 end;
 
  
 function  ERR_sk_new_null:POPENSSL_STACK; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_new_null_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_new_null_procname);
 end;
 
  
 function  ERR_sk_new_reserve(c:TOPENSSL_sk_compfunc; n:longint):POPENSSL_STACK; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_new_reserve_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_new_reserve_procname);
 end;
 
  
 function  ERR_sk_reserve(st:POPENSSL_STACK; n:longint):longint; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_reserve_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_reserve_procname);
 end;
 
  
 procedure  ERR_sk_free(_para1:POPENSSL_STACK); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_free_procname);
 end;
 
  
 procedure  ERR_sk_pop_free(st:POPENSSL_STACK; func:TOPENSSL_sk_freefunc); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_pop_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_pop_free_procname);
 end;
 
  
 function  ERR_sk_deep_copy(_para1:POPENSSL_STACK; c:TOPENSSL_sk_copyfunc; f:TOPENSSL_sk_freefunc):POPENSSL_STACK; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_deep_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_deep_copy_procname);
 end;
 
  
 function  ERR_sk_insert(sk:POPENSSL_STACK; data:pointer; where:longint):longint; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_insert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_insert_procname);
 end;
 
  
 function  ERR_sk_delete(st:POPENSSL_STACK; loc:longint):pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_delete_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_delete_procname);
 end;
 
  
 function  ERR_sk_delete_ptr(st:POPENSSL_STACK; p:pointer):pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_delete_ptr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_delete_ptr_procname);
 end;
 
  
 function  ERR_sk_find(st:POPENSSL_STACK; data:pointer):longint; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_find_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_find_procname);
 end;
 
  
 function  ERR_sk_find_ex(st:POPENSSL_STACK; data:pointer):longint; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_find_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_find_ex_procname);
 end;
 
  
 function  ERR_sk_push(st:POPENSSL_STACK; data:pointer):longint; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_push_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_push_procname);
 end;
 
  
 function  ERR_sk_unshift(st:POPENSSL_STACK; data:pointer):longint; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_unshift_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_unshift_procname);
 end;
 
  
 function  ERR_sk_shift(st:POPENSSL_STACK):pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_shift_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_shift_procname);
 end;
 
  
 function  ERR_sk_pop(st:POPENSSL_STACK):pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_pop_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_pop_procname);
 end;
 
  
 procedure  ERR_sk_zero(st:POPENSSL_STACK); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_zero_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_zero_procname);
 end;
 
  
 function  ERR_sk_set_cmp_func(sk:POPENSSL_STACK; cmp:TOPENSSL_sk_compfunc):TOPENSSL_sk_compfunc; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_set_cmp_func_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_set_cmp_func_procname);
 end;
 
  
 function  ERR_sk_dup(st:POPENSSL_STACK):POPENSSL_STACK; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_dup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_dup_procname);
 end;
 
  
 procedure  ERR_sk_sort(st:POPENSSL_STACK); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_sort_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_sort_procname);
 end;
 
  
 function  ERR_sk_is_sorted(st:POPENSSL_STACK):longint; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(sk_is_sorted_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(sk_is_sorted_procname);
 end;
 
  

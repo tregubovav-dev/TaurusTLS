@@ -113,64 +113,64 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_COMP_CTX_new(meth: PCOMP_METHOD): PCOMP_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(COMP_CTX_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(COMP_CTX_new_procname);
 end;
 
 
 function  ERR_COMP_CTX_get_method(const ctx: PCOMP_CTX): PCOMP_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(COMP_CTX_get_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(COMP_CTX_get_method_procname);
 end;
 
 
 function  ERR_COMP_CTX_get_type(const comp: PCOMP_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(COMP_CTX_get_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(COMP_CTX_get_type_procname);
 end;
 
 
 function  ERR_COMP_get_type(const meth: PCOMP_METHOD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(COMP_get_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(COMP_get_type_procname);
 end;
 
 
 function  ERR_COMP_get_name(const meth: PCOMP_METHOD): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(COMP_get_name_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(COMP_get_name_procname);
 end;
 
 
 procedure  ERR_COMP_CTX_free(ctx: PCOMP_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(COMP_CTX_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(COMP_CTX_free_procname);
 end;
 
 
 
 function  ERR_COMP_compress_block(ctx: PCOMP_CTX; out_: PByte; olen: TIdC_INT; in_: PByte; ilen: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(COMP_compress_block_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(COMP_compress_block_procname);
 end;
 
 
 function  ERR_COMP_expand_block(ctx: PCOMP_CTX; out_: PByte; olen: TIdC_INT; in_: PByte; ilen: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(COMP_expand_block_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(COMP_expand_block_procname);
 end;
 
 
 
 function  ERR_COMP_zlib: PCOMP_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(COMP_zlib_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(COMP_zlib_procname);
 end;
 
 
 
 function  ERR_BIO_f_zlib: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_f_zlib_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_f_zlib_procname);
 end;
 
 

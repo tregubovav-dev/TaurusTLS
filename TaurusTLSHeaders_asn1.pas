@@ -1687,73 +1687,73 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_ASN1_TYPE_get(const a: PASN1_TYPE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TYPE_get_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_get_procname);
 end;
 
 
 procedure  ERR_ASN1_TYPE_set(a: PASN1_TYPE; type_: TIdC_INT; value: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TYPE_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_set_procname);
 end;
 
 
 function  ERR_ASN1_TYPE_set1(a: PASN1_TYPE; type_: TIdC_INT; const value: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TYPE_set1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_set1_procname);
 end;
 
 
 function  ERR_ASN1_TYPE_cmp(const a: PASN1_TYPE; const b: PASN1_TYPE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TYPE_cmp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_cmp_procname);
 end;
 
 
 
 function  ERR_ASN1_TYPE_pack_sequence(const it: PASN1_ITEM; s: Pointer; t: PPASN1_TYPE): PASN1_TYPE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TYPE_pack_sequence_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_pack_sequence_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASN1_TYPE_unpack_sequence(const it: PASN1_ITEM; const t: PASN1_TYPE): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TYPE_unpack_sequence_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_unpack_sequence_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_ASN1_OBJECT_new: PASN1_OBJECT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_OBJECT_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_OBJECT_new_procname);
 end;
 
 
 procedure  ERR_ASN1_OBJECT_free(a: PASN1_OBJECT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_OBJECT_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_OBJECT_free_procname);
 end;
 
 
 function  ERR_i2d_ASN1_OBJECT(const a: PASN1_OBJECT; pp: PPByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_ASN1_OBJECT_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_ASN1_OBJECT_procname);
 end;
 
 
 function  ERR_d2i_ASN1_OBJECT(a: PPASN1_OBJECT; const pp: PPByte; length: TIdC_LONG): PASN1_OBJECT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_ASN1_OBJECT_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_ASN1_OBJECT_procname);
 end;
 
 function ERR_i2d_ASN1_BIT_STRING(val_in : PASN1_BIT_STRING; der_out : PPAnsiChar) : TIdC_long;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_ASN1_BIT_STRING_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_ASN1_BIT_STRING_procname);
 end;
 
 function ERR_d2i_ASN1_BIT_STRING(val_out : PPASN1_BIT_STRING; const der_in : PPAnsiChar; length : TIdC_LONG) : PASN1_BIT_STRING;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_ASN1_BIT_STRING_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_ASN1_BIT_STRING_procname);
 end;
 
   //DECLARE_ASN1_ITEM(ASN1_OBJECT)
@@ -1762,43 +1762,43 @@ end;
 
 function  ERR_ASN1_STRING_new: PASN1_STRING; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_new_procname);
 end;
 
 
 procedure  ERR_ASN1_STRING_free(a: PASN1_STRING); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_free_procname);
 end;
 
 
 procedure  ERR_ASN1_STRING_clear_free(a: PASN1_STRING); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_clear_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_clear_free_procname);
 end;
 
 
 function  ERR_ASN1_STRING_copy(dst: PASN1_STRING; const str: PASN1_STRING): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_copy_procname);
 end;
 
 
 function  ERR_ASN1_STRING_dup(const a: PASN1_STRING): PASN1_STRING; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_dup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_dup_procname);
 end;
 
 
 function  ERR_ASN1_STRING_type_new(type_: TIdC_INT): PASN1_STRING; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_type_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_type_new_procname);
 end;
 
 
 function  ERR_ASN1_STRING_cmp(const a: PASN1_STRING; const b: PASN1_STRING): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_cmp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_cmp_procname);
 end;
 
 
@@ -1809,37 +1809,37 @@ end;
    *)
 function  ERR_ASN1_STRING_set(str: PASN1_STRING; const data: Pointer; len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_set_procname);
 end;
 
 
 procedure  ERR_ASN1_STRING_set0(str: PASN1_STRING; data: Pointer; len: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_set0_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_set0_procname);
 end;
 
 
 function  ERR_ASN1_STRING_length(const x: PASN1_STRING): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_length_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_length_procname);
 end;
 
 
 procedure  ERR_ASN1_STRING_length_set(x: PASN1_STRING; n: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_length_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_length_set_procname);
 end;
 
 
 function  ERR_ASN1_STRING_type(const x: PASN1_STRING): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_type_procname);
 end;
 
 
 function  ERR_ASN1_STRING_get0_data(const x: PASN1_STRING): PByte; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_get0_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_get0_data_procname);
 end;
 
  {introduced 1.1.0}
@@ -1847,88 +1847,88 @@ end;
   //DECLARE_ASN1_FUNCTIONS(ASN1_BIT_STRING)
 function  ERR_ASN1_BIT_STRING_set(a: PASN1_BIT_STRING; d: PByte; length: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_set_procname);
 end;
 
 
 function  ERR_ASN1_BIT_STRING_set_bit(a: PASN1_BIT_STRING; n: TIdC_INT; value: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_set_bit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_set_bit_procname);
 end;
 
 
 function  ERR_ASN1_BIT_STRING_get_bit(const a: PASN1_BIT_STRING; n: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_get_bit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_get_bit_procname);
 end;
 
 
 function  ERR_ASN1_BIT_STRING_check(const a: PASN1_BIT_STRING; const flags: PByte; flags_len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_check_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_check_procname);
 end;
 
 
 
 function  ERR_ASN1_BIT_STRING_name_print(out_: PBIO; bs: PASN1_BIT_STRING; tbl: PBIT_STRING_BITNAME; indent: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_name_print_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_name_print_procname);
 end;
 
 
 function  ERR_ASN1_BIT_STRING_num_asc(const name: PIdAnsiChar; tbl: PBIT_STRING_BITNAME): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_num_asc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_num_asc_procname);
 end;
 
 
 function  ERR_ASN1_BIT_STRING_set_asc(bs: PASN1_BIT_STRING; const name: PIdAnsiChar; value: TIdC_INT; tbl: PBIT_STRING_BITNAME): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_set_asc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_set_asc_procname);
 end;
 
 
 
 function  ERR_ASN1_INTEGER_new: PASN1_INTEGER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_new_procname);
 end;
 
 
 procedure  ERR_ASN1_INTEGER_free(a: PASN1_INTEGER); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_free_procname);
 end;
 
 
 function  ERR_d2i_ASN1_INTEGER(a: PPASN1_INTEGER; const in_: PPByte; len: TIdC_Long): PASN1_INTEGER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_ASN1_INTEGER_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_ASN1_INTEGER_procname);
 end;
 
 
 function  ERR_i2d_ASN1_INTEGER(a: PASN1_INTEGER; out_: PPByte): TIdC_Int; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_ASN1_INTEGER_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_ASN1_INTEGER_procname);
 end;
 
 
 
 function  ERR_d2i_ASN1_UINTEGER(a: PPASN1_INTEGER; const pp: PPByte; length: TIdC_LONG): PASN1_INTEGER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_ASN1_UINTEGER_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_ASN1_UINTEGER_procname);
 end;
 
 
 function  ERR_ASN1_INTEGER_dup(const x: PASN1_INTEGER): PASN1_INTEGER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_dup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_dup_procname);
 end;
 
 
 function  ERR_ASN1_INTEGER_cmp(const x: PASN1_INTEGER; const y: PASN1_INTEGER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_cmp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_cmp_procname);
 end;
 
 
@@ -1937,63 +1937,63 @@ end;
 
 function  ERR_ASN1_UTCTIME_check(const a: PASN1_UTCTIME): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_check_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_check_procname);
 end;
 
 
 function  ERR_ASN1_UTCTIME_set(s: PASN1_UTCTIME; t: TIdC_TIMET): PASN1_UTCTIME; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_set_procname);
 end;
 
 
 function  ERR_ASN1_UTCTIME_adj(s: PASN1_UTCTIME; t: TIdC_TIMET; offset_day: TIdC_INT; offset_sec: TIdC_LONG): PASN1_UTCTIME; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_adj_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_adj_procname);
 end;
 
 
 function  ERR_ASN1_UTCTIME_set_string(s: PASN1_UTCTIME; const str: PAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_set_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_set_string_procname);
 end;
 
 
 function  ERR_ASN1_UTCTIME_cmp_time_t(const s: PASN1_UTCTIME; t: TIdC_TIMET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_cmp_time_t_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_cmp_time_t_procname);
 end;
 
 
 
 function  ERR_ASN1_GENERALIZEDTIME_check(const a: PASN1_GENERALIZEDTIME): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_check_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_check_procname);
 end;
 
 
 function  ERR_ASN1_GENERALIZEDTIME_set(s: PASN1_GENERALIZEDTIME; t: TIdC_TIMET): PASN1_GENERALIZEDTIME; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_set_procname);
 end;
 
 
 function  ERR_ASN1_GENERALIZEDTIME_adj(s: PASN1_GENERALIZEDTIME; t: TIdC_TIMET; offset_day: TIdC_INT; offset_sec: TIdC_LONG): PASN1_GENERALIZEDTIME; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_adj_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_adj_procname);
 end;
 
 
 function  ERR_ASN1_GENERALIZEDTIME_set_string(s: pASN1_GENERALIZEDTIME; const str: PAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_set_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_set_string_procname);
 end;
 
 
 
 function  ERR_ASN1_TIME_diff(pday: PIdC_INT; psec: PIdC_INT; const from: PASN1_TIME; const to_: PASN1_TIME): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TIME_diff_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_diff_procname);
 end;
 
 
@@ -2001,34 +2001,34 @@ end;
   // DECLARE_ASN1_FUNCTIONS(ASN1_OCTET_STRING)
 function  ERR_ASN1_OCTET_STRING_dup(const a: PASN1_OCTET_STRING): PASN1_OCTET_STRING; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_OCTET_STRING_dup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_OCTET_STRING_dup_procname);
 end;
 
 
 function  ERR_ASN1_OCTET_STRING_cmp(const a: PASN1_OCTET_STRING; const b: PASN1_OCTET_STRING): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_OCTET_STRING_cmp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_OCTET_STRING_cmp_procname);
 end;
 
 
 function  ERR_ASN1_OCTET_STRING_set(str: PASN1_OCTET_STRING; const data: PByte; len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_OCTET_STRING_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_OCTET_STRING_set_procname);
 end;
 
 function ERR_d2i_ASN1_OCTET_STRING(val_out : PPASN1_OCTET_STRING; der_in : PPAnsiChar; length : TIdC_LONG) : PASN1_OCTET_STRING;
 begin
-   EIdAPIFunctionNotPresent.RaiseException(d2i_ASN1_OCTET_STRING_procname);
+   ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_ASN1_OCTET_STRING_procname);
 end;
 
 function ERR_i2d_ASN1_OCTET_STRING(val_in : PASN1_OCTET_STRING; der_out : PPAnsiChar) : TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_ASN1_OCTET_STRING_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_ASN1_OCTET_STRING_procname);
 end;
 
 procedure ERR_ASN1_OCTET_STRING_free (a : PASN1_OCTET_STRING);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_OCTET_STRING_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_OCTET_STRING_free_procname);
 end;
 
   //DECLARE_ASN1_FUNCTIONS(ASN1_VISIBLESTRING)
@@ -2039,13 +2039,13 @@ end;
 
 function  ERR_UTF8_getc(const str: PByte; len: TIdC_INT; val: PIdC_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UTF8_getc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UTF8_getc_procname);
 end;
 
 
 function  ERR_UTF8_putc(str: PIdAnsiChar; len: TIdC_INT; value: TIdC_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UTF8_putc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UTF8_putc_procname);
 end;
 
 
@@ -2061,75 +2061,75 @@ end;
 
 function  ERR_ASN1_UTCTIME_new: PASN1_UTCTIME; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_new_procname);
 end;
 
 
 procedure  ERR_ASN1_UTCTIME_free(a: PASN1_UTCTIME); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_free_procname);
 end;
 
 
 function  ERR_d2i_ASN1_UTCTIME(a: PPASN1_UTCTIME; const in_: PPByte; len: TIdC_LONG): PASN1_UTCTIME; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_ASN1_UTCTIME_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_ASN1_UTCTIME_procname);
 end;
 
 
 function  ERR_i2d_ASN1_UTCTIME(a: PASN1_UTCTIME; out_: PPByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_ASN1_UTCTIME_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_ASN1_UTCTIME_procname);
 end;
 
 
 
 function  ERR_ASN1_GENERALIZEDTIME_new: PASN1_GENERALIZEDTIME; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_new_procname);
 end;
 
 
 procedure  ERR_ASN1_GENERALIZEDTIME_free(a: PASN1_GENERALIZEDTIME); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_free_procname);
 end;
 
 
 function  ERR_d2i_ASN1_GENERALIZEDTIME(a: PPASN1_GENERALIZEDTIME; const in_: PPByte; len: TIdC_LONG): PASN1_GENERALIZEDTIME; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_ASN1_GENERALIZEDTIME_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_ASN1_GENERALIZEDTIME_procname);
 end;
 
 
 function  ERR_i2d_ASN1_GENERALIZEDTIME(a: PASN1_GENERALIZEDTIME; out_: PPByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_ASN1_GENERALIZEDTIME_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_ASN1_GENERALIZEDTIME_procname);
 end;
 
 
 
 function  ERR_ASN1_TIME_new: PASN1_TIME; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TIME_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_new_procname);
 end;
 
 
 procedure  ERR_ASN1_TIME_free(a: PASN1_TIME); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TIME_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_free_procname);
 end;
 
 
 function  ERR_d2i_ASN1_TIME(a: PPASN1_TIME; const in_: PPByte; len: TIdC_LONG): PASN1_TIME; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_ASN1_TIME_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_ASN1_TIME_procname);
 end;
 
 
 function  ERR_i2d_ASN1_TIME(a: PASN1_TIME; out_: PPByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_ASN1_TIME_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_ASN1_TIME_procname);
 end;
 
 
@@ -2138,186 +2138,186 @@ end;
 
 function  ERR_ASN1_TIME_set(s: PASN1_TIME; t: TIdC_TIMET): PASN1_TIME; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TIME_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_set_procname);
 end;
 
 
 function  ERR_ASN1_TIME_adj(s: PASN1_TIME; t: TIdC_TIMET; offset_day: TIdC_INT; offset_sec: TIdC_LONG): PASN1_TIME; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TIME_adj_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_adj_procname);
 end;
 
 
 function  ERR_ASN1_TIME_check(const t: PASN1_TIME): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TIME_check_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_check_procname);
 end;
 
 
 function  ERR_ASN1_TIME_to_generalizedtime(const t: PASN1_TIME; out_: PPASN1_GENERALIZEDTIME): PASN1_GENERALIZEDTIME; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TIME_to_generalizedtime_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_to_generalizedtime_procname);
 end;
 
 
 function  ERR_ASN1_TIME_set_string(s: PASN1_TIME; const str: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TIME_set_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_set_string_procname);
 end;
 
 
 function  ERR_ASN1_TIME_set_string_X509(s: PASN1_TIME; const str: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TIME_set_string_X509_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_set_string_X509_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASN1_TIME_to_tm(const s: PASN1_TIME; tm: PIdC_TM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TIME_to_tm_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_to_tm_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASN1_TIME_normalize(s: PASN1_TIME): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TIME_normalize_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_normalize_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASN1_TIME_cmp_time_t(const s: PASN1_TIME; t: TIdC_TIMET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TIME_cmp_time_t_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_cmp_time_t_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASN1_TIME_compare(const a: PASN1_TIME; const b: PASN1_TIME): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TIME_compare_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_compare_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_i2a_ASN1_INTEGER(bp: PBIO; const a: PASN1_INTEGER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2a_ASN1_INTEGER_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2a_ASN1_INTEGER_procname);
 end;
 
 
 function  ERR_a2i_ASN1_INTEGER(bp: PBIO; bs: PASN1_INTEGER; buf: PIdAnsiChar; size: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(a2i_ASN1_INTEGER_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(a2i_ASN1_INTEGER_procname);
 end;
 
 
 function  ERR_i2a_ASN1_ENUMERATED(bp: PBIO; const a: PASN1_ENUMERATED): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2a_ASN1_ENUMERATED_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2a_ASN1_ENUMERATED_procname);
 end;
 
 
 function  ERR_a2i_ASN1_ENUMERATED(bp: PBIO; bs: PASN1_ENUMERATED; buf: PIdAnsiChar; size: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(a2i_ASN1_ENUMERATED_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(a2i_ASN1_ENUMERATED_procname);
 end;
 
 
 function  ERR_i2a_ASN1_OBJECT(bp: PBIO; const a: PASN1_OBJECT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2a_ASN1_OBJECT_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2a_ASN1_OBJECT_procname);
 end;
 
 
 function  ERR_a2i_ASN1_STRING(bp: PBIO; bs: PASN1_STRING; buf: PAnsiChar; size: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(a2i_ASN1_STRING_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(a2i_ASN1_STRING_procname);
 end;
 
 
 function  ERR_i2a_ASN1_STRING(bp: PBIO; const a: PASN1_STRING; type_: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2a_ASN1_STRING_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2a_ASN1_STRING_procname);
 end;
 
 
 function  ERR_i2t_ASN1_OBJECT(buf: PAnsiChar; buf_len: TIdC_INT; const a: PASN1_OBJECT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2t_ASN1_OBJECT_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2t_ASN1_OBJECT_procname);
 end;
 
 
 
 function  ERR_a2d_ASN1_OBJECT(out_: PByte; olen: TIdC_INT; const buf: PIdAnsiChar; num: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(a2d_ASN1_OBJECT_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(a2d_ASN1_OBJECT_procname);
 end;
 
 
 function  ERR_ASN1_OBJECT_create(nid: TIdC_INT; data: PByte; len: TIdC_INT; const sn: PAnsiChar; const ln: PAnsiChar): PASN1_OBJECT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_OBJECT_create_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_OBJECT_create_procname);
 end;
 
 
 
 function  ERR_ASN1_INTEGER_get_int64(pr: PIdC_Int64; const a: PASN1_INTEGER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_get_int64_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_get_int64_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASN1_INTEGER_set_int64(a: PASN1_INTEGER; r: TIdC_Int64): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_set_int64_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_set_int64_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASN1_INTEGER_get_uint64(pr: PIdC_UInt64; const a: PASN1_INTEGER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_get_uint64_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_get_uint64_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASN1_INTEGER_set_uint64(a: PASN1_INTEGER; r: TIdC_UInt64): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_set_uint64_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_set_uint64_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_ASN1_INTEGER_set(a: PASN1_INTEGER; v: TIdC_LONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_set_procname);
 end;
 
 
 function  ERR_ASN1_INTEGER_get(const a: PASN1_INTEGER): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_get_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_get_procname);
 end;
 
 
 function  ERR_BN_to_ASN1_INTEGER(const bn: PBIGNUM; ai: PASN1_INTEGER): PASN1_INTEGER; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_to_ASN1_INTEGER_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_to_ASN1_INTEGER_procname);
 end;
 
 
 function  ERR_ASN1_INTEGER_to_BN(const ai: PASN1_INTEGER; bn: PBIGNUM): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_to_BN_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_to_BN_procname);
 end;
 
 
 
 function  ERR_ASN1_ENUMERATED_get_int64(pr: PIdC_Int64; const a: PASN1_ENUMERATED): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_ENUMERATED_get_int64_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_ENUMERATED_get_int64_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASN1_ENUMERATED_set_int64(a: PASN1_ENUMERATED; r: TIdC_Int64): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_ENUMERATED_set_int64_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_ENUMERATED_set_int64_procname);
 end;
 
  {introduced 1.1.0}
@@ -2325,25 +2325,25 @@ end;
 
 function  ERR_ASN1_ENUMERATED_set(a: PASN1_ENUMERATED; v: TIdC_LONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_ENUMERATED_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_ENUMERATED_set_procname);
 end;
 
 
 function  ERR_ASN1_ENUMERATED_get(const a: PASN1_ENUMERATED): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_ENUMERATED_get_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_ENUMERATED_get_procname);
 end;
 
 
 function  ERR_BN_to_ASN1_ENUMERATED(const bn: PBIGNUM; ai: PASN1_ENUMERATED): PASN1_ENUMERATED; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BN_to_ASN1_ENUMERATED_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_to_ASN1_ENUMERATED_procname);
 end;
 
 
 function  ERR_ASN1_ENUMERATED_to_BN(const ai: PASN1_ENUMERATED; bn: PBIGNUM): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_ENUMERATED_to_BN_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_ENUMERATED_to_BN_procname);
 end;
 
 
@@ -2352,14 +2352,14 @@ end;
   (* given a string, return the correct type, max is the maximum length *)
 function  ERR_ASN1_PRINTABLE_type(const s: PByte; max: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_PRINTABLE_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PRINTABLE_type_procname);
 end;
 
 
 
 function  ERR_ASN1_tag2bit(tag: TIdC_INT): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_tag2bit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_tag2bit_procname);
 end;
 
 
@@ -2367,37 +2367,37 @@ end;
   (* SPECIALS *)
 function  ERR_ASN1_get_object(const pp: PPByte; plength: PIdC_LONG; ptag: PIdC_INT; pclass: PIdC_INT; omax: TIdC_LONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_get_object_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_get_object_procname);
 end;
 
 
 function  ERR_ASN1_check_infinite_end(p: PPByte; len: TIdC_LONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_check_infinite_end_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_check_infinite_end_procname);
 end;
 
 
 function  ERR_ASN1_const_check_infinite_end(const p: PPByte; len: TIdC_LONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_const_check_infinite_end_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_const_check_infinite_end_procname);
 end;
 
 
 procedure  ERR_ASN1_put_object(pp: PPByte; constructed: TIdC_INT; length: TIdC_INT; tag: TIdC_INT; xclass: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_put_object_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_put_object_procname);
 end;
 
 
 function  ERR_ASN1_put_eoc(pp: PPByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_put_eoc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_put_eoc_procname);
 end;
 
 
 function  ERR_ASN1_object_size(constructed: TIdC_INT; length: TIdC_INT; tag: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_object_size_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_object_size_procname);
 end;
 
 
@@ -2417,7 +2417,7 @@ end;
   //
 function  ERR_ASN1_item_dup(const it: PASN1_ITEM; x: Pointer): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_item_dup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_dup_procname);
 end;
 
 
@@ -2456,12 +2456,12 @@ end;
 
 function  ERR_ASN1_STRING_to_UTF8(out_: PPByte; const in_: PASN1_STRING): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_to_UTF8_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_to_UTF8_procname);
 end;
 
 function ERR_ASN1_d2i_bio(xnew: pxnew; d2i: pd2i_of_void; in_: PBIO; x: PPointer): Pointer; cdecl;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_d2i_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_d2i_bio_procname);
 end;
 
   //void *ASN1_d2i_bio(void *(*xnew) (void), d2i_of_void *d2i, BIO *in, void **x);
@@ -2474,13 +2474,13 @@ end;
 
 function  ERR_ASN1_item_d2i_bio(const it: PASN1_ITEM; in_: PBIO; x: Pointer): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_item_d2i_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_d2i_bio_procname);
 end;
 
 
 function  ERR_ASN1_i2d_bio(i2d: Pi2d_of_void; out_: PBIO; x: PByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_i2d_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_i2d_bio_procname);
 end;
 
 
@@ -2497,67 +2497,67 @@ end;
 
 function  ERR_ASN1_item_i2d_bio(const it: PASN1_ITEM; out_: PBIO; x: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_item_i2d_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_i2d_bio_procname);
 end;
 
 
 function  ERR_ASN1_UTCTIME_print(fp: PBIO; const a: PASN1_UTCTIME): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_print_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_print_procname);
 end;
 
 
 function  ERR_ASN1_GENERALIZEDTIME_print(fp: PBIO; const a: PASN1_GENERALIZEDTIME): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_print_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_print_procname);
 end;
 
 
 function  ERR_ASN1_TIME_print(fp: PBIO; const a: PASN1_TIME): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TIME_print_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_print_procname);
 end;
 
 
 function  ERR_ASN1_STRING_print(bp: PBIO; const v: PASN1_STRING): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_print_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_print_procname);
 end;
 
 
 function  ERR_ASN1_STRING_print_ex(out_: PBIO; const str: PASN1_STRING; flags: TIdC_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_print_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_print_ex_procname);
 end;
 
 
 function  ERR_ASN1_buf_print(bp: PBIO; const buf: PByte; buflen: TIdC_SIZET; off: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_buf_print_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_buf_print_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASN1_bn_print(bp: PBIO; const number: PIdAnsiChar; const num: PBIGNUM; buf: PByte; off: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_bn_print_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_bn_print_procname);
 end;
 
 
 function  ERR_ASN1_parse(bp: PBIO; const pp: PByte; len: TIdC_LONG; indent: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_parse_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_parse_procname);
 end;
 
 
 function  ERR_ASN1_parse_dump(bp: PPBIO; const pp: PByte; len: TIdC_LONG; indent: TIdC_INT; dump: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_parse_dump_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_parse_dump_procname);
 end;
 
 
 function  ERR_ASN1_tag2str(tag: TIdC_INT): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_tag2str_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_tag2str_procname);
 end;
 
 
@@ -2566,102 +2566,102 @@ end;
 
 function  ERR_ASN1_UNIVERSALSTRING_to_string(s: PASN1_UNIVERSALSTRING): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_UNIVERSALSTRING_to_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UNIVERSALSTRING_to_string_procname);
 end;
 
 
 
 function  ERR_ASN1_TYPE_set_octetstring(a: PASN1_TYPE; data: PByte; len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TYPE_set_octetstring_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_set_octetstring_procname);
 end;
 
 
 function  ERR_ASN1_TYPE_get_octetstring(const a: PASN1_TYPE; data: PByte; max_len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TYPE_get_octetstring_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_get_octetstring_procname);
 end;
 
 
 function  ERR_ASN1_TYPE_set_int_octetstring(a: PASN1_TYPE; num: TIdC_LONG; data: PByte; len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TYPE_set_int_octetstring_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_set_int_octetstring_procname);
 end;
 
 
 function  ERR_ASN1_TYPE_get_int_octetstring(const a: PASN1_TYPE; num: PIdC_LONG; data: PByte; max_len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_TYPE_get_int_octetstring_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_get_int_octetstring_procname);
 end;
 
 
 
 function  ERR_ASN1_item_unpack(const oct: PASN1_STRING; const it: PASN1_ITEM): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_item_unpack_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_unpack_procname);
 end;
 
 
 
 function  ERR_ASN1_item_pack(obj: Pointer; const it: PASN1_ITEM; oct: PPASN1_OCTET_STRING): PASN1_STRING; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_item_pack_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_pack_procname);
 end;
 
 
 
 procedure  ERR_ASN1_STRING_set_default_mask(mask: TIdC_ULONG); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_set_default_mask_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_set_default_mask_procname);
 end;
 
 
 function  ERR_ASN1_STRING_set_default_mask_asc(const p: PAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_set_default_mask_asc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_set_default_mask_asc_procname);
 end;
 
 
 function  ERR_ASN1_STRING_get_default_mask: TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_get_default_mask_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_get_default_mask_procname);
 end;
 
 
 function  ERR_ASN1_mbstring_copy(out_: PPASN1_STRING; const in_: PByte; len: TIdC_INT; inform: TIdC_INT; mask: TIdC_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_mbstring_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_mbstring_copy_procname);
 end;
 
 
 function  ERR_ASN1_mbstring_ncopy(out_: PPASN1_STRING; const in_: PByte; len: TIdC_INT; inform: TIdC_INT; mask: TIdC_ULONG; minsize: TIdC_LONG; maxsize: TIdC_LONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_mbstring_ncopy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_mbstring_ncopy_procname);
 end;
 
 
 
 function  ERR_ASN1_STRING_set_by_NID(out_: PPASN1_STRING; const in_: PByte; inlen: TIdC_INT; inform: TIdC_INT; nid: TIdC_INT): PASN1_STRING; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_set_by_NID_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_set_by_NID_procname);
 end;
 
 
 function  ERR_ASN1_STRING_TABLE_get(nid: TIdC_INT): PASN1_STRING_TABLE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_TABLE_get_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_TABLE_get_procname);
 end;
 
 
 function  ERR_ASN1_STRING_TABLE_add(v1: TIdC_INT; v2: TIdC_LONG; v3: TIdC_LONG; v4: TIdC_ULONG; v5: TIdC_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_TABLE_add_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_TABLE_add_procname);
 end;
 
 
 procedure  ERR_ASN1_STRING_TABLE_cleanup; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_STRING_TABLE_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_TABLE_cleanup_procname);
 end;
 
 
@@ -2671,142 +2671,142 @@ end;
   (* Old API compatible functions *)
 function  ERR_ASN1_item_new(const it: PASN1_ITEM): PASN1_VALUE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_item_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_new_procname);
 end;
 
 
 procedure  ERR_ASN1_item_free(val: PASN1_VALUE; const it: PASN1_ITEM); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_item_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_free_procname);
 end;
 
 
 function  ERR_ASN1_item_d2i(val: PPASN1_VALUE; const in_: PPByte; len: TIdC_LONG; const it: PASN1_ITEM): PASN1_VALUE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_item_d2i_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_d2i_procname);
 end;
 
 
 function  ERR_ASN1_item_i2d(val: PASN1_VALUE; out_: PPByte; const it: PASN1_ITEM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_item_i2d_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_i2d_procname);
 end;
 
 
 function  ERR_ASN1_item_ndef_i2d(val: PASN1_VALUE; out_: PPByte; const it: PASN1_ITEM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_item_ndef_i2d_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_ndef_i2d_procname);
 end;
 
 
 
 procedure  ERR_ASN1_add_oid_module; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_add_oid_module_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_add_oid_module_procname);
 end;
 
 
 procedure  ERR_ASN1_add_stable_module; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_add_stable_module_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_add_stable_module_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_ASN1_generate_nconf(const str: PAnsiChar; nconf: PCONF): PASN1_TYPE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_generate_nconf_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_generate_nconf_procname);
 end;
 
 
 function  ERR_ASN1_generate_v3(const str: PAnsiChar; cnf: PX509V3_CTX): PASN1_TYPE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_generate_v3_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_generate_v3_procname);
 end;
 
 
 function  ERR_ASN1_str2mask(const str: PByte; pmask: PIdC_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_str2mask_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_str2mask_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_ASN1_item_print(out_: PBIO; ifld: PASN1_VALUE; indent: TIdC_INT; const it: PASN1_ITEM; const pctx: PASN1_PCTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_item_print_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_print_procname);
 end;
 
 
 function  ERR_ASN1_PCTX_new: PASN1_PCTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_PCTX_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_new_procname);
 end;
 
 
 procedure  ERR_ASN1_PCTX_free(p: PASN1_PCTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_PCTX_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_free_procname);
 end;
 
 
 function  ERR_ASN1_PCTX_get_flags(const p: PASN1_PCTX): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_PCTX_get_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_get_flags_procname);
 end;
 
 
 procedure  ERR_ASN1_PCTX_set_flags(p: PASN1_PCTX; flags: TIdC_ULONG); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_PCTX_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_set_flags_procname);
 end;
 
 
 function  ERR_ASN1_PCTX_get_nm_flags(const p: PASN1_PCTX): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_PCTX_get_nm_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_get_nm_flags_procname);
 end;
 
 
 procedure  ERR_ASN1_PCTX_set_nm_flags(p: PASN1_PCTX; flags: TIdC_ULONG); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_PCTX_set_nm_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_set_nm_flags_procname);
 end;
 
 
 function  ERR_ASN1_PCTX_get_cert_flags(const p: PASN1_PCTX): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_PCTX_get_cert_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_get_cert_flags_procname);
 end;
 
 
 procedure  ERR_ASN1_PCTX_set_cert_flags(p: PASN1_PCTX; flags: TIdC_ULONG); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_PCTX_set_cert_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_set_cert_flags_procname);
 end;
 
 
 function  ERR_ASN1_PCTX_get_oid_flags(const p: PASN1_PCTX): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_PCTX_get_oid_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_get_oid_flags_procname);
 end;
 
 
 procedure  ERR_ASN1_PCTX_set_oid_flags(p: PASN1_PCTX; flags: TIdC_ULONG); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_PCTX_set_oid_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_set_oid_flags_procname);
 end;
 
 
 function  ERR_ASN1_PCTX_get_str_flags(const p: PASN1_PCTX): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_PCTX_get_str_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_get_str_flags_procname);
 end;
 
 
 procedure  ERR_ASN1_PCTX_set_str_flags(p: PASN1_PCTX; flags: TIdC_ULONG); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_PCTX_set_str_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_set_str_flags_procname);
 end;
 
 
@@ -2814,64 +2814,64 @@ end;
   //ASN1_SCTX *ASN1_SCTX_new(int (*scan_cb) (ASN1_SCTX *ctx));
 procedure  ERR_ASN1_SCTX_free(p: PASN1_SCTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_SCTX_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_SCTX_free_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASN1_SCTX_get_item(p: PASN1_SCTX): PASN1_ITEM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_SCTX_get_item_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_SCTX_get_item_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASN1_SCTX_get_template(p: PASN1_SCTX): PASN1_TEMPLATE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_SCTX_get_template_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_SCTX_get_template_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASN1_SCTX_get_flags(p: PASN1_SCTX): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_SCTX_get_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_SCTX_get_flags_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_ASN1_SCTX_set_app_data(p: PASN1_SCTX; data: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_SCTX_set_app_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_SCTX_set_app_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASN1_SCTX_get_app_data(p: PASN1_SCTX): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_SCTX_get_app_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_SCTX_get_app_data_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_BIO_f_asn1: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_f_asn1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_f_asn1_procname);
 end;
 
 
 
 function  ERR_BIO_new_NDEF(out_: PBIO; val: PASN1_VALUE; const it: PASN1_ITEM): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_new_NDEF_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_new_NDEF_procname);
 end;
 
 
 
 function  ERR_i2d_ASN1_bio_stream(out_: PBIO; val: PASN1_VALUE; in_: PBIO; flags: TIdC_INT; const it: PASN1_ITEM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_ASN1_bio_stream_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_ASN1_bio_stream_procname);
 end;
 
 
 function  ERR_PEM_write_bio_ASN1_stream(out_: PBIO; val: PASN1_VALUE; in_: PBIO; flags: TIdC_INT; const hdr: PAnsiChar; const it: PASN1_ITEM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_ASN1_stream_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_ASN1_stream_procname);
 end;
 
 
@@ -2880,32 +2880,32 @@ end;
   //                     STACK_OF(X509_ALGOR) *mdalgs, const ASN1_ITEM *it): TIdC_INT;
 function  ERR_SMIME_read_ASN1(bio: PBIO; bcont: PPBIO; const it: PASN1_ITEM): PASN1_VALUE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SMIME_read_ASN1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SMIME_read_ASN1_procname);
 end;
 
 
 function  ERR_SMIME_crlf_copy(in_: PBIO; out_: PBIO; flags: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SMIME_crlf_copy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SMIME_crlf_copy_procname);
 end;
 
 
 function  ERR_SMIME_text(in_: PBIO; out_: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SMIME_text_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SMIME_text_procname);
 end;
 
 
 
 function  ERR_ASN1_ITEM_lookup(const name: PIdAnsiChar): PASN1_ITEM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_ITEM_lookup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_ITEM_lookup_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_ASN1_ITEM_get(i: TIdC_SIZET): PASN1_ITEM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ASN1_ITEM_get_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_ITEM_get_procname);
 end;
 
  {introduced 1.1.0}

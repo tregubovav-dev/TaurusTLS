@@ -138,7 +138,7 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_ERR_load_RAND_strings: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(ERR_load_RAND_strings_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(ERR_load_RAND_strings_procname);
 end;
 
 

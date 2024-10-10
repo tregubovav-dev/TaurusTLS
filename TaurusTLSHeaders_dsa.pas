@@ -507,143 +507,143 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_DSAparams_dup(x: PDSA): PDSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSAparams_dup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSAparams_dup_procname);
 end;
 
 
 function  ERR_DSA_SIG_new: PDSA_SIG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_SIG_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_SIG_new_procname);
 end;
 
 
 procedure  ERR_DSA_SIG_free(a: PDSA_SIG); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_SIG_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_SIG_free_procname);
 end;
 
 
 function  ERR_i2d_DSA_SIG(const a: PDSA_SIG; pp: PPByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_DSA_SIG_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_DSA_SIG_procname);
 end;
 
 
 function  ERR_d2i_DSA_SIG(v: PPDSA_SIG; const pp: PPByte; length: TIdC_LONG): PDSA_SIG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_DSA_SIG_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_DSA_SIG_procname);
 end;
 
 
 procedure  ERR_DSA_SIG_get0(const sig: PDSA_SIG; const pr: PPBIGNUM; const ps: PPBIGNUM); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_SIG_get0_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_SIG_get0_procname);
 end;
 
 
 function  ERR_DSA_SIG_set0(sig: PDSA_SIG; r: PBIGNUM; s: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_SIG_set0_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_SIG_set0_procname);
 end;
 
 
   
 function  ERR_DSA_do_sign(const dgst: PByte; dlen: TIdC_INT; dsa: PDSA): PDSA_SIG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_do_sign_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_do_sign_procname);
 end;
 
 
 function  ERR_DSA_do_verify(const dgst: PByte; dgst_len: TIdC_INT; sig: PDSA_SIG; dsa: PDSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_do_verify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_do_verify_procname);
 end;
 
 
   
 function  ERR_DSA_TaurusTLS: PDSA_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_TaurusTLS_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_TaurusTLS_procname);
 end;
 
 
 procedure  ERR_DSA_set_default_method(const v1: PDSA_METHOD); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_set_default_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_set_default_method_procname);
 end;
 
 
 function  ERR_DSA_get_default_method: PDSA_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_get_default_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_get_default_method_procname);
 end;
 
 
 function  ERR_DSA_set_method(dsa: PDSA; const v1: PDSA_METHOD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_set_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_set_method_procname);
 end;
 
 
 function  ERR_DSA_get_method(d: PDSA): PDSA_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_get_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_get_method_procname);
 end;
 
 
 
 function  ERR_DSA_new: PDSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_new_procname);
 end;
 
 
 function  ERR_DSA_new_method(engine: PENGINE): PDSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_new_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_new_method_procname);
 end;
 
 
 procedure  ERR_DSA_free(r: PDSA); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_free_procname);
 end;
 
 
   (* "up" the DSA object's reference count *)
 function  ERR_DSA_up_ref(r: PDSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_up_ref_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_up_ref_procname);
 end;
 
 
 function  ERR_DSA_size(const v1: PDSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_size_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_size_procname);
 end;
 
 
 function  ERR_DSA_bits(const d: PDSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_bits_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_bits_procname);
 end;
 
 
 function  ERR_DSA_security_bits(const d: PDSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_security_bits_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_security_bits_procname);
 end;
 
 
 function  ERR_DSA_sign(type_: TIdC_INT; const dgst: PByte; dlen: TIdC_INT; sig: PByte; siglen: PIdC_UINT; dsa: PDSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_sign_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_sign_procname);
 end;
 
 
 function  ERR_DSA_verify(type_: TIdC_INT; const dgst: PByte; dgst_len: TIdC_INT; const sigbuf: PByte; siglen: TIdC_INT; dsa: PDSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_verify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_verify_procname);
 end;
 
 
@@ -651,77 +651,77 @@ end;
   //    CRYPTO_get_ex_new_index(CRYPTO_EX_INDEX_DSA, l, p, newf, dupf, freef)
 function  ERR_DSA_set_ex_data(d: PDSA; idx: TIdC_INT; arg: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_set_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_set_ex_data_procname);
 end;
 
 
 function  ERR_DSA_get_ex_data(d: PDSA; idx: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_get_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_get_ex_data_procname);
 end;
 
 
   
 function  ERR_d2i_DSAPublicKey(a: PPDSA; const pp: PPByte; length: TIdC_LONG): PDSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_DSAPublicKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_DSAPublicKey_procname);
 end;
 
 
 function  ERR_d2i_DSAPrivateKey(a: PPDSA; const pp: PPByte; length: TIdC_LONG): PDSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_DSAPrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_DSAPrivateKey_procname);
 end;
 
 
 function  ERR_d2i_DSAparams(a: PPDSA; const pp: PPByte; length: TIdC_LONG): PDSA; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_DSAparams_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_DSAparams_procname);
 end;
 
 
 
 function  ERR_DSA_generate_parameters_ex(dsa: PDSA; bits: TIdC_INT; const seed: PByte; seed_len: TIdC_INT; counter_ret: PIdC_INT; h_ret: PIdC_ULONG; cb: PBN_GENCB): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_generate_parameters_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_generate_parameters_ex_procname);
 end;
 
 
 
 function  ERR_DSA_generate_key(a: PDSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_generate_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_generate_key_procname);
 end;
 
 
 function  ERR_i2d_DSAPublicKey(const a: PDSA; pp: PPByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_DSAPublicKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_DSAPublicKey_procname);
 end;
 
 
 function  ERR_i2d_DSAPrivateKey(const a: PDSA; pp: PPByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_DSAPrivateKey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_DSAPrivateKey_procname);
 end;
 
 
 function  ERR_i2d_DSAparams(const a: PDSA; pp: PPByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_DSAparams_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_DSAparams_procname);
 end;
 
 
   
 function  ERR_DSAparams_print(bp: PBIO; const x: PDSA): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSAparams_print_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSAparams_print_procname);
 end;
 
 
 function  ERR_DSA_print(bp: PBIO; const x: PDSA; off: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_print_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_print_procname);
 end;
 
 
@@ -737,7 +737,7 @@ end;
    *)
 function  ERR_DSA_dup_DH(const r: PDSA): PDH; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_dup_DH_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_dup_DH_procname);
 end;
 
 
@@ -754,242 +754,242 @@ end;
 
 procedure  ERR_DSA_get0_pqg(const d: PDSA; const p: PPBIGNUM; const q: PPBIGNUM; const g: PPBIGNUM); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_get0_pqg_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_get0_pqg_procname);
 end;
 
 
 function  ERR_DSA_set0_pqg(d: PDSA; p: PBIGNUM; q: PBIGNUM; g: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_set0_pqg_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_set0_pqg_procname);
 end;
 
 
 procedure  ERR_DSA_get0_key(const d: PDSA; const pub_key: PPBIGNUM; const priv_key: PPBIGNUM); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_get0_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_get0_key_procname);
 end;
 
 
 function  ERR_DSA_set0_key(d: PDSA; pub_key: PBIGNUM; priv_key: PBIGNUM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_set0_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_set0_key_procname);
 end;
 
 
 function  ERR_DSA_get0_p(const d: PDSA): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_get0_p_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_get0_p_procname);
 end;
 
 
 function  ERR_DSA_get0_q(const d: PDSA): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_get0_q_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_get0_q_procname);
 end;
 
 
 function  ERR_DSA_get0_g(const d: PDSA): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_get0_g_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_get0_g_procname);
 end;
 
 
 function  ERR_DSA_get0_pub_key(const d: PDSA): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_get0_pub_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_get0_pub_key_procname);
 end;
 
 
 function  ERR_DSA_get0_priv_key(const d: PDSA): PBIGNUM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_get0_priv_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_get0_priv_key_procname);
 end;
 
 
 procedure  ERR_DSA_clear_flags(d: PDSA; flags: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_clear_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_clear_flags_procname);
 end;
 
 
 function  ERR_DSA_test_flags(const d: PDSA; flags: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_test_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_test_flags_procname);
 end;
 
 
 procedure  ERR_DSA_set_flags(d: PDSA; flags: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_set_flags_procname);
 end;
 
 
 function  ERR_DSA_get0_engine(d: PDSA): PENGINE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_get0_engine_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_get0_engine_procname);
 end;
 
 
   
 function  ERR_DSA_meth_new(const name: PIdAnsiChar; flags: TIdC_INT): PDSA_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_new_procname);
 end;
 
 
 procedure  ERR_DSA_meth_free(dsam: PDSA_METHOD); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_free_procname);
 end;
 
 
 function  ERR_DSA_meth_dup(const dsam: PDSA_METHOD): PDSA_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_dup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_dup_procname);
 end;
 
 
 function  ERR_DSA_meth_get0_name(const dsam: PDSA_METHOD): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_get0_name_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_get0_name_procname);
 end;
 
 
 function  ERR_DSA_meth_set1_name(dsam: PDSA_METHOD; const name: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_set1_name_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_set1_name_procname);
 end;
 
 
 function  ERR_DSA_meth_get_flags(const dsam: PDSA_METHOD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_get_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_get_flags_procname);
 end;
 
 
 function  ERR_DSA_meth_set_flags(dsam: PDSA_METHOD; flags: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_set_flags_procname);
 end;
 
 
 function  ERR_DSA_meth_get0_app_data(const dsam: PDSA_METHOD): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_get0_app_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_get0_app_data_procname);
 end;
 
 
 function  ERR_DSA_meth_set0_app_data(dsam: PDSA_METHOD; app_data: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_set0_app_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_set0_app_data_procname);
 end;
 
 
 function  ERR_DSA_meth_get_sign(const dsam: PDSA_METHOD): DSA_meth_sign_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_get_sign_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_get_sign_procname);
 end;
 
 
 function  ERR_DSA_meth_set_sign(dsam: PDSA_METHOD; sign: DSA_meth_sign_cb): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_set_sign_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_set_sign_procname);
 end;
 
 
 function  ERR_DSA_meth_get_sign_setup(const dsam: PDSA_METHOD): DSA_meth_sign_setup_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_get_sign_setup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_get_sign_setup_procname);
 end;
 
 
 function  ERR_DSA_meth_set_sign_setup(dsam: PDSA_METHOD; sign_setup: DSA_meth_sign_setup_cb): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_set_sign_setup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_set_sign_setup_procname);
 end;
 
 
 function  ERR_DSA_meth_get_verify(const dsam: PDSA_METHOD): DSA_meth_verify_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_get_verify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_get_verify_procname);
 end;
 
 
 function  ERR_DSA_meth_set_verify(dsam: PDSA_METHOD; verify: DSA_meth_verify_cb): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_set_verify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_set_verify_procname);
 end;
 
 
 function  ERR_DSA_meth_get_mod_exp(const dsam: PDSA_METHOD): DSA_meth_mod_exp_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_get_mod_exp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_get_mod_exp_procname);
 end;
 
 
 function  ERR_DSA_meth_set_mod_exp(dsam: PDSA_METHOD; mod_exp: DSA_meth_mod_exp_cb): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_set_mod_exp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_set_mod_exp_procname);
 end;
 
 
 function  ERR_DSA_meth_get_bn_mod_exp(const dsam: PDSA_METHOD): DSA_meth_bn_mod_exp_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_get_bn_mod_exp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_get_bn_mod_exp_procname);
 end;
 
 
 function  ERR_DSA_meth_set_bn_mod_exp(dsam: PDSA_METHOD; bn_mod_exp: DSA_meth_bn_mod_exp_cb): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_set_bn_mod_exp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_set_bn_mod_exp_procname);
 end;
 
 
 function  ERR_DSA_meth_get_init(const dsam: PDSA_METHOD): DSA_meth_init_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_get_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_get_init_procname);
 end;
 
 
 function  ERR_DSA_meth_set_init(dsam: PDSA_METHOD; init: DSA_meth_init_cb): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_set_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_set_init_procname);
 end;
 
 
 function  ERR_DSA_meth_get_finish(const dsam: PDSA_METHOD): DSA_meth_finish_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_get_finish_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_get_finish_procname);
 end;
 
 
 function  ERR_DSA_meth_set_finish(dsam: PDSA_METHOD; finish: DSA_meth_finish_cb): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_set_finish_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_set_finish_procname);
 end;
 
 
 function  ERR_DSA_meth_get_paramgen(const dsam: PDSA_METHOD): DSA_meth_paramgen_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_get_paramgen_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_get_paramgen_procname);
 end;
 
 
 function  ERR_DSA_meth_set_paramgen(dsam: PDSA_METHOD; paramgen: DSA_meth_paramgen_cb): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_set_paramgen_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_set_paramgen_procname);
 end;
 
 
 function  ERR_DSA_meth_get_keygen(const dsam: PDSA_METHOD): DSA_meth_keygen_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_get_keygen_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_get_keygen_procname);
 end;
 
 
 function  ERR_DSA_meth_set_keygen(dsam: PDSA_METHOD; keygen: DSA_meth_keygen_cb): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DSA_meth_set_keygen_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DSA_meth_set_keygen_procname);
 end;
 
 

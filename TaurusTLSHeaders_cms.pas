@@ -724,96 +724,96 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_CMS_get0_type(const cms: PCMS_ContentInfo): PASN1_OBJECT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_get0_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_get0_type_procname);
 end;
 
 
 
 function  ERR_CMS_dataInit(cms: PCMS_ContentInfo; icont: PBIO): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_dataInit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_dataInit_procname);
 end;
 
 
 function  ERR_CMS_dataFinal(cms: PCMS_ContentInfo; bio: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_dataFinal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_dataFinal_procname);
 end;
 
 
 
 function  ERR_CMS_get0_content(cms: PCMS_ContentInfo): PPASN1_OCTET_STRING; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_get0_content_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_get0_content_procname);
 end;
 
 
 function  ERR_CMS_is_detached(cms: PCMS_ContentInfo): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_is_detached_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_is_detached_procname);
 end;
 
 
 function  ERR_CMS_set_detached(cms: PCMS_ContentInfo; detached: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_set_detached_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_set_detached_procname);
 end;
 
 
 
 function  ERR_CMS_stream(cms: PCMS_ContentInfo; boundary: PPPByte): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_stream_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_stream_procname);
 end;
 
 
 function  ERR_d2i_CMS_bio(bp: PBIO; cms: PPCMS_ContentInfo): PCMS_ContentInfo; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_CMS_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_CMS_bio_procname);
 end;
 
 
 function  ERR_i2d_CMS_bio(bp: PBIO; cms: PCMS_ContentInfo): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_CMS_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_CMS_bio_procname);
 end;
 
 
 
 function  ERR_BIO_new_CMS(out_: PBIO; cms: PCMS_ContentInfo): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_new_CMS_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_new_CMS_procname);
 end;
 
 
 function  ERR_i2d_CMS_bio_stream(out_: PBIO; cms: PCMS_ContentInfo; in_: PBIO; flags: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_CMS_bio_stream_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_CMS_bio_stream_procname);
 end;
 
 
 function  ERR_PEM_write_bio_CMS_stream(out_: PBIO; cms: PCMS_ContentInfo; in_: PBIO; flags: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_CMS_stream_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_CMS_stream_procname);
 end;
 
 
 function  ERR_SMIME_read_CMS(bio: PBIO; bcont: PPBIO): PCMS_ContentInfo; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SMIME_read_CMS_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SMIME_read_CMS_procname);
 end;
 
 
 function  ERR_SMIME_write_CMS(bio: PBIO; cms: PCMS_ContentInfo; data: PBIO; flags: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SMIME_write_CMS_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SMIME_write_CMS_procname);
 end;
 
 
 
 function  ERR_CMS_final(cms: PCMS_ContentInfo; data: PBIO; dcont: PBIO; flags: TIdC_UINT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_final_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_final_procname);
 end;
 
 
@@ -824,47 +824,47 @@ end;
 
 function  ERR_CMS_data(cms: PCMS_ContentInfo; out_: PBIO; flags: TIdC_UINT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_data_procname);
 end;
 
 
 function  ERR_CMS_data_create(in_: PBIO; flags: TIdC_UINT): PCMS_ContentInfo; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_data_create_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_data_create_procname);
 end;
 
 
 
 function  ERR_CMS_digest_verify(cms: PCMS_ContentInfo; dcont: PBIO; out_: PBIO; flags: TIdC_UINT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_digest_verify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_digest_verify_procname);
 end;
 
 
 function  ERR_CMS_digest_create(in_: PBIO; const md: PEVP_MD; flags: TIdC_UINT): PCMS_ContentInfo; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_digest_create_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_digest_create_procname);
 end;
 
 
 
 function  ERR_CMS_EncryptedData_decrypt(cms: PCMS_ContentInfo; const key: PByte; keylen: TIdC_SIZET; dcont: PBIO; out_: PBIO; flags: TIdC_UINT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_EncryptedData_decrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_EncryptedData_decrypt_procname);
 end;
 
 
 
 function  ERR_CMS_EncryptedData_encrypt(in_: PBIO; const cipher: PEVP_CIPHER; const key: PByte; keylen: TIdC_SIZET; flags: TIdC_UINT): PCMS_ContentInfo; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_EncryptedData_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_EncryptedData_encrypt_procname);
 end;
 
 
 
 function  ERR_CMS_EncryptedData_set1_key(cms: PCMS_ContentInfo; const ciph: PEVP_CIPHER; const key: PByte; keylen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_EncryptedData_set1_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_EncryptedData_set1_key_procname);
 end;
 
 
@@ -879,26 +879,26 @@ end;
 
 function  ERR_CMS_decrypt(cms: PCMS_ContentInfo; pkey: PEVP_PKEY; cert: PX509; dcont: PBIO; out_: PBIO; flags: TIdC_UINT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_decrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_decrypt_procname);
 end;
 
 
 
 function  ERR_CMS_decrypt_set1_pkey(cms: PCMS_ContentInfo; pk: PEVP_PKEY; cert: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_decrypt_set1_pkey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_decrypt_set1_pkey_procname);
 end;
 
 
 function  ERR_CMS_decrypt_set1_key(cms: PCMS_ContentInfo; key: PByte; keylen: TIdC_SIZET; const id: PByte; idlen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_decrypt_set1_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_decrypt_set1_key_procname);
 end;
 
 
 function  ERR_CMS_decrypt_set1_password(cms: PCMS_ContentInfo; pass: PByte; passlen: ossl_ssize_t): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_decrypt_set1_password_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_decrypt_set1_password_procname);
 end;
 
 
@@ -906,149 +906,149 @@ end;
   //STACK_OF(CMS_RecipientInfo) *CMS_get0_RecipientInfos(CMS_ContentInfo *cms);
 function  ERR_CMS_RecipientInfo_type(ri: PCMS_RecipientInfo): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_type_procname);
 end;
 
 
 function  ERR_CMS_RecipientInfo_get0_pkey_ctx(ri: PCMS_RecipientInfo): PEVP_PKEY_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_get0_pkey_ctx_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_get0_pkey_ctx_procname);
 end;
 
 
 function  ERR_CMS_EnvelopedData_create(const cipher: PEVP_CIPHER): PCMS_ContentInfo; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_EnvelopedData_create_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_EnvelopedData_create_procname);
 end;
 
 
 function  ERR_CMS_add1_recipient_cert(cms: PCMS_ContentInfo; recip: PX509; flags: TIdC_UINT): PCMS_RecipientInfo; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_add1_recipient_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_add1_recipient_cert_procname);
 end;
 
 
 function  ERR_CMS_RecipientInfo_set0_pkey(ri: PCMS_RecipientInfo; pkey: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_set0_pkey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_set0_pkey_procname);
 end;
 
 
 function  ERR_CMS_RecipientInfo_ktri_cert_cmp(ri: PCMS_RecipientInfo; cert: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_ktri_cert_cmp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_ktri_cert_cmp_procname);
 end;
 
 
 function  ERR_CMS_RecipientInfo_ktri_get0_algs(ri: PCMS_RecipientInfo; pk: PPEVP_PKEY; recip: PPX509; palg: PPX509_ALGOR): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_ktri_get0_algs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_ktri_get0_algs_procname);
 end;
 
 
 function  ERR_CMS_RecipientInfo_ktri_get0_signer_id(ri: PPCMS_RecipientInfo; keyid: PPASN1_OCTET_STRING; issuer: PPX509_NAME; sno: PPASN1_INTEGER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_ktri_get0_signer_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_ktri_get0_signer_id_procname);
 end;
 
 
 
 function  ERR_CMS_add0_recipient_key(cms: PCMS_ContentInfo; nid: TIdC_INT; key: PByte; keylen: TIdC_SIZET; id: PByte; idlen: TIdC_SIZET; date: PASN1_GENERALIZEDTIME; otherTypeId: PASN1_OBJECT; otherType: ASN1_TYPE): PCMS_RecipientInfo; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_add0_recipient_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_add0_recipient_key_procname);
 end;
 
 
 
 function  ERR_CMS_RecipientInfo_kekri_get0_id(ri: PCMS_RecipientInfo; palg: PPX509_ALGOR; pid: PPASN1_OCTET_STRING; pdate: PPASN1_GENERALIZEDTIME; potherid: PPASN1_OBJECT; pothertype: PASN1_TYPE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_kekri_get0_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_kekri_get0_id_procname);
 end;
 
 
 
 function  ERR_CMS_RecipientInfo_set0_key(ri: PCMS_RecipientInfo; key: PByte; keylen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_set0_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_set0_key_procname);
 end;
 
 
 
 function  ERR_CMS_RecipientInfo_kekri_id_cmp(ri: PCMS_RecipientInfo; const id: PByte; idlen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_kekri_id_cmp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_kekri_id_cmp_procname);
 end;
 
 
 
 function  ERR_CMS_RecipientInfo_set0_password(ri: PCMS_RecipientInfo; pass: PByte; passlen: ossl_ssize_t): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_set0_password_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_set0_password_procname);
 end;
 
 
 
 function  ERR_CMS_add0_recipient_password(cms: PCMS_ContentInfo; iter: TIdC_INT; wrap_nid: TIdC_INT; pbe_nid: TIdC_INT; pass: PByte; passlen: ossl_ssize_t; const kekciph: PEVP_CIPHER): PCMS_RecipientInfo; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_add0_recipient_password_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_add0_recipient_password_procname);
 end;
 
 
 
 function  ERR_CMS_RecipientInfo_decrypt(cms: PCMS_ContentInfo; ri: PCMS_RecipientInfo): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_decrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_decrypt_procname);
 end;
 
 
 function  ERR_CMS_RecipientInfo_encrypt(cms: PCMS_ContentInfo; ri: PCMS_RecipientInfo): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_encrypt_procname);
 end;
 
 
 
 function  ERR_CMS_uncompress(cms: PCMS_ContentInfo; dcont: PBIO; out_: PBIO; flags: TIdC_UINT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_uncompress_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_uncompress_procname);
 end;
 
 
 function  ERR_CMS_compress(in_: PBIO; comp_nid: TIdC_INT; flags: TIdC_UINT): PCMS_ContentInfo; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_compress_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_compress_procname);
 end;
 
 
 
 function  ERR_CMS_set1_eContentType(cms: CMS_ContentInfo; const oit: PASN1_OBJECT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_set1_eContentType_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_set1_eContentType_procname);
 end;
 
 
 function  ERR_CMS_get0_eContentType(cms: PCMS_ContentInfo): PASN1_OBJECT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_get0_eContentType_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_get0_eContentType_procname);
 end;
 
 
 
 function  ERR_CMS_add0_CertificateChoices(cms: PCMS_ContentInfo): PCMS_CertificateChoices; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_add0_CertificateChoices_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_add0_CertificateChoices_procname);
 end;
 
 
 function  ERR_CMS_add0_cert(cms: PCMS_ContentInfo; cert: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_add0_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_add0_cert_procname);
 end;
 
 
 function  ERR_CMS_add1_cert(cms: PCMS_ContentInfo; cert: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_add1_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_add1_cert_procname);
 end;
 
 
@@ -1056,19 +1056,19 @@ end;
 
 function  ERR_CMS_add0_RevocationInfoChoice(cms: PCMS_ContentInfo): PCMS_RevocationInfoChoice; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_add0_RevocationInfoChoice_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_add0_RevocationInfoChoice_procname);
 end;
 
 
 function  ERR_CMS_add0_crl(cms: PCMS_ContentInfo; crl: PX509_CRL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_add0_crl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_add0_crl_procname);
 end;
 
 
 function  ERR_CMS_add1_crl(cms: PCMS_ContentInfo; crl: PX509_CRL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_add1_crl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_add1_crl_procname);
 end;
 
 
@@ -1076,25 +1076,25 @@ end;
 
 function  ERR_CMS_SignedData_init(cms: PCMS_ContentInfo): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_SignedData_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_SignedData_init_procname);
 end;
 
 
 function  ERR_CMS_add1_signer(cms: PCMS_ContentInfo; signer: PX509; pk: PEVP_PKEY; const md: PEVP_MD; flags: TIdC_UINT): PCMS_SignerInfo; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_add1_signer_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_add1_signer_procname);
 end;
 
 
 function  ERR_CMS_SignerInfo_get0_pkey_ctx(si: PCMS_SignerInfo): PEVP_PKEY_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_get0_pkey_ctx_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_get0_pkey_ctx_procname);
 end;
 
 
 function  ERR_CMS_SignerInfo_get0_md_ctx(si: PCMS_SignerInfo): PEVP_MD_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_get0_md_ctx_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_get0_md_ctx_procname);
 end;
 
 
@@ -1102,50 +1102,50 @@ end;
 
 procedure  ERR_CMS_SignerInfo_set1_signer_cert(si: PCMS_SignerInfo; signer: PX509); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_set1_signer_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_set1_signer_cert_procname);
 end;
 
 
 function  ERR_CMS_SignerInfo_get0_signer_id(si: PCMS_SignerInfo; keyid: PPASN1_OCTET_STRING; issuer: PPX509_NAME; sno: PPASN1_INTEGER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_get0_signer_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_get0_signer_id_procname);
 end;
 
 
 function  ERR_CMS_SignerInfo_cert_cmp(si: PCMS_SignerInfo; cert: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_cert_cmp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_cert_cmp_procname);
 end;
 
 
 //  function CMS_set1_signers_certs(cms: PCMS_ContentInfo; {STACK_OF(X509) *certs;} flags: TIdC_UINT): TIdC_INT;
 procedure  ERR_CMS_SignerInfo_get0_algs(si: PCMS_SignerInfo; pk: PPEVP_PKEY; signer: PPX509; pdig: PPX509_ALGOR; psig: PPX509_ALGOR); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_get0_algs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_get0_algs_procname);
 end;
 
 
 function  ERR_CMS_SignerInfo_get0_signature(si: PCMS_SignerInfo): PASN1_OCTET_STRING; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_get0_signature_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_get0_signature_procname);
 end;
 
 
 function  ERR_CMS_SignerInfo_sign(si: PCMS_SignerInfo): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_sign_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_sign_procname);
 end;
 
 
 function  ERR_CMS_SignerInfo_verify(si: PCMS_SignerInfo): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_verify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_verify_procname);
 end;
 
 
 function  ERR_CMS_SignerInfo_verify_content(si: PCMS_SignerInfo; chain: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_verify_content_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_SignerInfo_verify_content_procname);
 end;
 
 
@@ -1156,129 +1156,129 @@ end;
 
 function  ERR_CMS_signed_get_attr_count(const si: PCMS_SignerInfo): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_signed_get_attr_count_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_signed_get_attr_count_procname);
 end;
 
 
 function  ERR_CMS_signed_get_attr_by_NID(const si: PCMS_SignerInfo; nid: TIdC_INT; lastpos: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_signed_get_attr_by_NID_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_signed_get_attr_by_NID_procname);
 end;
 
 
 function  ERR_CMS_signed_get_attr_by_OBJ(const si: PCMS_SignerInfo; const obj: ASN1_OBJECT; lastpos: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_signed_get_attr_by_OBJ_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_signed_get_attr_by_OBJ_procname);
 end;
 
 
 function  ERR_CMS_signed_get_attr(const si: PCMS_SignerInfo; loc: TIdC_INT): PX509_ATTRIBUTE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_signed_get_attr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_signed_get_attr_procname);
 end;
 
 
 function  ERR_CMS_signed_delete_attr(const si: PCMS_SignerInfo; loc: TIdC_INT): PX509_ATTRIBUTE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_signed_delete_attr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_signed_delete_attr_procname);
 end;
 
 
 function  ERR_CMS_signed_add1_attr(si: PCMS_SignerInfo; loc: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_signed_add1_attr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_signed_add1_attr_procname);
 end;
 
 
 function  ERR_CMS_signed_add1_attr_by_OBJ(si: PCMS_SignerInfo; const obj: PASN1_OBJECT; type_: TIdC_INT; const bytes: Pointer; len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_signed_add1_attr_by_OBJ_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_signed_add1_attr_by_OBJ_procname);
 end;
 
 
 function  ERR_CMS_signed_add1_attr_by_NID(si: PCMS_SignerInfo; nid: TIdC_INT; type_: TIdC_INT; const bytes: Pointer; len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_signed_add1_attr_by_NID_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_signed_add1_attr_by_NID_procname);
 end;
 
 
 function  ERR_CMS_signed_add1_attr_by_txt(si: PCMS_SignerInfo; const attrname: PAnsiChar; type_: TIdC_INT; const bytes: Pointer; len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_signed_add1_attr_by_txt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_signed_add1_attr_by_txt_procname);
 end;
 
 
 function  ERR_CMS_signed_get0_data_by_OBJ(si: PCMS_SignerInfo; const oid: PASN1_OBJECT; lastpos: TIdC_INT; type_: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_signed_get0_data_by_OBJ_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_signed_get0_data_by_OBJ_procname);
 end;
 
 
 
 function  ERR_CMS_unsigned_get_attr_count(const si: PCMS_SignerInfo): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_unsigned_get_attr_count_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_unsigned_get_attr_count_procname);
 end;
 
 
 function  ERR_CMS_unsigned_get_attr_by_NID(const si: PCMS_SignerInfo; nid: TIdC_INT; lastpos: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_unsigned_get_attr_by_NID_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_unsigned_get_attr_by_NID_procname);
 end;
 
 
 function  ERR_CMS_unsigned_get_attr_by_OBJ(const si: PCMS_SignerInfo; const obj: PASN1_OBJECT; lastpos: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_unsigned_get_attr_by_OBJ_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_unsigned_get_attr_by_OBJ_procname);
 end;
 
 
 function  ERR_CMS_unsigned_get_attr(const si: PCMS_SignerInfo; loc: TIdC_INT): PX509_ATTRIBUTE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_unsigned_get_attr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_unsigned_get_attr_procname);
 end;
 
 
 function  ERR_CMS_unsigned_delete_attr(si: PCMS_SignerInfo; loc: TIdC_INT): PX509_ATTRIBUTE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_unsigned_delete_attr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_unsigned_delete_attr_procname);
 end;
 
 
 function  ERR_CMS_unsigned_add1_attr(si: PCMS_SignerInfo; attr: PX509_ATTRIBUTE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_unsigned_add1_attr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_unsigned_add1_attr_procname);
 end;
 
 
 function  ERR_CMS_unsigned_add1_attr_by_OBJ(si: PCMS_SignerInfo; const obj: PASN1_OBJECT; type_: TIdC_INT; const bytes: Pointer; len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_unsigned_add1_attr_by_OBJ_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_unsigned_add1_attr_by_OBJ_procname);
 end;
 
 
 function  ERR_CMS_unsigned_add1_attr_by_NID(si: PCMS_SignerInfo; nid: TIdC_INT; type_: TIdC_INT; const bytes: Pointer; len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_unsigned_add1_attr_by_NID_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_unsigned_add1_attr_by_NID_procname);
 end;
 
 
 function  ERR_CMS_unsigned_add1_attr_by_txt(si: PCMS_SignerInfo; const attrname: PAnsiChar; type_: TIdC_INT; const bytes: Pointer; len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_unsigned_add1_attr_by_txt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_unsigned_add1_attr_by_txt_procname);
 end;
 
 
 function  ERR_CMS_unsigned_get0_data_by_OBJ(si: PCMS_SignerInfo; oid: PASN1_OBJECT; lastpos: TIdC_INT; type_: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_unsigned_get0_data_by_OBJ_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_unsigned_get0_data_by_OBJ_procname);
 end;
 
 
 
 function  ERR_CMS_get1_ReceiptRequest(si: PCMS_SignerInfo; prr: PPCMS_ReceiptRequest): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_get1_ReceiptRequest_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_get1_ReceiptRequest_procname);
 end;
 
 
@@ -1286,7 +1286,7 @@ end;
 //    {;STACK_OF(GENERAL_NAMES) *receiptList;} {STACK_OF(GENERAL_NAMES) *receiptsTo}): PCMS_ReceiptRequest;
 function  ERR_CMS_add1_ReceiptRequest(si: PCMS_SignerInfo; rr: PCMS_ReceiptRequest): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_add1_ReceiptRequest_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_add1_ReceiptRequest_procname);
 end;
 
 
@@ -1299,52 +1299,52 @@ end;
 
 function  ERR_CMS_RecipientInfo_kari_get0_orig_id(ri: PCMS_RecipientInfo; pubalg: PPX509_ALGOR; pubkey: PASN1_BIT_STRING; keyid: PPASN1_OCTET_STRING; issuer: PPX509_NAME; sno: PPASN1_INTEGER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_kari_get0_orig_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_kari_get0_orig_id_procname);
 end;
 
 
 
 function  ERR_CMS_RecipientInfo_kari_orig_id_cmp(ri: PCMS_RecipientInfo; cert: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_kari_orig_id_cmp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_kari_orig_id_cmp_procname);
 end;
 
 
 
 function  ERR_CMS_RecipientEncryptedKey_get0_id(rek: PCMS_RecipientEncryptedKey; keyid: PPASN1_OCTET_STRING; tm: PPASN1_GENERALIZEDTIME; other: PPCMS_OtherKeyAttribute; issuer: PPX509_NAME; sno: PPASN1_INTEGER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientEncryptedKey_get0_id_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientEncryptedKey_get0_id_procname);
 end;
 
 
 function  ERR_CMS_RecipientEncryptedKey_cert_cmp(rek: PCMS_RecipientEncryptedKey; cert: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientEncryptedKey_cert_cmp_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientEncryptedKey_cert_cmp_procname);
 end;
 
 
 function  ERR_CMS_RecipientInfo_kari_set0_pkey(ri: PCMS_RecipientInfo; pk: PEVP_PKEY): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_kari_set0_pkey_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_kari_set0_pkey_procname);
 end;
 
 
 function  ERR_CMS_RecipientInfo_kari_get0_ctx(ri: PCMS_RecipientInfo): PEVP_CIPHER_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_kari_get0_ctx_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_kari_get0_ctx_procname);
 end;
 
 
 function  ERR_CMS_RecipientInfo_kari_decrypt(cms: PCMS_ContentInfo; ri: PCMS_RecipientInfo; rek: PCMS_RecipientEncryptedKey): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_kari_decrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_RecipientInfo_kari_decrypt_procname);
 end;
 
 
 
 function  ERR_CMS_SharedInfo_encode(pder: PPByte; kekalg: PX509_ALGOR; ukm: PASN1_OCTET_STRING; keylen: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CMS_SharedInfo_encode_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CMS_SharedInfo_encode_procname);
 end;
 
 

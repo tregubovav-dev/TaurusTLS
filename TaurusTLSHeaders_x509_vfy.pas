@@ -1437,7 +1437,7 @@ begin
   //Do nothing
 end;
 
-function  FC_X509_LOOKUP_meth_set_ctrl(method: PX509_LOOKUP_METHOD; ctrl_fn: X509_LOOKUP_ctrl_fn): TIdC_INT; cdecl;
+function  FC_X509_LOOKUP_meth_set_ctrl(out method: PX509_LOOKUP_METHOD; ctrl_fn: X509_LOOKUP_ctrl_fn): TIdC_INT; cdecl;
 begin
   _PX509_LOOKUP_METHOD(method)^.ctrl := @ctrl_fn;
   Result := 1;
@@ -1471,14 +1471,14 @@ end;
 {$WARN  NO_RETVAL OFF}
 function  ERR_X509_STORE_set_depth(store: PX509_STORE; depth: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set_depth_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set_depth_procname);
 end;
 
 
 
 procedure  ERR_X509_STORE_CTX_set_depth(ctx: PX509_STORE_CTX; depth: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_depth_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_depth_procname);
 end;
 
 
@@ -1489,7 +1489,7 @@ end;
   //        X509_STORE_CTX_get_ex_data(ctx,0)
 function  ERR_X509_STORE_CTX_get_app_data(ctx: PX509_STORE_CTX): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_app_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_app_data_procname);
 end;
 
  
@@ -1509,79 +1509,79 @@ end;
   //                                        X509_OBJECT *x);
 function  ERR_X509_OBJECT_up_ref_count(a: PX509_OBJECT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_OBJECT_up_ref_count_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_OBJECT_up_ref_count_procname);
 end;
 
 
 function  ERR_X509_OBJECT_new: PX509_OBJECT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_OBJECT_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_OBJECT_new_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_X509_OBJECT_free(a: PX509_OBJECT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_OBJECT_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_OBJECT_free_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_OBJECT_get_type(const a: PX509_OBJECT): X509_LOOKUP_TYPE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_OBJECT_get_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_OBJECT_get_type_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_OBJECT_get0_X509(const a: PX509_OBJECT): PX509; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_OBJECT_get0_X509_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_OBJECT_get0_X509_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_OBJECT_set1_X509(a: PX509_OBJECT; obj: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_OBJECT_set1_X509_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_OBJECT_set1_X509_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_OBJECT_get0_X509_CRL(a: PX509_OBJECT): PX509_CRL; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_OBJECT_get0_X509_CRL_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_OBJECT_get0_X509_CRL_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_OBJECT_set1_X509_CRL(a: PX509_OBJECT; obj: PX509_CRL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_OBJECT_set1_X509_CRL_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_OBJECT_set1_X509_CRL_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_new: PX509_STORE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_new_procname);
 end;
 
 
 procedure  ERR_X509_STORE_free(v: PX509_STORE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_free_procname);
 end;
 
 
 function  ERR_X509_STORE_lock(ctx: PX509_STORE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_lock_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_lock_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_unlock(ctx: PX509_STORE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_unlock_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_unlock_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_up_ref(v: PX509_STORE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_up_ref_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_up_ref_procname);
 end;
 
  {introduced 1.1.0}
@@ -1591,38 +1591,38 @@ end;
   //STACK_OF(X509_CRL) *X509_STORE_CTX_get1_crls(X509_STORE_CTX *st, X509_NAME *nm);
 function  ERR_X509_STORE_set_flags(ctx: PX509_STORE; flags: TIdC_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set_flags_procname);
 end;
 
 
 function  ERR_X509_STORE_set_purpose(ctx: PX509_STORE; purpose: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set_purpose_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set_purpose_procname);
 end;
 
 
 function  ERR_X509_STORE_set_trust(ctx: PX509_STORE; trust: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set_trust_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set_trust_procname);
 end;
 
 
 function  ERR_X509_STORE_set1_param(ctx: PX509_STORE; pm: PX509_VERIFY_PARAM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set1_param_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set1_param_procname);
 end;
 
 
 function  ERR_X509_STORE_get0_param(ctx: PX509_STORE): PX509_VERIFY_PARAM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_get0_param_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_get0_param_procname);
 end;
 
  {introduced 1.1.0}
 
 procedure  ERR_X509_STORE_set_verify(ctx: PX509_STORE; verify: X509_STORE_CTX_verify_fn); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set_verify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set_verify_procname);
 end;
 
  {introduced 1.1.0}
@@ -1630,19 +1630,19 @@ end;
   //            X509_STORE_set_verify((ctx),(func))
 procedure  ERR_X509_STORE_CTX_set_verify(ctx: PX509_STORE_CTX; verify: X509_STORE_CTX_verify_fn); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_verify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_verify_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_get_verify(ctx: PX509_STORE): X509_STORE_CTX_verify_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_get_verify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_get_verify_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_X509_STORE_set_verify_cb(ctx: PX509_STORE; verify_cb: X509_STORE_CTX_verify_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set_verify_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set_verify_cb_procname);
 end;
 
 
@@ -1650,91 +1650,91 @@ end;
   //            X509_STORE_set_verify_cb((ctx),(func))
 function  ERR_X509_STORE_get_verify_cb(ctx: PX509_STORE): X509_STORE_CTX_verify_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_get_verify_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_get_verify_cb_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_X509_STORE_set_get_issuer(ctx: PX509_STORE; get_issuer: X509_STORE_CTX_get_issuer_fn); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set_get_issuer_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set_get_issuer_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_get_get_issuer(ctx: PX509_STORE): X509_STORE_CTX_get_issuer_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_get_get_issuer_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_get_get_issuer_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_X509_STORE_set_check_issued(ctx: PX509_STORE; check_issued: X509_STORE_CTX_check_issued_fn); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set_check_issued_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set_check_issued_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_get_check_issued(ctx: PX509_STORE): X509_STORE_CTX_check_issued_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_get_check_issued_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_get_check_issued_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_X509_STORE_set_check_revocation(ctx: PX509_STORE; check_revocation: X509_STORE_CTX_check_revocation_fn); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set_check_revocation_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set_check_revocation_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_get_check_revocation(ctx: PX509_STORE): X509_STORE_CTX_check_revocation_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_get_check_revocation_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_get_check_revocation_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_X509_STORE_set_get_crl(ctx: PX509_STORE; get_crl: X509_STORE_CTX_get_crl_fn); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set_get_crl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set_get_crl_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_get_get_crl(ctx: PX509_STORE): X509_STORE_CTX_get_crl_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_get_get_crl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_get_get_crl_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_X509_STORE_set_check_crl(ctx: PX509_STORE; check_crl: X509_STORE_CTX_check_crl_fn); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set_check_crl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set_check_crl_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_get_check_crl(ctx: PX509_STORE): X509_STORE_CTX_check_crl_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_get_check_crl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_get_check_crl_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_X509_STORE_set_cert_crl(ctx: PX509_STORE; cert_crl: X509_STORE_CTX_cert_crl_fn); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set_cert_crl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set_cert_crl_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_get_cert_crl(ctx: PX509_STORE): X509_STORE_CTX_cert_crl_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_get_cert_crl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_get_cert_crl_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_X509_STORE_set_check_policy(ctx: PX509_STORE; check_policy: X509_STORE_CTX_check_policy_fn); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set_check_policy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set_check_policy_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_get_check_policy(ctx: PX509_STORE): X509_STORE_CTX_check_policy_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_get_check_policy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_get_check_policy_procname);
 end;
 
  {introduced 1.1.0}
@@ -1746,13 +1746,13 @@ end;
 //  function X509_STORE_get_lookup_crls(ctx: PX509_STORE): X509_STORE_CTX_lookup_crls_fn;
 procedure  ERR_X509_STORE_set_cleanup(ctx: PX509_STORE; cleanup: X509_STORE_CTX_cleanup_fn); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set_cleanup_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_get_cleanup(ctx: PX509_STORE): X509_STORE_CTX_cleanup_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_get_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_get_cleanup_procname);
 end;
 
  {introduced 1.1.0}
@@ -1761,34 +1761,34 @@ end;
   //    CRYPTO_get_ex_new_index(CRYPTO_EX_INDEX_X509_STORE, l, p, newf, dupf, freef)
 function  ERR_X509_STORE_set_ex_data(ctx: PX509_STORE; idx: TIdC_INT; data: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set_ex_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_get_ex_data(ctx: PX509_STORE; idx: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_get_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_get_ex_data_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_X509_STORE_CTX_new: PX509_STORE_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_new_procname);
 end;
 
 
 
 function  ERR_X509_STORE_CTX_get1_issuer(issuer: PPX509; ctx: PX509_STORE_CTX; x: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get1_issuer_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get1_issuer_procname);
 end;
 
 
 
 procedure  ERR_X509_STORE_CTX_free(ctx: PX509_STORE_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_free_procname);
 end;
 
 
@@ -1796,20 +1796,20 @@ end;
 //  procedure X509_STORE_CTX_set0_trusted_stack(ctx: PX509_STORE_CTX; sk: P STACK_OF(X509));
 procedure  ERR_X509_STORE_CTX_cleanup(ctx: PX509_STORE_CTX); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_cleanup_procname);
 end;
 
 
 
 function  ERR_X509_STORE_CTX_get0_store(ctx: PX509_STORE_CTX): PX509_STORE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get0_store_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get0_store_procname);
 end;
 
 
 function  ERR_X509_STORE_CTX_get0_cert(ctx: PX509_STORE_CTX): PX509; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get0_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get0_cert_procname);
 end;
 
  {introduced 1.1.0}
@@ -1817,61 +1817,61 @@ end;
   //void X509_STORE_CTX_set0_untrusted(X509_STORE_CTX *ctx, STACK_OF(X509) *sk);
 procedure  ERR_X509_STORE_CTX_set_verify_cb(ctx: PX509_STORE_CTX; verify: X509_STORE_CTX_verify_cb); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_verify_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_verify_cb_procname);
 end;
 
 
 function  ERR_X509_STORE_CTX_get_verify_cb(ctx: PX509_STORE_CTX): X509_STORE_CTX_verify_cb; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_verify_cb_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_verify_cb_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_CTX_get_verify(ctx: PX509_STORE_CTX): X509_STORE_CTX_verify_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_verify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_verify_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_CTX_get_get_issuer(ctx: PX509_STORE_CTX): X509_STORE_CTX_get_issuer_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_get_issuer_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_get_issuer_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_CTX_get_check_issued(ctx: PX509_STORE_CTX): X509_STORE_CTX_check_issued_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_check_issued_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_check_issued_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_CTX_get_check_revocation(ctx: PX509_STORE_CTX): X509_STORE_CTX_check_revocation_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_check_revocation_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_check_revocation_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_CTX_get_get_crl(ctx: PX509_STORE_CTX): X509_STORE_CTX_get_crl_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_get_crl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_get_crl_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_CTX_get_check_crl(ctx: PX509_STORE_CTX): X509_STORE_CTX_check_crl_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_check_crl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_check_crl_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_CTX_get_cert_crl(ctx: PX509_STORE_CTX): X509_STORE_CTX_cert_crl_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_cert_crl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_cert_crl_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_CTX_get_check_policy(ctx: PX509_STORE_CTX): X509_STORE_CTX_check_policy_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_check_policy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_check_policy_procname);
 end;
 
  {introduced 1.1.0}
@@ -1879,39 +1879,39 @@ end;
 //  function X509_STORE_CTX_get_lookup_crls(ctx: PX509_STORE_CTX): X509_STORE_CTX_lookup_crls_fn;
 function  ERR_X509_STORE_CTX_get_cleanup(ctx: PX509_STORE_CTX): X509_STORE_CTX_cleanup_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_cleanup_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_X509_STORE_add_lookup(v: PX509_STORE; m: PX509_LOOKUP_METHOD): PX509_LOOKUP; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_add_lookup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_add_lookup_procname);
 end;
 
 
 function  ERR_X509_LOOKUP_hash_dir: PX509_LOOKUP_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_hash_dir_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_hash_dir_procname);
 end;
 
 
 function  ERR_X509_LOOKUP_file: PX509_LOOKUP_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_file_procname);
 end;
 
 
 
 function  ERR_X509_LOOKUP_meth_new(const name: PIdAnsiChar): PX509_LOOKUP_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_new_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_X509_LOOKUP_meth_free(method: PX509_LOOKUP_METHOD); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_free_procname);
 end;
 
  {introduced 1.1.0}
@@ -1938,197 +1938,197 @@ end;
 
 function  ERR_X509_LOOKUP_meth_set_ctrl(method: PX509_LOOKUP_METHOD; ctrl_fn: X509_LOOKUP_ctrl_fn): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_set_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_set_ctrl_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_LOOKUP_meth_get_ctrl(const method: PX509_LOOKUP_METHOD): X509_LOOKUP_ctrl_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_get_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_get_ctrl_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_X509_LOOKUP_meth_set_get_by_subject(method: PX509_LOOKUP_METHOD; fn: X509_LOOKUP_get_by_subject_fn): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_set_get_by_subject_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_set_get_by_subject_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_LOOKUP_meth_get_get_by_subject(const method: PX509_LOOKUP_METHOD): X509_LOOKUP_get_by_subject_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_get_get_by_subject_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_get_get_by_subject_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_X509_LOOKUP_meth_set_get_by_issuer_serial(method: PX509_LOOKUP_METHOD; fn: X509_LOOKUP_get_by_issuer_serial_fn): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_set_get_by_issuer_serial_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_set_get_by_issuer_serial_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_LOOKUP_meth_get_get_by_issuer_serial(const method: PX509_LOOKUP_METHOD): X509_LOOKUP_get_by_issuer_serial_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_get_get_by_issuer_serial_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_get_get_by_issuer_serial_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_X509_LOOKUP_meth_set_get_by_fingerprint(method: PX509_LOOKUP_METHOD; fn: X509_LOOKUP_get_by_fingerprint_fn): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_set_get_by_fingerprint_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_set_get_by_fingerprint_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_LOOKUP_meth_get_get_by_fingerprint(const method: PX509_LOOKUP_METHOD): X509_LOOKUP_get_by_fingerprint_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_get_get_by_fingerprint_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_get_get_by_fingerprint_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_X509_LOOKUP_meth_set_get_by_alias(method: PX509_LOOKUP_METHOD; fn: X509_LOOKUP_get_by_alias_fn): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_set_get_by_alias_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_set_get_by_alias_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_LOOKUP_meth_get_get_by_alias(const method: PX509_LOOKUP_METHOD): X509_LOOKUP_get_by_alias_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_get_get_by_alias_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_meth_get_get_by_alias_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_X509_STORE_add_cert(ctx: PX509_STORE; x: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_add_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_add_cert_procname);
 end;
 
 
 function  ERR_X509_STORE_add_crl(ctx: PX509_STORE; x: PX509_CRL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_add_crl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_add_crl_procname);
 end;
 
 
 
 function  ERR_X509_STORE_CTX_get_by_subject(vs: PX509_STORE_CTX; type_: X509_LOOKUP_TYPE; name: PX509_NAME; ret: PX509_OBJECT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_by_subject_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_by_subject_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_CTX_get_obj_by_subject(vs: PX509_STORE_CTX; type_: X509_LOOKUP_TYPE; name: PX509_NAME): PX509_OBJECT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_obj_by_subject_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_obj_by_subject_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_X509_LOOKUP_ctrl(ctx: PX509_LOOKUP; cmd: TIdC_INT; const argc: PIdAnsiChar; argl: TIdC_LONG; ret: PPIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_ctrl_procname);
 end;
 
 
 
 function  ERR_X509_load_cert_file(ctx: PX509_LOOKUP; const file_: PIdAnsiChar; type_: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_load_cert_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_load_cert_file_procname);
 end;
 
 
 function  ERR_X509_load_crl_file(ctx: PX509_LOOKUP; const file_: PIdAnsiChar; type_: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_load_crl_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_load_crl_file_procname);
 end;
 
 
 function  ERR_X509_load_cert_crl_file(ctx: PX509_LOOKUP; const file_: PIdAnsiChar; type_: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_load_cert_crl_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_load_cert_crl_file_procname);
 end;
 
 
 
 function  ERR_X509_LOOKUP_new(method: PX509_LOOKUP_METHOD): PX509_LOOKUP; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_new_procname);
 end;
 
 
 procedure  ERR_X509_LOOKUP_free(ctx: PX509_LOOKUP); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_free_procname);
 end;
 
 
 function  ERR_X509_LOOKUP_init(ctx: PX509_LOOKUP): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_init_procname);
 end;
 
 
 function  ERR_X509_LOOKUP_by_subject(ctx: PX509_LOOKUP; type_: X509_LOOKUP_TYPE; name: PX509_NAME; ret: PX509_OBJECT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_by_subject_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_by_subject_procname);
 end;
 
 
 function  ERR_X509_LOOKUP_by_issuer_serial(ctx: PX509_LOOKUP; type_: X509_LOOKUP_TYPE; name: PX509_NAME; serial: PASN1_INTEGER; ret: PX509_OBJECT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_by_issuer_serial_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_by_issuer_serial_procname);
 end;
 
 
 function  ERR_X509_LOOKUP_by_fingerprint(ctx: PX509_LOOKUP; type_: X509_LOOKUP_TYPE; const bytes: PByte; len: TIdC_INT; ret: PX509_OBJECT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_by_fingerprint_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_by_fingerprint_procname);
 end;
 
 
 function  ERR_X509_LOOKUP_by_alias(ctx: PX509_LOOKUP; type_: X509_LOOKUP_TYPE; const str: PIdAnsiChar; len: TIdC_INT; ret: PX509_OBJECT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_by_alias_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_by_alias_procname);
 end;
 
 
 function  ERR_X509_LOOKUP_set_method_data(ctx: PX509_LOOKUP; data: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_set_method_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_set_method_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_LOOKUP_get_method_data(const ctx: PX509_LOOKUP): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_get_method_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_get_method_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_LOOKUP_get_store(const ctx: PX509_LOOKUP): PX509_STORE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_get_store_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_get_store_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_LOOKUP_shutdown(ctx: PX509_LOOKUP): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_LOOKUP_shutdown_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_LOOKUP_shutdown_procname);
 end;
 
 
 
 function  ERR_X509_STORE_load_locations(ctx: PX509_STORE; const file_: PIdAnsiChar; const dir: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_load_locations_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_load_locations_procname);
 end;
 
 
 function  ERR_X509_STORE_set_default_paths(ctx: PX509_STORE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_set_default_paths_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_set_default_paths_procname);
 end;
 
 
@@ -2137,67 +2137,67 @@ end;
   //    CRYPTO_get_ex_new_index(CRYPTO_EX_INDEX_X509_STORE_CTX, l, p, newf, dupf, freef)
 function  ERR_X509_STORE_CTX_set_ex_data(ctx: PX509_STORE_CTX; idx: TIdC_INT; data: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_ex_data_procname);
 end;
 
 
 function  ERR_X509_STORE_CTX_get_ex_data(ctx: PX509_STORE_CTX; idx: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_ex_data_procname);
 end;
 
 
 function  ERR_X509_STORE_CTX_get_error(ctx: PX509_STORE_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_error_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_error_procname);
 end;
 
 
 procedure  ERR_X509_STORE_CTX_set_error(ctx: X509_STORE_CTX; s: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_error_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_error_procname);
 end;
 
 
 function  ERR_X509_STORE_CTX_get_error_depth(ctx: PX509_STORE_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_error_depth_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_error_depth_procname);
 end;
 
 
 procedure  ERR_X509_STORE_CTX_set_error_depth(ctx: PX509_STORE_CTX; depth: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_error_depth_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_error_depth_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_CTX_get_current_cert(ctx: PX509_STORE_CTX): PX509; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_current_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_current_cert_procname);
 end;
 
 
 procedure  ERR_X509_STORE_CTX_set_current_cert(ctx: PX509_STORE_CTX; x: PX509); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_current_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_current_cert_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_STORE_CTX_get0_current_issuer(ctx: PX509_STORE_CTX): PX509; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get0_current_issuer_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get0_current_issuer_procname);
 end;
 
 
 function  ERR_X509_STORE_CTX_get0_current_crl(ctx: PX509_STORE_CTX): PX509_CRL; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get0_current_crl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get0_current_crl_procname);
 end;
 
 
 function  ERR_X509_STORE_CTX_get0_parent_ctx(ctx: PX509_STORE_CTX): PX509_STORE_CTX; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get0_parent_ctx_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get0_parent_ctx_procname);
 end;
 
 
@@ -2205,7 +2205,7 @@ end;
 //  STACK_OF(X509) *X509_STORE_CTX_get1_chain(X509_STORE_CTX *ctx);
 procedure  ERR_X509_STORE_CTX_set_cert(c: PX509_STORE_CTX; x: PX509); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_cert_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_cert_procname);
 end;
 
 
@@ -2213,25 +2213,25 @@ end;
 //  void X509_STORE_CTX_set0_crls(X509_STORE_CTX *c, STACK_OF(X509_CRL) *sk);
 function  ERR_X509_STORE_CTX_set_purpose(ctx: PX509_STORE_CTX; purpose: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_purpose_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_purpose_procname);
 end;
 
 
 function  ERR_X509_STORE_CTX_set_trust(ctx: PX509_STORE_CTX; trust: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_trust_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_trust_procname);
 end;
 
 
 function  ERR_X509_STORE_CTX_purpose_inherit(ctx: PX509_STORE_CTX; def_purpose: TIdC_INT; purpose: TIdC_INT; trust: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_purpose_inherit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_purpose_inherit_procname);
 end;
 
 
 procedure  ERR_X509_STORE_CTX_set_flags(ctx: PX509_STORE_CTX; flags: TIdC_ULONG); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_flags_procname);
 end;
 
 
@@ -2239,38 +2239,38 @@ end;
 
 function  ERR_X509_STORE_CTX_get0_policy_tree(ctx: PX509_STORE_CTX): PX509_POLICY_TREE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get0_policy_tree_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get0_policy_tree_procname);
 end;
 
 
 function  ERR_X509_STORE_CTX_get_explicit_policy(ctx: PX509_STORE_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_explicit_policy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_explicit_policy_procname);
 end;
 
 
 function  ERR_X509_STORE_CTX_get_num_untrusted(ctx: PX509_STORE_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_num_untrusted_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get_num_untrusted_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_X509_STORE_CTX_get0_param(ctx: PX509_STORE_CTX): PX509_VERIFY_PARAM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get0_param_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_get0_param_procname);
 end;
 
 
 procedure  ERR_X509_STORE_CTX_set0_param(ctx: PX509_STORE_CTX; param: PX509_VERIFY_PARAM); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set0_param_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set0_param_procname);
 end;
 
 
 function  ERR_X509_STORE_CTX_set_default(ctx: PX509_STORE_CTX; const name: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_default_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set_default_procname);
 end;
 
 
@@ -2281,7 +2281,7 @@ end;
    *)
 procedure  ERR_X509_STORE_CTX_set0_dane(ctx: PX509_STORE_CTX; dane: PSSL_DANE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set0_dane_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_STORE_CTX_set0_dane_procname);
 end;
 
  {introduced 1.1.0}
@@ -2290,73 +2290,73 @@ end;
 
 function  ERR_X509_VERIFY_PARAM_new: PX509_VERIFY_PARAM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_new_procname);
 end;
 
 
 procedure  ERR_X509_VERIFY_PARAM_free(param: PX509_VERIFY_PARAM); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_free_procname);
 end;
 
 
 function  ERR_X509_VERIFY_PARAM_inherit(to_: PX509_VERIFY_PARAM; const from: PX509_VERIFY_PARAM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_inherit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_inherit_procname);
 end;
 
 
 function  ERR_X509_VERIFY_PARAM_set1(to_: PX509_VERIFY_PARAM; const from: PX509_VERIFY_PARAM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set1_procname);
 end;
 
 
 function  ERR_X509_VERIFY_PARAM_set1_name(param: PX509_VERIFY_PARAM; const name: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set1_name_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set1_name_procname);
 end;
 
 
 function  ERR_X509_VERIFY_PARAM_set_flags(param: PX509_VERIFY_PARAM; flags: TIdC_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set_flags_procname);
 end;
 
 
 function  ERR_X509_VERIFY_PARAM_clear_flags(param: PX509_VERIFY_PARAM; flags: TIdC_ULONG): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_clear_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_clear_flags_procname);
 end;
 
 
 function  ERR_X509_VERIFY_PARAM_get_flags(param: PX509_VERIFY_PARAM): TIdC_ULONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get_flags_procname);
 end;
 
 
 function  ERR_X509_VERIFY_PARAM_set_purpose(param: PX509_VERIFY_PARAM; purpose: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set_purpose_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set_purpose_procname);
 end;
 
 
 function  ERR_X509_VERIFY_PARAM_set_trust(param: PX509_VERIFY_PARAM; trust: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set_trust_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set_trust_procname);
 end;
 
 
 procedure  ERR_X509_VERIFY_PARAM_set_depth(param: PX509_VERIFY_PARAM; depth: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set_depth_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set_depth_procname);
 end;
 
 
 procedure  ERR_X509_VERIFY_PARAM_set_auth_level(param: PX509_VERIFY_PARAM; auth_level: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set_auth_level_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set_auth_level_procname);
 end;
 
  {introduced 1.1.0}
@@ -2364,7 +2364,7 @@ end;
 //  procedure X509_VERIFY_PARAM_set_time(param: PX509_VERIFY_PARAM; t: TIdC_TIMET);
 function  ERR_X509_VERIFY_PARAM_add0_policy(param: PX509_VERIFY_PARAM; policy: PASN1_OBJECT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_add0_policy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_add0_policy_procname);
 end;
 
 
@@ -2373,118 +2373,118 @@ end;
 
 function  ERR_X509_VERIFY_PARAM_set_inh_flags(param: PX509_VERIFY_PARAM; flags: TIdC_UINT32): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set_inh_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set_inh_flags_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_VERIFY_PARAM_get_inh_flags(const param: PX509_VERIFY_PARAM): TIdC_UINT32; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get_inh_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get_inh_flags_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_X509_VERIFY_PARAM_set1_host(param: PX509_VERIFY_PARAM; const name: PIdAnsiChar; namelen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set1_host_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set1_host_procname);
 end;
 
 
 function  ERR_X509_VERIFY_PARAM_add1_host(param: PX509_VERIFY_PARAM; const name: PIdAnsiChar; namelen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_add1_host_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_add1_host_procname);
 end;
 
 
 procedure  ERR_X509_VERIFY_PARAM_set_hostflags(param: PX509_VERIFY_PARAM; flags: TIdC_UINT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set_hostflags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set_hostflags_procname);
 end;
 
 
 function  ERR_X509_VERIFY_PARAM_get_hostflags(const param: PX509_VERIFY_PARAM): TIdC_UINT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get_hostflags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get_hostflags_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_VERIFY_PARAM_get0_peername(v1: PX509_VERIFY_PARAM): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get0_peername_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get0_peername_procname);
 end;
 
 
 procedure  ERR_X509_VERIFY_PARAM_move_peername(v1: PX509_VERIFY_PARAM; v2: PX509_VERIFY_PARAM); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_move_peername_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_move_peername_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_VERIFY_PARAM_set1_email(param: PX509_VERIFY_PARAM; const email: PIdAnsiChar; emaillen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set1_email_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set1_email_procname);
 end;
 
 
 function  ERR_X509_VERIFY_PARAM_set1_ip(param: PX509_VERIFY_PARAM; const ip: PByte; iplen: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set1_ip_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set1_ip_procname);
 end;
 
 
 function  ERR_X509_VERIFY_PARAM_set1_ip_asc(param: PX509_VERIFY_PARAM; const ipasc: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set1_ip_asc_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_set1_ip_asc_procname);
 end;
 
 
 
 function  ERR_X509_VERIFY_PARAM_get_depth(const param: PX509_VERIFY_PARAM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get_depth_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get_depth_procname);
 end;
 
 
 function  ERR_X509_VERIFY_PARAM_get_auth_level(const param: PX509_VERIFY_PARAM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get_auth_level_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get_auth_level_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_X509_VERIFY_PARAM_get0_name(const param: PX509_VERIFY_PARAM): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get0_name_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get0_name_procname);
 end;
 
 
 
 function  ERR_X509_VERIFY_PARAM_add0_table(param: PX509_VERIFY_PARAM): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_add0_table_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_add0_table_procname);
 end;
 
 
 function  ERR_X509_VERIFY_PARAM_get_count: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get_count_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get_count_procname);
 end;
 
 
 function  ERR_X509_VERIFY_PARAM_get0(id: TIdC_INT): PX509_VERIFY_PARAM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get0_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_get0_procname);
 end;
 
 
 function  ERR_X509_VERIFY_PARAM_lookup(const name: PIdAnsiChar): X509_VERIFY_PARAM; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_lookup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_lookup_procname);
 end;
 
 
 procedure  ERR_X509_VERIFY_PARAM_table_cleanup; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_table_cleanup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_VERIFY_PARAM_table_cleanup_procname);
 end;
 
 
@@ -2495,20 +2495,20 @@ end;
 
 procedure  ERR_X509_policy_tree_free(tree: PX509_POLICY_TREE); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_policy_tree_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_policy_tree_free_procname);
 end;
 
 
 
 function  ERR_X509_policy_tree_level_count(const tree: PX509_POLICY_TREE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_policy_tree_level_count_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_policy_tree_level_count_procname);
 end;
 
 
 function  ERR_X509_policy_tree_get0_level(const tree: PX509_POLICY_TREE; i: TIdC_INT): PX509_POLICY_LEVEL; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_policy_tree_get0_level_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_policy_tree_get0_level_procname);
 end;
 
 
@@ -2523,21 +2523,21 @@ end;
 
 function  ERR_X509_policy_level_node_count(level: PX509_POLICY_LEVEL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_policy_level_node_count_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_policy_level_node_count_procname);
 end;
 
 
 
 function  ERR_X509_policy_level_get0_node(level: PX509_POLICY_LEVEL; i: TIdC_INT): PX509_POLICY_NODE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_policy_level_get0_node_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_policy_level_get0_node_procname);
 end;
 
 
 
 function  ERR_X509_policy_node_get0_policy(const node: PX509_POLICY_NODE): PASN1_OBJECT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_policy_node_get0_policy_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_policy_node_get0_policy_procname);
 end;
 
 
@@ -2547,7 +2547,7 @@ end;
   //                                                           *node);
 function  ERR_X509_policy_node_get0_parent(const node: PX509_POLICY_NODE): PX509_POLICY_NODE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(X509_policy_node_get0_parent_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(X509_policy_node_get0_parent_procname);
 end;
 
 

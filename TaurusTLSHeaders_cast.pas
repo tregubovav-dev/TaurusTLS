@@ -109,43 +109,43 @@ const
 {$WARN  NO_RETVAL OFF}
 procedure  ERR_CAST_set_key(key: PCast_Key; len: TIdC_INT; const data: PByte); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CAST_set_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CAST_set_key_procname);
 end;
 
 
 procedure  ERR_CAST_ecb_encrypt(const in_: PByte; out_: PByte; const key: PCast_Key; enc: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CAST_ecb_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CAST_ecb_encrypt_procname);
 end;
 
 
 procedure  ERR_CAST_encrypt(data: PCAST_LONG; const key: PCast_Key); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CAST_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CAST_encrypt_procname);
 end;
 
 
 procedure  ERR_CAST_decrypt(data: PCAST_LONG; const key: PCast_Key); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CAST_decrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CAST_decrypt_procname);
 end;
 
 
 procedure  ERR_CAST_cbc_encrypt(const in_: PByte; out_: PByte; length: TIdC_LONG; const ks: PCast_Key; iv: PByte; enc: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CAST_cbc_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CAST_cbc_encrypt_procname);
 end;
 
 
 procedure  ERR_CAST_cfb64_encrypt(const in_: PByte; out_: PByte; length: TIdC_LONG; const schedule: PCast_Key; ivec: PByte; num: PIdC_INT; enc: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CAST_cfb64_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CAST_cfb64_encrypt_procname);
 end;
 
 
 procedure  ERR_CAST_ofb64_encrypt(const in_: PByte; out_: PByte; length: TIdC_LONG; const schedule: PCast_Key; ivec: PByte; num: PIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(CAST_ofb64_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(CAST_ofb64_encrypt_procname);
 end;
 
 

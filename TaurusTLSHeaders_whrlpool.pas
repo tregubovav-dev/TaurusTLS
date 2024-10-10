@@ -102,31 +102,31 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_WHIRLPOOL_Init(c: PWHIRLPOOL_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(WHIRLPOOL_Init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(WHIRLPOOL_Init_procname);
 end;
 
 
 function  ERR_WHIRLPOOL_Update(c: PWHIRLPOOL_CTX; inp: Pointer; bytes: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(WHIRLPOOL_Update_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(WHIRLPOOL_Update_procname);
 end;
 
 
 procedure  ERR_WHIRLPOOL_BitUpdate(c: PWHIRLPOOL_CTX; inp: Pointer; bits: TIdC_SIZET); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(WHIRLPOOL_BitUpdate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(WHIRLPOOL_BitUpdate_procname);
 end;
 
 
 function  ERR_WHIRLPOOL_Final(md: PByte; c: PWHIRLPOOL_CTX): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(WHIRLPOOL_Final_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(WHIRLPOOL_Final_procname);
 end;
 
 
 function  ERR_WHIRLPOOL(inp: Pointer; bytes: TIdC_SIZET; md: PByte): PByte; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(WHIRLPOOL_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(WHIRLPOOL_procname);
 end;
 
 

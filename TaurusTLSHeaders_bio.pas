@@ -1833,25 +1833,25 @@ end;
 {$WARN  NO_RETVAL OFF}
 function  ERR_BIO_get_flags(const b: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_get_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_get_flags_procname);
 end;
 
  
 procedure  ERR_BIO_set_retry_special(b: PBIO); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_retry_special_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_retry_special_procname);
 end;
 
  
 procedure  ERR_BIO_set_retry_read(b: PBIO); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_retry_read_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_retry_read_procname);
 end;
 
  
 procedure  ERR_BIO_set_retry_write(b: PBIO); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_retry_write_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_retry_write_procname);
 end;
 
  
@@ -1859,13 +1859,13 @@ end;
 (* These are normally used internally in BIOs *)
 procedure  ERR_BIO_clear_retry_flags(b: PBIO); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_clear_retry_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_clear_retry_flags_procname);
 end;
 
  
 function  ERR_BIO_get_retry_flags(b: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_get_retry_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_get_retry_flags_procname);
 end;
 
  
@@ -1873,31 +1873,31 @@ end;
 (* These should be used by the application to tell why we should retry *)
 function  ERR_BIO_should_read(b: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_should_read_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_should_read_procname);
 end;
 
  
 function  ERR_BIO_should_write(b: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_should_write_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_should_write_procname);
 end;
 
  
 function  ERR_BIO_should_io_special(b: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_should_io_special_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_should_io_special_procname);
 end;
 
  
 function  ERR_BIO_retry_type(b: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_retry_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_retry_type_procname);
 end;
 
  
 function  ERR_BIO_should_retry(b: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_should_retry_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_should_retry_procname);
 end;
 
  
@@ -1905,121 +1905,121 @@ end;
 (* BIO_s_accept() and BIO_s_connect() *)
 function  ERR_BIO_do_connect(b: PBIO): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_do_connect_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_do_connect_procname);
 end;
 
  
 function  ERR_BIO_do_accept(b: PBIO): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_do_accept_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_do_accept_procname);
 end;
 
  
 function  ERR_BIO_do_handshake(b: PBIO): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_do_handshake_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_do_handshake_procname);
 end;
 
  
 
 function  ERR_BIO_get_mem_data(b: PBIO; pp: PIdAnsiChar) : TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_get_mem_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_get_mem_data_procname);
 end;
 
  
 function  ERR_BIO_set_mem_buf(b: PBIO; bm: PIdAnsiChar; c: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_mem_buf_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_mem_buf_procname);
 end;
 
  
 function  ERR_BIO_get_mem_ptr(b: PBIO; pp: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_get_mem_ptr_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_get_mem_ptr_procname);
 end;
 
  
 function  ERR_BIO_set_mem_eof_return(b: PBIO; v: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_mem_eof_return_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_mem_eof_return_procname);
 end;
 
  
 
 function  ERR_BIO_get_new_index: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_get_new_index_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_get_new_index_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_BIO_set_flags(b: PBIO; flags: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_flags_procname);
 end;
 
 
 function  ERR_BIO_test_flags(const b: PBIO; flags: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_test_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_test_flags_procname);
 end;
 
 
 procedure  ERR_BIO_clear_flags(b: PBIO; flags: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_clear_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_clear_flags_procname);
 end;
 
 
 
 function  ERR_BIO_get_callback(b: PBIO): BIO_callback_fn; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_get_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_get_callback_procname);
 end;
 
 
 procedure  ERR_BIO_set_callback(b: PBIO; callback: BIO_callback_fn); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_callback_procname);
 end;
 
 
 
 function  ERR_BIO_get_callback_ex(b: PBIO): BIO_callback_fn_ex; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_get_callback_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_get_callback_ex_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_BIO_set_callback_ex(b: PBIO; callback: BIO_callback_fn_ex); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_callback_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_callback_ex_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_BIO_get_callback_arg(const b: PBIO): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_get_callback_arg_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_get_callback_arg_procname);
 end;
 
 
 procedure  ERR_BIO_set_callback_arg(var b: PBIO; arg: PIdAnsiChar); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_callback_arg_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_callback_arg_procname);
 end;
 
 
 
 function  ERR_BIO_method_name(const b: PBIO): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_method_name_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_method_name_procname);
 end;
 
 
 function  ERR_BIO_method_type(const b: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_method_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_method_type_procname);
 end;
 
 
@@ -2147,13 +2147,13 @@ end;
   (* ...pending macros have inappropriate return type *)
 function  ERR_BIO_ctrl_pending(b: PBIO): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ctrl_pending_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ctrl_pending_procname);
 end;
 
 
 function  ERR_BIO_ctrl_wpending(b: PBIO): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ctrl_wpending_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ctrl_wpending_procname);
 end;
 
 
@@ -2177,19 +2177,19 @@ end;
 //  {$HPPEMIT '# define BIO_get_read_request(b)    (int)BIO_ctrl(b,BIO_C_GET_READ_REQUEST,0,NULL)'}
 function  ERR_BIO_ctrl_get_write_guarantee(b: PBIO): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ctrl_get_write_guarantee_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ctrl_get_write_guarantee_procname);
 end;
 
 
 function  ERR_BIO_ctrl_get_read_request(b: PBIO): TIdC_SIZET; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ctrl_get_read_request_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ctrl_get_read_request_procname);
 end;
 
 
 function  ERR_BIO_ctrl_reset_read_request(b: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ctrl_reset_read_request_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ctrl_reset_read_request_procname);
 end;
 
 
@@ -2215,25 +2215,25 @@ end;
 
 function  ERR_BIO_set_ex_data(bio: PBIO; idx: TIdC_INT; data: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_ex_data_procname);
 end;
 
 
 function  ERR_BIO_get_ex_data(bio: PBIO; idx: TIdC_INT): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_get_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_get_ex_data_procname);
 end;
 
 
 function  ERR_BIO_number_read(bio: PBIO): TIdC_UINT64; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_number_read_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_number_read_procname);
 end;
 
 
 function  ERR_BIO_number_written(bio: PBIO): TIdC_UINT64; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_number_written_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_number_written_procname);
 end;
 
 
@@ -2246,337 +2246,337 @@ end;
 
 function  ERR_BIO_s_file: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_s_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_s_file_procname);
 end;
 
 
 function  ERR_BIO_new_file(const filename: PIdAnsiChar; const mode: PIdAnsiChar): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_new_file_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_new_file_procname);
 end;
 
 
 //  function BIO_new_fp(stream: cFile; close_flag: TIdC_INT): PBIO;
 function  ERR_BIO_new(const cType: PBIO_METHOD): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_new_procname);
 end;
 
 
 function  ERR_BIO_free(a: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_free_procname);
 end;
 
 
 procedure  ERR_BIO_set_data(a: PBIO; ptr: Pointer); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_data_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_get_data(a: PBIO): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_get_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_get_data_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_BIO_set_init(a: PBIO; init: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_init_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_get_init(a: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_get_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_get_init_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_BIO_set_shutdown(a: PBIO; shut: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_shutdown_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_shutdown_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_get_shutdown(a: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_get_shutdown_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_get_shutdown_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_BIO_vfree(a: PBIO); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_vfree_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_vfree_procname);
 end;
 
 
 function  ERR_BIO_up_ref(a: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_up_ref_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_up_ref_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_read(b: PBIO; data: Pointer; dlen: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_read_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_read_procname);
 end;
 
 
 function  ERR_BIO_read_ex(b: PBIO; data: Pointer; dlen: TIdC_SIZET; readbytes: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_read_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_read_ex_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_gets( bp: PBIO; buf: PIdAnsiChar; size: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_gets_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_gets_procname);
 end;
 
 
 function  ERR_BIO_write(b: PBIO; const data: Pointer; dlen: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_write_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_write_procname);
 end;
 
 
 function  ERR_BIO_write_ex(b: PBIO; const data: Pointer; dlen: TIdC_SIZET; written: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_write_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_write_ex_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_puts(bp: PBIO; const buf: PIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_puts_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_puts_procname);
 end;
 
 
 function  ERR_BIO_indent(b: PBIO; indent: TIdC_INT; max: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_indent_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_indent_procname);
 end;
 
 
 function  ERR_BIO_ctrl(bp: PBIO; cmd: TIdC_INT; larg: TIdC_LONG; parg: Pointer): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ctrl_procname);
 end;
 
 
 function  ERR_BIO_callback_ctrl(b: PBIO; cmd: TIdC_INT; fp: PBIO_info_cb): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_callback_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_callback_ctrl_procname);
 end;
 
 
 function  ERR_BIO_ptr_ctrl(bp: PBIO; cmd: TIdC_INT; larg: TIdC_LONG): Pointer; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ptr_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ptr_ctrl_procname);
 end;
 
 
 function  ERR_BIO_int_ctrl(bp: PBIO; cmd: TIdC_INT; larg: TIdC_LONG; iarg: TIdC_INT): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_int_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_int_ctrl_procname);
 end;
 
 
 function  ERR_BIO_push(b: PBIO; append: PBIO): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_push_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_push_procname);
 end;
 
 
 function  ERR_BIO_pop(b: PBIO): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_pop_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_pop_procname);
 end;
 
 
 procedure  ERR_BIO_free_all(a: PBIO); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_free_all_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_free_all_procname);
 end;
 
 
 function  ERR_BIO_find_type(b: PBIO; bio_type: TIdC_INT): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_find_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_find_type_procname);
 end;
 
 
 function  ERR_BIO_next(b: PBIO): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_next_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_next_procname);
 end;
 
 
 procedure  ERR_BIO_set_next(b: PBIO; next: PBIO); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_next_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_next_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_get_retry_BIO(bio: PBIO; reason: TIdC_INT): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_get_retry_BIO_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_get_retry_BIO_procname);
 end;
 
 
 function  ERR_BIO_get_retry_reason(bio: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_get_retry_reason_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_get_retry_reason_procname);
 end;
 
 
 procedure  ERR_BIO_set_retry_reason(bio: PBIO; reason: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_retry_reason_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_retry_reason_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_dup_chain(in_: PBIO): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_dup_chain_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_dup_chain_procname);
 end;
 
 
 
 function  ERR_BIO_nread0(bio: PBIO; buf: PPIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_nread0_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_nread0_procname);
 end;
 
 
 function  ERR_BIO_nread(bio: PBIO; buf: PPIdAnsiChar; num: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_nread_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_nread_procname);
 end;
 
 
 function  ERR_BIO_nwrite0(bio: PBIO; buf: PPIdAnsiChar): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_nwrite0_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_nwrite0_procname);
 end;
 
 
 function  ERR_BIO_nwrite(bio: PBIO; buf: PPIdAnsiChar; num: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_nwrite_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_nwrite_procname);
 end;
 
 
 
 function  ERR_BIO_debug_callback(bio: PBIO; cmd: TIdC_INT; const argp: PIdAnsiChar; argi: TIdC_INT; argl: TIdC_LONG; ret: TIdC_LONG): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_debug_callback_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_debug_callback_procname);
 end;
 
 
 
 function  ERR_BIO_s_mem: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_s_mem_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_s_mem_procname);
 end;
 
 
 function  ERR_BIO_s_secmem: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_s_secmem_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_s_secmem_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_new_mem_buf(const buf: Pointer; len: TIdC_INT): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_new_mem_buf_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_new_mem_buf_procname);
 end;
 
 
 
 function  ERR_BIO_s_socket: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_s_socket_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_s_socket_procname);
 end;
 
 
 function  ERR_BIO_s_connect: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_s_connect_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_s_connect_procname);
 end;
 
 
 function  ERR_BIO_s_accept: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_s_accept_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_s_accept_procname);
 end;
 
 
 
 function  ERR_BIO_s_fd: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_s_fd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_s_fd_procname);
 end;
 
 
 function  ERR_BIO_s_log: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_s_log_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_s_log_procname);
 end;
 
 
 function  ERR_BIO_s_bio: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_s_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_s_bio_procname);
 end;
 
 
 function  ERR_BIO_s_null: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_s_null_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_s_null_procname);
 end;
 
 
 function  ERR_BIO_f_null: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_f_null_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_f_null_procname);
 end;
 
 
 function  ERR_BIO_f_buffer: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_f_buffer_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_f_buffer_procname);
 end;
 
 
 function  ERR_BIO_f_linebuffer: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_f_linebuffer_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_f_linebuffer_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_f_nbio_test: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_f_nbio_test_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_f_nbio_test_procname);
 end;
 
 
 function  ERR_BIO_s_datagram: PBIO_METHOD; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_s_datagram_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_s_datagram_procname);
 end;
 
 
 function  ERR_BIO_dgram_non_fatal_error(error: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_dgram_non_fatal_error_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_dgram_non_fatal_error_procname);
 end;
 
 
 function  ERR_BIO_new_dgram(fd: TIdC_INT; close_flag: TIdC_INT): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_new_dgram_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_new_dgram_procname);
 end;
 
 
@@ -2592,26 +2592,26 @@ end;
 
 function  ERR_BIO_sock_should_retry(i: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_sock_should_retry_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_sock_should_retry_procname);
 end;
 
 
 function  ERR_BIO_sock_non_fatal_error(error: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_sock_non_fatal_error_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_sock_non_fatal_error_procname);
 end;
 
 
 
 function  ERR_BIO_fd_should_retry(i: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_fd_should_retry_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_fd_should_retry_procname);
 end;
 
 
 function  ERR_BIO_fd_non_fatal_error(error: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_fd_non_fatal_error_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_fd_non_fatal_error_procname);
 end;
 
 
@@ -2622,13 +2622,13 @@ end;
 //  function BIO_dump_indent_cb(TIdC_INT (cb( Pointer data, TIdC_SIZET len, Pointer function ): u: TIdC_INT, Pointer function ,  PIdAnsiChar s, TIdC_INT len, TIdC_INT indent): u;
 function  ERR_BIO_dump(b: PBIO; const bytes: PIdAnsiChar; len: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_dump_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_dump_procname);
 end;
 
 
 function  ERR_BIO_dump_indent(b: PBIO; const bytes: PIdAnsiChar; len: TIdC_INT; indent: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_dump_indent_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_dump_indent_procname);
 end;
 
 
@@ -2638,233 +2638,233 @@ end;
 
 function  ERR_BIO_hex_string(out_: PBIO; indent: TIdC_INT; width: TIdC_INT; data: PByte; datalen: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_hex_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_hex_string_procname);
 end;
 
 
 
 function  ERR_BIO_ADDR_new: PBIO_ADDR; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ADDR_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ADDR_new_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_ADDR_rawmake(ap: PBIO_ADDR; familiy: TIdC_INT; const where: Pointer; wherelen: TIdC_SIZET; port: TIdC_SHORT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ADDR_rawmake_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ADDR_rawmake_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_BIO_ADDR_free(a: PBIO_ADDR); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ADDR_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ADDR_free_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_BIO_ADDR_clear(ap: PBIO_ADDR); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ADDR_clear_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ADDR_clear_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_ADDR_family(const ap: PBIO_ADDR): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ADDR_family_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ADDR_family_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_ADDR_rawaddress(const ap: PBIO_ADDR; p: Pointer; l: PIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ADDR_rawaddress_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ADDR_rawaddress_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_ADDR_rawport(const ap: PBIO_ADDR): TIdC_SHORT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ADDR_rawport_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ADDR_rawport_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_ADDR_hostname_string(const ap: PBIO_ADDR; numeric: TIdC_INT): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ADDR_hostname_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ADDR_hostname_string_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_ADDR_service_string(const ap: PBIO_ADDR; numeric: TIdC_INT): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ADDR_service_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ADDR_service_string_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_ADDR_path_string(const ap: PBIO_ADDR): PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ADDR_path_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ADDR_path_string_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_BIO_ADDRINFO_next(const bai: PBIO_ADDRINFO): PBIO_ADDRINFO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ADDRINFO_next_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ADDRINFO_next_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_ADDRINFO_family(const bai: PBIO_ADDRINFO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ADDRINFO_family_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ADDRINFO_family_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_ADDRINFO_socktype(const bai: PBIO_ADDRINFO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ADDRINFO_socktype_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ADDRINFO_socktype_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_ADDRINFO_protocol(const bai: PBIO_ADDRINFO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ADDRINFO_protocol_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ADDRINFO_protocol_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_ADDRINFO_address(const bai: PBIO_ADDRINFO): PBIO_ADDR; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ADDRINFO_address_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ADDRINFO_address_procname);
 end;
 
  {introduced 1.1.0}
 procedure  ERR_BIO_ADDRINFO_free(bai: PBIO_ADDRINFO); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_ADDRINFO_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_ADDRINFO_free_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_BIO_parse_hostserv(const hostserv: PIdAnsiChar; host: PPIdAnsiChar; service: PPIdAnsiChar; hostserv_prio: BIO_hostserv_priorities): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_parse_hostserv_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_parse_hostserv_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_BIO_lookup(const host: PIdAnsiChar; const service: PIdAnsiChar; lookup_type: BIO_lookup_type; family: TIdC_INT; socktype: TIdC_INT; res: PPBIO_ADDRINFO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_lookup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_lookup_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_lookup_ex(const host: PIdAnsiChar; const service: PIdAnsiChar; lookup_type: TIdC_INT; family: TIdC_INT; socktype: TIdC_INT; protocol: TIdC_INT; res: PPBIO_ADDRINFO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_lookup_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_lookup_ex_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_sock_error(sock: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_sock_error_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_sock_error_procname);
 end;
 
 
 function  ERR_BIO_socket_ioctl(fd: TIdC_INT; cType: TIdC_LONG; arg: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_socket_ioctl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_socket_ioctl_procname);
 end;
 
 
 function  ERR_BIO_socket_nbio(fd: TIdC_INT; mode: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_socket_nbio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_socket_nbio_procname);
 end;
 
 
 function  ERR_BIO_sock_init: TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_sock_init_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_sock_init_procname);
 end;
 
 
 
 function  ERR_BIO_set_tcp_ndelay(sock: TIdC_INT; turn_on: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_set_tcp_ndelay_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_set_tcp_ndelay_procname);
 end;
 
 
 
 function  ERR_BIO_sock_info(sock: TIdC_INT; type_: BIO_sock_info_type; info: PBIO_sock_info_u): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_sock_info_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_sock_info_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_BIO_socket(domain: TIdC_INT; socktype: TIdC_INT; protocol: TIdC_INT; options: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_socket_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_socket_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_connect(sock: TIdC_INT; const addr: PBIO_ADDR; options: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_connect_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_connect_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_bind(sock: TIdC_INT; const addr: PBIO_ADDR; options: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_bind_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_bind_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_listen(sock: TIdC_INT; const addr: PBIO_ADDR; options: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_listen_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_listen_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_accept_ex(accept_sock: TIdC_INT; addr: PBIO_ADDR; options: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_accept_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_accept_ex_procname);
 end;
 
  {introduced 1.1.0}
 function  ERR_BIO_closesocket(sock: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_closesocket_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_closesocket_procname);
 end;
 
  {introduced 1.1.0}
 
 function  ERR_BIO_new_socket(sock: TIdC_INT; close_flag: TIdC_INT): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_new_socket_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_new_socket_procname);
 end;
 
 
 function  ERR_BIO_new_connect(const host_port: PIdAnsiChar): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_new_connect_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_new_connect_procname);
 end;
 
 
 function  ERR_BIO_new_accept(const host_port: PIdAnsiChar): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_new_accept_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_new_accept_procname);
 end;
 
 
 
 function  ERR_BIO_new_fd(fd: TIdC_INT; close_flag: TIdC_INT): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_new_fd_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_new_fd_procname);
 end;
 
 
 
 function  ERR_BIO_new_bio_pair(bio1: PPBIO; writebuf1: TIdC_SIZET; bio2: PPBIO; writebuf2: TIdC_SIZET): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_new_bio_pair_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_new_bio_pair_procname);
 end;
 
 
@@ -2876,7 +2876,7 @@ end;
 
 procedure  ERR_BIO_copy_next_retry(b: PBIO); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_copy_next_retry_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_copy_next_retry_procname);
 end;
 
 

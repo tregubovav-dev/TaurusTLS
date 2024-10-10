@@ -715,48 +715,48 @@ end;
 procedure ERR_DES_ecb2_encrypt(input: Pconst_DES_cblock; output: PDES_cblock;
   ks1: PDES_key_schedule; ks2: PDES_key_schedule; enc: longint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_ecb2_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_ecb2_encrypt_procname);
 end;
 
 procedure ERR_DES_ede2_cbc_encrypt(input: Pbyte; output: Pbyte; length: longint;
   ks1: PDES_key_schedule; ks2: PDES_key_schedule; ivec: PDES_cblock;
   enc: longint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_ede2_cbc_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_ede2_cbc_encrypt_procname);
 end;
 
 procedure ERR_DES_ede2_cfb64_encrypt(in_: Pbyte; out_: Pbyte; length: longint;
   ks1: PDES_key_schedule; ks2: PDES_key_schedule; ivec: PDES_cblock;
   num: Plongint; enc: longint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_ede2_cfb64_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_ede2_cfb64_encrypt_procname);
 end;
 
 procedure ERR_DES_ede2_ofb64_encrypt(in_: Pbyte; out_: Pbyte; length: longint;
   ks1: PDES_key_schedule; ks2: PDES_key_schedule; ivec: PDES_cblock;
   num: Plongint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_ede2_ofb64_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_ede2_ofb64_encrypt_procname);
 end;
 
 (* Const before type ignored *)
 function ERR_DES_options: PIdAnsiChar;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_options_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_options_procname);
 end;
 
 procedure ERR_DES_ecb3_encrypt(input: Pconst_DES_cblock; output: PDES_cblock;
   ks1: PDES_key_schedule; ks2: PDES_key_schedule; ks3: PDES_key_schedule;
   enc: longint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_ecb3_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_ecb3_encrypt_procname);
 end;
 
 (* Const before type ignored *)
 function ERR_DES_cbc_cksum(input: Pbyte; output: PDES_cblock; length: longint;
   schedule: PDES_key_schedule; ivec: Pconst_DES_cblock): DES_LONG;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_cbc_cksum_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_cbc_cksum_procname);
 end;
 
 { DES_cbc_encrypt does not update the IV!  Use DES_ncbc_encrypt instead. }
@@ -764,14 +764,14 @@ end;
 procedure ERR_DES_cbc_encrypt(input: Pbyte; output: Pbyte; length: longint;
   schedule: PDES_key_schedule; ivec: PDES_cblock; enc: longint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_cbc_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_cbc_encrypt_procname);
 end;
 
 (* Const before type ignored *)
 procedure ERR_DES_ncbc_encrypt(input: Pbyte; output: Pbyte; length: longint;
   schedule: PDES_key_schedule; ivec: PDES_cblock; enc: longint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_ncbc_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_ncbc_encrypt_procname);
 end;
 
 (* Const before type ignored *)
@@ -779,7 +779,7 @@ procedure ERR_DES_xcbc_encrypt(input: Pbyte; output: Pbyte; length: longint;
   schedule: PDES_key_schedule; ivec: PDES_cblock; inw: Pconst_DES_cblock;
   outw: Pconst_DES_cblock; enc: longint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_xcbc_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_xcbc_encrypt_procname);
 end;
 
 (* Const before type ignored *)
@@ -787,13 +787,13 @@ procedure ERR_DES_cfb_encrypt(in_: Pbyte; out_: Pbyte; numbits: longint;
   length: longint; schedule: PDES_key_schedule; ivec: PDES_cblock;
   enc: longint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_cfb_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_cfb_encrypt_procname);
 end;
 
 procedure ERR_DES_ecb_encrypt(input: Pconst_DES_cblock; output: PDES_cblock;
   ks: PDES_key_schedule; enc: longint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_ecb_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_ecb_encrypt_procname);
 end;
 
 {
@@ -809,7 +809,7 @@ end;
 procedure ERR_DES_encrypt1(data: PDES_LONG; ks: PDES_key_schedule;
   enc: longint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_encrypt1_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_encrypt1_procname);
 end;
 
 {
@@ -823,19 +823,19 @@ end;
 procedure ERR_DES_encrypt2(data: PDES_LONG; ks: PDES_key_schedule;
   enc: longint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_encrypt2_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_encrypt2_procname);
 end;
 
 procedure ERR_DES_encrypt3(data: PDES_LONG; ks1: PDES_key_schedule;
   ks2: PDES_key_schedule; ks3: PDES_key_schedule);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_encrypt3_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_encrypt3_procname);
 end;
 
 procedure ERR_DES_decrypt3(data: PDES_LONG; ks1: PDES_key_schedule;
   ks2: PDES_key_schedule; ks3: PDES_key_schedule);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_decrypt3_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_decrypt3_procname);
 end;
 
 (* Const before type ignored *)
@@ -843,7 +843,7 @@ procedure ERR_DES_ede3_cbc_encrypt(input: Pbyte; output: Pbyte; length: longint;
   ks1: PDES_key_schedule; ks2: PDES_key_schedule; ks3: PDES_key_schedule;
   ivec: PDES_cblock; enc: longint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_ede3_cbc_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_ede3_cbc_encrypt_procname);
 end;
 
 (* Const before type ignored *)
@@ -851,7 +851,7 @@ procedure ERR_DES_ede3_cfb64_encrypt(in_: Pbyte; out_: Pbyte; length: longint;
   ks1: PDES_key_schedule; ks2: PDES_key_schedule; ks3: PDES_key_schedule;
   ivec: PDES_cblock; num: Plongint; enc: longint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_ede3_cfb64_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_ede3_cfb64_encrypt_procname);
 end;
 
 (* Const before type ignored *)
@@ -859,7 +859,7 @@ procedure ERR_DES_ede3_cfb_encrypt(in_: Pbyte; out_: Pbyte; numbits: longint;
   length: longint; ks1: PDES_key_schedule; ks2: PDES_key_schedule;
   ks3: PDES_key_schedule; ivec: PDES_cblock; enc: longint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_ede3_cfb_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_ede3_cfb_encrypt_procname);
 end;
 
 (* Const before type ignored *)
@@ -867,7 +867,7 @@ procedure ERR_DES_ede3_ofb64_encrypt(in_: Pbyte; out_: Pbyte; length: longint;
   ks1: PDES_key_schedule; ks2: PDES_key_schedule; ks3: PDES_key_schedule;
   ivec: PDES_cblock; num: Plongint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_ede3_ofb64_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_ede3_ofb64_encrypt_procname);
 end;
 
 (* Const before type ignored *)
@@ -875,55 +875,55 @@ end;
 function ERR_DES_fcrypt(buf: PIdAnsiChar; salt: PIdAnsiChar; ret: PIdAnsiChar)
   : PIdAnsiChar;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_fcrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_fcrypt_procname);
 end;
 
 (* Const before type ignored *)
 (* Const before type ignored *)
 function ERR_DES_crypt(buf: PIdAnsiChar; salt: PIdAnsiChar): PIdAnsiChar;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_crypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_crypt_procname);
 end;
 
 (* Const before type ignored *)
 procedure ERR_DES_ofb_encrypt(in_: Pbyte; out_: Pbyte; numbits: longint;
   length: longint; schedule: PDES_key_schedule; ivec: PDES_cblock);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_ofb_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_ofb_encrypt_procname);
 end;
 
 (* Const before type ignored *)
 procedure ERR_DES_pcbc_encrypt(input: Pbyte; output: Pbyte; length: longint;
   schedule: PDES_key_schedule; ivec: PDES_cblock; enc: longint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_pcbc_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_pcbc_encrypt_procname);
 end;
 
 (* Const before type ignored *)
 function ERR_DES_quad_cksum(input: Pbyte; output: PDES_cblock; length: longint;
   out_count: longint; seed: PDES_cblock): DES_LONG;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_quad_cksum_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_quad_cksum_procname);
 end;
 
 function ERR_DES_random_key(ret: PDES_cblock): longint;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_random_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_random_key_procname);
 end;
 
 procedure ERR_DES_set_odd_parity(key: PDES_cblock);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_set_odd_parity_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_set_odd_parity_procname);
 end;
 
 function ERR_DES_check_key_parity(key: Pconst_DES_cblock): longint;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_check_key_parity_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_check_key_parity_procname);
 end;
 
 function ERR_DES_is_weak_key(key: Pconst_DES_cblock): longint;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_is_weak_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_is_weak_key_procname);
 end;
 
 {
@@ -934,57 +934,57 @@ end;
 function ERR_DES_set_key(key: Pconst_DES_cblock; var schedule: DES_key_schedule)
   : longint;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_set_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_set_key_procname);
 end;
 
 function ERR_DES_key_sched(key: Pconst_DES_cblock; schedule: PDES_key_schedule)
   : longint;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_key_sched_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_key_sched_procname);
 end;
 
 function ERR_DES_set_key_checked(key: Pconst_DES_cblock;
   schedule: PDES_key_schedule): longint;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_set_key_checked_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_set_key_checked_procname);
 end;
 
 procedure ERR_DES_set_key_unchecked(key: Pconst_DES_cblock;
   schedule: PDES_key_schedule);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_set_key_unchecked_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_set_key_unchecked_procname);
 end;
 
 (* Const before type ignored *)
 procedure ERR_DES_string_to_key(str: PIdAnsiChar; key: PDES_cblock);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_string_to_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_string_to_key_procname);
 end;
 
 (* Const before type ignored *)
 procedure ERR_DES_string_to_2keys(str: PIdAnsiChar; key1: PDES_cblock;
   key2: PDES_cblock);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_string_to_2keys_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_string_to_2keys_procname);
 end;
 
 (* Const before type ignored *)
 procedure ERR_DES_cfb64_encrypt(in_: Pbyte; out_: Pbyte; length: longint;
   schedule: PDES_key_schedule; ivec: PDES_cblock; num: Plongint; enc: longint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_cfb64_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_cfb64_encrypt_procname);
 end;
 
 (* Const before type ignored *)
 procedure ERR_DES_ofb64_encrypt(in_: Pbyte; out_: Pbyte; length: longint;
   schedule: PDES_key_schedule; ivec: PDES_cblock; num: Plongint);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_ofb64_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_ofb64_encrypt_procname);
 end;
 
 procedure ERR_DES_fixup_key_parity(key: PDES_cblock);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(DES_fixup_key_parity_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(DES_fixup_key_parity_procname);
 end;
 
 {$WARN  NO_RETVAL ON}

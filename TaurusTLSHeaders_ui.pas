@@ -1140,17 +1140,17 @@ const
 
 function ERR_UI_new: PUI;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_new_procname);
 end;
 
 function ERR_UI_new_method(const method: PUI_Method): PUI;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_new_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_new_method_procname);
 end;
 
 procedure ERR_UI_free(ui: PUI);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_free_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_free_procname);
 end;
 
 (*
@@ -1201,28 +1201,28 @@ function ERR_UI_add_input_string(ui: PUI; const prompt: PIdAnsiChar;
   flags: TIdC_INT; result_buf: PIdAnsiChar; minsize: TIdC_INT;
   maxsize: TIdC_INT): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_add_input_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_add_input_string_procname);
 end;
 
 function ERR_UI_dup_input_string(ui: PUI; const prompt: PIdAnsiChar;
   flags: TIdC_INT; result_buf: PIdAnsiChar; minsize: TIdC_INT;
   maxsize: TIdC_INT): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_dup_input_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_dup_input_string_procname);
 end;
 
 function ERR_UI_add_verify_string(ui: PUI; const prompt: PIdAnsiChar;
   flags: TIdC_INT; result_buf: PIdAnsiChar; minsize: TIdC_INT;
   maxsize: TIdC_INT; const test_buf: PIdAnsiChar): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_add_verify_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_add_verify_string_procname);
 end;
 
 function ERR_UI_dup_verify_string(ui: PUI; const prompt: PIdAnsiChar;
   flags: TIdC_INT; result_buf: PIdAnsiChar; minsize: TIdC_INT;
   maxsize: TIdC_INT; const test_buf: PIdAnsiChar): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_dup_verify_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_dup_verify_string_procname);
 end;
 
 function ERR_UI_add_input_boolean(ui: PUI; const prompt: PIdAnsiChar;
@@ -1230,7 +1230,7 @@ function ERR_UI_add_input_boolean(ui: PUI; const prompt: PIdAnsiChar;
   const cancel_chars: PIdAnsiChar; flags: TIdC_INT; result_buf: PIdAnsiChar)
   : TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_add_input_boolean_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_add_input_boolean_procname);
 end;
 
 function ERR_UI_dup_input_boolean(ui: PUI; const prompt: PIdAnsiChar;
@@ -1238,27 +1238,27 @@ function ERR_UI_dup_input_boolean(ui: PUI; const prompt: PIdAnsiChar;
   const cancel_chars: PIdAnsiChar; flags: TIdC_INT; result_buf: PIdAnsiChar)
   : TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_dup_input_boolean_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_dup_input_boolean_procname);
 end;
 
 function ERR_UI_add_info_string(ui: PUI; const text: PIdAnsiChar): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_add_info_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_add_info_string_procname);
 end;
 
 function ERR_UI_dup_info_string(ui: PUI; const text: PIdAnsiChar): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_dup_info_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_dup_info_string_procname);
 end;
 
 function ERR_UI_add_error_string(ui: PUI; const text: PIdAnsiChar): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_add_error_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_add_error_string_procname);
 end;
 
 function ERR_UI_dup_error_string(ui: PUI; const text: PIdAnsiChar): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_dup_error_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_dup_error_string_procname);
 end;
 
 (*
@@ -1282,7 +1282,7 @@ end;
 function ERR_UI_construct_prompt(ui_method: PUI; const object_desc: PIdAnsiChar;
   const object_name: PIdAnsiChar): PIdAnsiChar;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_construct_prompt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_construct_prompt_procname);
 end;
 
 (*
@@ -1298,7 +1298,7 @@ end;
 *)
 function ERR_UI_add_user_data(ui: PUI; user_data: Pointer): Pointer;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_add_user_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_add_user_data_procname);
 end;
 
 (*
@@ -1308,30 +1308,30 @@ end;
 *)
 function ERR_UI_dup_user_data(ui: PUI; user_data: Pointer): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_dup_user_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_dup_user_data_procname);
 end;
 
 (* We need a user data retrieving function as well. *)
 function ERR_UI_get0_user_data(ui: PUI): Pointer;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_get0_user_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_get0_user_data_procname);
 end;
 
 (* Return the result associated with a prompt given with the index i. *)
 function ERR_UI_get0_result(ui: PUI; i: TIdC_INT): PIdAnsiChar;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_get0_result_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_get0_result_procname);
 end;
 
 function ERR_UI_get_result_length(ui: PUI; i: TIdC_INT): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_get_result_length_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_get_result_length_procname);
 end;
 
 (* When all strings have been added, process the whole thing. *)
 function ERR_UI_process(ui: PUI): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_process_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_process_procname);
 end;
 
 (*
@@ -1342,7 +1342,7 @@ end;
 function ERR_UI_ctrl(ui: PUI; cmd: TIdC_INT; i: TIdC_LONG; p: Pointer;
   f: UI_ctrl_f): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_ctrl_procname);
 end;
 
 (* Some methods may use extra data *)
@@ -1353,39 +1353,39 @@ end;
 // CRYPTO_get_ex_new_index(CRYPTO_EX_INDEX_UI, l, p, newf, dupf, freef)
 function ERR_UI_set_ex_data(r: PUI; idx: TIdC_INT; arg: Pointer): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_set_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_set_ex_data_procname);
 end;
 
 function ERR_UI_get_ex_data(r: PUI; idx: TIdC_INT): Pointer;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_get_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_get_ex_data_procname);
 end;
 
 (* Use specific methods instead of the built-in one *)
 procedure ERR_UI_set_default_method(const meth: PUI_Method);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_set_default_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_set_default_method_procname);
 end;
 
 function ERR_UI_get_default_method: PUI_Method;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_get_default_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_get_default_method_procname);
 end;
 
 function ERR_UI_get_method(ui: PUI): PUI_Method;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_get_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_get_method_procname);
 end;
 
 function ERR_UI_set_method(ui: PUI; const meth: PUI_Method): PUI_Method;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_set_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_set_method_procname);
 end;
 
 (* The method with all the built-in thingies *)
 function ERR_UI_TaurusTLS: PUI_Method;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_TaurusTLS_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_TaurusTLS_procname);
 end;
 
 (*
@@ -1394,7 +1394,7 @@ end;
 *)
 function ERR_UI_null: PUI_Method;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_null_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_null_procname);
 end;
 
 (* ---------- For method writers ---------- *)
@@ -1442,120 +1442,120 @@ end;
 
 function ERR_UI_create_method(const name: PIdAnsiChar): PUI_Method;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_create_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_create_method_procname);
 end;
 
 procedure ERR_UI_destroy_method(ui_method: PUI_Method);
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_destroy_method_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_destroy_method_procname);
 end;
 
 function ERR_UI_method_set_opener(method: PUI_Method;
   opener: UI_method_opener_cb): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_method_set_opener_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_method_set_opener_procname);
 end;
 
 function ERR_UI_method_set_writer(method: PUI_Method;
   writer: UI_method_writer_cb): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_method_set_writer_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_method_set_writer_procname);
 end;
 
 function ERR_UI_method_set_flusher(method: PUI_Method;
   flusher: UI_method_flusher_cb): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_method_set_flusher_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_method_set_flusher_procname);
 end;
 
 function ERR_UI_method_set_reader(method: PUI_Method;
   reader: UI_method_reader_cb): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_method_set_reader_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_method_set_reader_procname);
 end;
 
 function ERR_UI_method_set_closer(method: PUI_Method;
   closer: UI_method_closer_cb): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_method_set_closer_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_method_set_closer_procname);
 end;
 
 function ERR_UI_method_set_data_duplicator(method: PUI_Method;
   duplicator: UI_method_data_duplicator_cb;
   destructor_: UI_method_data_destructor_cb): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException
+  ETaurusTLSAPIFunctionNotPresent.RaiseException
     (UI_method_set_data_duplicator_procname);
 end;
 
 function ERR_UI_method_set_prompt_constructor(method: PUI_Method;
   prompt_constructor: UI_method_prompt_constructor_cb): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException
+  ETaurusTLSAPIFunctionNotPresent.RaiseException
     (UI_method_set_prompt_constructor_procname);
 end;
 
 function ERR_UI_method_set_ex_data(method: PUI_Method; idx: TIdC_INT;
   data: Pointer): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_method_set_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_method_set_ex_data_procname);
 end;
 
 function ERR_UI_method_get_opener(const method: PUI_Method)
   : UI_method_opener_cb;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_method_get_opener_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_method_get_opener_procname);
 end;
 
 function ERR_UI_method_get_writer(const method: PUI_Method)
   : UI_method_writer_cb;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_method_get_writer_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_method_get_writer_procname);
 end;
 
 function ERR_UI_method_get_flusher(const method: PUI_Method)
   : UI_method_flusher_cb;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_method_get_flusher_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_method_get_flusher_procname);
 end;
 
 function ERR_UI_method_get_reader(const method: PUI_Method)
   : UI_method_reader_cb;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_method_get_reader_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_method_get_reader_procname);
 end;
 
 function ERR_UI_method_get_closer(const method: PUI_Method)
   : UI_method_closer_cb;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_method_get_closer_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_method_get_closer_procname);
 end;
 
 function ERR_UI_method_get_prompt_constructor(const method: PUI_Method)
   : UI_method_prompt_constructor_cb;
 begin
-  EIdAPIFunctionNotPresent.RaiseException
+  ETaurusTLSAPIFunctionNotPresent.RaiseException
     (UI_method_get_prompt_constructor_procname);
 end;
 
 function ERR_UI_method_get_data_duplicator(const method: PUI_Method)
   : UI_method_data_duplicator_cb;
 begin
-  EIdAPIFunctionNotPresent.RaiseException
+  ETaurusTLSAPIFunctionNotPresent.RaiseException
     (UI_method_get_data_duplicator_procname);
 end;
 
 function ERR_UI_method_get_data_destructor(const method: PUI_Method)
   : UI_method_data_destructor_cb;
 begin
-  EIdAPIFunctionNotPresent.RaiseException
+  ETaurusTLSAPIFunctionNotPresent.RaiseException
     (UI_method_get_data_destructor_procname);
 end;
 
 function ERR_UI_method_get_ex_data(const method: PUI_Method; idx: TIdC_INT)
   : Pointer;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_method_get_ex_data_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_method_get_ex_data_procname);
 end;
 
 (*
@@ -1566,19 +1566,19 @@ end;
 (* Return type of the UI_STRING *)
 function ERR_UI_get_string_type(uis: PUI_STRING): UI_string_types;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_get_string_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_get_string_type_procname);
 end;
 
 (* Return input flags of the UI_STRING *)
 function ERR_UI_get_input_flags(uis: PUI_STRING): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_get_input_flags_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_get_input_flags_procname);
 end;
 
 (* Return the actual string to output (the prompt, info or error) *)
 function ERR_UI_get0_output_string(uis: PUI_STRING): PIdAnsiChar;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_get0_output_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_get0_output_string_procname);
 end;
 
 (*
@@ -1587,18 +1587,18 @@ end;
 *)
 function ERR_UI_get0_action_string(uis: PUI_STRING): PIdAnsiChar;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_get0_action_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_get0_action_string_procname);
 end;
 
 (* Return the result of a prompt *)
 function ERR_UI_get0_result_string(uis: PUI_STRING): PIdAnsiChar;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_get0_result_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_get0_result_string_procname);
 end;
 
 function ERR_UI_get_result_string_length(uis: PUI_STRING): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_get_result_string_length_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_get_result_string_length_procname);
 end;
 
 (*
@@ -1606,51 +1606,51 @@ end;
 *)
 function ERR_UI_get0_test_string(uis: PUI_STRING): PIdAnsiChar;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_get0_test_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_get0_test_string_procname);
 end;
 
 (* Return the required minimum size of the result *)
 function ERR_UI_get_result_minsize(uis: PUI_STRING): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_get_result_minsize_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_get_result_minsize_procname);
 end;
 
 (* Return the required maximum size of the result *)
 function ERR_UI_get_result_maxsize(uis: PUI_STRING): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_get_result_maxsize_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_get_result_maxsize_procname);
 end;
 
 (* Set the result of a UI_STRING. *)
 function ERR_UI_set_result(ui: PUI; uis: PUI_STRING; const _result: PIdAnsiChar)
   : TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_set_result_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_set_result_procname);
 end;
 
 function ERR_UI_set_result_ex(ui: PUI; uis: PUI_STRING;
   const _result: PIdAnsiChar; len: TIdC_INT): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_set_result_ex_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_set_result_ex_procname);
 end;
 
 (* A couple of popular utility functions *)
 function ERR_UI_UTIL_read_pw_string(buf: PIdAnsiChar; length: TIdC_INT;
   const prompt: PIdAnsiChar; verify: TIdC_INT): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_UTIL_read_pw_string_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_UTIL_read_pw_string_procname);
 end;
 
 function ERR_UI_UTIL_read_pw(buf: PIdAnsiChar; buff: PIdAnsiChar;
   size: TIdC_INT; const prompt: PIdAnsiChar; verify: TIdC_INT): TIdC_INT;
 begin
-  EIdAPIFunctionNotPresent.RaiseException(UI_UTIL_read_pw_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(UI_UTIL_read_pw_procname);
 end;
 
 function ERR_UI_UTIL_wrap_read_pem_callback(cb: pem_password_cb;
   rwflag: TIdC_INT): PUI_Method;
 begin
-  EIdAPIFunctionNotPresent.RaiseException
+  ETaurusTLSAPIFunctionNotPresent.RaiseException
     (UI_UTIL_wrap_read_pem_callback_procname);
 end;
 

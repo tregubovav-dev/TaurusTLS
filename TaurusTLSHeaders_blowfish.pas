@@ -123,52 +123,52 @@ const
 {$WARN  NO_RETVAL OFF}
 procedure  ERR_BF_set_key(key: PBF_KEY; len: TIdC_INT; const data: PByte); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BF_set_key_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BF_set_key_procname);
 end;
 
 
 
 procedure  ERR_BF_encrypt(data: PBF_LONG; const key: PBF_KEY); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BF_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BF_encrypt_procname);
 end;
 
 
 procedure  ERR_BF_decrypt(data: PBF_LONG; const key: PBF_KEY); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BF_decrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BF_decrypt_procname);
 end;
 
 
 
 procedure  ERR_BF_ecb_encrypt(const in_: PByte; out_: PByte; key: PBF_KEY; enc: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BF_ecb_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BF_ecb_encrypt_procname);
 end;
 
 
 procedure  ERR_BF_cbc_encrypt(const in_: PByte; out_: PByte; length: TIdC_LONG; schedule: PBF_KEY; ivec: PByte; enc: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BF_cbc_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BF_cbc_encrypt_procname);
 end;
 
 
 procedure  ERR_BF_cfb64_encrypt(const in_: PByte; out_: PByte; length: TIdC_LONG; schedule: PBF_KEY; ivec: PByte; num: PIdC_INT; enc: TIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BF_cfb64_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BF_cfb64_encrypt_procname);
 end;
 
 
 procedure  ERR_BF_ofb64_encrypt(const in_: PByte; out_: PByte; length: TIdC_LONG; schedule: PBF_KEY; ivec: PByte; num: PIdC_INT); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BF_ofb64_encrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BF_ofb64_encrypt_procname);
 end;
 
 
 
 function  ERR_BF_options: PIdAnsiChar; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BF_options_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BF_options_procname);
 end;
 
 

@@ -671,38 +671,38 @@ const
 {$WARN  NO_RETVAL OFF}
 function  ERR_PKCS7_ISSUER_AND_SERIAL_digest(data: PPKCS7_ISSUER_AND_SERIAL; const type_: PEVP_MD; md: PByte; len: PIdC_UINT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_ISSUER_AND_SERIAL_digest_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_ISSUER_AND_SERIAL_digest_procname);
 end;
 
 
 
 function  ERR_PKCS7_dup(p7: PPKCS7): PPKCS7; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_dup_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_dup_procname);
 end;
 
 
 function  ERR_d2i_PKCS7_bio(bp: PBIO; p7: PPPKCS7): PPKCS7; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(d2i_PKCS7_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_PKCS7_bio_procname);
 end;
 
 
 function  ERR_i2d_PKCS7_bio(bp: PBIO; p7: PPKCS7): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_PKCS7_bio_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_PKCS7_bio_procname);
 end;
 
 
 function  ERR_i2d_PKCS7_bio_stream(out_: PBIO; p7: PPKCS7; in_: PBIO; flags: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(i2d_PKCS7_bio_stream_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_PKCS7_bio_stream_procname);
 end;
 
 
 function  ERR_PEM_write_bio_PKCS7_stream(out_: PBIO; p7: PPKCS7; in_: PBIO; flags: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PEM_write_bio_PKCS7_stream_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_PKCS7_stream_procname);
 end;
 
 
@@ -770,112 +770,112 @@ end;
 
 function  ERR_PKCS7_ctrl(p7: PPKCS7; cmd: TIdC_INT; larg: TIdC_LONG; parg: PIdAnsiChar): TIdC_LONG; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_ctrl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_ctrl_procname);
 end;
 
 
 
 function  ERR_PKCS7_set_type(p7: PPKCS7; type_: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_set_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_set_type_procname);
 end;
 
 
 function  ERR_PKCS7_set0_type_other(p7: PPKCS7; type_: TIdC_INT; other: PASN1_TYPE): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_set0_type_other_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_set0_type_other_procname);
 end;
 
 
 function  ERR_PKCS7_set_content(p7: PPKCS7; p7_data: PPKCS7): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_set_content_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_set_content_procname);
 end;
 
 
 function  ERR_PKCS7_SIGNER_INFO_set(p7i: PPKCS7_SIGNER_INFO; x509: PX509; pkey: PEVP_PKEY; const dgst: PEVP_MD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_SIGNER_INFO_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_SIGNER_INFO_set_procname);
 end;
 
 
 function  ERR_PKCS7_SIGNER_INFO_sign(si: PPKCS7_SIGNER_INFO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_SIGNER_INFO_sign_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_SIGNER_INFO_sign_procname);
 end;
 
 
 function  ERR_PKCS7_add_signer(p7: PPKCS7; p7i: PPKCS7_SIGNER_INFO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_add_signer_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_add_signer_procname);
 end;
 
 
 function  ERR_PKCS7_add_certificate(p7: PPKCS7; x509: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_add_certificate_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_add_certificate_procname);
 end;
 
 
 function  ERR_PKCS7_add_crl(p7: PPKCS7; x509: PX509_CRL): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_add_crl_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_add_crl_procname);
 end;
 
 
 function  ERR_PKCS7_content_new(p7: PPKCS7; nid: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_content_new_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_content_new_procname);
 end;
 
 
 function  ERR_PKCS7_dataVerify(cert_store: PX509_STORE; ctx: PX509_STORE_CTX; bio: PBIO; p7: PPKCS7; si: PPKCS7_SIGNER_INFO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_dataVerify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_dataVerify_procname);
 end;
 
 
 function  ERR_PKCS7_signatureVerify(bio: PBIO; p7: PPKCS7; si: PPKCS7_SIGNER_INFO; x509: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_signatureVerify_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_signatureVerify_procname);
 end;
 
 
 
 function  ERR_PKCS7_dataInit(p7: PPKCS7; bio: PBIO): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_dataInit_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_dataInit_procname);
 end;
 
 
 function  ERR_PKCS7_dataFinal(p7: PPKCS7; bio: PBIO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_dataFinal_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_dataFinal_procname);
 end;
 
 
 function  ERR_PKCS7_dataDecode(p7: PPKCS7; pkey: PEVP_PKEY; in_bio: PBIO; pcert: PX509): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_dataDecode_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_dataDecode_procname);
 end;
 
 
 
 function  ERR_PKCS7_add_signature(p7: PPKCS7; x509: PX509; pkey: PEVP_PKEY; const dgst: PEVP_MD): PPKCS7_SIGNER_INFO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_add_signature_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_add_signature_procname);
 end;
 
 
 function  ERR_PKCS7_cert_from_signer_info(p7: PPKCS7; si: PPKCS7_SIGNER_INFO): PX509; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_cert_from_signer_info_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_cert_from_signer_info_procname);
 end;
 
 
 function  ERR_PKCS7_set_digest(p7: PPKCS7; const md: PEVP_MD): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_set_digest_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_set_digest_procname);
 end;
 
 
@@ -883,75 +883,75 @@ end;
 
 function  ERR_PKCS7_add_recipient(p7: PPKCS7; x509: PX509): PPKCS7_RECIP_INFO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_add_recipient_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_add_recipient_procname);
 end;
 
 
 procedure  ERR_PKCS7_SIGNER_INFO_get0_algs(si: PPKCS7_SIGNER_INFO; pk: PPEVP_PKEY; pdig: PPX509_ALGOR; psig: PPX509_ALGOR); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_SIGNER_INFO_get0_algs_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_SIGNER_INFO_get0_algs_procname);
 end;
 
 
 procedure  ERR_PKCS7_RECIP_INFO_get0_alg(ri: PPKCS7_RECIP_INFO; penc: PPX509_ALGOR); 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_RECIP_INFO_get0_alg_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_RECIP_INFO_get0_alg_procname);
 end;
 
 
 function  ERR_PKCS7_add_recipient_info(p7: PPKCS7; ri: PPKCS7_RECIP_INFO): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_add_recipient_info_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_add_recipient_info_procname);
 end;
 
 
 function  ERR_PKCS7_RECIP_INFO_set(p7i: PPKCS7_RECIP_INFO; x509: PX509): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_RECIP_INFO_set_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_RECIP_INFO_set_procname);
 end;
 
 
 function  ERR_PKCS7_set_cipher(p7: PPKCS7; const cipher: PEVP_CIPHER): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_set_cipher_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_set_cipher_procname);
 end;
 
 
 function  ERR_PKCS7_stream(boundary: PPPByte; p7: PPKCS7): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_stream_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_stream_procname);
 end;
 
 
 
 function  ERR_PKCS7_get_issuer_and_serial(p7: PPKCS7; idx: TIdC_INT): PPKCS7_ISSUER_AND_SERIAL; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_get_issuer_and_serial_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_get_issuer_and_serial_procname);
 end;
 
 
   //function PKCS7_digest_from_attributes(sk: Pointer{PSTACK_OF_X509_ATTRIBUTE}): PASN1_OCTET_STRING;
 function  ERR_PKCS7_add_signed_attribute(p7si: PPKCS7_SIGNER_INFO; nid: TIdC_INT; type_: TIdC_INT; data: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_add_signed_attribute_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_add_signed_attribute_procname);
 end;
 
 
 function  ERR_PKCS7_add_attribute(p7si: PPKCS7_SIGNER_INFO; nid: TIdC_INT; atrtype: TIdC_INT; value: Pointer): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_add_attribute_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_add_attribute_procname);
 end;
 
 
 function  ERR_PKCS7_get_attribute(si: PPKCS7_SIGNER_INFO; nid: TIdC_INT): PASN1_TYPE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_get_attribute_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_get_attribute_procname);
 end;
 
 
 function  ERR_PKCS7_get_signed_attribute(si: PPKCS7_SIGNER_INFO; nid: TIdC_INT): PASN1_TYPE; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_get_signed_attribute_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_get_signed_attribute_procname);
 end;
 
 
@@ -962,14 +962,14 @@ end;
 
 function  ERR_PKCS7_sign_add_signer(p7: PPKCS7; signcert: PX509; pkey: PEVP_PKEY; const md: PEVP_MD; flags: TIdC_INT): PPKCS7_SIGNER_INFO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_sign_add_signer_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_sign_add_signer_procname);
 end;
 
 
 
 function  ERR_PKCS7_final(p7: PPKCS7; data: PBIO; flags: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_final_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_final_procname);
 end;
 
 
@@ -978,7 +978,7 @@ end;
   //function PKCS7_encrypt(certs: PSTACK_OF_X509; in_: PBIO; const cipher: PEVP_CIPHER; flags: TIdC_INT): PPKCS7;
 function  ERR_PKCS7_decrypt(p7: PPKCS7; pkey: PEVP_PKEY; cert: PX509; data: PBIO; flags: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_decrypt_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_decrypt_procname);
 end;
 
 
@@ -989,39 +989,39 @@ end;
 
 function  ERR_PKCS7_add_attrib_content_type(si: PPKCS7_SIGNER_INFO; coid: PASN1_OBJECT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_add_attrib_content_type_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_add_attrib_content_type_procname);
 end;
 
 
 function  ERR_PKCS7_add0_attrib_signing_time(si: PPKCS7_SIGNER_INFO; t: PASN1_TIME): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_add0_attrib_signing_time_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_add0_attrib_signing_time_procname);
 end;
 
 
 function  ERR_PKCS7_add1_attrib_digest(si: PPKCS7_SIGNER_INFO; const md: PByte; mdlen: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(PKCS7_add1_attrib_digest_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS7_add1_attrib_digest_procname);
 end;
 
 
 
 function  ERR_SMIME_write_PKCS7(bio: PBIO; p7: PPKCS7; data: PBIO; flags: TIdC_INT): TIdC_INT; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SMIME_write_PKCS7_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SMIME_write_PKCS7_procname);
 end;
 
 
 function  ERR_SMIME_read_PKCS7(bio: PBIO; bcont: PPBIO): PPKCS7; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(SMIME_read_PKCS7_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(SMIME_read_PKCS7_procname);
 end;
 
 
 
 function  ERR_BIO_new_PKCS7(out_: PBIO; p7: PPKCS7): PBIO; 
 begin
-  EIdAPIFunctionNotPresent.RaiseException(BIO_new_PKCS7_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_new_PKCS7_procname);
 end;
 
 

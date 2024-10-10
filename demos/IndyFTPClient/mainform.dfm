@@ -1211,20 +1211,6 @@ object frmMainForm: TfrmMainForm
     Left = 168
     Top = 169
   end
-  object iosslFTP: TIdSSLIOHandlerSocketTaurusTLS
-    Destination = ':21'
-    Intercept = FIdLog
-    MaxLineAction = maException
-    Port = 21
-    DefaultPort = 0
-    ReadTimeout = 60000
-    SSLOptions.Mode = sslmUnassigned
-    SSLOptions.VerifyMode = [sslvrfFailIfNoPeerCert, sslvrfClientOnce]
-    SSLOptions.VerifyDepth = 0
-    OnStatusInfoEx = iosslFTPStatusInfoEx
-    Left = 204
-    Top = 273
-  end
   object FIdLog: TIdLogEvent
     Active = True
     ReplaceCRLF = False
@@ -1457,5 +1443,18 @@ object frmMainForm: TfrmMainForm
     Port = 0
     Left = 593
     Top = 177
+  end
+  object iosslFTP: TTaurusTLSIOHandlerSocket
+    Destination = ':21'
+    Intercept = FIdLog
+    MaxLineAction = maException
+    Port = 21
+    DefaultPort = 0
+    ReadTimeout = 60000
+    SSLOptions.Mode = sslmUnassigned
+    SSLOptions.VerifyMode = []
+    SSLOptions.VerifyDepth = 0
+    Left = 624
+    Top = 306
   end
 end

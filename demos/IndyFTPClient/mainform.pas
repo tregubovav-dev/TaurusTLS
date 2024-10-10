@@ -36,7 +36,6 @@ type
     actFileConnect: TAction;
     ToolButton1: TToolButton;
     IdFTPClient: TIdFTP;
-    iosslFTP: TIdSSLIOHandlerSocketTaurusTLS;
     ToolButton2: TToolButton;
     actFileDisconnect: TAction;
     FIdLog: TIdLogEvent;
@@ -106,6 +105,7 @@ type
     ToolButton7: TToolButton;
     SocksInfo: TIdSocksInfo;
     HTTPConnectThrough: TIdConnectThroughHttpProxy;
+    iosslFTP: TTaurusTLSIOHandlerSocket;
     procedure FormCreate(Sender: TObject);
     procedure actFileConnectExecute(Sender: TObject);
     procedure actFileConnectUpdate(Sender: TObject);
@@ -174,7 +174,7 @@ type
     FProgressIndicator: TfrmFileProgress;
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     // event handlers
-    procedure iosslFTPOnSSLNegotiated(ASender: TIdSSLIOHandlerSocketTaurusTLS);
+    procedure iosslFTPOnSSLNegotiated(ASender: TTaurusTLSIOHandlerSocket);
 
     procedure InitLog;
     // Thread procedure starts
@@ -236,13 +236,13 @@ type
     FKeyPassword: String;
     FError: Integer;
     FDepth: Integer;
-    FX509: TIdX509;
+    FX509: TTaurusX509;
     FFTP: TIdFTP;
     procedure PromptVerifyCert;
     procedure PromptPassword;
-    procedure DoPasswordEx(ASender: TObject; out VPassword: String;
+    procedure DoPassword(ASender: TObject; out VPassword: String;
       const AIsWrite: Boolean);
-    function DoVerifyPeer(Certificate: TIdX509; AOk: Boolean;
+    function DoVerifyPeer(Certificate: TTaurusX509; AOk: Boolean;
       ADepth, AError: Integer): Boolean;
   public
     constructor Create(AFTP: TIdFTP);
@@ -1191,7 +1191,7 @@ begin
 end;
 
 procedure TfrmMainForm.iosslFTPOnSSLNegotiated
-  (ASender: TIdSSLIOHandlerSocketTaurusTLS);
+  (ASender: TTaurusTLSIOHandlerSocket);
 var
 {$IFNDEF USE_INLINE_VAR}
   LStr: String;
@@ -1814,14 +1814,14 @@ begin
   inherited;
 end;
 
-procedure TFTPThread.DoPasswordEx(ASender: TObject; out VPassword: String;
+procedure TFTPThread.DoPassword(ASender: TObject; out VPassword: String;
   const AIsWrite: Boolean);
 begin
   Synchronize(Self, PromptPassword);
   VPassword := FKeyPassword;
 end;
 
-function TFTPThread.DoVerifyPeer(Certificate: TIdX509; AOk: Boolean;
+function TFTPThread.DoVerifyPeer(Certificate: TTaurusX509; AOk: Boolean;
   ADepth, AError: Integer): Boolean;
 begin
   FX509 := Certificate;
@@ -1863,7 +1863,7 @@ begin
     begin
       FVerifyResult := True;
     end;
-    (FFTP.IOHandler as TIdSSLIOHandlerSocketTaurusTLS).OnVerifyPeer := nil;
+    (FFTP.IOHandler as TTaurusTLSIOHandlerSocket).OnVerifyPeer := nil;
   except
     FVerifyResult := False;
   end;
@@ -1874,15 +1874,15 @@ end;
 procedure TConnectThread.Execute;
 var
   LCurDir: String;
-  LIO : TIdSSLIOHandlerSocketTaurusTLS;
+  LIO : TTaurusTLSIOHandlerSocket;
 begin
   try
-    LIO := FFTP.IOHandler as TIdSSLIOHandlerSocketTaurusTLS;
+    LIO := FFTP.IOHandler as TTaurusTLSIOHandlerSocket;
     TThreadStartNotify.StartThread;
     LIO.OnVerifyPeer :=
       DoVerifyPeer;
-    LIO.OnGetPasswordEx :=
-      DoPasswordEx;
+    LIO.OnGetPassword :=
+      DoPassword;
     FFTP.Connect;
     if FFTP.IsCompressionSupported then
     begin
@@ -1898,7 +1898,7 @@ begin
     on E: Exception do
       TLogFTPError.NotifyString(E.Message);
   end;
-  LIO.OnGetPasswordEx := nil;
+  LIO.OnGetPassword := nil;
   TThreadFinishedNotify.EndThread;
 end;
 
@@ -1913,11 +1913,11 @@ end;
 procedure TRemoteChangeDirThread.Execute;
 var
   LCurDir: String;
-  LIO: TIdSSLIOHandlerSocketTaurusTLS;
+  LIO: TTaurusTLSIOHandlerSocket;
 begin
   try
-    LIO := FFTP.IOHandler as TIdSSLIOHandlerSocketTaurusTLS;
-    LIO.OnGetPasswordEx := DoPasswordEx;
+    LIO := FFTP.IOHandler as TTaurusTLSIOHandlerSocket;
+    LIO.OnGetPassword := DoPassword;
     TThreadStartNotify.StartThread;
     FFTP.ChangeDir(FNewDir);
     LCurDir := FFTP.RetrieveCurrentDir;
@@ -1931,7 +1931,7 @@ begin
       TLogFTPError.NotifyString(E.Message);
   end;
   TThreadFinishedNotify.EndThread;
-  LIO.OnGetPasswordEx := nil;
+  LIO.OnGetPassword := nil;
 end;
 
 { TFileThread }
@@ -1975,10 +1975,10 @@ end;
 procedure TDownloadFileThread.Execute;
 var
   LFile: TStream;
-  LIO: TIdSSLIOHandlerSocketTaurusTLS;
+  LIO: TTaurusTLSIOHandlerSocket;
 begin
-  LIO := FFTP.IOHandler as TIdSSLIOHandlerSocketTaurusTLS;
-  LIO.OnGetPasswordEx := DoPasswordEx;
+  LIO := FFTP.IOHandler as TTaurusTLSIOHandlerSocket;
+  LIO.OnGetPassword := DoPassword;
   try
     TThreadStartNotify.StartThread;
     FSize := FFTP.Size(FFile);
@@ -2003,7 +2003,7 @@ begin
   FFTP.OnWorkBegin := nil;
   FFTP.OnWork := nil;
   FFTP.OnWorkEnd := nil;
-  LIO.OnGetPasswordEx := nil;
+  LIO.OnGetPassword := nil;
   TThreadFinishedNotify.EndThread;
 end;
 
@@ -2018,8 +2018,8 @@ var
 begin
   try
     FSize := IdGlobalProtocols.FileSizeByName(FFile);
-    (FFTP.IOHandler as TIdSSLIOHandlerSocketTaurusTLS).OnGetPasswordEx :=
-      DoPasswordEx;
+    (FFTP.IOHandler as TTaurusTLSIOHandlerSocket).OnGetPassword :=
+      DoPassword;
     FFTP.OnWorkBegin := Self.OnWorkBegin;
     FFTP.OnWork := Self.OnWork;
     FFTP.OnWorkEnd := Self.OnWorkEnd;
@@ -2048,7 +2048,7 @@ begin
   FFTP.OnWorkBegin := nil;
   FFTP.OnWork := nil;
   FFTP.OnWorkEnd := nil;
-  (FFTP.IOHandler as TIdSSLIOHandlerSocketTaurusTLS).OnGetPasswordEx := nil;
+  (FFTP.IOHandler as TTaurusTLSIOHandlerSocket).OnGetPassword := nil;
   TThreadFinishedNotify.EndThread;
 end;
 
@@ -2059,11 +2059,11 @@ var
   {$IFNDEF USE_INLINE_VAR}
   LCurDir: String;
   {$ENDIF}
-  LIO: TIdSSLIOHandlerSocketTaurusTLS;
+  LIO: TTaurusTLSIOHandlerSocket;
 begin
   try
-    LIO := FFTP.IOHandler as TIdSSLIOHandlerSocketTaurusTLS;
-    LIO.OnGetPasswordEx := DoPasswordEx;
+    LIO := FFTP.IOHandler as TTaurusTLSIOHandlerSocket;
+    LIO.OnGetPassword := DoPassword;
     TThreadStartNotify.StartThread;
     FFTP.Delete(FFile);
     {$IFDEF USE_INLINE_VAR}
@@ -2079,7 +2079,7 @@ begin
     on E: Exception do
       TLogFTPError.NotifyString(E.Message);
   end;
-  LIO.OnGetPasswordEx := nil;
+  LIO.OnGetPassword := nil;
   TThreadFinishedNotify.EndThread;
 end;
 
@@ -2090,11 +2090,11 @@ var
   {$IFNDEF USE_INLINE_VAR}
   LCurDir: String;
   {$ENDIF}
-  LIO: TIdSSLIOHandlerSocketTaurusTLS;
+  LIO: TTaurusTLSIOHandlerSocket;
 begin
   try
-    LIO := FFTP.IOHandler as TIdSSLIOHandlerSocketTaurusTLS;
-    LIO.OnGetPasswordEx := DoPasswordEx;
+    LIO := FFTP.IOHandler as TTaurusTLSIOHandlerSocket;
+    LIO.OnGetPassword := DoPassword;
     TThreadStartNotify.StartThread;
     FFTP.RemoveDir(FFile);
   {$IFDEF USE_INLINE_VAR}
@@ -2110,7 +2110,7 @@ begin
     on E: Exception do
       TLogFTPError.NotifyString(E.Message);
   end;
-  LIO.OnGetPasswordEx := DoPasswordEx;
+  LIO.OnGetPassword := DoPassword;
   TThreadFinishedNotify.EndThread;
 end;
 
@@ -2128,11 +2128,11 @@ var
   {$IFNDEF USE_INLINE_VAR}
   LCurDir: String;
   {$ENDIF}
-  LIO: TIdSSLIOHandlerSocketTaurusTLS;
+  LIO: TTaurusTLSIOHandlerSocket;
 begin
   try
-    LIO := FFTP.IOHandler as TIdSSLIOHandlerSocketTaurusTLS;
-    LIO.OnGetPasswordEx := DoPasswordEx;
+    LIO := FFTP.IOHandler as TTaurusTLSIOHandlerSocket;
+    LIO.OnGetPassword := DoPassword;
     TThreadStartNotify.StartThread;
     FFTP.Rename(FFile, FNewName);
     {$IFDEF USE_INLINE_VAR}
@@ -2148,9 +2148,8 @@ begin
     on E: Exception do
       TLogFTPError.NotifyString(E.Message);
   end;
-  LIO.OnGetPasswordEx := nil;
+  LIO.OnGetPassword := nil;
   TThreadFinishedNotify.EndThread;
-
 end;
 
 { TMakeDirThread }
@@ -2160,11 +2159,11 @@ var
   {$IFNDEF USE_INLINE_VAR}
   LCurDir: String;
   {$ENDIF}
-  LIO: TIdSSLIOHandlerSocketTaurusTLS;
+  LIO: TTaurusTLSIOHandlerSocket;
 begin
   try
-    LIO := FFTP.IOHandler as TIdSSLIOHandlerSocketTaurusTLS;
-    LIO.OnGetPasswordEx := DoPasswordEx;
+    LIO := FFTP.IOHandler as TTaurusTLSIOHandlerSocket;
+    LIO.OnGetPassword := DoPassword;
     TThreadStartNotify.StartThread;
     FFTP.MakeDir(FFile);
    {$IFDEF USE_INLINE_VAR}
@@ -2180,7 +2179,7 @@ begin
     on E: Exception do
       TLogFTPError.NotifyString(E.Message);
   end;
-  LIO.OnGetPasswordEx := nil;
+  LIO.OnGetPassword := nil;
   TThreadFinishedNotify.EndThread;
 end;
 

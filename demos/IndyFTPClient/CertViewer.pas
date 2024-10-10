@@ -26,22 +26,22 @@ type
     procedure SetErrorForeground(const Value: TColor);
   {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     { Private declarations }
-    FX509: TIdX509;
+    FX509: TTaurusX509;
     FErrorCode: Integer;
     FErrorForeground : TColor;
     FErrorBackground : TColor;
-    function GetX509: TIdX509;
+    function GetX509: TTaurusX509;
     procedure RefreshViewer;
-    procedure SetX509(const Value: TIdX509);
+    procedure SetX509(const Value: TTaurusX509);
     procedure WriteErrorString(const AStr : String);
     procedure WriteWarningString(const AStr : String);
-    procedure DumpX509Name(AX509Name: TIdX509Name);
-    procedure DumpX509KeyUsage(AX509: TIdX509);
-    procedure DumpX509ExtKeyUsage(AX509: TIdX509);
+    procedure DumpX509Name(AX509Name: TTaurusX509Name);
+    procedure DumpX509KeyUsage(AX509: TTaurusX509);
+    procedure DumpX509ExtKeyUsage(AX509: TTaurusX509);
     procedure SetErrorCode(const Value: Integer);
   public
     { Public declarations }
-    property X509: TIdX509 read GetX509 write SetX509;
+    property X509: TTaurusX509 read GetX509 write SetX509;
     property ErrorCode: Integer read FErrorCode write SetErrorCode;
     property ErrorForeground : TColor read GetErrorForeground write SetErrorForeground;
     property ErrorBackground : TColor read GetErrorBackground write SetErrorBackground;
@@ -65,10 +65,10 @@ const
 
   { TfrmCertViewer }
 
-procedure TfrmCertViewer.DumpX509ExtKeyUsage(AX509: TIdX509);
+procedure TfrmCertViewer.DumpX509ExtKeyUsage(AX509: TTaurusX509);
 var
   LStr: String;
-  LExtKeyUsage: TIdX509ExtKeyUsage;
+  LExtKeyUsage: TTaurusX509ExtKeyUsage;
 begin
   LStr := '';
   LExtKeyUsage := FX509.ExtendedKeyUsage;
@@ -115,9 +115,9 @@ begin
   end;
 end;
 
-procedure TfrmCertViewer.DumpX509KeyUsage(AX509: TIdX509);
+procedure TfrmCertViewer.DumpX509KeyUsage(AX509: TTaurusX509);
 var
-  LKeyUsage: TIdX509KeyUsage;
+  LKeyUsage: TTaurusX509KeyUsage;
   LStr: String;
 begin
   LStr := '';
@@ -168,7 +168,7 @@ begin
 
 end;
 
-procedure TfrmCertViewer.DumpX509Name(AX509Name: TIdX509Name);
+procedure TfrmCertViewer.DumpX509Name(AX509Name: TTaurusX509Name);
 var
   LStr: String;
 begin
@@ -245,7 +245,7 @@ begin
   Result := Self.FErrorForeground;
 end;
 
-function TfrmCertViewer.GetX509: TIdX509;
+function TfrmCertViewer.GetX509: TTaurusX509;
 begin
   Result := FX509;
 end;
@@ -416,7 +416,7 @@ begin
           FX509.ExtensionValues[i]);
       end;
     end;
-
+    redtCertView.Lines.AddStrings(FX509.DisplayInfo);
   finally
     Self.redtCertView.Lines.EndUpdate;
   end;
@@ -441,7 +441,7 @@ begin
   Self.FErrorForeground := Value;
 end;
 
-procedure TfrmCertViewer.SetX509(const Value: TIdX509);
+procedure TfrmCertViewer.SetX509(const Value: TTaurusX509);
 begin
   FX509 := Value;
   RefreshViewer;

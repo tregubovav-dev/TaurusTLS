@@ -26,7 +26,7 @@ type
   TFTPServerApp = class(TObject)
   private
     FCompressor: TIdCompressorZLib;
-    FIO: TIdServerIOHandlerSSLTaurusTLS;
+    FIO: TTaurusTLSServerIOHandler;
     FFTPServ: TIdFTPServer;
     procedure ioOnGetPasswordEx(ASender: TObject; out VPassword: String;
       const AIsWrite: Boolean);
@@ -212,7 +212,7 @@ begin
   end;
 
   // temp
-  FIO := TIdServerIOHandlerSSLTaurusTLS.Create(nil);
+  FIO := TTaurusTLSServerIOHandler.Create(nil);
   Lini := TIniFile.Create(GetCurrentDir + '\server.ini');
   FFTPServ := TIdFTPServer.Create(nil);
   try
@@ -231,7 +231,7 @@ begin
       'RootCertFile', '');
     FIO.SSLOptions.DHParamsFile := Lini.ReadString('Certificate',
       'DH_Parameters', '');
-    FIO.OnGetPasswordEx := Self.ioOnGetPasswordEx;
+    FIO.OnGetPassword := Self.ioOnGetPasswordEx;
     if Lini.ReadBool('Server', 'Allow_Compression', True) then
     begin
       FCompressor := TIdCompressorZLib.Create(nil);

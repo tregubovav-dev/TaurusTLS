@@ -42,9 +42,9 @@ type
     Data: PByte;
   end;
 
-  TIdX509 = class;
+  TTaurusX509 = class;
 
-  TIdX509Name = class(TObject)
+  TTaurusX509Name = class(TObject)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     fX509Name: PX509_NAME;
     function GetStrByNID(const ANid: TIdC_INT): String;
@@ -77,7 +77,7 @@ type
     property CertificateName: PX509_NAME read fX509Name;
   end;
 
-  TIdX509Info = class(TObject)
+  TTaurusX509Info = class(TObject)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     // Do not free this here because it belongs
     // to the X509 or something else.
@@ -88,7 +88,7 @@ type
     property Certificate: PX509 read FX509;
   end;
 
-  TIdX509Fingerprints = class(TIdX509Info)
+  TTaurusX509Fingerprints = class(TTaurusX509Info)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     function GetMD5: TIdSSLEVP_MD;
     function GetMD5AsString: String;
@@ -128,7 +128,7 @@ type
     property SHA512AsString: String read GetSHA512AsString;
   end;
 
-  TIdX509SigInfo = class(TIdX509Info)
+  TTaurusX509SigInfo = class(TTaurusX509Info)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     Fsig_alg: PX509_ALGOR;
     Fsignature: PASN1_BIT_STRING;
@@ -144,7 +144,7 @@ type
     property SigTypeAsString: String read GetSigTypeAsString;
   end;
 
-  TIdX509PublicKey = class(TIdX509Info)
+  TTaurusX509PublicKey = class(TTaurusX509Info)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     function GetModulus: String;
     function GetAlgorithm: String;
@@ -163,7 +163,7 @@ type
     property Modulus: String read GetModulus;
   end;
 
-  TIdX509Exts = class(TIdX509Info)
+  TTaurusX509Exts = class(TTaurusX509Info)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     // X509_get_ext
     function GetExtension(const AIndex: TIdC_INT): PX509_EXTENSION;
@@ -177,7 +177,7 @@ type
     property Count: TIdC_INT read GetCount;
   end;
 
-  TIdX509AuthorityKeyID = class(TIdX509Info)
+  TTaurusX509AuthorityKeyID = class(TTaurusX509Info)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     function GetIssuer(const AIndex: TIdC_INT): String;
     function GetKeyId: String;
@@ -190,7 +190,7 @@ type
     property IssuerCount: TIdC_INT read GetIssuerCount;
   end;
 
-  TIdX509Warnings = class(TIdX509Info)
+  TTaurusX509Warnings = class(TTaurusX509Info)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     function GetObsoleteV1: Boolean;
     function GetSelfSigned: Boolean;
@@ -201,7 +201,7 @@ type
     property SubjectAndIssuerMatch: Boolean read GetSubjectAndIssuerMatch;
   end;
 
-  TIdX509Errors = class(TIdX509Info)
+  TTaurusX509Errors = class(TTaurusX509Info)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     function GetInvalidInconsistantValues: Boolean;
     function GetInvalidPolicy: Boolean;
@@ -216,7 +216,7 @@ type
       read GetUnhandledCriticalExtension;
   end;
 
-  TIdX509AltSubjectAltNames = class(TIdX509Info)
+  TTaurusX509AltSubjectAltNames = class(TTaurusX509Info)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} private
     function GetItems(const AIndex: TIdC_INT): string;
     function GetItemsCount: TIdC_INT;
@@ -230,32 +230,32 @@ type
     property ItemsCount: TIdC_INT read GetItemsCount;
   end;
 
-  TIdX509KeyUse = (DigitalSignature, NonRepudiation, KeyEncipherment,
+  TTaurusX509KeyUse = (DigitalSignature, NonRepudiation, KeyEncipherment,
     DataEncipherment, KeyAgreement, CertSign, CRLSign, EncipherOnly,
     DecipherOnly);
-  TIdX509KeyUsage = set of TIdX509KeyUse;
-  TIdX509ExtKeyUse = (Server, Client, SMIME, CodeSign, OCSPSign, TimeStamp,
+  TTaurusX509KeyUsage = set of TTaurusX509KeyUse;
+  TTaurusX509ExtKeyUse = (Server, Client, SMIME, CodeSign, OCSPSign, TimeStamp,
     DVCS, AnyEKU);
-  TIdX509ExtKeyUsage = set of TIdX509ExtKeyUse;
+  TTaurusX509ExtKeyUsage = set of TTaurusX509ExtKeyUse;
 
-  TIdX509 = class(TObject)
+  TTaurusX509 = class(TObject)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    FErrors: TIdX509Errors;
-    FWarnings: TIdX509Warnings;
-    FExtensions: TIdX509Exts;
-    FFingerprints: TIdX509Fingerprints;
-    FSigInfo: TIdX509SigInfo;
-    FPublicKey: TIdX509PublicKey;
+    FErrors: TTaurusX509Errors;
+    FWarnings: TTaurusX509Warnings;
+    FExtensions: TTaurusX509Exts;
+    FFingerprints: TTaurusX509Fingerprints;
+    FSigInfo: TTaurusX509SigInfo;
+    FPublicKey: TTaurusX509PublicKey;
     FCanFreeX509: Boolean;
     FX509: PX509;
-    FSubject: TIdX509Name;
-    FIssuer: TIdX509Name;
+    FSubject: TTaurusX509Name;
+    FIssuer: TTaurusX509Name;
     FDisplayInfo: TStrings;
-    FAuthorityKeyID: TIdX509AuthorityKeyID;
-    FAltSubjectNames: TIdX509AltSubjectAltNames;
+    FAuthorityKeyID: TTaurusX509AuthorityKeyID;
+    FAltSubjectNames: TTaurusX509AltSubjectAltNames;
     function GetExtensionCount: TIdC_LONG;
-    function GetSubject: TIdX509Name;
-    function GetIssuer: TIdX509Name;
+    function GetSubject: TTaurusX509Name;
+    function GetIssuer: TTaurusX509Name;
     function GetnotBefore: TDateTime;
     function GetnotAfter: TDateTime;
     function GetFingerprint: TIdSSLEVP_MD;
@@ -269,8 +269,8 @@ type
     function GetExtentionName(const AIndex: TIdC_INT): string;
     function GetExtentionCritical(const AIndex: TIdC_INT): Boolean;
     function GetExtentionValues(const AIndex: TIdC_INT): string;
-    function GetKeyUsage: TIdX509KeyUsage;
-    function GetExtKeyUsage: TIdX509ExtKeyUsage;
+    function GetKeyUsage: TTaurusX509KeyUsage;
+    function GetExtKeyUsage: TTaurusX509ExtKeyUsage;
     function GetProxyPathLen: TIdC_LONG;
   public
     Constructor Create(aX509: PX509; aCanFreeX509: Boolean = True); virtual;
@@ -280,14 +280,14 @@ type
     //
     property Version: TIdC_LONG read GetVersion;
     //
-    property SigInfo: TIdX509SigInfo read FSigInfo;
-    property Fingerprints: TIdX509Fingerprints read FFingerprints;
+    property SigInfo: TTaurusX509SigInfo read FSigInfo;
+    property Fingerprints: TTaurusX509Fingerprints read FFingerprints;
     //
     property Fingerprint: TIdSSLEVP_MD read GetFingerprint;
     property FingerprintAsString: String read GetFingerprintAsString;
-    property Subject: TIdX509Name read GetSubject;
-    property AltSubjectNames: TIdX509AltSubjectAltNames read FAltSubjectNames;
-    property Issuer: TIdX509Name read GetIssuer;
+    property Subject: TTaurusX509Name read GetSubject;
+    property AltSubjectNames: TTaurusX509AltSubjectAltNames read FAltSubjectNames;
+    property Issuer: TTaurusX509Name read GetIssuer;
     property notBefore: TDateTime read GetnotBefore;
     property notAfter: TDateTime read GetnotAfter;
     property SerialNumber: string read GetSerialNumber;
@@ -295,7 +295,7 @@ type
 
     //
     property Certificate: PX509 read FX509;
-    property PublicKey: TIdX509PublicKey read FPublicKey;
+    property PublicKey: TTaurusX509PublicKey read FPublicKey;
     property SubjectKeyIdentifier: String read GetSubjectKeyIdentifier;
     property BasicConstraints: String read GetBasicConstraints;
     property ExtentionName[const AIndex: TIdC_INT]: string
@@ -304,12 +304,12 @@ type
       read GetExtentionCritical;
     property ExtensionValues[const AIndex: TIdC_INT]: string
       read GetExtentionValues;
-    property AuthorityKeyID: TIdX509AuthorityKeyID read FAuthorityKeyID;
-    property KeyUsage: TIdX509KeyUsage read GetKeyUsage;
-    property ExtendedKeyUsage: TIdX509ExtKeyUsage read GetExtKeyUsage;
+    property AuthorityKeyID: TTaurusX509AuthorityKeyID read FAuthorityKeyID;
+    property KeyUsage: TTaurusX509KeyUsage read GetKeyUsage;
+    property ExtendedKeyUsage: TTaurusX509ExtKeyUsage read GetExtKeyUsage;
     property ProxyPathLen: TIdC_LONG read GetProxyPathLen;
-    property Errors: TIdX509Errors read FErrors;
-    property Warnings: TIdX509Warnings read FWarnings;
+    property Errors: TTaurusX509Errors read FErrors;
+    property Warnings: TTaurusX509Warnings read FWarnings;
   end;
 
 implementation
@@ -327,9 +327,9 @@ uses
 // X509 Certificate
 /// ////////////////////////////////////////////////////////////
 
-{ TIdX509Name }
+{ TTaurusX509Name }
 
-function TIdX509Name.GetOneLine: String;
+function TTaurusX509Name.GetOneLine: String;
 var
   LOneLine: array [0 .. 2048] of TIdAnsiChar;
   LPtr: PAnsiChar;
@@ -345,27 +345,27 @@ begin
   end;
 end;
 
-function TIdX509Name.GetCity: String;
+function TTaurusX509Name.GetCity: String;
 begin
   Result := GetStrByNID(NID_localityName);
 end;
 
-function TIdX509Name.GetCommonName: String;
+function TTaurusX509Name.GetCommonName: String;
 begin
   Result := GetStrByNID(NID_commonName);
 end;
 
-function TIdX509Name.GetCountry: String;
+function TTaurusX509Name.GetCountry: String;
 begin
   Result := GetStrByNID(NID_countryName);
 end;
 
-function TIdX509Name.GetEMail: String;
+function TTaurusX509Name.GetEMail: String;
 begin
   Result := GetStrByNID(NID_pkcs9_emailAddress);
 end;
 
-function TIdX509Name.GetHash: TIdSSLULong;
+function TTaurusX509Name.GetHash: TIdSSLULong;
 begin
   if fX509Name = nil then
   begin
@@ -377,22 +377,22 @@ begin
   end;
 end;
 
-function TIdX509Name.GetHashAsString: String;
+function TTaurusX509Name.GetHashAsString: String;
 begin
   Result := IndyFormat('%.8x', [Hash.L1]); { do not localize }
 end;
 
-function TIdX509Name.GetOrginization: String;
+function TTaurusX509Name.GetOrginization: String;
 begin
   Result := GetStrByNID(NID_organizationName);
 end;
 
-function TIdX509Name.GetProvidence: String;
+function TTaurusX509Name.GetProvidence: String;
 begin
   Result := GetStrByNID(NID_stateOrProvinceName);
 end;
 
-function TIdX509Name.GetStrByNID(const ANid: TIdC_INT): String;
+function TTaurusX509Name.GetStrByNID(const ANid: TIdC_INT): String;
 var
   LBuffer: array [0 .. 2048] of TIdAnsiChar;
   LPtr: PAnsiChar;
@@ -415,17 +415,17 @@ begin
   end;
 end;
 
-function TIdX509Name.GetStreetAddress: String;
+function TTaurusX509Name.GetStreetAddress: String;
 begin
   Result := GetStrByNID(NID_streetAddress);
 end;
 
-function TIdX509Name.GetUnit: String;
+function TTaurusX509Name.GetUnit: String;
 begin
   Result := GetStrByNID(NID_organizationalUnitName);
 end;
 
-constructor TIdX509Name.Create(aX509Name: PX509_NAME);
+constructor TTaurusX509Name.Create(aX509Name: PX509_NAME);
 begin
   Inherited Create;
   fX509Name := aX509Name;
@@ -435,38 +435,38 @@ end;
 // X509 Certificate
 /// ////////////////////////////////////////////////////////////
 
-{ TIdX509Info }
+{ TTaurusX509Info }
 
-constructor TIdX509Info.Create(aX509: PX509);
+constructor TTaurusX509Info.Create(aX509: PX509);
 begin
   inherited Create;
   FX509 := aX509;
 end;
 
-{ TIdX509Fingerprints }
+{ TTaurusX509Fingerprints }
 
-function TIdX509Fingerprints.GetMD5: TIdSSLEVP_MD;
+function TTaurusX509Fingerprints.GetMD5: TIdSSLEVP_MD;
 begin
   CheckMD5Permitted;
   X509_digest(FX509, EVP_md5, PByte(@Result.MD), Result._Length);
 end;
 
-function TIdX509Fingerprints.GetMD5AsString: String;
+function TTaurusX509Fingerprints.GetMD5AsString: String;
 begin
   Result := MDAsString(MD5);
 end;
 
-function TIdX509Fingerprints.GetSHA1: TIdSSLEVP_MD;
+function TTaurusX509Fingerprints.GetSHA1: TIdSSLEVP_MD;
 begin
   X509_digest(FX509, EVP_sha1, PByte(@Result.MD), Result._Length);
 end;
 
-function TIdX509Fingerprints.GetSHA1AsString: String;
+function TTaurusX509Fingerprints.GetSHA1AsString: String;
 begin
   Result := MDAsString(SHA1);
 end;
 
-function TIdX509Fingerprints.GetSHA224: TIdSSLEVP_MD;
+function TTaurusX509Fingerprints.GetSHA224: TIdSSLEVP_MD;
 begin
 {$IFDEF OPENSSL_STATIC_LINK_MODEL}
   X509_digest(FX509, EVP_sha224, PByte(@Result.MD), Result._Length);
@@ -482,7 +482,7 @@ begin
 {$ENDIF}
 end;
 
-function TIdX509Fingerprints.GetSHA224AsString: String;
+function TTaurusX509Fingerprints.GetSHA224AsString: String;
 begin
 {$IFDEF OPENSSL_STATIC_LINK_MODEL}
   Result := MDAsString(SHA224);
@@ -498,7 +498,7 @@ begin
 {$ENDIF}
 end;
 
-function TIdX509Fingerprints.GetSHA256: TIdSSLEVP_MD;
+function TTaurusX509Fingerprints.GetSHA256: TIdSSLEVP_MD;
 begin
 {$IFDEF OPENSSL_STATIC_LINK_MODEL}
   X509_digest(FX509, EVP_sha256, PByte(@Result.MD), Result._Length);
@@ -514,7 +514,7 @@ begin
 {$ENDIF}
 end;
 
-function TIdX509Fingerprints.GetSHA256AsString: String;
+function TTaurusX509Fingerprints.GetSHA256AsString: String;
 begin
 {$IFDEF OPENSSL_STATIC_LINK_MODEL}
   Result := MDAsString(SHA256);
@@ -530,7 +530,7 @@ begin
 {$ENDIF}
 end;
 
-function TIdX509Fingerprints.GetSHA384: TIdSSLEVP_MD;
+function TTaurusX509Fingerprints.GetSHA384: TIdSSLEVP_MD;
 begin
 {$IFDEF OPENSSL_STATIC_LINK_MODEL}
   X509_digest(FX509, EVP_SHA384, PByte(@Result.MD), Result._Length);
@@ -546,7 +546,7 @@ begin
 {$ENDIF}
 end;
 
-function TIdX509Fingerprints.GetSHA384AsString: String;
+function TTaurusX509Fingerprints.GetSHA384AsString: String;
 begin
 {$IFDEF OPENSSL_STATIC_LINK_MODEL}
   Result := MDAsString(SHA384);
@@ -562,7 +562,7 @@ begin
 {$ENDIF}
 end;
 
-function TIdX509Fingerprints.GetSHA512: TIdSSLEVP_MD;
+function TTaurusX509Fingerprints.GetSHA512: TIdSSLEVP_MD;
 begin
 {$IFDEF OPENSSL_STATIC_LINK_MODEL}
   X509_digest(FX509, EVP_sha512, PByte(@Result.MD), Result._Length);
@@ -578,7 +578,7 @@ begin
 {$ENDIF}
 end;
 
-function TIdX509Fingerprints.GetSHA512AsString: String;
+function TTaurusX509Fingerprints.GetSHA512AsString: String;
 begin
 {$IFDEF OPENSSL_STATIC_LINK_MODEL}
   Result := MDAsString(SHA512);
@@ -594,16 +594,16 @@ begin
 {$ENDIF}
 end;
 
-{ TIdX509SigInfo }
+{ TTaurusX509SigInfo }
 
-constructor TIdX509SigInfo.Create(aX509: PX509);
+constructor TTaurusX509SigInfo.Create(aX509: PX509);
 begin
   inherited;
   Fsig_alg := nil;
   Fsignature := nil;
 end;
 
-function TIdX509SigInfo.GetAlgorithm: String;
+function TTaurusX509SigInfo.GetAlgorithm: String;
 var
   lalgorithm: PASN1_OBJECT;
 begin
@@ -615,7 +615,7 @@ begin
   Result := ASN1_OBJECT_ToStr(lalgorithm);
 end;
 
-function TIdX509SigInfo.GetSignature: String;
+function TTaurusX509SigInfo.GetSignature: String;
 begin
   if not Assigned(Fsignature) then
   begin
@@ -624,38 +624,38 @@ begin
   Result := BytesToHexString(Fsignature^.Data, Fsignature^.length);
 end;
 
-function TIdX509SigInfo.GetSigType: TIdC_INT;
+function TTaurusX509SigInfo.GetSigType: TIdC_INT;
 begin
   Result := X509_get_signature_type(FX509);
 end;
 
-function TIdX509SigInfo.GetSigTypeAsString: String;
+function TTaurusX509SigInfo.GetSigTypeAsString: String;
 begin
   Result := String(OBJ_nid2ln(SigType));
 end;
 
-{ TIdX509 }
+{ TTaurusX509 }
 
-constructor TIdX509.Create(aX509: PX509; aCanFreeX509: Boolean = True);
+constructor TTaurusX509.Create(aX509: PX509; aCanFreeX509: Boolean = True);
 begin
   inherited Create;
   // don't create FDisplayInfo unless specifically requested.
   FDisplayInfo := nil;
   FX509 := aX509;
   FCanFreeX509 := aCanFreeX509;
-  FAltSubjectNames := TIdX509AltSubjectAltNames.Create(FX509);
-  FErrors := TIdX509Errors.Create(FX509);
-  FFingerprints := TIdX509Fingerprints.Create(FX509);
-  FSigInfo := TIdX509SigInfo.Create(FX509);
-  FPublicKey := TIdX509PublicKey.Create(FX509);
-  FExtensions := TIdX509Exts.Create(FX509);
+  FAltSubjectNames := TTaurusX509AltSubjectAltNames.Create(FX509);
+  FErrors := TTaurusX509Errors.Create(FX509);
+  FFingerprints := TTaurusX509Fingerprints.Create(FX509);
+  FSigInfo := TTaurusX509SigInfo.Create(FX509);
+  FPublicKey := TTaurusX509PublicKey.Create(FX509);
+  FExtensions := TTaurusX509Exts.Create(FX509);
   FSubject := nil;
   FIssuer := nil;
-  FAuthorityKeyID := TIdX509AuthorityKeyID.Create(FX509);
-  FWarnings := TIdX509Warnings.Create(FX509);
+  FAuthorityKeyID := TTaurusX509AuthorityKeyID.Create(FX509);
+  FWarnings := TTaurusX509Warnings.Create(FX509);
 end;
 
-destructor TIdX509.Destroy;
+destructor TTaurusX509.Destroy;
 begin
   FreeAndNil(FWarnings);
   FreeAndNil(FAuthorityKeyID);
@@ -678,7 +678,7 @@ begin
   inherited Destroy;
 end;
 
-function TIdX509.GetSubjectKeyIdentifier: String;
+function TTaurusX509.GetSubjectKeyIdentifier: String;
 var
   LPtr: PAnsiChar;
   LLen: TIdC_INT;
@@ -694,7 +694,7 @@ begin
   end;
 end;
 
-function TIdX509.GetBasicConstraints: String;
+function TTaurusX509.GetBasicConstraints: String;
 var
   LPathLen: TIdC_LONG;
 begin
@@ -710,7 +710,7 @@ begin
   end;
 end;
 
-function TIdX509.GetDisplayInfo: TStrings;
+function TTaurusX509.GetDisplayInfo: TStrings;
 begin
   if not Assigned(FDisplayInfo) then
   begin
@@ -720,12 +720,12 @@ begin
   Result := FDisplayInfo;
 end;
 
-function TIdX509.GetExtensionCount: TIdC_LONG;
+function TTaurusX509.GetExtensionCount: TIdC_LONG;
 begin
   Result := Self.FExtensions.Count;
 end;
 
-function TIdX509.GetExtentionCritical(const AIndex: TIdC_INT): Boolean;
+function TTaurusX509.GetExtentionCritical(const AIndex: TIdC_INT): Boolean;
 var
   LExt: PX509_EXTENSION;
 
@@ -738,7 +738,7 @@ begin
   end;
 end;
 
-function TIdX509.GetExtentionName(const AIndex: TIdC_INT): string;
+function TTaurusX509.GetExtentionName(const AIndex: TIdC_INT): string;
 var
   LExt: PX509_EXTENSION;
   LASN1: PASN1_OBJECT;
@@ -752,7 +752,7 @@ begin
   end;
 end;
 
-function TIdX509.GetExtentionValues(const AIndex: TIdC_INT): string;
+function TTaurusX509.GetExtentionValues(const AIndex: TIdC_INT): string;
 var
   LExt: PX509_EXTENSION;
   LASN1: PASN1_STRING;
@@ -773,7 +773,7 @@ begin
   end;
 end;
 
-function TIdX509.GetExtKeyUsage: TIdX509ExtKeyUsage;
+function TTaurusX509.GetExtKeyUsage: TTaurusX509ExtKeyUsage;
 var
   LFlags: TIdC_UINT32;
 begin
@@ -816,7 +816,7 @@ begin
   end;
 end;
 
-function TIdX509.GetKeyUsage: TIdX509KeyUsage;
+function TTaurusX509.GetKeyUsage: TTaurusX509KeyUsage;
 var
   LKeyUsage: TIdC_UINT32;
 begin
@@ -860,7 +860,7 @@ begin
   end;
 end;
 
-function TIdX509.GetProxyPathLen: TIdC_LONG;
+function TTaurusX509.GetProxyPathLen: TIdC_LONG;
 begin
   Result := -1;
   if X509_get_extension_flags(FX509) and EXFLAG_PROXY = EXFLAG_PROXY then
@@ -869,7 +869,7 @@ begin
   end;
 end;
 
-function TIdX509.GetSerialNumber: String;
+function TTaurusX509.GetSerialNumber: String;
 var
   LSN: PASN1_INTEGER;
   LBN: PBIGNUM;
@@ -887,12 +887,12 @@ begin
   end;
 end;
 
-function TIdX509.GetVersion: TIdC_LONG;
+function TTaurusX509.GetVersion: TIdC_LONG;
 begin
   Result := X509_get_version(FX509);
 end;
 
-function TIdX509.GetSubject: TIdX509Name;
+function TTaurusX509.GetSubject: TTaurusX509Name;
 var
   Lx509_name: PX509_NAME;
 Begin
@@ -906,12 +906,12 @@ Begin
     begin
       Lx509_name := nil;
     end;
-    FSubject := TIdX509Name.Create(Lx509_name);
+    FSubject := TTaurusX509Name.Create(Lx509_name);
   end;
   Result := FSubject;
 end;
 
-function TIdX509.GetIssuer: TIdX509Name;
+function TTaurusX509.GetIssuer: TTaurusX509Name;
 var
   Lx509_name: PX509_NAME;
 begin
@@ -925,22 +925,22 @@ begin
     begin
       Lx509_name := nil;
     end;
-    FIssuer := TIdX509Name.Create(Lx509_name);
+    FIssuer := TTaurusX509Name.Create(Lx509_name);
   End;
   Result := FIssuer;
 end;
 
-function TIdX509.GetFingerprint: TIdSSLEVP_MD;
+function TTaurusX509.GetFingerprint: TIdSSLEVP_MD;
 begin
   X509_digest(FX509, EVP_md5, PByte(@Result.MD), Result._Length);
 end;
 
-function TIdX509.GetFingerprintAsString: String;
+function TTaurusX509.GetFingerprintAsString: String;
 begin
   Result := MDAsString(Fingerprint);
 end;
 
-function TIdX509.GetnotBefore: TDateTime;
+function TTaurusX509.GetnotBefore: TDateTime;
 begin
   if FX509 = nil then
   begin
@@ -954,7 +954,7 @@ begin
   end;
 end;
 
-function TIdX509.GetnotAfter: TDateTime;
+function TTaurusX509.GetnotAfter: TDateTime;
 begin
   if FX509 = nil then
   begin
@@ -968,9 +968,9 @@ begin
   end;
 end;
 
-{ TIdX509PublicKey }
+{ TTaurusX509PublicKey }
 
-function TIdX509PublicKey.GetAlgorithm: String;
+function TTaurusX509PublicKey.GetAlgorithm: String;
 var
   lalgorithm: PASN1_OBJECT;
 begin
@@ -979,7 +979,7 @@ begin
   Result := ASN1_OBJECT_ToStr(lalgorithm);
 end;
 
-function TIdX509PublicKey.GetEncoding: String;
+function TTaurusX509PublicKey.GetEncoding: String;
 var
   LLen: TIdC_INT;
   LKey: array [0 .. 2048] of TIdAnsiChar;
@@ -989,7 +989,7 @@ begin
   Result := BytesToHexString(@LKey[0], LLen);
 end;
 
-function TIdX509PublicKey.GetEncodingSize: TIdC_INT;
+function TTaurusX509PublicKey.GetEncodingSize: TIdC_INT;
 var
   LKey: array [0 .. 2048] of TIdAnsiChar;
 begin
@@ -997,7 +997,7 @@ begin
     X509_get_X509_PUBKEY(FX509));
 end;
 
-function TIdX509PublicKey.GetModulus: String;
+function TTaurusX509PublicKey.GetModulus: String;
 var
   LKey: PEVP_PKEY;
   LBN: PBIGNUM;
@@ -1011,35 +1011,35 @@ begin
   end;
 end;
 
-function TIdX509PublicKey.GetBits: TIdC_INT;
+function TTaurusX509PublicKey.GetBits: TIdC_INT;
 begin
   Result := EVP_PKEY_bits(X509_PUBKEY_get0(X509_get_X509_PUBKEY(FX509)));
 end;
 
-function TIdX509PublicKey.GetSecurityBits: TIdC_INT;
+function TTaurusX509PublicKey.GetSecurityBits: TIdC_INT;
 begin
   Result := EVP_PKEY_security_bits
     (X509_PUBKEY_get0(X509_get_X509_PUBKEY(FX509)));
 end;
 
-function TIdX509PublicKey.GetSize: TIdC_INT;
+function TTaurusX509PublicKey.GetSize: TIdC_INT;
 begin
   Result := EVP_PKEY_size(X509_PUBKEY_get0(X509_get_X509_PUBKEY(FX509)));
 end;
 
-{ TIdX509Exts }
+{ TTaurusX509Exts }
 
-function TIdX509Exts.GetCount: TIdC_INT;
+function TTaurusX509Exts.GetCount: TIdC_INT;
 begin
   Result := X509_get_ext_count(FX509);
 end;
 
-function TIdX509Exts.GetExtension(const AIndex: TIdC_INT): PX509_EXTENSION;
+function TTaurusX509Exts.GetExtension(const AIndex: TIdC_INT): PX509_EXTENSION;
 begin
   Result := X509_get_ext(FX509, AIndex);
 end;
 
-function TIdX509Exts.GetExtensionByNid(const ANid: TIdC_INT): PX509_EXTENSION;
+function TTaurusX509Exts.GetExtensionByNid(const ANid: TIdC_INT): PX509_EXTENSION;
 var
   LIdx: TIdC_INT;
 begin
@@ -1054,9 +1054,9 @@ begin
   end;
 end;
 
-{ TIdX509AuthorityKeyID }
+{ TTaurusX509AuthorityKeyID }
 
-function TIdX509AuthorityKeyID.GetIssuerCount: TIdC_INT;
+function TTaurusX509AuthorityKeyID.GetIssuerCount: TIdC_INT;
 var
   LGNs: PGENERAL_NAMES;
 begin
@@ -1157,7 +1157,7 @@ begin
   end;
 end;
 
-function TIdX509AuthorityKeyID.GetIssuer(const AIndex: TIdC_INT): String;
+function TTaurusX509AuthorityKeyID.GetIssuer(const AIndex: TIdC_INT): String;
 var
   LGNs: PGENERAL_NAMES;
   LG: PGENERAL_NAME;
@@ -1172,7 +1172,7 @@ begin
 
 end;
 
-function TIdX509AuthorityKeyID.GetKeyId: String;
+function TTaurusX509AuthorityKeyID.GetKeyId: String;
 var
   LASN1: PASN1_STRING;
   LPtr: PAnsiChar;
@@ -1188,7 +1188,7 @@ begin
   end;
 end;
 
-function TIdX509AuthorityKeyID.GetSerial: TIdC_INT64;
+function TTaurusX509AuthorityKeyID.GetSerial: TIdC_INT64;
 var
   LASN1: PASN1_INTEGER;
 
@@ -1201,57 +1201,57 @@ begin
   end;
 end;
 
-{ TIdX509Warnings }
+{ TTaurusX509Warnings }
 
-function TIdX509Warnings.GetObsoleteV1: Boolean;
+function TTaurusX509Warnings.GetObsoleteV1: Boolean;
 begin
   Result := X509_get_extension_flags(FX509) and EXFLAG_V1 = EXFLAG_V1;
 end;
 
-function TIdX509Warnings.GetSelfSigned: Boolean;
+function TTaurusX509Warnings.GetSelfSigned: Boolean;
 begin
   Result := X509_get_extension_flags(FX509) and EXFLAG_SI = EXFLAG_SI;
 end;
 
-function TIdX509Warnings.GetSubjectAndIssuerMatch: Boolean;
+function TTaurusX509Warnings.GetSubjectAndIssuerMatch: Boolean;
 begin
   Result := X509_get_extension_flags(FX509) and EXFLAG_SS = EXFLAG_SS;
 end;
 
-{ TIdX509Errors }
+{ TTaurusX509Errors }
 
-function TIdX509Errors.GetInvalidInconsistantValues: Boolean;
+function TTaurusX509Errors.GetInvalidInconsistantValues: Boolean;
 begin
   Result := X509_get_extension_flags(FX509) and EXFLAG_INVALID = EXFLAG_INVALID;
 end;
 
-function TIdX509Errors.GetInvalidPolicy: Boolean;
+function TTaurusX509Errors.GetInvalidPolicy: Boolean;
 begin
   Result := X509_get_extension_flags(FX509) and
     EXFLAG_INVALID_POLICY = EXFLAG_INVALID_POLICY;
 end;
 
-function TIdX509Errors.GetNoFingerprint: Boolean;
+function TTaurusX509Errors.GetNoFingerprint: Boolean;
 begin
   Result := X509_get_extension_flags(FX509) and
     EXFLAG_NO_FINGERPRINT = EXFLAG_NO_FINGERPRINT;
 end;
 
-function TIdX509Errors.GetUnhandledCriticalExtension: Boolean;
+function TTaurusX509Errors.GetUnhandledCriticalExtension: Boolean;
 begin
   Result := X509_get_extension_flags(FX509) and
     EXFLAG_CRITICAL = EXFLAG_CRITICAL;
 end;
 
-{ TIdX509AltSubjectAltNames }
+{ TTaurusX509AltSubjectAltNames }
 
-constructor TIdX509AltSubjectAltNames.Create(aX509: PX509);
+constructor TTaurusX509AltSubjectAltNames.Create(aX509: PX509);
 begin
   inherited Create(aX509);
   FGeneralNames := nil;
 end;
 
-destructor TIdX509AltSubjectAltNames.Destroy;
+destructor TTaurusX509AltSubjectAltNames.Destroy;
 begin
   if Assigned(FGeneralNames) then
   begin
@@ -1260,7 +1260,7 @@ begin
   inherited;
 end;
 
-procedure TIdX509AltSubjectAltNames.GetGeneralNames;
+procedure TTaurusX509AltSubjectAltNames.GetGeneralNames;
 begin
   if not Assigned(FGeneralNames) then
   begin
@@ -1268,7 +1268,7 @@ begin
   end;
 end;
 
-function TIdX509AltSubjectAltNames.GetItems(const AIndex: TIdC_INT): string;
+function TTaurusX509AltSubjectAltNames.GetItems(const AIndex: TIdC_INT): string;
 var
   LGN: PGENERAL_NAME;
 begin
@@ -1281,7 +1281,7 @@ begin
   end;
 end;
 
-function TIdX509AltSubjectAltNames.GetItemsCount: TIdC_INT;
+function TTaurusX509AltSubjectAltNames.GetItemsCount: TIdC_INT;
 begin
   Result := -1;
   GetGeneralNames;

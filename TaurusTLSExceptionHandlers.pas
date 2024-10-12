@@ -72,6 +72,7 @@ var
   LErrMsgPtr: TPtrWrapper;
   {$ENDIF}
 begin
+  FillChar(LErrMsg,sMaxErrMsg,0);
   {$IFDEF USE_MARSHALLED_PTRS}
   LErrMsgPtr := TPtrWrapper.Create(@LErrMsg[0]);
   {$ENDIF}
@@ -81,7 +82,6 @@ begin
     {$ELSE}
     LErrMsg
     {$ENDIF}, sMaxErrMsg);
-  LErrMsg[sMaxErrMsg] := TIdAnsiChar(0);
   {$IFDEF USE_MARSHALLED_PTRS}
   Result := TMarshal.ReadStringAsAnsi(LErrMsgPtr);
   {$ELSE}

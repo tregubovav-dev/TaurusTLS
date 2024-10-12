@@ -252,8 +252,8 @@ var
   ERR_peek_last_error_line_data: function (file_: PPIdAnsiChar; line: PIdC_INT; data: PPIdAnsiChar; flags: PIdC_INT): TIdC_ULONG; cdecl = nil;
 
   ERR_clear_error: procedure ; cdecl = nil;
-  ERR_error_string: function (e: TIdC_ULONG; var buf: PIdAnsiChar): PIdAnsiChar; cdecl = nil;
-  ERR_error_string_n: procedure (e: TIdC_ULONG; var buf: PIdAnsiChar; len: TIdC_SIZET); cdecl = nil;
+  ERR_error_string: function (e: TIdC_ULONG; buf: PIdAnsiChar): PIdAnsiChar; cdecl = nil;
+  ERR_error_string_n: procedure (e: TIdC_ULONG; buf: PIdAnsiChar; len: TIdC_SIZET); cdecl = nil;
   ERR_lib_error_string: function (e: TIdC_ULONG): PIdAnsiChar; cdecl = nil;
   ERR_func_error_string: function (e: TIdC_ULONG): PIdAnsiChar; cdecl = nil;
   ERR_reason_error_string: function (e: TIdC_ULONG): PIdAnsiChar; cdecl = nil;

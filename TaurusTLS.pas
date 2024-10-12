@@ -278,10 +278,9 @@ type
     const AWhere, Aret: TIdC_INT; const AType, AMsg: String) of object;
   TPasswordEvent = procedure(ASender: TObject; out VPassword: String;
     const AIsWrite: Boolean) of object;
-  TVerifyPeerEvent = function(Certificate: TTaurusX509; AOk: Boolean;
+  TVerifyPeerEvent = function(Certificate: TTaurusTLSX509; AOk: Boolean;
     ADepth, AError: Integer): Boolean of object;
-  TIOHandlerNotify = procedure(ASender: TTaurusTLSIOHandlerSocket)
-    of object;
+  TIOHandlerNotify = procedure(ASender: TTaurusTLSIOHandlerSocket) of object;
 
   { TTaurusTLSSSLOptions }
 
@@ -310,8 +309,8 @@ type
     property DHParamsFile: String read fsDHParamsFile write fsDHParamsFile;
     property Method: TTaurusTLSSSLVersion read fMethod write SetMethod
       default DEF_SSLVERSION; { ignored with TaurusTLS 1.1.0 or later }
-    property SSLVersions: TTaurusTLSSSLVersions read fSSLVersions write SetSSLVersions
-      default DEF_SSLVERSIONS;
+    property SSLVersions: TTaurusTLSSSLVersions read fSSLVersions
+      write SetSSLVersions default DEF_SSLVERSIONS;
     { SSLVersions is only used to determine min version with TaurusTLS 1.1.0 or later }
     property Mode: TTaurusTLSSSLMode read fMode write fMode;
     property VerifyMode: TIdSSLVerifyModeSet read fVerifyMode write fVerifyMode;
@@ -372,7 +371,8 @@ type
     property VerifyOn: Boolean read fVerifyOn write fVerifyOn;
     // THese can't be published in a TObject without a compiler warning.
     // published
-    property SSLVersions: TTaurusTLSSSLVersions read fSSLVersions write fSSLVersions;
+    property SSLVersions: TTaurusTLSSSLVersions read fSSLVersions
+      write fSSLVersions;
     property Method: TTaurusTLSSSLVersion read fMethod write fMethod;
     property Mode: TTaurusTLSSSLMode read fMode write fMode;
     property RootCertFile: String read fsRootCertFile write fsRootCertFile;
@@ -401,12 +401,12 @@ type
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict {$ENDIF}protected
 {$IFDEF USE_OBJECT_ARC}[Weak]
 {$ENDIF} FParent: TObject;
-    fPeerCert: TTaurusX509;
+    fPeerCert: TTaurusTLSX509;
     fSSL: PSSL;
     fSSLCipher: TTaurusTLSCipher;
     fSSLContext: TTaurusTLSContext;
     fHostName: String;
-    function GetPeerCert: TTaurusX509;
+    function GetPeerCert: TTaurusTLSX509;
 
     function GetSSLCipher: TTaurusTLSCipher;
   public
@@ -425,7 +425,7 @@ type
     property SSL: PSSL read fSSL;
     property SSLContext: TTaurusTLSContext read fSSLContext write fSSLContext;
     property Parent: TObject read FParent;
-    property PeerCert: TTaurusX509 read GetPeerCert;
+    property PeerCert: TTaurusTLSX509 read GetPeerCert;
     property Cipher: TTaurusTLSCipher read GetSSLCipher;
     property HostName: String read fHostName write fHostName;
     property SSLProtocolVersion: TTaurusTLSSSLVersion read GetProtocolVersion;
@@ -440,7 +440,7 @@ type
     function GetPassword(const AIsWrite: Boolean): string;
     procedure StatusInfo(const ASSL: PSSL; AWhere, Aret: TIdC_INT;
       const AStatusStr: string);
-    function VerifyPeer(ACertificate: TTaurusX509; AOk: Boolean;
+    function VerifyPeer(ACertificate: TTaurusTLSX509; AOk: Boolean;
       ADepth, AError: Integer): Boolean;
     function GetIOHandlerSelf: TTaurusTLSIOHandlerSocket;
   end;
@@ -451,14 +451,14 @@ type
     fSSLContext: TTaurusTLSContext;
     fxSSLOptions: TTaurusTLSSSLOptions;
     fSSLSocket: TTaurusTLSSocket;
-    // fPeerCert: TTaurusX509;
+    // fPeerCert: TTaurusTLSX509;
     FOnStatusInfo: TCallbackExEvent;
     fOnGetPassword: TPasswordEvent;
     fOnVerifyPeer: TVerifyPeerEvent;
     // fSSLLayerClosed: Boolean;
     fOnBeforeConnect: TIOHandlerNotify;
     FOnSSLNegotiated: TIOHandlerNotify;
-    // function GetPeerCert: TTaurusX509;
+    // function GetPeerCert: TTaurusTLSX509;
     // procedure CreateSSLContext(axMode: TTaurusTLSSSLMode);
     //
     procedure SetPassThrough(const Value: Boolean); override;
@@ -468,7 +468,7 @@ type
       const AWhereStr, ARetStr: String);
     procedure DoGetPassword(out VPassword: String; const AIsWrite: Boolean);
     procedure DoOnSSLNegotiated;
-    function DoVerifyPeer(Certificate: TTaurusX509; AOk: Boolean;
+    function DoVerifyPeer(Certificate: TTaurusTLSX509; AOk: Boolean;
       ADepth, AError: Integer): Boolean;
     function RecvEnc(var VBuffer: TIdBytes): Integer; override;
     function SendEnc(const ABuffer: TIdBytes; const AOffset, ALength: Integer)
@@ -485,7 +485,7 @@ type
     function GetPassword(const AIsWrite: Boolean): string;
     procedure StatusInfo(const AsslSocket: PSSL; AWhere, Aret: TIdC_INT;
       const AStatusStr: string);
-    function VerifyPeer(ACertificate: TTaurusX509; AOk: Boolean;
+    function VerifyPeer(ACertificate: TTaurusTLSX509; AOk: Boolean;
       ADepth, AError: Integer): Boolean;
     function GetIOHandlerSelf: TTaurusTLSIOHandlerSocket;
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}protected{$ENDIF}
@@ -505,7 +505,8 @@ type
   published
     property OnSSLNegotiated: TIOHandlerNotify read FOnSSLNegotiated
       write FOnSSLNegotiated;
-    property SSLOptions: TTaurusTLSSSLOptions read fxSSLOptions write fxSSLOptions;
+    property SSLOptions: TTaurusTLSSSLOptions read fxSSLOptions
+      write fxSSLOptions;
     property OnStatusInfo: TCallbackExEvent read FOnStatusInfo
       write FOnStatusInfo;
     property OnGetPassword: TPasswordEvent read fOnGetPassword
@@ -529,7 +530,7 @@ type
     procedure DoStatusInfo(const AsslSocket: PSSL; const AWhere, Aret: TIdC_INT;
       const AWhereStr, ARetStr: String);
     procedure DoGetPassword(out VPassword: String; const AIsWrite: Boolean);
-    function DoVerifyPeer(Certificate: TTaurusX509; AOk: Boolean;
+    function DoVerifyPeer(Certificate: TTaurusTLSX509; AOk: Boolean;
       ADepth, AError: Integer): Boolean;
     procedure InitComponent; override;
 
@@ -537,7 +538,7 @@ type
     function GetPassword(const AIsWrite: Boolean): string;
     procedure StatusInfo(const AsslSocket: PSSL; AWhere, Aret: TIdC_INT;
       const AStatusStr: string);
-    function VerifyPeer(ACertificate: TTaurusX509; AOk: Boolean;
+    function VerifyPeer(ACertificate: TTaurusTLSX509; AOk: Boolean;
       ADepth, AError: Integer): Boolean;
     function GetIOHandlerSelf: TTaurusTLSIOHandlerSocket;
 
@@ -556,7 +557,8 @@ type
     //
     property SSLContext: TTaurusTLSContext read fSSLContext;
   published
-    property SSLOptions: TTaurusTLSSSLOptions read fxSSLOptions write fxSSLOptions;
+    property SSLOptions: TTaurusTLSSSLOptions read fxSSLOptions
+      write fxSSLOptions;
     property OnStatusInfo: TCallbackExEvent read FOnStatusInfo
       write FOnStatusInfo;
     property OnGetPassword: TPasswordEvent read fOnGetPassword
@@ -796,8 +798,8 @@ begin
 {$ENDIF}
       LPassword := ''; { Do not Localize }
       LContext := TTaurusTLSContext(userdata);
-      if Supports(LContext.Parent, ITaurusTLSCallbackHelper,
-        IInterface(LHelper)) then
+      if Supports(LContext.Parent, ITaurusTLSCallbackHelper, IInterface(LHelper))
+      then
       begin
         LPassword := LHelper.GetPassword(rwflag > 0);
         LHelper := nil;
@@ -850,8 +852,8 @@ begin
     LockInfoCB.Enter;
     try
       LSocket := TTaurusTLSSocket(SSL_get_app_data(SSLSocket));
-      if Supports(LSocket.Parent, ITaurusTLSCallbackHelper,
-        IInterface(LHelper)) then
+      if Supports(LSocket.Parent, ITaurusTLSCallbackHelper, IInterface(LHelper))
+      then
       begin
 {$IFDEF USE_INLINE_VAR}
         var
@@ -888,11 +890,11 @@ begin
   end;
 end;
 
-function VerifyCallback(const preverify_ok: TIdC_INT; x509_ctx: PX509_STORE_CTX)
+function VerifyCallback(preverify_ok: TIdC_INT; x509_ctx: PX509_STORE_CTX)
   : TIdC_INT; cdecl;
 var
   Lhcert: PX509;
-  LCertificate: TTaurusX509;
+  LCertificate: TTaurusTLSX509;
   hSSL: PSSL;
   IdSSLSocket: TTaurusTLSSocket;
   // str: String;
@@ -901,12 +903,12 @@ var
   LError: Integer;
   LPreverifyOK: TIdC_INT;
   LOk: Boolean;
-  {$IFNDEF USE_INLINE_VAR}
+{$IFNDEF USE_INLINE_VAR}
   LHelper: ITaurusTLSCallbackHelper;
-  {$ENDIF}
-//return
-//  1 - success -Ok
-//  0 - failed
+{$ENDIF}
+  // return
+  // 1 - success -Ok
+  // 0 - failed
 begin
   LPreverifyOK := preverify_ok;
   Result := preverify_ok;
@@ -918,7 +920,7 @@ begin
       if Assigned(hSSL) then
       begin
         Lhcert := X509_STORE_CTX_get_current_cert(x509_ctx);
-        LCertificate := TTaurusX509.Create(Lhcert, False);
+        LCertificate := TTaurusTLSX509.Create(Lhcert, False);
         // the certificate is owned by the store
         try
           IdSSLSocket := TTaurusTLSSocket(SSL_get_app_data(hSSL));
@@ -938,10 +940,10 @@ begin
           begin
             LOk := true;
           end;
-          {$IFDEF USE_INLINE_VAR}
+{$IFDEF USE_INLINE_VAR}
           var
             LHelper: ITaurusTLSCallbackHelper;
-          {$ENDIF}
+{$ENDIF}
           if Supports(IdSSLSocket.Parent, ITaurusTLSCallbackHelper,
             IInterface(LHelper)) then
           begin
@@ -964,7 +966,7 @@ begin
         // Result := Ok; // testing
       end;
     except
-    //indicate failed
+      // indicate failed
       Result := 0;
     end;
   finally
@@ -1124,6 +1126,7 @@ begin
       OPENSSL_INIT_LOAD_CRYPTO_STRINGS or OPENSSL_INIT_LOAD_CONFIG or
       OPENSSL_INIT_ASYNC or OPENSSL_INIT_ENGINE_ALL_BUILTIN, nil);
 
+    SSL_load_error_strings;
     // Create locking structures, we need them for callback routines
     Assert(LockInfoCB = nil);
     LockInfoCB := TIdCriticalSection.Create;
@@ -1164,43 +1167,44 @@ var
 begin
   SSLIsLoaded.Lock;
   try
-    if not SSLIsLoaded.Value then
-      Exit;
-
-{$IFNDEF OPENSSL_STATIC_LINK_MODEL}
-    if Assigned(CRYPTO_set_locking_callback) then
-{$ENDIF}
-      CRYPTO_set_locking_callback(nil);
-
-    // <-- RLebeau: why is this here and not in IdSSLTaurusTLSHeaders.Unload()?
-{$IFNDEF OPENSSL_STATIC_LINK_MODEL}
-    GetOpenSSLLoader.Unload;
-{$ENDIF}
-    FreeAndNil(LockInfoCB);
-    FreeAndNil(LockPassCB);
-    FreeAndNil(LockVerifyCB);
-    if Assigned(CallbackLockList) then
+    if SSLIsLoaded.Value then
     begin
-{$IFDEF USE_OBJECT_ARC}
-      CallbackLockList.Clear; // Items are auto-freed
-{$ELSE}
-      LList := CallbackLockList.LockList;
-
-      begin
-        try
-          for i := 0 to LList.Count - 1 do
-          begin
-{$IFDEF HAS_GENERICS_TList}LList.Items[i]{$ELSE}TIdCriticalSection(LList.Items[i]){$ENDIF}.Free;
-          end;
-          LList.Clear;
-        finally
-          CallbackLockList.UnlockList;
-        end;
-      end;
+      SSL_load_error_strings;
+{$IFNDEF OPENSSL_STATIC_LINK_MODEL}
+      if Assigned(CRYPTO_set_locking_callback) then
 {$ENDIF}
-      FreeAndNil(CallbackLockList);
+        CRYPTO_set_locking_callback(nil);
+
+      // <-- RLebeau: why is this here and not in IdSSLTaurusTLSHeaders.Unload()?
+{$IFNDEF OPENSSL_STATIC_LINK_MODEL}
+      GetOpenSSLLoader.Unload;
+{$ENDIF}
+      FreeAndNil(LockInfoCB);
+      FreeAndNil(LockPassCB);
+      FreeAndNil(LockVerifyCB);
+      if Assigned(CallbackLockList) then
+      begin
+{$IFDEF USE_OBJECT_ARC}
+        CallbackLockList.Clear; // Items are auto-freed
+{$ELSE}
+        LList := CallbackLockList.LockList;
+
+        begin
+          try
+            for i := 0 to LList.Count - 1 do
+            begin
+{$IFDEF HAS_GENERICS_TList}LList.Items[i]{$ELSE}TIdCriticalSection(LList.Items[i]){$ENDIF}.Free;
+            end;
+            LList.Clear;
+          finally
+            CallbackLockList.UnlockList;
+          end;
+        end;
+{$ENDIF}
+        FreeAndNil(CallbackLockList);
+      end;
+      SSLIsLoaded.Value := False;
     end;
-    SSLIsLoaded.Value := False;
   finally
     SSLIsLoaded.Unlock;
   end;
@@ -1269,7 +1273,8 @@ begin
   end;
 end;
 
-procedure TTaurusTLSSSLOptions.SetSSLVersions(const AValue: TTaurusTLSSSLVersions);
+procedure TTaurusTLSSSLOptions.SetSSLVersions(const AValue
+  : TTaurusTLSSSLVersions);
 begin
   fSSLVersions := AValue;
   if fSSLVersions = [SSLv2] then
@@ -1464,7 +1469,7 @@ begin
   end;
 end;
 
-function TTaurusTLSServerIOHandler.DoVerifyPeer(Certificate: TTaurusX509;
+function TTaurusTLSServerIOHandler.DoVerifyPeer(Certificate: TTaurusTLSX509;
   AOk: Boolean; ADepth, AError: Integer): Boolean;
 begin
   Result := true;
@@ -1474,8 +1479,7 @@ begin
   end;
 end;
 
-function TTaurusTLSServerIOHandler.MakeFTPSvrPort
-  : TIdSSLIOHandlerSocketBase;
+function TTaurusTLSServerIOHandler.MakeFTPSvrPort: TIdSSLIOHandlerSocketBase;
 var
   LIO: TTaurusTLSIOHandlerSocket;
 begin
@@ -1500,8 +1504,7 @@ begin
   inherited Shutdown;
 end;
 
-function TTaurusTLSServerIOHandler.MakeFTPSvrPasv
-  : TIdSSLIOHandlerSocketBase;
+function TTaurusTLSServerIOHandler.MakeFTPSvrPasv: TIdSSLIOHandlerSocketBase;
 var
   LIO: TTaurusTLSIOHandlerSocket;
 begin
@@ -1522,8 +1525,7 @@ end;
 
 { ITaurusTLSCallbackHelper }
 
-function TTaurusTLSServerIOHandler.GetPassword(const AIsWrite
-  : Boolean): string;
+function TTaurusTLSServerIOHandler.GetPassword(const AIsWrite: Boolean): string;
 begin
   DoGetPassword(Result, AIsWrite);
 end;
@@ -1546,14 +1548,13 @@ begin
   end;
 end;
 
-function TTaurusTLSServerIOHandler.VerifyPeer(ACertificate: TTaurusX509;
+function TTaurusTLSServerIOHandler.VerifyPeer(ACertificate: TTaurusTLSX509;
   AOk: Boolean; ADepth, AError: Integer): Boolean;
 begin
   Result := DoVerifyPeer(ACertificate, AOk, ADepth, AError);
 end;
 
-function TTaurusTLSServerIOHandler.GetIOHandlerSelf
-  : TTaurusTLSIOHandlerSocket;
+function TTaurusTLSServerIOHandler.GetIOHandlerSelf: TTaurusTLSIOHandlerSocket;
 begin
   Result := nil;
 end;
@@ -1606,8 +1607,8 @@ begin
   begin
     FreeAndNil(fSSLContext);
   end;
-  if (fxSSLOptions <> nil) and (fxSSLOptions is TTaurusTLSSSLOptions_Internal) and
-    (TTaurusTLSSSLOptions_Internal(fxSSLOptions).FParent = Self) then
+  if (fxSSLOptions <> nil) and (fxSSLOptions is TTaurusTLSSSLOptions_Internal)
+    and (TTaurusTLSSSLOptions_Internal(fxSSLOptions).FParent = Self) then
   begin
     FreeAndNil(fxSSLOptions);
   end;
@@ -1824,7 +1825,7 @@ begin
   end;
 end;
 
-function TTaurusTLSIOHandlerSocket.DoVerifyPeer(Certificate: TTaurusX509;
+function TTaurusTLSIOHandlerSocket.DoVerifyPeer(Certificate: TTaurusTLSX509;
   AOk: Boolean; ADepth, AError: Integer): Boolean;
 begin
   Result := true;
@@ -1995,8 +1996,7 @@ begin
   Result := LIO;
 end;
 
-function TTaurusTLSIOHandlerSocket.CheckForError
-  (ALastResult: Integer): Integer;
+function TTaurusTLSIOHandlerSocket.CheckForError(ALastResult: Integer): Integer;
 // var
 // err: Integer;
 begin
@@ -2036,8 +2036,7 @@ end;
 
 { ITaurusTLSCallbackHelper }
 
-function TTaurusTLSIOHandlerSocket.GetPassword(const AIsWrite
-  : Boolean): string;
+function TTaurusTLSIOHandlerSocket.GetPassword(const AIsWrite: Boolean): string;
 begin
   DoGetPassword(Result, AIsWrite);
 end;
@@ -2060,14 +2059,13 @@ begin
   end;
 end;
 
-function TTaurusTLSIOHandlerSocket.VerifyPeer(ACertificate: TTaurusX509;
+function TTaurusTLSIOHandlerSocket.VerifyPeer(ACertificate: TTaurusTLSX509;
   AOk: Boolean; ADepth, AError: Integer): Boolean;
 begin
   Result := DoVerifyPeer(ACertificate, AOk, ADepth, AError);
 end;
 
-function TTaurusTLSIOHandlerSocket.GetIOHandlerSelf
-  : TTaurusTLSIOHandlerSocket;
+function TTaurusTLSIOHandlerSocket.GetIOHandlerSelf: TTaurusTLSIOHandlerSocket;
 begin
   Result := Self;
 end;
@@ -2191,7 +2189,8 @@ end;
 procedure TTaurusTLSContext.InitContext(CtxMode: TIdSSLCtxMode);
 
 const
-  SSLProtoVersion: array [TTaurusTLSSSLVersion] of TIdC_LONG = (0, 0, 0, SSL3_VERSION,
+  SSLProtoVersion: array [TTaurusTLSSSLVersion] of TIdC_LONG = (0, 0, 0,
+    SSL3_VERSION,
     { sslvSSLv3 }
     TLS1_VERSION, { sslvTLSv1 }
     TLS1_1_VERSION, { sslvTLSv1_1 }
@@ -2450,6 +2449,7 @@ begin
     begin
       Func := nil;
     end;
+
     SSL_CTX_set_verify(fContext, TranslateInternalVerifyToSSL(AMode), Func);
     SSL_CTX_set_verify_depth(fContext, fVerifyDepth);
   end;
@@ -2731,12 +2731,12 @@ begin
   LError := SSL_set_app_data(fSSL, Self);
   if LError <= 0 then
   begin
-    EIdOSSLDataBindingError.RaiseException(fSSL, Error, RSSSLDataBindingError);
+    EIdOSSLDataBindingError.RaiseException(fSSL, LError, RSSSLDataBindingError);
   end;
   LError := SSL_set_fd(fSSL, pHandle);
   if LError <= 0 then
   begin
-    EIdOSSLFDSetError.RaiseException(fSSL, Error, RSSSLFDSetError);
+    EIdOSSLFDSetError.RaiseException(fSSL, LError, RSSSLFDSetError);
   end;
   // RLebeau: if this socket's IOHandler was cloned, reuse the
   // original IOHandler's active session ID...
@@ -2764,7 +2764,8 @@ begin
     // remote side, SSL_connect() will fail. In that case, before giving up,
     // try re-connecting using a version-specific method for each enabled
     // version, maybe one will succeed...
-    EIdOSSLConnectError.RaiseException(fSSL, Error, RSSSLConnectError);
+    LError := SSL_get_error(fSSL, LError);
+    EIdOSSLConnectError.RaiseException(fSSL, LError, RSSSLConnectError);
   end;
   fSession := SSL_get1_session(fSSL);
   // TODO: even if SSL_connect() returns success, the connection might
@@ -2905,7 +2906,7 @@ begin
   end;
 end;
 
-function TTaurusTLSSocket.GetPeerCert: TTaurusX509;
+function TTaurusTLSSocket.GetPeerCert: TTaurusTLSX509;
 var
   LX509: PX509;
 begin
@@ -2914,7 +2915,7 @@ begin
     LX509 := SSL_get_peer_certificate(fSSL);
     if LX509 <> nil then
     begin
-      fPeerCert := TTaurusX509.Create(LX509, False);
+      fPeerCert := TTaurusTLSX509.Create(LX509, False);
     end;
   end;
   Result := fPeerCert;

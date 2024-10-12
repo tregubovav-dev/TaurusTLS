@@ -70,26 +70,22 @@ var
   LErrMsg: array [0..sMaxErrMsg] of TIdAnsiChar;
   {$IFDEF USE_MARSHALLED_PTRS}
   LErrMsgPtr: TPtrWrapper;
-  {$ELSE}
-  LErrMsgPtr : PAnsiChar;
   {$ENDIF}
 begin
   {$IFDEF USE_MARSHALLED_PTRS}
   LErrMsgPtr := TPtrWrapper.Create(@LErrMsg[0]);
-  {$ELSE}
-  LErrMsgPtr := @LErrMsg[0];
   {$ENDIF}
   ERR_error_string_n(AErr,
     {$IFDEF USE_MARSHALLED_PTRS}
     LErrMsgPtr.ToPointer
     {$ELSE}
-    LErrMsgPtr
+    LErrMsg
     {$ENDIF}, sMaxErrMsg);
   LErrMsg[sMaxErrMsg] := TIdAnsiChar(0);
   {$IFDEF USE_MARSHALLED_PTRS}
   Result := TMarshal.ReadStringAsAnsi(LErrMsgPtr);
   {$ELSE}
-  Result := String(LErrMsgPtr);
+  Result := String(LErrMsg);
   {$ENDIF}
 end;
 

@@ -278,8 +278,8 @@ type
     const AWhere, Aret: TIdC_INT; const AType, AMsg: String) of object;
   TPasswordEvent = procedure(ASender: TObject; out VPassword: String;
     const AIsWrite: Boolean) of object;
-  TVerifyPeerEvent = function(Certificate: TTaurusTLSX509; AOk: Boolean;
-    ADepth, AError: Integer): Boolean of object;
+  TVerifyPeerEvent = function(Certificate: TTaurusTLSX509; const AOk: Boolean;
+    const ADepth, AError: Integer): Boolean of object;
   TIOHandlerNotify = procedure(ASender: TTaurusTLSIOHandlerSocket) of object;
 
   { TTaurusTLSSSLOptions }
@@ -440,8 +440,8 @@ type
     function GetPassword(const AIsWrite: Boolean): string;
     procedure StatusInfo(const ASSL: PSSL; AWhere, Aret: TIdC_INT;
       const AStatusStr: string);
-    function VerifyPeer(ACertificate: TTaurusTLSX509; AOk: Boolean;
-      ADepth, AError: Integer): Boolean;
+    function VerifyPeer(ACertificate: TTaurusTLSX509; const AOk: Boolean;
+      const ADepth, AError: Integer): Boolean;
     function GetIOHandlerSelf: TTaurusTLSIOHandlerSocket;
   end;
 
@@ -468,8 +468,8 @@ type
       const AWhereStr, ARetStr: String);
     procedure DoGetPassword(out VPassword: String; const AIsWrite: Boolean);
     procedure DoOnSSLNegotiated;
-    function DoVerifyPeer(Certificate: TTaurusTLSX509; AOk: Boolean;
-      ADepth, AError: Integer): Boolean;
+    function DoVerifyPeer(Certificate: TTaurusTLSX509; const AOk: Boolean;
+      const ADepth, AError: Integer): Boolean;
     function RecvEnc(var VBuffer: TIdBytes): Integer; override;
     function SendEnc(const ABuffer: TIdBytes; const AOffset, ALength: Integer)
       : Integer; override;
@@ -485,8 +485,8 @@ type
     function GetPassword(const AIsWrite: Boolean): string;
     procedure StatusInfo(const AsslSocket: PSSL; AWhere, Aret: TIdC_INT;
       const AStatusStr: string);
-    function VerifyPeer(ACertificate: TTaurusTLSX509; AOk: Boolean;
-      ADepth, AError: Integer): Boolean;
+    function VerifyPeer(ACertificate: TTaurusTLSX509; const AOk: Boolean;
+      const ADepth, AError: Integer): Boolean;
     function GetIOHandlerSelf: TTaurusTLSIOHandlerSocket;
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}protected{$ENDIF}
   public
@@ -530,16 +530,16 @@ type
     procedure DoStatusInfo(const AsslSocket: PSSL; const AWhere, Aret: TIdC_INT;
       const AWhereStr, ARetStr: String);
     procedure DoGetPassword(out VPassword: String; const AIsWrite: Boolean);
-    function DoVerifyPeer(Certificate: TTaurusTLSX509; AOk: Boolean;
-      ADepth, AError: Integer): Boolean;
+    function DoVerifyPeer(Certificate: TTaurusTLSX509; const AOk: Boolean;
+      const ADepth, AError: Integer): Boolean;
     procedure InitComponent; override;
 
     { ITaurusTLSCallbackHelper }
     function GetPassword(const AIsWrite: Boolean): string;
     procedure StatusInfo(const AsslSocket: PSSL; AWhere, Aret: TIdC_INT;
       const AStatusStr: string);
-    function VerifyPeer(ACertificate: TTaurusTLSX509; AOk: Boolean;
-      ADepth, AError: Integer): Boolean;
+    function VerifyPeer(ACertificate: TTaurusTLSX509; const AOk: Boolean;
+      const ADepth, AError: Integer): Boolean;
     function GetIOHandlerSelf: TTaurusTLSIOHandlerSocket;
 
   public
@@ -585,22 +585,22 @@ type
     property Version: String read GetVersion;
   end;
 
-  EIdOSSLCouldNotLoadSSLLibrary = class(ETaurusTLSError);
-  EIdOSSLModeNotSet = class(ETaurusTLSError);
-  EIdOSSLGetMethodError = class(ETaurusTLSError);
-  EIdOSSLCreatingSessionError = class(ETaurusTLSError);
-  EIdOSSLCreatingContextError = class(ETaurusTLSAPICryptoError);
-  EIdOSSLLoadingRootCertError = class(ETaurusTLSAPICryptoError);
-  EIdOSSLLoadingCertError = class(ETaurusTLSAPICryptoError);
-  EIdOSSLLoadingKeyError = class(ETaurusTLSAPICryptoError);
-  EIdOSSLLoadingDHParamsError = class(ETaurusTLSAPICryptoError);
-  EIdOSSLSettingCipherError = class(ETaurusTLSError);
-  EIdOSSLFDSetError = class(ETaurusTLSAPISSLError);
-  EIdOSSLDataBindingError = class(ETaurusTLSAPISSLError);
-  EIdOSSLAcceptError = class(ETaurusTLSAPISSLError);
-  EIdOSSLConnectError = class(ETaurusTLSAPISSLError);
+  ETaurusTLSCouldNotLoadSSLLibrary = class(ETaurusTLSError);
+  ETaurusTLSModeNotSet = class(ETaurusTLSError);
+  ETaurusTLSGetMethodError = class(ETaurusTLSError);
+  ETaurusTLSCreatingSessionError = class(ETaurusTLSError);
+  ETaurusTLSCreatingContextError = class(ETaurusTLSAPICryptoError);
+  ETaurusTLSLoadingRootCertError = class(ETaurusTLSAPICryptoError);
+  ETaurusTLSLoadingCertError = class(ETaurusTLSAPICryptoError);
+  ETaurusTLSLoadingKeyError = class(ETaurusTLSAPICryptoError);
+  ETaurusTLSLoadingDHParamsError = class(ETaurusTLSAPICryptoError);
+  ETaurusTLSSettingCipherError = class(ETaurusTLSError);
+  ETaurusTLSFDSetError = class(ETaurusTLSAPISSLError);
+  ETaurusTLSDataBindingError = class(ETaurusTLSAPISSLError);
+  ETaurusTLSAcceptError = class(ETaurusTLSAPISSLError);
+  ETaurusTLSConnectError = class(ETaurusTLSAPISSLError);
 {$IFNDEF OPENSSL_NO_TLSEXT}
-  EIdOSSLSettingTLSHostNameError = class(ETaurusTLSAPISSLError);
+  ETaurusTLSSettingTLSHostNameError = class(ETaurusTLSAPISSLError);
 {$ENDIF}
 function LoadOpenSSLLibrary: Boolean;
 procedure UnLoadOpenSSLLibrary;
@@ -1470,7 +1470,7 @@ begin
 end;
 
 function TTaurusTLSServerIOHandler.DoVerifyPeer(Certificate: TTaurusTLSX509;
-  AOk: Boolean; ADepth, AError: Integer): Boolean;
+  const AOk: Boolean; const ADepth, AError: Integer): Boolean;
 begin
   Result := true;
   if Assigned(fOnVerifyPeer) then
@@ -1549,7 +1549,7 @@ begin
 end;
 
 function TTaurusTLSServerIOHandler.VerifyPeer(ACertificate: TTaurusTLSX509;
-  AOk: Boolean; ADepth, AError: Integer): Boolean;
+  const AOk: Boolean; const ADepth, AError: Integer): Boolean;
 begin
   Result := DoVerifyPeer(ACertificate, AOk, ADepth, AError);
 end;
@@ -1623,7 +1623,7 @@ begin
   try
     Init;
   except
-    on EIdOSSLCouldNotLoadSSLLibrary do
+    on ETaurusTLSCouldNotLoadSSLLibrary do
     begin
       if not PassThrough then
         raise;
@@ -1703,7 +1703,7 @@ begin
         end
         else
         begin
-          raise EIdOSSLCouldNotLoadSSLLibrary.Create
+          raise ETaurusTLSCouldNotLoadSSLLibrary.Create
             (RSOSSLCouldNotLoadSSLLibrary);
         end;
       end;
@@ -1757,7 +1757,7 @@ begin
     try
       Init;
     except
-      on EIdOSSLCouldNotLoadSSLLibrary do
+      on ETaurusTLSCouldNotLoadSSLLibrary do
       begin
         if not PassThrough then
           raise;
@@ -1826,7 +1826,7 @@ begin
 end;
 
 function TTaurusTLSIOHandlerSocket.DoVerifyPeer(Certificate: TTaurusTLSX509;
-  AOk: Boolean; ADepth, AError: Integer): Boolean;
+  const AOk: Boolean; const ADepth, AError: Integer): Boolean;
 begin
   Result := true;
   if Assigned(fOnVerifyPeer) then
@@ -2060,7 +2060,7 @@ begin
 end;
 
 function TTaurusTLSIOHandlerSocket.VerifyPeer(ACertificate: TTaurusTLSX509;
-  AOk: Boolean; ADepth, AError: Integer): Boolean;
+  const AOk: Boolean; const ADepth, AError: Integer): Boolean;
 begin
   Result := DoVerifyPeer(ACertificate, AOk, ADepth, AError);
 end;
@@ -2079,7 +2079,7 @@ begin
   // of the openssl libraries. refer to comments at the top of this file.
   if not LoadOpenSSLLibrary then
   begin
-    raise EIdOSSLCouldNotLoadSSLLibrary.Create(RSOSSLCouldNotLoadSSLLibrary);
+    raise ETaurusTLSCouldNotLoadSSLLibrary.Create(RSOSSLCouldNotLoadSSLLibrary);
   end;
   fVerifyMode := [];
   fMode := sslmUnassigned;
@@ -2094,85 +2094,80 @@ begin
 end;
 
 {$IFDEF USE_WINDOWS_CERT_STORE}
-
 const
   wincryptdll = 'crypt32.dll';
   RootStore = 'ROOT';
 
 type
   HCERTSTORE = THandle;
-  PHCRYPTPROV_LEGACY = PIdC_LONG;
-  // PCERT_INFO = Pointer; { don't need to know this structure }
-  // PCCERT_CONTEXT = ^CERT_CONTEXT;
-
-  { CERT_CONTEXT = record
+  {$IFDEF WIN64}
+  HCRYPTPROV_LEGACY = PIdC_UINT64;
+  {$ELSE}
+  HCRYPTPROV_LEGACY = PIdC_UINT32;
+  {$ENDIF}
+  PCERT_INFO = pointer; {don't need to know this structure}
+  PCCERT_CONTEXT = ^CERT_CONTEXT;
+  CERT_CONTEXT = record
     dwCertEncodingType: DWORD;
     pbCertEncoded: PByte;
     cbCertEncoded: DWORD;
     CertInfo: PCERT_INFO;
-    certstore: HCERTSTORE end;
-  }
+    certstore: HCERTSTORE
+  end;
+
 {$IFDEF STRING_IS_ANSI}
 {$EXTERNALSYM CertOpenSystemStoreA}
-function CertOpenSystemStoreA(hProv: HCRYPTPROV_LEGACY;
-  szSubsystemProtocol: PIdAnsiChar): HCERTSTORE; stdcall; external wincryptdll;
+function CertOpenSystemStoreA(hProv: HCRYPTPROV_LEGACY; szSubsystemProtocol: PIdAnsiChar):HCERTSTORE;
+  stdcall; external wincryptdll;
 {$ELSE}
 {$EXTERNALSYM CertOpenSystemStoreW}
-function CertOpenSystemStoreW(hProv: PHCRYPTPROV_LEGACY;
-  szSubsystemProtocol: PCHar): HCERTSTORE; stdcall; external wincryptdll;
-{$ENDIF}
-{$EXTERNALSYM CertCloseStore}
-function CertCloseStore(certstore: HCERTSTORE; dwFlags: DWORD): Boolean;
+function CertOpenSystemStoreW(hProv: HCRYPTPROV_LEGACY; szSubsystemProtocol: PCHar):HCERTSTORE;
   stdcall; external wincryptdll;
+{$ENDIF}
+
+{$EXTERNALSYM CertCloseStore}
+function CertCloseStore(certstore: HCERTSTORE; dwFlags: DWORD): boolean; stdcall; external wincryptdll;
 
 {$EXTERNALSYM CertEnumCertificatesInStore}
-function CertEnumCertificatesInStore(certstore: HCERTSTORE;
-  pPrevCertContext: PCCERT_CONTEXT): PCCERT_CONTEXT; stdcall;
-  external wincryptdll;
+function CertEnumCertificatesInStore(certstore: HCERTSTORE; pPrevCertContext: PCCERT_CONTEXT): PCCERT_CONTEXT;
+  stdcall; external wincryptdll;
 
-{ Copy Windows CA Certs to out cert store }
+{Copy Windows CA Certs to out cert store}
 procedure TTaurusTLSContext.LoadWindowsCertStore;
-var
-  LWinCertStore: HCERTSTORE;
-  LX509Cert: PX509;
-  LCERT_CONTEXT: PCCERT_CONTEXT;
-  LError: Integer;
-  LSSLCertStore: PX509_STORE;
-  LCertEncoded: PByte;
+var LWinCertStore: HCERTSTORE;
+    LX509Cert: PX509;
+    Lcert_context: PCCERT_CONTEXT;
+    LError: integer;
+    LSSLCertStore: PX509_STORE;
 begin
-  LCERT_CONTEXT := nil;
-{$IFDEF STRING_IS_ANSI}
-  WinCertStore := CertOpenSystemStoreA(nil, RootStore);
-{$ELSE}
-  LWinCertStore := CertOpenSystemStoreW(nil, RootStore);
-{$ENDIF}
-  if LWinCertStore <> 0 then
-  begin
-    LSSLCertStore := SSL_CTX_get_cert_store(fContext);
-    try
-      LCERT_CONTEXT := CertEnumCertificatesInStore(LWinCertStore,
-        LCERT_CONTEXT);
-      while LCERT_CONTEXT <> nil do
+  Lcert_context := nil;
+  {$IFDEF STRING_IS_ANSI}
+  LWinCertStore := CertOpenSystemStoreA(nil,RootStore);
+  {$ELSE}
+  LWinCertStore := CertOpenSystemStoreW(nil,RootStore);
+  {$ENDIF}
+  if LWinCertStore = 0 then
+    Exit;
+
+  LSSLCertStore := SSL_CTX_get_cert_store(fContext);
+  try
+    Lcert_context := CertEnumCertificatesInStore(LWinCertStore,Lcert_context);
+    while Lcert_context <> nil do
+    begin
+      LX509Cert := d2i_X509(nil,@Lcert_context^.pbCertEncoded, Lcert_context^.cbCertEncoded);
+      if LX509Cert <> nil then
       begin
-        LCertEncoded := LCERT_CONTEXT^.pbCertEncoded;
-        LX509Cert := d2i_X509(nil, @LCertEncoded, LCERT_CONTEXT^.cbCertEncoded);
-        if LX509Cert <> nil then
-        begin
-          LError := X509_STORE_add_cert(LSSLCertStore, LX509Cert);
-          // Ignore if cert already in store
-          if (LError = 0) and
-            (ERR_GET_REASON(ERR_get_error) <> X509_R_CERT_ALREADY_IN_HASH_TABLE)
-          then
-            ETaurusTLSAPICryptoError.RaiseException
-              (ROSCertificateNotAddedToStore);
-          X509_free(LX509Cert);
-        end;
-        LCERT_CONTEXT := CertEnumCertificatesInStore(LWinCertStore,
-          LCERT_CONTEXT);
+        LError := X509_STORE_add_cert(LSSLCertStore, LX509Cert);
+//Ignore if cert already in store
+        if (LError = 0) and
+           (ERR_GET_REASON(ERR_get_error) <> X509_R_CERT_ALREADY_IN_HASH_TABLE) then
+          ETaurusTLSAPICryptoError.RaiseException(ROSCertificateNotAddedToStore);
+        X509_free(LX509Cert);
       end;
-    finally
-      CertCloseStore(LWinCertStore, 0);
+      Lcert_context := CertEnumCertificatesInStore(LWinCertStore,Lcert_context);
     end;
+  finally
+     CertCloseStore(LWinCertStore, 0);
   end;
 end;
 {$ENDIF}
@@ -2225,7 +2220,7 @@ begin
   fContext := SSL_CTX_new(SSLMethod);
   if fContext = nil then
   begin
-    EIdOSSLCreatingContextError.RaiseException(RSSSLCreatingContextError);
+    ETaurusTLSCreatingContextError.RaiseException(RSSSLCreatingContextError);
   end;
 
   // set SSL Versions we will use
@@ -2346,28 +2341,28 @@ begin
   begin { Do not Localize }
     if not LoadRootCert then
     begin
-      EIdOSSLLoadingRootCertError.RaiseException(RSSSLLoadingRootCertError);
+      ETaurusTLSLoadingRootCertError.RaiseException(RSSSLLoadingRootCertError);
     end;
   end;
   if CertFile <> '' then
   begin { Do not Localize }
     if not LoadCert then
     begin
-      EIdOSSLLoadingCertError.RaiseException(RSSSLLoadingCertError);
+      ETaurusTLSLoadingCertError.RaiseException(RSSSLLoadingCertError);
     end;
   end;
   if KeyFile <> '' then
   begin { Do not Localize }
     if not LoadKey then
     begin
-      EIdOSSLLoadingKeyError.RaiseException(RSSSLLoadingKeyError);
+      ETaurusTLSLoadingKeyError.RaiseException(RSSSLLoadingKeyError);
     end;
   end;
   if DHParamsFile <> '' then
   begin { Do not Localize }
     if not LoadDHParams then
     begin
-      EIdOSSLLoadingDHParamsError.RaiseException(RSSSLLoadingDHParamsError);
+      ETaurusTLSLoadingDHParamsError.RaiseException(RSSSLLoadingDHParamsError);
     end;
   end;
   if StatusInfoOn then
@@ -2411,7 +2406,7 @@ begin
   if LError <= 0 then
   begin
     // TODO: should this be using EIdOSSLSettingCipherError.RaiseException() instead?
-    raise EIdOSSLSettingCipherError.Create(RSSSLSettingCipherError);
+    raise ETaurusTLSSettingCipherError.Create(RSSSLSettingCipherError);
   end;
   if fVerifyMode <> [] then
   begin
@@ -2509,7 +2504,7 @@ begin
   Result := nil;
   if fMode = sslmUnassigned then
   begin
-    raise EIdOSSLModeNotSet.Create(RSOSSLModeNotSet);
+    raise ETaurusTLSModeNotSet.Create(RSOSSLModeNotSet);
   end;
   { We are running with TaurusTLS 1.1.1 or later. TaurusTLS will negotiate the best
     available SSL/TLS version and there is not much that we can do to influence this.
@@ -2669,17 +2664,17 @@ begin
   fSSL := SSL_new(fSSLContext.Context);
   if fSSL = nil then
   begin
-    raise EIdOSSLCreatingSessionError.Create(RSSSLCreatingSessionError);
+    raise ETaurusTLSCreatingSessionError.Create(RSSSLCreatingSessionError);
   end;
   LError := SSL_set_app_data(fSSL, Self);
   if LError <= 0 then
   begin
-    EIdOSSLDataBindingError.RaiseException(fSSL, Error, RSSSLDataBindingError);
+    ETaurusTLSDataBindingError.RaiseException(fSSL, Error, RSSSLDataBindingError);
   end;
   LError := SSL_set_fd(fSSL, pHandle);
   if LError <= 0 then
   begin
-    EIdOSSLFDSetError.RaiseException(fSSL, Error, RSSSLFDSetError);
+    ETaurusTLSFDSetError.RaiseException(fSSL, Error, RSSSLFDSetError);
   end;
   // RLebeau: if this socket's IOHandler was cloned, no need to reuse the
   // original IOHandler's active session ID, since this is a server socket
@@ -2698,7 +2693,7 @@ begin
   LError := SSL_accept(fSSL);
   if LError <= 0 then
   begin
-    EIdOSSLAcceptError.RaiseException(fSSL, Error, RSSSLAcceptError);
+    ETaurusTLSAcceptError.RaiseException(fSSL, Error, RSSSLAcceptError);
   end;
   fSession := SSL_get1_session(fSSL);
 end;
@@ -2726,17 +2721,17 @@ begin
   fSSL := SSL_new(fSSLContext.Context);
   if fSSL = nil then
   begin
-    raise EIdOSSLCreatingSessionError.Create(RSSSLCreatingSessionError);
+    raise ETaurusTLSCreatingSessionError.Create(RSSSLCreatingSessionError);
   end;
   LError := SSL_set_app_data(fSSL, Self);
   if LError <= 0 then
   begin
-    EIdOSSLDataBindingError.RaiseException(fSSL, LError, RSSSLDataBindingError);
+    ETaurusTLSDataBindingError.RaiseException(fSSL, LError, RSSSLDataBindingError);
   end;
   LError := SSL_set_fd(fSSL, pHandle);
   if LError <= 0 then
   begin
-    EIdOSSLFDSetError.RaiseException(fSSL, LError, RSSSLFDSetError);
+    ETaurusTLSFDSetError.RaiseException(fSSL, LError, RSSSLFDSetError);
   end;
   // RLebeau: if this socket's IOHandler was cloned, reuse the
   // original IOHandler's active session ID...
@@ -2765,7 +2760,7 @@ begin
     // try re-connecting using a version-specific method for each enabled
     // version, maybe one will succeed...
     LError := SSL_get_error(fSSL, LError);
-    EIdOSSLConnectError.RaiseException(fSSL, LError, RSSSLConnectError);
+    ETaurusTLSConnectError.RaiseException(fSSL, LError, RSSSLConnectError);
   end;
   fSession := SSL_get1_session(fSSL);
   // TODO: even if SSL_connect() returns success, the connection might

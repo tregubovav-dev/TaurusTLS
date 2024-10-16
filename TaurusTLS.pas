@@ -890,7 +890,7 @@ begin
   end;
 end;
 
-function VerifyCallback(preverify_ok: TIdC_INT; x509_ctx: PX509_STORE_CTX)
+function VerifyCallback(const preverify_ok: TIdC_INT; x509_ctx: PX509_STORE_CTX)
   : TIdC_INT; cdecl;
 var
   Lhcert: PX509;
@@ -2792,27 +2792,27 @@ end;
 function TTaurusTLSSocket.Recv(out VBuffer: TIdBytes): Integer;
 
 var
-  ret, err: Integer;
+  Lret, Lerr: Integer;
 begin
   repeat
-    ret := SSL_read(fSSL, PByte(VBuffer), Length(VBuffer));
-    if ret > 0 then
+    Lret := SSL_read(fSSL, PByte(VBuffer), Length(VBuffer));
+    if Lret > 0 then
     begin
-      Result := ret;
+      Result := Lret;
       Break;
     end;
-    err := GetSSLError(ret);
-    if (err = SSL_ERROR_WANT_READ) or (err = SSL_ERROR_WANT_WRITE) then
+    Lerr := GetSSLError(Lret);
+    if (Lerr = SSL_ERROR_WANT_READ) or (Lerr = SSL_ERROR_WANT_WRITE) then
     begin
       Continue;
     end;
-    if err = SSL_ERROR_ZERO_RETURN then
+    if Lerr = SSL_ERROR_ZERO_RETURN then
     begin
       Result := 0;
     end
     else
     begin
-      Result := ret;
+      Result := Lret;
     end;
     Break;
   until False;

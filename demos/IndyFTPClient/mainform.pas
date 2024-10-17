@@ -15,8 +15,8 @@ uses
   IdExplicitTLSClientServerBase, IdFTP, IdCTypes,
   IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL,
   IdIntercept, IdLogBase, IdLogEvent, Vcl.Menus, Vcl.StdActns,
-  IdZLibCompressorBase, IdCompressorZLib, IdSync, IdConnectThroughHttpProxy,
-  IdCustomTransparentProxy, IdSocks,
+  IdZLibCompressorBase, IdCompressorZLib, IdConnectThroughHttpProxy,
+  IdCustomTransparentProxy, IdSocks, IdThreadSafe,
   TaurusTLSHeaders_ossl_typ, TaurusTLS_X509, TaurusTLS;
 
 type
@@ -111,10 +111,6 @@ type
     procedure actFileConnectUpdate(Sender: TObject);
     procedure actFileDisconnectExecute(Sender: TObject);
     procedure actFileDisconnectUpdate(Sender: TObject);
-    procedure FIdLogReceived(ASender: TComponent; const AText, AData: string);
-    procedure FIdLogSent(ASender: TComponent; const AText, AData: string);
-    procedure iosslFTPStatusInfoEx(ASender: TObject; const AsslSocket: PSSL;
-      const AWhere, Aret: TIdC_INT; const AType, AMsg: string);
     procedure actHelpAboutExecute(Sender: TObject);
     procedure actViewSettingExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -126,7 +122,6 @@ type
       Data: Integer; var Compare: Integer);
     procedure lvLocalFilesColumnClick(Sender: TObject; Column: TListColumn);
     procedure lvLocalFilesDblClick(Sender: TObject);
-    procedure FIdLogStatus(ASender: TComponent; const AText: string);
     procedure actFileFTPSitesExecute(Sender: TObject);
     procedure actFileFTPSitesUpdate(Sender: TObject);
     procedure cboRemoteCurrentDirKeyDown(Sender: TObject; var Key: Word;
@@ -149,6 +144,7 @@ type
     procedure actFileRemoteMakeDirectoryUpdate(Sender: TObject);
     procedure actFileLocalMakeDirectoryExecute(Sender: TObject);
     procedure actFileLocalMakeDirectoryUpdate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} private
     { Private declarations }
     FLocalColumnToSort: Integer;
@@ -157,7 +153,7 @@ type
     FRemoteColumnToSort: Integer;
     FRemoteAscending: Boolean;
 
-    FThreadRunning: Boolean;
+    FThreadRunning: TIdThreadSafeBoolean;
 
     // colors
     FErrorForeground: TColor;
@@ -172,9 +168,9 @@ type
     FLogDirOutput: Boolean;
 
     FProgressIndicator: TfrmFileProgress;
+    function GetThreadRunning: Boolean;
+    procedure SetThreadRunning(const Value: Boolean);
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    // event handlers
-    procedure iosslFTPOnSSLNegotiated(ASender: TTaurusTLSIOHandlerSocket);
 
     procedure InitLog;
     // Thread procedure starts
@@ -209,7 +205,8 @@ type
     //
     property LogDirOutput: Boolean read FLogDirOutput write FLogDirOutput;
     property LogDebugOutput: Boolean read FLogDebugOutput write FLogDebugOutput;
-    property ThreadRunning: Boolean read FThreadRunning write FThreadRunning;
+    property ThreadRunning: Boolean read GetThreadRunning
+      write SetThreadRunning;
     property ErrorForeground: TColor read FErrorForeground
       write FErrorForeground;
     property ErrorBackground: TColor read FErrorBackground
@@ -236,14 +233,29 @@ type
     FKeyPassword: String;
     FError: Integer;
     FDepth: Integer;
-    FX509: TTaurusX509;
+    FX509: TTaurusTLSX509;
     FFTP: TIdFTP;
+    FLog: TIdLogEvent;
+    FIO: TTaurusTLSIOHandlerSocket;
+    // logging
+    procedure LogRegularOutput(const AStr: String);
+    procedure LogCipherEvent(const AStr: String);
+    procedure LogFTPError(const AStr: String);
+    procedure LogSSLEvent(const AStr: String);
+    procedure LogDirListing(AListing: TStrings);
+    procedure OnLogSent(ASender: TComponent; const AText, AData: string);
+    procedure OnLogReceived(ASender: TComponent; const AText, AData: string);
+    procedure OnStatusInfo(ASender: TObject; const AsslSocket: PSSL;
+      const AWhere, Aret: TIdC_INT; const AType, AMsg: string);
+    procedure OnSSLNegotiated(ASender: TTaurusTLSIOHandlerSocket);
+    //
+
     procedure PromptVerifyCert;
     procedure PromptPassword;
     procedure DoPassword(ASender: TObject; out VPassword: String;
       const AIsWrite: Boolean);
-    function DoVerifyPeer(Certificate: TTaurusX509; AOk: Boolean;
-      ADepth, AError: Integer): Boolean;
+    function DoVerifyPeer(Certificate: TTaurusTLSX509; const AOk: Boolean;
+      const ADepth, AError: Integer): Boolean;
   public
     constructor Create(AFTP: TIdFTP);
     destructor Destroy; override;
@@ -276,6 +288,8 @@ type
       AWorkCountMax: Int64);
     procedure OnWork(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int64);
     procedure OnWorkEnd(ASender: TObject; AWorkMode: TWorkMode);
+  public
+    constructor Create(AFTP: TIdFTP; const AFile: String);
   end;
 
   TDownloadFileThread = class(TFileOnWorkThread)
@@ -312,35 +326,6 @@ type
     procedure Execute(); override;
   end;
 
-  TLogEventNotify = class(TIdNotify)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    FStr: String;
-    procedure DoNotify; override;
-  public
-    class procedure NotifyString(const AStr: String); virtual;
-  end;
-
-  TLogFTPError = class(TLogEventNotify)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    procedure DoNotify; override;
-  public
-    class procedure NotifyString(const AStr: String); override;
-  end;
-
-  TSSLEvent = class(TLogEventNotify)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    procedure DoNotify; override;
-  public
-    class procedure NotifyString(const AStr: String); override;
-  end;
-
-  TSSLCipherEvent = class(TLogEventNotify)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    procedure DoNotify; override;
-  public
-    class procedure NotifyString(const AStr: String); override;
-  end;
-
 var
   frmMainForm: TfrmMainForm;
 
@@ -360,84 +345,6 @@ const
   ARROW_UP_IMAGE_IDX = 8;
   ARROW_DOWN_IMAGE_IDX = 9;
 
-type
-  TStatusBarEvent = class(TLogEventNotify)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    procedure DoNotify; override;
-  public
-    class procedure NotifyString(const AStr: String); override;
-  end;
-
-  TPopulateRemoteListNotify = class(TIdNotify)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    FCurrentDir: String;
-    procedure DoNotify; override;
-  public
-    class procedure PopulateRemoteList(const ACurrentDir: String);
-  end;
-
-  TPopulateLocalListNotify = class(TIdNotify)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    procedure DoNotify; override;
-  public
-    class procedure PopulateLocalList;
-  end;
-
-  TLogDirListingEvent = class(TIdNotify)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    FDirListing: TStrings;
-    procedure DoNotify; override;
-  public
-    class procedure LogDirListing(AStrings: TStrings);
-  end;
-
-  TThreadFinishedNotify = class(TIdNotify)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    procedure DoNotify; override;
-  public
-    class procedure EndThread;
-  end;
-
-  TThreadStartNotify = class(TIdNotify)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    procedure DoNotify; override;
-  public
-    class procedure StartThread;
-  end;
-
-  TWorkEventNotify = class(TIdNotify)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    FFileName: String;
-    FWorkMode: TWorkMode;
-    FWorkCount: Int64;
-    FWorkCountMax: Int64;
-  public
-  end;
-
-  TOnWorkNotify = class(TWorkEventNotify)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    procedure DoNotify; override;
-  public
-    class procedure WorkNotify(const AFileName: String;
-      const AWorkMode: TWorkMode; AWorkCount, AWorkCountMax: Int64);
-  end;
-
-  TOnWorkNotifyBegin = class(TWorkEventNotify)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    procedure DoNotify; override;
-  public
-    class procedure WorkNotify(const AFileName: String;
-      const AWorkMode: TWorkMode; AWorkCount, AWorkCountMax: Int64);
-  end;
-
-  TOnWorkNotifyEnd = class(TWorkEventNotify)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    procedure DoNotify; override;
-  public
-    class procedure WorkNotify(const AWorkMode: TWorkMode;
-      AWorkCount, AWorkCountMax: Int64);
-  end;
-
 {$R *.dfm}
 
 procedure TfrmMainForm.actFileDisconnectExecute(Sender: TObject);
@@ -448,7 +355,7 @@ end;
 
 procedure TfrmMainForm.actFileDisconnectUpdate(Sender: TObject);
 begin
-  actFileDisconnect.Enabled := (not FThreadRunning) and IdFTPClient.Connected;
+  actFileDisconnect.Enabled := (not ThreadRunning) and IdFTPClient.Connected;
 end;
 
 procedure TfrmMainForm.actFileDownloadExecute(Sender: TObject);
@@ -467,7 +374,7 @@ var
   Li: TListItem;
 begin
 
-  actFileDownload.Enabled := (not FThreadRunning) and IdFTPClient.Connected and
+  actFileDownload.Enabled := (not ThreadRunning) and IdFTPClient.Connected and
     (lvRemoteFiles.ItemIndex > -1);
   if actFileDownload.Enabled then
   begin
@@ -524,7 +431,7 @@ end;
 
 procedure TfrmMainForm.actFileFTPSitesUpdate(Sender: TObject);
 begin
-  actFileFTPSites.Enabled := (not FThreadRunning) and
+  actFileFTPSites.Enabled := (not ThreadRunning) and
     (not IdFTPClient.Connected);
 end;
 
@@ -549,7 +456,7 @@ var
   Li: TListItem;
   LRes: Boolean;
 begin
-  LRes := (not FThreadRunning) and (lvLocalFiles.ItemIndex > -1);
+  LRes := (not ThreadRunning) and (lvLocalFiles.ItemIndex > -1);
   if LRes then
   begin
     Li := lvLocalFiles.Items[lvLocalFiles.ItemIndex];
@@ -573,7 +480,7 @@ end;
 
 procedure TfrmMainForm.actFileLocalMakeDirectoryUpdate(Sender: TObject);
 begin
-  actFileLocalMakeDirectory.Enabled := (not FThreadRunning);
+  actFileLocalMakeDirectory.Enabled := (not ThreadRunning);
 end;
 
 procedure TfrmMainForm.actFileLocalRenameExecute(Sender: TObject);
@@ -608,7 +515,7 @@ var
   Li: TListItem;
   LRes: Boolean;
 begin
-  LRes := (not FThreadRunning) and (lvLocalFiles.ItemIndex > -1);
+  LRes := (not ThreadRunning) and (lvLocalFiles.ItemIndex > -1);
   if LRes then
   begin
     Li := lvLocalFiles.Items[lvLocalFiles.ItemIndex];
@@ -640,7 +547,7 @@ var
   Li: TListItem;
   LRes: Boolean;
 begin
-  LRes := (not FThreadRunning) and IdFTPClient.Connected and
+  LRes := (not ThreadRunning) and IdFTPClient.Connected and
     (lvRemoteFiles.ItemIndex > -1);
   if LRes then
   begin
@@ -665,7 +572,7 @@ end;
 
 procedure TfrmMainForm.actFileRemoteMakeDirectoryUpdate(Sender: TObject);
 begin
-  actFileRemoteMakeDirectory.Enabled := (not FThreadRunning) and
+  actFileRemoteMakeDirectory.Enabled := (not ThreadRunning) and
     IdFTPClient.Connected
 end;
 
@@ -701,7 +608,7 @@ var
   Li: TListItem;
   LRes: Boolean;
 begin
-  LRes := (not FThreadRunning) and IdFTPClient.Connected and
+  LRes := (not ThreadRunning) and IdFTPClient.Connected and
     (lvRemoteFiles.ItemIndex > -1);
   if LRes then
   begin
@@ -727,7 +634,7 @@ procedure TfrmMainForm.actFileUploadUpdate(Sender: TObject);
 var
   Li: TListItem;
 begin
-  actFileUpload.Enabled := (not FThreadRunning) and IdFTPClient.Connected and
+  actFileUpload.Enabled := (not ThreadRunning) and IdFTPClient.Connected and
     (lvLocalFiles.ItemIndex > -1);
   if actFileUpload.Enabled then
   begin
@@ -1018,13 +925,12 @@ end;
 
 procedure TfrmMainForm.actFileConnectUpdate(Sender: TObject);
 begin
-  actFileConnect.Enabled := (not FThreadRunning) and
-    (not IdFTPClient.Connected);
+  actFileConnect.Enabled := (not ThreadRunning) and (not IdFTPClient.Connected);
 end;
 
 procedure TfrmMainForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  if FThreadRunning then
+  if ThreadRunning then
   begin
     Action := caNone;
   end
@@ -1039,7 +945,9 @@ var
   LIni: TIniFile;
   i: Integer;
 begin
-  FThreadRunning := False;
+
+  FThreadRunning := TIdThreadSafeBoolean.Create;
+  FThreadRunning.Value := False;
   FLocalColumnToSort := 0;
   FLocalAscending := True;
 
@@ -1056,7 +964,6 @@ begin
   pnlRemoteBrowser.Constraints.MinWidth := pnlRemoteBrowser.Width;
   IdFTPClient.Compressor := IdCompressorZLib1;
   Application.Title := Caption;
-  iosslFTP.OnSSLNegotiated := iosslFTPOnSSLNegotiated;
   LIni := TIniFile.Create(GetIniFilePath);
   try
     IdFTPClient.Passive := not LIni.ReadBool('Transfers',
@@ -1124,6 +1031,16 @@ begin
   InitLog;
 end;
 
+procedure TfrmMainForm.FormDestroy(Sender: TObject);
+begin
+  FreeAndNil(FThreadRunning);
+end;
+
+function TfrmMainForm.GetThreadRunning: Boolean;
+begin
+  Result := FThreadRunning.Value;
+end;
+
 procedure TfrmMainForm.InitLog;
 var
   i: Integer;
@@ -1148,94 +1065,6 @@ begin
     end;
   end;
   ScrollToEnd(redtLog);
-end;
-
-procedure TfrmMainForm.FIdLogReceived(ASender: TComponent;
-  const AText, AData: string);
-var
-  LData: String;
-begin
-  LData := Trim(AData);
-  if Length(LData) > 0 then
-  begin
-    if CharInSet(LData[1], ['4', '5']) then
-    begin
-      TLogFTPError.NotifyString(LData);
-    end
-    else
-    begin
-      TLogEventNotify.NotifyString(LData);
-    end;
-  end;
-end;
-
-procedure TfrmMainForm.FIdLogSent(ASender: TComponent;
-  const AText, AData: string);
-begin
-  if IndyPos('PASS ', AData) > 0 then
-  begin
-    TLogEventNotify.NotifyString('PASS ***');
-  end
-  else
-  begin
-    TLogEventNotify.NotifyString(Trim(AData));
-  end;
-end;
-
-procedure TfrmMainForm.FIdLogStatus(ASender: TComponent; const AText: string);
-begin
-  TStatusBarEvent.NotifyString(AText);
-  lvRemoteFiles.Enabled := IdFTPClient.Connected;
-  cboRemoteCurrentDir.Enabled := IdFTPClient.Connected;
-  lblRemotDir.Enabled := IdFTPClient.Connected;
-end;
-
-procedure TfrmMainForm.iosslFTPOnSSLNegotiated
-  (ASender: TTaurusTLSIOHandlerSocket);
-var
-{$IFNDEF USE_INLINE_VAR}
-  LStr: String;
-{$ENDIF}
-  LNo: Integer;
-begin
-  if Assigned(ASender.SSLSocket) then
-  begin
-{$IFDEF USE_INLINE_VAR}
-    var
-      LStr: String;
-{$ENDIF}
-    LStr := ASender.SSLSocket.SSLProtocolVersionStr;
-    if LStr <> '' then
-    begin
-      TSSLCipherEvent.NotifyString('       TLS Version: ' + LStr);
-    end;
-    if Assigned(ASender.SSLSocket.Cipher) then
-    begin
-      LStr := ASender.SSLSocket.Cipher.Name;
-      if LStr <> '' then
-        TSSLCipherEvent.NotifyString('       Cipher Name: ' + LStr);
-      LStr := ASender.SSLSocket.Cipher.Description;
-      if LStr <> '' then
-        TSSLCipherEvent.NotifyString('Cipher Description: ' + Trim(LStr));
-      LStr := ASender.SSLSocket.Cipher.Version;
-      if LStr <> '' then
-        TSSLCipherEvent.NotifyString('    Cipher Version: ' + LStr);
-      LNo := ASender.SSLSocket.Cipher.Bits;
-      if LNo <> 0 then
-      begin
-        TSSLCipherEvent.NotifyString('       Cipher Bits: ' + IntToStr(LNo));
-      end;
-    end;
-  end;
-end;
-
-procedure TfrmMainForm.iosslFTPStatusInfoEx(ASender: TObject;
-  const AsslSocket: PSSL; const AWhere, Aret: TIdC_INT;
-  const AType, AMsg: string);
-
-begin
-  TSSLEvent.NotifyString(AType);
-  TSSLEvent.NotifyString(AMsg);
 end;
 
 procedure TfrmMainForm.LocalClearArrows;
@@ -1767,6 +1596,11 @@ begin
   end;
 end;
 
+procedure TfrmMainForm.SetThreadRunning(const Value: Boolean);
+begin
+  FThreadRunning.Value := Value;
+end;
+
 procedure TfrmMainForm.SetupPRogressIndicator(const AFileName: String;
   const AWorkMode: TWorkMode; const AWorkCount, AWorkMax: Int64);
 begin
@@ -1805,12 +1639,26 @@ constructor TFTPThread.Create(AFTP: TIdFTP);
 begin
   inherited Create(False);
   FFTP := AFTP;
-
+  FIO := AFTP.IOHandler as TTaurusTLSIOHandlerSocket;
+  FIO.OnVerifyPeer := DoVerifyPeer;
+  FIO.OnGetPassword := DoPassword;
+  FIO.OnStatusInfo := OnStatusInfo;
+  FIO.OnSSLNegotiated := OnSSLNegotiated;
+  FLog := FIO.Intercept as TIdLogEvent;
+  FLog.OnReceived := Self.OnLogReceived;
+  FLog.OnSent := Self.OnLogSent;
   FreeOnTerminate := True;
 end;
 
 destructor TFTPThread.Destroy;
 begin
+  FIO.OnVerifyPeer := nil;
+  FIO.OnGetPassword := nil;
+  FLog.OnReceived := nil;
+  FLog.OnSent := nil;
+  FFTP.OnWorkBegin := nil;
+  FFTP.OnWork := nil;
+  FFTP.OnWorkEnd := nil;
   inherited;
 end;
 
@@ -1821,14 +1669,164 @@ begin
   VPassword := FKeyPassword;
 end;
 
-function TFTPThread.DoVerifyPeer(Certificate: TTaurusX509; AOk: Boolean;
-  ADepth, AError: Integer): Boolean;
+function TFTPThread.DoVerifyPeer(Certificate: TTaurusTLSX509;
+  const AOk: Boolean; const ADepth, AError: Integer): Boolean;
 begin
   FX509 := Certificate;
   FError := AError;
   FDepth := ADepth;
   Synchronize(Self, PromptVerifyCert);
   Result := FVerifyResult;
+end;
+
+procedure TFTPThread.LogCipherEvent(const AStr: String);
+begin
+  frmMainForm.redtLog.SelAttributes.Color := frmMainForm.SSLMessageForeground;
+  frmMainForm.redtLog.SelAttributes.BackColor :=
+    frmMainForm.SSLMessageBackground;
+  LogRegularOutput(AStr);
+end;
+
+procedure TFTPThread.LogDirListing(AListing: TStrings);
+var
+  i: Integer;
+begin
+  if frmMainForm.LogDirOutput then
+  begin
+    frmMainForm.redtLog.Lines.BeginUpdate;
+    try
+      for i := 0 to AListing.Count - 1 do
+      begin
+        frmMainForm.redtLog.SelAttributes.Color :=
+          frmMainForm.DirOutputForeground;
+        frmMainForm.redtLog.SelAttributes.BackColor :=
+          frmMainForm.DirOutputBackground;
+        frmMainForm.redtLog.Lines.Add(AListing[i]);
+      end;
+    finally
+      frmMainForm.redtLog.Lines.EndUpdate;
+    end;
+    ScrollToEnd(frmMainForm.redtLog);
+  end;
+end;
+
+procedure TFTPThread.LogFTPError(const AStr: String);
+begin
+  frmMainForm.redtLog.SelAttributes.Color := frmMainForm.ErrorForeground;
+  frmMainForm.redtLog.SelAttributes.BackColor := frmMainForm.ErrorBackground;
+  LogRegularOutput(AStr);
+end;
+
+procedure TFTPThread.LogRegularOutput(const AStr: String);
+begin
+  frmMainForm.redtLog.Lines.Add(AStr);
+  ScrollToEnd(frmMainForm.redtLog);
+end;
+
+procedure TFTPThread.LogSSLEvent(const AStr: String);
+begin
+  if frmMainForm.LogDebugOutput then
+  begin
+    frmMainForm.redtLog.SelAttributes.Color := frmMainForm.DebugForeground;
+    frmMainForm.redtLog.SelAttributes.BackColor := frmMainForm.DebugBackground;
+    LogRegularOutput(AStr);
+  end;
+end;
+
+procedure TFTPThread.OnLogReceived(ASender: TComponent;
+  const AText, AData: string);
+var
+  LData: String;
+begin
+  LData := Trim(AData);
+  if Length(LData) > 0 then
+  begin
+    if CharInSet(LData[1], ['4', '5']) then
+    begin
+      queue(
+        procedure
+        begin
+          LogFTPError(LData);
+        end);
+    end
+    else
+    begin
+      queue(
+        procedure
+        begin
+          LogRegularOutput(LData);
+        end);
+    end;
+  end;
+end;
+
+procedure TFTPThread.OnLogSent(ASender: TComponent; const AText, AData: string);
+begin
+  if IndyPos('PASS ', AData) > 0 then
+  begin
+    queue(
+      procedure
+      begin
+        LogRegularOutput('PASS ***');
+      end);
+  end
+  else
+  begin
+    queue(
+      procedure
+      begin
+        LogRegularOutput(Trim(AData));
+      end);
+  end;
+end;
+
+procedure TFTPThread.OnSSLNegotiated(ASender: TTaurusTLSIOHandlerSocket);
+var
+{$IFNDEF USE_INLINE_VAR}
+  LStr: String;
+{$ENDIF}
+  LNo: Integer;
+begin
+  queue(
+    procedure
+    begin
+      if Assigned(ASender.SSLSocket) then
+      begin
+{$IFDEF USE_INLINE_VAR}
+        var
+          LStr: String;
+{$ENDIF}
+        LStr := ASender.SSLSocket.SSLProtocolVersionStr;
+        if LStr <> '' then
+        begin
+          LogCipherEvent('       TLS Version: ' + LStr);
+        end;
+        if Assigned(ASender.SSLSocket.Cipher) then
+        begin
+          LStr := ASender.SSLSocket.Cipher.Name;
+          if LStr <> '' then
+            LogCipherEvent('       Cipher Name: ' + LStr);
+          LStr := ASender.SSLSocket.Cipher.Description;
+          if LStr <> '' then
+            LogCipherEvent('Cipher Description: ' + Trim(LStr));
+          LStr := ASender.SSLSocket.Cipher.Version;
+          if LStr <> '' then
+            LogCipherEvent('    Cipher Version: ' + LStr);
+          LNo := ASender.SSLSocket.Cipher.Bits;
+          if LNo <> 0 then
+          begin
+            LogCipherEvent('       Cipher Bits: ' + IntToStr(LNo));
+          end;
+        end;
+      end;
+    end);
+end;
+
+procedure TFTPThread.OnStatusInfo(ASender: TObject; const AsslSocket: PSSL;
+const AWhere, Aret: TIdC_INT; const AType, AMsg: string);
+begin
+  LogSSLEvent(AType);
+  LogSSLEvent(AMsg);
 end;
 
 procedure TFTPThread.PromptPassword;
@@ -1874,15 +1872,9 @@ end;
 procedure TConnectThread.Execute;
 var
   LCurDir: String;
-  LIO : TTaurusTLSIOHandlerSocket;
 begin
   try
-    LIO := FFTP.IOHandler as TTaurusTLSIOHandlerSocket;
-    TThreadStartNotify.StartThread;
-    LIO.OnVerifyPeer :=
-      DoVerifyPeer;
-    LIO.OnGetPassword :=
-      DoPassword;
+    frmMainForm.ThreadRunning := True;
     FFTP.Connect;
     if FFTP.IsCompressionSupported then
     begin
@@ -1890,16 +1882,27 @@ begin
     end;
     LCurDir := FFTP.RetrieveCurrentDir;
     FFTP.List;
-    TLogDirListingEvent.LogDirListing(FFTP.ListResult);
-    TPopulateRemoteListNotify.PopulateRemoteList(LCurDir);
+    queue(
+      procedure
+      begin
+        LogDirListing(FFTP.ListResult);
+      end);
+    queue(
+      procedure
+      begin
+        frmMainForm.PopulateRemoteFiles(LCurDir);
+      end);
   except
     // This is already reported in the FTP log Window
     on E: EIdReplyRFCError do;
     on E: Exception do
-      TLogFTPError.NotifyString(E.Message);
+      queue(
+        procedure
+        begin
+          LogFTPError(E.Message);
+        end);
   end;
-  LIO.OnGetPassword := nil;
-  TThreadFinishedNotify.EndThread;
+  frmMainForm.ThreadRunning := False;
 end;
 
 { TRemoteChangeDirThread }
@@ -1913,25 +1916,33 @@ end;
 procedure TRemoteChangeDirThread.Execute;
 var
   LCurDir: String;
-  LIO: TTaurusTLSIOHandlerSocket;
 begin
+  frmMainForm.ThreadRunning := True;
   try
-    LIO := FFTP.IOHandler as TTaurusTLSIOHandlerSocket;
-    LIO.OnGetPassword := DoPassword;
-    TThreadStartNotify.StartThread;
     FFTP.ChangeDir(FNewDir);
     LCurDir := FFTP.RetrieveCurrentDir;
     FFTP.List;
-    TLogDirListingEvent.LogDirListing(FFTP.ListResult);
-    TPopulateRemoteListNotify.PopulateRemoteList(LCurDir);
+    queue(
+      procedure
+      begin
+        LogDirListing(FFTP.ListResult);
+      end);
+    queue(
+      procedure
+      begin
+        frmMainForm.PopulateRemoteFiles(LCurDir);
+      end);
   except
     // This is already reported in the FTP log Window
     on E: EIdReplyRFCError do;
     on E: Exception do
-      TLogFTPError.NotifyString(E.Message);
+      queue(
+        procedure
+        begin
+          LogFTPError(E.Message);
+        end);
   end;
-  TThreadFinishedNotify.EndThread;
-  LIO.OnGetPassword := nil;
+  frmMainForm.ThreadRunning := False;
 end;
 
 { TFileThread }
@@ -1944,10 +1955,23 @@ end;
 
 { TFileOnWorkThread }
 
-procedure TFileOnWorkThread.OnWork(ASender: TObject; AWorkMode: TWorkMode;
-  AWorkCount: Int64);
+constructor TFileOnWorkThread.Create(AFTP: TIdFTP; const AFile: String);
 begin
-  TOnWorkNotify.WorkNotify(FFile, AWorkMode, AWorkCount, FSize);
+  inherited Create(AFTP, AFile);
+  FFTP.OnWorkBegin := Self.OnWorkBegin;
+  FFTP.OnWork := Self.OnWork;
+  FFTP.OnWorkEnd := Self.OnWorkEnd;
+end;
+
+procedure TFileOnWorkThread.OnWork(ASender: TObject; AWorkMode: TWorkMode;
+AWorkCount: Int64);
+begin
+  queue(
+    procedure
+    begin
+      frmMainForm.UpdateProgressIndicator(FFile, AWorkMode, AWorkCount,
+        FSize);
+    end);
   if Assigned(frmMainForm.ProgressIndicator) then
   begin
     if frmMainForm.ProgressIndicator.CancelPressed then
@@ -1959,15 +1983,23 @@ begin
 end;
 
 procedure TFileOnWorkThread.OnWorkBegin(ASender: TObject; AWorkMode: TWorkMode;
-  AWorkCountMax: Int64);
+AWorkCountMax: Int64);
 begin
 
-  TOnWorkNotifyBegin.WorkNotify(FFile, AWorkMode, 0, FSize);
+  queue(
+    procedure
+    begin
+      frmMainForm.SetupPRogressIndicator(Self.FFile, AWorkMode, 0, FSize);
+    end);
 end;
 
 procedure TFileOnWorkThread.OnWorkEnd(ASender: TObject; AWorkMode: TWorkMode);
 begin
-  TOnWorkNotifyEnd.WorkNotify(AWorkMode, FSize, FSize);
+  queue(
+    procedure
+    begin
+      frmMainForm.CloseProgressIndicator;
+    end);
 end;
 
 { TDownloadFileThread }
@@ -1975,16 +2007,11 @@ end;
 procedure TDownloadFileThread.Execute;
 var
   LFile: TStream;
-  LIO: TTaurusTLSIOHandlerSocket;
 begin
-  LIO := FFTP.IOHandler as TTaurusTLSIOHandlerSocket;
-  LIO.OnGetPassword := DoPassword;
+  frmMainForm.ThreadRunning := True;
   try
-    TThreadStartNotify.StartThread;
     FSize := FFTP.Size(FFile);
-    FFTP.OnWorkBegin := Self.OnWorkBegin;
-    FFTP.OnWork := Self.OnWork;
-    FFTP.OnWorkEnd := Self.OnWorkEnd;
+
     LFile := TFileStream.Create(FFile, fmCreate);
     try
       FFTP.TransferType := ftBinary;
@@ -1993,18 +2020,22 @@ begin
       FreeAndNil(LFile);
     end;
     TFile.SetLastWriteTime(FFile, FFTP.FileDate(FFile));
-    TPopulateLocalListNotify.PopulateLocalList;
+    queue(
+      procedure
+      begin
+        frmMainForm.PopulateLocalFiles;
+      end);
   except
     // This is already reported in the FTP log Window
     on E: EIdReplyRFCError do;
     on E: Exception do
-      TLogFTPError.NotifyString(E.Message);
+      queue(
+        procedure
+        begin
+          LogFTPError(E.Message);
+        end);
   end;
-  FFTP.OnWorkBegin := nil;
-  FFTP.OnWork := nil;
-  FFTP.OnWorkEnd := nil;
-  LIO.OnGetPassword := nil;
-  TThreadFinishedNotify.EndThread;
+  frmMainForm.ThreadRunning := False;
 end;
 
 { TUploadFileThread }
@@ -2012,18 +2043,13 @@ end;
 procedure TUploadFileThread.Execute;
 var
   LFile: TStream;
-  {$IFNDEF USE_INLINE_VAR}
+{$IFNDEF USE_INLINE_VAR}
   LCurDir: String;
-  {$ENDIF}
+{$ENDIF}
 begin
+  frmMainForm.ThreadRunning := True;
   try
     FSize := IdGlobalProtocols.FileSizeByName(FFile);
-    (FFTP.IOHandler as TTaurusTLSIOHandlerSocket).OnGetPassword :=
-      DoPassword;
-    FFTP.OnWorkBegin := Self.OnWorkBegin;
-    FFTP.OnWork := Self.OnWork;
-    FFTP.OnWorkEnd := Self.OnWorkEnd;
-    TThreadStartNotify.StartThread;
     LFile := TFileStream.Create(FFile, fmOpenRead);
     try
       FFTP.TransferType := ftBinary;
@@ -2032,404 +2058,202 @@ begin
       FreeAndNil(LFile);
     end;
     FFTP.SetModTime(FFile, TFile.GetLastWriteTime(FFile));
-    {$IFDEF USE_INLINE_VAR}
-    var LCurDir: String;
-    {$ENDIF}
+{$IFDEF USE_INLINE_VAR}
+    var
+      LCurDir: String;
+{$ENDIF}
     LCurDir := FFTP.RetrieveCurrentDir;
     FFTP.List;
-    TLogDirListingEvent.LogDirListing(FFTP.ListResult);
-    TPopulateRemoteListNotify.PopulateRemoteList(LCurDir);
+    queue(
+      procedure
+      begin
+        LogDirListing(FFTP.ListResult);
+      end);
+    queue(
+      procedure
+      begin
+        frmMainForm.PopulateRemoteFiles(LCurDir);
+      end);
   except
     // This is already reported in the FTP log Window
     on E: EIdReplyRFCError do;
     on E: Exception do
-      TLogFTPError.NotifyString(E.Message);
+      queue(
+        procedure
+        begin
+          LogFTPError(E.Message);
+        end);
   end;
-  FFTP.OnWorkBegin := nil;
-  FFTP.OnWork := nil;
-  FFTP.OnWorkEnd := nil;
-  (FFTP.IOHandler as TTaurusTLSIOHandlerSocket).OnGetPassword := nil;
-  TThreadFinishedNotify.EndThread;
+
+  frmMainForm.ThreadRunning := False;
 end;
 
 { TDeleteFileThread }
 
 procedure TDeleteFileThread.Execute;
+
+{$IFNDEF USE_INLINE_VAR}
 var
-  {$IFNDEF USE_INLINE_VAR}
   LCurDir: String;
-  {$ENDIF}
-  LIO: TTaurusTLSIOHandlerSocket;
+{$ENDIF}
 begin
+  frmMainForm.ThreadRunning := True;
   try
-    LIO := FFTP.IOHandler as TTaurusTLSIOHandlerSocket;
-    LIO.OnGetPassword := DoPassword;
-    TThreadStartNotify.StartThread;
     FFTP.Delete(FFile);
-    {$IFDEF USE_INLINE_VAR}
-    var LCurDir: String;
-    {$ENDIF}
+{$IFDEF USE_INLINE_VAR}
+    var
+      LCurDir: String;
+{$ENDIF}
     LCurDir := FFTP.RetrieveCurrentDir;
     FFTP.List;
-    TLogDirListingEvent.LogDirListing(FFTP.ListResult);
-    TPopulateRemoteListNotify.PopulateRemoteList(LCurDir);
+    queue(
+      procedure
+      begin
+        LogDirListing(FFTP.ListResult);
+      end);
+    queue(
+      procedure
+      begin
+        frmMainForm.PopulateRemoteFiles(LCurDir);
+      end);
   except
     // This is already reported in the FTP log Window
     on E: EIdReplyRFCError do;
     on E: Exception do
-      TLogFTPError.NotifyString(E.Message);
+      queue(
+        procedure
+        begin
+          LogFTPError(E.Message);
+        end);
   end;
-  LIO.OnGetPassword := nil;
-  TThreadFinishedNotify.EndThread;
+  frmMainForm.ThreadRunning := False;
 end;
 
 { TRemoveDirThread }
 
 procedure TRemoveDirThread.Execute;
+{$IFNDEF USE_INLINE_VAR}
 var
-  {$IFNDEF USE_INLINE_VAR}
   LCurDir: String;
-  {$ENDIF}
-  LIO: TTaurusTLSIOHandlerSocket;
+{$ENDIF}
 begin
+  frmMainForm.ThreadRunning := True;
   try
-    LIO := FFTP.IOHandler as TTaurusTLSIOHandlerSocket;
-    LIO.OnGetPassword := DoPassword;
-    TThreadStartNotify.StartThread;
     FFTP.RemoveDir(FFile);
-  {$IFDEF USE_INLINE_VAR}
-    var LCurDir: String;
-  {$ENDIF}
+{$IFDEF USE_INLINE_VAR}
+    var
+      LCurDir: String;
+{$ENDIF}
     LCurDir := FFTP.RetrieveCurrentDir;
     FFTP.List;
-    TLogDirListingEvent.LogDirListing(FFTP.ListResult);
-    TPopulateRemoteListNotify.PopulateRemoteList(LCurDir);
+    queue(
+      procedure
+      begin
+        LogDirListing(FFTP.ListResult);
+      end);
+    queue(
+      procedure
+      begin
+        frmMainForm.PopulateRemoteFiles(LCurDir);
+      end);
   except
     // This is already reported in the FTP log Window
     on E: EIdReplyRFCError do;
     on E: Exception do
-      TLogFTPError.NotifyString(E.Message);
+      queue(
+        procedure
+        begin
+          LogFTPError(E.Message);
+        end);
   end;
-  LIO.OnGetPassword := DoPassword;
-  TThreadFinishedNotify.EndThread;
+  frmMainForm.ThreadRunning := False;
 end;
 
 { TRenamePathThread }
 
 constructor TRenamePathThread.Create(AFTP: TIdFTP;
-  const AOldName, ANewName: String);
+const AOldName, ANewName: String);
 begin
   inherited Create(AFTP, AOldName);
   FNewName := ANewName;
 end;
 
 procedure TRenamePathThread.Execute;
+{$IFNDEF USE_INLINE_VAR}
 var
-  {$IFNDEF USE_INLINE_VAR}
   LCurDir: String;
-  {$ENDIF}
-  LIO: TTaurusTLSIOHandlerSocket;
+{$ENDIF}
 begin
+  frmMainForm.ThreadRunning := True;
   try
-    LIO := FFTP.IOHandler as TTaurusTLSIOHandlerSocket;
-    LIO.OnGetPassword := DoPassword;
-    TThreadStartNotify.StartThread;
     FFTP.Rename(FFile, FNewName);
-    {$IFDEF USE_INLINE_VAR}
-    var LCurDir: String;
-    {$ENDIF}
+{$IFDEF USE_INLINE_VAR}
+    var
+      LCurDir: String;
+{$ENDIF}
     LCurDir := FFTP.RetrieveCurrentDir;
     FFTP.List;
-    TLogDirListingEvent.LogDirListing(FFTP.ListResult);
-    TPopulateRemoteListNotify.PopulateRemoteList(LCurDir);
+    queue(
+      procedure
+      begin
+        LogDirListing(FFTP.ListResult);
+      end);
+    queue(
+      procedure
+      begin
+        frmMainForm.PopulateRemoteFiles(LCurDir);
+      end);
   except
     // This is already reported in the FTP log Window
     on E: EIdReplyRFCError do;
     on E: Exception do
-      TLogFTPError.NotifyString(E.Message);
+      queue(
+        procedure
+        begin
+          LogFTPError(E.Message);
+        end);
   end;
-  LIO.OnGetPassword := nil;
-  TThreadFinishedNotify.EndThread;
+  frmMainForm.ThreadRunning := False;
 end;
 
 { TMakeDirThread }
 
 procedure TMakeDirThread.Execute;
+{$IFNDEF USE_INLINE_VAR}
 var
-  {$IFNDEF USE_INLINE_VAR}
   LCurDir: String;
-  {$ENDIF}
-  LIO: TTaurusTLSIOHandlerSocket;
+{$ENDIF}
 begin
+  frmMainForm.ThreadRunning := True;
   try
-    LIO := FFTP.IOHandler as TTaurusTLSIOHandlerSocket;
-    LIO.OnGetPassword := DoPassword;
-    TThreadStartNotify.StartThread;
     FFTP.MakeDir(FFile);
-   {$IFDEF USE_INLINE_VAR}
-   var LCurDir: String;
-   {$ENDIF}
+{$IFDEF USE_INLINE_VAR}
+    var
+      LCurDir: String;
+{$ENDIF}
     LCurDir := FFTP.RetrieveCurrentDir;
     FFTP.List;
-    TLogDirListingEvent.LogDirListing(FFTP.ListResult);
-    TPopulateRemoteListNotify.PopulateRemoteList(LCurDir);
+    queue(
+      procedure
+      begin
+        LogDirListing(FFTP.ListResult);
+      end);
+    queue(
+      procedure
+      begin
+        frmMainForm.PopulateRemoteFiles(LCurDir);
+      end);
   except
     // EIdReplyRFCError exceptions reported in log Window
     on E: EIdReplyRFCError do;
     on E: Exception do
-      TLogFTPError.NotifyString(E.Message);
+      queue(
+        procedure
+        begin
+          LogFTPError(E.Message);
+        end);
   end;
-  LIO.OnGetPassword := nil;
-  TThreadFinishedNotify.EndThread;
-end;
-
-{ TLogEventNotify }
-
-procedure TLogEventNotify.DoNotify;
-begin
-  frmMainForm.redtLog.Lines.Add(FStr);
-  ScrollToEnd(frmMainForm.redtLog);
-end;
-
-class procedure TLogEventNotify.NotifyString(const AStr: String);
-var
-  L: TLogEventNotify;
-begin
-  L := TLogEventNotify.Create;
-  L.FStr := AStr;
-  L.Notify;
-end;
-
-{ TLogFTPError }
-
-procedure TLogFTPError.DoNotify;
-begin
-  frmMainForm.redtLog.SelAttributes.Color := frmMainForm.ErrorForeground;
-  frmMainForm.redtLog.SelAttributes.BackColor := frmMainForm.ErrorBackground;
-  inherited;
-end;
-
-class procedure TLogFTPError.NotifyString(const AStr: String);
-var
-  L: TLogFTPError;
-begin
-  L := TLogFTPError.Create;
-  L.FStr := AStr;
-  L.Notify;
-end;
-
-{ TSSLEvent }
-
-procedure TSSLEvent.DoNotify;
-begin
-  if frmMainForm.LogDebugOutput then
-  begin
-    frmMainForm.redtLog.SelAttributes.Color := frmMainForm.DebugForeground;
-    frmMainForm.redtLog.SelAttributes.BackColor := frmMainForm.DebugBackground;
-    inherited;
-  end;
-end;
-
-class procedure TSSLEvent.NotifyString(const AStr: String);
-var
-  L: TSSLEvent;
-begin
-  L := TSSLEvent.Create;
-  L.FStr := AStr;
-  L.Notify;
-end;
-
-{ TSSLCipherEvent }
-
-procedure TSSLCipherEvent.DoNotify;
-begin
-  frmMainForm.redtLog.SelAttributes.Color := frmMainForm.SSLMessageForeground;
-  frmMainForm.redtLog.SelAttributes.BackColor :=
-    frmMainForm.SSLMessageBackground;
-  inherited;
-end;
-
-class procedure TSSLCipherEvent.NotifyString(const AStr: String);
-var
-  L: TSSLCipherEvent;
-begin
-  L := TSSLCipherEvent.Create;
-  L.FStr := AStr;
-  L.Notify;
-end;
-
-{ TStatusBarEvent }
-
-procedure TStatusBarEvent.DoNotify;
-begin
-  frmMainForm.sbrMainForm.Panels[0].Text := FStr;
-end;
-
-class procedure TStatusBarEvent.NotifyString(const AStr: String);
-var
-  L: TStatusBarEvent;
-begin
-  L := TStatusBarEvent.Create;
-  L.FStr := AStr;
-  L.Notify;
-end;
-
-{ TPopulateRemoteListNotify }
-
-procedure TPopulateRemoteListNotify.DoNotify;
-begin
-  frmMainForm.PopulateRemoteFiles(FCurrentDir);
-end;
-
-class procedure TPopulateRemoteListNotify.PopulateRemoteList
-  (const ACurrentDir: String);
-var
-  L: TPopulateRemoteListNotify;
-begin
-  L := TPopulateRemoteListNotify.Create;
-  L.FCurrentDir := ACurrentDir;
-  L.Notify;
-end;
-
-{ TLogDirListingEvent }
-
-procedure TLogDirListingEvent.DoNotify;
-var
-  i: Integer;
-begin
-  if frmMainForm.LogDirOutput then
-  begin
-    frmMainForm.redtLog.Lines.BeginUpdate;
-    try
-      for i := 0 to FDirListing.Count - 1 do
-      begin
-        frmMainForm.redtLog.SelAttributes.Color :=
-          frmMainForm.DirOutputForeground;
-        frmMainForm.redtLog.SelAttributes.BackColor :=
-          frmMainForm.DirOutputBackground;
-        frmMainForm.redtLog.Lines.Add(FDirListing[i]);
-      end;
-    finally
-      frmMainForm.redtLog.Lines.EndUpdate;
-    end;
-    ScrollToEnd(frmMainForm.redtLog);
-  end;
-end;
-
-class procedure TLogDirListingEvent.LogDirListing(AStrings: TStrings);
-var
-  L: TLogDirListingEvent;
-begin
-  L := TLogDirListingEvent.Create;
-  L.FDirListing := AStrings;
-  L.Notify;
-end;
-
-{ TThreadFinishedNotify }
-
-procedure TThreadFinishedNotify.DoNotify;
-begin
   frmMainForm.ThreadRunning := False;
-end;
-
-class procedure TThreadFinishedNotify.EndThread;
-var
-  L: TThreadFinishedNotify;
-begin
-  L := TThreadFinishedNotify.Create;
-  L.Notify;
-end;
-
-{ TThreadStartNotify }
-
-procedure TThreadStartNotify.DoNotify;
-begin
-  frmMainForm.ThreadRunning := True;
-end;
-
-class procedure TThreadStartNotify.StartThread;
-var
-  L: TThreadStartNotify;
-begin
-  L := TThreadStartNotify.Create;
-  L.Notify;
-end;
-
-{ TPopulateLocalListNotify }
-
-procedure TPopulateLocalListNotify.DoNotify;
-begin
-  frmMainForm.PopulateLocalFiles;
-end;
-
-class procedure TPopulateLocalListNotify.PopulateLocalList;
-var
-  LNotify: TPopulateLocalListNotify;
-begin
-  LNotify := TPopulateLocalListNotify.Create;
-  LNotify.Notify;
-end;
-
-{ TOnWorkNotify }
-
-procedure TOnWorkNotify.DoNotify;
-begin
-  frmMainForm.UpdateProgressIndicator(FFileName, FWorkMode, FWorkCount,
-    FWorkCountMax);
-end;
-
-class procedure TOnWorkNotify.WorkNotify(const AFileName: String;
-  const AWorkMode: TWorkMode; AWorkCount, AWorkCountMax: Int64);
-var
-  LW: TOnWorkNotify;
-
-begin
-  LW := TOnWorkNotify.Create;
-  LW.FFileName := AFileName;
-  LW.FWorkMode := AWorkMode;
-  LW.FWorkCount := AWorkCount;
-  LW.FWorkCountMax := AWorkCountMax;
-  LW.Notify;
-end;
-
-{ TOnWorkNotifyBegin }
-
-procedure TOnWorkNotifyBegin.DoNotify;
-begin
-  frmMainForm.SetupPRogressIndicator(FFileName, FWorkMode, FWorkCount,
-    FWorkCountMax);
-end;
-
-class procedure TOnWorkNotifyBegin.WorkNotify(const AFileName: String;
-  const AWorkMode: TWorkMode; AWorkCount, AWorkCountMax: Int64);
-var
-  LW: TOnWorkNotifyBegin;
-begin
-  LW := TOnWorkNotifyBegin.Create;
-  LW.FFileName := AFileName;
-  LW.FWorkMode := AWorkMode;
-  LW.FWorkCount := AWorkCount;
-  LW.FWorkCountMax := AWorkCountMax;
-  LW.Notify;
-end;
-
-{ TOnWorkNotifyEnd }
-
-procedure TOnWorkNotifyEnd.DoNotify;
-begin
-  frmMainForm.CloseProgressIndicator;
-end;
-
-class procedure TOnWorkNotifyEnd.WorkNotify(const AWorkMode: TWorkMode;
-  AWorkCount, AWorkCountMax: Int64);
-var
-  LW: TOnWorkNotifyEnd;
-begin
-  LW := TOnWorkNotifyEnd.Create;
-  LW.FWorkMode := AWorkMode;
-  LW.FWorkCount := AWorkCount;
-  LW.FWorkCountMax := AWorkCountMax;
-  LW.Notify;
 end;
 
 initialization

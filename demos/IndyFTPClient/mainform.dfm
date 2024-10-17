@@ -13,6 +13,7 @@ object frmMainForm: TfrmMainForm
   Menu = MainMenu1
   OnClose = FormClose
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   TextHeight = 15
   object spltrLog: TSplitter
     Left = 0
@@ -188,6 +189,7 @@ object frmMainForm: TfrmMainForm
             MinWidth = 150
             Width = 150
           end>
+        Items.ItemData = {050000000000000000}
         PopupMenu = ppmnuLocal
         SmallImages = vimglstSmall
         SortType = stBoth
@@ -256,6 +258,7 @@ object frmMainForm: TfrmMainForm
             Width = 150
           end>
         Enabled = False
+        Items.ItemData = {050000000000000000}
         LargeImages = vimglstSmall
         PopupMenu = ppmnuRemote
         SmallImages = vimglstSmall
@@ -1214,9 +1217,6 @@ object frmMainForm: TfrmMainForm
   object FIdLog: TIdLogEvent
     Active = True
     ReplaceCRLF = False
-    OnReceived = FIdLogReceived
-    OnSent = FIdLogSent
-    OnStatus = FIdLogStatus
     Left = 276
     Top = 249
   end

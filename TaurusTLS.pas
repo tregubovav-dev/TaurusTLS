@@ -12,25 +12,25 @@
   a. Property SSLProtocolVersion added to TSocket. This returns the SSL/TLS protocol
   version that was negotiated when the session was created.
 
-  b. SSL Headers now loaded using the TaurusTLSLoader unit in order to support
-  TaurusTLS 3 and later.
+  b. SSL Headers now loaded using the OpenSSLLoader unit in order to support
+  OpenSSL 3 and later.
 
-  c. New property TTaurusTLSSSLOptions.UseSystemRootCertificateStore. Defaults to true.
+  c. New property TOpenSSLSSLOptions.UseSystemRootCertificateStore. Defaults to true.
   If true then SSL_CTX_set_default_verify_paths is called. This causes the
   certs in OPENSSLDIR/certs to be used for certificate verification
 
   d. Windows only: if OPENSSL_DONT_USE_WINDOWS_CERT_STORE not defined  and
-  TTaurusTLSSSLOptions.UseSystemRootCertificateStore is true then
+  TOpenSSLSSLOptions.UseSystemRootCertificateStore is true then
   Windows Root Certificate store is also loaded into SSL Context X.509 certificate store.
 
   e. Direct access to OpenSSL internal data structures (exposed in earlier versions,
   but now opaque (typically 1.1.1 onwards) now uses getter and setter functions
-  provided by later versions of TaurusTLS libraries with forwards compatibility
+  provided by later versions of OpenSSL libraries with forwards compatibility
   functions (in appropriate SSL Header unit) used to provide getters and setters
   for earlier versions.
 
   f. New functions: OPenSSLVersion and OpenSSLDir. These are information access
-  that return, respectively, the TaurusTLS Version string and the TaurusTLS Directory.
+  that return, respectively, the OpenSSL Version string and the OpenSSL Directory.
 
   Rev 1.40    03/11/2009 09:04:00  AWinkelsdorf
   Implemented fix for Vista+ SSL_Read and SSL_Write to allow connection
@@ -50,7 +50,7 @@
   Fixed unload bug
 
   Rev 1.35    2004-05-07 16:34:26  Mattias
-  Implemented  TaurusTLS locking callbacks
+  Implemented  OpenSSL locking callbacks
 
   Rev 1.34    27/04/2004 9:38:48  HHariri
   Added compiler directive so it works in BCB
@@ -115,7 +115,7 @@
   Changed for new buffer interface
 
   Rev 1.14    6/29/2003 5:42:02 PM  BGooijen
-  fixed problem in TTaurusTLSIOHandlerSocket.SetPassThrough that Henrick
+  fixed problem in TIdOpenSSLIOHandlerSocket.SetPassThrough that Henrick
   Hellstrom reported
 
   Rev 1.13    5/7/2003 7:13:00 PM  BGooijen
@@ -138,13 +138,13 @@
   Updated registration framework to give more information.
 
   Rev 1.7    3/13/2003 11:07:14 AM  JPMugaas
-  TaurusTLS classes renamed.
+  OpenSSL classes renamed.
 
   Rev 1.6    3/13/2003 10:28:16 AM  JPMugaas
   Forgot the reegistration - OOPS!!!
 
   Rev 1.5    3/13/2003 09:49:42 AM  JPMugaas
-  Now uses an abstract SSL base class instead of TaurusTLS so 3rd-party vendors
+  Now uses an abstract SSL base class instead of OpenSSL so 3rd-party vendors
   can plug-in their products.
 
   Rev 1.4    3/13/2003 10:20:08 AM  BGooijen

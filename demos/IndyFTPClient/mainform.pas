@@ -252,9 +252,9 @@ type
 
     procedure PromptVerifyCert;
     procedure PromptPassword;
-    procedure DoPassword(ASender: TObject; out VPassword: String;
+    procedure OnGetPassword(ASender: TObject; out VPassword: String;
       const AIsWrite: Boolean);
-    function DoVerifyPeer(Certificate: TTaurusTLSX509; const AOk: Boolean;
+    function OnVerifyPeer(Certificate: TTaurusTLSX509; const AOk: Boolean;
       const ADepth, AError: Integer): Boolean;
   public
     constructor Create(AFTP: TIdFTP);
@@ -1640,8 +1640,8 @@ begin
   inherited Create(False);
   FFTP := AFTP;
   FIO := AFTP.IOHandler as TTaurusTLSIOHandlerSocket;
-  FIO.OnVerifyPeer := DoVerifyPeer;
-  FIO.OnGetPassword := DoPassword;
+  FIO.OnVerifyPeer := OnVerifyPeer;
+  FIO.OnGetPassword := OnGetPassword;
   FIO.OnStatusInfo := OnStatusInfo;
   FIO.OnSSLNegotiated := OnSSLNegotiated;
   FLog := FIO.Intercept as TIdLogEvent;
@@ -1662,14 +1662,14 @@ begin
   inherited;
 end;
 
-procedure TFTPThread.DoPassword(ASender: TObject; out VPassword: String;
+procedure TFTPThread.OnGetPassword(ASender: TObject; out VPassword: String;
   const AIsWrite: Boolean);
 begin
   Synchronize(Self, PromptPassword);
   VPassword := FKeyPassword;
 end;
 
-function TFTPThread.DoVerifyPeer(Certificate: TTaurusTLSX509;
+function TFTPThread.OnVerifyPeer(Certificate: TTaurusTLSX509;
   const AOk: Boolean; const ADepth, AError: Integer): Boolean;
 begin
   FX509 := Certificate;

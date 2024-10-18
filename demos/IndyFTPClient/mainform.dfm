@@ -189,7 +189,6 @@ object frmMainForm: TfrmMainForm
             MinWidth = 150
             Width = 150
           end>
-        Items.ItemData = {050000000000000000}
         PopupMenu = ppmnuLocal
         SmallImages = vimglstSmall
         SortType = stBoth
@@ -258,7 +257,6 @@ object frmMainForm: TfrmMainForm
             Width = 150
           end>
         Enabled = False
-        Items.ItemData = {050000000000000000}
         LargeImages = vimglstSmall
         PopupMenu = ppmnuRemote
         SmallImages = vimglstSmall
@@ -1452,8 +1450,8 @@ object frmMainForm: TfrmMainForm
     DefaultPort = 0
     ReadTimeout = 60000
     SSLOptions.Mode = sslmUnassigned
-    SSLOptions.VerifyMode = []
-    SSLOptions.VerifyDepth = 0
+    SSLOptions.VerifyMode = [sslvrfPeer, sslvrfClientOnce]
+    SSLOptions.VerifyDepth = 2
     Left = 624
     Top = 306
   end

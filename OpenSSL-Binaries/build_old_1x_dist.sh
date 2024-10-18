@@ -24,22 +24,22 @@
 	  _win=winarm64
       ;;
   esac
-
-versions=("3.4.0-beta1" "3.3.2" "3.2.3" "3.1.7" "3.0.15")
+# https://github.com/openssl/openssl/releases/tag/OpenSSL_1_1_1w
+versions=("1_1_1w")
 for ver in "${versions[@]}"; do
   if [ ! -e "openssl-${ver}.tar.gz" ]; then
-    wget https://github.com/openssl/openssl/archive/refs/tags/openssl-${ver}.tar.gz	
+    wget https://github.com/openssl/openssl/archive/refs/tags/OpenSSL_${ver}.tar.gz	
   fi
   
   rm -rf openssl-${ver} 
   
 
 # now do shared
-  tar zxf "openssl-${ver}.tar.gz"
-  if [ -d openssl-${ver} ]; then 
-    cd openssl-${ver}
+  tar zxf "OpenSSL_${ver}.tar.gz"
+  if [ -d openssl_${ver} ]; then 
+    cd openssl_${ver}
   else
-    cd openssl-openssl-${ver}
+    cd openssl-OpenSSL_${ver}
   fi
   /usr/bin/perl Configure ${_mingw} shared
   make

@@ -2506,17 +2506,17 @@ begin
   begin
     raise ETaurusTLSModeNotSet.Create(RSOSSLModeNotSet);
   end;
-  { We are running with TaurusTLS 1.1.1 or later. TaurusTLS will negotiate the best
+  { We are running with OpenSSL 1.1.1 or later. OpenSSL will negotiate the best
     available SSL/TLS version and there is not much that we can do to influence this.
     Hence, we ignore fMethod.
 
-    Quoting from the TaurusTLS man page:
+    Quoting from the OpenSSL man page:
 
     TLS_method(), TLS_server_method(), TLS_client_method()
 
     These are the general-purpose version-flexible SSL/TLS methods. The actual
-    protocol version used will be negotiated to the highest version mutually s
-    upported by the client and the server. The supported protocols are SSLv3,
+    protocol version used will be negotiated to the highest version mutually
+    supported by the client and the server. The supported protocols are SSLv3,
     TLSv1, TLSv1.1, TLSv1.2 and TLSv1.3. Applications should use these methods,
     and avoid the version-specific methods described below [e.g. SSLv2_method),
     which are deprecated.

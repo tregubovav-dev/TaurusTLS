@@ -5,7 +5,6 @@ program TaurusFTPServer;
 
 uses
   IdFIPS,
-  IdOpenSSL_FIPS,
   IdExplicitTLSClientServerBase,
   IdCompressorZLib,
   IdFTPCommon,

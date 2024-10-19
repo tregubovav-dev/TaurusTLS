@@ -252,7 +252,7 @@ type
 
     procedure PromptVerifyCert;
     procedure PromptPassword;
-    procedure OnGetPassword(ASender: TObject; out VPassword: String;
+    procedure OnGetPassword(ASender: TObject; var VPassword: String;
       const AIsWrite: Boolean);
     function OnVerifyPeer(Certificate: TTaurusTLSX509; const AOk: Boolean;
       const ADepth, AError: Integer): Boolean;
@@ -1662,7 +1662,7 @@ begin
   inherited;
 end;
 
-procedure TFTPThread.OnGetPassword(ASender: TObject; out VPassword: String;
+procedure TFTPThread.OnGetPassword(ASender: TObject; var VPassword: String;
   const AIsWrite: Boolean);
 begin
   Synchronize(Self, PromptPassword);

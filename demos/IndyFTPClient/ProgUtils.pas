@@ -232,8 +232,6 @@ begin
 end;
 
 function RightJustify(const AText: String; ALen: Integer): String;
-var
-  i: Integer;
 begin
   Result := '';
   if ALen > Length(AText) then

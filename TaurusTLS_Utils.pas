@@ -164,7 +164,7 @@ end;
 function MDAsString(const AMD: TIdSSLEVP_MD): String;
 {$IFDEF USE_INLINE} inline; {$ENDIF}
 var
-  i: Integer;
+  i: TIdC_UINT;
 begin
   Result := '';
   for i := 0 to AMD._Length - 1 do

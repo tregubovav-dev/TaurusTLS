@@ -249,7 +249,9 @@ type
       const AWhere, Aret: TIdC_INT; const AType, AMsg: string);
     procedure OnSSLNegotiated(ASender: TTaurusTLSIOHandlerSocket);
     //
-
+    // Dumy method to ensure all queued items are comopleted
+    procedure DummySync;
+    //
     procedure PromptVerifyCert;
     procedure PromptPassword;
     procedure OnGetPassword(ASender: TObject; var VPassword: String;
@@ -351,6 +353,7 @@ procedure TfrmMainForm.actFileDisconnectExecute(Sender: TObject);
 begin
   IdFTPClient.Disconnect;
   lvRemoteFiles.Items.Clear;
+  lvRemoteFiles.Enabled := False;
 end;
 
 procedure TfrmMainForm.actFileDisconnectUpdate(Sender: TObject);
@@ -1517,6 +1520,7 @@ begin
     lvRemoteFiles.AlphaSort;
   finally
     lvRemoteFiles.Items.EndUpdate;
+    lvRemoteFiles.Enabled := True;
   end;
 end;
 
@@ -1640,7 +1644,7 @@ begin
   inherited Create(False);
   FFTP := AFTP;
   FIO := AFTP.IOHandler as TTaurusTLSIOHandlerSocket;
-  FIO.OnVerifyPeer := OnVerifyPeer;
+  // FIO.OnVerifyPeer := OnVerifyPeer;
   FIO.OnGetPassword := OnGetPassword;
   FIO.OnStatusInfo := OnStatusInfo;
   FIO.OnSSLNegotiated := OnSSLNegotiated;
@@ -1660,6 +1664,13 @@ begin
   FFTP.OnWork := nil;
   FFTP.OnWorkEnd := nil;
   inherited;
+end;
+
+procedure TFTPThread.DummySync;
+begin
+  // You don't need to do anything here. It's just used
+  // as a fence to stop the thread ending before all the
+  // Queued messages are processed.
 end;
 
 procedure TFTPThread.OnGetPassword(ASender: TObject; var VPassword: String;
@@ -1787,7 +1798,8 @@ var
 {$ENDIF}
   LNo: Integer;
 begin
-  queue(
+//use synchronize to prevent an AV
+  Synchronize(
     procedure
     begin
       if Assigned(ASender.SSLSocket) then
@@ -1875,6 +1887,11 @@ var
 begin
   try
     frmMainForm.ThreadRunning := True;
+    Synchronize(
+      procedure
+      begin
+        FIO.OnVerifyPeer := OnVerifyPeer;
+      end);
     FFTP.Connect;
     if FFTP.IsCompressionSupported then
     begin
@@ -1902,6 +1919,7 @@ begin
           LogFTPError(E.Message);
         end);
   end;
+  Synchronize(DummySync);
   frmMainForm.ThreadRunning := False;
 end;
 
@@ -1942,6 +1960,7 @@ begin
           LogFTPError(E.Message);
         end);
   end;
+  Synchronize(DummySync);
   frmMainForm.ThreadRunning := False;
 end;
 
@@ -1969,8 +1988,7 @@ begin
   queue(
     procedure
     begin
-      frmMainForm.UpdateProgressIndicator(FFile, AWorkMode, AWorkCount,
-        FSize);
+      frmMainForm.UpdateProgressIndicator(FFile, AWorkMode, AWorkCount, FSize);
     end);
   if Assigned(frmMainForm.ProgressIndicator) then
   begin
@@ -2035,6 +2053,7 @@ begin
           LogFTPError(E.Message);
         end);
   end;
+  Synchronize(DummySync);
   frmMainForm.ThreadRunning := False;
 end;
 
@@ -2084,7 +2103,7 @@ begin
           LogFTPError(E.Message);
         end);
   end;
-
+  Synchronize(DummySync);
   frmMainForm.ThreadRunning := False;
 end;
 
@@ -2126,6 +2145,7 @@ begin
           LogFTPError(E.Message);
         end);
   end;
+  Synchronize(DummySync);
   frmMainForm.ThreadRunning := False;
 end;
 
@@ -2166,6 +2186,7 @@ begin
           LogFTPError(E.Message);
         end);
   end;
+  Synchronize(DummySync);
   frmMainForm.ThreadRunning := False;
 end;
 
@@ -2213,6 +2234,7 @@ begin
           LogFTPError(E.Message);
         end);
   end;
+  Synchronize(DummySync);
   frmMainForm.ThreadRunning := False;
 end;
 
@@ -2253,6 +2275,7 @@ begin
           LogFTPError(E.Message);
         end);
   end;
+  Synchronize(DummySync);
   frmMainForm.ThreadRunning := False;
 end;
 

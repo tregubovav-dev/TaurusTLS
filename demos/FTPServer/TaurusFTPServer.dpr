@@ -27,7 +27,7 @@ type
     FCompressor: TIdCompressorZLib;
     FIO: TTaurusTLSServerIOHandler;
     FFTPServ: TIdFTPServer;
-    procedure ioOnGetPasswordEx(ASender: TObject; out VPassword: String;
+    procedure ioOnGetPasswordEx(ASender: TObject; var VPassword: String;
       const AIsWrite: Boolean);
     procedure ftpsrvOnHostCheck(ASender: TIdFTPServerContext;
       const AHost: String; var VAccepted: Boolean);
@@ -703,7 +703,7 @@ begin
 end;
 
 procedure TFTPServerApp.ioOnGetPasswordEx(ASender: TObject;
-  out VPassword: String; const AIsWrite: Boolean);
+  var VPassword: String; const AIsWrite: Boolean);
 var
   Lini: TIniFile;
 begin

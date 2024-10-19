@@ -70,6 +70,14 @@ var
 {$ENDIF}
 {$ENDIF}
 begin
+  year := 0;
+  month := 1;
+  day := 1;
+  hour := 0;
+  min := 0;
+  sec := 0;
+  tz_hour := 0;
+  tz_min := 0;
   Result := 0; { default is to return with an error indication }
   if UTCtime^.Length < 12 then
   begin

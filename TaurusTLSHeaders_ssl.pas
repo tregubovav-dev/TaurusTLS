@@ -5695,14 +5695,14 @@ type
 
 	//* For a server, this contains a callback function by which the set of
 	// * advertised protocols can be provided. */
-    next_protos_advertised_cb : function(s : PSSL; out but : PIdAnsiChar;
-     out len : TIdC_UINT; arg : Pointer) : TIdC_INT cdecl;
+    next_protos_advertised_cb : function(s : PSSL; var _out : PIdAnsiChar;
+     var len : TIdC_UINT; arg : Pointer) : TIdC_INT cdecl;
 //	int (*next_protos_advertised_cb)(SSL *s, const unsigned char **buf,
 //			                 unsigned int *len, void *arg);
 	  next_protos_advertised_cb_arg : Pointer;
 	//* For a client, this contains a callback function that selects the
 	// * next protocol from the list provided by the server. */
-    next_proto_select_cb : function(s : PSSL; out _out : PIdAnsiChar;
+    next_proto_select_cb : function(s : PSSL; var _out : PIdAnsiChar;
       outlen : PIdAnsiChar;
       _in : PIdAnsiChar;
       inlen : TIdC_UINT;

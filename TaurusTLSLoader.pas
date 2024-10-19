@@ -69,7 +69,7 @@ uses
 
 {$if not declared(NilHandle)}
 const
-  NilHandle = 0;
+  NilHandle : TIdLibHandle = 0;
 {$ifend}
 
 var

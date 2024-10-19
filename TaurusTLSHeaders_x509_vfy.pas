@@ -1405,7 +1405,7 @@ type
     free : procedure (ctx : PX509_LOOKUP); cdecl;
     init : function(ctx : PX509_LOOKUP) : TIdC_INT; cdecl;
     shutdown : function(ctx : PX509_LOOKUP) : TIdC_INT; cdecl;
-    ctrl: function(ctx : PX509_LOOKUP; cmd : TIdC_INT; const argc : PIdAnsiChar; argl : TIdC_LONG; out ret : PIdAnsiChar ) : TIdC_INT; cdecl;
+    ctrl: function(ctx : PX509_LOOKUP; cmd : TIdC_INT; const argc : PIdAnsiChar; argl : TIdC_LONG; var ret : PIdAnsiChar ) : TIdC_INT; cdecl;
     get_by_subject: function(ctx : PX509_LOOKUP; _type : TIdC_INT; name : PX509_NAME; ret : PX509_OBJECT ) : TIdC_INT; cdecl;
     get_by_issuer_serial : function(ctx : PX509_LOOKUP; _type : TIdC_INT; name : PX509_NAME; serial : PASN1_INTEGER; ret : PX509_OBJECT) : TIdC_INT; cdecl;
     get_by_fingerprint : function (ctx : PX509_LOOKUP; _type : TIdC_INT; bytes : PIdAnsiChar; len : TIdC_INT; ret : PX509_OBJECT): TIdC_INT; cdecl;

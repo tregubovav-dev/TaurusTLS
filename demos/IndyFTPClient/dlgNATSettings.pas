@@ -58,7 +58,6 @@ end;
 procedure TfrmNATSettings.ValidateFeilds;
 var
   LIP: String;
-  LBool: Boolean;
 begin
   LIP := edtExternalIPAddress.Text;
   Self.OKBtn.Enabled := (LIP = '') or IsValidIP(LIP);

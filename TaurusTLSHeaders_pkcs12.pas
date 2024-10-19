@@ -247,7 +247,7 @@ var
   PKCS12_BAGS_it: function : PASN1_ITEM; cdecl = nil;
 
   PKCS12_PBE_add: procedure (v: Pointer); cdecl = nil;
-  PKCS12_parse: function (p12: PPKCS12; const pass: PIdAnsiChar; out pkey: PEVP_PKEY; out cert: PX509; ca: PPStack_Of_X509): TIdC_INT; cdecl = nil;
+  PKCS12_parse: function (p12: PPKCS12; const pass: PIdAnsiChar; var pkey: PEVP_PKEY; var cert: PX509; ca: PPStack_Of_X509): TIdC_INT; cdecl = nil;
   PKCS12_create: function (const pass: PIdAnsiChar; const name: PIdAnsiChar; pkey: PEVP_PKEY; cert: PX509; ca: PStack_Of_X509; nid_key: TIdC_INT; nid_cert: TIdC_INT; iter: TIdC_INT; mac_iter: TIdC_INT; keytype: TIdC_INT): PPKCS12; cdecl = nil;
 
 //  function PKCS12_add_cert(STACK_OF(PKCS12_SAFEBAG) **pbags; X509 *cert): PKCS12_SAFEBAG;
@@ -350,7 +350,7 @@ var
   function PKCS12_BAGS_it: PASN1_ITEM cdecl; external CLibCrypto;
 
   procedure PKCS12_PBE_add(v: Pointer) cdecl; external CLibCrypto;
-  function PKCS12_parse(p12: PPKCS12; const pass: PIdAnsiChar; out pkey: PEVP_PKEY; out cert: PX509; ca: PPStack_Of_X509): TIdC_INT cdecl; external CLibCrypto;
+  function PKCS12_parse(p12: PPKCS12; const pass: PIdAnsiChar; var pkey: PEVP_PKEY; var cert: PX509; ca: PPStack_Of_X509): TIdC_INT cdecl; external CLibCrypto;
   function PKCS12_create(const pass: PIdAnsiChar; const name: PIdAnsiChar; pkey: PEVP_PKEY; cert: PX509; ca: PStack_Of_X509; nid_key: TIdC_INT; nid_cert: TIdC_INT; iter: TIdC_INT; mac_iter: TIdC_INT; keytype: TIdC_INT): PPKCS12 cdecl; external CLibCrypto;
 
 //  function PKCS12_add_cert(STACK_OF(PKCS12_SAFEBAG) **pbags; X509 *cert): PKCS12_SAFEBAG;
@@ -912,7 +912,7 @@ begin
 end;
 
 
-function  ERR_PKCS12_parse(p12: PPKCS12; const pass: PIdAnsiChar; out pkey: PEVP_PKEY; out cert: PX509; ca: PPStack_Of_X509): TIdC_INT; 
+function  ERR_PKCS12_parse(p12: PPKCS12; const pass: PIdAnsiChar; var pkey: PEVP_PKEY; var cert: PX509; ca: PPStack_Of_X509): TIdC_INT;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(PKCS12_parse_procname);
 end;

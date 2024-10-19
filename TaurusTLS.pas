@@ -276,7 +276,7 @@ type
   TTaurusTLSCipher = class;
   TCallbackExEvent = procedure(ASender: TObject; const AsslSocket: PSSL;
     const AWhere, Aret: TIdC_INT; const AType, AMsg: String) of object;
-  TPasswordEvent = procedure(ASender: TObject; out VPassword: String;
+  TPasswordEvent = procedure(ASender: TObject; var VPassword: String;
     const AIsWrite: Boolean) of object;
   TVerifyPeerEvent = function(Certificate: TTaurusTLSX509; const AOk: Boolean;
     const ADepth, AError: Integer): Boolean of object;
@@ -417,7 +417,7 @@ type
     procedure Connect(const pHandle: TIdStackSocketHandle);
     function Send(const ABuffer: TIdBytes;
       const AOffset, ALength: Integer): Integer;
-    function Recv(out VBuffer: TIdBytes): Integer;
+    function Recv(var VBuffer: TIdBytes): Integer;
     function _GetSessionID: TIdSSLByteArray;
     function GetSessionIDAsString: String;
     procedure SetCipherList(CipherList: String);
@@ -466,7 +466,7 @@ type
 
     procedure DoStatusInfo(const AsslSocket: PSSL; const AWhere, Aret: TIdC_INT;
       const AWhereStr, ARetStr: String);
-    procedure DoGetPassword(out VPassword: String; const AIsWrite: Boolean);
+    procedure DoGetPassword(var VPassword: String; const AIsWrite: Boolean);
     procedure DoOnSSLNegotiated;
     function DoVerifyPeer(Certificate: TTaurusTLSX509; const AOk: Boolean;
       const ADepth, AError: Integer): Boolean;
@@ -682,12 +682,14 @@ var
   LockVerifyCB: TIdCriticalSection = nil;
   CallbackLockList: TIdCriticalSectionThreadList = nil;
 
-procedure GetStateVars(const SSLSocket: PSSL; AWhere, Aret: TIdC_INT;
+procedure GetStateVars(const SSLSocket: PSSL; const AWhere, Aret: TIdC_INT;
   out VTypeStr, VMsg: String);
 {$IFDEF USE_INLINE}inline; {$ENDIF}
 var
   LState, LAlert: String;
 begin
+  VTypeStr := '';
+  VMsg := '';
   LState := String(SSL_state_string_long(SSLSocket));
   LAlert := String(SSL_alert_type_string_long(Aret));
 
@@ -1463,6 +1465,7 @@ end;
 procedure TTaurusTLSServerIOHandler.DoGetPassword(out VPassword: String;
   const AIsWrite: Boolean);
 begin
+  VPassword := '';
   if Assigned(fOnGetPassword) then
   begin
     fOnGetPassword(Self, VPassword, AIsWrite);
@@ -1808,7 +1811,7 @@ begin
   end;
 end;
 
-procedure TTaurusTLSIOHandlerSocket.DoGetPassword(out VPassword: String;
+procedure TTaurusTLSIOHandlerSocket.DoGetPassword(var VPassword: String;
   const AIsWrite: Boolean);
 begin
   if Assigned(fOnGetPassword) then
@@ -2671,6 +2674,8 @@ begin
   begin
     ETaurusTLSDataBindingError.RaiseException(fSSL, Error, RSSSLDataBindingError);
   end;
+  //ignore warning about 64-bit value being passed to a 32bit parameter.
+  //See: https://docs.openssl.org/3.0/man3/SSL_set_fd/#return-values
   LError := SSL_set_fd(fSSL, pHandle);
   if LError <= 0 then
   begin
@@ -2728,6 +2733,8 @@ begin
   begin
     ETaurusTLSDataBindingError.RaiseException(fSSL, LError, RSSSLDataBindingError);
   end;
+//ignore 64 value passed to 32bit parameter.
+//see: https://docs.openssl.org/3.0/man3/SSL_set_fd/#return-values
   LError := SSL_set_fd(fSSL, pHandle);
   if LError <= 0 then
   begin
@@ -2789,7 +2796,7 @@ begin
   }
 end;
 
-function TTaurusTLSSocket.Recv(out VBuffer: TIdBytes): Integer;
+function TTaurusTLSSocket.Recv(var VBuffer: TIdBytes): Integer;
 
 var
   Lret, Lerr: Integer;

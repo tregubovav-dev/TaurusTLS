@@ -280,7 +280,7 @@ function Indy_unicode_X509_load_cert_file(ctx: PX509_LOOKUP;
 }
 
 function by_Indy_unicode_file_ctrl(ctx: PX509_LOOKUP; cmd: TIdC_INT;
-  const argc: PAnsiChar; argl: TIdC_LONG; out ret: PAnsiChar): TIdC_INT; cdecl;
+  const argc: PAnsiChar; argl: TIdC_LONG; var ret: PAnsiChar): TIdC_INT; cdecl;
 var
   LOk: TIdC_INT;
 {$IFNDEF USE_INLINE_VAR}

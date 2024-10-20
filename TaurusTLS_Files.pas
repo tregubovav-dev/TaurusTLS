@@ -755,7 +755,7 @@ var
   ca: PX509;
   r: TIdC_INT;
   LErr: TIdC_ULONG;
-
+  LUserData : Pointer;
 begin
   Result := 0;
 
@@ -781,8 +781,9 @@ begin
       Exit;
     end;
     try
-      LX := PEM_read_bio_X509_AUX(b, nil, SSL_CTX_get_default_passwd_cb(ctx),
-        SSL_CTX_get_default_passwd_cb_userdata(ctx));
+      LUserData := SSL_CTX_get_default_passwd_cb_userdata(ctx);
+      LX := PEM_read_bio_X509_AUX(b, nil, SSL_CTX_get_default_passwd_cb_userdata(ctx),
+        LUserData);
       if LX = nil then
       begin
         SSLerr(SSL_F_SSL_CTX_USE_CERTIFICATE_CHAIN_FILE, ERR_R_PEM_LIB);
@@ -800,7 +801,7 @@ begin
           SSL_CTX_clear_chain_certs(ctx);
           repeat
             ca := PEM_read_bio_X509(b, nil, SSL_CTX_get_default_passwd_cb(ctx),
-              SSL_CTX_get_default_passwd_cb_userdata(ctx));
+              LUserData);
             if ca = nil then
             begin
               Break;

@@ -47,9 +47,8 @@ procedure Register;
 implementation
 
 uses
-  IdDsnCoreResourceStrings, // for RSRegIndyIOHandlers in dclIndyCore package
+  TaurusTLS_Dsn_ResourceStrings, // for RSRegIndyIOHandlers in dclIndyCore package
   {$IFDEF FPC}
-  IdDsnResourceStrings,     // for RSProt in dclIndyProtocols package
   LResources,
   {$ENDIF}
   TaurusTLS;
@@ -75,7 +74,7 @@ end;
 
 procedure Register;
 begin
-  RegisterComponents(RSRegIndyIOHandlers{$IFDEF FPC}+RSProt{$ENDIF}, [
+  RegisterComponents(RSTaurusTLS, [
     TTaurusTLSServerIOHandler,
     TTaurusTLSIOHandlerSocket
   ]);

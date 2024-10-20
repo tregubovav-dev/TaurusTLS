@@ -55,7 +55,7 @@ uses
   TaurusTLS;
 
 {$IFNDEF FPC}
-//  {$R IdRegisterTaurusTLS.dcr}
+  {$R *.dcr}
 {$ENDIF}
 
 {$IFDEF HAS_TSelectionEditor}

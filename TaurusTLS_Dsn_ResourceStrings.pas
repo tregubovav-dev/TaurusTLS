@@ -4,7 +4,7 @@ interface
 
 resourcestring
   RSTaurusTLS = 'TaurusTLS';
-  RSAAboutMenuItemName = 'T&aurusTLS %s';
+  RSAAboutMenuItemName = 'About T&aurusTLS %s...';
   RSLicense = 'TaurusTLS is dual licensed. You can review which license '
     + 'better suits your needs, and use that license.  See LICENSE.md '
     + 'for details.';
@@ -26,6 +26,7 @@ resourcestring
       'Indy project may be used to endorse or promote products derived from ' +
       'this software without specific prior written permission of the ' +
       'specific individual or organization.';
+   //
 
 implementation
 

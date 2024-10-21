@@ -172,6 +172,9 @@
         <DCCReference Include="IndySystem290.dcp"/>
         <DCCReference Include="TaurusTLS290.dcp"/>
         <DCCReference Include="TaurusTLS_Dsn_Register.pas"/>
+        <DCCReference Include="TaurusTLS_Dsn_ResourceStrings.pas"/>
+        <DCCReference Include="TaurusTLS_Dsn_AboutDlg.pas"/>
+        <DCCReference Include="TaurusTLS_Dsn_ComponentEditor.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

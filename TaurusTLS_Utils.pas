@@ -28,6 +28,7 @@ type
     MD: Array [0 .. EVP_MAX_MD_SIZE - 1] of TIdAnsiChar;
   end;
 
+function ANS1_STRING_ToHexStr(a : PASN1_STRING) : String;
 function ASN1_OBJECT_ToStr(a: PASN1_OBJECT): String;
 function LogicalAnd(a, B: Integer): Boolean;
 function BytesToHexString(APtr: Pointer; ALen: Integer): String;
@@ -140,6 +141,21 @@ function LogicalAnd(a, B: Integer): Boolean;
 {$IFDEF USE_INLINE} inline; {$ENDIF}
 begin
   Result := (a and B) = B;
+end;
+
+function ANS1_STRING_ToHexStr(a : PASN1_STRING) : String;
+{$IFDEF USE_INLINE} inline; {$ENDIF}
+var
+  LPtr: PAnsiChar;
+  LLen: TIdC_INT;
+begin
+  Result := '';
+  if Assigned(a) then
+  begin
+    LPtr := PAnsiChar(ASN1_STRING_get0_data(a));
+    LLen := ASN1_STRING_length(a);
+    Result := BytesToHexString(LPtr, LLen);
+  end;
 end;
 
 function BytesToHexString(APtr: Pointer; ALen: Integer): String;

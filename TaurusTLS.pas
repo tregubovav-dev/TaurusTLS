@@ -570,6 +570,8 @@ type
   TTaurusTLSCipher = class(TObject)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} private
     fSSLSocket: TTaurusTLSSocket;
+    fSSLCipher: PSSL_CIPHER;
+    function GetSSLCipher : PSSL_CIPHER;
     function GetDescription: String;
     function GetName: String;
     function GetBits: Integer;
@@ -2993,6 +2995,7 @@ constructor TTaurusTLSCipher.Create(AOwner: TTaurusTLSSocket);
 begin
   inherited Create;
   fSSLSocket := AOwner;
+  Self.fSSLCipher := nil;
 end;
 
 destructor TTaurusTLSCipher.Destroy;
@@ -3001,57 +3004,35 @@ begin
 end;
 
 function TTaurusTLSCipher.GetDescription;
-
 var
   buf: array [0 .. 1024] of TIdAnsiChar;
-  LSSLCipher: PSSL_CIPHER;
 begin
-  Result := '';
-  LSSLCipher := SSL_get_current_cipher(fSSLSocket.SSL);
-  if Assigned(LSSLCipher) then
-  begin
-    Result := String(SSL_CIPHER_description(LSSLCipher, @buf[0],
+    Result := String(SSL_CIPHER_description(GetSSLCipher, @buf[0],
       SizeOf(buf) - 1));
-  end;
 end;
 
 function TTaurusTLSCipher.GetName: String;
-
-var
-  LSSLCipher: PSSL_CIPHER;
 begin
-  Result := '';
-  LSSLCipher := SSL_get_current_cipher(fSSLSocket.SSL);
-  if Assigned(LSSLCipher) then
+    Result := String(SSL_CIPHER_get_name(GetSSLCipher));
+end;
+
+function TTaurusTLSCipher.GetSSLCipher: PSSL_CIPHER;
+begin
+  if not Assigned(FSSLCipher) then
   begin
-    Result := String(SSL_CIPHER_get_name(LSSLCipher));
+    FSSLCipher := SSL_get_current_cipher(fSSLSocket.SSL);
   end;
+  Result := FSSLCipher;
 end;
 
 function TTaurusTLSCipher.GetBits: TIdC_INT;
-
-var
-  LSSLCipher: PSSL_CIPHER;
 begin
-  Result := 0;
-  LSSLCipher := SSL_get_current_cipher(fSSLSocket.SSL);
-  if Assigned(LSSLCipher) then
-  begin
-    SSL_CIPHER_get_bits(LSSLCipher, Result);
-  end;
+  SSL_CIPHER_get_bits(GetSSLCipher, Result);
 end;
 
 function TTaurusTLSCipher.GetVersion: String;
-
-var
-  LSSLCipher: PSSL_CIPHER;
 begin
-  Result := '';
-  LSSLCipher := SSL_get_current_cipher(fSSLSocket.SSL);
-  if Assigned(LSSLCipher) then
-  begin
-    Result := String(SSL_CIPHER_get_version(LSSLCipher));
-  end;
+    Result := String(SSL_CIPHER_get_version(GetSSLCipher));
 end;
 
 {$I TaurusTLSSymbolDeprecatedOff.inc}

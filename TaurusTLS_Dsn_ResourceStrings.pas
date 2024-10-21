@@ -10,7 +10,7 @@ resourcestring
     + 'for details.';
   RSCopyright = 'Copyright (c) 2024 Taurus Developers';
   RSAllRightsReserved = 'All Rights Reserved';
-  RSThirdPartyAcknowlegements = '&Third-Party Acknowlegements';
+  RSThirdPartyAcknowlegements = '&Third-Party Acknowlegements...';
   RSOk = 'Ok';
 
   //Indy licensing acknowlegement

@@ -680,18 +680,10 @@ end;
 
 function TTaurusTLSX509.GetSubjectKeyIdentifier: String;
 var
-  LPtr: PAnsiChar;
-  LLen: TIdC_INT;
   LASN1: PASN1_STRING;
 begin
-  Result := '';
   LASN1 := PASN1_STRING(X509_get0_subject_key_id(FX509));
-  if Assigned(LASN1) then
-  begin
-    LPtr := PAnsiChar(ASN1_STRING_get0_data(LASN1));
-    LLen := ASN1_STRING_length(LASN1);
-    Result := BytesToHexString(LPtr, LLen);
-  end;
+  Result := ANS1_STRING_ToHexStr(LASN1);
 end;
 
 function TTaurusTLSX509.GetBasicConstraints: String;
@@ -892,40 +884,33 @@ begin
   Result := X509_get_version(FX509);
 end;
 
+function GetX509Name(ax509 : PX509_NAME) : TTaurusTLSX509Name;
+
+begin
+  Result := nil;
+  if Assigned(ax509) then
+  begin
+    Result := TTaurusTLSX509Name.Create(ax509);
+  end;
+end;
+
 function TTaurusTLSX509.GetSubject: TTaurusTLSX509Name;
-var
-  Lx509_name: PX509_NAME;
 Begin
   if not Assigned(FSubject) then
   begin
     if FX509 <> nil then
     begin
-      Lx509_name := X509_get_subject_name(FX509);
-    end
-    else
-    begin
-      Lx509_name := nil;
+      FSubject := GetX509Name(X509_get_subject_name(FX509));
     end;
-    FSubject := TTaurusTLSX509Name.Create(Lx509_name);
   end;
   Result := FSubject;
 end;
 
 function TTaurusTLSX509.GetIssuer: TTaurusTLSX509Name;
-var
-  Lx509_name: PX509_NAME;
 begin
   if not Assigned(FIssuer) then
   begin
-    if FX509 <> nil then
-    begin
-      Lx509_name := X509_get_issuer_name(FX509);
-    end
-    else
-    begin
-      Lx509_name := nil;
-    end;
-    FIssuer := TTaurusTLSX509Name.Create(Lx509_name);
+    FIssuer := GetX509Name(X509_get_issuer_name(FX509));
   End;
   Result := FIssuer;
 end;
@@ -950,7 +935,7 @@ begin
   begin
     // This is a safe typecast since PASN1_UTCTIME and PASN1_TIME are really
     // pointers to ASN1 strings since ASN1_UTCTIME amd ASM1_TIME are ASN1_STRING.
-    Result := UTCTime2DateTime(PASN1_UTCTIME(X509_get0_notBefore(FX509)));
+    Result := ASN1TimeToDateTime(X509_get0_notBefore(FX509));
   end;
 end;
 
@@ -964,7 +949,7 @@ begin
   begin
     // This is a safe typecast since PASN1_UTCTIME and PASN1_TIME are really
     // pointers to ASN1 strings since ASN1_UTCTIME amd ASM1_TIME are ASN1_STRING.
-    Result := UTCTime2DateTime(PASN1_UTCTIME(X509_get0_notAfter(FX509)));
+    Result := ASN1TimeToDateTime(X509_get0_notAfter(FX509));
   end;
 end;
 
@@ -1175,17 +1160,9 @@ end;
 function TTaurusTLSX509AuthorityKeyID.GetKeyId: String;
 var
   LASN1: PASN1_STRING;
-  LPtr: PAnsiChar;
-  LLen: TIdC_INT;
 begin
-  Result := '';
   LASN1 := PASN1_STRING(X509_get0_authority_key_id(FX509));
-  if Assigned(LASN1) then
-  begin
-    LPtr := PAnsiChar(ASN1_STRING_get0_data(LASN1));
-    LLen := ASN1_STRING_length(LASN1);
-    Result := BytesToHexString(LPtr, LLen);
-  end;
+  Result := ANS1_STRING_ToHexStr(LASN1);
 end;
 
 function TTaurusTLSX509AuthorityKeyID.GetSerial: TIdC_INT64;

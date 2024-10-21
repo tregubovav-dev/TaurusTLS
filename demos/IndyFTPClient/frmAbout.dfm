@@ -3,7 +3,7 @@ object AboutBox: TAboutBox
   Top = 108
   BorderStyle = bsDialog
   Caption = 'About'
-  ClientHeight = 274
+  ClientHeight = 287
   ClientWidth = 298
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -15,21 +15,22 @@ object AboutBox: TAboutBox
   OnCreate = FormCreate
   DesignSize = (
     298
-    274)
+    287)
   TextHeight = 13
   object Panel1: TPanel
     Left = 9
     Top = 8
     Width = 281
-    Height = 222
+    Height = 235
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelInner = bvRaised
     BevelOuter = bvLowered
     ParentColor = True
     TabOrder = 0
+    ExplicitHeight = 227
     DesignSize = (
       281
-      222)
+      235)
     object ProductName: TLabel
       Left = 119
       Top = 12
@@ -48,16 +49,17 @@ object AboutBox: TAboutBox
     end
     object Copyright: TLabel
       Left = 8
-      Top = 123
-      Width = 154
+      Top = 136
+      Width = 199
       Height = 13
       Anchors = [akLeft, akBottom]
-      Caption = 'Copyright (c) 2024 Indy Pitt Crew'
+      Caption = 'Copyright (c) 2024 TaurusTLS Developers'
       IsControl = True
+      ExplicitTop = 123
     end
     object Comments: TLabel
       Left = 8
-      Top = 142
+      Top = 155
       Width = 257
       Height = 43
       Anchors = [akLeft, akRight, akBottom]
@@ -67,6 +69,7 @@ object AboutBox: TAboutBox
         'en Design'#13#10'released under MIT LIcense and available at:'
       WordWrap = True
       IsControl = True
+      ExplicitTop = 142
     end
     object VirtualImage1: TVirtualImage
       Left = 8
@@ -81,20 +84,22 @@ object AboutBox: TAboutBox
     end
     object LinkLabel1: TLinkLabel
       Left = 8
-      Top = 191
+      Top = 204
       Width = 226
       Height = 17
       Hint = 'https://github.com/DennisSuitters/LibreICONS'
+      Anchors = [akLeft, akRight, akBottom]
       Caption = 
         '<a href="https://github.com/DennisSuitters/LibreICONS">https://g' +
         'ithub.com/DennisSuitters/LibreICONS</a>'
       TabOrder = 0
       OnClick = LinkLabel1Click
+      ExplicitTop = 196
     end
   end
   object OKButton: TButton
     Left = 111
-    Top = 235
+    Top = 247
     Width = 75
     Height = 25
     Anchors = [akLeft, akRight]
@@ -102,6 +107,7 @@ object AboutBox: TAboutBox
     Default = True
     ModalResult = 1
     TabOrder = 1
+    ExplicitTop = 240
   end
   object ImageCollection1: TImageCollection
     Images = <

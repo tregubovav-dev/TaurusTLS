@@ -23,7 +23,7 @@ type
   TTaurusTLSAPISSLError = class of ETaurusTLSAPISSLError;
 
   ETaurusTLSAPISSLError = class(ETaurusTLSError)
-  protected
+{$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} protected
     FErrorCode : TIdC_INT;
     FRetCode : TIdC_INT;
   public
@@ -35,7 +35,7 @@ type
 
   TTaurusTLSAPICryptoError = class of ETaurusTLSAPICryptoError;
   ETaurusTLSAPICryptoError = class(ETaurusTLSError)
-  protected
+{$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} protected
     FErrorCode : TIdC_ULONG;
   public
     class procedure RaiseExceptionCode(const AErrCode : TIdC_ULONG; const AMsg : String = '');

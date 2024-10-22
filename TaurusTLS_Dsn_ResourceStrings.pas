@@ -11,7 +11,7 @@ resourcestring
   RSCopyright = 'Copyright (c) 2024 Taurus Developers';
   RSAllRightsReserved = 'All Rights Reserved';
   RSThirdPartyAcknowlegements = '&Third-Party Acknowlegements...';
-  RSOk = 'Ok';
+  RSOk = 'OK';
 
   //Indy licensing acknowlegement
   RSIndyPortionsOf = 'Portions of this software are Copyright (c) 1993 '#8211' 2018, Chad Z. Hower ';

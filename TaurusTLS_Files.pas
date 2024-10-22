@@ -107,9 +107,8 @@ var
 begin
   Result := 0;
 
-  LM := nil;
+  LM := TMemoryStream.Create;
   try
-    LM := TMemoryStream.Create;
     LM.LoadFromFile(AFileName);
   except
     // Surpress exception here since it's going to be called by the TaurusTLS .DLL
@@ -188,9 +187,8 @@ var
 begin
   Result := 0;
 
-  LM := nil;
+  LM := TMemoryStream.Create;
   try
-    LM := TMemoryStream.Create;
     LM.LoadFromFile(AFileName);
   except
     // Surpress exception here since it's going to be called by the TaurusTLS .DLL
@@ -349,9 +347,8 @@ begin
     Exit;
   end;
 
-  LM := nil;
+  LM := TMemoryStream.Create;
   try
-    LM := TMemoryStream.Create;
     LM.LoadFromFile(AFileName);
   except
     // Surpress exception here since it's going to be called by the TaurusTLS .DLL
@@ -436,7 +433,6 @@ var
 begin
   Result := 0;
   count := 0;
-  LM := nil;
 
   if _type <> X509_FILETYPE_PEM then
   begin
@@ -444,8 +440,8 @@ begin
     Exit;
   end;
 
+  LM := TMemoryStream.Create;
   try
-    LM := TMemoryStream.Create;
     LM.LoadFromFile(AFileName);
   except
     // Surpress exception here since it's going to be called by the TaurusTLS .DLL
@@ -523,9 +519,8 @@ begin
   if Assigned(Lsk) then
   begin
     try
-      LM := nil;
+      LM := TMemoryStream.Create;
       try
-        LM := TMemoryStream.Create;
         LM.LoadFromFile(AFileName);
       except
         // Surpress exception here since it's going to be called by the TaurusTLS .DLL
@@ -631,9 +626,8 @@ var
 begin
   Result := 0;
 
-  LM := nil;
+  LM := TMemoryStream.Create;
   try
-    LM := TMemoryStream.Create;
     LM.LoadFromFile(AFileName);
   except
     // Surpress exception here since it's going to be called by the TaurusTLS .DLL
@@ -693,9 +687,8 @@ var
 begin
   Result := 0;
 
-  LM := nil;
+  LM := TMemoryStream.Create;
   try
-    LM := TMemoryStream.Create;
     LM.LoadFromFile(AFileName);
   except
     // Surpress exception here since it's going to be called by the TaurusTLS .DLL
@@ -762,9 +755,8 @@ begin
   ERR_clear_error(); // * clear error stack for
   // * SSL_CTX_use_certificate() */
 
-  LM := nil;
+  LM := TMemoryStream.Create;
   try
-    LM := TMemoryStream.Create;
     LM.LoadFromFile(AFileName);
   except
     // Surpress exception here since it's going to be called by the TaurusTLS .DLL
@@ -910,9 +902,8 @@ var
 begin
   Result := 0;
 
-  LM := nil;
+  LM := TMemoryStream.Create;
   try
-    LM := TMemoryStream.Create;
     LM.LoadFromFile(AFileName);
   except
     // Surpress exception here since it's going to be called by the TaurusTLS .DLL

@@ -87,12 +87,10 @@ end;
 
 function TaurusTLSGetDigestCtx( AInst : PEVP_MD) : TIdHashIntCtx;
   {$IFDEF USE_INLINE} inline; {$ENDIF}
-var LRet : Integer;
 begin
   Result := EVP_MD_CTX_new;
 
-  LRet := EVP_DigestInit_ex(Result, AInst, nil);
-  if LRet <> 1 then begin
+  if EVP_DigestInit_ex(Result, AInst, nil) <> 1 then begin
     EIdDigestInitEx.RaiseException(RSOSSLEVPDigestExError);
   end;
 end;
@@ -111,16 +109,11 @@ begin
 end;
 
 function TaurusTLSGetMD2HashInst : TIdHashIntCtx;
-{$IFNDEF OPENSSL_NO_MD2}
-var
-  LRet : PEVP_MD;
-{$ENDIF}
 begin
   {$IFDEF OPENSSL_NO_MD2}
   Result := nil;
   {$ELSE}
-  LRet := EVP_md2;
-  Result := TaurusTLSGetDigestCtx(LRet);
+  Result := TaurusTLSGetDigestCtx(EVP_md2);
   {$ENDIF}
 end;
 
@@ -134,11 +127,8 @@ begin
 end;
 
 function TaurusTLSGetMD4HashInst : TIdHashIntCtx;
-var
-  LRet : PEVP_MD;
 begin
-  LRet := EVP_md4;
-  Result := TaurusTLSGetDigestCtx(LRet);
+  Result := TaurusTLSGetDigestCtx(EVP_md4);
 end;
 
 function TaurusTLSIsMD5HashIntfAvail: Boolean;
@@ -151,11 +141,8 @@ begin
 end;
 
 function TaurusTLSGetMD5HashInst : TIdHashIntCtx;
-var
-  LRet : PEVP_MD;
 begin
-  LRet := EVP_md5;
-  Result := TaurusTLSGetDigestCtx(LRet);
+  Result := TaurusTLSGetDigestCtx(EVP_md5);
 end;
 
 function TaurusTLSIsSHA1HashIntfAvail: Boolean;
@@ -172,16 +159,11 @@ begin
 end;
 
 function TaurusTLSGetSHA1HashInst : TIdHashIntCtx;
-{$IFNDEF OPENSSL_NO_SHA}
-var
-  LRet : PEVP_MD;
-{$ENDIF}
 begin
   {$IFDEF OPENSSL_NO_SHA}
   Result := nil;
   {$ELSE}
-  LRet := EVP_sha1;
-  Result := TaurusTLSGetDigestCtx(LRet);
+  Result := TaurusTLSGetDigestCtx(EVP_sha1);
   {$ENDIF}
 end;
 
@@ -199,16 +181,11 @@ begin
 end;
 
 function TaurusTLSGetSHA224HashInst : TIdHashIntCtx;
-{$IFNDEF OPENSSL_NO_SHA256}
-var
-  LRet : PEVP_MD;
-{$ENDIF}
 begin
   {$IFDEF OPENSSL_NO_SHA256}
   Result := nil;
   {$ELSE}
-  LRet := EVP_sha224;
-  Result := TaurusTLSGetDigestCtx(LRet);
+  Result := TaurusTLSGetDigestCtx(EVP_sha224);
   {$ENDIF}
 end;
 
@@ -226,16 +203,11 @@ begin
 end;
 
 function TaurusTLSGetSHA256HashInst : TIdHashIntCtx;
-{$IFNDEF OPENSSL_NO_SHA256}
-var
-  LRet : PEVP_MD;
-{$ENDIF}
 begin
   {$IFDEF OPENSSL_NO_SHA256}
   Result := nil;
   {$ELSE}
-  LRet := EVP_sha256;
-  Result := TaurusTLSGetDigestCtx(LRet);
+  Result := TaurusTLSGetDigestCtx(EVP_sha256);
   {$ENDIF}
 end;
 
@@ -252,16 +224,11 @@ begin
 end;
 
 function TaurusTLSGetSHA384HashInst : TIdHashIntCtx;
-{$IFNDEF OPENSSL_NO_SHA512}
-var
-  LRet : PEVP_MD;
-{$ENDIF}
 begin
   {$IFDEF OPENSSL_NO_SHA512}
   Result := nil;
   {$ELSE}
-  LRet := EVP_sha384;
-  Result := TaurusTLSGetDigestCtx(LRet);
+  Result := TaurusTLSGetDigestCtx(EVP_sha384);
   {$ENDIF}
 end;
 
@@ -279,25 +246,17 @@ begin
 end;
 
 function TaurusTLSGetSHA512HashInst : TIdHashIntCtx;
-{$IFNDEF OPENSSL_NO_SHA512}
-var
-  LRet : PEVP_MD;
-{$ENDIF}
 begin
   {$IFDEF OPENSSL_NO_SHA512}
   Result := nil;
   {$ELSE}
-  LRet := EVP_sha512;
-  Result := TaurusTLSGetDigestCtx(LRet);
-{$ENDIF}
+  Result := TaurusTLSGetDigestCtx(EVP_sha512);
+  {$ENDIF}
 end;
 
 procedure TaurusTLSUpdateHashInst(ACtx: TIdHashIntCtx; const AIn: TIdBytes);
-var
-  LRet : TIdC_Int;
 begin
-  LRet := EVP_DigestUpdate(ACtx, PByte(Ain), Length(AIn));
-  if LRet <> 1 then begin
+  if EVP_DigestUpdate(ACtx, PByte(Ain), Length(AIn)) <> 1 then begin
     EIdDigestInitEx.RaiseException(RSOSSLEVPDigestUpdateError);
   end;
 end;
@@ -305,11 +264,9 @@ end;
 function TaurusTLSFinalHashInst(ACtx: TIdHashIntCtx): TIdBytes;
 var
   LLen : TIdC_UInt;
-  LRet : TIdC_Int;
 begin
   SetLength(Result,EVP_MAX_MD_SIZE);
-  LRet := EVP_DigestFinal_ex(ACtx, PByte(@Result[0]), LLen);
-  if LRet <> 1 then begin
+  if EVP_DigestFinal_ex(ACtx, PByte(@Result[0]), LLen) <> 1 then begin
     EIdDigestFinalEx.RaiseException('EVP_DigestFinal_ex error');
   end;
   SetLength(Result,LLen);

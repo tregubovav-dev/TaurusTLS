@@ -847,6 +847,7 @@ begin
     do in this event.  We need the value of WSGetLastError so we can report
     an underlying socket error when the OpenSSL function returns.
 
+    Keep LErr even if it is referenced once.
     JPM.
   }
   LErr := GStack.WSGetLastError;

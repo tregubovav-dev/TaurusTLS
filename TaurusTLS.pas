@@ -351,7 +351,7 @@ type
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} protected
 
     procedure DestroyContext;
-    function SetSSLMethod: PSSL_METHOD;
+    function GetSSLMethod: PSSL_METHOD;
     procedure SetVerifyMode(AMode: TIdSSLVerifyModeSet; ACheckRoutine: Boolean);
     function GetVerifyMode: TIdSSLVerifyModeSet;
   public
@@ -786,7 +786,6 @@ var
 {$IFDEF STRING_IS_UNICODE}
   LBPassword: TIdBytes;
 {$ENDIF}
-  LContext: TTaurusTLSContext;
   LErr: Integer;
   LHelper: ITaurusTLSCallbackHelper;
 begin
@@ -801,8 +800,7 @@ begin
         LPassword: String;
 {$ENDIF}
       LPassword := ''; { Do not Localize }
-      LContext := TTaurusTLSContext(userdata);
-      if Supports(LContext.Parent, ITaurusTLSCallbackHelper, IInterface(LHelper))
+      if Supports(TTaurusTLSContext(userdata).Parent, ITaurusTLSCallbackHelper, IInterface(LHelper))
       then
       begin
         LPassword := LHelper.GetPassword(rwflag > 0);
@@ -1933,7 +1931,7 @@ begin
   LMode := fSSLContext.Mode;
   if not(LMode in [sslmClient, sslmServer]) then
   begin
-    // Mode must be sslmBoth (or else TTaurusTLSContext.SetSSLMethod() would have
+    // Mode must be sslmBoth (or else TTaurusTLSContext.GetSSLMethod() would have
     // raised an exception), so just fall back to previous behavior for now,
     // until we can figure out a better way to handle this scenario...
     if IsPeer then
@@ -2198,7 +2196,6 @@ const
     TLS1_3_VERSION); { sslvTLSv1_3 }
 
 var
-  SSLMethod: PSSL_METHOD;
   LError: TIdC_INT;
   v: TTaurusTLSSSLVersion;
   // pCAname: PSTACK_X509_NAME;
@@ -2219,10 +2216,9 @@ begin
       fMode := sslmClient;
     end
   end;
-  // get SSL method function (SSL2, SSL23, SSL3, TLS)
-  SSLMethod := SetSSLMethod;
+
   // create new SSL context
-  fContext := SSL_CTX_new(SSLMethod);
+  fContext := SSL_CTX_new(GetSSLMethod);
   if fContext = nil then
   begin
     ETaurusTLSCreatingContextError.RaiseException(RSSSLCreatingContextError);
@@ -2504,7 +2500,7 @@ begin
 end;
 {$ENDIF}
 
-function TTaurusTLSContext.SetSSLMethod: PSSL_METHOD;
+function TTaurusTLSContext.GetSSLMethod: PSSL_METHOD;
 begin
   Result := nil;
   if fMode = sslmUnassigned then

@@ -682,11 +682,8 @@ begin
 end;
 
 function TTaurusTLSX509.GetSubjectKeyIdentifier: String;
-var
-  LASN1: PASN1_STRING;
 begin
-  LASN1 := PASN1_STRING(X509_get0_subject_key_id(FX509));
-  Result := ANS1_STRING_ToHexStr(LASN1);
+  Result := ANS1_STRING_ToHexStr(PASN1_STRING(X509_get0_subject_key_id(FX509)));
 end;
 
 function TTaurusTLSX509.GetBasicConstraints: String;
@@ -883,7 +880,8 @@ begin
   Result := X509_get_version(FX509);
 end;
 
-function TTaurusTLSX509.X509ToTTaurusTLSX509Name(aX509: PX509_NAME): TTaurusTLSX509Name;
+function TTaurusTLSX509.X509ToTTaurusTLSX509Name(aX509: PX509_NAME)
+  : TTaurusTLSX509Name;
 
 begin
   Result := nil;
@@ -1142,24 +1140,13 @@ begin
 end;
 
 function TTaurusTLSX509AuthorityKeyID.GetKeyId: String;
-var
-  LASN1: PASN1_STRING;
 begin
-  LASN1 := PASN1_STRING(X509_get0_authority_key_id(FX509));
-  Result := ANS1_STRING_ToHexStr(LASN1);
+  Result := ANS1_STRING_ToHexStr(PASN1_STRING(X509_get0_authority_key_id(FX509)));
 end;
 
 function TTaurusTLSX509AuthorityKeyID.GetSerial: TIdC_INT64;
-var
-  LASN1: PASN1_INTEGER;
-
 begin
-  Result := -1;
-  LASN1 := X509_get0_authority_serial(FX509);
-  if Assigned(LASN1) then
-  begin
-    ASN1_INTEGER_get_int64(@Result, LASN1);
-  end;
+  ASN1_INTEGER_get_int64(@Result, X509_get0_authority_serial(FX509));
 end;
 
 { TTaurusTLSX509Warnings }

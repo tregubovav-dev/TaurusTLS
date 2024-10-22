@@ -234,8 +234,8 @@ type
     DataEncipherment, KeyAgreement, CertSign, CRLSign, EncipherOnly,
     DecipherOnly);
   TTaurusTLSX509KeyUsage = set of TTaurusTLSX509KeyUse;
-  TTaurusTLSX509ExtKeyUse = (Server, Client, SMIME, CodeSign, OCSPSign, TimeStamp,
-    DVCS, AnyEKU);
+  TTaurusTLSX509ExtKeyUse = (Server, Client, SMIME, CodeSign, OCSPSign,
+    TimeStamp, DVCS, AnyEKU);
   TTaurusTLSX509ExtKeyUsage = set of TTaurusTLSX509ExtKeyUse;
 
   TTaurusTLSX509 = class(TObject)
@@ -272,6 +272,8 @@ type
     function GetKeyUsage: TTaurusTLSX509KeyUsage;
     function GetExtKeyUsage: TTaurusTLSX509ExtKeyUsage;
     function GetProxyPathLen: TIdC_LONG;
+
+    function X509ToTTaurusTLSX509Name(aX509: PX509_NAME): TTaurusTLSX509Name;
   public
     Constructor Create(aX509: PX509; aCanFreeX509: Boolean = True); virtual;
     Destructor Destroy; override;
@@ -286,7 +288,8 @@ type
     property Fingerprint: TIdSSLEVP_MD read GetFingerprint;
     property FingerprintAsString: String read GetFingerprintAsString;
     property Subject: TTaurusTLSX509Name read GetSubject;
-    property AltSubjectNames: TTaurusTLSX509AltSubjectAltNames read FAltSubjectNames;
+    property AltSubjectNames: TTaurusTLSX509AltSubjectAltNames
+      read FAltSubjectNames;
     property Issuer: TTaurusTLSX509Name read GetIssuer;
     property notBefore: TDateTime read GetnotBefore;
     property notAfter: TDateTime read GetnotAfter;
@@ -748,8 +751,6 @@ function TTaurusTLSX509.GetExtentionValues(const AIndex: TIdC_INT): string;
 var
   LExt: PX509_EXTENSION;
   LASN1: PASN1_STRING;
-  LPtr: PAnsiChar;
-  LLen: TIdC_INT;
 begin
   Result := '';
   if AIndex > -1 then
@@ -758,9 +759,7 @@ begin
     LASN1 := PASN1_STRING(X509_EXTENSION_get_data(LExt));
     if Assigned(LASN1) then
     begin
-      LPtr := PAnsiChar(ASN1_STRING_get0_data(LASN1));
-      LLen := ASN1_STRING_length(LASN1);
-      Result := BytesToHexString(LPtr, LLen);
+      Result := ANS1_STRING_ToHexStr(LASN1);
     end;
   end;
 end;
@@ -884,13 +883,13 @@ begin
   Result := X509_get_version(FX509);
 end;
 
-function GetX509Name(ax509 : PX509_NAME) : TTaurusTLSX509Name;
+function TTaurusTLSX509.X509ToTTaurusTLSX509Name(aX509: PX509_NAME): TTaurusTLSX509Name;
 
 begin
   Result := nil;
-  if Assigned(ax509) then
+  if Assigned(aX509) then
   begin
-    Result := TTaurusTLSX509Name.Create(ax509);
+    Result := TTaurusTLSX509Name.Create(aX509);
   end;
 end;
 
@@ -898,10 +897,7 @@ function TTaurusTLSX509.GetSubject: TTaurusTLSX509Name;
 Begin
   if not Assigned(FSubject) then
   begin
-    if FX509 <> nil then
-    begin
-      FSubject := GetX509Name(X509_get_subject_name(FX509));
-    end;
+    FSubject := X509ToTTaurusTLSX509Name(X509_get_subject_name(FX509));
   end;
   Result := FSubject;
 end;
@@ -910,7 +906,7 @@ function TTaurusTLSX509.GetIssuer: TTaurusTLSX509Name;
 begin
   if not Assigned(FIssuer) then
   begin
-    FIssuer := GetX509Name(X509_get_issuer_name(FX509));
+    FIssuer := X509ToTTaurusTLSX509Name(X509_get_issuer_name(FX509));
   End;
   Result := FIssuer;
 end;
@@ -927,30 +923,16 @@ end;
 
 function TTaurusTLSX509.GetnotBefore: TDateTime;
 begin
-  if FX509 = nil then
-  begin
-    Result := 0
-  end
-  else
-  begin
-    // This is a safe typecast since PASN1_UTCTIME and PASN1_TIME are really
-    // pointers to ASN1 strings since ASN1_UTCTIME amd ASM1_TIME are ASN1_STRING.
-    Result := ASN1TimeToDateTime(X509_get0_notBefore(FX509));
-  end;
+  // This is a safe typecast since PASN1_UTCTIME and PASN1_TIME are really
+  // pointers to ASN1 strings since ASN1_UTCTIME amd ASM1_TIME are ASN1_STRING.
+  Result := ASN1TimeToDateTime(X509_get0_notBefore(FX509));
 end;
 
 function TTaurusTLSX509.GetnotAfter: TDateTime;
 begin
-  if FX509 = nil then
-  begin
-    Result := 0
-  end
-  else
-  begin
-    // This is a safe typecast since PASN1_UTCTIME and PASN1_TIME are really
-    // pointers to ASN1 strings since ASN1_UTCTIME amd ASM1_TIME are ASN1_STRING.
-    Result := ASN1TimeToDateTime(X509_get0_notAfter(FX509));
-  end;
+  // This is a safe typecast since PASN1_UTCTIME and PASN1_TIME are really
+  // pointers to ASN1 strings since ASN1_UTCTIME amd ASM1_TIME are ASN1_STRING.
+  Result := ASN1TimeToDateTime(X509_get0_notAfter(FX509));
 end;
 
 { TTaurusTLSX509PublicKey }
@@ -1019,12 +1001,14 @@ begin
   Result := X509_get_ext_count(FX509);
 end;
 
-function TTaurusTLSX509Exts.GetExtension(const AIndex: TIdC_INT): PX509_EXTENSION;
+function TTaurusTLSX509Exts.GetExtension(const AIndex: TIdC_INT)
+  : PX509_EXTENSION;
 begin
   Result := X509_get_ext(FX509, AIndex);
 end;
 
-function TTaurusTLSX509Exts.GetExtensionByNid(const ANid: TIdC_INT): PX509_EXTENSION;
+function TTaurusTLSX509Exts.GetExtensionByNid(const ANid: TIdC_INT)
+  : PX509_EXTENSION;
 var
   LIdx: TIdC_INT;
 begin
@@ -1245,7 +1229,8 @@ begin
   end;
 end;
 
-function TTaurusTLSX509AltSubjectAltNames.GetItems(const AIndex: TIdC_INT): string;
+function TTaurusTLSX509AltSubjectAltNames.GetItems(const AIndex
+  : TIdC_INT): string;
 var
   LGN: PGENERAL_NAME;
 begin

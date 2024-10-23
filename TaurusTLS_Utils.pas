@@ -20,6 +20,7 @@ uses
   TaurusTLSHeaders_asn1,
   TaurusTLSHeaders_evp,
   TaurusTLSHeaders_ossl_typ,
+  TaurusTLSHeaders_x509v3,
   System.Classes;
 
 type
@@ -42,6 +43,10 @@ function AddMins(const DT: TDateTime; const Mins: Extended): TDateTime;
 function AddHrs(const DT: TDateTime; const Hrs: Extended): TDateTime;
 
 function ASN1TimeToDateTime(A : PASN1_TIME) : TDateTime;
+
+function ASN1_ToIPAddress(const a: PASN1_OCTET_STRING): String;
+function DirName(const ADirName: PX509_NAME): String;
+function GeneralNameToStr(const AGN: PGENERAL_NAME): String;
 
 implementation
 
@@ -221,8 +226,8 @@ begin
   then
   begin
     Result := EncodeDate(year, month, day) + EncodeTime(hour, min, sec, 0);
-    AddMins(Result, tz_m);
-    AddHrs(Result, tz_h);
+    Result := AddMins(Result, tz_m);
+    Result := AddHrs(Result, tz_h);
     Result := UTCTimeToLocalTime(Result);
   end;
 end;
@@ -232,6 +237,96 @@ begin
     // This is a safe typecast since PASN1_UTCTIME and PASN1_TIME are really
     // pointers to ASN1 strings since ASN1_UTCTIME amd ASM1_TIME are ASN1_STRING.
     Result := UTCTime2DateTime(PASN1_UTCTIME(a));
+end;
+
+
+function DirName(const ADirName: PX509_NAME): String;
+var
+  i, Le_count: TIdC_INT;
+  LE: PX509_NAME_ENTRY;
+  LASN1: PASN1_STRING;
+  LOBJ: PASN1_OBJECT;
+  LPtr: PAnsiChar;
+begin
+  Result := '';
+  Le_count := X509_NAME_entry_count(ADirName);
+
+  for i := 0 to Le_count - 1 do
+  begin
+    LE := X509_NAME_get_entry(ADirName, i);
+    LOBJ := X509_NAME_ENTRY_get_object(LE);
+    LASN1 := X509_NAME_ENTRY_get_data(LE);
+    LPtr := PAnsiChar(ASN1_STRING_get0_data(LASN1));
+    Result := Result + ' ' + ASN1_OBJECT_ToStr(LOBJ) + ' = ' +
+      String(LPtr) + ';';
+  end;
+  Result := Trim(Result);
+end;
+
+function ASN1_ToIPAddress(const a: PASN1_OCTET_STRING): String;
+{$IFDEF USE_INLINE}inline; {$ENDIF}
+var
+  LIPv6: TIdIPv6Address;
+  i: Integer;
+begin
+  Result := '';
+  if a.length = 4 then
+  begin
+    Result := IntToStr(a.Data[0]) + '.' + IntToStr(a.Data[1]) + '.' +
+      IntToStr(a.Data[2]) + '.' + IntToStr(a.Data[3]);
+  end
+  else
+  begin
+    if a.length = 16 then
+    begin
+
+      for i := 0 to 7 do
+      begin
+        LIPv6[i] := (a.Data[i * 2] shl 8) + (a.Data[(i * 2) + 1]);
+      end;
+      Result := IdGlobal.IPv6AddressToStr(LIPv6);
+    end;
+  end;
+end;
+
+function GeneralNameToStr(const AGN: PGENERAL_NAME): String;
+begin
+  Result := '';
+  case AGN.type_ of
+    GEN_OTHERNAME:
+      Result := 'Other Name';
+    GEN_EMAIL:
+      begin
+        Result := 'E-Mail: ' + String(PAnsiChar(AGN.d.rfc822Name.Data));
+      end;
+    GEN_DNS:
+      begin
+        Result := 'DNS: ' + String(PAnsiChar(AGN.d.dNSName.Data));
+      end;
+    GEN_X400:
+      begin
+        Result := 'X400';
+      end;
+    GEN_DIRNAME:
+      begin
+        Result := 'Dir Name: ' + DirName(AGN.d.directoryName);
+      end;
+    GEN_EDIPARTY:
+      begin
+        Result := 'EDI Party';
+      end;
+    GEN_URI:
+      begin
+        Result := 'URI: ' +
+          String(PIdAnsiChar(AGN.d.uniformResourceIdentifier.Data));
+      end;
+    GEN_IPADD:
+      begin
+        Result := 'IP Address: ' + ASN1_ToIPAddress(AGN.d.iPAddress);
+      end;
+    GEN_RID:
+      Result := 'Registered ID: ' + ASN1_OBJECT_ToStr(AGN.d.rid);
+  end;
 end;
 
 {$IFNDEF OPENSSL_NO_BIO}

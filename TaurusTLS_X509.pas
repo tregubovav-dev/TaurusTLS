@@ -162,7 +162,7 @@ type
     property Encoding: String read GetEncoding;
     property EncodingSize: TIdC_INT read GetEncodingSize;
     property Modulus: String read GetModulus;
-    property Exponent : String read GetExponent;
+    property Exponent_ : String read GetExponent;
   end;
 
   TTaurusTLSX509Exts = class(TTaurusTLSX509Info)
@@ -400,7 +400,6 @@ end;
 function TTaurusTLSX509Name.GetStrByNID(const ANid: TIdC_INT): String;
 var
   LBuffer: array [0 .. 2048] of TIdAnsiChar;
-  LPtr: PAnsiChar;
 begin
   if fX509Name = nil then
   begin
@@ -408,10 +407,12 @@ begin
   end
   else
   begin
-    LPtr := @LBuffer[0];
-    if X509_NAME_get_text_by_NID(fX509Name, ANid, LPtr, 256) > -1 then
+    if X509_NAME_get_text_by_NID(fX509Name, ANid, @LBuffer[0], 256) > -1 then
     begin
-      Result := String(LPtr);
+      //PIdAnsiChar typecast is necessary to force the RTL
+      // to read it as a PAnsiChar for conversion for a
+      // string.
+      Result := String(PIdAnsiChar(@LBuffer[0]));
     end
     else
     begin
@@ -960,8 +961,11 @@ function TTaurusTLSX509PublicKey.GetEncodingSize: TIdC_INT;
 var
   LKey: array [0 .. 2048] of TIdAnsiChar;
 begin
-  X509_PUBKEY_get0_param(nil, @LKey[0], @Result, nil,
-    X509_get_X509_PUBKEY(FX509));
+  if X509_PUBKEY_get0_param(nil, @LKey[0], @Result, nil,
+    X509_get_X509_PUBKEY(FX509)) <> 1 then
+  begin
+    Result := 0;
+  end;
 end;
 
 function TTaurusTLSX509PublicKey.GetExponent: String;
@@ -1051,94 +1055,6 @@ begin
   end;
 end;
 
-function DirName(const ADirName: PX509_NAME): String;
-var
-  i, Le_count: TIdC_INT;
-  LE: PX509_NAME_ENTRY;
-  LASN1: PASN1_STRING;
-  LOBJ: PASN1_OBJECT;
-  LPtr: PAnsiChar;
-begin
-  Result := '';
-  Le_count := X509_NAME_entry_count(ADirName);
-
-  for i := 0 to Le_count - 1 do
-  begin
-    LE := X509_NAME_get_entry(ADirName, i);
-    LOBJ := X509_NAME_ENTRY_get_object(LE);
-    LASN1 := X509_NAME_ENTRY_get_data(LE);
-    LPtr := PAnsiChar(ASN1_STRING_get0_data(LASN1));
-    Result := Result + ' ' + ASN1_OBJECT_ToStr(LOBJ) + ' = ' +
-      String(LPtr) + ';';
-  end;
-  Result := Trim(Result);
-end;
-
-function ASN1_ToIPAddress(a: PASN1_OCTET_STRING): String;
-{$IFDEF USE_INLINE}inline; {$ENDIF}
-var
-  LIPv6: TIdIPv6Address;
-  i: Integer;
-begin
-  Result := '';
-  if a.length = 4 then
-  begin
-    Result := IntToStr(a.Data[0]) + '.' + IntToStr(a.Data[1]) + '.' +
-      IntToStr(a.Data[2]) + '.' + IntToStr(a.Data[3]);
-  end
-  else
-  begin
-    if a.length = 16 then
-    begin
-
-      for i := 0 to 7 do
-      begin
-        LIPv6[i] := (a.Data[i * 2] shl 8) + (a.Data[(i * 2) + 1]);
-      end;
-      Result := IdGlobal.IPv6AddressToStr(LIPv6);
-    end;
-  end;
-end;
-
-function GeneralNameToStr(AGN: PGENERAL_NAME): String;
-begin
-  Result := '';
-  case AGN.type_ of
-    GEN_OTHERNAME:
-      Result := 'Other Name';
-    GEN_EMAIL:
-      begin
-        Result := 'E-Mail: ' + String(PAnsiChar(AGN.d.rfc822Name.Data));
-      end;
-    GEN_DNS:
-      begin
-        Result := 'DNS: ' + String(PAnsiChar(AGN.d.dNSName.Data));
-      end;
-    GEN_X400:
-      begin
-        Result := 'X400';
-      end;
-    GEN_DIRNAME:
-      begin
-        Result := 'Dir Name: ' + DirName(AGN.d.directoryName);
-      end;
-    GEN_EDIPARTY:
-      begin
-        Result := 'EDI Party';
-      end;
-    GEN_URI:
-      begin
-        Result := 'URI: ' +
-          String(PAnsiChar(AGN.d.uniformResourceIdentifier.Data));
-      end;
-    GEN_IPADD:
-      begin
-        Result := 'IP Address: ' + ASN1_ToIPAddress(AGN.d.iPAddress);
-      end;
-    GEN_RID:
-      Result := 'Registered ID: ' + ASN1_OBJECT_ToStr(AGN.d.rid);
-  end;
-end;
 
 function TTaurusTLSX509AuthorityKeyID.GetIssuer(const AIndex: TIdC_INT): String;
 var

@@ -46,6 +46,8 @@ resourcestring
   {IdSSLTaurusTLSFIPS}
   RSOSSLEVPDigestExError = 'EVP_DigestInit_ex error';
   RSOSSLEVPDigestUpdateError = 'EVP_DigestUpdate error';
+  RSOSSLMinProtocolError = 'SSL_CTX_set_min_proto_version error';
+  RSOSSLMaxProtocolError = 'SSL_CTX_set_max_proto_version error';
 
 implementation
 

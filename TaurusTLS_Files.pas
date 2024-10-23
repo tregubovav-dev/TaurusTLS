@@ -568,7 +568,7 @@ begin
                   Failed := True;
                   Exit;
                 end;
-                if (sk_X509_NAME_find(Lsk, LXNDup) >= 0) then
+                if sk_X509_NAME_find(Lsk, LXNDup) >= 0 then
                 begin
                   X509_NAME_free(LXNDup);
                 end
@@ -799,7 +799,7 @@ begin
               Break;
             end;
             r := SSL_CTX_add0_chain_cert(ctx, ca);
-            if (r = 0) then
+            if r = 0 then
             begin
               X509_free(ca);
               Result := 0;

@@ -1637,6 +1637,8 @@ begin
   // any data from the base class unencrypted when setting up that
   // connection.  We should do this anyway since SSL hasn't been
   // negotiated yet!
+  // Save LPassThrough instead of "fixing" the "Local variable is referenced
+  // only once" warning.
   LPassThrough := fPassThrough;
   fPassThrough := true;
   try

@@ -147,6 +147,7 @@ type
   TTaurusTLSX509PublicKey = class(TTaurusTLSX509Info)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     function GetModulus: String;
+    function GetExponent: String;
     function GetAlgorithm: String;
     function GetBits: TIdC_INT;
     function GetSize: TIdC_INT;
@@ -161,6 +162,7 @@ type
     property Encoding: String read GetEncoding;
     property EncodingSize: TIdC_INT read GetEncodingSize;
     property Modulus: String read GetModulus;
+    property Exponent : String read GetExponent;
   end;
 
   TTaurusTLSX509Exts = class(TTaurusTLSX509Info)
@@ -960,6 +962,20 @@ var
 begin
   X509_PUBKEY_get0_param(nil, @LKey[0], @Result, nil,
     X509_get_X509_PUBKEY(FX509));
+end;
+
+function TTaurusTLSX509PublicKey.GetExponent: String;
+var
+  LKey: PEVP_PKEY;
+  LBN: PBIGNUM;
+begin
+  Result := '';
+  LKey := X509_PUBKEY_get0(X509_get_X509_PUBKEY(FX509));
+  if EVP_PKEY_base_id(LKey) = EVP_PKEY_RSA then
+  begin
+    RSA_get0_key(EVP_PKEY_get0_RSA(LKey), nil, @LBN, nil);
+    Result := String(BN_bn2hex(LBN));
+  end;
 end;
 
 function TTaurusTLSX509PublicKey.GetModulus: String;

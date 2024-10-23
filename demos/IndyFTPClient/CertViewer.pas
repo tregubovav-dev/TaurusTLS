@@ -338,6 +338,12 @@ begin
     begin
       redtCertView.Lines.Add(RightJustify('Modulus: ', TAB1) + LStr);
     end;
+    LStr := FX509.PublicKey.Exponent;
+    if LStr <> '' then
+    begin
+      redtCertView.Lines.Add(RightJustify('Exponent: ', TAB1) + LStr);
+    end;
+
     redtCertView.Lines.Add('');
     redtCertView.Lines.Add('Signature');
     redtCertView.Lines.Add(RightJustify('Signature: ', TAB1) +
@@ -416,7 +422,6 @@ begin
           FX509.ExtensionValues[i]);
       end;
     end;
-    redtCertView.Lines.AddStrings(FX509.DisplayInfo);
   finally
     Self.redtCertView.Lines.EndUpdate;
   end;

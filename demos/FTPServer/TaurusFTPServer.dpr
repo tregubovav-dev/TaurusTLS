@@ -215,6 +215,7 @@ begin
   Lini := TIniFile.Create(GetCurrentDir + '\server.ini');
   FFTPServ := TIdFTPServer.Create(nil);
   try
+    FFTPServ.Greeting.Text.Text := 'TaurusFTP Server..';
     FFTPServ.PASVBoundPortMin := Lini.ReadInteger('Server',
       'PASV_Bound_Port_Minimum', 0);
     FFTPServ.PASVBoundPortMax := Lini.ReadInteger('Server',

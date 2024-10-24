@@ -2123,7 +2123,8 @@ type
     pbCertEncoded: PByte;
     cbCertEncoded: DWORD;
     CertInfo: PCERT_INFO;
-    certstore: HCERTSTORE end;
+    certstore: HCERTSTORE;
+  end;
 
 {$IFDEF STRING_IS_ANSI}
 {$EXTERNALSYM CertOpenSystemStoreA}

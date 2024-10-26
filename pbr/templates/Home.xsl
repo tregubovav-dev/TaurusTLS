@@ -16,7 +16,7 @@
         <p><b>Welcome to TaurusTLS</b> - An attempt to make <a href="https://www.openssl.org/">OpenSSL 1.1.1 and OpenSSL 3.x</a> compatible support for <a href="https://www.indyproject.org/">Indy - Internet Direct</a></p>
         <p>TaurusTLS includes</p>
         <ul>
-          <li>Pascal Headers for OpenSSL 1.1.1 that either load OpenSSL dynamically or statically depending upon platform and compiler</li>
+          <li>Pascal Headers for OpenSSL that either load OpenSSL dynamically, static load, or statically link depending upon platform and compiler</li>
           <li><b>TaurusTLSIOHandlerSocket</b> - for enabling TLS in a TIdTCPClientCustom descendant</li>
           <li><b>TTaurusTLSServerIOHandler</b> - for enabling TLS in a TIdCustomTCPServer descendant</li>
         </ul>

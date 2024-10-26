@@ -65,7 +65,7 @@
         <h2>Linux</h2>
         <p>Most modern Linux distributions already include the OpenSSL library or users can easily install it using their respective packaging systems.  You should document that your application requires OpenSSL.</p>
         <h2>MacOSX</h2>
-        <p>MacIntosh OSX includes the OpenSSL library.  However, useers may wish to upgrade it to more recent versions using <a href="https://www.macports.org/">MacPorts</a> or <a href="https://brew.sh/">Homebrew</a>.  You
+        <p>MacOS includes the OpenSSL library.  However, useers may wish to upgrade it to more recent versions using <a href="https://www.macports.org/">MacPorts</a> or <a href="https://brew.sh/">Homebrew</a>.  You
         should document that your application requires OpenSSL.</p>
         <h2>iOS</h2>
         <p>OpenSSL is statically linked into your executable.</p>

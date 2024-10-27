@@ -956,7 +956,13 @@ begin
 
   FRemoteColumnToSort := 0;
   FRemoteAscending := True;
-
+  Self.IdFTPClient.ClientInfo.ClientName := Application.Title;;
+  Self.IdFTPClient.ClientInfo.ClientVersion := GetProgramVersion;
+{$IFDEF WIN64}
+  Self.IdFTPClient.ClientInfo.PlatformDescription := 'Win64';
+{$ELSE}
+  Self.IdFTPClient.ClientInfo.PlatformDescription := 'Win32';
+{$ENDIF}
   LocalClearArrows;
   PopulateLocalFiles;
   RemoteLvClearArrows;

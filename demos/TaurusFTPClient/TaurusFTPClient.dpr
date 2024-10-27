@@ -1,4 +1,4 @@
-program IndyFTPClient;
+program TaurusFTPClient;
 
 uses
   Vcl.Forms,

@@ -17,6 +17,7 @@ type
     VirtualImage1: TVirtualImage;
     ImageCollection1: TImageCollection;
     LinkLabel1: TLinkLabel;
+    VirtualImage2: TVirtualImage;
     procedure FormCreate(Sender: TObject);
     procedure LinkLabel1Click(Sender: TObject);
   private
@@ -29,15 +30,14 @@ var
   AboutBox: TAboutBox;
 
 implementation
-uses ShellApi;
+uses ShellApi, ProgUtils;
 
 {$R *.dfm}
 
 procedure TAboutBox.FormCreate(Sender: TObject);
-var LMajor, LMinor, LBuild : Cardinal;
+
 begin
-  GetProductVersion(ParamStr(0), LMajor, LMinor, LBuild);
-  Self.Version.Caption := IntToStr(LMajor)+'.'+IntToStr(LMinor)+'.'+IntToStr(LBuild);
+  Self.Version.Caption := GetProgramVersion;
   Self.ProductName.Caption := Application.Title;
 end;
 

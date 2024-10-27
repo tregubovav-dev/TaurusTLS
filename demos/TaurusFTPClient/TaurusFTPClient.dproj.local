@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/09/29 12:41:10.000.551,=C:\msys64\home\jpmugaas\IndyTLS-OpenSSL\demos\IndyFTPClient\Unit1.pas</Transaction>
+    <Transaction>2024/09/29 12:43:43.000.635,C:\msys64\home\jpmugaas\IndyTLS-OpenSSL\IdSSLOpenSSL_X509.pas=C:\msys64\home\jpmugaas\IndyTLS-OpenSSL\demos\IndyFTPClient\Unit1.pas</Transaction>
+    <Transaction>2024/09/29 13:01:38.000.112,=C:\msys64\home\jpmugaas\IndyTLS-OpenSSL\demos\IndyFTPClient\Unit1.pas</Transaction>
+    <Transaction>2024/09/29 13:03:01.000.139,C:\msys64\home\jpmugaas\IndyTLS-OpenSSL\IdSSLOpenSSL_Utils.pas=C:\msys64\home\jpmugaas\IndyTLS-OpenSSL\demos\IndyFTPClient\Unit1.pas</Transaction>
+    <Transaction>2024/09/29 14:55:07.000.166,=C:\msys64\home\jpmugaas\IndyTLS-OpenSSL\demos\IndyFTPClient\Unit1.pas</Transaction>
+    <Transaction>2024/09/29 14:56:16.000.062,C:\msys64\home\jpmugaas\IndyTLS-OpenSSL\demos\IndyFTPClient\Unit1.pas=C:\msys64\home\jpmugaas\IndyTLS-OpenSSL\IdSSLOpenSSL_Files.pas</Transaction>
+    <Transaction>2024/09/29 22:21:28.000.001,C:\msys64\home\jpmugaas\IndyTLS-OpenSSL\IdSSLOpenSSL_Utils.pas=</Transaction>
+    <Transaction>2024/09/29 22:21:33.000.656,C:\msys64\home\jpmugaas\IndyTLS-OpenSSL\IdSSLOpenSSL_X509.pas=</Transaction>
+    <Transaction>2024/10/26 20:16:47.000.766,C:\msys64\home\jpmugaas\TaurusTLS\demos\IndyFTPClient\IndyFTPClient.dproj=C:\msys64\home\jpmugaas\TaurusTLS\demos\IndyFTPClient\TaurusFTPClient.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

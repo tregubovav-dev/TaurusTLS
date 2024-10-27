@@ -11,10 +11,20 @@ function RightJustify(const AText: String; ALen: Integer): String;
 function IsValidIP(const AAddr: String): Boolean;
 function DlgCaptionToFormCaption(const ACaption : String) : String;
 
+function GetProgramVersion : String;
+
 implementation
 
 uses WinAPI.Messages, IdIPAddress, TaurusTLSHeaders_x509,
 TaurusTLSHeaders_x509_vfy, System.SysUtils;
+
+function GetProgramVersion : String;
+var LMajor, LMinor, LBuild : Cardinal;
+begin
+  GetProductVersion(ParamStr(0), LMajor, LMinor, LBuild);
+  Result := IntToStr(LMajor)+'.'+IntToStr(LMinor)+'.'+IntToStr(LBuild);
+
+end;
 
 function DlgCaptionToFormCaption(const ACaption : String) : String;
 var i : Integer;

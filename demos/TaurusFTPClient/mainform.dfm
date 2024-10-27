@@ -1,7 +1,7 @@
 object frmMainForm: TfrmMainForm
   Left = 0
   Top = 0
-  Caption = 'Indy FTP Client'
+  Caption = 'TaurusFTP Client'
   ClientHeight = 400
   ClientWidth = 741
   Color = clBtnFace
@@ -1209,6 +1209,7 @@ object frmMainForm: TfrmMainForm
     NATKeepAlive.IntervalMS = 0
     ProxySettings.ProxyType = fpcmNone
     ProxySettings.Port = 0
+    ClientInfo.ClientName = 'TaurusFTP'
     Left = 168
     Top = 169
   end

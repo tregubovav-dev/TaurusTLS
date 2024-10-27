@@ -338,7 +338,7 @@ begin
     begin
       redtCertView.Lines.Add(RightJustify('Modulus: ', TAB1) + LStr);
     end;
-    LStr := FX509.PublicKey.Exponent;
+    LStr := FX509.PublicKey.Exponent_;
     if LStr <> '' then
     begin
       redtCertView.Lines.Add(RightJustify('Exponent: ', TAB1) + LStr);

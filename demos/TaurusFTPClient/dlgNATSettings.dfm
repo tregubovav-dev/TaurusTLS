@@ -20,7 +20,7 @@ object frmNATSettings: TfrmNATSettings
     Left = 230
     Top = 76
     Width = 58
-    Height = 23
+    Height = 15
     Anchors = [akTop, akRight]
     Caption = 'M&aximum:'
     FocusControl = spnedtPortMaximum

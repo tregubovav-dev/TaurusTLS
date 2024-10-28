@@ -2838,10 +2838,10 @@ type
   end;
 
   function TTaurusTLSSocket.Recv(var VBuffer: TIdBytes): Integer;
-
   var
     Lret, LErr: Integer;
   begin
+    Result := 0;
     repeat
       Lret := SSL_read(fSSL, PByte(VBuffer), Length(VBuffer));
       if Lret > 0 then
@@ -2854,11 +2854,7 @@ type
       begin
         Continue;
       end;
-      if LErr = SSL_ERROR_ZERO_RETURN then
-      begin
-        Result := 0;
-      end
-      else
+      if LErr <> SSL_ERROR_ZERO_RETURN then
       begin
         Result := Lret;
       end;

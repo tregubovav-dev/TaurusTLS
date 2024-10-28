@@ -17,8 +17,8 @@
         <p>TaurusTLS includes</p>
         <ul>
           <li>Pascal Headers for OpenSSL that either load OpenSSL dynamically, static load, or statically link depending upon platform and compiler</li>
-          <li><img src="images/TTaurusTLSIOHandlerSocket.png"/><b>TaurusTLSIOHandlerSocket</b> - for enabling TLS in a TIdTCPClientCustom descendant</li>
-          <li><img src="images/TTaurusTLSServerIOHandler.png"/><b>TTaurusTLSServerIOHandler</b> - for enabling TLS in a TIdCustomTCPServer descendant</li>
+          <li><img src="images/TTaurusTLSIOHandlerSocket.png" alt=""/><b>TaurusTLSIOHandlerSocket</b> - for enabling TLS in a TIdTCPClientCustom descendant</li>
+          <li><img src="images/TTaurusTLSServerIOHandler.png" alt=""/><b>TTaurusTLSServerIOHandler</b> - for enabling TLS in a TIdCustomTCPServer descendant</li>
         </ul>
         <p>For updates, please visit the GitHub repository at <a href="https://github.com/JPeterMugaas/TaurusTLS">https://github.com/JPeterMugaas/TaurusTLS</a></p>
         <p>

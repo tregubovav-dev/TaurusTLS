@@ -92,6 +92,7 @@ object AboutBox: TAboutBox
       ImageHeight = 0
       ImageIndex = 1
       ImageName = 'bwIndy_victory_64x64'
+      OnClick = VirtualImage2Click
     end
     object LinkLabel1: TLinkLabel
       Left = 8

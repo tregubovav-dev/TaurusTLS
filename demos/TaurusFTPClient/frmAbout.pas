@@ -20,6 +20,7 @@ type
     VirtualImage2: TVirtualImage;
     procedure FormCreate(Sender: TObject);
     procedure LinkLabel1Click(Sender: TObject);
+    procedure VirtualImage2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,6 +45,11 @@ end;
 procedure TAboutBox.LinkLabel1Click(Sender: TObject);
 begin
   ShellExecute(0, 'open', PChar(LinkLabel1.Hint), nil, nil, SW_SHOWNORMAL);
+end;
+
+procedure TAboutBox.VirtualImage2Click(Sender: TObject);
+begin
+  ShellExecute(0, 'open', PChar('https://www.indyproject.org/'), nil, nil, SW_SHOWNORMAL);
 end;
 
 end.

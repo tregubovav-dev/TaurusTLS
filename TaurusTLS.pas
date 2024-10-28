@@ -2128,950 +2128,938 @@ type
 
 {$IFDEF STRING_IS_ANSI}
 {$EXTERNALSYM CertOpenSystemStoreA}
-    function CertOpenSystemStoreA(hProv: HCRYPTPROV_LEGACY;
-      szSubsystemProtocol: PIdAnsiChar): HCERTSTORE; stdcall;
-      external wincryptdll;
+
+function CertOpenSystemStoreA(hProv: HCRYPTPROV_LEGACY;
+  szSubsystemProtocol: PIdAnsiChar): HCERTSTORE; stdcall; external wincryptdll;
 {$ELSE}
 {$EXTERNALSYM CertOpenSystemStoreW}
-    function CertOpenSystemStoreW(hProv: HCRYPTPROV_LEGACY;
-      szSubsystemProtocol: PCHar): HCERTSTORE; stdcall; external wincryptdll;
+function CertOpenSystemStoreW(hProv: HCRYPTPROV_LEGACY;
+  szSubsystemProtocol: PCHar): HCERTSTORE; stdcall; external wincryptdll;
 {$ENDIF}
 {$EXTERNALSYM CertCloseStore}
-    function CertCloseStore(certstore: HCERTSTORE; dwFlags: DWORD): Boolean;
-      stdcall; external wincryptdll;
+function CertCloseStore(certstore: HCERTSTORE; dwFlags: DWORD): Boolean;
+  stdcall; external wincryptdll;
 
 {$EXTERNALSYM CertEnumCertificatesInStore}
-    function CertEnumCertificatesInStore(certstore: HCERTSTORE;
-      pPrevCertContext: PCCERT_CONTEXT): PCCERT_CONTEXT; stdcall;
-      external wincryptdll;
+function CertEnumCertificatesInStore(certstore: HCERTSTORE;
+  pPrevCertContext: PCCERT_CONTEXT): PCCERT_CONTEXT; stdcall;
+  external wincryptdll;
 
-    { Copy Windows CA Certs to out cert store }
-    procedure TTaurusTLSContext.LoadWindowsCertStore;
-
-  var
-    LWinCertStore: HCERTSTORE;
-    LX509Cert: PX509;
-    Lcert_context: PCCERT_CONTEXT;
-    LError: Integer;
-    LSSLCertStore: PX509_STORE;
-  begin
-    Lcert_context := nil;
+{ Copy Windows CA Certs to out cert store }
+procedure TTaurusTLSContext.LoadWindowsCertStore;
+var
+  LWinCertStore: HCERTSTORE;
+  LX509Cert: PX509;
+  Lcert_context: PCCERT_CONTEXT;
+  LError: Integer;
+  LSSLCertStore: PX509_STORE;
+begin
+  Lcert_context := nil;
 {$IFDEF STRING_IS_ANSI}
-    LWinCertStore := CertOpenSystemStoreA(nil, RootStore);
+  LWinCertStore := CertOpenSystemStoreA(nil, RootStore);
 {$ELSE}
-    LWinCertStore := CertOpenSystemStoreW(nil, RootStore);
+  LWinCertStore := CertOpenSystemStoreW(nil, RootStore);
 {$ENDIF}
-    if LWinCertStore = 0 then
-      Exit;
+  if LWinCertStore = 0 then
+    Exit;
 
-    LSSLCertStore := SSL_CTX_get_cert_store(fContext);
-    try
+  LSSLCertStore := SSL_CTX_get_cert_store(fContext);
+  try
+    Lcert_context := CertEnumCertificatesInStore(LWinCertStore, Lcert_context);
+    while Lcert_context <> nil do
+    begin
+      LX509Cert := d2i_X509(nil, @Lcert_context^.pbCertEncoded,
+        Lcert_context^.cbCertEncoded);
+      if LX509Cert <> nil then
+      begin
+        LError := X509_STORE_add_cert(LSSLCertStore, LX509Cert);
+        // Ignore if cert already in store
+        if (LError = 0) and
+          (ERR_GET_REASON(ERR_get_error) <> X509_R_CERT_ALREADY_IN_HASH_TABLE)
+        then
+        begin
+          ETaurusTLSAPICryptoError.RaiseException
+            (ROSCertificateNotAddedToStore);
+        end;
+        X509_free(LX509Cert);
+      end;
       Lcert_context := CertEnumCertificatesInStore(LWinCertStore,
         Lcert_context);
-      while Lcert_context <> nil do
-      begin
-        LX509Cert := d2i_X509(nil, @Lcert_context^.pbCertEncoded,
-          Lcert_context^.cbCertEncoded);
-        if LX509Cert <> nil then
-        begin
-          LError := X509_STORE_add_cert(LSSLCertStore, LX509Cert);
-          // Ignore if cert already in store
-          if (LError = 0) and
-            (ERR_GET_REASON(ERR_get_error) <> X509_R_CERT_ALREADY_IN_HASH_TABLE)
-          then
-            ETaurusTLSAPICryptoError.RaiseException
-              (ROSCertificateNotAddedToStore);
-          X509_free(LX509Cert);
-        end;
-        Lcert_context := CertEnumCertificatesInStore(LWinCertStore,
-          Lcert_context);
-      end;
-    finally
-      if CertCloseStore(LWinCertStore, 0) = False then
-      begin
-        RaiseLastOSError;
-      end;
+    end;
+  finally
+    if CertCloseStore(LWinCertStore, 0) = False then
+    begin
+      RaiseLastOSError;
     end;
   end;
+end;
 {$ENDIF}
-  procedure TTaurusTLSContext.DestroyContext;
+
+procedure TTaurusTLSContext.DestroyContext;
+begin
+  if fContext <> nil then
   begin
-    if fContext <> nil then
-    begin
-      SSL_CTX_free(fContext);
-      fContext := nil;
-    end;
+    SSL_CTX_free(fContext);
+    fContext := nil;
   end;
+end;
 
-  procedure TTaurusTLSContext.InitContext(CtxMode: TIdSSLCtxMode);
+procedure TTaurusTLSContext.InitContext(CtxMode: TIdSSLCtxMode);
+const
+  SSLProtoVersion: array [TTaurusTLSSSLVersion] of TIdC_LONG = (0, 0, 0,
+    SSL3_VERSION, { SSLv3 }
+    TLS1_VERSION, { TLSv1 }
+    TLS1_1_VERSION, { TLSv1_1 }
+    TLS1_2_VERSION, { TLSv1_2 }
+    TLS1_3_VERSION); { TLSv1_3 }
 
-  const
-    SSLProtoVersion: array [TTaurusTLSSSLVersion] of TIdC_LONG = (0, 0, 0,
-      SSL3_VERSION,
-      { sslvSSLv3 }
-      TLS1_VERSION, { sslvTLSv1 }
-      TLS1_1_VERSION, { sslvTLSv1_1 }
-      TLS1_2_VERSION, { sslvTLSv1_2 }
-      TLS1_3_VERSION); { sslvTLSv1_3 }
-
-  var
-    LError: TIdC_INT;
-    v: TTaurusTLSSSLVersion;
-    // pCAname: PSTACK_X509_NAME;
+var
+  LError: TIdC_INT;
+  v: TTaurusTLSSSLVersion;
+  // pCAname: PSTACK_X509_NAME;
 {$IFDEF USE_MARSHALLED_PTRS}
-    M: TMarshaller;
+  M: TMarshaller;
 {$ENDIF}
+begin
+  // Destroy the context first
+  DestroyContext;
+  if fMode = sslmUnassigned then
   begin
-    // Destroy the context first
-    DestroyContext;
-    if fMode = sslmUnassigned then
-    begin
-      if CtxMode = sslCtxServer then
-      begin
-        fMode := sslmServer;
-      end
-      else
-      begin
-        fMode := sslmClient;
-      end
-    end;
-
-    // create new SSL context
-    fContext := SSL_CTX_new(GetSSLMethod);
-    if fContext = nil then
-    begin
-      ETaurusTLSCreatingContextError.RaiseException(RSSSLCreatingContextError);
-    end;
-
-    // set SSL Versions we will use
-    if HasTLS_method then
-    begin
-      if SSLVersions <> [] then
-      begin
-        for v := SSLv3 to MAX_SSLVERSION do
-        begin
-          if v in SSLVersions then
-          begin
-            if SSL_CTX_set_min_proto_version(fContext, SSLProtoVersion[v]) = 0
-            then
-            begin
-              ETaurusTLSSettingMinProtocolError.RaiseException
-                (RSOSSLMinProtocolError);
-            end;
-            Break;
-          end;
-        end;
-        for v := MAX_SSLVERSION downto SSLv3 do
-        begin
-          if v in SSLVersions then
-          begin
-            if SSL_CTX_set_max_proto_version(fContext, SSLProtoVersion[v]) = 0
-            then
-            begin
-              ETaurusTLSSettingMaxProtocolError.RaiseException
-                (RSOSSLMaxProtocolError);
-            end;
-            Break;
-          end;
-        end;
-      end
-      else
-      begin
-        if SSL_CTX_set_min_proto_version(fContext, SSL3_VERSION) = 0 then
-        begin
-          ETaurusTLSSettingMinProtocolError.RaiseException
-            (RSOSSLMinProtocolError);
-        end;
-        if SSL_CTX_set_max_proto_version(fContext,
-          SSLProtoVersion[high(TTaurusTLSSSLVersion)]) = 0 then
-        begin
-          ETaurusTLSSettingMaxProtocolError.RaiseException
-            (RSOSSLMaxProtocolError);
-        end;
-      end;
-    end
-    else
-    begin
-{$IFNDEF OPENSSL_STATIC_LINK_MODEL}
-      { legacy code 1.0.2 and earlier }
-
-      if IsTaurusTLS_SSLv2_Available then
-      begin
-        if not(SSLv2 in SSLVersions) then
-        begin
-          SSL_CTX_set_options(fContext, SSL_OP_NO_SSLv2);
-        end
-        else if fMethod = SSLv23 then
-        begin
-          SSL_CTX_clear_options(fContext, SSL_OP_NO_SSLv2);
-        end;
-      end;
-      // SSLv3 might also be disabled as well..
-      if IsTaurusTLS_SSLv3_Available then
-      begin
-        if not(SSLv3 in SSLVersions) then
-        begin
-          SSL_CTX_set_options(fContext, SSL_OP_NO_SSLv3);
-        end
-        else if fMethod = SSLv23 then
-        begin
-          SSL_CTX_clear_options(fContext, SSL_OP_NO_SSLv3);
-        end;
-      end;
-      // may as well do the same for all of them...
-      if IsTaurusTLS_TLSv1_0_Available then
-      begin
-        if not(TLSv1 in SSLVersions) then
-        begin
-          SSL_CTX_set_options(fContext, SSL_OP_NO_TLSv1);
-        end
-        else if fMethod = SSLv23 then
-        begin
-          SSL_CTX_clear_options(fContext, SSL_OP_NO_TLSv1);
-        end;
-      end;
-      { IMPORTANT!!!  Do not set SSL_CTX_set_options SSL_OP_NO_TLSv1_1 and
-        SSL_OP_NO_TLSv1_2 if that functionality is not available.  TaurusTLS 1.0 and
-        earlier do not support those flags.  Those flags would only cause
-        an invalid MAC when doing SSL. }
-      if IsTaurusTLS_TLSv1_1_Available then
-      begin
-        if not(TLSv1_1 in SSLVersions) then
-        begin
-          SSL_CTX_set_options(fContext, SSL_OP_NO_TLSv1_1);
-        end
-        else if fMethod = SSLv23 then
-        begin
-          SSL_CTX_clear_options(fContext, SSL_OP_NO_TLSv1_1);
-        end;
-      end;
-      if IsTaurusTLS_TLSv1_2_Available then
-      begin
-        if not(TLSv1_2 in SSLVersions) then
-        begin
-          SSL_CTX_set_options(fContext, SSL_OP_NO_TLSv1_2);
-        end
-        else if fMethod = SSLv23 then
-        begin
-          SSL_CTX_clear_options(fContext, SSL_OP_NO_TLSv1_2);
-        end;
-      end;
-{$ENDIF}
-    end;
-
-    SSL_CTX_set_mode(fContext, SSL_MODE_AUTO_RETRY);
-    // assign a password lookup routine
-    // if PasswordRoutineOn then begin
-    SSL_CTX_set_default_passwd_cb(fContext, @PasswordCallback);
-    SSL_CTX_set_default_passwd_cb_userdata(fContext, Self);
-    // end;
-
-    if fUseSystemRootCertificateStore then
-    begin
-{$IFDEF USE_WINDOWS_CERT_STORE}
-      LoadWindowsCertStore;
-{$ELSE}
-      SSL_CTX_set_default_verify_paths(fContext);
-{$ENDIF}
-    end;
-    // load key and certificate files
-    if (RootCertFile <> '') or (VerifyDirs <> '') then
-    begin { Do not Localize }
-      if not LoadRootCert then
-      begin
-        ETaurusTLSLoadingRootCertError.RaiseException
-          (RSSSLLoadingRootCertError);
-      end;
-    end;
-    if CertFile <> '' then
-    begin { Do not Localize }
-      if not LoadCert then
-      begin
-        ETaurusTLSLoadingCertError.RaiseException(RSSSLLoadingCertError);
-      end;
-    end;
-    if KeyFile <> '' then
-    begin { Do not Localize }
-      if not LoadKey then
-      begin
-        ETaurusTLSLoadingKeyError.RaiseException(RSSSLLoadingKeyError);
-      end;
-    end;
-    if DHParamsFile <> '' then
-    begin { Do not Localize }
-      if not LoadDHParams then
-      begin
-        ETaurusTLSLoadingDHParamsError.RaiseException
-          (RSSSLLoadingDHParamsError);
-      end;
-    end;
-    if StatusInfoOn then
-    begin
-      SSL_CTX_set_info_callback(fContext, InfoCallback);
-    end;
-    // if_SSL_CTX_set_tmp_rsa_callback(hSSLContext, @RSACallback);
-    if fCipherList <> '' then
-    begin { Do not Localize }
-      LError := SSL_CTX_set_cipher_list(fContext,
-{$IFDEF USE_MARSHALLED_PTRS}
-        M.AsAnsi(fCipherList).ToPointer
-{$ELSE}
-        PAnsiChar(
-{$IFDEF STRING_IS_ANSI}
-        fCipherList
-{$ELSE}
-        AnsiString(fCipherList) // explicit cast to Ansi
-{$ENDIF}
-        )
-{$ENDIF}
-        );
-    end
-    else
-    begin
-      // RLebeau: don't override TaurusTLS's default.  As TaurusTLS evolves, the
-      // SSL_DEFAULT_CIPHER_LIST constant defined in the C/C++ SDK may change,
-      // while Indy's define of it might take some time to catch up.  We don't
-      // want users using an older default with newer DLLs...
-      (*
-        error := SSL_CTX_set_cipher_list(fContext,
-        {$IFDEF USE_MARSHALLED_PTRS}
-        M.AsAnsi(SSL_DEFAULT_CIPHER_LIST).ToPointer
-        {$ELSE}
-        SSL_DEFAULT_CIPHER_LIST
-        {$ENDIF}
-        );
-      *)
-      LError := 1;
-    end;
-    if LError <= 0 then
-    begin
-      // TODO: should this be using EIdOSSLSettingCipherError.RaiseException() instead?
-      raise ETaurusTLSSettingCipherError.Create(RSSSLSettingCipherError);
-    end;
-    if fVerifyMode <> [] then
-    begin
-      SetVerifyMode(fVerifyMode, VerifyOn);
-    end;
     if CtxMode = sslCtxServer then
     begin
-      SSL_CTX_set_session_id_context(fContext, PByte(@fSessionId),
-        SizeOf(fSessionId));
-    end;
-    // CA list
-    if RootCertFile <> '' then
-    begin { Do not Localize }
-      SSL_CTX_set_client_CA_list(fContext,
-        IndySSL_load_client_CA_file(RootCertFile));
+      fMode := sslmServer;
     end
-
-    // TODO: provide an event so users can apply their own settings as needed...
-  end;
-
-  procedure TTaurusTLSContext.SetVerifyMode(AMode: TIdSSLVerifyModeSet;
-    ACheckRoutine: Boolean);
-
-  var
-    Func: SSL_verify_cb;
-  begin
-    if fContext <> nil then
+    else
     begin
-      // SSL_CTX_set_default_verify_paths(fContext);
-      if ACheckRoutine then
-      begin
-        Func := VerifyCallback;
-      end
-      else
-      begin
-        Func := nil;
-      end;
-
-      SSL_CTX_set_verify(fContext, TranslateInternalVerifyToSSL(AMode), Func);
-      SSL_CTX_set_verify_depth(fContext, fVerifyDepth);
-    end;
+      fMode := sslmClient;
+    end
   end;
 
-  function TTaurusTLSContext.GetVerifyMode: TIdSSLVerifyModeSet;
+  // create new SSL context
+  fContext := SSL_CTX_new(GetSSLMethod);
+  if fContext = nil then
   begin
-    Result := fVerifyMode;
+    ETaurusTLSCreatingContextError.RaiseException(RSSSLCreatingContextError);
   end;
-  {
-    function TTaurusTLSContext.LoadVerifyLocations(FileName: String; Dirs: String): Boolean;
+
+  // set SSL Versions we will use
+  if HasTLS_method then
+  begin
+    if SSLVersions <> [] then
     begin
-    Result := False;
-
-    if (Dirs <> '') or (FileName <> '') then begin
-    if IndySSL_CTX_load_verify_locations(fContext, FileName, Dirs) <= 0 then begin
-    raise EIdOSSLCouldNotLoadSSLLibrary.Create(RSOSSLCouldNotLoadSSLLibrary);
-    end;
-    end;
-
-    Result := True;
-    end;
-  }
-
-{$IFNDEF OPENSSL_STATIC_LINK_MODEL}
-  function SelectTLS1Method(const AMode: TTaurusTLSSSLMode): PSSL_METHOD;
-{$IFDEF USE_INLINE} inline; {$ENDIF}
-  begin
-    Result := nil;
-    case AMode of
-      sslmServer:
+      for v := SSLv3 to MAX_SSLVERSION do
+      begin
+        if v in SSLVersions then
         begin
-          if Assigned(TLSv1_server_method) then
+          if SSL_CTX_set_min_proto_version(fContext, SSLProtoVersion[v]) = 0
+          then
           begin
-            Result := TLSv1_server_method();
+            ETaurusTLSSettingMinProtocolError.RaiseException
+              (RSOSSLMinProtocolError);
           end;
-        end;
-      sslmClient:
-        begin
-          if Assigned(TLSv1_client_method) then
-          begin
-            Result := TLSv1_client_method();
-          end;
-        end;
-    else
-      if Assigned(TLSv1_method) then
-      begin
-        Result := TLSv1_method();
-      end;
-    end;
-  end;
-{$ENDIF}
-  function TTaurusTLSContext.GetSSLMethod: PSSL_METHOD;
-  begin
-    Result := nil;
-    if fMode = sslmUnassigned then
-    begin
-      raise ETaurusTLSModeNotSet.Create(RSOSSLModeNotSet);
-    end;
-    { We are running with OpenSSL 1.1.1 or later. OpenSSL will negotiate the best
-      available SSL/TLS version and there is not much that we can do to influence this.
-      Hence, we ignore fMethod.
-
-      Quoting from the OpenSSL man page:
-
-      TLS_method(), TLS_server_method(), TLS_client_method()
-
-      These are the general-purpose version-flexible SSL/TLS methods. The actual
-      protocol version used will be negotiated to the highest version mutually
-      supported by the client and the server. The supported protocols are SSLv3,
-      TLSv1, TLSv1.1, TLSv1.2 and TLSv1.3. Applications should use these methods,
-      and avoid the version-specific methods described below [e.g. SSLv2_method),
-      which are deprecated.
-    }
-    case fMode of
-      sslmClient:
-        Result := TLS_client_method();
-
-      sslmServer:
-        Result := TLS_server_method();
-
-      sslmBoth, sslmUnassigned:
-        Result := TLS_Method();
-
-    end;
-  end;
-
-  function TTaurusTLSContext.LoadRootCert: Boolean;
-  begin
-    Result := IndySSL_CTX_load_verify_locations(fContext, RootCertFile,
-      VerifyDirs) > 0;
-  end;
-
-  function TTaurusTLSContext.LoadCert: Boolean;
-  begin
-    if PosInStrArray(ExtractFileExt(CertFile), ['.p12', '.pfx'], False) <> -1
-    then
-    begin
-      Result := IndySSL_CTX_use_certificate_file_PKCS12(fContext, CertFile) > 0;
-    end
-    else
-    begin
-      // TaurusTLS 1.0.2 has a new function, SSL_CTX_use_certificate_chain_file
-      // that handles a chain of certificates in a PEM file.  That is prefered.
-{$IFNDEF OPENSSL_STATIC_LINK_MODEL}
-      if Assigned(SSL_CTX_use_certificate_chain_file) then
-      begin
-        Result := IndySSL_CTX_use_certificate_chain_file(fContext,
-          CertFile) > 0;
-      end
-      else
-      begin
-        Result := IndySSL_CTX_use_certificate_file(fContext, CertFile,
-          SSL_FILETYPE_PEM) > 0;
-      end;
-{$ELSE}
-      Result := IndySSL_CTX_use_certificate_chain_file(fContext, CertFile) > 0;
-{$ENDIF}
-    end;
-  end;
-
-  function TTaurusTLSContext.LoadKey: Boolean;
-  begin
-    if PosInStrArray(ExtractFileExt(KeyFile), ['.p12', '.pfx'], False) <> -1
-    then
-    begin
-      Result := IndySSL_CTX_use_PrivateKey_file_PKCS12(fContext, KeyFile) > 0;
-    end
-    else
-    begin
-      Result := IndySSL_CTX_use_PrivateKey_file(fContext, KeyFile,
-        SSL_FILETYPE_PEM) > 0;
-    end;
-    if Result then
-    begin
-      Result := SSL_CTX_check_private_key(fContext) > 0;
-    end;
-  end;
-
-  function TTaurusTLSContext.LoadDHParams: Boolean;
-  begin
-    Result := IndySSL_CTX_use_DHparams_file(fContext, fsDHParamsFile,
-      SSL_FILETYPE_PEM) > 0;
-  end;
-
-  /// ///////////////////////////////////////////////////////////
-
-  function TTaurusTLSContext.Clone: TTaurusTLSContext;
-  begin
-    Result := TTaurusTLSContext.Create;
-    Result.StatusInfoOn := StatusInfoOn;
-    // property PasswordRoutineOn: Boolean read fPasswordRoutineOn write fPasswordRoutineOn;
-    Result.VerifyOn := VerifyOn;
-    Result.Method := Method;
-    Result.SSLVersions := SSLVersions;
-    Result.Mode := Mode;
-    Result.RootCertFile := RootCertFile;
-    Result.CertFile := CertFile;
-    Result.KeyFile := KeyFile;
-    Result.VerifyMode := VerifyMode;
-    Result.VerifyDepth := VerifyDepth;
-  end;
-
-  { TTaurusTLSSocket }
-
-  constructor TTaurusTLSSocket.Create(AParent: TObject);
-  begin
-    inherited Create;
-    FParent := AParent;
-  end;
-
-  destructor TTaurusTLSSocket.Destroy;
-  begin
-    if fSession <> nil then
-      SSL_SESSION_free(fSession);
-    if fSSL <> nil then
-    begin
-      // TODO: should this be moved to TTaurusTLSContext instead?  Is this here
-      // just to make sure the SSL shutdown does not log any messages?
-      {
-        if (fSSLContext <> nil) and (fSSLContext.StatusInfoOn) and
-        (fSSLContext.fContext <> nil) then begin
-        SSL_CTX_set_info_callback(fSSLContext.fContext, nil);
-        end;
-      }
-      // SSL_set_shutdown(fSSL, SSL_SENT_SHUTDOWN);
-      SSL_shutdown(fSSL);
-      SSL_free(fSSL);
-      fSSL := nil;
-    end;
-    FreeAndNil(fSSLCipher);
-    FreeAndNil(fPeerCert);
-    inherited Destroy;
-  end;
-
-  function TTaurusTLSSocket.GetSSLError(retCode: Integer): Integer;
-  begin
-    // COMMENT!!!
-    // I found out that SSL layer should not interpret errors, cause they will pop up
-    // on the socket layer. Only thing that the SSL layer should consider is key
-    // or protocol renegotiation. This is done by loop in read and write
-    Result := SSL_get_error(fSSL, retCode);
-  end;
-
-  procedure TTaurusTLSSocket.Accept(const pHandle: TIdStackSocketHandle);
-
-  // Accept and Connect have a lot of duplicated code
-  var
-    LError: Integer;
-{$IFNDEF USE_INLINE_VAR}
-    LStatusStr: String;
-{$ENDIF}
-    // LParentIO: TTaurusTLSIOHandlerSocket;
-    // LHelper: ITaurusTLSCallbackHelper;
-  begin
-    Assert(fSSL = nil);
-    Assert(fSSLContext <> nil);
-    fSSL := SSL_new(fSSLContext.Context);
-    if fSSL = nil then
-    begin
-      raise ETaurusTLSCreatingSessionError.Create(RSSSLCreatingSessionError);
-    end;
-    LError := SSL_set_app_data(fSSL, Self);
-    if LError <= 0 then
-    begin
-      ETaurusTLSDataBindingError.RaiseException(fSSL, Error,
-        RSSSLDataBindingError);
-    end;
-    // ignore warning about 64-bit value being passed to a 32bit parameter.
-    // See: https://docs.openssl.org/3.0/man3/SSL_set_fd/#return-values
-    LError := SSL_set_fd(fSSL, pHandle);
-    if LError <= 0 then
-    begin
-      ETaurusTLSFDSetError.RaiseException(fSSL, Error, RSSSLFDSetError);
-    end;
-    // RLebeau: if this socket's IOHandler was cloned, no need to reuse the
-    // original IOHandler's active session ID, since this is a server socket
-    // that generates its own sessions...
-    //
-    // RLebeau: is this actually true?  Should we be reusing the original
-    // IOHandler's active session ID regardless of whether this is a client
-    // or server socket? What about FTP in non-passive mode, for example?
-    {
-      if (LParentIO <> nil) and (LParentIO.fSSLSocket <> nil) and
-      (LParentIO.fSSLSocket <> Self) then
-      begin
-      SSL_copy_session_id(fSSL, LParentIO.fSSLSocket.fSSL);
-      end;
-    }
-    LError := SSL_accept(fSSL);
-    if LError <= 0 then
-    begin
-      ETaurusTLSAcceptError.RaiseException(fSSL, Error, RSSSLAcceptError);
-    end;
-    fSession := SSL_get1_session(fSSL);
-  end;
-
-  procedure TTaurusTLSSocket.Connect(const pHandle: TIdStackSocketHandle);
-
-  var
-    LError: Integer;
-{$IFNDEF USE_INLINE_VAR}
-    LStatusStr: String;
-{$ENDIF}
-    LParentIO: TTaurusTLSIOHandlerSocket;
-    LHelper: ITaurusTLSCallbackHelper;
-  begin
-    Assert(fSSL = nil);
-    Assert(fSSLContext <> nil);
-    if Supports(FParent, ITaurusTLSCallbackHelper, IInterface(LHelper)) then
-    begin
-      LParentIO := LHelper.GetIOHandlerSelf;
-    end
-    else
-    begin
-      LParentIO := nil;
-    end;
-    fSSL := SSL_new(fSSLContext.Context);
-    if fSSL = nil then
-    begin
-      raise ETaurusTLSCreatingSessionError.Create(RSSSLCreatingSessionError);
-    end;
-    LError := SSL_set_app_data(fSSL, Self);
-    if LError <= 0 then
-    begin
-      ETaurusTLSDataBindingError.RaiseException(fSSL, LError,
-        RSSSLDataBindingError);
-    end;
-    // ignore 64 value passed to 32bit parameter.
-    // see: https://docs.openssl.org/3.0/man3/SSL_set_fd/#return-values
-    LError := SSL_set_fd(fSSL, pHandle);
-    if LError <= 0 then
-    begin
-      ETaurusTLSFDSetError.RaiseException(fSSL, LError, RSSSLFDSetError);
-    end;
-    // RLebeau: if this socket's IOHandler was cloned, reuse the
-    // original IOHandler's active session ID...
-    if (LParentIO <> nil) and (LParentIO.SSLSocket <> nil) and
-      (LParentIO.SSLSocket <> Self) then
-    begin
-      SSL_copy_session_id(fSSL, LParentIO.SSLSocket.SSL);
-    end;
-{$IFNDEF OPENSSL_NO_TLSEXT}
-    { Delphi appears to need the extra AnsiString coerction. Otherwise, only the
-      first character to the hostname is passed }
-    LError := SSL_set_tlsext_host_name(fSSL,
-      PIdAnsiChar(AnsiString(fHostName)));
-    if LError <= 0 then
-    begin
-      // RLebeau: for the time being, not raising an exception on error, as I don't
-      // know which OpenSSL versions support this extension, and which error code(s)
-      // are safe to ignore on those versions...
-      // EIdOSSLSettingTLSHostNameError.RaiseException(fSSL, error, RSSSLSettingTLSHostNameError);
-    end;
-{$ENDIF}
-    LError := SSL_connect(fSSL);
-    if LError <= 0 then
-    begin
-      // TODO: if sslv23 is being used, but sslv23 is not being used on the
-      // remote side, SSL_connect() will fail. In that case, before giving up,
-      // try re-connecting using a version-specific method for each enabled
-      // version, maybe one will succeed...
-      LError := SSL_get_error(fSSL, LError);
-      ETaurusTLSConnectError.RaiseException(fSSL, LError, RSSSLConnectError);
-    end;
-    fSession := SSL_get1_session(fSSL);
-    // TODO: even if SSL_connect() returns success, the connection might
-    // still be insecure if SSL_connect() detected that certificate validation
-    // actually failed, but ignored it because SSL_VERIFY_PEER was disabled!
-    // It would report such a failure via SSL_get_verify_result() instead of
-    // returning an error code, so we should call SSL_get_verify_result() here
-    // to make sure...
-
-    // TODO: enable this
-    {
-      var
-      peercert: PX509;
-      lHostName: AnsiString;
-      peercert := SSL_get_peer_certificate(fSSL);
-      try
-      lHostName := AnsiString(fHostName);
-      if (X509_check_host(peercert, PByte(PAnsiChar(lHostName)), Length(lHostName), 0) != 1) and
-      (not certificate_host_name_override(peercert, PAnsiChar(lHostName)) then
-      begin
-      EIdOSSLCertificateError.RaiseException(fSSL, error, 'SSL certificate does not match host name');
-      end;
-      finally
-      X509_free(peercert);
-      end;
-    }
-  end;
-
-  function TTaurusTLSSocket.Recv(var VBuffer: TIdBytes): Integer;
-  var
-    Lret, LErr: Integer;
-  begin
-    Result := 0;
-    repeat
-      Lret := SSL_read(fSSL, PByte(VBuffer), Length(VBuffer));
-      if Lret > 0 then
-      begin
-        Result := Lret;
-        Break;
-      end;
-      LErr := GetSSLError(Lret);
-      if (LErr = SSL_ERROR_WANT_READ) or (LErr = SSL_ERROR_WANT_WRITE) then
-      begin
-        Continue;
-      end;
-      if LErr <> SSL_ERROR_ZERO_RETURN then
-      begin
-        Result := Lret;
-      end;
-      Break;
-    until False;
-  end;
-
-  function TTaurusTLSSocket.Send(const ABuffer: TIdBytes;
-    const AOffset, ALength: Integer): Integer;
-
-  var
-    Lret, LErr, LOffset, LLength: Integer;
-  begin
-    Result := 0;
-    LOffset := AOffset;
-    LLength := ALength;
-    repeat
-      Lret := SSL_write(fSSL, @ABuffer[LOffset], LLength);
-      if Lret > 0 then
-      begin
-        Inc(Result, Lret);
-        Inc(LOffset, Lret);
-        Dec(LLength, Lret);
-        if LLength < 1 then
-        begin
           Break;
         end;
-        Continue;
       end;
-      LErr := GetSSLError(Lret);
-      if (LErr = SSL_ERROR_WANT_READ) or (LErr = SSL_ERROR_WANT_WRITE) then
+      for v := MAX_SSLVERSION downto SSLv3 do
       begin
-        Continue;
-      end;
-      if LErr = SSL_ERROR_ZERO_RETURN then
-      begin
-        Result := 0;
-      end
-      else
-      begin
-        Result := Lret;
-      end;
-      Break;
-    until False;
-  end;
-
-  function TTaurusTLSSocket.GetProtocolVersion: TTaurusTLSSSLVersion;
-  begin
-    if fSession = nil then
-      Result := Unknown
-    else
-      case SSL_SESSION_get_protocol_version(fSession) of
-        SSL3_VERSION:
-          Result := SSLv3;
-        TLS1_VERSION:
-          Result := TLSv1;
-        TLS1_1_VERSION:
-          Result := TLSv1_1;
-        TLS1_2_VERSION:
-          Result := TLSv1_2;
-        TLS1_3_VERSION:
-          Result := TLSv1_3;
-      else
-        Result := Unknown;
-      end;
-  end;
-
-  function TTaurusTLSSocket.GetSSLProtocolVersionStr: string;
-  begin
-    Result := 'Unknown';
-    case SSLProtocolVersion of
-      Unknown:
-        Result := 'Unknown';
-      SSLv23:
-        Result := 'SSLv2 or SSLv3';
-      SSLv2:
-        Result := 'SSLv2';
-      SSLv3:
-        Result := 'SSLv3';
-      TLSv1:
-        Result := 'TLS';
-      TLSv1_1:
-        Result := 'TLSv1.1';
-      TLSv1_2:
-        Result := 'TLSv1.2';
-      TLSv1_3:
-        Result := 'TLSv1.3';
-    end;
-  end;
-
-  function TTaurusTLSSocket.GetPeerCert: TTaurusTLSX509;
-
-  var
-    LX509: PX509;
-  begin
-    if fPeerCert = nil then
-    begin
-      LX509 := SSL_get_peer_certificate(fSSL);
-      if LX509 <> nil then
-      begin
-        fPeerCert := TTaurusTLSX509.Create(LX509, False);
-      end;
-    end;
-    Result := fPeerCert;
-  end;
-
-  function TTaurusTLSSocket.GetSSLCipher: TTaurusTLSCipher;
-  begin
-    if (fSSLCipher = nil) and (fSSL <> nil) then
-    begin
-      fSSLCipher := TTaurusTLSCipher.Create(Self);
-    end;
-    Result := fSSLCipher;
-  end;
-
-  function TTaurusTLSSocket._GetSessionID: TIdSSLByteArray;
-
-  var
-    pSession: PSSL_SESSION;
-  begin
-    Result._Length := 0;
-    Result.Data := nil;
-{$IFNDEF OPENSSL_STATIC_LINK_MODEL}
-    if Assigned(SSL_get_session) and Assigned(SSL_SESSION_get_id) then
-{$ENDIF}
-    begin
-      if fSSL <> nil then
-      begin
-        pSession := SSL_get_session(fSSL);
-        if pSession <> nil then
+        if v in SSLVersions then
         begin
-          Result.Data := SSL_SESSION_get_id(pSession, @Result._Length);
+          if SSL_CTX_set_max_proto_version(fContext, SSLProtoVersion[v]) = 0
+          then
+          begin
+            ETaurusTLSSettingMaxProtocolError.RaiseException
+              (RSOSSLMaxProtocolError);
+          end;
+          Break;
         end;
       end;
+    end
+    else
+    begin
+      if SSL_CTX_set_min_proto_version(fContext, SSL3_VERSION) = 0 then
+      begin
+        ETaurusTLSSettingMinProtocolError.RaiseException
+          (RSOSSLMinProtocolError);
+      end;
+      if SSL_CTX_set_max_proto_version(fContext,
+        SSLProtoVersion[high(TTaurusTLSSSLVersion)]) = 0 then
+      begin
+        ETaurusTLSSettingMaxProtocolError.RaiseException
+          (RSOSSLMaxProtocolError);
+      end;
     end;
+  end
+  else
+  begin
+{$IFNDEF OPENSSL_STATIC_LINK_MODEL}
+    { legacy code 1.0.2 and earlier }
+
+    if IsTaurusTLS_SSLv2_Available then
+    begin
+      if not(SSLv2 in SSLVersions) then
+      begin
+        SSL_CTX_set_options(fContext, SSL_OP_NO_SSLv2);
+      end
+      else if fMethod = SSLv23 then
+      begin
+        SSL_CTX_clear_options(fContext, SSL_OP_NO_SSLv2);
+      end;
+    end;
+    // SSLv3 might also be disabled as well..
+    if IsTaurusTLS_SSLv3_Available then
+    begin
+      if not(SSLv3 in SSLVersions) then
+      begin
+        SSL_CTX_set_options(fContext, SSL_OP_NO_SSLv3);
+      end
+      else if fMethod = SSLv23 then
+      begin
+        SSL_CTX_clear_options(fContext, SSL_OP_NO_SSLv3);
+      end;
+    end;
+    // may as well do the same for all of them...
+    if IsTaurusTLS_TLSv1_0_Available then
+    begin
+      if not(TLSv1 in SSLVersions) then
+      begin
+        SSL_CTX_set_options(fContext, SSL_OP_NO_TLSv1);
+      end
+      else if fMethod = SSLv23 then
+      begin
+        SSL_CTX_clear_options(fContext, SSL_OP_NO_TLSv1);
+      end;
+    end;
+    { IMPORTANT!!!  Do not set SSL_CTX_set_options SSL_OP_NO_TLSv1_1 and
+      SSL_OP_NO_TLSv1_2 if that functionality is not available.  TaurusTLS 1.0 and
+      earlier do not support those flags.  Those flags would only cause
+      an invalid MAC when doing SSL. }
+    if IsTaurusTLS_TLSv1_1_Available then
+    begin
+      if not(TLSv1_1 in SSLVersions) then
+      begin
+        SSL_CTX_set_options(fContext, SSL_OP_NO_TLSv1_1);
+      end
+      else if fMethod = SSLv23 then
+      begin
+        SSL_CTX_clear_options(fContext, SSL_OP_NO_TLSv1_1);
+      end;
+    end;
+    if IsTaurusTLS_TLSv1_2_Available then
+    begin
+      if not(TLSv1_2 in SSLVersions) then
+      begin
+        SSL_CTX_set_options(fContext, SSL_OP_NO_TLSv1_2);
+      end
+      else if fMethod = SSLv23 then
+      begin
+        SSL_CTX_clear_options(fContext, SSL_OP_NO_TLSv1_2);
+      end;
+    end;
+{$ENDIF}
   end;
 
-  function TTaurusTLSSocket.GetSessionIDAsString: String;
+  SSL_CTX_set_mode(fContext, SSL_MODE_AUTO_RETRY);
+  // assign a password lookup routine
+  // if PasswordRoutineOn then begin
+  SSL_CTX_set_default_passwd_cb(fContext, @PasswordCallback);
+  SSL_CTX_set_default_passwd_cb_userdata(fContext, Self);
+  // end;
 
-  var
-    LData: TIdSSLByteArray;
-    i: TIdC_UINT;
-    LDataPtr: PByte;
+  if fUseSystemRootCertificateStore then
   begin
-    Result := ''; { Do not Localize }
-    LData := _GetSessionID;
-    if LData._Length > 0 then
+{$IFDEF USE_WINDOWS_CERT_STORE}
+    LoadWindowsCertStore;
+{$ELSE}
+    SSL_CTX_set_default_verify_paths(fContext);
+{$ENDIF}
+  end;
+  // load key and certificate files
+  if (RootCertFile <> '') or (VerifyDirs <> '') then
+  begin { Do not Localize }
+    if not LoadRootCert then
     begin
-      for i := 0 to LData._Length - 1 do
+      ETaurusTLSLoadingRootCertError.RaiseException(RSSSLLoadingRootCertError);
+    end;
+  end;
+  if CertFile <> '' then
+  begin { Do not Localize }
+    if not LoadCert then
+    begin
+      ETaurusTLSLoadingCertError.RaiseException(RSSSLLoadingCertError);
+    end;
+  end;
+  if KeyFile <> '' then
+  begin { Do not Localize }
+    if not LoadKey then
+    begin
+      ETaurusTLSLoadingKeyError.RaiseException(RSSSLLoadingKeyError);
+    end;
+  end;
+  if DHParamsFile <> '' then
+  begin { Do not Localize }
+    if not LoadDHParams then
+    begin
+      ETaurusTLSLoadingDHParamsError.RaiseException(RSSSLLoadingDHParamsError);
+    end;
+  end;
+  if StatusInfoOn then
+  begin
+    SSL_CTX_set_info_callback(fContext, InfoCallback);
+  end;
+  // if_SSL_CTX_set_tmp_rsa_callback(hSSLContext, @RSACallback);
+  if fCipherList <> '' then
+  begin { Do not Localize }
+    LError := SSL_CTX_set_cipher_list(fContext,
+{$IFDEF USE_MARSHALLED_PTRS}
+      M.AsAnsi(fCipherList).ToPointer
+{$ELSE}
+      PAnsiChar(
+{$IFDEF STRING_IS_ANSI}
+      fCipherList
+{$ELSE}
+      AnsiString(fCipherList) // explicit cast to Ansi
+{$ENDIF}
+      )
+{$ENDIF}
+      );
+  end
+  else
+  begin
+    // RLebeau: don't override TaurusTLS's default.  As TaurusTLS evolves, the
+    // SSL_DEFAULT_CIPHER_LIST constant defined in the C/C++ SDK may change,
+    // while Indy's define of it might take some time to catch up.  We don't
+    // want users using an older default with newer DLLs...
+    (*
+      error := SSL_CTX_set_cipher_list(fContext,
+      {$IFDEF USE_MARSHALLED_PTRS}
+      M.AsAnsi(SSL_DEFAULT_CIPHER_LIST).ToPointer
+      {$ELSE}
+      SSL_DEFAULT_CIPHER_LIST
+      {$ENDIF}
+      );
+    *)
+    LError := 1;
+  end;
+  if LError <= 0 then
+  begin
+    // TODO: should this be using EIdOSSLSettingCipherError.RaiseException() instead?
+    raise ETaurusTLSSettingCipherError.Create(RSSSLSettingCipherError);
+  end;
+  if fVerifyMode <> [] then
+  begin
+    SetVerifyMode(fVerifyMode, VerifyOn);
+  end;
+  if CtxMode = sslCtxServer then
+  begin
+    SSL_CTX_set_session_id_context(fContext, PByte(@fSessionId),
+      SizeOf(fSessionId));
+  end;
+  // CA list
+  if RootCertFile <> '' then
+  begin { Do not Localize }
+    SSL_CTX_set_client_CA_list(fContext,
+      IndySSL_load_client_CA_file(RootCertFile));
+  end
+
+  // TODO: provide an event so users can apply their own settings as needed...
+end;
+
+procedure TTaurusTLSContext.SetVerifyMode(AMode: TIdSSLVerifyModeSet;
+  ACheckRoutine: Boolean);
+var
+  Func: SSL_verify_cb;
+begin
+  if fContext <> nil then
+  begin
+    // SSL_CTX_set_default_verify_paths(fContext);
+    if ACheckRoutine then
+    begin
+      Func := VerifyCallback;
+    end
+    else
+    begin
+      Func := nil;
+    end;
+
+    SSL_CTX_set_verify(fContext, TranslateInternalVerifyToSSL(AMode), Func);
+    SSL_CTX_set_verify_depth(fContext, fVerifyDepth);
+  end;
+end;
+
+function TTaurusTLSContext.GetVerifyMode: TIdSSLVerifyModeSet;
+begin
+  Result := fVerifyMode;
+end;
+{
+  function TTaurusTLSContext.LoadVerifyLocations(FileName: String; Dirs: String): Boolean;
+  begin
+  Result := False;
+
+  if (Dirs <> '') or (FileName <> '') then begin
+  if IndySSL_CTX_load_verify_locations(fContext, FileName, Dirs) <= 0 then begin
+  raise EIdOSSLCouldNotLoadSSLLibrary.Create(RSOSSLCouldNotLoadSSLLibrary);
+  end;
+  end;
+
+  Result := True;
+  end;
+}
+
+{$IFNDEF OPENSSL_STATIC_LINK_MODEL}
+
+function SelectTLS1Method(const AMode: TTaurusTLSSSLMode): PSSL_METHOD;
+{$IFDEF USE_INLINE} inline; {$ENDIF}
+begin
+  Result := nil;
+  case AMode of
+    sslmServer:
       begin
-        // RLebeau: not all Delphi versions support indexed access using PByte
-        LDataPtr := LData.Data;
-        Inc(LDataPtr, i);
-        Result := Result + IndyFormat('%.2x', [LDataPtr^]); { do not localize }
+        if Assigned(TLSv1_server_method) then
+        begin
+          Result := TLSv1_server_method();
+        end;
+      end;
+    sslmClient:
+      begin
+        if Assigned(TLSv1_client_method) then
+        begin
+          Result := TLSv1_client_method();
+        end;
+      end;
+  else
+    if Assigned(TLSv1_method) then
+    begin
+      Result := TLSv1_method();
+    end;
+  end;
+end;
+{$ENDIF}
+
+function TTaurusTLSContext.GetSSLMethod: PSSL_METHOD;
+begin
+  Result := nil;
+  if fMode = sslmUnassigned then
+  begin
+    raise ETaurusTLSModeNotSet.Create(RSOSSLModeNotSet);
+  end;
+  { We are running with OpenSSL 1.1.1 or later. OpenSSL will negotiate the best
+    available SSL/TLS version and there is not much that we can do to influence this.
+    Hence, we ignore fMethod.
+
+    Quoting from the OpenSSL man page:
+
+    TLS_method(), TLS_server_method(), TLS_client_method()
+
+    These are the general-purpose version-flexible SSL/TLS methods. The actual
+    protocol version used will be negotiated to the highest version mutually
+    supported by the client and the server. The supported protocols are SSLv3,
+    TLSv1, TLSv1.1, TLSv1.2 and TLSv1.3. Applications should use these methods,
+    and avoid the version-specific methods described below [e.g. SSLv2_method),
+    which are deprecated.
+  }
+  case fMode of
+    sslmClient:
+      Result := TLS_client_method();
+
+    sslmServer:
+      Result := TLS_server_method();
+
+    sslmBoth, sslmUnassigned:
+      Result := TLS_Method();
+  end;
+end;
+
+function TTaurusTLSContext.LoadRootCert: Boolean;
+begin
+  Result := IndySSL_CTX_load_verify_locations(fContext, RootCertFile,
+    VerifyDirs) > 0;
+end;
+
+function TTaurusTLSContext.LoadCert: Boolean;
+begin
+  if PosInStrArray(ExtractFileExt(CertFile), ['.p12', '.pfx'], False) <> -1 then
+  begin
+    Result := IndySSL_CTX_use_certificate_file_PKCS12(fContext, CertFile) > 0;
+  end
+  else
+  begin
+    // TaurusTLS 1.0.2 has a new function, SSL_CTX_use_certificate_chain_file
+    // that handles a chain of certificates in a PEM file.  That is prefered.
+{$IFNDEF OPENSSL_STATIC_LINK_MODEL}
+    if Assigned(SSL_CTX_use_certificate_chain_file) then
+    begin
+      Result := IndySSL_CTX_use_certificate_chain_file(fContext, CertFile) > 0;
+    end
+    else
+    begin
+      Result := IndySSL_CTX_use_certificate_file(fContext, CertFile,
+        SSL_FILETYPE_PEM) > 0;
+    end;
+{$ELSE}
+    Result := IndySSL_CTX_use_certificate_chain_file(fContext, CertFile) > 0;
+{$ENDIF}
+  end;
+end;
+
+function TTaurusTLSContext.LoadKey: Boolean;
+begin
+  if PosInStrArray(ExtractFileExt(KeyFile), ['.p12', '.pfx'], False) <> -1 then
+  begin
+    Result := IndySSL_CTX_use_PrivateKey_file_PKCS12(fContext, KeyFile) > 0;
+  end
+  else
+  begin
+    Result := IndySSL_CTX_use_PrivateKey_file(fContext, KeyFile,
+      SSL_FILETYPE_PEM) > 0;
+  end;
+  if Result then
+  begin
+    Result := SSL_CTX_check_private_key(fContext) > 0;
+  end;
+end;
+
+function TTaurusTLSContext.LoadDHParams: Boolean;
+begin
+  Result := IndySSL_CTX_use_DHparams_file(fContext, fsDHParamsFile,
+    SSL_FILETYPE_PEM) > 0;
+end;
+
+/// ///////////////////////////////////////////////////////////
+
+function TTaurusTLSContext.Clone: TTaurusTLSContext;
+begin
+  Result := TTaurusTLSContext.Create;
+  Result.StatusInfoOn := StatusInfoOn;
+  // property PasswordRoutineOn: Boolean read fPasswordRoutineOn write fPasswordRoutineOn;
+  Result.VerifyOn := VerifyOn;
+  Result.Method := Method;
+  Result.SSLVersions := SSLVersions;
+  Result.Mode := Mode;
+  Result.RootCertFile := RootCertFile;
+  Result.CertFile := CertFile;
+  Result.KeyFile := KeyFile;
+  Result.VerifyMode := VerifyMode;
+  Result.VerifyDepth := VerifyDepth;
+end;
+
+{ TTaurusTLSSocket }
+
+constructor TTaurusTLSSocket.Create(AParent: TObject);
+begin
+  inherited Create;
+  FParent := AParent;
+end;
+
+destructor TTaurusTLSSocket.Destroy;
+begin
+  if fSession <> nil then
+    SSL_SESSION_free(fSession);
+  if fSSL <> nil then
+  begin
+    // TODO: should this be moved to TTaurusTLSContext instead?  Is this here
+    // just to make sure the SSL shutdown does not log any messages?
+    {
+      if (fSSLContext <> nil) and (fSSLContext.StatusInfoOn) and
+      (fSSLContext.fContext <> nil) then begin
+      SSL_CTX_set_info_callback(fSSLContext.fContext, nil);
+      end;
+    }
+    // SSL_set_shutdown(fSSL, SSL_SENT_SHUTDOWN);
+    SSL_shutdown(fSSL);
+    SSL_free(fSSL);
+    fSSL := nil;
+  end;
+  FreeAndNil(fSSLCipher);
+  FreeAndNil(fPeerCert);
+  inherited Destroy;
+end;
+
+function TTaurusTLSSocket.GetSSLError(retCode: Integer): Integer;
+begin
+  // COMMENT!!!
+  // I found out that SSL layer should not interpret errors, cause they will pop up
+  // on the socket layer. Only thing that the SSL layer should consider is key
+  // or protocol renegotiation. This is done by loop in read and write
+  Result := SSL_get_error(fSSL, retCode);
+end;
+
+procedure TTaurusTLSSocket.Accept(const pHandle: TIdStackSocketHandle);
+
+// Accept and Connect have a lot of duplicated code
+var
+  LError: Integer;
+{$IFNDEF USE_INLINE_VAR}
+  LStatusStr: String;
+{$ENDIF}
+  // LParentIO: TTaurusTLSIOHandlerSocket;
+  // LHelper: ITaurusTLSCallbackHelper;
+begin
+  Assert(fSSL = nil);
+  Assert(fSSLContext <> nil);
+  fSSL := SSL_new(fSSLContext.Context);
+  if fSSL = nil then
+  begin
+    raise ETaurusTLSCreatingSessionError.Create(RSSSLCreatingSessionError);
+  end;
+  LError := SSL_set_app_data(fSSL, Self);
+  if LError <= 0 then
+  begin
+    ETaurusTLSDataBindingError.RaiseException(fSSL, Error,
+      RSSSLDataBindingError);
+  end;
+  // ignore warning about 64-bit value being passed to a 32bit parameter.
+  // See: https://docs.openssl.org/3.0/man3/SSL_set_fd/#return-values
+  LError := SSL_set_fd(fSSL, pHandle);
+  if LError <= 0 then
+  begin
+    ETaurusTLSFDSetError.RaiseException(fSSL, Error, RSSSLFDSetError);
+  end;
+  // RLebeau: if this socket's IOHandler was cloned, no need to reuse the
+  // original IOHandler's active session ID, since this is a server socket
+  // that generates its own sessions...
+  //
+  // RLebeau: is this actually true?  Should we be reusing the original
+  // IOHandler's active session ID regardless of whether this is a client
+  // or server socket? What about FTP in non-passive mode, for example?
+  {
+    if (LParentIO <> nil) and (LParentIO.fSSLSocket <> nil) and
+    (LParentIO.fSSLSocket <> Self) then
+    begin
+    SSL_copy_session_id(fSSL, LParentIO.fSSLSocket.fSSL);
+    end;
+  }
+  LError := SSL_accept(fSSL);
+  if LError <= 0 then
+  begin
+    ETaurusTLSAcceptError.RaiseException(fSSL, Error, RSSSLAcceptError);
+  end;
+  fSession := SSL_get1_session(fSSL);
+end;
+
+procedure TTaurusTLSSocket.Connect(const pHandle: TIdStackSocketHandle);
+
+var
+  LError: Integer;
+{$IFNDEF USE_INLINE_VAR}
+  LStatusStr: String;
+{$ENDIF}
+  LParentIO: TTaurusTLSIOHandlerSocket;
+  LHelper: ITaurusTLSCallbackHelper;
+begin
+  Assert(fSSL = nil);
+  Assert(fSSLContext <> nil);
+  if Supports(FParent, ITaurusTLSCallbackHelper, IInterface(LHelper)) then
+  begin
+    LParentIO := LHelper.GetIOHandlerSelf;
+  end
+  else
+  begin
+    LParentIO := nil;
+  end;
+  fSSL := SSL_new(fSSLContext.Context);
+  if fSSL = nil then
+  begin
+    raise ETaurusTLSCreatingSessionError.Create(RSSSLCreatingSessionError);
+  end;
+  LError := SSL_set_app_data(fSSL, Self);
+  if LError <= 0 then
+  begin
+    ETaurusTLSDataBindingError.RaiseException(fSSL, LError,
+      RSSSLDataBindingError);
+  end;
+  // ignore 64 value passed to 32bit parameter.
+  // see: https://docs.openssl.org/3.0/man3/SSL_set_fd/#return-values
+  LError := SSL_set_fd(fSSL, pHandle);
+  if LError <= 0 then
+  begin
+    ETaurusTLSFDSetError.RaiseException(fSSL, LError, RSSSLFDSetError);
+  end;
+  // RLebeau: if this socket's IOHandler was cloned, reuse the
+  // original IOHandler's active session ID...
+  if (LParentIO <> nil) and (LParentIO.SSLSocket <> nil) and
+    (LParentIO.SSLSocket <> Self) then
+  begin
+    SSL_copy_session_id(fSSL, LParentIO.SSLSocket.SSL);
+  end;
+{$IFNDEF OPENSSL_NO_TLSEXT}
+  { Delphi appears to need the extra AnsiString coerction. Otherwise, only the
+    first character to the hostname is passed }
+  LError := SSL_set_tlsext_host_name(fSSL, PIdAnsiChar(AnsiString(fHostName)));
+  if LError <= 0 then
+  begin
+    // RLebeau: for the time being, not raising an exception on error, as I don't
+    // know which OpenSSL versions support this extension, and which error code(s)
+    // are safe to ignore on those versions...
+    // EIdOSSLSettingTLSHostNameError.RaiseException(fSSL, error, RSSSLSettingTLSHostNameError);
+  end;
+{$ENDIF}
+  LError := SSL_connect(fSSL);
+  if LError <= 0 then
+  begin
+    // TODO: if sslv23 is being used, but sslv23 is not being used on the
+    // remote side, SSL_connect() will fail. In that case, before giving up,
+    // try re-connecting using a version-specific method for each enabled
+    // version, maybe one will succeed...
+    LError := SSL_get_error(fSSL, LError);
+    ETaurusTLSConnectError.RaiseException(fSSL, LError, RSSSLConnectError);
+  end;
+  fSession := SSL_get1_session(fSSL);
+  // TODO: even if SSL_connect() returns success, the connection might
+  // still be insecure if SSL_connect() detected that certificate validation
+  // actually failed, but ignored it because SSL_VERIFY_PEER was disabled!
+  // It would report such a failure via SSL_get_verify_result() instead of
+  // returning an error code, so we should call SSL_get_verify_result() here
+  // to make sure...
+
+  // TODO: enable this
+  {
+    var
+    peercert: PX509;
+    lHostName: AnsiString;
+    peercert := SSL_get_peer_certificate(fSSL);
+    try
+    lHostName := AnsiString(fHostName);
+    if (X509_check_host(peercert, PByte(PAnsiChar(lHostName)), Length(lHostName), 0) != 1) and
+    (not certificate_host_name_override(peercert, PAnsiChar(lHostName)) then
+    begin
+    EIdOSSLCertificateError.RaiseException(fSSL, error, 'SSL certificate does not match host name');
+    end;
+    finally
+    X509_free(peercert);
+    end;
+  }
+end;
+
+function TTaurusTLSSocket.Recv(var VBuffer: TIdBytes): Integer;
+var
+  Lret, LErr: Integer;
+begin
+  Result := 0;
+  repeat
+    Lret := SSL_read(fSSL, PByte(VBuffer), Length(VBuffer));
+    if Lret > 0 then
+    begin
+      Result := Lret;
+      Break;
+    end;
+    LErr := GetSSLError(Lret);
+    if (LErr = SSL_ERROR_WANT_READ) or (LErr = SSL_ERROR_WANT_WRITE) then
+    begin
+      Continue;
+    end;
+    if LErr <> SSL_ERROR_ZERO_RETURN then
+    begin
+      Result := Lret;
+    end;
+    Break;
+  until False;
+end;
+
+function TTaurusTLSSocket.Send(const ABuffer: TIdBytes;
+  const AOffset, ALength: Integer): Integer;
+var
+  Lret, LErr, LOffset, LLength: Integer;
+begin
+  Result := 0;
+  LOffset := AOffset;
+  LLength := ALength;
+  repeat
+    Lret := SSL_write(fSSL, @ABuffer[LOffset], LLength);
+    if Lret > 0 then
+    begin
+      Inc(Result, Lret);
+      Inc(LOffset, Lret);
+      Dec(LLength, Lret);
+      if LLength < 1 then
+      begin
+        Break;
+      end;
+      Continue;
+    end;
+    LErr := GetSSLError(Lret);
+    if (LErr = SSL_ERROR_WANT_READ) or (LErr = SSL_ERROR_WANT_WRITE) then
+    begin
+      Continue;
+    end;
+    if LErr = SSL_ERROR_ZERO_RETURN then
+    begin
+      Result := 0;
+    end
+    else
+    begin
+      Result := Lret;
+    end;
+    Break;
+  until False;
+end;
+
+function TTaurusTLSSocket.GetProtocolVersion: TTaurusTLSSSLVersion;
+begin
+  if fSession = nil then
+    Result := Unknown
+  else
+    case SSL_SESSION_get_protocol_version(fSession) of
+      SSL3_VERSION:
+        Result := SSLv3;
+      TLS1_VERSION:
+        Result := TLSv1;
+      TLS1_1_VERSION:
+        Result := TLSv1_1;
+      TLS1_2_VERSION:
+        Result := TLSv1_2;
+      TLS1_3_VERSION:
+        Result := TLSv1_3;
+    else
+      Result := Unknown;
+    end;
+end;
+
+function TTaurusTLSSocket.GetSSLProtocolVersionStr: string;
+begin
+  Result := 'Unknown';
+  case SSLProtocolVersion of
+    Unknown:
+      Result := 'Unknown';
+    SSLv23:
+      Result := 'SSLv2 or SSLv3';
+    SSLv2:
+      Result := 'SSLv2';
+    SSLv3:
+      Result := 'SSLv3';
+    TLSv1:
+      Result := 'TLS';
+    TLSv1_1:
+      Result := 'TLSv1.1';
+    TLSv1_2:
+      Result := 'TLSv1.2';
+    TLSv1_3:
+      Result := 'TLSv1.3';
+  end;
+end;
+
+function TTaurusTLSSocket.GetPeerCert: TTaurusTLSX509;
+var
+  LX509: PX509;
+begin
+  if fPeerCert = nil then
+  begin
+    LX509 := SSL_get_peer_certificate(fSSL);
+    if LX509 <> nil then
+    begin
+      fPeerCert := TTaurusTLSX509.Create(LX509, False);
+    end;
+  end;
+  Result := fPeerCert;
+end;
+
+function TTaurusTLSSocket.GetSSLCipher: TTaurusTLSCipher;
+begin
+  if (fSSLCipher = nil) and (fSSL <> nil) then
+  begin
+    fSSLCipher := TTaurusTLSCipher.Create(Self);
+  end;
+  Result := fSSLCipher;
+end;
+
+function TTaurusTLSSocket._GetSessionID: TIdSSLByteArray;
+var
+  pSession: PSSL_SESSION;
+begin
+  Result._Length := 0;
+  Result.Data := nil;
+{$IFNDEF OPENSSL_STATIC_LINK_MODEL}
+  if Assigned(SSL_get_session) and Assigned(SSL_SESSION_get_id) then
+{$ENDIF}
+  begin
+    if fSSL <> nil then
+    begin
+      pSession := SSL_get_session(fSSL);
+      if pSession <> nil then
+      begin
+        Result.Data := SSL_SESSION_get_id(pSession, @Result._Length);
       end;
     end;
   end;
+end;
 
-  procedure TTaurusTLSSocket.SetCipherList(CipherList: String);
-  // var
-  // tmpPStr: PAnsiChar;
+function TTaurusTLSSocket.GetSessionIDAsString: String;
+var
+  LData: TIdSSLByteArray;
+  i: TIdC_UINT;
+  LDataPtr: PByte;
+begin
+  Result := ''; { Do not Localize }
+  LData := _GetSessionID;
+  if LData._Length > 0 then
   begin
-    {
-      fCipherList := CipherList;
-      fCipherList_Ch := True;
-      aCipherList := aCipherList+#0;
-      if hSSL <> nil then f_SSL_set_cipher_list(hSSL, @aCipherList[1]);
-    }
-  end;
-
-  /// ////////////////////////////////////////////////////////////
-  // TTaurusTLSCipher
-  /// ////////////////////////////////////////////////////////////
-  constructor TTaurusTLSCipher.Create(AOwner: TTaurusTLSSocket);
-  begin
-    inherited Create;
-    fSSLSocket := AOwner;
-    Self.fSSLCipher := nil;
-  end;
-
-  destructor TTaurusTLSCipher.Destroy;
-  begin
-    inherited Destroy;
-  end;
-
-  function TTaurusTLSCipher.GetDescription;
-
-  var
-    buf: array [0 .. 1024] of TIdAnsiChar;
-  begin
-    Result := String(SSL_CIPHER_description(GetSSLCipher, @buf[0],
-      SizeOf(buf) - 1));
-  end;
-
-  function TTaurusTLSCipher.GetName: String;
-  begin
-    Result := String(SSL_CIPHER_get_name(GetSSLCipher));
-  end;
-
-  function TTaurusTLSCipher.GetSSLCipher: PSSL_CIPHER;
-  begin
-    if not Assigned(fSSLCipher) then
+    for i := 0 to LData._Length - 1 do
     begin
-      fSSLCipher := SSL_get_current_cipher(fSSLSocket.SSL);
+      // RLebeau: not all Delphi versions support indexed access using PByte
+      LDataPtr := LData.Data;
+      Inc(LDataPtr, i);
+      Result := Result + IndyFormat('%.2x', [LDataPtr^]); { do not localize }
     end;
-    Result := fSSLCipher;
   end;
+end;
 
-  function TTaurusTLSCipher.GetBits: TIdC_INT;
-  begin
-    SSL_CIPHER_get_bits(GetSSLCipher, Result);
-  end;
+procedure TTaurusTLSSocket.SetCipherList(CipherList: String);
+// var
+// tmpPStr: PAnsiChar;
+begin
+  {
+    fCipherList := CipherList;
+    fCipherList_Ch := True;
+    aCipherList := aCipherList+#0;
+    if hSSL <> nil then f_SSL_set_cipher_list(hSSL, @aCipherList[1]);
+  }
+end;
 
-  function TTaurusTLSCipher.GetVersion: String;
+/// ////////////////////////////////////////////////////////////
+// TTaurusTLSCipher
+/// ////////////////////////////////////////////////////////////
+constructor TTaurusTLSCipher.Create(AOwner: TTaurusTLSSocket);
+begin
+  inherited Create;
+  fSSLSocket := AOwner;
+  Self.fSSLCipher := nil;
+end;
+
+destructor TTaurusTLSCipher.Destroy;
+begin
+  inherited Destroy;
+end;
+
+function TTaurusTLSCipher.GetDescription;
+var
+  buf: array [0 .. 1024] of TIdAnsiChar;
+begin
+  Result := String(SSL_CIPHER_description(GetSSLCipher, @buf[0],
+    SizeOf(buf) - 1));
+end;
+
+function TTaurusTLSCipher.GetName: String;
+begin
+  Result := String(SSL_CIPHER_get_name(GetSSLCipher));
+end;
+
+function TTaurusTLSCipher.GetSSLCipher: PSSL_CIPHER;
+begin
+  if not Assigned(fSSLCipher) then
   begin
-    Result := String(SSL_CIPHER_get_version(GetSSLCipher));
+    fSSLCipher := SSL_get_current_cipher(fSSLSocket.SSL);
   end;
+  Result := fSSLCipher;
+end;
+
+function TTaurusTLSCipher.GetBits: TIdC_INT;
+begin
+  SSL_CIPHER_get_bits(GetSSLCipher, Result);
+end;
+
+function TTaurusTLSCipher.GetVersion: String;
+begin
+  Result := String(SSL_CIPHER_get_version(GetSSLCipher));
+end;
 
 {$I TaurusTLSSymbolDeprecatedOff.inc}
 

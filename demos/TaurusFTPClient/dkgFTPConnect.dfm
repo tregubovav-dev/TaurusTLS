@@ -149,7 +149,9 @@ object frmConnect: TfrmConnect
           Height = 23
           Style = csDropDownList
           Anchors = [akLeft, akTop, akRight]
+          ItemIndex = 0
           TabOrder = 5
+          Text = 'Unencrypted FTP Connection'
           OnChange = cboConnectionTypeChange
           Items.Strings = (
             'Unencrypted FTP Connection'

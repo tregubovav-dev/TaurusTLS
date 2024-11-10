@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/11/09 17:33:16.000.054,C:\msys64\home\jpmugaas\TaurusTLS\Packages\11AndAbove\Delphi\TaurusTLS290.dproj=C:\msys64\home\jpmugaas\TaurusTLS\Packages\11AndAbove\Delphi\TaurusTLS_Run.dproj</Transaction>
+    <Transaction>2024/11/09 17:33:53.000.859,C:\msys64\home\jpmugaas\TaurusTLS\Packages\11AndAbove\Delphi\TaurusTLS_Run.dproj=C:\msys64\home\jpmugaas\TaurusTLS\Packages\11AndAbove\Delphi\TaurusTLS_RT.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -954,7 +954,6 @@ begin
   Result := MDAsString(Fingerprint);
 end;
 
-
 function TTaurusTLSX509.GetnotBefore: TDateTime;
 begin
   // This is a safe typecast since PASN1_UTCTIME and PASN1_TIME are really

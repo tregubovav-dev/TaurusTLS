@@ -230,7 +230,6 @@ uses
   Windows,
 {$ENDIF}
   Classes,
-  IdBuffer,
   IdCTypes,
   IdGlobal,
   IdException,
@@ -239,14 +238,9 @@ uses
   IdComponent,
   IdIOHandler,
   IdGlobalProtocols,
-  IdTCPServer,
   IdThread,
-  IdTCPConnection,
-  IdIntercept,
   IdIOHandlerSocket,
   IdSSL,
-  IdSocks,
-  IdScheduler,
   IdYarn,
   TaurusTLSExceptionHandlers,
   TaurusTLSHeaders_ossl_typ,
@@ -607,14 +601,9 @@ uses
   Posix.Unistd,
 {$ENDIF}
   IdFIPS,
-  IdResourceStringsCore,
   IdResourceStringsProtocols,
   TaurusTLS_ResourceStrings,
   IdStack,
-  IdStackBSDBase,
-  IdAntiFreezeBase,
-  IdExceptionCore,
-  IdResourceStrings,
   IdThreadSafe,
   {$IFNDEF GETURIHOST_SUPPORTED}
   IdCustomTransparentProxy,
@@ -622,7 +611,6 @@ uses
   {$ENDIF}
   SysUtils,
   SyncObjs,
-  TaurusTLSHeaders_obj_mac,
   TaurusTLSHeaders_asn1,
   TaurusTLSHeaders_bn,
   TaurusTLSHeaders_x509_vfy,
@@ -638,7 +626,6 @@ uses
   TaurusTLSHeaders_objects,
   TaurusTLSHeaders_ssl3,
   TaurusTLSHeaders_x509,
-  TaurusTLSConsts,
   TaurusTLS_Files,
   TaurusTLSLoader;
 

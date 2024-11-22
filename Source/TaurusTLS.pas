@@ -213,9 +213,10 @@ unit TaurusTLS;
   This helps user code distinquish between Self-signed and invalid certificates.
 }
 
+{$I TaurusTLSCompilerDefines.inc}
+
 interface
 
-{$I TaurusTLSCompilerDefines.inc}
 {$I TaurusTLSLinkDefines.inc}
 {$IFDEF WINDOWS}
 {$IFNDEF OPENSSL_DONT_USE_WINDOWS_CERT_STORE}

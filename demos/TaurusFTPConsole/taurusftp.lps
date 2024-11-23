@@ -8,8 +8,7 @@
         <Filename Value="taurusftp.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="63"/>
-        <CursorPos X="24" Y="77"/>
+        <CursorPos X="68" Y="9"/>
         <UsageCount Value="133"/>
         <Loaded Value="True"/>
       </Unit>
@@ -996,8 +995,16 @@
         <CursorPos X="65" Y="23"/>
         <UsageCount Value="10"/>
       </Unit>
+      <Unit>
+        <Filename Value="taurusftp_unit.pas"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="28"/>
+        <CursorPos X="31" Y="44"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="15">
+    <JumpHistory HistoryIndex="18">
       <Position>
         <Filename Value="taurusftp.lpr"/>
         <Caret Line="417" TopLine="388"/>
@@ -1062,6 +1069,18 @@
         <Filename Value="taurusftp.lpr"/>
         <Caret Line="34" Column="22" TopLine="21"/>
       </Position>
+      <Position>
+        <Filename Value="taurusftp.lpr"/>
+        <Caret Line="8"/>
+      </Position>
+      <Position>
+        <Filename Value="taurusftp_unit.pas"/>
+        <Caret Line="44" Column="31" TopLine="28"/>
+      </Position>
+      <Position>
+        <Filename Value="taurusftp.lpr"/>
+        <Caret Line="8"/>
+      </Position>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -1079,8 +1098,6 @@
         <Item2 Value="\usr\bin\gnome-terminal -t &apos;Lazarus Run Output&apos; -e &apos;$(LazarusDir)\tools\runwait.sh $(TargetCmdLine)&apos;"/>
         <Item3 Value="C:\WINDOWS\system32\cmd.exe /C ${TargetCmdLine}"/>
       </List>
-      <List Name="WorkingDirectory" Type="File" Count="1"/>
-      <List Name="CommandLineParameters" Count="1"/>
     </HistoryLists>
   </ProjectSession>
   <Debugging>
@@ -1090,7 +1107,7 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="taurusftp.lpr"/>
-        <Line Value="411"/>
+        <Line Value="412"/>
       </Item>
       <Item>
         <Kind Value="bpkSource"/>

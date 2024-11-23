@@ -370,8 +370,8 @@
         <UnitName Value="TaurusTLS_X509"/>
       </Item>
       <Item>
-        <Filename Value="../../Source/ITaurusTLS_NTLM.pas"/>
-        <UnitName Value="ITaurusTLS_NTLM"/>
+        <Filename Value="../../Source/TaurusTLS_NTLM.pas"/>
+        <UnitName Value="TaurusTLS_NTLM"/>
       </Item>
     </Files>
     <RequiredPkgs>

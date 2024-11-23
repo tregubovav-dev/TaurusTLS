@@ -520,8 +520,16 @@ initialization
   Application.Title := 'TaurusFTP Console';
   Application.Run;
 {$ELSE}
-  Application := TFTPApplication.Create;
-  Application.DoRun;
+  try
+    Application := TFTPApplication.Create;
+    Application.DoRun;
+  except
+    on E:Exception do
+    begin
+      WriteLn(E.Message);
+      ReadLn;
+    end;
+  end;
 {$ENDIF}
   Application.Free;
 end.

@@ -36,8 +36,8 @@ uses
   TaurusTLSHeaders_ts, TaurusTLSHeaders_tserr, TaurusTLSHeaders_txt_db, 
   TaurusTLSHeaders_ui, TaurusTLSHeaders_uierr, TaurusTLSHeaders_whrlpool, 
   TaurusTLSHeaders_x509, TaurusTLSHeaders_x509err, TaurusTLSHeaders_x509v3, 
-  TaurusTLSHeaders_x509_vfy, TaurusTLSLoader, TaurusTLS_NTLM, 
-  TaurusTLS_ResourceStrings, TaurusTLS_Utils, TaurusTLS_X509;
+  TaurusTLSHeaders_x509_vfy, TaurusTLSLoader, TaurusTLS_ResourceStrings, 
+  TaurusTLS_Utils, TaurusTLS_X509, ITaurusTLS_NTLM;
 
 implementation
 

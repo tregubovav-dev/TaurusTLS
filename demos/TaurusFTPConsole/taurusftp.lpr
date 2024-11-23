@@ -63,7 +63,7 @@ type
 
   procedure TFTPApplication.OnReceived(ASender: TComponent; const AText, AData: string);
   begin
-    WriteLn(Trim(AData));
+    WriteLn(TrimRight(AData));
   end;
 
   procedure TFTPApplication.OnSent(ASender: TComponent; const AText, AData: string);
@@ -74,7 +74,7 @@ type
     end
     else
     begin
-      WriteLn(Trim(AData));
+      WriteLn(TrimRight(AData));
     end;
   end;
 

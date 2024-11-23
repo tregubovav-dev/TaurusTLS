@@ -8,9 +8,7 @@
 {* Chad Z. Hower (Kudzu) and the Indy Pit Crew – http://www.IndyProject.org/  *}
 {******************************************************************************}
 
-unit ITaurusTLS_NTLM;
-
-{$I TaurusTLSCompilerDefines.inc}
+unit TaurusTLS_NTLM;
 
 interface
 
@@ -21,6 +19,8 @@ uses
   TaurusTLSLoader,
   TaurusTLSHeaders_des,
   SysUtils;
+
+{$I TaurusTLSCompilerDefines.inc}
 
 function LoadTaurusTLS: Boolean;
 begin
@@ -174,8 +174,9 @@ begin
 end;
 
 initialization
-  IdFIPS.LoadNTLMLibrary := {$IFDEF FPC}@{$ENDIF}LoadTaurusTLS;
-  IdFIPS.IsNTLMFuncsAvail := {$IFDEF FPC}@{$ENDIF}IsNTLMFuncsAvail;
-  IdFIPS.NTLMGetLmChallengeResponse := {$IFDEF FPC}@{$ENDIF}SetupLanManagerPassword;
-  IdFIPS.NTLMGetNtChallengeResponse := {$IFDEF FPC}@{$ENDIF}CreateNTPassword;
+  IdFIPS.LoadNTLMLibrary := @LoadTaurusTLS;
+  IdFIPS.IsNTLMFuncsAvail := @IsNTLMFuncsAvail;
+  IdFIPS.NTLMGetLmChallengeResponse := @SetupLanManagerPassword;
+  IdFIPS.NTLMGetNtChallengeResponse := @CreateNTPassword;
+
 end.

@@ -349,19 +349,6 @@ begin
   end;
 end;
 
-function RightJustify(const AText: String; ALen: integer): String;
-begin
-  Result := '';
-  if ALen > Length(AText) then
-  begin
-    Result := StringOfChar(' ', ALen - Length(AText)) + AText;
-  end
-  else
-  begin
-    Result := AText;
-  end;
-end;
-
 function LeftJustify(const AText: String; ALen: integer): string;
 begin
   Result := '';
@@ -550,7 +537,7 @@ begin
     PrintCmdHelp(['exit', 'quit'], 'Terminate ftp session and exit');
     PrintCmdHelp(['get'], 'Receive file');
     PrintCmdHelp(['lcd'], 'Change local working directory');
-    PrintCmdHelp(['ldir'], 'List contents of local directory','ldir [local_path]');
+    PrintCmdHelp(['ldir'], 'List contents of local directory');
     PrintCmdHelp(['lpwd'], 'Print local working directory');
     PrintCmdHelp(['mkdir'],'Make directory on the remote machine');
     PrintCmdHelp(['open'],'Connect to remote ftp');
@@ -714,7 +701,8 @@ begin
       //'help', '?'];
       23, 24:
       CmdHelp(LCmd);
-      25 : //'status'
+      //'status'
+      25 :
       CmdStatus;
     else
       WriteLn('Bad Command');

@@ -1,4 +1,4 @@
-unit TaurusTLS_Dsn_ResourceStrings;
+﻿unit TaurusTLS_Dsn_ResourceStrings;
 
 interface
 

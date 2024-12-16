@@ -98,7 +98,7 @@ function SetupLanManagerPassword(const APassword: String; const ANonce: TIdBytes
 var
   lm_hpw: array[0..20] of Byte;
   lm_pw: array[0..13] of Byte;
-  idx, len: Integer;
+  idx, len : Integer;
   ks: des_key_schedule;
   lm_resp: array [0..23] of Byte;
   lPassword: {$IFDEF STRING_IS_UNICODE}TIdBytes{$ELSE}AnsiString{$ENDIF};
@@ -109,7 +109,7 @@ begin
   lPassword := UpperCase(APassword);
   {$ENDIF}
 
-  len := IndyMin(Length(lPassword), 14);
+  len := Integer(IndyMin(Length(lPassword), 14));
   if len > 0 then begin
     Move(lPassword[{$IFDEF STRING_IS_UNICODE}0{$ELSE}1{$ENDIF}], lm_pw[0], len);
   end;

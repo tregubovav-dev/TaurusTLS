@@ -1247,7 +1247,6 @@ function BIO_get_mem_ptr(b: PBIO; pp: PIdAnsiChar): TIdC_INT; {removed 1.0.0}
 function BIO_set_mem_eof_return(b: PBIO; v: TIdC_INT): TIdC_INT; {removed 1.0.0}
 {$ENDIF}
 
-
 implementation
 
   uses

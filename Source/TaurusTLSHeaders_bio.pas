@@ -1247,6 +1247,7 @@ function BIO_get_mem_ptr(b: PBIO; pp: PIdAnsiChar): TIdC_INT; {removed 1.0.0}
 function BIO_set_mem_eof_return(b: PBIO; v: TIdC_INT): TIdC_INT; {removed 1.0.0}
 {$ENDIF}
 
+
 implementation
 
   uses
@@ -1526,8 +1527,6 @@ const
 //  {$HPPEMIT '# define BIO_dgram_get_mtu_overhead(b)'}
 //           (Cardinal)BIO_ctrl((b), BIO_CTRL_DGRAM_GET_MTU_OVERHEAD, 0, 0)
 
-//#define BIO_get_ex_new_index(l, p, newf, dupf, freef) \
-//    CRYPTO_get_ex_new_index(CRYPTO_EX_INDEX_BIO, l, p, newf, dupf, freef)
 
   BIO_set_ex_data_procname = 'BIO_set_ex_data';
   BIO_get_ex_data_procname = 'BIO_get_ex_data';

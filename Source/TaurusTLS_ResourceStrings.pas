@@ -34,6 +34,7 @@ resourcestring
   RSOSSLMinProtocolError = 'SSL_CTX_set_min_proto_version error';
   RSOSSLMaxProtocolError = 'SSL_CTX_set_max_proto_version error';
   ROSUnsupported = 'Not Supported';
+  RSOSSLCertificateDoesNotMatch = 'SSL certificate does not match host name';
   //callback where strings
   RSOSSLAlert =  '%s Alert';
   RSOSSLReadAlert =  '%s Read Alert';

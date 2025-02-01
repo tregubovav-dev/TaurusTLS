@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/11/09 17:36:46.000.262,C:\msys64\home\jpmugaas\TaurusTLS\Packages\11AndAbove\Delphi\TaurusAll.groupproj=C:\msys64\home\jpmugaas\TaurusTLS\Packages\11AndAbove\Delphi\TaurusAll290.groupproj</Transaction>
+  </Transactions>
+	<Default.Personality>
+		<Projects ActiveProject="C:\msys64\home\jpmugaas\TaurusTLS\Packages\11AndAbove\Delphi\TaurusTLS_RTForIndy290.dproj"/>
+	</Default.Personality>
+</BorlandProject>

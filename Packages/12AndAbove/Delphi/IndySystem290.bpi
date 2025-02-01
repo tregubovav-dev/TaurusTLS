@@ -1,0 +1,3 @@
+/* 'IndySystem290' Package */
+OUTPUT_FORMAT(elf64-x86-64)
+GROUP ( bplIndySystem290290.so IndySystem290_nonshared.a )

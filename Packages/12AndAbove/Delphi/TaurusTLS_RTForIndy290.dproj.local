@@ -8,6 +8,10 @@
     <Transaction>2025/01/04 19:50:15.000.457,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLSHeaders_ct.pas</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="IndyCore290.dcp"/>
+    <File Path="IndyProtocols290.dcp"/>
+    <File Path="IndySystem290.dcp"/>
+    <File Path="rtl.dcp"/>
     <File Path="..\..\..\..\TaurusTLS"/>
     <File Path="..\..\..\Source"/>
     <File Path="..\..\..\Source\TaurusTLS.pas"/>
@@ -100,9 +104,5 @@
     <File Path="..\..\..\Source\TaurusTLS_ResourceStrings.pas"/>
     <File Path="..\..\..\Source\TaurusTLS_Utils.pas"/>
     <File Path="..\..\..\Source\TaurusTLS_X509.pas"/>
-    <File Path="IndyCore290.dcp"/>
-    <File Path="IndyProtocols290.dcp"/>
-    <File Path="IndySystem290.dcp"/>
-    <File Path="rtl.dcp"/>
   </ProjectSortOrder>
 </BorlandProject>

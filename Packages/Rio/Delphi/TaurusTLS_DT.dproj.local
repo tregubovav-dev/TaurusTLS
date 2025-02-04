@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2025/01/31 20:00:24.000.339,=rtl.dcp</Transaction>
+    <Transaction>2025/01/31 20:01:26.000.024,C:\msys64\home\jpmugaas\TaurusTLS\Packages\Rio\Delphi\TaurusTLS_DT.dproj=C:\Users\root\Documents\Embarcadero\Studio\Projects\Package1.dproj</Transaction>
+    <Transaction>2025/01/31 20:03:33.000.541,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_AboutDlg.pas</Transaction>
+    <Transaction>2025/01/31 20:03:33.000.556,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_ComponentEditor.pas</Transaction>
+    <Transaction>2025/01/31 20:03:33.000.570,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_ResourceStrings.pas</Transaction>
+    <Transaction>2025/01/31 20:03:33.000.562,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_Register.pas</Transaction>
+    <Transaction>2025/01/31 20:05:02.000.691,=designide.dcp</Transaction>
+    <Transaction>2025/01/31 20:05:47.000.120,=TaurusTLS_RT.dcp</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -20,17 +20,19 @@
     <Transaction>2025/02/01 07:44:22.000.969,C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_AboutDlg.pas=</Transaction>
     <Transaction>2025/02/01 07:44:38.000.334,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_AboutDlg.pas</Transaction>
     <Transaction>2025/02/01 07:44:39.000.329,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_Register.pas</Transaction>
-    <Transaction>2025/02/01 07:44:39.000.305,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_ComponentEditor.pas</Transaction>
     <Transaction>2025/02/01 07:44:39.000.342,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_ResourceStrings.pas</Transaction>
-    <Transaction>2025/02/01 07:48:26.000.461,C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_ComponentEditor.pas=</Transaction>
+    <Transaction>2025/02/01 07:44:39.000.305,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_ComponentEditor.pas</Transaction>
     <Transaction>2025/02/01 07:48:26.000.431,C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_AboutDlg.pas=</Transaction>
+    <Transaction>2025/02/01 07:48:26.000.461,C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_ComponentEditor.pas=</Transaction>
     <Transaction>2025/02/01 07:48:26.000.473,C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_Register.pas=</Transaction>
     <Transaction>2025/02/01 07:49:24.000.311,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_AboutDlg.pas</Transaction>
     <Transaction>2025/02/01 07:50:19.000.521,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_ComponentEditor.pas</Transaction>
     <Transaction>2025/02/01 07:52:03.000.579,C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_ComponentEditor.pas=</Transaction>
     <Transaction>2025/02/01 07:54:07.000.841,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_Register.pas</Transaction>
     <Transaction>2025/02/01 07:55:36.000.644,C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_Register.pas=</Transaction>
-    <Transaction>2025/02/01 11:29:37.874,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_AboutDlg.pas</Transaction>
-    <Transaction>2025/02/01 11:29:37.878,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_ResourceStrings.pas</Transaction>
+    <Transaction>2025/02/01 11:29:37.000.874,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_AboutDlg.pas</Transaction>
+    <Transaction>2025/02/01 11:29:37.000.878,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_ResourceStrings.pas</Transaction>
+    <Transaction>2025/02/02 21:41:45.000.743,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_Register.pas</Transaction>
+    <Transaction>2025/02/02 21:41:45.000.735,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLS_Dsn_ComponentEditor.pas</Transaction>
   </Transactions>
 </BorlandProject>

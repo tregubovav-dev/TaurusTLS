@@ -36,7 +36,6 @@ var
   lblProductName: TLabel;
   lblVersion: TLabel;
   lblCopyright: TLabel;
-  lblAllRightsReserved: TLabel;
   btnOk: TButton;
   mmoLicense: TMemo;
   btnThirdPartyAcknowlegement: TButton;
@@ -48,7 +47,6 @@ begin
     lblProductName := TLabel.Create(frmAbout);
     lblVersion := TLabel.Create(frmAbout);
     lblCopyright := TLabel.Create(frmAbout);
-    lblAllRightsReserved := TLabel.Create(frmAbout);
     btnOk := TButton.Create(frmAbout);
     mmoLicense := TMemo.Create(frmAbout);
     btnThirdPartyAcknowlegement := TButton.Create(frmAbout);
@@ -136,8 +134,13 @@ begin
     btnThirdPartyAcknowlegement.Anchors := [akLeft, akRight, akBottom];
     btnThirdPartyAcknowlegement.Caption := RSThirdPartyAcknowlegements;
     btnThirdPartyAcknowlegement.TabOrder := 1;
+    {$IFDEF FPC}
+     btnThirdPartyAcknowlegement.OnClick :=
+      @frmAbout.btnThirdPartyAcknowlegementClick;
+    {$ELSE}
     btnThirdPartyAcknowlegement.OnClick :=
       frmAbout.btnThirdPartyAcknowlegementClick;
+    {$ENDIF}
     frmAbout.ShowModal;
   finally
     FreeAndNil(frmAbout);

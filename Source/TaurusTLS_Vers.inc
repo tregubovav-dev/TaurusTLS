@@ -8,7 +8,7 @@ const
   gsTaurusTLSVersionBuild = 5;
   {$NODEFINE gsTaurusTLSVersionBuild}
 
-  (*$HPPEMIT '#define gsTaurusTdLSVersionMajor 1'*)
+  (*$HPPEMIT '#define gsTaurusTLSVersionMajor 1'*)
   (*$HPPEMIT '#define gsTaurusTLSVersionMinor 0'*)
   (*$HPPEMIT '#define gsTaurusTLSVersionRelease 0'*)
   (*$HPPEMIT '#define gsTaurusTLSVersionBuild 5'*)

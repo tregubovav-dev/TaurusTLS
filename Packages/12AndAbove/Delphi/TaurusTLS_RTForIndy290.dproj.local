@@ -1,17 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2024/11/29 19:19:42.000.655,C:\msys64\home\jpmugaas\TaurusTLS\Packages\11AndAbove\Delphi\TaurusTLS_RT.dproj=C:\msys64\home\jpmugaas\TaurusTLS\Packages\11AndAbove\Delphi\TaurusTLS_RTForIndy290.dproj</Transaction>
+    <Transaction>2024/11/29 19:19:42.000.655,C:\msys64\home\jpmugaas\TaurusTLS\Packages\11AndAbove\Delphi\TaurusTLS_RTForIndy290.dproj=C:\msys64\home\jpmugaas\TaurusTLS\Packages\11AndAbove\Delphi\TaurusTLS_RT.dproj</Transaction>
     <Transaction>2024/11/29 19:24:27.000.025,=IndyCore290.dcp</Transaction>
     <Transaction>2024/11/29 19:24:59.000.098,=IndySystem290.dcp</Transaction>
     <Transaction>2024/11/29 19:25:12.000.235,=IndyProtocols290.dcp</Transaction>
     <Transaction>2025/01/04 19:50:15.000.457,=C:\msys64\home\jpmugaas\TaurusTLS\Source\TaurusTLSHeaders_ct.pas</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
-    <File Path="IndyCore290.dcp"/>
-    <File Path="IndyProtocols290.dcp"/>
-    <File Path="IndySystem290.dcp"/>
-    <File Path="rtl.dcp"/>
     <File Path="..\..\..\..\TaurusTLS"/>
     <File Path="..\..\..\Source"/>
     <File Path="..\..\..\Source\TaurusTLS.pas"/>
@@ -104,5 +100,9 @@
     <File Path="..\..\..\Source\TaurusTLS_ResourceStrings.pas"/>
     <File Path="..\..\..\Source\TaurusTLS_Utils.pas"/>
     <File Path="..\..\..\Source\TaurusTLS_X509.pas"/>
+    <File Path="IndyCore290.dcp"/>
+    <File Path="IndyProtocols290.dcp"/>
+    <File Path="IndySystem290.dcp"/>
+    <File Path="rtl.dcp"/>
   </ProjectSortOrder>
 </BorlandProject>

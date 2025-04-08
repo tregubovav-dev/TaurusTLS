@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject>
-	<Transactions>
-    <Transaction>2025/02/01 07:39:10.000.771,C:\msys64\home\jpmugaas\TaurusTLS\Packages\Alexandria\TaurusAll.groupproj=C:\msys64\home\jpmugaas\TaurusTLS\Packages\Alexandria\TaurusAll.groupproj</Transaction>
-  </Transactions>
-	<Default.Personality>
-		<Projects ActiveProject="C:\msys64\home\jpmugaas\TaurusTLS\Packages\Alexandria\Delphi\TaurusTLS_DT.dproj"/>
-	</Default.Personality>
-</BorlandProject>

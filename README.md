@@ -1,11 +1,14 @@
+
 # TaurusTLS
+
 Copyright (c) 2025 TaurusTLS Developers
 All Rights Reserved
+
 ## General Information
 
 TaurusTLS provides OpenSSL 1.1.1 and 3.x support for Indy - Internet Direct.  It includes headers plus two components for Delphi and C++Builder.  Those components are:
 
-- TTaurusTLSIOHandlerSocket - Enables TLS in a TIdTCPClientCustom descendant. 
+- TTaurusTLSIOHandlerSocket - Enables TLS in a TIdTCPClientCustom descendant.
 - TTaurusTLSServerIOHandler - Enables TLS in a TIdCustomTCPServer descendant.
 
 Both components are in the TaurusTLS.pas unit and the components are available on the IDE palette page, “TaurusTLS”.
@@ -17,11 +20,13 @@ TaurusTLS supports the following operating systems:
 - Windows
 
 ## License
+
 TaurusTLS is dual licensed. You can review which license better suits your needs, and use that license.  You can even change your mind later if you have previously chosen one.
 
 The TaurusTLS Modified BSD license is a very no nonsense license that allows you to do almost anything you want with TaurusTLS provided you provide proper attribution.  Details are available in the Modified_BSD_LICENSE.md file included in the with this source-code.
- 
+
 To make it easier and consistent for JEDI users, we also offer an MPL license v1.1.  Details are available in the LICENSE_MPL_1_1.txt file included with this source-code.
+
 ## RAD Studio Installation
 
 ### For Indy Included with Delphi
@@ -52,22 +57,24 @@ You may install TaurusTLS into the 64-bit Integrated Development Environment (ID
 TaurusTLS requires OpenSSL 1.1.1 or OpenSSL 3.x.  
 
 ### Linux
+
 On Linux, OpenSSL is usually installed by default.  We recommend that developers document this requirement in case users need to install updated versions of OpenSSL.
 
 ### MacOS
 
 On MacOS, the default OpenSSL version is LibreSSL and that may NOT work.  You can install OpenSSL alongside LibreSSL using the instructions at:
 
-https://secdops.com/blog/using-openssl-alongside-the-default-libressl-on-macos/
+<https://secdops.com/blog/using-openssl-alongside-the-default-libressl-on-macos/>
 
 ### Windows
 
-On Windows, OpenSSL is not installed by default so you have to redistribute it along with your software by placing the library files in the same directory as your executable.   You can choose to either deploy OpenSSL 1.1.1 (not recommended) or an OpenSSL 3.x version.  As of this writing, the current OpenSSL 3.x versions are 3.0.16, 3.1.8, 3.2.4, 3.3.3, 3.4.1, and 3.5.0.  Pre-compiled .DLL’s for these versions are available at https://github.com/JPeterMugaas/OpenSSL-Distribution/tree/main/binaries/Windows and https://github.com/TurboPack/OpenSSL-Distribution/tree/main/binaries/Windows .  
+On Windows, OpenSSL is not installed by default so you have to redistribute it along with your software by placing the library files in the same directory as your executable.   You can choose to either deploy OpenSSL 1.1.1 (not recommended) or an OpenSSL 3.x version.  As of this writing, the current OpenSSL 3.x versions are 3.0.16, 3.1.8, 3.2.4, 3.3.3, 3.4.1, and 3.5.0.  Pre-compiled .DLL’s for these versions are available at <https://github.com/JPeterMugaas/OpenSSL-Distribution/tree/main/binaries/Windows> and <https://github.com/TurboPack/OpenSSL-Distribution/tree/main/binaries/Windows> .  
 
 For Win32 applications, you need to redistribute the following:
 
 OpenSSL 1.1.1  (not recommended because OpenSSL 1.1.1 has reached its end of life)
-- libcrypto-1_1.dll	
+
+- libcrypto-1_1.dll
 - libssl-1_1.dll
 - openssl.exe
 
@@ -119,7 +126,7 @@ Password=[password for your private SSL key]
 
 You can also do the following:
 
-1. Copy the OpenSSL .dll's and openssl.exe to the directory where the FTP server demo .exe is built.  Usually that is \$\(platform\)\\Debug or \$\(platform\)\\Release.
+1. Copy the OpenSSL .dll's and openssl.exe to the directory where the FTP server demo .exe is built.  Usually that is \\$\(platform\)\\Debug or \\$\(platform\)\\Release.
 2. Run the makecert.bat to generate a minimal self-signed certificate for development on the loopbook adaptor (localhost).
 3. Run the FTP Server .exe and it will create a default server.ini file that points to the certificate files generated in Step 2.
 

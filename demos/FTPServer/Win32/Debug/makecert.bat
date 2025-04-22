@@ -1,2 +1,4 @@
-openssl ecparam -genkey -name secp521r1 -out privkey.pem
-openssl req -new -x509 -nodes -key privkey.pem -config openssl-min-req.cnf -subj "/CN=localhost" -out ca.pem
+openssl genrsa -out ssl-key.pem 4096
+openssl req -new -key ssl-key.pem -out ssl.csr -config openssl.cnf
+openssl x509 -req -in ssl.csr -signkey ssl-key.pem -out ssl-cert.pem
+

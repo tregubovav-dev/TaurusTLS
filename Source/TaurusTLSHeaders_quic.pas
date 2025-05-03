@@ -78,7 +78,8 @@ const
   OSSL_QUIC_client_thread_method_procname = 'OSSL_QUIC_client_thread_method(';
   OSSL_QUIC_server_method_procname = 'OSSL_QUIC_server_method';
 
-  {$i TaurusTLSNoRetValOff.inc} 
+  {$i TaurusTLSNoRetValOff.inc}
+
 {introduced 3.2.0}
 function ERR_OSSL_QUIC_client_method : PSSL_METHOD;
 begin
@@ -96,8 +97,8 @@ function ERR_OSSL_QUIC_server_method : PSSL_METHOD;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(OSSL_QUIC_server_method_procname);
 end;
-{$WARN NO_RETVAL ON}
 
+  {$i TaurusTLSNoRetValOn.inc} 
 
 procedure Load(const ADllHandle: TIdLibHandle; LibVersion: TIdC_UINT; const AFailed: TStringList);
 var FuncLoadError: boolean;

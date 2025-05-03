@@ -1579,6 +1579,7 @@ type
     /// for the TTaurusTLSServerIOHandler.
     /// </summary>
     procedure Shutdown; override;
+      {$i TaurusTLSUnusedParamOff.inc}
     // AListenerThread is a thread and not a yarn. Its the listener thread.
     /// <summary>
     /// Called by Indy (Internet Direct) when the server accepts a connection.
@@ -1600,6 +1601,7 @@ type
     /// </remarks>
     function Accept(ASocket: TIdSocketHandle; AListenerThread: TIdThread;
       AYarn: TIdYarn): TIdIOHandler; override;
+      {$i TaurusTLSUnusedParamOn.inc}
     // function Accept(ASocket: TIdSocketHandle; AThread: TIdThread) : TIdIOHandler;  override;
     /// <summary>
     /// Frees resources and destroys the current instance.
@@ -2184,6 +2186,7 @@ begin
   end;
 end;
 
+{$i TaurusTLSUnusedParamOff.inc}
 function SecurityLevelCallback(const s: PSSL; const ctx: PSSL_CTX; op: TIdC_INT;
   bits: TIdC_INT; nid: TIdC_INT; other: Pointer; ex: Pointer): TIdC_INT; cdecl;
 var
@@ -2222,6 +2225,7 @@ begin
     GStack.WSSetLastError(LErr);
   end;
 end;
+{$i TaurusTLSUnusedParamOn.inc}
 
 function PasswordCallback(var buf: PIdAnsiChar; size: TIdC_INT;
   rwflag: TIdC_INT; userdata: Pointer): TIdC_INT; cdecl;
@@ -2341,6 +2345,9 @@ var
 {$ENDIF}
   LVer: TTaurusMsgCBVer;
 begin
+  {$ifdef fpc}
+  LBytes := nil;
+  {$endif}
   {
     You have to save the value of WSGetLastError as some Operating System API
     function calls will reset that value and we can't know what a programmer will
@@ -2471,6 +2478,7 @@ begin
 end;
 {$ENDIF}
 
+{$i TaurusTLSUnusedParamOff.inc}
 procedure SslLockingCallback(Mode, n: TIdC_INT; Afile: PIdAnsiChar;
   line: TIdC_INT)cdecl;
 var
@@ -2500,6 +2508,7 @@ begin
     Lock.Release;
   end;
 end;
+{$i TaurusTLSUnusedParamOn.inc}
 
 procedure PrepareTaurusTLSLocking;
 var
@@ -2819,6 +2828,7 @@ begin
   fSSLContext.InitContext(sslCtxServer);
 end;
 
+{$i TaurusTLSUnusedParamOff.inc}
 function TTaurusTLSServerIOHandler.Accept(ASocket: TIdSocketHandle;
   // This is a thread and not a yarn. Its the listener thread.
   AListenerThread: TIdThread; AYarn: TIdYarn): TIdIOHandler;
@@ -2873,6 +2883,7 @@ begin
     FreeAndNil(LIO);
   end;
 end;
+   {$i TaurusTLSUnusedParamOn.inc}
 
 function TTaurusTLSServerIOHandler.MakeDataChannelIOHandler : TTaurusTLSIOHandlerSocket;
 
@@ -2932,13 +2943,10 @@ function TTaurusTLSServerIOHandler.GetPassword(const AIsWrite: Boolean;
   out VOk: Boolean): string;
 begin
   Result := '';
+  VOk := False;
   if Assigned(fOnGetPassword) then
   begin
     fOnGetPassword(Self, Result, AIsWrite, VOk);
-  end
-  else
-  begin
-    VOk := False;
   end;
 end;
 
@@ -2963,15 +2971,12 @@ end;
 function TTaurusTLSServerIOHandler.VerifyPeer(ACertificate: TTaurusTLSX509;
   const ADepth: Integer; const AError: TIdC_LONG): Boolean;
 begin
+  Result := False;
   if Assigned(fOnVerifyPeer) then
   begin
     fOnVerifyPeer(Self, ACertificate, ADepth, AError,
       AnsiStringToString(X509_verify_cert_error_string(AError)),
       CertErrorToLongDescr(AError), Result);
-  end
-  else
-  begin
-    Result := False;
   end;
 end;
 
@@ -3437,13 +3442,10 @@ function TTaurusTLSIOHandlerSocket.GetPassword(const AIsWrite: Boolean;
   out VOk: Boolean): string;
 begin
   Result := '';
+  VOk := False;
   if Assigned(fOnGetPassword) then
   begin
     fOnGetPassword(Self, Result, AIsWrite, VOk);
-  end
-  else
-  begin
-    VOk := False;
   end;
 end;
 
@@ -4084,7 +4086,6 @@ var
   LCertificate: TTaurusTLSX509;
 {$IFNDEF  USE_INLINE_VAR}
   lHostName: AnsiString;
-  LErrorMsg: AnsiString;
 {$ENDIF}
 begin
   Assert(fSSL = nil);

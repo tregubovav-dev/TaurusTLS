@@ -171,6 +171,9 @@ uses
   Classes,
   IdGlobal,
   SysUtils,
+  {$IFDEF STRING_IS_UNICODE}
+  TaurusTLS_Utils,
+  {$ENDIF}
   TaurusTLSHeaders_asn1,
   TaurusTLSHeaders_bio,
   TaurusTLSHeaders_dh,
@@ -181,8 +184,7 @@ uses
   TaurusTLSHeaders_ssl,
   TaurusTLSHeaders_sslerr,
   TaurusTLSHeaders_stack,
-  TaurusTLSHeaders_x509_vfy,
-  TaurusTLS_Utils;
+  TaurusTLSHeaders_x509_vfy;
 
 // ** General certificate loading **//
 function LoadCertificate(const AFileName: String): PX509;
@@ -225,6 +227,7 @@ var
   Ldefault_passwd_cb: pem_password_cb;
 begin
   Result := 0;
+  LPassword := nil;
   LKey := nil;
   LCert := nil;
   LM := TMemoryStream.Create;
@@ -307,6 +310,7 @@ var
   LPassword: array of TIdAnsiChar;
   Ldefault_passwd_callback: pem_password_cb;
 begin
+  LPassword := nil;
   Result := 0;
   LKey := nil;
   LCert := nil;

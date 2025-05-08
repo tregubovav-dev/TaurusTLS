@@ -27,12 +27,15 @@ interface
 // async.h
 
 
+{$i TaurusTLSUnusedUnitOff.inc}
 uses
   IdCTypes,
-  IdGlobal
+  IdGlobal,
   {$IFDEF OPENSSL_STATIC_LINK_MODEL}
-  , TaurusTLSConsts
-  {$ENDIF};
+  TaurusTLSConsts,
+  {$ENDIF}
+  TaurusTLSHeaders_ossl_typ;
+{$i TaurusTLSUnusedUnitOn.inc}
 
 const
   ASYNC_ERR = 0;

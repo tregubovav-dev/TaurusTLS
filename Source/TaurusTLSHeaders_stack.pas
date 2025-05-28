@@ -29,6 +29,9 @@ uses
   IdGlobal
   {$IFDEF OPENSSL_STATIC_LINK_MODEL}
   , TaurusTLSConsts
+  {$ENDIF}
+ {$IFNDEF OPENSSL_STATIC_LINK_MODEL}
+    ,TaurusTLSLoader
   {$ENDIF};
 
 

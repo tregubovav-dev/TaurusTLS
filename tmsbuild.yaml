@@ -12,16 +12,5 @@ supported frameworks:
       - all
   
 packages:
-  - awscore: [runtime, rtl]
-  - awsses: [runtime, rtl]
-  - awssesv2: [runtime, rtl]
-  - awssns: [runtime, rtl]
-  - awssqs: [runtime, rtl]
-  - awstextract: [runtime, rtl]
-  - awstranscribe: [runtime, rtl]
-  - awstranslate: [runtime, rtl]
-  - awslexruntimeservice: [runtime, rtl]
-  - awslexruntimev2: [runtime, rtl]
-  - awspolly: [runtime, rtl]
-  - awsrekognition: [runtime, rtl]
-  - awss3: [runtime, rtl]
+  - TaurusTLS_RT: [runtime, rtl]
+  - TaurusTLS_DT: [design, rtl]

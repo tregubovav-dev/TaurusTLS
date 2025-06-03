@@ -1,3 +1,0 @@
-/* 'TaurusTLS_RT' Package */
-OUTPUT_FORMAT(elf64-x86-64)
-GROUP ( bplTaurusTLS_RT290.so TaurusTLS_RT_nonshared.a )

@@ -93,7 +93,6 @@
         <DCC_BplOutput>.\$(Platform)\$(Config)</DCC_BplOutput>
         <DCC_ObjOutput>.\$(Platform)\$(Config)</DCC_ObjOutput>
         <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
-        <DCC_DcpOutput>.\$(Platform)\$(Config)</DCC_DcpOutput>
         <DCC_BpiOutput>.\$(Platform)\$(Config)</DCC_BpiOutput>
         <DCC_HppOutput>.\$(Platform)\$(Config)</DCC_HppOutput>
         <DllSuffix>230</DllSuffix>

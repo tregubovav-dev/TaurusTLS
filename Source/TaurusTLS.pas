@@ -4274,7 +4274,7 @@ begin
           begin
             LCertificate := TTaurusTLSX509.Create(Lpeercert, False);
             try
-              if not LHelper.VerifyPeer(LCertificate, 0, LVerifyResult) then
+              if not LHelper.VerifyPeer(LCertificate, fSSLContext.VerifyDepth, LVerifyResult) then
               begin
                 ETaurusTLSCertValidationError.RaiseWithMessage
                   (AnsiStringToString(X509_verify_cert_error_string

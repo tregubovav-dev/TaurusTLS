@@ -4205,16 +4205,15 @@ begin
   end;
 
   LHostName := BytesOf(fHostName + #0);
-  if fHostName <> '' then
+  //RFC 3546 states:
+  //Literal IPv4 and IPv6 addresses are not permitted in "HostName".
+  if (fHostName <> '') and (not IsValidIP(fHostName)) then
   begin
     {$IFNDEF OPENSSL_NO_TLSEXT}
     { Delphi appears to need the extra AnsiString coerction. Otherwise, only the
       first character to the hostname is passed }
-    LRetCode := SSL_set_tlsext_host_name(fSSL, PIdAnsiChar(LHostName));
+    LRetCode := SSL_set_tlsext_host_name(fSSL, PIdAnsiChar(@LHostName[0]));
     if LRetCode <= 0 then begin
-       // RLebeau: for the time being, not raising an exception on error, as I don't
-       // know which OpenSSL versions support this extension, and which error code(s)
-      // are safe to ignore on those versions...
       ETaurusTLSSettingTLSHostNameError.RaiseException(fSSL, LRetCode, RSSSLSettingTLSHostNameError_2);
    end;
    {$ENDIF}
@@ -4225,7 +4224,7 @@ begin
     if fHostName <> '' then
     begin
       SSL_set_hostflags(fSSL,0);
-      LRetCode := SSL_set1_host(fSSL, PIdAnsiChar( @LHostName));
+      LRetCode := SSL_set1_host(fSSL, PIdAnsiChar( @LHostName[0]));
       if LRetCode <= 0 then
       begin
         ETaurusTLSSettingTLSHostNameError.RaiseException(fSSL, LRetCode,
@@ -4277,7 +4276,7 @@ begin
           begin
             LCertificate := TTaurusTLSX509.Create(Lpeercert, False);
             try
-              if not LHelper.VerifyPeer(LCertificate, 0, LVerifyResult) then
+              if not LHelper.VerifyPeer(LCertificate, fSSLContext.VerifyDepth, LVerifyResult) then
               begin
                 ETaurusTLSCertValidationError.RaiseWithMessage
                   (AnsiStringToString(X509_verify_cert_error_string

@@ -4,13 +4,20 @@ program TaurusTLS.UT;
 {$APPTYPE CONSOLE}
 {$ENDIF}
 
+(*
+{STRONGLINKTYPES directive is commented in this project
+to avoid TaurusTLS.UT.Utils.TFastMM5Log class initialization on start-up.
+
 {$STRONGLINKTYPES ON}
+*)
 
 uses
   {$IFDEF MSWINDOWS}
   FastMM5,
+  {$IFDEF MEMLEAK_CHECK}
   DUnitX.MemoryLeakMonitor.FastMM5,
-  {$ENDIF }
+  {$ENDIF MEMLEAK_CHECK}
+  {$ENDIF MSWINDOWS}
   System.SysUtils,
   {$IFDEF TESTINSIGHT}
   TestInsight.DUnitX,
@@ -19,7 +26,9 @@ uses
   DUnitX.Loggers.Xml.NUnit,
   {$ENDIF }
   DUnitX.TestFramework,
-  TaurusTLS.UT.Utils in 'TaurusTLS.UT.Utils.pas';
+  TaurusTLS.UT.Utils in 'TaurusTLS.UT.Utils.pas',
+  TaurusTLS.UT.TestClasses in 'TaurusTLS.UT.TestClasses.pas',
+  TaurusTLS.UT.Dummy in 'TaurusTLS.UT.Dummy.pas';
 
 { keep comment here to protect the following conditional from being removed by the IDE when adding a unit }
 {$IFNDEF TESTINSIGHT}

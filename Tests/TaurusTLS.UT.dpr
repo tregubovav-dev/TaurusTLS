@@ -3,10 +3,14 @@ program TaurusTLS.UT;
 {$IFNDEF TESTINSIGHT}
 {$APPTYPE CONSOLE}
 {$ENDIF}
+
 {$STRONGLINKTYPES ON}
+
 uses
+  {$IFDEF MSWINDOWS}
   FastMM5,
   DUnitX.MemoryLeakMonitor.FastMM5,
+  {$ENDIF }
   System.SysUtils,
   {$IFDEF TESTINSIGHT}
   TestInsight.DUnitX,
@@ -14,7 +18,8 @@ uses
   DUnitX.Loggers.Console,
   DUnitX.Loggers.Xml.NUnit,
   {$ENDIF }
-  DUnitX.TestFramework;
+  DUnitX.TestFramework,
+  TaurusTLS.UT.Utils in 'TaurusTLS.UT.Utils.pas';
 
 { keep comment here to protect the following conditional from being removed by the IDE when adding a unit }
 {$IFNDEF TESTINSIGHT}

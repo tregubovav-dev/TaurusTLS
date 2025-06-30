@@ -245,15 +245,22 @@ end;
 
 function TFTPServerApp.SetupIOHandler(AIni: TIniFile)
   : TTaurusTLSServerIOHandler;
+//var
+//  LCert : TTaurusTLSX509File;
 begin
   Result := TTaurusTLSServerIOHandler.Create(nil);
   Result.SSLOptions.MinTLSVersion := TLSv1_2;
-  Result.SSLOptions.CertFile := AIni.ReadString('Certificate',
+  Result.SSLOptions.DefaultCert.PublicKey := AIni.ReadString('Certificate',
     'CertificateFile', GetCurrentDir + '\localhost.crt');
-  Result.SSLOptions.KeyFile := AIni.ReadString('Certificate', 'KeyFile',
+  Result.SSLOptions.DefaultCert.PrivateKey := AIni.ReadString('Certificate', 'KeyFile',
     GetCurrentDir + '\localhost.key');
-  Result.SSLOptions.RootCertFile := AIni.ReadString('Certificate',
+  Result.SSLOptions.RootPublicKey := AIni.ReadString('Certificate',
     'RootCertFile', '');
+
+//  LCert := Result.SSLOptions.Certificates.Add;
+//  LCert.PrivateKey := GetCurrentDir + '\hayse-key.pem';
+//  LCert.PublicKey :=  GetCurrentDir + '\hayse-cert.pem';
+
   Result.SSLOptions.DHParamsFile := AIni.ReadString('Certificate',
     'DH_Parameters', '');
   Result.OnGetPassword := ioOnGetPasswordEx;
@@ -270,12 +277,12 @@ begin
     Lini := TIniFile.Create(GetCurrentDir + '\server.ini');
     try
       Lini.WriteString('Certificate', 'CertificateFile',
-        GetCurrentDir + '\ca.pem');
+        GetCurrentDir + '\ssl-cert.pem');
       Lini.WriteString('Certificate', 'KeyFile',
-        GetCurrentDir + '\privkey.pem');
+        GetCurrentDir + '\ssl-key.pem');
       Lini.WriteString('Certificate', 'RootCertFile', '');
       Lini.WriteString('Certificate', 'DH_Parameters', '');
-      Lini.WriteString('Certificate', 'Password', 'testinfg');
+      Lini.WriteString('Certificate', 'Password', '');
 
       Lini.WriteInteger('Server', 'PASV_Bound_Port_Minimum', 0);
       Lini.WriteInteger('Server', 'PASV_Bound_Port_Maximum', 0);

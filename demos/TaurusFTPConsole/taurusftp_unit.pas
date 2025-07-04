@@ -1353,6 +1353,7 @@ begin
         WriteLn(E.Message);
     end;
   until False;
+  CmdSaveConfig;
 end;
 
 procedure TFTPApplication.DoOnVerifyError(ASender: TObject;

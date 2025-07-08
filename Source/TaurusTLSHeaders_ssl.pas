@@ -45,7 +45,7 @@ uses
   {$IFDEF OPENSSL_STATIC_LINK_MODEL}
   TaurusTLSConsts,
   {$ENDIF}
-  TaurusTLSHeaders_ossl_typ,
+  TaurusTLSHeaders_types,
   TaurusTLSHeaders_async,
   TaurusTLSHeaders_bio,
   TaurusTLSHeaders_crypto,
@@ -2312,7 +2312,8 @@ var
 
   SSL_ctrl: function (ssl: PSSL; cmd: TIdC_INT; larg: TIdC_LONG; parg: Pointer): TIdC_LONG; cdecl = nil;
   SSL_CTX_ctrl: function (ctx: PSSL_CTX; cmd: TIdC_INT; larg: TIdC_LONG; parg: Pointer): TIdC_LONG; cdecl = nil;
-  SSL_CTX_callback_ctrl: function (ctx : PSSL_CTX; cmd : TIdC_INT; fp : SSL_CTX_callback_ctrl_v3) : TIdC_LONG; cdecl = nil;
+  SSL_CTX_callback_ctrl: function (v1: PSSL_CTX; v2: TIdC_INT; v3: SSL_CTX_callback_ctrl_v3): TIdC_LONG; cdecl = nil;
+
   SSL_get_early_data_status: function (const s: PSSL): TIdC_INT; cdecl = nil; {introduced 1.1.0}
 
   SSL_get_error: function (const s: PSSL; ret_code: TIdC_INT): TIdC_INT; cdecl = nil;

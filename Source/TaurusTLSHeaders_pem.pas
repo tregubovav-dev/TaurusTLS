@@ -34,7 +34,7 @@ uses
   TaurusTLSConsts,
   {$ENDIF}
   TaurusTLSHeaders_ec,
-  TaurusTLSHeaders_ossl_typ,
+  TaurusTLSHeaders_types,
   TaurusTLSHeaders_pkcs7,
   TaurusTLSHeaders_x509;
 
@@ -112,7 +112,6 @@ const
 
 type
   PSTACK_OF_X509_INFO = pointer;
-  pem_password_cb = function(buf: PIdAnsiChar; size: TIdC_INT; rwflag: TIdC_INT; userdata: Pointer): TIdC_INT; cdecl;
 
     { The EXTERNALSYM directive is ignored by FPC, however, it is used by Delphi as follows:
 		

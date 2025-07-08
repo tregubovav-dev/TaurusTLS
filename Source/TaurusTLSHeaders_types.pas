@@ -18,7 +18,7 @@
 {******************************************************************************}
 {$i TaurusTLSCompilerDefines.inc}
 
-unit TaurusTLSHeaders_ossl_typ;
+unit TaurusTLSHeaders_types;
 
 interface
 
@@ -639,11 +639,14 @@ type
 
   {OSSL_LIB_CTX is defined in types.h from 3.0.0 onwards}
   //  typedef struct ossl_lib_ctx_st OSSL_LIB_CTX;
-  ossl_lib_ctx_st = record
+  POSSL_LIB_CTX = Pointer;
+  POSSL_ENCODER = Pointer;
+  POSSL_PROVIDER = Pointer;
+  OSSL_PARAM = record
   end;
-  POSSL_LIB_CTX = ^OSSL_LIB_CTX;
-  OSSL_LIB_CTX = ossl_lib_ctx_st;
-
+  POSSL_PARAM = ^OSSL_PARAM;
+  POSSL_ENCODER_CTX = Pointer;
+  pem_password_cb = function(buf: PIdAnsiChar; size: TIdC_INT; rwflag: TIdC_INT; userdata: Pointer): TIdC_INT; cdecl;
 
 implementation
 

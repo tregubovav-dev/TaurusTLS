@@ -26,7 +26,7 @@ uses
   IdGlobalProtocols,
   TaurusTLSHeaders_asn1,
   TaurusTLSHeaders_evp,
-  TaurusTLSHeaders_ossl_typ,
+  TaurusTLSHeaders_types,
   TaurusTLSHeaders_x509v3,
   Classes;
 
@@ -594,8 +594,10 @@ begin
   Result := '';
   if Assigned(a) then
   begin
-    LPtr := ASN1_STRING_get0_data(PASN1_STRING(a));
-    LLen := ASN1_STRING_length(PASN1_STRING(a));
+    LPtr := a.data;
+    //ASN1_STRING_get0_data(PASN1_STRING(a));
+    LLen := a._length;
+    //ASN1_STRING_length(PASN1_STRING(a));
     Result := BytesToHexString(LPtr, LLen);
   end;
 end;

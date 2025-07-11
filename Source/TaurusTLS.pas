@@ -692,7 +692,7 @@ type
     fContext: TTaurusTLSContext;
     procedure AssignTo(Destination: TPersistent); override;
     function GetCtx: PSSL_CTX;
-    function GetX509 : PX509;
+    function GetX509: PX509;
   public
     /// <summary>
     /// Creates a new TTaurus​TLSX509File object with Collection as the owner.
@@ -713,7 +713,7 @@ type
     /// <summary>
     /// The OpenSSL X509 object for this certificate.
     /// </summary>
-    property x509 : PX509 read GetX509;
+    property x509: PX509 read GetX509;
   published
     /// <summary>
     /// Private Key file for certificate.
@@ -727,11 +727,11 @@ type
     /// <summary>
     /// Public Root certificate chain file for the certificate.
     /// </summary>
-    property RootKey: TFileName read fRootKey write FRootKey;
+    property RootKey: TFileName read FRootKey write FRootKey;
     /// <summary>
-    ///  DH Parameters file.
+    /// DH Parameters file.
     /// </summary>
-    property DHParamsFile: TFileName read fDHParamsFile write FDHParamsFile;
+    property DHParamsFile: TFileName read fDHParamsFile write fDHParamsFile;
   end;
 
   /// <summary>
@@ -764,11 +764,11 @@ type
 
   end;
 
-  { TTaurusTLSBaseSSLOptions }
+  { TTaurusTLSOptions }
   /// <summary>
   /// Class that provides properties that effect TLS.
   /// </summary>
-  TTaurusTLSBaseSSLOptions = class(TPersistent)
+  TTaurusTLSOptions = class(TPersistent)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} protected
     FParent: TObject;
     fUseSystemRootCertificateStore: Boolean;
@@ -787,12 +787,12 @@ type
     procedure SetSecurityLevel(const AValue: TTaurusTLSSecurityLevel);
   public
     /// <summary>
-    /// Creates a new instance of TTaurusTLSBaseSSLOptions.
+    /// Creates a new instance of TTaurusTLSOptions.
     /// </summary>
     constructor Create(AOwner: TObject);
     //
     /// <summary>
-    /// The object that owns this TTaurusTLSBaseSSLOptions.
+    /// The object that owns this TTaurusTLSOptions.
     /// </summary>
     /// <remarks>
     /// Should only be set by TaurusTLS itself.
@@ -900,13 +900,13 @@ type
     /// </item>
     /// <item>
     /// Are availble for the particular security level you set with the
-    /// <see cref="TaurusTLS|TTaurusTLSBaseSSLOptions.SecurityLevel" />
+    /// <see cref="TaurusTLS|TTaurusTLSOptions.SecurityLevel" />
     /// property
     /// </item>
     /// <item>
     /// Are avaiable with the TLS version used in the session. That can be
     /// between the <see
-    /// cref="TaurusTLS|TTaurusTLSBaseSSLOptions.MinTLSVersion" /> property
+    /// cref="TaurusTLS|TTaurusTLSOptions.MinTLSVersion" /> property
     /// and TLS 1.3.
     /// </item>
     /// </list>
@@ -917,56 +917,6 @@ type
     /// </seealso>
     property CipherList: String read fCipherList write fCipherList;
   end;
-
-  /// <summary>
-  /// Class that provides properties that effect TLS. clients
-  /// </summary>
-  TTaurusTLSClientSSLOptions = class(TTaurusTLSBaseSSLOptions)
-  {$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} protected
-    fClientCert: TTaurusTLSX509File;
-    procedure SetClientCert(AValue: TTaurusTLSX509File);
-  public
-    /// <summary>
-    /// Creates a new instance of TTaurusTLSClientSSLOptions.
-    /// </summary>
-    constructor Create(AOwner: TObject);
-    /// <summary>
-    /// Frees resources and destroys the current instance.
-    /// </summary>
-    destructor Destroy; override;
-  published
-
-    /// <summary>
-    /// Client certificate to send to the TLS Server.
-    /// </summary>
-    property ClientCert: TTaurusTLSX509File read fClientCert;
-  end;
-
-  TTaurusTLSServerSSLOptions = class(TTaurusTLSBaseSSLOptions)
-  {$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} protected
-    fDefaultCert: TTaurusTLSX509File;
-    fCertificates: TTaurusTLSX509Files;
-    procedure SetDefaultCert(AValue: TTaurusTLSX509File);
-    procedure SetCertificates(AValue: TTaurusTLSX509Files);
-  public
-    /// <summary>
-    /// Creates a new instance of TTaurusTLSClientSSLOptions.
-    /// </summary>
-    constructor Create(AOwner: TObject);
-    /// <summary>
-    /// Frees resources and destroys the current instance.
-    /// </summary>
-    destructor Destroy; override;
-  published
-
-    /// <summary>
-    /// Default Server Certificate to send to the client.
-    /// </summary>
-    property DefaultCert: TTaurusTLSX509File read fDefaultCert;
-    property Certificates: TTaurusTLSX509Files read fCertificates
-      write SetCertificates;
-  end;
-  { TTaurusTLSContext }
 
   /// <summary>
   /// The TLS Context encapsolated into an object. This object is for internal
@@ -1108,13 +1058,13 @@ type
     /// </item>
     /// <item>
     /// Are availble for the particular security level you set with the
-    /// <see cref="TaurusTLS|TTaurusTLSBaseSSLOptions.SecurityLevel" />
+    /// <see cref="TaurusTLS|TTaurusTLSOptions.SecurityLevel" />
     /// property
     /// </item>
     /// <item>
     /// Are avaiable with the TLS version used in the session. That can be
     /// between the <see
-    /// cref="TaurusTLS|TTaurusTLSBaseSSLOptions.MinTLSVersion" /> property
+    /// cref="TaurusTLS|TTaurusTLSOptions.MinTLSVersion" /> property
     /// and TLS 1.3.
     /// </item>
     /// </list>
@@ -1454,8 +1404,9 @@ type
   TTaurusTLSIOHandlerSocket = class(TIdSSLIOHandlerSocketBase,
     ITaurusTLSCallbackHelper)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} protected
+    fClientCert: TTaurusTLSX509File;
     fSSLContext: TTaurusTLSContext;
-    fSSLOptions: TTaurusTLSClientSSLOptions;
+    fSSLOptions: TTaurusTLSOptions;
     fSSLSocket: TTaurusTLSSocket;
     // fPeerCert: TTaurusTLSX509;
     FOnDebugMessage: TOnDebugMessageEvent;
@@ -1471,7 +1422,6 @@ type
     // procedure CreateSSLContext(axMode: TTaurusTLSSSLMode);
     //
     procedure SetPassThrough(const Value: Boolean); override;
-
     procedure DoVerifyError(Certificate: TTaurusTLSX509;
       const AError: TIdC_LONG; out VOk: Boolean);
     function RecvEnc(var VBuffer: TIdBytes): Integer; override;
@@ -1519,7 +1469,7 @@ type
     /// <summary>
     /// Called by Indy (Internet Direct) to make an IOHandler for TIdFTP
     /// data channel connection. The new IOHandler has similar properties
-    /// except that <see cref="TaurusTLS|TTaurusTLSBaseSSLOptions.VerifyHostname">
+    /// except that <see cref="TaurusTLS|TTaurusTLSOptions.VerifyHostname">
     /// VerifyHostname</see> is false to prevent a certificate check that is
     /// likely to fail with the FTP data channel because the FTP PASV/EPSV
     /// command returns an IP address instead of a DNS hostname.
@@ -1624,6 +1574,10 @@ type
       write FOnDebugMessage;
   published
     /// <summary>
+    /// Client certificate to send to the TLS Server.
+    /// </summary>
+    property ClientCert: TTaurusTLSX509File read fClientCert;
+    /// <summary>
     /// Occurs when TLS negotiation is concluded.
     /// </summary>
     /// <param name="ASender">
@@ -1634,7 +1588,7 @@ type
     /// <summary>
     /// Properties that effect TLS.
     /// </summary>
-    property SSLOptions: TTaurusTLSClientSSLOptions read fSSLOptions
+    property SSLOptions: TTaurusTLSOptions read fSSLOptions
       write fSSLOptions;
     /// <summary>
     /// Occurs when there is a status message.
@@ -1775,7 +1729,9 @@ type
   TTaurusTLSServerIOHandler = class(TIdServerIOHandlerSSLBase,
     ITaurusTLSCallbackHelper)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED} strict{$ENDIF} protected
-    fSSLOptions: TTaurusTLSServerSSLOptions;
+    fCertificates: TTaurusTLSX509Files;
+    fDefaultCert: TTaurusTLSX509File;
+    fSSLOptions: TTaurusTLSOptions;
     fSSLContext: TTaurusTLSContext;
     FOnSSLNegotiated: TOnIOHandlerNotify;
     FOnStatusInfo: TOnStatusEvent;
@@ -1789,7 +1745,7 @@ type
     // procedure CreateSSLContext;
     //
     procedure InitComponent; override;
-
+    procedure SetCertificates(const AValue: TTaurusTLSX509Files);
     procedure InitCertContexts;
     { ITaurusTLSCallbackHelper }
     procedure DoOnDebugMessage(const AWrite: Boolean; AVersion: TTaurusMsgCBVer;
@@ -1913,9 +1869,19 @@ type
       write FOnDebugMessage;
   published
     /// <summary>
+    /// Default Server Certificate to send to the client.
+    /// </summary>
+    property DefaultCert: TTaurusTLSX509File read fDefaultCert;
+    /// <summary>
+    ///   Certificates for domains that the TLS Client may request from the
+    ///   server.
+    /// </summary>
+    property Certificates: TTaurusTLSX509Files read fCertificates
+      write SetCertificates;
+    /// <summary>
     /// Properties that effect TLS.
     /// </summary>
-    property SSLOptions: TTaurusTLSServerSSLOptions read fSSLOptions
+    property SSLOptions: TTaurusTLSOptions read fSSLOptions
       write fSSLOptions;
     /// <summary>
     /// Occurs when TLS negotiation is concluded.
@@ -2722,56 +2688,61 @@ function g_tlsext_SNI_callback(SSL: PSSL; alert: PIdC_INT; arg: Pointer)
   : TIdC_INT; cdecl;
 var
   LErr: Integer;
-  i : Integer;
-  LSSLIO : TTaurusTLSServerIOHandler;
-  LX509 : PX509;
-  {$IFNDEF USE_INLINE_VAR}
+  i: Integer;
+  LSSLIO: TTaurusTLSServerIOHandler;
+  LX509: PX509;
+{$IFNDEF USE_INLINE_VAR}
   LHostname: String;
-  LBHost : TIdBytes;
-  {$ENDIF}
+  LBHost: TIdBytes;
+{$ENDIF}
 begin
   LErr := GStack.WSGetLastError;
   try
-    //Default reply, do not acknowlege SNI and continue as if we didn't
-    //receive a SNI.
+    // Default reply, do not acknowlege SNI and continue as if we didn't
+    // receive a SNI.
     Result := SSL_TLSEXT_ERR_NOACK;
     Lock_SNI_CB.Enter;
     try
       if SSL <> nil then
       begin
-        if arg <> nil then begin
+        if arg <> nil then
+        begin
           LSSLIO := TTaurusTLSServerIOHandler(arg);
-           {$IFDEF USE_INLINE_VAR}
-          var LHostName : String;
-           {$ENDIF}
+{$IFDEF USE_INLINE_VAR}
+          var
+            LHostname: String;
+{$ENDIF}
           LHostname := AnsiStringToString(SSL_get_servername(SSL,
             TLSEXT_NAMETYPE_host_name));
           if LHostname <> '' then
           begin
-            //indicate a fatal alert for hostname not found.
+            // indicate a fatal alert for hostname not found.
             Result := SSL_TLSEXT_ERR_ALERT_FATAL;
-            {$IFDEF USE_INLINE_VAR}
-            var LBHost : TIdBytes;
-            {$ENDIF}
-            LBHost := ToBytes(LHostName);
-            for i := 0 to LSSLIO.SSLOptions.Certificates.Count -1 do
+{$IFDEF USE_INLINE_VAR}
+            var
+              LBHost: TIdBytes;
+{$ENDIF}
+            LBHost := ToBytes(LHostname);
+            for i := 0 to LSSLIO.Certificates.Count - 1 do
             begin
-              LX509 := LSSLIO.SSLOptions.Certificates[i].x509;
-              if X509_check_host(LX509, @LBHost[0], Length(LBHost),0,nil) = 1 then
+              LX509 := LSSLIO.Certificates[i].x509;
+              if X509_check_host(LX509, @LBHost[0], Length(LBHost), 0, nil) = 1
+              then
               begin
-                //switch certificate we send to the client and indicate success.
-                SSL_set_SSL_CTX(SSL, LSSLIO.SSLOptions.Certificates[i].ctx);
+                // switch certificate we send to the client and indicate success.
+                SSL_set_SSL_CTX(SSL, LSSLIO.Certificates[i].ctx);
                 Result := SSL_TLSEXT_ERR_OK;
                 break;
               end;
             end;
-            //try with the default cert if none was found.
+            // try with the default cert if none was found.
             if Result <> SSL_TLSEXT_ERR_OK then
             begin
-              LX509 := SSL_CTX_get0_certificate( LSSLIO.SSLContext.Context );
+              LX509 := SSL_CTX_get0_certificate(LSSLIO.SSLContext.Context);
               if LX509 <> nil then
               begin
-                if X509_check_host(LX509, @LBHost[0], Length(LBHost),0,nil) = 1 then
+                if X509_check_host(LX509, @LBHost[0], Length(LBHost), 0, nil) = 1
+                then
                 begin
                   Result := SSL_TLSEXT_ERR_NOACK;
                 end;
@@ -3113,9 +3084,9 @@ procedure TTaurusTLSX509File.AssignTo(Destination: TPersistent);
 var
   LDest: TTaurusTLSX509File;
 begin
-  if Destination is TTaurusTLSBaseSSLOptions then
+  if Destination is TTaurusTLSOptions then
   begin
-    LDest := TTaurusTLSX509File(Destination);
+    LDest := Destination as TTaurusTLSX509File;
     LDest.PrivateKey := FPrivateKey;
     LDest.PublicKey := FPublicKey;
   end
@@ -3139,9 +3110,9 @@ end;
 
 function TTaurusTLSX509File.GetX509: PX509;
 var
-  LCtx : PSSL_CTX;
+  LCtx: PSSL_CTX;
 begin
-  LCtx := Ctx;
+  LCtx := ctx;
   if Assigned(LCtx) then
   begin
     Result := SSL_CTX_get0_certificate(LCtx);
@@ -3185,10 +3156,10 @@ begin
 end;
 
 /// ///////////////////////////////////////////////////
-// TTaurusTLSBaseSSLOptions
+// TTaurusTLSOptions
 /// ////////////////////////////////////////////////////
 
-constructor TTaurusTLSBaseSSLOptions.Create;
+constructor TTaurusTLSOptions.Create;
 begin
   inherited Create;
   fMinTLSVersion := DEF_MIN_TLSVERSION;
@@ -3197,25 +3168,25 @@ begin
   fVerifyHostname := DEF_VERIFY_HOSTNAME;
 end;
 
-procedure TTaurusTLSBaseSSLOptions.SetMinTLSVersion(const AValue
+procedure TTaurusTLSOptions.SetMinTLSVersion(const AValue
   : TTaurusTLSSSLVersion);
 begin
   fMinTLSVersion := AValue;
 end;
 
-procedure TTaurusTLSBaseSSLOptions.SetSecurityLevel(const AValue
+procedure TTaurusTLSOptions.SetSecurityLevel(const AValue
   : TTaurusTLSSecurityLevel);
 begin
   FSecurityLevel := AValue;
 end;
 
-procedure TTaurusTLSBaseSSLOptions.AssignTo(Destination: TPersistent);
+procedure TTaurusTLSOptions.AssignTo(Destination: TPersistent);
 var
-  LDest: TTaurusTLSBaseSSLOptions;
+  LDest: TTaurusTLSOptions;
 begin
-  if Destination is TTaurusTLSBaseSSLOptions then
+  if Destination is TTaurusTLSOptions then
   begin
-    LDest := TTaurusTLSBaseSSLOptions(Destination);
+    LDest := TTaurusTLSOptions(Destination);
     LDest.SecurityLevel := SecurityLevel;
     LDest.MinTLSVersion := MinTLSVersion;
     LDest.Mode := Mode;
@@ -3232,63 +3203,21 @@ begin
   end;
 end;
 
-{ TTaurusTLSClientSSLOptions }
-
-constructor TTaurusTLSClientSSLOptions.Create(AOwner: TObject);
-begin
-  inherited Create(AOwner);
-  fClientCert := TTaurusTLSX509File.Create(nil);
-  FParent := AOwner;
-end;
-
-destructor TTaurusTLSClientSSLOptions.Destroy;
-begin
-  FreeAndNil(fClientCert);
-  inherited;
-end;
-
-procedure TTaurusTLSClientSSLOptions.SetClientCert(AValue: TTaurusTLSX509File);
-begin
-  fClientCert.Assign(AValue);
-end;
-
-{ TTaurusTLSServerSSLOptions }
-
-constructor TTaurusTLSServerSSLOptions.Create(AOwner: TObject);
-begin
-  inherited Create(AOwner);
-  fDefaultCert := TTaurusTLSX509File.Create(nil);
-  fCertificates := TTaurusTLSX509Files.Create(TComponent(AOwner));
-end;
-
-destructor TTaurusTLSServerSSLOptions.Destroy;
-begin
-  FreeAndNil(fCertificates);
-  FreeAndNil(fDefaultCert);
-  inherited;
-end;
-
-procedure TTaurusTLSServerSSLOptions.SetCertificates
-  (AValue: TTaurusTLSX509Files);
-begin
-  fCertificates.Assign(AValue);
-end;
-
-procedure TTaurusTLSServerSSLOptions.SetDefaultCert(AValue: TTaurusTLSX509File);
-begin
-  fDefaultCert.Assign(AValue);
-end;
-
 { TTaurusTLSServerIOHandler }
 
 procedure TTaurusTLSServerIOHandler.InitComponent;
 begin
   inherited InitComponent;
-  fSSLOptions := TTaurusTLSServerSSLOptions.Create(Self);
+  fSSLOptions := TTaurusTLSOptions.Create(Self);
+  fSSLOptions.Parent := Self;
+  fDefaultCert := TTaurusTLSX509File.Create(nil);
+  fCertificates := TTaurusTLSX509Files.Create(Self);
 end;
 
 destructor TTaurusTLSServerIOHandler.Destroy;
 begin
+  FreeAndNil(fCertificates);
+  FreeAndNil(fDefaultCert);
   FreeAndNil(fSSLOptions);
   inherited Destroy;
 end;
@@ -3307,11 +3236,11 @@ procedure TTaurusTLSServerIOHandler.InitCertContexts;
 var
   i: Integer;
   LContext: TTaurusTLSContext;
-  LCertificate : TTaurusTLSX509File;
+  LCertificate: TTaurusTLSX509File;
 begin
-  for i := 0 to fSSLOptions.Certificates.Count - 1 do
+  for i := 0 to Certificates.Count - 1 do
   begin
-    LCertificate := fSSLOptions.Certificates[i];
+    LCertificate := Certificates[i];
     LContext := TTaurusTLSContext.Create;
     LContext.Parent := Self;
     LContext.PrivateKey := LCertificate.PrivateKey;
@@ -3341,10 +3270,10 @@ begin
   Assert(fSSLContext = nil);
   fSSLContext := TTaurusTLSContext.Create;
   fSSLContext.Parent := Self;
-  fSSLContext.RootPublicKey := SSLOptions.DefaultCert.RootKey;
-  fSSLContext.PrivateKey := SSLOptions.DefaultCert.PrivateKey;
-  fSSLContext.PublicKey := SSLOptions.DefaultCert.PublicKey;
-  fSSLContext.DHParamsFile := SSLOptions.DefaultCert.DHParamsFile;
+  fSSLContext.RootPublicKey := DefaultCert.RootKey;
+  fSSLContext.PublicKey := DefaultCert.PublicKey;
+  fSSLContext.PrivateKey := DefaultCert.PrivateKey;
+  fSSLContext.DHParamsFile := DefaultCert.DHParamsFile;
   fSSLContext.VerifyDepth := SSLOptions.VerifyDepth;
   fSSLContext.VerifyMode := SSLOptions.VerifyMode;
   // fSSLContext.fVerifyFile := SSLOptions.fVerifyFile;
@@ -3364,11 +3293,11 @@ begin
   fSSLContext.InitContext(sslCtxServer);
   // This must be after the Context is initialized so it does not AV.
   // It avs if the Context property is nil.
-  if Self.fSSLOptions.Certificates.Count > 0 then
+  if Certificates.Count > 0 then
   begin
     SSL_CTX_set_tlsext_servername_callback(fSSLContext.Context,
       g_tlsext_SNI_callback);
-    SSL_CTX_set_tlsext_servername_arg(fSSLContext.Context,Self);
+    SSL_CTX_set_tlsext_servername_arg(fSSLContext.Context, Self);
     InitCertContexts;
   end;
 end;
@@ -3422,7 +3351,7 @@ begin
 
           Result := LIO;
           LIO := nil;
-          Break;
+          break;
         end;
       end;
     end;
@@ -3552,6 +3481,12 @@ begin
 
 end;
 
+procedure TTaurusTLSServerIOHandler.SetCertificates(
+  const AValue: TTaurusTLSX509Files);
+begin
+  fCertificates.Assign(AValue);
+end;
+
 function TTaurusTLSServerIOHandler.GetIOHandlerSelf: TTaurusTLSIOHandlerSocket;
 begin
   Result := nil;
@@ -3590,13 +3525,16 @@ procedure TTaurusTLSIOHandlerSocket.InitComponent;
 begin
   inherited InitComponent;
   IsPeer := False;
-  fSSLOptions := TTaurusTLSClientSSLOptions.Create(Self);
+  fSSLOptions := TTaurusTLSOptions.Create(Self);
+  fSSLOptions.Parent := Self;
+  fClientCert := TTaurusTLSX509File.Create(nil);
   // fSSLLayerClosed := true;
   fSSLContext := nil;
 end;
 
 destructor TTaurusTLSIOHandlerSocket.Destroy;
 begin
+  FreeAndNil(fClientCert);
   FreeAndNil(fSSLSocket);
   // we do not destroy these if their Parent is not Self
   // because these do not belong to us when we are in a server.
@@ -3791,10 +3729,10 @@ begin
   begin
     fSSLContext := TTaurusTLSContext.Create;
     fSSLContext.Parent := Self;
-    fSSLContext.PublicKey := SSLOptions.ClientCert.PublicKey;
-    fSSLContext.PrivateKey := SSLOptions.ClientCert.PrivateKey;
-    fSSLContext.RootPublicKey := SSLOptions.ClientCert.RootKey;
-    fSSLContext.DHParamsFile := SSLOptions.ClientCert.DHParamsFile;
+    fSSLContext.PublicKey := ClientCert.PublicKey;
+    fSSLContext.PrivateKey := ClientCert.PrivateKey;
+    fSSLContext.RootPublicKey := ClientCert.RootKey;
+    fSSLContext.DHParamsFile := ClientCert.DHParamsFile;
     fSSLContext.VerifyDepth := SSLOptions.VerifyDepth;
     fSSLContext.VerifyMode := SSLOptions.VerifyMode;
     fSSLContext.VerifyHostname := SSLOptions.VerifyHostname;
@@ -4025,9 +3963,9 @@ begin
       repeat
         LNextTransparentProxy := LTransparentProxy.ChainedProxy;
         if not Assigned(LNextTransparentProxy) then
-          Break;
+          break;
         if not LNextTransparentProxy.Enabled then
-          Break;
+          break;
         LTransparentProxy := LNextTransparentProxy;
       until False;
       Result := LTransparentProxy.Host;
@@ -4071,9 +4009,9 @@ begin
       repeat
         LNextTransparentProxy := LTransparentProxy.ChainedProxy;
         if not Assigned(LNextTransparentProxy) then
-          Break;
+          break;
         if not LNextTransparentProxy.Enabled then
-          Break;
+          break;
         LTransparentProxy := LNextTransparentProxy;
       until False;
       Result := LTransparentProxy.Host;
@@ -4843,7 +4781,7 @@ begin
     if Lret > 0 then
     begin
       Result := LRead;
-      Break;
+      break;
     end;
     LErr := GetSSLError(Lret);
     if (LErr = SSL_ERROR_WANT_READ) or (LErr = SSL_ERROR_WANT_WRITE) then
@@ -4854,7 +4792,7 @@ begin
     begin
       ETaurusTLSReadExError.RaiseExceptionCode(LErr, Lret, RSDSSLReadExFailed);
     end;
-    Break;
+    break;
   until False;
 end;
 
@@ -4876,7 +4814,7 @@ begin
       LLength := LLength - LWritten;
       if LLength < 1 then
       begin
-        Break;
+        break;
       end;
       Continue;
     end;
@@ -4894,7 +4832,7 @@ begin
       ETaurusTLSWriteEx2Error.RaiseExceptionCode(LErr, Lret,
         RSDSSLWriteExFailed);
     end;
-    Break;
+    break;
   until False;
 end;
 

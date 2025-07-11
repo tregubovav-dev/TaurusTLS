@@ -60,18 +60,21 @@ type
   {$EXTERNALSYM RAND_set_rand_method}
   {$EXTERNALSYM RAND_get_rand_method}
   {$EXTERNALSYM RAND_set_rand_engine}
-  {$EXTERNALSYM RAND_TaurusTLS}
+  {$EXTERNALSYM RAND_OpenSSL}
   {$EXTERNALSYM RAND_bytes}
   {$EXTERNALSYM RAND_priv_bytes}
+  {$EXTERNALSYM RAND_priv_bytes_ex}
   {$EXTERNALSYM RAND_seed}
   {$EXTERNALSYM RAND_keep_random_devices_open}
   {$EXTERNALSYM RAND_add}
   {$EXTERNALSYM RAND_load_file}
   {$EXTERNALSYM RAND_write_file}
   {$EXTERNALSYM RAND_status}
+  {$IFNDEF OPENSSL_NO_EGD}
   {$EXTERNALSYM RAND_query_egd_bytes}
   {$EXTERNALSYM RAND_egd}
   {$EXTERNALSYM RAND_egd_bytes}
+  {$ENDIF}
   {$EXTERNALSYM RAND_poll}
 
 {$IFNDEF OPENSSL_STATIC_LINK_MODEL}
@@ -80,10 +83,14 @@ var
   RAND_get_rand_method: function : PRAND_METHOD; cdecl = nil;
   RAND_set_rand_engine: function (engine: PENGINE): TIdC_INT; cdecl = nil;
 
-  RAND_TaurusTLS: function : PRAND_METHOD; cdecl = nil;
+  RAND_OpenSSL: function : PRAND_METHOD; cdecl = nil;
 
   RAND_bytes: function (buf: PByte; num: TIdC_INT): TIdC_INT; cdecl = nil;
+  RAND_bytes_ex: function(ctx : POSSL_LIB_CTX; buf : PIdAnsiChar;
+     num : TIdC_SIZET; strength : TIdC_UINT) : TIdC_INT; cdecl = nil;
   RAND_priv_bytes: function (buf: PByte; num: TIdC_INT): TIdC_INT; cdecl = nil;
+  RAND_priv_bytes_ex : function(ctx : POSSL_LIB_CTX; buf : PIdAnsiChar;
+     num : TIdC_SIZET;  strength : TIdC_UINT) : TIdC_INT; cdecl = nil;
 
   RAND_seed: procedure (const buf: Pointer; num: TIdC_INT); cdecl = nil;
   RAND_keep_random_devices_open: procedure (keep: TIdC_INT); cdecl = nil;
@@ -93,9 +100,11 @@ var
   RAND_write_file: function (const file_: PIdAnsiChar): TIdC_INT; cdecl = nil;
   RAND_status: function : TIdC_INT; cdecl = nil;
 
+  {$IFNDEF OPENSSL_NO_EGD}
   RAND_query_egd_bytes: function (const path: PIdAnsiChar; buf: PByte; bytes: TIdC_INT): TIdC_INT; cdecl = nil;
   RAND_egd: function (const path: PIdAnsiChar): TIdC_INT; cdecl = nil;
   RAND_egd_bytes: function (const path: PIdAnsiChar; bytes: TIdC_INT): TIdC_INT; cdecl = nil;
+  {$ENDIF}
 
   RAND_poll: function : TIdC_INT; cdecl = nil;
 
@@ -104,10 +113,14 @@ var
   function RAND_get_rand_method: PRAND_METHOD cdecl; external CLibCrypto;
   function RAND_set_rand_engine(engine: PENGINE): TIdC_INT cdecl; external CLibCrypto;
 
-  function RAND_TaurusTLS: PRAND_METHOD cdecl; external CLibCrypto;
+  function RAND_OpenSSL: PRAND_METHOD cdecl; external CLibCrypto;
 
   function RAND_bytes(buf: PByte; num: TIdC_INT): TIdC_INT cdecl; external CLibCrypto;
+  function RAND_bytes_ex(ctx : POSSL_LIB_CTX; buf : PIdAnsiChar;
+     num : TIdC_SIZET; strength : TIdC_UINT) : TIdC_INT cdecl; external CLibCrypto;
   function RAND_priv_bytes(buf: PByte; num: TIdC_INT): TIdC_INT cdecl; external CLibCrypto;
+  function RAND_priv_bytes_ex(ctx : POSSL_LIB_CTX; buf : PIdAnsiChar;
+     num : TIdC_SIZET;  strength : TIdC_UINT) : TIdC_INT; cdecl; external CLibCrypto;
 
   procedure RAND_seed(const buf: Pointer; num: TIdC_INT) cdecl; external CLibCrypto;
   procedure RAND_keep_random_devices_open(keep: TIdC_INT) cdecl; external CLibCrypto;
@@ -117,9 +130,11 @@ var
   function RAND_write_file(const file_: PIdAnsiChar): TIdC_INT cdecl; external CLibCrypto;
   function RAND_status: TIdC_INT cdecl; external CLibCrypto;
 
+ {$IFNDEF OPENSSL_NO_EGD}
   function RAND_query_egd_bytes(const path: PIdAnsiChar; buf: PByte; bytes: TIdC_INT): TIdC_INT cdecl; external CLibCrypto;
   function RAND_egd(const path: PIdAnsiChar): TIdC_INT cdecl; external CLibCrypto;
   function RAND_egd_bytes(const path: PIdAnsiChar; bytes: TIdC_INT): TIdC_INT cdecl; external CLibCrypto;
+  {$ENDIF}
 
   function RAND_poll: TIdC_INT cdecl; external CLibCrypto;
 
@@ -136,15 +151,23 @@ implementation
   
 
 {$IFNDEF OPENSSL_STATIC_LINK_MODEL}
+
+const
+  RAND_bytes_ex_introduced = (byte(3) shl 8 or byte(0)) shl 8 or byte(0);
+  RAND_priv_bytes_introduced = (byte(1) shl 8 or byte(1)) shl 8 or byte(0);
+  RAND_priv_bytes_ex_introduced = (byte(3) shl 8 or byte(0)) shl 8 or byte(0);
+
 const
   RAND_set_rand_method_procname = 'RAND_set_rand_method';
   RAND_get_rand_method_procname = 'RAND_get_rand_method';
   RAND_set_rand_engine_procname = 'RAND_set_rand_engine';
 
-  RAND_TaurusTLS_procname = 'RAND_TaurusTLS';
+  RAND_OpenSSL_procname = 'RAND_OpenSSL';
 
   RAND_bytes_procname = 'RAND_bytes';
+  RAND_bytes_ex_procname = 'RAND_bytes_ex';
   RAND_priv_bytes_procname = 'RAND_priv_bytes';
+  RAND_priv_bytes_ex_procname = 'RAND_priv_bytes_ex';
 
   RAND_seed_procname = 'RAND_seed';
   RAND_keep_random_devices_open_procname = 'RAND_keep_random_devices_open';
@@ -154,9 +177,11 @@ const
   RAND_write_file_procname = 'RAND_write_file';
   RAND_status_procname = 'RAND_status';
 
+  {$IFNDEF OPENSSL_NO_EGD}
   RAND_query_egd_bytes_procname = 'RAND_query_egd_bytes';
   RAND_egd_procname = 'RAND_egd';
   RAND_egd_bytes_procname = 'RAND_egd_bytes';
+  {$ENDIF}
 
   RAND_poll_procname = 'RAND_poll';
 
@@ -181,25 +206,32 @@ end;
 
 
 
-function  ERR_RAND_TaurusTLS: PRAND_METHOD; 
+function  ERR_RAND_OpenSSL: PRAND_METHOD;
 begin
-  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_TaurusTLS_procname);
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_OpenSSL_procname);
 end;
 
-
-
-function  ERR_RAND_bytes(buf: PByte; num: TIdC_INT): TIdC_INT; 
+function  ERR_RAND_bytes(buf: PByte; num: TIdC_INT): TIdC_INT;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_bytes_procname);
 end;
 
+function ERR_RAND_bytes_ex(ctx : POSSL_LIB_CTX; buf : PIdAnsiChar;
+     num : TIdC_SIZET;  strength : TIdC_UINT) : TIdC_INT;
+begin
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_bytes_ex_procname);
+end;
 
 function  ERR_RAND_priv_bytes(buf: PByte; num: TIdC_INT): TIdC_INT; 
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_priv_bytes_procname);
 end;
 
-
+function ERR_RAND_priv_bytes_ex(ctx : POSSL_LIB_CTX; buf : PIdAnsiChar;
+     num : TIdC_SIZET;  strength : TIdC_UINT) : TIdC_INT;
+begin
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_priv_bytes_ex_procname);
+end;
 
 procedure  ERR_RAND_seed(const buf: Pointer; num: TIdC_INT); 
 begin
@@ -238,7 +270,7 @@ begin
 end;
 
 
-
+ {$IFNDEF OPENSSL_NO_EGD}
 function  ERR_RAND_query_egd_bytes(const path: PIdAnsiChar; buf: PByte; bytes: TIdC_INT): TIdC_INT; 
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_query_egd_bytes_procname);
@@ -256,7 +288,7 @@ begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_egd_bytes_procname);
 end;
 
-
+  {$ENDIF}
 
 function  ERR_RAND_poll: TIdC_INT; 
 begin
@@ -368,34 +400,34 @@ begin
   end;
 
 
-  RAND_TaurusTLS := LoadLibFunction(ADllHandle, RAND_TaurusTLS_procname);
-  FuncLoadError := not assigned(RAND_TaurusTLS);
+  RAND_OpenSSL := LoadLibFunction(ADllHandle, RAND_OpenSSL_procname);
+  FuncLoadError := not assigned(RAND_OpenSSL);
   if FuncLoadError then
   begin
-    {$if not defined(RAND_TaurusTLS_allownil)}
-    RAND_TaurusTLS := @ERR_RAND_TaurusTLS;
+    {$if not defined(RAND_OpenSSL_allownil)}
+    RAND_OpenSSL := @ERR_RAND_OpenSSL;
     {$ifend}
-    {$if declared(RAND_TaurusTLS_introduced)}
-    if LibVersion < RAND_TaurusTLS_introduced then
+    {$if declared(RAND_OpenSSL_introduced)}
+    if LibVersion < RAND_OpenSSL_introduced then
     begin
-      {$if declared(FC_RAND_TaurusTLS)}
-      RAND_TaurusTLS := @FC_RAND_TaurusTLS;
+      {$if declared(FC_RAND_OpenSSL)}
+      RAND_OpenSSL := @FC_RAND_OpenSSL;
       {$ifend}
       FuncLoadError := false;
     end;
     {$ifend}
-    {$if declared(RAND_TaurusTLS_removed)}
-    if RAND_TaurusTLS_removed <= LibVersion then
+    {$if declared(RAND_OpenSSL_removed)}
+    if RAND_OpenSSL_removed <= LibVersion then
     begin
-      {$if declared(_RAND_TaurusTLS)}
-      RAND_TaurusTLS := @_RAND_TaurusTLS;
+      {$if declared(_RAND_OpenSSL)}
+      RAND_OpenSSL := @_RAND_OpenSSL;
       {$ifend}
       FuncLoadError := false;
     end;
     {$ifend}
-    {$if not defined(RAND_TaurusTLS_allownil)}
+    {$if not defined(RAND_OpenSSL_allownil)}
     if FuncLoadError then
-      AFailed.Add('RAND_TaurusTLS');
+      AFailed.Add('RAND_OpenSSL');
     {$ifend}
   end;
 
@@ -431,6 +463,36 @@ begin
     {$ifend}
   end;
 
+  RAND_bytes_ex := LoadLibFunction(ADllHandle, RAND_bytes_ex_procname);
+  FuncLoadError := not assigned(RAND_bytes_ex);
+  if FuncLoadError then
+  begin
+    {$if not defined(RAND_bytes_ex_allownil)}
+    RAND_bytes_ex := @ERR_RAND_bytes_ex;
+    {$ifend}
+    {$if declared(RAND_bytes_ex_introduced)}
+    if LibVersion < RAND_bytes_ex_introduced then
+    begin
+      {$if declared(FC_RAND_bytes_ex)}
+      RAND_bytes_ex := @FC_RAND_bytes_ex;
+      {$ifend}
+      FuncLoadError := false;
+    end;
+    {$ifend}
+    {$if declared(RAND_bytes_ex_removed)}
+    if RAND_bytes_ex_removed <= LibVersion then
+    begin
+      {$if declared(_RAND_bytes_ex)}
+      RAND_bytes_ex := @_RAND_bytes_ex;
+      {$ifend}
+      FuncLoadError := false;
+    end;
+    {$ifend}
+    {$if not defined(RAND_bytes_ex_allownil)}
+    if FuncLoadError then
+      AFailed.Add('RAND_bytes_ex');
+    {$ifend}
+  end;
 
   RAND_priv_bytes := LoadLibFunction(ADllHandle, RAND_priv_bytes_procname);
   FuncLoadError := not assigned(RAND_priv_bytes);
@@ -460,6 +522,37 @@ begin
     {$if not defined(RAND_priv_bytes_allownil)}
     if FuncLoadError then
       AFailed.Add('RAND_priv_bytes');
+    {$ifend}
+  end;
+
+  RAND_priv_bytes_ex := LoadLibFunction(ADllHandle, RAND_priv_bytes_ex_procname);
+  FuncLoadError := not assigned(RAND_priv_bytes_ex);
+  if FuncLoadError then
+  begin
+    {$if not defined(RAND_priv_bytes_ex_allownil)}
+    RAND_priv_bytes_ex := @ERR_RAND_priv_bytes_ex;
+    {$ifend}
+    {$if declared(RAND_priv_bytes_ex_introduced)}
+    if LibVersion < RAND_priv_bytes_ex_introduced then
+    begin
+      {$if declared(FC_RAND_priv_bytes_ex)}
+      RAND_priv_bytes_ex := @FC_RAND_priv_bytes_ex;
+      {$ifend}
+      FuncLoadError := false;
+    end;
+    {$ifend}
+    {$if declared(RAND_priv_bytes_ex_removed)}
+    if RAND_priv_bytes_ex_removed <= LibVersion then
+    begin
+      {$if declared(_RAND_priv_bytes_ex)}
+      RAND_priv_bytes_ex := @_RAND_priv_bytes_ex;
+      {$ifend}
+      FuncLoadError := false;
+    end;
+    {$ifend}
+    {$if not defined(RAND_priv_bytes_ex_allownil)}
+    if FuncLoadError then
+      AFailed.Add('RAND_priv_bytes_ex');
     {$ifend}
   end;
 
@@ -655,7 +748,7 @@ begin
     {$ifend}
   end;
 
-
+  {$IFNDEF OPENSSL_NO_EGD}
   RAND_query_egd_bytes := LoadLibFunction(ADllHandle, RAND_query_egd_bytes_procname);
   FuncLoadError := not assigned(RAND_query_egd_bytes);
   if FuncLoadError then
@@ -750,7 +843,7 @@ begin
       AFailed.Add('RAND_egd_bytes');
     {$ifend}
   end;
-
+  {$ENDIF}
 
   RAND_poll := LoadLibFunction(ADllHandle, RAND_poll_procname);
   FuncLoadError := not assigned(RAND_poll);
@@ -789,18 +882,22 @@ begin
   RAND_set_rand_method := nil;
   RAND_get_rand_method := nil;
   RAND_set_rand_engine := nil;
-  RAND_TaurusTLS := nil;
+  RAND_OpenSSL := nil;
   RAND_bytes := nil;
+  RAND_bytes_ex := nil;
   RAND_priv_bytes := nil;
+  RAND_priv_bytes_ex := nil;
   RAND_seed := nil;
   RAND_keep_random_devices_open := nil;
   RAND_add := nil;
   RAND_load_file := nil;
   RAND_write_file := nil;
   RAND_status := nil;
+   {$IFNDEF OPENSSL_NO_EGD}
   RAND_query_egd_bytes := nil;
   RAND_egd := nil;
   RAND_egd_bytes := nil;
+   {$ENDIF}
   RAND_poll := nil;
 end;
 {$ELSE}

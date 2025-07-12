@@ -1,3 +1,12 @@
+{ ****************************************************************************** }
+{ *  TaurusTLS                                                                 * }
+{ *           https://github.com/JPeterMugaas/TaurusTLS                        * }
+{ *                                                                            * }
+{ *  Copyright (c) 2024 - 2025 TaurusTLS Developers, All Rights Reserved       * }
+{ *                                                                            * }
+{ * Portions of this software are Copyright (c) 1993 – 2018,                   * }
+{ * Chad Z. Hower (Kudzu) and the Indy Pit Crew – http://www.IndyProject.org/  * }
+{ ****************************************************************************** }
 program TaurusTLS.UT;
 
 {$IFNDEF TESTINSIGHT}

@@ -1,3 +1,8 @@
+{$I ..\Source\TaurusTLSCompilerDefines.inc}
+{$I TaurusTLSUTCompilerDefines.inc}
+/// <summary>
+/// Utility classes to extend DUnitX functionality.
+/// </summary>
 unit TaurusTLS.UT.Utils;
 {$I ..\Source\TaurusTLSLinkDefines.inc}
 
@@ -62,7 +67,7 @@ type
     class property Path: string read GetPath write SetPath;
   end;
 
-  {$IFDEF MSWINDOWS}
+  {$IFDEF WINDOWS}
   TFastMMDebugLog = class
   public const
     cEnvVarNameDll = 'FASTMM_DEBUG_DLL';
@@ -98,17 +103,19 @@ resourcestring
   rcOssLoaderHelp = 'Specify path to OpenSSL library folder';
   rcFastMMDebugEnableHelp = 'Enable or disable detailed memory leak';
   rcFastMMLogHelp = 'Memory leak report file name.';
-{$IFDEF WIN32}
+{$IFDEF WINDOWS}
+  {$IFDEF WIN32}
   rcFastMMDllNamelHelp = 'Path to FastMM_FullDebugMode.dll';
-{$ENDIF}
-{$IFDEF WIN64}
+  {$ENDIF}
+  {$IFDEF WIN64}
   rcFastMMDllNamelHelp = 'Path to FastMM_FullDebugMode64.dll';
+  {$ENDIF}
 {$ENDIF}
 
 implementation
 
 uses
-  {$IFDEF MSWINDOWS}
+  {$IFDEF WINDOWS}
   FastMM5,
   {$ENDIF}
   System.SyncObjs, DUnitX.CommandLine.Options;
@@ -191,7 +198,7 @@ begin
   FLoader.OpenSSLPath:=Value;
 end;
 
-{$IFDEF MSWINDOWS}
+{$IFDEF WINDOWS}
 
 { TFastMMDebugLoader }
 

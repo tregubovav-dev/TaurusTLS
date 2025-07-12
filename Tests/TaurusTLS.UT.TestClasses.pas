@@ -1,4 +1,10 @@
+{$I ..\Source\TaurusTLSCompilerDefines.inc}
+{$I TaurusTLSUTCompilerDefines.inc}
+/// <summary>
+/// Base Test Fixture class for unit-tests
+/// </summary>
 unit TaurusTLS.UT.TestClasses;
+{$i ..\Source\TaurusTLSLinkDefines.inc}
 
 interface
 
@@ -6,7 +12,15 @@ uses
   System.SysUtils, DUnitX.TestFramework, TaurusTLS.UT.Utils;
 
 type
+  ///  <summary>
+  ///  Base exception class can be used to make Assert Tests Fixtures
+  ///  </summary
   EOsslBaseFixture = class(Exception);
+
+  ///  <summary>
+  ///  Base Test Fixture class for unit-tests used OpenSSL library.
+  ///  This fixture automatically load OpenSSL library if its not loaded yet.
+  ///  </summary
   [TestFixture]
   TOsslBaseFixture = class
   public type
@@ -17,24 +31,69 @@ type
   private
     class function GetGlobalFail: boolean; static;
     class function GetOssLibFailed: boolean; static;
-    class function GetOssLibLoaded: boolean; static;
     class procedure SetOssLibLoaded(const Value: boolean); static;
+    class procedure SetFlag(const AFlag: TTestFlag; AEnable: boolean); static;
+  protected
+    class function GetOssLibLoaded: boolean; static;
     class procedure SetGlobalFail(const Value: boolean); static;
     class procedure SetOssLibFailed(const Value: boolean); static;
-    class procedure SetFlag(const AFlag: TTestFlag; AEnable: boolean); static;
   public
     [SetupFixture]
+    ///  <summary>
+    ///  The <c>SetupFixture</c> method loads the OpenSSL library
+    ///  and set internal library refrerence counter to <c>1</c>,
+    ///  or increments internal library refrerence counter otherwise.
+    ///  </summary>
+    ///  <remark>
+    ///  This method can be overritten by inherited class
+    ///  </remark>
     procedure SetupFixture; virtual;
     [TearDownFixture]
+    ///  <summary>
+    ///  The <c>TearDownFixture</c> method decrements internal library refrerence counter
+    ///  and unloads the OpenSSL library when it reaches Zero.
+    ///  </summary>
+    ///  <remark>
+    ///  This method can be overritten by inherited class
+    ///  </remark>
     procedure TearDownFixture; virtual;
 
+    ///  <summary>
+    ///  The <c>CheckLoaded</c> method checks if the OpenSSL library
+    ///  has loaded and raise <see ref="EOsslBaseFixture" /> if not.
+    ///  </summary>
     class procedure CheckLoaded;
+    ///  <summary>
+    ///  The <c>CheckLoaded</c> method checks if any faulre registered which
+    ///  blocks any Test Fixture execution and raise <see ref="EOsslBaseFixture" />
+    ///  if any.
+    ///  </summary>
+    ///  <remark>
+    ///  This method can be overritten by inherited class
+    ///  </remark>
     class procedure CheckFailed; virtual;
+    ///  <summary>
+    ///  The <c>CheckLoaded</c> method checks if any faulre registered
+    ///  and OpenSSL Library loased, and raise <see ref="EOsslBaseFixture" /> if any.
+    ///  </summary>
+    ///  <remark>
+    ///  This method can be overritten by inherited class
+    ///  </remark>
     class procedure CheckAllFailures; virtual;
 
-    class property OssLibLoaded: boolean read GetOssLibLoaded write SetOssLibLoaded;
-    class property OssLibFailed: boolean read GetOssLibFailed write SetOssLibFailed;
-    class property GlobalFail: boolean read GetGlobalFail write SetGlobalFail;
+    ///  <summary>
+    ///  Displays if OpenSSL library loaded.
+    ///  </summary>
+    class property OssLibLoaded: boolean read GetOssLibLoaded;
+    ///  <summary>
+    ///  Displays if OpenSSL library is inconsitance state.
+    ///  </summary>
+    class property OssLibFailed: boolean read GetOssLibFailed ;
+    ///  <summary>
+    ///  Displays if Test Fixtures has failure which blocks
+    ///  other Test Fixtures execution.
+    ///  </summary>
+    class property GlobalFail: boolean read GetGlobalFail;
   end;
 
 resourcestring
@@ -103,7 +162,7 @@ end;
 class procedure TOsslBaseFixture.SetOssLibFailed(const Value: boolean);
 begin
   SetFlag(tfOssLibFailed, Value);
-  GlobalFail:=True;
+  SetGlobalFail(True);
 end;
 
 class procedure TOsslBaseFixture.SetFlag(const AFlag: TTestFlag; AEnable: boolean);
@@ -147,10 +206,10 @@ begin
   {$ENDIF MEMLEAK_DETAILS}
 {$ENDIF}
   try
-    OssLibLoaded:=TOsslLoader.Load;
+    SetOssLibLoaded(TOsslLoader.Load);
     CheckAllFailures;
   except
-    GlobalFail:=True;
+    SetGlobalFail(True);
     raise
   end;
 end;
@@ -161,8 +220,7 @@ begin
   try
     TOsslLoader.Unload;
   except
-    GlobalFail:=True;
-    CheckFailed;
+    SetGlobalFail(True);
     raise;
   end;
 end;

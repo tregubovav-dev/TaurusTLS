@@ -35,6 +35,10 @@ uses
   {$ENDIF}
   TaurusTLSHeaders_types;
 
+const
+  RAND_DRBG_STRENGTH = 256; // Openssl default RANDOM strength constant.
+  RAND_DEFAULT_STRENGTH = RAND_DRBG_STRENGTH; // Default RANDOM strength
+
 type
   rand_meth_st_seed = function (const buf: Pointer; num: TIdC_INT): TIdC_INT; cdecl;
   rand_meth_st_bytes = function (buf: PByte; num: TIdC_INT): TIdC_INT; cdecl;
@@ -185,21 +189,32 @@ const
 
   RAND_poll_procname = 'RAND_poll';
 
+function FC_RAND_bytes_ex(ctx : POSSL_LIB_CTX; buf : PIdAnsiChar;
+     num : TIdC_SIZET;  strength : TIdC_UINT) : TIdC_INT;
+begin
+   Result := RAND_bytes(PByte(buf),TIdC_INT(num));
+end;
 
-  {$i TaurusTLSNoRetValOff.inc} 
-function  ERR_RAND_set_rand_method(const meth: PRAND_METHOD): TIdC_INT; 
+function FC_RAND_priv_bytes_ex(ctx : POSSL_LIB_CTX; buf : PIdAnsiChar;
+     num : TIdC_SIZET;  strength : TIdC_UINT) : TIdC_INT;
+begin
+  Result := RAND_priv_bytes_ex(nil,buf,TIdC_INT(num), strength);
+end;
+
+  {$i TaurusTLSNoRetValOff.inc}
+function  ERR_RAND_set_rand_method(const meth: PRAND_METHOD): TIdC_INT;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_set_rand_method_procname);
 end;
 
 
-function  ERR_RAND_get_rand_method: PRAND_METHOD; 
+function  ERR_RAND_get_rand_method: PRAND_METHOD;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_get_rand_method_procname);
 end;
 
 
-function  ERR_RAND_set_rand_engine(engine: PENGINE): TIdC_INT; 
+function  ERR_RAND_set_rand_engine(engine: PENGINE): TIdC_INT;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_set_rand_engine_procname);
 end;
@@ -222,7 +237,7 @@ begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_bytes_ex_procname);
 end;
 
-function  ERR_RAND_priv_bytes(buf: PByte; num: TIdC_INT): TIdC_INT; 
+function  ERR_RAND_priv_bytes(buf: PByte; num: TIdC_INT): TIdC_INT;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(RAND_priv_bytes_procname);
 end;

@@ -252,7 +252,7 @@ end;
 function TOSSLRandomFixture.GetRandomBytes(ASource: TRandomSrc;
   ACtx: POSSL_LIB_CTX; AStrength: TIdC_UINT): TTaurusTLS_CustomOSSLRandomBytes;
 begin
-  TOSSLRandomBytesFixture.GetRandomBytes(ASource, ACtx, AStrength);
+  Result:=TOSSLRandomBytesFixture.GetRandomBytes(ASource, ACtx, AStrength);
 end;
 
 procedure TOSSLRandomFixture.NewRandomNegative;

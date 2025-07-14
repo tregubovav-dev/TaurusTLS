@@ -9,7 +9,23 @@ uses
 
 
 type
+  EOSSLRandom = class(Exception);
+
   TRandomSrc = (rsPrivate, rsPublic);
+  TOSSLRandomBytesClass = class of TTaurusTLS_CustomOSSLRandomBytes;
+
+  [TestFixture]
+  TOSSLRandomBytesFixture = class(TOsslBaseFixture)
+  public
+    class function GetRandomBytes(ASource: TRandomSrc; ACtx: POSSL_LIB_CTX;
+      AStrength: TIdC_UINT): TTaurusTLS_CustomOSSLRandomBytes; static;
+    class function SrcFromClass(AClass: TOSSLRandomBytesClass): TRandomSrc;
+      static;
+
+    [Test]
+    procedure VerifyCreation;
+  end;
+
   [TestFixture]
   TOSSLRandomFixture = class(TOsslBaseFixture)
   private
@@ -64,7 +80,7 @@ type
 implementation
 
 uses
-  TaurusTLSHeaders_err;
+  TaurusTLSHeaders_rand, TaurusTLSHeaders_err;
 
 { TTools }
 
@@ -146,9 +162,33 @@ begin
     end;
 end;
 
-{ TOSSLRandomFixture }
+type
+  TMockRandomBytesProc = reference to procedure
+    (ctx : POSSL_LIB_CTX; var buf; num: TIdC_SIZET; strength: TIdC_UINT);
 
-function TOSSLRandomFixture.GetRandomBytes(ASource: TRandomSrc;
+  TMockRandomBytes = class(TTaurusTLS_CustomOSSLRandomBytes)
+  private
+    FMockProc: TMockRandomBytesProc;
+  protected
+    function DoRandom(ctx : POSSL_LIB_CTX; var buf; num: TIdC_SIZET;
+      strength: TIdC_UINT): TIdC_INT; override;
+    property MockProc: TMockRandomBytesProc read FMockProc write FMockProc;
+  end;
+
+{ TMockRandomBytes }
+
+function TMockRandomBytes.DoRandom(ctx: POSSL_LIB_CTX; var buf; num: TIdC_SIZET;
+  strength: TIdC_UINT): TIdC_INT;
+begin
+  Result:=-1;
+  Assert.IsNotNull(@FMockProc, 'MocProc property must be assigned.');
+  FMockProc(ctx, buf, num, strength);
+  Result:=1;
+end;
+
+{ TOSSLRandomBytesFixture }
+
+class function TOSSLRandomBytesFixture.GetRandomBytes(ASource: TRandomSrc;
   ACtx: POSSL_LIB_CTX; AStrength: TIdC_UINT): TTaurusTLS_CustomOSSLRandomBytes;
 begin
   case ASource of
@@ -157,6 +197,58 @@ begin
     rsPublic:
       Result:=TTaurusTLS_OSSLPublicRandomBytes.Create(ACtx, AStrength);
   end;
+end;
+
+class function TOSSLRandomBytesFixture.SrcFromClass(
+  AClass: TOSSLRandomBytesClass): TRandomSrc;
+begin
+  if AClass = TTaurusTLS_OSSLPrivateRandomBytes then
+    Result:=rsPrivate
+  else if AClass = TTaurusTLS_OSSLPublicRandomBytes then
+    Result:=rsPublic
+  else
+    raise EOSSLRandom.CreateFmt('Unknown class ''%s''', [AClass.ClassName]);
+end;
+
+procedure TOSSLRandomBytesFixture.VerifyCreation;
+
+var
+  lCtx: POSSL_LIB_CTX;
+  lData: NativeUInt;
+  lStrength: TIdC_UINT;
+
+begin
+  //use System.Random to initialize local variables;
+  Randomize;
+  lCtx:=POSSL_LIB_CTX(System.Random(High(integer)));
+  lData:=System.Random(High(integer));
+  lStrength:=Abs(System.Random(RAND_DEFAULT_STRENGTH));
+
+  var lRandomBytes: TMockRandomBytes:=nil;
+  try
+    lRandomBytes:=TMockRandomBytes.Create(lCtx, lStrength);
+    lRandomBytes.MockProc:=procedure(ctx : POSSL_LIB_CTX; var buf;
+      num: TIdC_SIZET; strength: TIdC_UINT)
+      begin
+        Assert.AreEqual(lCtx, ctx, '''lCtx'' and ''ctx'' are not equal.');
+        Assert.AreEqual(@lData, @buf, '''@lData'' and ''@buf'' are not equal.');
+        Assert.AreEqual<TIdC_SIZET>(SizeOf(lData), num, '''SizeOf(lData)'' and ''num'' are not equal.');
+        Assert.AreEqual(lStrength, strength, '''lStrength'' and ''strength'' are not equal.');
+        FillChar(buf, num, $00);
+      end;
+    Assert.AreEqual<TIdC_INT>(1, lRandomBytes.Random(lData, SizeOf(lData)));
+    Assert.AreEqual<NativeUInt>(0, lData, 'lRandomBytes.Radndom did not update ''lData''.')
+  finally
+    lRandomBytes.Free;
+  end;
+end;
+
+{ TOSSLRandomFixture }
+
+function TOSSLRandomFixture.GetRandomBytes(ASource: TRandomSrc;
+  ACtx: POSSL_LIB_CTX; AStrength: TIdC_UINT): TTaurusTLS_CustomOSSLRandomBytes;
+begin
+  TOSSLRandomBytesFixture.GetRandomBytes(ASource, ACtx, AStrength);
 end;
 
 function TOSSLRandomFixture.GetOSSLRandom(
@@ -310,6 +402,7 @@ begin
 end;
 
 initialization
+  TDUnitX.RegisterTestFixture(TOSSLRandomBytesFixture);
   TDUnitX.RegisterTestFixture(TOSSLRandomFixture);
 
 end.

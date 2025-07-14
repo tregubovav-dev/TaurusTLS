@@ -458,8 +458,10 @@ end;
 
 class constructor TTaurusTLS_OSSLRandom.Create;
 begin
-  FPrivateRandom:=NewRandom(TTaurusTLS_OSSLPrivateRandomBytes.Create(nil, 0));
-  FPublicRandom:=NewRandom(TTaurusTLS_OSSLPublicRandomBytes.Create(nil, 0));
+  FPrivateRandom:=NewRandom(
+    TTaurusTLS_OSSLPrivateRandomBytes.Create(nil, RAND_DEFAULT_STRENGTH));
+  FPublicRandom:=NewRandom(
+    TTaurusTLS_OSSLPublicRandomBytes.Create(nil, RAND_DEFAULT_STRENGTH));
 end;
 
 class destructor TTaurusTLS_OSSLRandom.Destroy;
@@ -525,8 +527,10 @@ end;
 
 class constructor TTaurusTLS_Random.Create;
 begin
-  FPrivateRandom:=NewRandom(TTaurusTLS_OSSLPrivateRandomBytes.Create(nil, 0));
-  FPublicRandom:=NewRandom(TTaurusTLS_OSSLPublicRandomBytes.Create(nil, 0));
+  FPrivateRandom:=NewRandom(
+    TTaurusTLS_OSSLPrivateRandomBytes.Create(nil, RAND_DEFAULT_STRENGTH));
+  FPublicRandom:=NewRandom(
+    TTaurusTLS_OSSLPublicRandomBytes.Create(nil, RAND_DEFAULT_STRENGTH));
 end;
 
 class destructor TTaurusTLS_Random.Destroy;

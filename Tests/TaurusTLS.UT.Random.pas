@@ -35,6 +35,11 @@ type
     procedure CheckOsslResult(AResult: TIdC_INT);
     procedure RandomT<T: record>(Source: TRandomSrc; Items: TIdC_SIZET);
   public
+    [Test]
+    [IgnoreMemoryLeaks]
+    procedure NewRandomNegative;
+    [TestCase('Iterations=5', '5')]
+    procedure NewRandomPositive(Iterations: NativeUInt);
     [TestCase('Source=rsPrivate;Items=5;Size=1024', 'rsPrivate,5,1024')]
     [TestCase('Source=rsPublic;Items=5;Size=1024', 'rsPublic,5,1024')]
     procedure RandomMemory(Source: TRandomSrc; Items, Size: TIdC_SIZET);
@@ -211,7 +216,6 @@ begin
 end;
 
 procedure TOSSLRandomBytesFixture.VerifyCreation;
-
 var
   lCtx: POSSL_LIB_CTX;
   lData: NativeUInt;
@@ -249,6 +253,57 @@ function TOSSLRandomFixture.GetRandomBytes(ASource: TRandomSrc;
   ACtx: POSSL_LIB_CTX; AStrength: TIdC_UINT): TTaurusTLS_CustomOSSLRandomBytes;
 begin
   TOSSLRandomBytesFixture.GetRandomBytes(ASource, ACtx, AStrength);
+end;
+
+procedure TOSSLRandomFixture.NewRandomNegative;
+begin
+  Assert.WillRaise(
+    procedure
+    begin
+      var lRandom: TTaurusTLS_OSSLRandom:=nil;
+      try
+        lRandom:=TTaurusTLS_OSSLRandom.NewRandom(nil);
+      finally
+        lRandom.Free;
+      end;
+    end,
+    EAssertionFailed
+  );
+end;
+
+procedure TOSSLRandomFixture.NewRandomPositive(Iterations: NativeUInt);
+var
+  lCtx: POSSL_LIB_CTX;
+  lData: NativeUInt;
+  lStrength: TIdC_UINT;
+
+begin
+  lCtx:=POSSL_LIB_CTX(System.Random(High(integer)));
+  lData:=System.Random(High(integer));
+  lStrength:=Abs(System.Random(RAND_DEFAULT_STRENGTH));
+
+  for var i:= 0 to Iterations-1 do
+  begin
+    var lRandom: TTaurusTLS_OSSLRandom:=nil;
+    var lRandomBytes: TMockRandomBytes:=nil;
+    try
+      lRandomBytes:=TMockRandomBytes.Create(lCtx, lStrength);
+      lRandomBytes.MockProc:=procedure(ctx : POSSL_LIB_CTX; var buf;
+        num: TIdC_SIZET; strength: TIdC_UINT)
+        begin
+          Assert.AreEqual(lCtx, ctx, '''lCtx'' and ''ctx'' are not equal.');
+          Assert.AreEqual(@lData, @buf, '''@lData'' and ''@buf'' are not equal.');
+          Assert.AreEqual<TIdC_SIZET>(SizeOf(lData), num, '''SizeOf(lData)'' and ''num'' are not equal.');
+          Assert.AreEqual(lStrength, strength, '''lStrength'' and ''strength'' are not equal.');
+          FillChar(buf, num, $00);
+        end;
+      lRandom:=TTaurusTLS_OSSLRandom.NewRandom(lRandomBytes);
+      lRandom.Random(lData, SizeOf(lData));
+      Assert.AreEqual<NativeUInt>(0, lData, 'lRandomBytes.Radndom did not update ''lData''.')
+    finally
+       lRandom.Free;
+    end;
+  end;
 end;
 
 function TOSSLRandomFixture.GetOSSLRandom(

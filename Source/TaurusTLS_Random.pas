@@ -189,6 +189,7 @@ type
       {$IFDEF USE_INLINE}inline;{$ENDIF}
 
   public
+    destructor Destroy; override;
     ///  <summary>
     ///  The instance of <c>TTaurusTLS_OSSLRandom</c> class must be created
     ///  using <see cref="NewRandom" /> <c>class method</c>.
@@ -318,6 +319,7 @@ type
     procedure CheckError(const AResult: TIdC_INT);
       {$IFDEF USE_INLINE}inline;{$ENDIF}
   public
+    destructor Destroy; override;
     ///  <summary>
     ///  The instance of <c>TTaurusTLS_Random</c> class must be created
     ///  using <see cref="NewRandom" /> <c>class method</c>.
@@ -471,6 +473,11 @@ begin
   Assert(False, ClassName+' can not be creates with this constructor.');
 end;
 
+destructor TTaurusTLS_OSSLRandom.Destroy;
+begin
+  FreeAndNil(FRandomBytes);
+end;
+
 constructor TTaurusTLS_OSSLRandom.Create(ARandomGen: TTaurusTLS_CustomOSSLRandomBytes;
   ACtx: POSSL_LIB_CTX; AStrength: TIdC_UINT);
 begin
@@ -531,6 +538,11 @@ end;
 constructor TTaurusTLS_Random.Create;
 begin
   Assert(False, ClassName+' can not be creates with this constructor.');
+end;
+
+destructor TTaurusTLS_Random.Destroy;
+begin
+  FreeAndNil(FRandomBytes);
 end;
 
 procedure TTaurusTLS_Random.CheckError(const AResult: TIdC_INT);

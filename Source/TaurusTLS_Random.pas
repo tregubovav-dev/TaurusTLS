@@ -227,7 +227,7 @@ type
     ///  or <c>0</c> on other failure
     ///  <seealso href="https://docs.openssl.org/3.3/man3/RAND_bytes/#return-values" />
     ///  </returns>
-    function Random(out ABytes: TBytes; ASize: TIdC_SIZET): TIdC_INT;
+    function Random(var ABytes: TBytes; ASize: TIdC_SIZET): TIdC_INT;
       overload; {$IFDEF USE_INLINE}inline;{$ENDIF}
     ///  <summary>
     ///  The <c>Random</c> is a method returns random floating number value
@@ -244,7 +244,7 @@ type
     ///  <remarks>
     ///  This method returns number in ranges <c>-1 >= x < 0</c> and <c> 0 > x and <=1 </c>
     ///  </remarks>
-    function Random(out AOut: extended): TIdC_INT;
+    function Random(var AOut: extended): TIdC_INT;
       overload; {$IFDEF USE_INLINE}inline;{$ENDIF}
     ///  <summary>
     ///  The <c>Random</c> is a method to create a <c>generic type</c> <typeparamref name="T" />
@@ -437,15 +437,20 @@ type
   ///  </summary>
   ETaurusTLSRandom = class(ETaurusTLSAPICryptoError);
 
+const
+  cMultiplier: extended = ((1.0/$100000000) / $100000000);  // 2^-48
+
+function RandomToExtend(ASeed: TIdC_UINT64): extended;
+  {$IFDEF USE_INLINE}inline;{$ENDIF}
+
 implementation
 
 uses
+  Math,
   TaurusTLSHeaders_err;
 
 function RandomToExtend(ASeed: TIdC_UINT64): extended;
   {$IFDEF USE_INLINE}inline;{$ENDIF}
-const
-  cMultiplier: extended = ((1.0/$100000000) / $100000000);  // 2^-48
 
 var
   lExt: extended;
@@ -453,7 +458,7 @@ var
 begin
   lExt:=ASeed;
   Result:=lExt*cMultiplier;
-  if (Result <> 0) and (((1 shl (ASeed and $3F)) and ASeed) <> 0) then
+  if not IsZero (Result) and (((1 shl (ASeed and $3F)) and ASeed) <> 0) then
     Result:=-1*Result; //random negative
 end;
 
@@ -511,6 +516,7 @@ class destructor TTaurusTLS_OSSLRandom.Destroy;
 begin
   FreeAndNil(FPublicRandom);
   FreeAndNil(FPrivateRandom);
+  inherited Destroy;
 end;
 
 constructor TTaurusTLS_OSSLRandom.Create;
@@ -541,7 +547,7 @@ begin
   Result:=GetRandom(ABuffer, ASize);
 end;
 
-function TTaurusTLS_OSSLRandom.Random(out ABytes: TBytes;
+function TTaurusTLS_OSSLRandom.Random(var ABytes: TBytes;
   ASize: TIdC_SIZET): TIdC_INT;
 begin
   if ASize = 0 then
@@ -555,7 +561,7 @@ begin
   Result:=GetRandom(ABytes[0], ASize);
 end;
 
-function TTaurusTLS_OSSLRandom.Random(out AOut: extended): TIdC_INT;
+function TTaurusTLS_OSSLRandom.Random(var AOut: extended): TIdC_INT;
 var
   lTemp: TIdC_UINT64;
 begin
@@ -642,6 +648,11 @@ begin
   GetRandom(Result[0], ASize);
 end;
 
+function TTaurusTLS_Random.Random<T>: T;
+begin
+  GetRandom(Result, SizeOf(T));
+end;
+
 function TTaurusTLS_Random.Random: extended;
 var
   lTemp: TIdC_UINT64;
@@ -651,11 +662,6 @@ begin
     lTemp:=Random<TIdC_UINT64>;
   until (lTemp <> 0);
   Result:=RandomToExtend(lTemp);
-end;
-
-function TTaurusTLS_Random.Random<T>: T;
-begin
-  GetRandom(Result, SizeOf(T));
 end;
 
 end.

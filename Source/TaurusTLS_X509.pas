@@ -1205,7 +1205,7 @@ function TTaurusTLSX509.GetDisplayInfo: TStrings;
 var
   LMem: PBIO;
   LLen: TIdC_INT;
-  LBufPtr : Pointer;
+  LBufPtr : PIdAnsiChar;
 //  LBufPtr: PIdAnsiChar;
 begin
   if not Assigned(FDisplayInfo) then
@@ -1229,9 +1229,9 @@ begin
               // error if the PByte type-cast is used, even though GetString() actually
               // expects a PByte as input.  Must be a compiler bug, as it compiles fine
               // in Delphi 6.  So, converting to TIdBytes until I find a better solution...
-              RawToBytes(LBufPtr^, LLen)
+              RawToBytes(LBufPtr*, LLen)
 {$ELSE}
-              LBufPtr, LLen
+              @LBufPtr^, LLen
 {$ENDIF}
               );
             {$else}

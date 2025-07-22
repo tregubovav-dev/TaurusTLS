@@ -1218,7 +1218,7 @@ begin
       try
         if X509_print_ex(LMem, FX509, XN_FLAG_COMPAT, X509_FLAG_COMPAT) = 1 then
         begin
-          LLen := BIO_get_mem_data(LMem, @LBufPtr);
+          LLen := BIO_get_mem_data(LMem, LBufPtr);
           if (LLen > 0) and (LBufPtr <> nil) then
           begin
             {$ifndef fpc}

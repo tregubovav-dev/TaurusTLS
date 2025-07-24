@@ -1044,6 +1044,7 @@ var
   {$EXTERNALSYM EVP_CIPHER_key_length} {removed 3.0.0}
   {$EXTERNALSYM EVP_CIPHER_iv_length} {removed 3.0.0}
   {$EXTERNALSYM EVP_CIPHER_flags} {removed 3.0.0}
+  {$EXTERNALSYM EVP_CIPHER_get_flags} {introduced 3.0.0}
   {$EXTERNALSYM EVP_CIPHER_CTX_encrypting} {introduced 1.1.0 removed 3.0.0}
   {$EXTERNALSYM EVP_CIPHER_CTX_nid} {removed 3.0.0}
   {$EXTERNALSYM EVP_CIPHER_CTX_block_size} {removed 3.0.0}
@@ -1158,6 +1159,7 @@ var
   EVP_CIPHER_iv_length: function (const cipher: PEVP_CIPHER): TIdC_INT; cdecl = nil; {removed 3.0.0}
   EVP_CIPHER_get_iv_length: function (const cipher: PEVP_CIPHER): TIdC_INT; cdecl = nil; {introduced 3.0.0}
   EVP_CIPHER_flags: function (const cipher: PEVP_CIPHER): TIdC_ULONG; cdecl = nil; {removed 3.0.0}
+  EVP_CIPHER_get_flags: function (const cipher: PEVP_CIPHER): TIdC_ULONG; cdecl = nil; {removed 3.0.0}
   //# define EVP_CIPHER_mode(e)              (EVP_CIPHER_flags(e) & EVP_CIPH_MODE)
 
   EVP_CIPHER_CTX_cipher: function (const ctx: PEVP_CIPHER_CTX): PEVP_CIPHER; cdecl = nil;
@@ -2825,6 +2827,7 @@ const
   EVP_CIPHER_iv_length_removed = (byte(3) shl 8 or byte(0)) shl 8 or byte(0);
   EVP_CIPHER_get_iv_length_introduced = (byte(3) shl 8 or byte(0)) shl 8 or byte(0);
   EVP_CIPHER_flags_removed = (byte(3) shl 8 or byte(0)) shl 8 or byte(0);
+  EVP_CIPHER_get_flags_introduced = (byte(3) shl 8 or byte(0)) shl 8 or byte(0);
   EVP_CIPHER_CTX_encrypting_removed = (byte(3) shl 8 or byte(0)) shl 8 or byte(0);
   EVP_CIPHER_CTX_nid_removed = (byte(3) shl 8 or byte(0)) shl 8 or byte(0);
   EVP_CIPHER_CTX_get_nid_introduced =  (byte(3) shl 8 or byte(0)) shl 8 or byte(0);
@@ -2949,6 +2952,7 @@ const
   EVP_CIPHER_iv_length_procname = 'EVP_CIPHER_iv_length'; {removed 3.0.0}
   EVP_CIPHER_get_iv_length_procname = 'EVP_CIPHER_get_iv_length'; {introduced 3.0.0}
   EVP_CIPHER_flags_procname = 'EVP_CIPHER_flags'; {removed 3.0.0}
+  EVP_CIPHER_get_flags_procname = 'EVP_CIPHER_get_flags'; {introduced 3.0.0}
   //# define EVP_CIPHER_mode(e)              (EVP_CIPHER_flags(e) & EVP_CIPH_MODE)
 
   EVP_CIPHER_CTX_cipher_procname = 'EVP_CIPHER_CTX_cipher';
@@ -4275,12 +4279,16 @@ begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_get_iv_length_procname);
 end;
 
-function  ERR_EVP_CIPHER_flags(const cipher: PEVP_CIPHER): TIdC_ULONG; 
+function  ERR_EVP_CIPHER_flags(const cipher: PEVP_CIPHER): TIdC_ULONG;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_flags_procname);
 end;
 
- 
+function  ERR_EVP_CIPHER_get_flags(const cipher: PEVP_CIPHER): TIdC_ULONG;
+begin
+  ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_get_flags_procname);
+end;
+
   //# define EVP_CIPHER_mode(e)              (EVP_CIPHER_flags(e) & EVP_CIPH_MODE)
 
 function  ERR_EVP_CIPHER_CTX_cipher(const ctx: PEVP_CIPHER_CTX): PEVP_CIPHER; 
@@ -9450,6 +9458,38 @@ begin
     {$if not defined(EVP_CIPHER_flags_allownil)}
     if FuncLoadError then
       AFailed.Add('EVP_CIPHER_flags');
+    {$ifend}
+  end;
+
+
+  EVP_CIPHER_get_flags := LoadLibFunction(ADllHandle, EVP_CIPHER_get_flags_procname);
+  FuncLoadError := not assigned(EVP_CIPHER_get_flags);
+  if FuncLoadError then
+  begin
+    {$if not defined(EVP_CIPHER_get_flags_allownil)}
+    EVP_CIPHER_get_flags := @ERR_EVP_CIPHER_get_flags;
+    {$ifend}
+    {$if declared(EVP_CIPHER_get_flags_introduced)}
+    if LibVersion < EVP_CIPHER_get_flags_introduced then
+    begin
+      {$if declared(FC_EVP_CIPHER_get_flags)}
+      EVP_CIPHER_get_flags := @FC_EVP_CIPHER_get_flags;
+      {$ifend}
+      FuncLoadError := false;
+    end;
+    {$ifend}
+    {$if declared(EVP_CIPHER_get_flags_removed)}
+    if EVP_CIPHER_get_flags_removed <= LibVersion then
+    begin
+      {$if declared(_EVP_CIPHER_get_flags)}
+      EVP_CIPHER_get_flags := @_EVP_CIPHER_get_flags;
+      {$ifend}
+      FuncLoadError := false;
+    end;
+    {$ifend}
+    {$if not defined(EVP_CIPHER_get_flags_allownil)}
+    if FuncLoadError then
+      AFailed.Add('EVP_CIPHER_get_flags');
     {$ifend}
   end;
 
@@ -24319,6 +24359,7 @@ begin
   EVP_CIPHER_iv_length := nil; {removed 3.0.0}
   EVP_CIPHER_get_iv_length := nil; {introduced  3.0.0}
   EVP_CIPHER_flags := nil; {removed 3.0.0}
+  EVP_CIPHER_get_flags := nil; {introduced  3.0.0}
   EVP_CIPHER_get_mode := nil; {introduced  3.0.0}
   EVP_CIPHER_get_type := nil; {introduced  3.0.0}
   EVP_CIPHER_CTX_cipher := nil;

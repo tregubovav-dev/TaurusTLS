@@ -1159,7 +1159,7 @@ var
   EVP_CIPHER_iv_length: function (const cipher: PEVP_CIPHER): TIdC_INT; cdecl = nil; {removed 3.0.0}
   EVP_CIPHER_get_iv_length: function (const cipher: PEVP_CIPHER): TIdC_INT; cdecl = nil; {introduced 3.0.0}
   EVP_CIPHER_flags: function (const cipher: PEVP_CIPHER): TIdC_ULONG; cdecl = nil; {removed 3.0.0}
-  EVP_CIPHER_get_flags: function (const cipher: PEVP_CIPHER): TIdC_ULONG; cdecl = nil; {removed 3.0.0}
+  EVP_CIPHER_get_flags: function (const cipher: PEVP_CIPHER): TIdC_ULONG; cdecl = nil; {introduced 3.0.0}
   //# define EVP_CIPHER_mode(e)              (EVP_CIPHER_flags(e) & EVP_CIPH_MODE)
 
   EVP_CIPHER_CTX_cipher: function (const ctx: PEVP_CIPHER_CTX): PEVP_CIPHER; cdecl = nil;
@@ -1900,6 +1900,10 @@ var
   function EVP_CIPHER_get0_name(const cipher : PEVP_CIPHER) : PIdAnsiChar cdecl; external CLibCrypto; {introduced 3.0.0}
   function EVP_CIPHER_impl_ctx_size(const cipher: PEVP_CIPHER): TIdC_INT cdecl; external CLibCrypto; {introduced 1.1.0}
   //# define EVP_CIPHER_mode(e)              (EVP_CIPHER_flags(e) & EVP_CIPH_MODE)
+
+  function EVP_CIPHER_flags(const cipher: PEVP_CIPHER): TIdC_ULONG; cdecl; external CLibCrypto; {removed 3.0.0}
+  function EVP_CIPHER_get_flags(const cipher: PEVP_CIPHER): TIdC_ULONG; cdecl; external CLibCrypto; {introduced 3.0.0}
+
 
   function EVP_CIPHER_CTX_cipher(const ctx: PEVP_CIPHER_CTX): PEVP_CIPHER cdecl; external CLibCrypto;
   function EVP_CIPHER_CTX_get0_cipher(const ctx: PEVP_CIPHER_CTX): PEVP_CIPHER cdecl; external CLibCrypto; {introduced 3.0.0}

@@ -3659,14 +3659,24 @@ begin
   Result := OBJ_nid2sn(EVP_CIPHER_nid(e));
 end;
 
-function FC_EVP_CIPHER_get_block_size (const cipher: PEVP_CIPHER): TIdC_INT cdecl;
+function FC_EVP_CIPHER_get_block_size (const cipher: PEVP_CIPHER): TIdC_INT; cdecl;
 begin
   Result := EVP_CIPHER_block_size(cipher);
 end;
 
-function FC_EVP_CIPHER_get_key_length(const cipher: PEVP_CIPHER): TIdC_INT cdecl;
+function FC_EVP_CIPHER_get_key_length(const cipher: PEVP_CIPHER): TIdC_INT; cdecl;
 begin
   Result := EVP_CIPHER_key_length(cipher);
+end;
+
+function FC_EVP_CIPHER_get_iv_length(const cipher: PEVP_CIPHER): TIdC_INT; cdecl;
+begin
+  Result := EVP_CIPHER_iv_length(cipher);
+end;
+
+function FC_EVP_CIPHER_get_flags(const cipher: PEVP_CIPHER): TIdC_ULONG; cdecl;
+begin
+  Result := EVP_CIPHER_flags(cipher);
 end;
 
 function FC_EVP_CIPHER_CTX_get_nid(const ctx: PEVP_CIPHER_CTX): TIdC_INT; cdecl;
@@ -3717,6 +3727,11 @@ end;
 function FC_EVP_CIPHER_get_mode(const ctx: PEVP_CIPHER): TIdC_INT; cdecl;
 begin
   Result :=  EVP_CIPHER_mode(ctx);
+end;
+
+function FC_EVP_CIPHER_CTX_is_encrypting(const ctx: PEVP_CIPHER_CTX): TIdC_INT;
+begin
+  Result:=EVP_CIPHER_CTX_encrypting(ctx);
 end;
 
 {function removals - compatability}
@@ -4283,7 +4298,7 @@ begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_get_iv_length_procname);
 end;
 
-function  ERR_EVP_CIPHER_flags(const cipher: PEVP_CIPHER): TIdC_ULONG;
+function ERR_EVP_CIPHER_flags(const cipher: PEVP_CIPHER): TIdC_ULONG;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(EVP_CIPHER_flags_procname);
 end;

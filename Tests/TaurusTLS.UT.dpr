@@ -15,7 +15,7 @@ program TaurusTLS.UT;
 
 (*
 {STRONGLINKTYPES directive is commented in this project
-to avoid TaurusTLS.UT.Utils.TFastMM5Log class initialization on start-up.
+to avoid TaurusTLS.UT.Utils.TFastMM5Log class initialization on start-up.}
 
 {$STRONGLINKTYPES ON}
 *)
@@ -39,7 +39,8 @@ uses
   TaurusTLS.UT.TestClasses in 'TaurusTLS.UT.TestClasses.pas',
   TaurusTLS.UT.Dummy in 'TaurusTLS.UT.Dummy.pas',
   TaurusTLS.UT.Random in 'TaurusTLS.UT.Random.pas',
-  TaurusTLS.UT.Headers.Bio in 'TaurusTLS.UT.Headers.Bio.pas';
+  TaurusTLS.UT.Headers.Bio in 'TaurusTLS.UT.Headers.Bio.pas',
+  TaurusTLS.UT.SSLContext in 'TaurusTLS.UT.SSLContext.pas';
 
 { keep comment here to protect the following conditional from being removed by the IDE when adding a unit }
 {$IFNDEF TESTINSIGHT}

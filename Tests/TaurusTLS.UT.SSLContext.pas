@@ -1,0 +1,920 @@
+unit TaurusTLS.UT.SSLContext;
+
+interface
+
+uses
+  System.Classes, System.SysUtils, DUnitX.TestFramework, DUnitX.Types,
+  DUnitX.InternalDataProvider, DUnitX.TestDataProvider,
+  IdGlobal, IdCTypes,
+  TaurusTLS.UT.TestClasses, TaurusTLSHeaders_types,
+  TaurusTLS_SSLContext;
+
+type
+  [TestFixture]
+  [Category('Ciphers')]
+  TCipherFixture = class(TOsslBaseFixture)
+  private
+    FCipher: TTaurusTLS_Cipher;
+    FCipherName: string;
+  protected
+    function GetCipher(ACipherName: string): TTaurusTLS_Cipher;
+    procedure DoWithOSSLCipher(AOSSLCipherProc: TProc<PEVP_CIPHER>);
+    function CheckRandomFactor(ABytes: TBytes): NativeInt;
+
+    procedure CheckCipherKeyLen(const ACipherName: string; ALen: TIdC_UINT);
+    procedure CheckCipherIVLen(const ACipherName: string; ALen: TIdC_UINT);
+    procedure CheckCipherBlockSize(const ACipherName: string; ALen: TIdC_UINT);
+
+  public
+    property Cipher[ACipherName: string]: TTaurusTLS_Cipher read GetCipher;
+
+    [Teardown]
+    procedure Teardown;
+    [AutoNameTestCase('DES3')]
+    [AutoNameTestCase('ChaCha20')]
+    [AutoNameTestCase('AES-128-CBC-CTS')]
+    [AutoNameTestCase('ARIA-256-GCM')]
+    [AutoNameTestCase('CAMELLIA-256-CFB')]
+    procedure GetCipherByNameUnicodePositive(const ACipherName: string);
+    [AutoNameTestCase('DES3')]
+    [AutoNameTestCase('ChaCha20')]
+    [AutoNameTestCase('AES-128-CBC-CTS')]
+    [AutoNameTestCase('ARIA-256-GCM')]
+    [AutoNameTestCase('CAMELLIA-256-CFB')]
+    procedure GetCipherByNameAnsiPositive(const ACipherName: RawByteString);
+    [TestCase('aes-wrong-name', 'aes-wrong-name')]
+    procedure GetCipherByNameUnicodeNegative(const ACipherName: string);
+    [TestCase('aes-wrong-name', 'aes-wrong-name')]
+    procedure GetCipherByNameAnsiNegative(const ACipherName: RawByteString);
+    [AutoNameTestCase('DES3')]
+    [AutoNameTestCase('ChaCha20')]
+    [AutoNameTestCase('AES-128-CBC-CTS')]
+    [AutoNameTestCase('ARIA-256-GCM')]
+    [AutoNameTestCase('CAMELLIA-256-CFB')]
+    procedure NewKey(const ACipherName: string);
+    [AutoNameTestCase('DES3')]
+    [AutoNameTestCase('ChaCha20')]
+    [AutoNameTestCase('AES-128-CBC-CTS')]
+    [AutoNameTestCase('ARIA-256-GCM')]
+    [AutoNameTestCase('CAMELLIA-256-CFB')]
+    procedure NewIV(const ACipherName: string);
+    [AutoNameTestCase('DES3')]
+    [AutoNameTestCase('ChaCha20')]
+    [AutoNameTestCase('AES-128-CBC-CTS')]
+    [AutoNameTestCase('ARIA-256-GCM')]
+    [AutoNameTestCase('CAMELLIA-256-CFB')]
+    procedure KeyLen(const ACipherName: string);
+    [AutoNameTestCase('DES3')]
+    [AutoNameTestCase('ChaCha20')]
+    [AutoNameTestCase('AES-128-CBC-CTS')]
+    [AutoNameTestCase('ARIA-256-GCM')]
+    [AutoNameTestCase('CAMELLIA-256-CFB')]
+    procedure IVLen(const ACipherName: string);
+    [AutoNameTestCase('DES3')]
+    [AutoNameTestCase('ChaCha20')]
+    [AutoNameTestCase('AES-128-CBC-CTS')]
+    [AutoNameTestCase('ARIA-256-GCM')]
+    [AutoNameTestCase('CAMELLIA-256-CFB')]
+    procedure BlockSize(const ACipherName: string);
+  end;
+
+  [TestFixture]
+  [Category('Encrypt')]
+  TSimpleAESEncrypDecryptFixture = class(TOsslBaseFixture)
+  private type
+    TAESKeySize = TTaurusTLS_SimpleAESEncrypDecrypt.TAESKeySize;
+    TEncoderMode = TTaurusTLS_SimpleAESEncrypDecrypt.TEncoderMode;
+  private
+    function CompareBytes(const A, B: TBytes): boolean;
+    procedure EncryptDecrypt(AEncryptor: TTaurusTLS_SimpleAESEncrypDecrypt;
+      ADataSize: NativeUInt); overload;
+    procedure TestEncryptDecryptAll(ADataSize: NativeUInt);
+  public
+    [AutoNameTestCase('CBC,1')]
+    [AutoNameTestCase('CBC,1024')]
+    [AutoNameTestCase('CBC,383')]
+    [AutoNameTestCase('CFB,1')]
+    [AutoNameTestCase('CFB,1024')]
+    [AutoNameTestCase('CFB,383')]
+    [AutoNameTestCase('CFB,1')]
+    [AutoNameTestCase('CFB,1024')]
+    [AutoNameTestCase('CFB,383')]
+    [AutoNameTestCase('CTR,1')]
+    [AutoNameTestCase('CTR,1024')]
+    [AutoNameTestCase('CTR,383')]
+    procedure TestEncrypDecrypt(AEncoderMode: string; ADataSize: NativeUInt);
+  end;
+
+  TCustomBytesFixture = class(TOsslBaseFixture)
+    FData: TBytes;
+    function GetDataLen: NativeUInt;
+  protected
+    procedure InitData(ASize: TIdC_SizeT); overload;
+    procedure InitData(AData: TBytes); overload;
+    function CopyData: TBytes;
+    class function HexToBytes(const AHexStr: string): TBytes;
+    class function Base64ToBytes(const AB64: string): TBytes;
+    class function GetBioMemPtr(ABio: ITaurusTLS_Bio; var AMemPtr: pointer): TIdC_INT;
+    class procedure TestBytes(AExpected, AData: TBytes); overload;
+    class procedure TestData(AExpected: TBytes; AData: pointer; ADataLen: NativeUInt); overload;
+    procedure TestBytes(AData: TBytes); overload;
+    procedure TestData(AData: pointer; ADataLen: NativeUInt); overload;
+    procedure TestBytesIntf(ABytes: ITaurusTLS_Bytes);
+    procedure TestBioIntf(ABio: ITaurusTLS_Bio);
+
+    property Data: TBytes read FData;
+    property DataLen: NativeUInt read GetDataLen;
+  public
+    [Teardown]
+    procedure TearDown;
+  end;
+
+  [TestFixture]
+  [Category('PlainBytes')]
+  TPlainBytesFixture = class(TCustomBytesFixture)
+  public
+    [AutoNameTestCase('e2')]
+    [AutoNameTestCase('026ca6b4d0761ebfcd933a3f7b379e')]
+    [AutoNameTestCase('941833f8ffd98ea2861d8c9f718d3f4d'+
+      '7ca37f0214e733d1bd1426bfa03fa2c0')]
+    procedure BytesSame(AHexStr: string); overload;
+    [AutoNameTestCase('0')]
+    [AutoNameTestCase('1024')]
+    [AutoNameTestCase('177')]
+    [AutoNameTestCase('383')]
+    procedure BytesSame(ASize: NativeUInt); overload;
+    [AutoNameTestCase('e2')]
+    [AutoNameTestCase('026ca6b4d0761ebfcd933a3f7b379e')]
+    [AutoNameTestCase('941833f8ffd98ea2861d8c9f718d3f4d'+
+      '7ca37f0214e733d1bd1426bfa03fa2c0')]
+    procedure BytesCopy(AHexStr: string); overload;
+    [AutoNameTestCase('0')]
+    [AutoNameTestCase('1024')]
+    [AutoNameTestCase('177')]
+    [AutoNameTestCase('383')]
+    procedure BytesCopy(ASize: NativeUInt); overload;
+    [Test]
+    procedure BioNull(ASize: NativeUInt); overload;
+    [AutoNameTestCase('e2')]
+    [AutoNameTestCase('026ca6b4d0761ebfcd933a3f7b379e')]
+    [AutoNameTestCase('941833f8ffd98ea2861d8c9f718d3f4d'+
+      '7ca37f0214e733d1bd1426bfa03fa2c0')]
+    procedure BioSame(AHexStr: string); overload;
+    [AutoNameTestCase('1024')]
+    [AutoNameTestCase('177')]
+    [AutoNameTestCase('383')]
+    procedure BioSame(ASize: NativeUInt); overload;
+    [AutoNameTestCase('e2')]
+    [AutoNameTestCase('026ca6b4d0761ebfcd933a3f7b379e')]
+    [AutoNameTestCase('941833f8ffd98ea2861d8c9f718d3f4d'+
+      '7ca37f0214e733d1bd1426bfa03fa2c0')]
+    procedure BioCopy(AHexStr: string); overload;
+    [AutoNameTestCase('1024')]
+    [AutoNameTestCase('177')]
+    [AutoNameTestCase('383')]
+    procedure BioCopy(ASize: NativeUInt); overload;
+  end;
+
+  [TestFixture]
+  [Category('WipingBytes')]
+  TWipingBytesFixture = class(TCustomBytesFixture)
+  protected
+    class procedure IsEmpty(ABytes: TBytes); overload;
+    class procedure IsEmpty(ABio: PBIO; AExpectedLen: NativeUInt); overload;
+    class procedure IsEmpty(AData: pointer; ASize: NativeUInt); overload;
+    procedure TestWipeBytes;
+    procedure TestWipeBio;
+  public
+    [AutoNameTestCase('e2')]
+    [AutoNameTestCase('026ca6b4d0761ebfcd933a3f7b379e')]
+    [AutoNameTestCase('941833f8ffd98ea2861d8c9f718d3f4d'+
+      '7ca37f0214e733d1bd1426bfa03fa2c0')]
+    procedure WipeBytes(AHexStr: string); overload;
+    [AutoNameTestCase('0')]
+    [AutoNameTestCase('1024')]
+    [AutoNameTestCase('177')]
+    [AutoNameTestCase('383')]
+    procedure WipeBytes(ASize: NativeUInt); overload;
+    [AutoNameTestCase('e2')]
+    [AutoNameTestCase('026ca6b4d0761ebfcd933a3f7b379e')]
+    [AutoNameTestCase('941833f8ffd98ea2861d8c9f718d3f4d'+
+      '7ca37f0214e733d1bd1426bfa03fa2c0')]
+    procedure WipeBio(AHexStr: string); overload;
+    [AutoNameTestCase('1024')]
+    [AutoNameTestCase('177')]
+    [AutoNameTestCase('383')]
+    procedure WipeBio(ASize: NativeUInt); overload;
+  end;
+
+  [TestFixture]
+  [Category('EncryptedBytes')]
+  TEnryptedBytesFixture = class(TCustomBytesFixture)
+  protected
+    procedure IsEncrypted(const ABytes: TBytes); overload;
+    procedure IsEncrypted(AData: pointer; ADataLen: NativeUInt); overload;
+    procedure IsUnEncrypted(ABio: ITaurusTLS_Bio); overload;
+    class function NewBytes(ABytes: TBytes): ITaurusTLS_Bytes; overload;
+    class function NewBytes(AHexStr: string): ITaurusTLS_Bytes; overload;
+  public
+    [AutoNameTestCase('e2')]
+    [AutoNameTestCase('026ca6b4d0761ebfcd933a3f7b379e')]
+    [AutoNameTestCase('941833f8ffd98ea2861d8c9f718d3f4d'+
+      '7ca37f0214e733d1bd1426bfa03fa2c0')]
+    procedure Bytes(AHexStr: string); overload;
+    [AutoNameTestCase('1024')]
+    [AutoNameTestCase('177')]
+    [AutoNameTestCase('383')]
+    procedure Bytes(ASize: NativeUInt); overload;
+    [AutoNameTestCase('e2')]
+    [AutoNameTestCase('026ca6b4d0761ebfcd933a3f7b379e')]
+    [AutoNameTestCase('941833f8ffd98ea2861d8c9f718d3f4d'+
+      '7ca37f0214e733d1bd1426bfa03fa2c0')]
+    procedure Bio(AHexStr: string); overload;
+    [AutoNameTestCase('1024')]
+    [AutoNameTestCase('177')]
+    [AutoNameTestCase('383')]
+    procedure Bio(ASize: NativeUInt); overload;
+  end;
+
+implementation
+
+uses
+  System.RTTI, System.NetEncoding, TaurusTLSHeaders_bio,
+  TaurusTLSHeaders_evp, TaurusTLSHeaders_evperr, TaurusTLS_Random;
+
+{ TCipherFixture }
+
+function TCipherFixture.GetCipher(ACipherName: string): TTaurusTLS_Cipher;
+begin
+  if CompareText(FCipherName, ACipherName) <> 0 then
+  begin
+    FreeAndNil(FCipher);
+    FCipherName:=ACipherName;
+  end;
+  if not Assigned(FCipher) then
+    FCipher:=TTaurusTLS_Cipher.Create(FCipherName);
+  Assert.IsNotNull(FCipher,
+    Format('Unable to create TTaurusTLS_Cipher instance '+
+    'with the cipher name ''%s''.', [ACipherName]));
+  Result:=FCipher;
+end;
+
+function TCipherFixture.CheckRandomFactor(ABytes: TBytes): NativeInt;
+var
+  i, lChunkStart, lChunkEnd: NativeInt;
+  lBits: set of byte;
+  lVal, lUniqueCount: byte;
+
+begin
+  Result:=Length(ABytes);
+  if Result = 0 then
+    Exit;
+
+  lChunkStart:=0;
+  repeat
+    lChunkEnd:=lChunkStart+High(Byte)+1;
+    if lChunkEnd >= Result then
+      lChunkEnd:=Result-1;
+    lBits:=[];
+    for i:=lChunkStart to lChunkEnd do
+    begin
+      lVal:=ABytes[i];
+      if not (lVal in lBits) then
+      begin
+//        lUniqueCount:=
+      end;
+    end;
+
+    Inc(lChunkStart);
+  until lChunkEnd >= Result;
+
+
+end;
+
+procedure TCipherFixture.DoWithOSSLCipher(AOSSLCipherProc: TProc<PEVP_CIPHER>);
+var
+  lOSSLCipher: PEVP_CIPHER;
+  lCipherName: RawByteString;
+
+begin
+  if not Assigned(AOSSLCipherProc) then
+    Assert.Fail(ClassName+'.DoWithOSSLCipher: AOSSLCipherProc should not be ''nil''.');
+  lOSSLCipher:=nil;
+  lCipherName:=FCipherName;
+  try
+    lOSSLCipher:=EVP_Cipher_fetch(nil, PIdAnsiChar(lCipherName), nil);
+    if not Assigned(lOSSLCipher) then
+      Assert.Fail(Format('Unable to initialize Cipher the name ''%s''.',
+        [FCipherName]));
+    AOSSLCipherProc(lOSSLCipher);
+  finally
+    if Assigned(lOSSLCipher) then
+      EVP_CIPHER_free(lOSSLCipher);
+  end;
+end;
+
+procedure TCipherFixture.CheckCipherBlockSize(const ACipherName: string;
+  ALen: TIdC_UINT);
+var
+  lOSSLCipherBlockSize: TIdC_UINT;
+
+begin
+  DoWithOSSLCipher(
+    procedure(AOSSLCipher: PEVP_CIPHER)
+    begin
+      lOSSLCipherBlockSize:=EVP_CIPHER_get_block_size(AOSSLCipher);
+      Assert.AreNotEqual<TIdC_UINT>(0, lOSSLCipherBlockSize,
+        'Cipher Block Size is not initialized.');
+    end
+  );
+
+  Assert.AreEqual<TIdC_UINT>(lOSSLCipherBlockSize, ALen,
+    'Invalid Cipher Block Length.');
+end;
+
+procedure TCipherFixture.CheckCipherKeyLen(const ACipherName: string;
+  ALen: TIdC_UINT);
+var
+  lOSSLCipherLen: TIdC_UINT;
+
+begin
+  DoWithOSSLCipher(
+    procedure(AOSSLCipher: PEVP_CIPHER)
+    begin
+      lOSSLCipherLen:=EVP_CIPHER_get_key_length(AOSSLCipher);
+      if lOSSLCipherLen = 0 then
+        lOSSLCipherLen:=EVP_MAX_KEY_LENGTH;
+    end
+  );
+
+  Assert.AreEqual<TIdC_UINT>(lOSSLCipherLen, ALen,
+    'Invalid Cipher Key Length.');
+end;
+
+procedure TCipherFixture.CheckCipherIVLen(const ACipherName: string; ALen: TIdC_UINT);
+var
+  lOSSLCipherIVLen: TIdC_UINT;
+
+begin
+  DoWithOSSLCipher(
+    procedure(AOSSLCipher: PEVP_CIPHER)
+    begin
+      lOSSLCipherIVLen:=EVP_CIPHER_get_iv_length(AOSSLCipher);
+      if lOSSLCipherIVLen = 0 then
+        lOSSLCipherIVLen:=EVP_MAX_KEY_LENGTH;
+    end
+  );
+
+  Assert.AreEqual<TIdC_UINT>(lOSSLCipherIVLen, ALen,
+    'Invalid Cipher IV Length.');
+end;
+
+procedure TCipherFixture.Teardown;
+begin
+  FreeAndNil(FCipher);
+end;
+
+procedure TCipherFixture.GetCipherByNameAnsiNegative(
+  const ACipherName: RawByteString);
+begin
+  Assert.IsNull(TTaurusTLS_Cipher.GetCipherByName(PIdAnsiChar(ACipherName)),
+    'TTaurusTLS_Cipher.GetCipherByName should return '+
+    'empty Cipher method implementation for this Cipher name.')
+end;
+
+procedure TCipherFixture.GetCipherByNameAnsiPositive(
+  const ACipherName: RawByteString);
+begin
+  Assert.IsNotNull(TTaurusTLS_Cipher.GetCipherByName(PIdAnsiChar(ACipherName)),
+    'TTaurusTLS_Cipher.GetCipherByName returns empty Cipher method implementation.')
+end;
+
+procedure TCipherFixture.GetCipherByNameUnicodeNegative(const ACipherName: string);
+begin
+  Assert.IsNull(TTaurusTLS_Cipher.GetCipherByName(ACipherName),
+    'TTaurusTLS_Cipher.GetCipherByName should return '+
+    'empty Cipher method implementation for this Cipher name.')
+end;
+
+procedure TCipherFixture.GetCipherByNameUnicodePositive(const ACipherName: string);
+begin
+  Assert.IsNotNull(TTaurusTLS_Cipher.GetCipherByName(ACipherName),
+    'TTaurusTLS_Cipher.GetCipherByName returns empty Cipher method implementation.')
+end;
+
+procedure TCipherFixture.NewKey(const ACipherName: string);
+begin
+  CheckCipherKeyLen(ACipherName, Length(Cipher[ACipherName].NewKey));
+end;
+
+procedure TCipherFixture.NewIV(const ACipherName: string);
+begin
+  CheckCipherIVLen(ACipherName, Length(Cipher[ACipherName].NewIV));
+end;
+
+procedure TCipherFixture.KeyLen(const ACipherName: string);
+begin
+  CheckCipherKeyLen(ACipherName, Cipher[ACipherName].KeyLen);
+end;
+
+procedure TCipherFixture.IVLen(const ACipherName: string);
+begin
+  CheckCipherIVLen(ACipherName, Cipher[ACipherName].IVLen);
+end;
+
+procedure TCipherFixture.BlockSize(const ACipherName: string);
+begin
+  CheckCipherBlockSize(ACipherName, Cipher[ACipherName].BlockSize);
+end;
+
+type
+  TAESEncoderDecoderMock = class(TTaurusTLS_SimpleAESEncrypDecrypt)
+  public
+    class function GeKeySizeEnum(ASize: string):
+      TTaurusTLS_SimpleAESEncrypDecrypt.TAESKeySize; static;
+    class function GetModeEnum(AMode: string):
+      TTaurusTLS_SimpleAESEncrypDecrypt.TEncoderMode; static;
+  end;
+
+{ TAESEncoderDecoderMock }
+
+class function TAESEncoderDecoderMock.GeKeySizeEnum(
+  ASize: string): TTaurusTLS_SimpleAESEncrypDecrypt.TAESKeySize;
+var
+  lFound: boolean;
+
+begin
+  Result:=Low(TTaurusTLS_SimpleAESEncrypDecrypt.TAESKeySize);
+  repeat
+    lFound:=CompareStr(ASize, cKeySizes[Result]) = 0;
+    if lFound then
+      break;
+    Inc(Result);
+  until Result >= High(TTaurusTLS_SimpleAESEncrypDecrypt.TAESKeySize);
+  Assert.IsTrue(lFound, Format('Unknown TAESKeySize value ''%s''.', [ASize]));
+end;
+
+class function TAESEncoderDecoderMock.GetModeEnum(
+  AMode: string): TTaurusTLS_SimpleAESEncrypDecrypt.TEncoderMode;
+var
+  lFound: boolean;
+
+begin
+  Result:=Low(TTaurusTLS_SimpleAESEncrypDecrypt.TEncoderMode);
+  repeat
+    lFound:=CompareStr(AMode, cEncoderModes[Result]) = 0;
+    if lFound then
+      break;
+    Inc(Result);
+  until Result > High(TTaurusTLS_SimpleAESEncrypDecrypt.TEncoderMode);
+  Assert.IsTrue(lFound, Format('Unknown TEncoderMode value ''%s''.', [AMode]));
+end;
+
+{ TAESEncryptDecryptFixture }
+
+function TSimpleAESEncrypDecryptFixture.CompareBytes(const A, B: TBytes): boolean;
+var
+  lLenA, lLenb, lMinLen: NativeUInt;
+
+begin
+  lLenA:=Length(A);
+  lLenB:=Length(B);
+  if lLenA < lLenB then
+    lMinLen:=lLenA
+  else
+    lMinLen:=lLenB;
+  Result:=CompareMem(@A[0], @B[0], lMinLen);
+end;
+
+procedure TSimpleAESEncrypDecryptFixture.EncryptDecrypt(
+  AEncryptor: TTaurusTLS_SimpleAESEncrypDecrypt; ADataSize: NativeUInt);
+var
+  lPlain, lEnc, lDec: TBytes;
+
+begin
+  Assert.IsNotNull(AEncryptor, 'AEncryptor must not be ''nil''.');
+  Assert.AreNotEqual<TIdC_UINT>(0, ADataSize, 'ADataSize is Zero.');
+  lPlain:=TTaurusTLS_Random.PublicRandom.Random(ADataSize);
+
+  AEncryptor.Encrypt(lPlain, lEnc);
+  Assert.AreNotEqual<NativeUInt>(0, Length(lEnc), 'Encrypted size is Zero.');
+  Assert.IsFalse(CompareBytes(lPlain, lEnc),
+    'Content of Plan and Encrypted data is partially or fully equal.');
+
+  AEncryptor.Decrypt(lEnc, lDec);
+  Assert.AreNotEqual<NativeUInt>(0, Length(lEnc),  'Decrypted size is Zero.');
+  Assert.IsTrue(CompareBytes(lPlain, lDec),
+    'Content of Plan and Encrypted data is partially or fully equal.');
+  Assert.AreEqual(Length(lPlain), Length(lDec),
+    'Length of Plain and Decrypted data are not equal.')
+end;
+procedure TSimpleAESEncrypDecryptFixture.TestEncryptDecryptAll(
+  ADataSize: NativeUInt);
+begin
+  Assert.AreNotEqual<NativeUInt>(0, ADataSize, 'AData size must be greater than Zero.');
+  for var lKeySize:=Low(TAESKeySize) to High(TAESKeySize) do
+    for var lMode:=Low(TEncoderMode) to High(TEncoderMode) do
+//      TestEncrypDecrypt(lMode, ADataSize);
+end;
+
+procedure TSimpleAESEncrypDecryptFixture.TestEncrypDecrypt(AEncoderMode: string;
+  ADataSize: NativeUInt);
+var
+  lEncryptor: TTaurusTLS_SimpleAESEncrypDecrypt;
+  lKeySize: TAESKeySize;
+
+begin
+  for lKeySize:=Low(TAESKeySize) to High(TAESKeySize) do
+  begin
+    lEncryptor:=nil;
+    try
+      lEncryptor:=TAESEncoderDecoderMock.Create(lKeySize,
+        TAESEncoderDecoderMock.GetModeEnum(AEncoderMode));
+      EncryptDecrypt(lEncryptor, ADataSize);
+    finally
+      lEncryptor.Free;
+    end;
+  end;
+end;
+
+{ TCustomBytesFixture }
+
+procedure TCustomBytesFixture.TearDown;
+begin
+  FData:=nil;
+end;
+
+class function TCustomBytesFixture.Base64ToBytes(const AB64: string): TBytes;
+begin
+  Assert.AreNotEqual(0, Length(AB64),
+    'Parameter ''AB64'' must be grater than Zero.');
+  Result:=BytesOf(TNetEncoding.Base64.Decode(AB64));
+end;
+
+class function TCustomBytesFixture.HexToBytes(const AHexStr: string): TBytes;
+var
+  lLen: NativeUInt;
+
+begin
+  Assert.IsNotEmpty(AHexStr, 'Parameter ''AHexStr'' must not be empty.');
+  lLen:=Length(AHexStr);
+  Assert.IsFalse(Odd(lLen mod 2), 'HEX String must be divisible by 2.');
+  lLen:=lLen div 2;
+  SetLength(Result, lLen);
+  HexToBin(PChar(AHexStr), 0, Result, 0, lLen);
+end;
+
+procedure TCustomBytesFixture.InitData(AData: TBytes);
+begin
+  FData:=AData;
+end;
+
+procedure TCustomBytesFixture.InitData(ASize: TIdC_SizeT);
+begin
+  FData:=TTaurusTLS_Random.PublicRandom.Random(ASize);
+end;
+
+class function TCustomBytesFixture.GetBioMemPtr(ABio: ITaurusTLS_Bio; 
+  var AMemPtr: pointer): TIdC_INT;
+begin
+  Assert.IsNotNull(ABio, 'ABio must not be ''nil''.');
+  Result:=BIO_get_mem_data(ABio.Bio, AMemPtr);
+  Assert.IsTrue(Result >= 0, 'Can not get Data memory pointer form thr ABio.');
+end;
+
+function TCustomBytesFixture.GetDataLen: NativeUInt;
+begin
+  Result:=Length(FData);
+end;
+
+function TCustomBytesFixture.CopyData: TBytes;
+begin
+  Result:=Copy(FData, 0, Length(FData));
+end;
+
+class procedure TCustomBytesFixture.TestBytes(AExpected, AData: TBytes);
+var
+  lExpectedLen, lADataLen: NativeUInt;
+begin
+  if AExpected = AData then
+    Exit; // the same  byte array
+  lExpectedLen:=Length(AExpected);
+  lADataLen:=Length(AData);
+  Assert.AreEqual(lExpectedLen, lADataLen, 'FData and AData lengths are not equal.');
+  if lExpectedLen = 0 then
+    Exit; // lADataLen = 0 as well.
+  Assert.IsTrue(CompareMem(@AExpected[0], @AData[0], lExpectedLen),
+    'FData and AData contents are not equal.');
+end;
+
+class procedure TCustomBytesFixture.TestData(AExpected: TBytes; AData: pointer;
+  ADataLen: NativeUInt);
+var
+  lExpectedLen: NativeUInt;
+
+begin
+  lExpectedLen:=Length(AExpected);
+  Assert.AreEqual(lExpectedLen, ADataLen, 'FData and AData lengths are not equal.');
+  if lExpectedLen = 0 then
+    Exit; // lADataLen = 0 as well.
+
+  if @AExpected[0] = AData then
+    Exit; // the same byte array. Address of first element and length are equal.
+  Assert.IsTrue(CompareMem(@AExpected[0], AData, lExpectedLen),
+    'FData and AData contents are not equal.');
+end;
+
+procedure TCustomBytesFixture.TestBytes(AData: TBytes);
+begin
+  TestBytes(Data, AData);
+end;
+
+procedure TCustomBytesFixture.TestData(AData: pointer; ADataLen: NativeUInt);
+begin
+  TestData(Data, AData, ADataLen);
+end;
+
+procedure TCustomBytesFixture.TestBytesIntf(ABytes: ITaurusTLS_Bytes);
+begin
+  Assert.IsNotNull(ABytes, 'ABytes msut not be ''nil''.');
+  TestBytes(ABytes.Bytes);
+end;
+
+procedure TCustomBytesFixture.TestBioIntf(ABio: ITaurusTLS_Bio);
+var
+  lBio: PBIO;
+  lBioLen: TIdC_SIZET;
+  lMemPtr: Pointer;
+
+begin
+  Assert.IsNotNull(ABio, 'ABio msut not be ''nil''.');
+  lBIO:=ABio.Bio;
+  lBioLen:=BIO_get_mem_data(lBio, lMemPtr);
+  Assert.AreEqual<NativeUInt>(DataLen, lBioLen,
+    'Unable to extract memory pointer from the lBio');
+  TestData(lMemPtr, lBioLen);
+end;
+
+{ TPlainBytesFixture }
+
+procedure TPlainBytesFixture.BytesSame(AHexStr: string);
+begin
+  InitData(HexToBytes(AHexStr));
+  TestBytesIntf(TTaurusTLS_PlainBytes.Create(Data));
+end;
+
+procedure TPlainBytesFixture.BytesSame(ASize: NativeUInt);
+begin
+  InitData(ASize);
+  TestBytesIntf(TTaurusTLS_PlainBytes.Create(Data));
+end;
+
+procedure TPlainBytesFixture.BytesCopy(AHexStr: string);
+begin
+  InitData(HexToBytes(AHexStr));
+  TestBytesIntf(TTaurusTLS_PlainBytes.Create(CopyData));
+end;
+
+procedure TPlainBytesFixture.BytesCopy(ASize: NativeUInt);
+begin
+  InitData(ASize);
+  TestBytesIntf(TTaurusTLS_PlainBytes.Create(CopyData));
+end;
+
+procedure TPlainBytesFixture.BioNull(ASize: NativeUInt);
+begin
+  InitData(0);
+  Assert.IsNull((TTaurusTLS_PlainBytes.Create(Data) as ITaurusTLS_Bytes).NewBio,
+    'Excpected ''nil'' Bio.');
+end;
+
+procedure TPlainBytesFixture.BioSame(AHexStr: string);
+begin
+  InitData(HexToBytes(AHexStr));
+  TestBioIntf((TTaurusTLS_PlainBytes.Create(Data) as ITaurusTLS_Bytes).NewBio);
+end;
+
+procedure TPlainBytesFixture.BioSame(ASize: NativeUInt);
+begin
+  InitData(ASize);
+  TestBioIntf((TTaurusTLS_PlainBytes.Create(Data) as ITaurusTLS_Bytes).NewBio);
+end;
+
+procedure TPlainBytesFixture.BioCopy(ASize: NativeUInt);
+begin
+  InitData(ASize);
+  TestBioIntf((TTaurusTLS_PlainBytes.Create(CopyData) as ITaurusTLS_Bytes).NewBio);
+end;
+
+procedure TPlainBytesFixture.BioCopy(AHexStr: string);
+begin
+  InitData(HexToBytes(AHexStr));
+  TestBioIntf((TTaurusTLS_PlainBytes.Create(CopyData) as ITaurusTLS_Bytes).NewBio);
+end;
+
+{ TWipingBytesFixture }
+
+class procedure TWipingBytesFixture.IsEmpty(AData: pointer; ASize: NativeUInt);
+var
+  lLongPtr: PNativeUInt;
+  lBytePtr: PByte;
+
+begin
+  if not Assigned(AData) then
+    Exit;
+  lLongPtr:=AData;
+{$POINTERMATH ON}
+  while (lLongPtr+1) < (PByte(AData)+ASize) do
+    if lLongPtr^ <> 0 then
+      Assert.Fail('Data is not wiped out.')
+    else
+      Inc(lLongPtr);
+  lBytePtr:=PByte(lLongPtr);
+  while lBytePtr < (PByte(AData)+ASize) do
+    if lBytePtr^ <> 0 then
+      Assert.Fail('Data is not wiped out.')
+    else
+      Inc(lBytePtr);
+{$POINTERMATH OFF}
+end;
+
+class procedure TWipingBytesFixture.IsEmpty(ABio: PBIO; AExpectedLen: NativeUInt);
+var
+  lMemPtr: pointer;
+  lLen: TIdC_INT;
+
+begin
+  Assert.IsNotNull(ABio, 'ABio msut not be ''nil''.');
+  lLen:=BIO_get_mem_data(ABio, lMemPtr);
+  Assert.AreEqual<NativeUInt>(AExpectedLen, lLen,
+    'ABio length is not equal AExpectedLen.');
+  IsEmpty(lMemPtr, AExpectedLen);
+end;
+
+class procedure TWipingBytesFixture.IsEmpty(ABytes: TBytes);
+var
+  lLen: NativeUInt;
+
+begin
+  lLen:=Length(ABytes);
+  if lLen = 0 then
+    Exit;
+  IsEmpty(@ABytes[0], lLen);
+end;
+
+procedure TWipingBytesFixture.TestWipeBytes;
+var
+  lBytes: ITaurusTLS_Bytes;
+  lData: TBytes;
+
+begin
+  lBytes:=TTaurusTLS_WipingBytes.Create(CopyData);
+  TestBytesIntf(lBytes);
+  lData:=lBytes.Bytes;
+  lBytes:=nil;
+  IsEmpty(lData);
+end;
+
+procedure TWipingBytesFixture.WipeBytes(ASize: NativeUInt);
+begin
+  InitData(ASize);
+  TestWipeBytes;
+end;
+
+procedure TWipingBytesFixture.WipeBytes(AHexStr: string);
+begin
+  InitData(HexToBytes(AHexStr));
+  TestWipeBytes;
+end;
+
+procedure TWipingBytesFixture.TestWipeBio;
+var
+  lBytes: ITaurusTLS_Bytes;
+  lBio: ITaurusTLS_Bio;
+  lBioPtr: pointer;
+
+begin
+  lBytes:=TTaurusTLS_WipingBytes.Create(CopyData);
+  lBio:=lBytes.NewBio;
+  TestBioIntf(lBio);
+  GetBioMemPtr(lBio, lBioPtr);
+  lBytes:=nil;
+  TestBioIntf(lBio);
+  lBio:=nil;
+  IsEmpty(lBioPtr, DataLen);
+end;
+
+procedure TWipingBytesFixture.WipeBio(ASize: NativeUInt);
+begin
+  InitData(ASize);
+  TestWipeBio;
+end;
+
+procedure TWipingBytesFixture.WipeBio(AHexStr: string);
+begin
+  InitData(HexToBytes(AHexStr));
+  TestWipeBio;
+end;
+
+{ TEnryptedBytesFixture }
+
+procedure TEnryptedBytesFixture.IsEncrypted(AData: pointer;
+  ADataLen: NativeUInt);
+var
+  lLen: NativeUInt;
+  
+begin
+  lLen:=DataLen;
+  Assert.AreNotEqual<NativeUInt>(0, lLen, 'Data is not initialized.');
+  Assert.IsNotNull(AData, 'AData must be not ''nil''.');
+  Assert.AreNotEqual<NativeUInt>(0, lLen, 'ADataLen must be greater than Zero.');
+  if lLen > ADataLen then
+    lLen:=ADataLen;
+  Assert.IsFalse(CompareMem(@FData[0], AData, lLen),
+    'Plain and Encrypted data looks the same...');
+end;
+
+procedure TEnryptedBytesFixture.IsEncrypted(const ABytes: TBytes);
+var
+  lLen: NativeUInt;
+  
+begin
+  lLen:=Length(ABytes);
+  Assert.AreNotEqual<NativeUInt>(0, lLen, 'ABytes should not be an empty array.');
+  IsEncrypted(@ABytes[0], lLen);
+end;
+
+procedure TEnryptedBytesFixture.IsUnEncrypted(ABio: ITaurusTLS_Bio);
+var
+  lMemPtr: Pointer;
+  lLen: TIdC_INT;
+  
+begin
+  lLen:=GetBioMemPtr(ABio, lMemPtr);
+  TestData(lMemPtr, lLen);
+end;
+
+class function TEnryptedBytesFixture.NewBytes(
+  AHexStr: string): ITaurusTLS_Bytes;
+begin
+  Result:=NewBytes(HexToBytes(AHexStr));
+end;
+
+class function TEnryptedBytesFixture.NewBytes(ABytes: TBytes): ITaurusTLS_Bytes;
+begin
+  Result:=TTaurusTLS_EncryptedBytes.Create(ABytes,
+    TTaurusTLS_SimpleAESEncrypDecrypt.Create(aks192, emCFB));
+end;
+
+procedure TEnryptedBytesFixture.Bytes(ASize: NativeUInt);
+var
+  lBytes: ITaurusTLS_Bytes;
+  
+begin
+  InitData(ASize);
+  lBytes:=NewBytes(CopyData);
+  IsEncrypted(lBytes.Bytes);
+end;
+
+procedure TEnryptedBytesFixture.Bytes(AHexStr: string);
+var
+  lBytes: ITaurusTLS_Bytes;
+  
+begin
+  InitData(HexToBytes(AHexStr));
+  lBytes:=NewBytes(CopyData);
+  IsEncrypted(lBytes.Bytes);
+end;
+
+procedure TEnryptedBytesFixture.Bio(ASize: NativeUInt);
+var
+  lBytes: ITaurusTLS_Bytes;
+  lBio: ITaurusTLS_Bio;
+  
+begin
+  InitData(ASize);
+  lBytes:=NewBytes(CopyData);
+  lBio:=lBytes.NewBio;
+  IsUnencrypted(lBio);
+end;
+
+procedure TEnryptedBytesFixture.Bio(AHexStr: string);
+var
+  lBytes: ITaurusTLS_Bytes;
+  lBio: ITaurusTLS_Bio;
+  
+begin
+  InitData(HexToBytes(AHexStr));
+  lBytes:=NewBytes(CopyData);
+  lBio:=lBytes.NewBio;
+  IsUnencrypted(lBio);
+end;
+
+initialization
+  TDUnitX.RegisterTestFixture(TCipherFixture);
+  TDUnitX.RegisterTestFixture(TSimpleAESEncrypDecryptFixture);
+  TDUnitX.RegisterTestFixture(TPlainBytesFixture);
+  TDUnitX.RegisterTestFixture(TWipingBytesFixture);
+  TDUnitX.RegisterTestFixture(TEnryptedBytesFixture);
+  
+end.

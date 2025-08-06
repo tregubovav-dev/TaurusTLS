@@ -78,26 +78,25 @@ type
     procedure BlockSize(const ACipherName: string);
   end;
 
-  TAESKeySize = TTaurusTLS_AESKeySize;
-  TEncoderMode = TTaurusTLS_EncoderMode;
+//  TAESKeySize = TTaurusTLS_AESKeySize;
+//  TEncodeMode = TTaurusTLS_EncodeMode;
 
   [TestFixture]
   [Category('EncryptDecrypt')]
   TSimpleAESEncryptorFixture = class(TOsslBaseFixture)
   private var
     FKeySizeNames: array[TTaurusTLS_AESKeySize] of string;
-    FEncoderModeNames: array[TTaurusTLS_EncoderMode] of string;
+    FEncoderModeNames: array[TTaurusTLS_EncodeMode] of string;
 
     function CompareBytes(const A, B: TBytes): boolean;
     procedure EncryptDecrypt(AEncryptor: TTaurusTLS_SimpleAESEncryptor;
       ADataSize: NativeUInt); overload;
-    procedure TestEncryptDecryptAll(ADataSize: NativeUInt);
     function GetKeySizeByName(AKeySizeName: string): TTaurusTLS_AESKeySize;
-    function GetEncodingModeByName(AEncoderModeName: string): TTaurusTLS_EncoderMode;
+    function GetEncodingModeByName(AEncoderModeName: string): TTaurusTLS_EncodeMode;
   protected
     property KeySizeByName[AKeySizeName: string]: TTaurusTLS_AESKeySize
       read GetKeySizeByName;
-    property EncodingModeByName[AEncoderModeName: string]: TTaurusTLS_EncoderMode
+    property EncodingModeByName[AEncoderModeName: string]: TTaurusTLS_EncodeMode
       read GetEncodingModeByName;
   public
     [Setup]
@@ -251,11 +250,104 @@ type
     procedure Bio(ASize: NativeUInt); overload;
   end;
 
+  [TestFixture]
+  [Category('SimpleAESFactory')]
+  TSimpleAESFactoryFixture = class(TCustomBytesFixture)
+  public
+    [Test]
+    procedure KeySizeNameAll;
+    [Test]
+    procedure EncodeModeNameAll;
+    [AutoNameTestCase('128,CBC')]
+    [AutoNameTestCase('192,CFB')]
+    [AutoNameTestCase('256,OFB')]
+    procedure NewEncryptor(AKeySizeName, AEncodeMode: string);
+    [IgnoreMemoryLeaks] // The singleton intsantiates first time.
+    [AutoNameTestCase('128,OFB')]
+    [AutoNameTestCase('192,CBC')]
+    [AutoNameTestCase('256,CFB')]
+    procedure SetDefaultCipher(AKeySizeName, AEncodeMode: string);
+    [AutoNameTestCase('128,OFB')]
+    [AutoNameTestCase('192,CBC')]
+    [AutoNameTestCase('256,CFB')]
+    procedure NewEncyptorDefault(AKeySizeName, AEncodeMode: string);
+  end;
+
 implementation
 
 uses
-  System.RTTI, System.NetEncoding, TaurusTLSHeaders_bio,
+  System.RTTI, System.NetEncoding, System.TypInfo, TaurusTLSHeaders_bio,
   TaurusTLSHeaders_evp, TaurusTLSHeaders_evperr, TaurusTLS_Random;
+
+type
+  TSimpleAESEnums = class
+  protected const
+    // DO NOT LOCALIZE
+    cKeySizes: array[TTaurusTLS_AESKeySize] of string = ('128','192','256');
+    cIntKeySizes: array[TTaurusTLS_AESKeySize] of cardinal = (128, 192, 256);
+    cEncoderModes: array[TTaurusTLS_EncodeMode] of string =
+      ('CBC','CFB','OFB','CTR');
+  protected
+    class function GetKeySizeNameToEnum(AName: string): TTaurusTLS_AESKeySize;
+      static;
+    class function GetEncodeModeNameToEnum(AName: string): TTaurusTLS_EncodeMode;
+      static;
+    class function GetEncodeModeToName(AValue: TTaurusTLS_EncodeMode): string;
+      static;
+    class function GetKeySizeEnumToName(AValue: TTaurusTLS_AESKeySize): string;
+      static;
+    class function GetKeySizeNameToInt(AValue: TTaurusTLS_AESKeySize): cardinal;
+      static;
+  public
+    class property KeySize[AName: string]: TTaurusTLS_AESKeySize
+      read GetKeySizeNameToEnum;
+    class property KeySizeName[AValue: TTaurusTLS_AESKeySize]: string
+      read GetKeySizeEnumToName;
+    class property EncodeMode[AName: string]: TTaurusTLS_EncodeMode
+      read GetEncodeModeNameToEnum;
+    class property EncodeModeName[AValue: TTaurusTLS_EncodeMode]: string
+      read GetEncodeModeToName;
+    class property KeySizeInt[AValue: TTaurusTLS_AESKeySize]: cardinal
+      read GetKeySizeNameToInt;
+  end;
+
+class function TSimpleAESEnums.GetEncodeModeNameToEnum(
+  AName: string): TTaurusTLS_EncodeMode;
+begin
+  for Result:=Low(TTaurusTLS_EncodeMode) to High(TTaurusTLS_EncodeMode) do
+    if AName.CompareTo(cEncoderModes[Result]) = 0 then
+      Exit;
+  Assert.FailFmt('Unable to convert string value ''%s'' to the value '+
+    'of ''TTaurusTLS_EncodeMode'' type.', [AName]);
+end;
+
+class function TSimpleAESEnums.GetEncodeModeToName(
+  AValue: TTaurusTLS_EncodeMode): string;
+begin
+  Result:=cEncoderModes[AValue];
+end;
+
+class function TSimpleAESEnums.GetKeySizeEnumToName(
+  AValue: TTaurusTLS_AESKeySize): string;
+begin
+  Result:=cKeySizes[AValue];
+end;
+
+class function TSimpleAESEnums.GetKeySizeNameToEnum(
+  AName: string): TTaurusTLS_AESKeySize;
+begin
+  for Result:=Low(TTaurusTLS_AESKeySize) to High(TTaurusTLS_AESKeySize) do
+    if AName.CompareTo(cKeySizes[Result]) = 0 then
+      Exit;
+  Assert.FailFmt('Unable to convert string value ''%s'' to the value '+
+    'of ''TTaurusTLS_EncodeMode'' type.', [AName]);
+end;
+
+class function TSimpleAESEnums.GetKeySizeNameToInt(
+  AValue: TTaurusTLS_AESKeySize): cardinal;
+begin
+  Result:=cIntKeySizes[AValue];
+end;
 
 { TCipherFixture }
 
@@ -447,25 +539,25 @@ end;
 procedure TSimpleAESEncryptorFixture.Setup;
 var
   lKeySize: TTaurusTLS_AESKeySize;
-  lEncoderMode: TTaurusTLS_EncoderMode;
+  lEncoderMode: TTaurusTLS_EncodeMode;
 
 begin
   for lKeySize:=Low(TTaurusTLS_AESKeySize) to High(TTaurusTLS_AESKeySize) do
     FKeySizeNames[lKeySize]:=TTaurusTLS_SimpleAESFactory.KeySizeName[lKeySize];
-  for lEncoderMode:=Low(TTaurusTLS_EncoderMode) to High(TTaurusTLS_EncoderMode) do
+  for lEncoderMode:=Low(TTaurusTLS_EncodeMode) to High(TTaurusTLS_EncodeMode) do
     FEncoderModeNames[lEncoderMode]:=
-      TTaurusTLS_SimpleAESFactory.EncoderModeName[lEncoderMode];
+      TTaurusTLS_SimpleAESFactory.EncodeModeName[lEncoderMode];
 end;
 
 procedure TSimpleAESEncryptorFixture.Teardown;
 var
   lKeySize: TTaurusTLS_AESKeySize;
-  lEncoderMode: TTaurusTLS_EncoderMode;
+  lEncoderMode: TTaurusTLS_EncodeMode;
 
 begin
   for lKeySize:=Low(TTaurusTLS_AESKeySize) to High(TTaurusTLS_AESKeySize) do
     FKeySizeNames[lKeySize]:='';
-  for lEncoderMode:=Low(TTaurusTLS_EncoderMode) to High(TTaurusTLS_EncoderMode) do
+  for lEncoderMode:=Low(TTaurusTLS_EncodeMode) to High(TTaurusTLS_EncodeMode) do
     FEncoderModeNames[lEncoderMode]:='';
 end;
 
@@ -501,7 +593,7 @@ begin
   AEncryptor.Decrypt(lEnc, lDec);
   Assert.AreNotEqual<NativeUInt>(0, Length(lEnc),  'Decrypted size is Zero.');
   Assert.IsTrue(CompareBytes(lPlain, lDec),
-    'Content of Plan and Encrypted data is partially or fully equal.');
+    'Content of Plan and Encrypted data is NOT partially or fully equal.');
   Assert.AreEqual(Length(lPlain), Length(lDec),
     'Length of Plain and Decrypted data are not equal.')
 end;
@@ -517,7 +609,7 @@ begin
 end;
 
 function TSimpleAESEncryptorFixture.GetEncodingModeByName(
-  AEncoderModeName: string): TTaurusTLS_EncoderMode;
+  AEncoderModeName: string): TTaurusTLS_EncodeMode;
 begin
   for Result:=Low(Result) to High(Result) do
     if CompareStr(FEncoderModeNames[Result], AEncoderModeName) = 0 then
@@ -526,24 +618,14 @@ begin
     [AEncoderModeName]));
 end;
 
-procedure TSimpleAESEncryptorFixture.TestEncryptDecryptAll(
-  ADataSize: NativeUInt);
-begin
-  Assert.AreNotEqual<NativeUInt>(0, ADataSize, 'AData size must be greater than Zero.');
-  for var lKeySize:=Low(TAESKeySize) to High(TAESKeySize) do
-    for var lMode:=Low(TEncoderMode) to High(TEncoderMode) do
-//      TestEncryptor(lMode, ADataSize);
-end;
-
-
 procedure TSimpleAESEncryptorFixture.TestEncryptor(AEncoderMode: string;
   ADataSize: NativeUInt);
 var
   lEncryptor: TTaurusTLS_SimpleAESEncryptor;
-  lKeySize: TAESKeySize;
+  lKeySize: TTaurusTLS_AESKeySize;
 
 begin
-  for lKeySize:=Low(TAESKeySize) to High(TAESKeySize) do
+  for lKeySize:=Low(TTaurusTLS_AESKeySize) to High(TTaurusTLS_AESKeySize) do
   begin
     lEncryptor:=nil;
     try
@@ -622,7 +704,7 @@ begin
   Assert.AreEqual(lExpectedLen, lADataLen, 'FData and AData lengths are not equal.');
   if lExpectedLen = 0 then
     Exit; // lADataLen = 0 as well.
-  Assert.IsTrue(CompareMem(@AExpected[0], @AData[0], lExpectedLen),
+  Assert.AreEqualMemory(@AExpected[0], @AData[0], lExpectedLen,
     'FData and AData contents are not equal.');
 end;
 
@@ -639,7 +721,7 @@ begin
 
   if @AExpected[0] = AData then
     Exit; // the same byte array. Address of first element and length are equal.
-  Assert.IsTrue(CompareMem(@AExpected[0], AData, lExpectedLen),
+  Assert.AreEqualMemory(@AExpected[0], AData, lExpectedLen,
     'FData and AData contents are not equal.');
 end;
 
@@ -849,7 +931,7 @@ begin
   Assert.AreNotEqual<NativeUInt>(0, lLen, 'ADataLen must be greater than Zero.');
   if lLen > ADataLen then
     lLen:=ADataLen;
-  Assert.IsFalse(CompareMem(@FData[0], AData, lLen),
+  Assert.AreNotEqualMemory(@FData[0], AData, lLen,
     'Plain and Encrypted data looks the same...');
 end;
 
@@ -921,12 +1003,97 @@ procedure TEnryptedBytesFixture.Bio(AHexStr: string);
 var
   lBytes: ITaurusTLS_Bytes;
   lBio: ITaurusTLS_Bio;
-  
+
 begin
   InitData(HexToBytes(AHexStr));
   lBytes:=NewBytes(CopyData);
   lBio:=lBytes.NewBio;
   IsUnencrypted(lBio);
+end;
+
+{ TSimpleAESFactoryFixture }
+
+procedure TSimpleAESFactoryFixture.KeySizeNameAll;
+var
+  i: TTaurusTLS_AESKeySize;
+
+begin
+  for i:=Low(TTaurusTLS_AESKeySize) to High(TTaurusTLS_AESKeySize) do
+    Assert.AreEqual(TSimpleAESEnums.KeySizeName[i],
+      TTaurusTLS_SimpleAESFactory.KeySizeName[i], 'KeySize Name is invalid.');
+end;
+
+procedure TSimpleAESFactoryFixture.EncodeModeNameAll;
+var
+  i: TTaurusTLS_EncodeMode;
+
+begin
+  for i:=Low(TTaurusTLS_EncodeMode) to High(TTaurusTLS_EncodeMode) do
+    Assert.AreEqual(TSimpleAESEnums.EncodeModeName[i],
+      TTaurusTLS_SimpleAESFactory.EncodeModeName[i], 'EncodeMode Name is invalid.');
+end;
+
+procedure TSimpleAESFactoryFixture.NewEncryptor;
+var
+  lKeySize: TTaurusTLS_AESKeySize;
+  lEncodeMode: TTaurusTLS_EncodeMode;
+  lEncryptor: TTaurusTLS_CustomEncryptor;
+
+begin
+  lKeySize:=TSimpleAESEnums.KeySize[AKeySizeName];
+  lEncodeMode:=TSimpleAESEnums.EncodeMode[AEncodeMode];
+  lEncryptor:=nil;
+  try
+    lEncryptor:=TTaurusTLS_SimpleAESFactory.NewEncryptor(lKeySize, lEncodeMode);
+    Assert.IsNotNull(lEncryptor, 'NewEncryptor failed to create Encryptor instance');
+    Assert.InheritsFrom(lEncryptor.ClassType, TTaurusTLS_SimpleAESEncryptor,
+      'Encyptor instance inherits from a unexpected class.');
+    Assert.AreEqual(TSimpleAESEnums.KeySizeInt[lKeySize], lEncryptor.KeyLen*8,
+      'Invalid Encryptor Cipher KeyLen.');
+    Assert.AreEqual<TIdC_INT>(TIdC_INT(lEncodeMode), lEncryptor.Mode,
+      'Invalid Encryptor Cipher EncodeMode.');
+  finally
+    lEncryptor.Free;
+  end;
+end;
+
+procedure TSimpleAESFactoryFixture.SetDefaultCipher(AKeySizeName,
+  AEncodeMode: string);
+var
+  lKeySize: TTaurusTLS_AESKeySize;
+  lEncodeMode: TTaurusTLS_EncodeMode;
+
+begin
+  lKeySize:=TSimpleAESEnums.KeySize[AKeySizeName];
+  lEncodeMode:=TSimpleAESEnums.EncodeMode[AEncodeMode];
+  TTaurusTLS_SimpleAESFactory.SetDefaultCipher(lKeySize, lEncodeMode);
+  Assert.AreEqual<TTaurusTLS_AESKeySize>(lKeySize,
+    TTaurusTLS_SimpleAESFactory.DefaultKeySize, 'DefaultKeySize was not updated.');
+  Assert.AreEqual<TTaurusTLS_EncodeMode>(lEncodeMode,
+    TTaurusTLS_SimpleAESFactory.DefaultEncodeMode, 'DefaultKeySize was not updated.');
+end;
+
+procedure TSimpleAESFactoryFixture.NewEncyptorDefault(AKeySizeName,
+  AEncodeMode: string);
+var
+  lEncryptor: TTaurusTLS_CustomEncryptor;
+  lKeySize: TTaurusTLS_AESKeySize;
+  lEncodeMode: TTaurusTLS_EncodeMode;
+
+begin
+  lEncryptor:=nil;
+  try
+    SetDefaultCipher(AKeySizeName, AEncodeMode);
+    lEncryptor:=TTaurusTLS_SimpleAESFactory.NewEncryptor;
+    lKeySize:=TSimpleAESEnums.KeySize[AKeySizeName];
+    lEncodeMode:=TSimpleAESEnums.EncodeMode[AEncodeMode];
+    Assert.AreEqual(TSimpleAESEnums.KeySizeInt[lKeySize], lEncryptor.KeyLen*8,
+      'Invalid Encryptor Cipher KeyLen.');
+    Assert.AreEqual<TIdC_INT>(TIdC_INT(lEncodeMode), lEncryptor.Mode,
+      'Invalid Encryptor Cipher EncodeMode.');
+  finally
+    lEncryptor.Free;
+  end;
 end;
 
 initialization
@@ -935,5 +1102,6 @@ initialization
   TDUnitX.RegisterTestFixture(TPlainBytesFixture);
   TDUnitX.RegisterTestFixture(TWipingBytesFixture);
   TDUnitX.RegisterTestFixture(TEnryptedBytesFixture);
+  TDUnitX.RegisterTestFixture(TSimpleAESFactoryFixture);
   
 end.

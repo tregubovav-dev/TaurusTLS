@@ -189,15 +189,17 @@ type
   end;
 
   TTaurusTLS_AESKeySize = (aks128, aks192, aks256);
-  TTaurusTLS_EncoderMode = (emCBC=EVP_CIPH_CBC_MODE, emCFB=EVP_CIPH_CFB_MODE,
-    emOFB=EVP_CIPH_OFB_MODE, emCTR=EVP_CIPH_CTR_MODE);
+  TTaurusTLS_EncodeModeWide = (emStream=EVP_CIPH_STREAM_CIPHER, emECB=EVP_CIPH_ECB_MODE,
+    emCBC=EVP_CIPH_CBC_MODE, emCFB=EVP_CIPH_CFB_MODE, emOFB=EVP_CIPH_OFB_MODE,
+    emCTR=EVP_CIPH_CTR_MODE, emGCM=EVP_CIPH_GCM_MODE, emCCM=EVP_CIPH_CCM_MODE);
+  TTaurusTLS_EncodeMode = emCBC..emCTR;
 
   TTaurusTLS_SimpleAESEncryptor = class(TTaurusTLS_CustomEncryptor)
     class function BuildCipherName(AKeySize: TTaurusTLS_AESKeySize;
-      AEncoderMode: TTaurusTLS_EncoderMode): string; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      AEncoderMode: TTaurusTLS_EncodeMode): string; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
   public
     constructor Create(AKeySize: TTaurusTLS_AESKeySize;
-      AEncoderMode: TTaurusTLS_EncoderMode);
+      AEncoderMode: TTaurusTLS_EncodeMode);
     procedure Encrypt(const APlain: TBytes; var ASecret: TBytes); override;
     procedure Decrypt(const ASecret: TBytes; var APlain: TBytes); override;
   end;
@@ -212,22 +214,23 @@ type
 {$ENDIF}
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} private
     FKeySize: TTaurusTLS_AESKeySize;
-    FEncoderMode: TTaurusTLS_EncoderMode;
-    class function GetEncoderMode: TTaurusTLS_EncoderMode; static;
+    FEncodeMode: TTaurusTLS_EncodeMode;
+    class function GetEncoderMode: TTaurusTLS_EncodeMode; static;
     class function GetKeySize: TTaurusTLS_AESKeySize; static;
-    class function GetEncodingModeName(AEncoderMode: TTaurusTLS_EncoderMode): string;
+    class function GetEncodingModeName(AEncoderMode: TTaurusTLS_EncodeMode): string;
       static; {$IFDEF USE_INLINE}inline;{$ENDIF}
     class function GetKeySizeName(AKeySize: TTaurusTLS_AESKeySize): string;
       static; {$IFDEF USE_INLINE}inline;{$ENDIF}
   protected const
+    // DO NOT LOCALIZE
     cKeySizes: array[TTaurusTLS_AESKeySize] of string = ('128','192','256');
-    cEncoderModes: array[TTaurusTLS_EncoderMode] of string =
+    cEncoderModes: array[TTaurusTLS_EncodeMode] of string =
       ('CBC','CFB','OFB','CTR');
     cDefaultKey = aks192;
     cDefaultEncoder = emCFB;
   protected
     class function BuildCipherName(AKeySize: TTaurusTLS_AESKeySize;
-      AEncoderMode: TTaurusTLS_EncoderMode): string; static;
+      AEncoderMode: TTaurusTLS_EncodeMode): string; static;
       {$IFDEF USE_INLINE}inline;{$ENDIF}
     class procedure BeginRead; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
     class procedure BeginWrite; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
@@ -240,20 +243,20 @@ type
     class constructor Create;
     class destructor Destroy;
     class procedure SetDefaultCipher(AKeySize: TTaurusTLS_AESKeySize;
-      AEncoderMode: TTaurusTLS_EncoderMode);
+      AEncoderMode: TTaurusTLS_EncodeMode);
     constructor Create(AKeySize: TTaurusTLS_AESKeySize;
-      AEncoderMode: TTaurusTLS_EncoderMode);
-    class function NewEncryptDecrypt: TTaurusTLS_CustomEncryptor; overload;
+      AEncoderMode: TTaurusTLS_EncodeMode);
+    class function NewEncryptor: TTaurusTLS_CustomEncryptor; overload;
       static; {$IFDEF USE_INLINE}inline;{$ENDIF}
-    class function NewEncryptDecrypt(AKeySize: TTaurusTLS_AESKeySize;
-      AEncoderMode: TTaurusTLS_EncoderMode): TTaurusTLS_CustomEncryptor;
+    class function NewEncryptor(AKeySize: TTaurusTLS_AESKeySize;
+      AEncoderMode: TTaurusTLS_EncodeMode): TTaurusTLS_CustomEncryptor;
       overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
 
-    class property KeySize: TTaurusTLS_AESKeySize read GetKeySize;
+    class property DefaultKeySize: TTaurusTLS_AESKeySize read GetKeySize;
     class property KeySizeName[AKeySize: TTaurusTLS_AESKeySize]: string
       read GetKeySizeName;
-    class property EncoderMode: TTaurusTLS_EncoderMode read GetEncoderMode;
-    class property EncoderModeName[AEncoderMode: TTaurusTLS_EncoderMode]: string
+    class property DefaultEncodeMode: TTaurusTLS_EncodeMode read GetEncoderMode;
+    class property EncodeModeName[AEncoderMode: TTaurusTLS_EncodeMode]: string
       read GetEncodingModeName;
   end;
 
@@ -280,7 +283,7 @@ type
       AEncryptor: TTaurusTLS_CustomEncryptor = nil):ITaurusTLS_Bytes;
       overload; static;
     class function LoadFromStream(const AStream: TStream; AWipeSrcMem: boolean;
-      AKeySize: TTaurusTLS_AESKeySize; AEncodeMode: TTaurusTLS_EncoderMode):
+      AKeySize: TTaurusTLS_AESKeySize; AEncodeMode: TTaurusTLS_EncodeMode):
       ITaurusTLS_Bytes; overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
   end;
 
@@ -727,7 +730,7 @@ end;
 { TTaurusTLS_SimpleAESEncryptor }
 
 constructor TTaurusTLS_SimpleAESEncryptor.Create(AKeySize: TTaurusTLS_AESKeySize;
-  AEncoderMode: TTaurusTLS_EncoderMode);
+  AEncoderMode: TTaurusTLS_EncodeMode);
 begin
   inherited Create(TTaurusTLS_Cipher.Create(
     BuildCipherName(AKeySize, AEncoderMode)));
@@ -746,7 +749,7 @@ begin
 end;
 
 class function TTaurusTLS_SimpleAESEncryptor.BuildCipherName(
-  AKeySize: TTaurusTLS_AESKeySize; AEncoderMode: TTaurusTLS_EncoderMode): string;
+  AKeySize: TTaurusTLS_AESKeySize; AEncoderMode: TTaurusTLS_EncodeMode): string;
 begin
   Result:=TTaurusTLS_SimpleAESFactory.BuildCipherName(AKeySize, AEncoderMode);
 end;
@@ -763,10 +766,10 @@ begin
 end;
 
 constructor TTaurusTLS_SimpleAESFactory.Create(AKeySize: TTaurusTLS_AESKeySize;
-  AEncoderMode: TTaurusTLS_EncoderMode);
+  AEncoderMode: TTaurusTLS_EncodeMode);
 begin
   FKeySize:=AKeySize;
-  FEncoderMode:=AEncoderMode;
+  FEncodeMode:=AEncoderMode;
 end;
 
 class destructor TTaurusTLS_SimpleAESFactory.Destroy;
@@ -777,7 +780,7 @@ end;
 
 class function TTaurusTLS_SimpleAESFactory.BuildCipherName(
   AKeySize: TTaurusTLS_AESKeySize;
-  AEncoderMode: TTaurusTLS_EncoderMode): string;
+  AEncoderMode: TTaurusTLS_EncodeMode): string;
 begin
   Result:=Format('AES-%s-%s',
     [cKeySizes[AKeySize], cEncoderModes[AEncoderMode]]);
@@ -833,12 +836,12 @@ end;
 
 class function TTaurusTLS_SimpleAESFactory.GetKeySize: TTaurusTLS_AESKeySize;
 begin
-  Result:=Factory.KeySize;
+  Result:=GetFactory.FKeySize;
 end;
 
-class function TTaurusTLS_SimpleAESFactory.GetEncoderMode: TTaurusTLS_EncoderMode;
+class function TTaurusTLS_SimpleAESFactory.GetEncoderMode: TTaurusTLS_EncodeMode;
 begin
-  Result:=Factory.EncoderMode;
+  Result:=GetFactory.FEncodeMode;
 end;
 
 class function TTaurusTLS_SimpleAESFactory.GetKeySizeName(
@@ -848,12 +851,12 @@ begin
 end;
 
 class function TTaurusTLS_SimpleAESFactory.GetEncodingModeName(
-  AEncoderMode: TTaurusTLS_EncoderMode): string;
+  AEncoderMode: TTaurusTLS_EncodeMode): string;
 begin
   Result:=cEncoderModes[AEncoderMode];
 end;
 
-class function TTaurusTLS_SimpleAESFactory.NewEncryptDecrypt: TTaurusTLS_CustomEncryptor;
+class function TTaurusTLS_SimpleAESFactory.NewEncryptor: TTaurusTLS_CustomEncryptor;
 var
   lFactory: TTaurusTLS_SimpleAESFactory;
 
@@ -861,29 +864,24 @@ begin
   BeginRead;
   try
     lFactory:=FFactory;
-    Result:=NewEncryptDecrypt(lFactory.FKeySize, lFactory.FEncoderMode);
+    Result:=NewEncryptor(lFactory.FKeySize, lFactory.FEncodeMode);
   finally
     EndRead;
   end;
 end;
 
-class function TTaurusTLS_SimpleAESFactory.NewEncryptDecrypt(
+class function TTaurusTLS_SimpleAESFactory.NewEncryptor(
   AKeySize: TTaurusTLS_AESKeySize;
-  AEncoderMode: TTaurusTLS_EncoderMode): TTaurusTLS_CustomEncryptor;
+  AEncoderMode: TTaurusTLS_EncodeMode): TTaurusTLS_CustomEncryptor;
 var
   lFactory: TTaurusTLS_SimpleAESFactory;
 
 begin
-  BeginRead;
-  try
-    Result:=TTaurusTLS_SimpleAESEncryptor.Create(AKeySize, AEncoderMode);
-  finally
-    EndRead;
-  end;
+  Result:=TTaurusTLS_SimpleAESEncryptor.Create(AKeySize, AEncoderMode);
 end;
 
 class procedure TTaurusTLS_SimpleAESFactory.SetDefaultCipher(
-  AKeySize: TTaurusTLS_AESKeySize; AEncoderMode: TTaurusTLS_EncoderMode);
+  AKeySize: TTaurusTLS_AESKeySize; AEncoderMode: TTaurusTLS_EncodeMode);
 begin
   BeginWrite;
   try
@@ -988,7 +986,7 @@ begin
   if not Assigned(AStream) then
     Exit;
   if not Assigned(AEncryptor) then
-    AEncryptor:=TTaurusTLS_SimpleAESFactory.NewEncryptDecrypt;
+    AEncryptor:=TTaurusTLS_SimpleAESFactory.NewEncryptor;
   lSize:= AStream.Size;
   if AStream is TBytesStream then
   begin
@@ -1012,10 +1010,10 @@ end;
 
 class function TTaurusTLS_EncryptedBytesHelper.LoadFromStream(
   const AStream: TStream; AWipeSrcMem: boolean; AKeySize: TTaurusTLS_AESKeySize;
-  AEncodeMode: TTaurusTLS_EncoderMode): ITaurusTLS_Bytes;
+  AEncodeMode: TTaurusTLS_EncodeMode): ITaurusTLS_Bytes;
 begin
   LoadFromStream(AStream, AWipeSrcMem,
-    TTaurusTLS_SimpleAESFactory.NewEncryptDecrypt(AKeySize, AEncodeMode));
+    TTaurusTLS_SimpleAESFactory.NewEncryptor(AKeySize, AEncodeMode));
 end;
 
 end.

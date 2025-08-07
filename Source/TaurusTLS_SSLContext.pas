@@ -40,39 +40,34 @@ type
 
   TTaurusTLS_CustomEncryptor = class;
 
-  TTaurusTLS_CustomBytes = class abstract(TInterfacedObject, ITaurusTLS_Bytes)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected type
+  TTaurusTLS_Bytes = class (TInterfacedObject, ITaurusTLS_Bytes)
+    protected type
+      TBio = class(TInterfacedObject, ITaurusTLS_Bio)
+      private
+        FOwner: ITaurusTLS_Bytes;
+        FBytes: TBytes;
+        FBio: PBIO;
+    {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
+        function GetBio: PBIO;
+      public
+        constructor Create(ABytes: TBytes; AOwner: TTaurusTLS_Bytes);
+        destructor Destroy; override;
+      end;
 
-    TBio = class(TInterfacedObject, ITaurusTLS_Bio)
-  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} private
-      FOwner: ITaurusTLS_Bytes;
-      FBytes: TBytes;
-      FBio: PBIO;
-  {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-      function GetBio: PBIO; {$IFDEF USE_INLINE}inline;{$ENDIF}
-    public
-      constructor Create(ABytes: TBytes; AOwner: TTaurusTLS_CustomBytes);
-      destructor Destroy; override;
-    end;
-
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    function GetBytes: TBytes; virtual; abstract;
-    function NewBio: ITaurusTLS_Bio; virtual; abstract;
-  end;
-
-  TTaurusTLS_PlainBytes = class(TTaurusTLS_CustomBytes)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    FData: TBytes;
-    function GetBytes: TBytes; override;
-    function NewBio: ITaurusTLS_Bio; override;
-
+  private
+    FBytes: TBytes;
+  protected
+    function GetBytes: TBytes; virtual;
+    function NewBio: ITaurusTLS_Bio; virtual;
+    procedure SetBytes(const ABytes: TBytes); virtual;
   public
-    constructor Create(const AData: TBytes); overload;
+    constructor Create(const ABytes: TBytes); overload;
     constructor Create(ASize: TIdC_SIZET); overload;
   end;
 
-  TTaurusTLS_WipingBytes = class(TTaurusTLS_PlainBytes)
-{$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
+//  TTaurusTLS_WipingBytes = class(TTaurusTLS_PlainBytes)
+  TTaurusTLS_WipingBytes = class(TTaurusTLS_Bytes)
+  protected
     procedure WipeData; overload;
   public
     class procedure WipeData(var AData: TBytes; AChar: Char = #0); overload;
@@ -82,7 +77,7 @@ type
 
   ITaurusTLS_BytesHost = interface
   ['{D4C93767-9DFB-4ADE-A8A0-4586CEB0A135}']
-    procedure ReleaseNotify(const ASender: TTaurusTLS_CustomBytes);
+    procedure ReleaseNotify(const ASender: TTaurusTLS_Bytes);
   end;
 
   TTaurusTLS_EncryptedBytes = class(TTaurusTLS_WipingBytes, ITaurusTLS_BytesHost)
@@ -102,11 +97,12 @@ type
 
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     function NewBio: ITaurusTLS_Bio; override;
-    procedure ReleaseNotify(const ASender: TTaurusTLS_CustomBytes);
+    procedure ReleaseNotify(const ASender: TTaurusTLS_Bytes);
 
     function DecryptBytes: TBytes;
     function EncrypBytes(ASrc: TBytes): TBytes;
     function GetPlainBytes: ITaurusTLS_Bytes;
+    procedure SetBytes(const ABytes: TBytes); override;
   public
     constructor Create(ABytes: TBytes; AEncryptor: TTaurusTLS_CustomEncryptor);
     destructor Destroy; override;
@@ -260,21 +256,24 @@ type
       read GetEncodingModeName;
   end;
 
-  TTaurusTLS_CustomBytesHelper = class helper for TTaurusTLS_CustomBytes
+  TTaurusTLS_BytesHelper = class helper for TTaurusTLS_Bytes
   private
     class function NewBytes(ASize: NativeUInt): TBytes;
       static; {$IFDEF USE_INLINE}inline;{$ENDIF}
   public
-    class function LoadFromString(const ASrc: string): ITaurusTLS_Bytes;
-      overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
-    class function LoadFromString(const ASrc: RawByteString): ITaurusTLS_Bytes;
-      overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
-    class function LoadFromString(const ASrc: PIdAnsiChar): ITaurusTLS_Bytes;
-      overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
-    class function LoadFromBytes(const ASrc: TBytes): ITaurusTLS_Bytes;
-      static; {$IFDEF USE_INLINE}inline;{$ENDIF}
-    class function LoadFromStream(const AStream: TStream): ITaurusTLS_Bytes;
-      static; {$IFDEF USE_INLINE}inline;{$ENDIF}
+    class function LoadFromString<T: TTaurusTLS_Bytes, constructor>(const ASrc: string):
+      ITaurusTLS_Bytes; overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
+    class function LoadFromRawByteString<T: TTaurusTLS_Bytes, constructor>
+      (const ASrc: RawByteString): ITaurusTLS_Bytes; overload; static;
+      {$IFDEF USE_INLINE}inline;{$ENDIF}
+    class function LoadFromPChar<T: TTaurusTLS_Bytes, constructor>(
+      const ASrc: PIdAnsiChar): ITaurusTLS_Bytes; overload; static;
+      {$IFDEF USE_INLINE}inline;{$ENDIF}
+    class function LoadFromBytes<T: TTaurusTLS_Bytes, constructor>(
+      const ASrc: TBytes): ITaurusTLS_Bytes; overload; static;
+      {$IFDEF USE_INLINE}inline;{$ENDIF}
+    class function LoadFromStream<T: TTaurusTLS_Bytes, constructor>(const AStream: TStream):
+      ITaurusTLS_Bytes; overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
   end;
 
   TTaurusTLS_EncryptedBytesHelper = class helper for TTaurusTLS_EncryptedBytes
@@ -287,8 +286,9 @@ type
       ITaurusTLS_Bytes; overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
   end;
 
-  EETaurusTLSCipherError = class(ETaurusTLSAPICryptoError);
-  EETaurusTLSEncryptorError = class(ETaurusTLSAPICryptoError);
+  ETaurusTLSIBytesError = class(ETaurusTLSError);
+  ETaurusTLSCipherError = class(ETaurusTLSAPICryptoError);
+  ETaurusTLSEncryptorError = class(ETaurusTLSAPICryptoError);
 
 (* --- To transfer consts to the TaurusTLSHeaders_evperr.pas --- *)
 const
@@ -296,6 +296,8 @@ const
 
 (* --- To transfer resourcestrings to the TaurusTLS_ResourceStrings.pas --- *)
 resourcestring
+  RIB_Bytes_CanNotChange = 'Unable to set a data to the ITaurusTLS_Bytes instance.'+
+    'It was initialized already.';
   REVP_Cipher_NoCipherProvided = 'Unable to initializate Cipher instance. '+
     'No OpenSSL Cipher provided.';
   REVP_Cipher_ZeroKeyLen = 'Unable to initializate Cipher instance with zero Key length.';
@@ -328,27 +330,65 @@ end;
 
 { TTaurusTLS_CustomBytes.TBioIntf }
 
-constructor TTaurusTLS_CustomBytes.TBio.Create(ABytes: TBytes;
-  AOwner: TTaurusTLS_CustomBytes);
+constructor TTaurusTLS_Bytes.TBio.Create(ABytes: TBytes;
+  AOwner: TTaurusTLS_Bytes);
 begin
   FOwner:=AOwner;
   FBytes:=ABytes;
 end;
 
-destructor TTaurusTLS_CustomBytes.TBio.Destroy;
+destructor TTaurusTLS_Bytes.TBio.Destroy;
 begin
   if Assigned(FBio) then
     BIO_free(FBio);
   inherited;
 end;
 
-function TTaurusTLS_CustomBytes.TBio.GetBio: PBIO;
+function TTaurusTLS_Bytes.TBio.GetBio: PBIO;
 begin
   if not Assigned(FBio) and (Length(FBytes) > 0) then
     FBIO:=BIO_new_mem_buf(FBytes[0], Length(FBytes));
   Result:=FBIO;
 end;
 
+{ TTaurusTLS_Bytes }
+
+constructor TTaurusTLS_Bytes.Create(const ABytes: TBytes);
+begin
+  Create;
+  SetBytes(ABytes);
+end;
+
+constructor TTaurusTLS_Bytes.Create(ASize: TIdC_SIZET);
+var
+  lBytes: TBytes;
+
+begin
+  SetLength(lBytes, ASize);
+  Create(lBytes);
+end;
+
+procedure TTaurusTLS_Bytes.SetBytes(const ABytes: TBytes);
+begin
+  if Length(FBytes) <> 0 then
+    ETaurusTLSIBytesError.RaiseWithMessage('Error Message');
+  FBytes:=ABytes;
+end;
+
+function TTaurusTLS_Bytes.GetBytes: TBytes;
+begin
+  Result:=FBytes;
+end;
+
+function TTaurusTLS_Bytes.NewBio: ITaurusTLS_Bio;
+begin
+  if Length(FBytes) > 0 then
+    Result:=TBio.Create(FBytes, Self)
+  else
+    Result:=nil;
+end;
+
+(*
 { TTaurusTLS_PlainBytes }
 
 constructor TTaurusTLS_PlainBytes.Create(const AData: TBytes);
@@ -378,6 +418,7 @@ begin
   else
     Result:=nil;
 end;
+*)
 
 { TTaurusTLS_WipedBytes }
 
@@ -389,7 +430,7 @@ end;
 
 procedure TTaurusTLS_WipingBytes.WipeData;
 begin
-  WipeData(FData);
+  WipeData(FBytes);
 end;
 
 class procedure TTaurusTLS_WipingBytes.WipeData(var AData: TBytes; AChar: Char);
@@ -412,7 +453,7 @@ begin
   Assert(Assigned(AHost),
     ClassName+'.Create: parameter AHost must not be  ''nil''.');
   FHost:=AHost;
-  inherited Create(Abytes);
+  inherited Create(ABytes);
 end;
 
 destructor TTaurusTLS_EncryptedBytes.TPlainBytes.Destroy;
@@ -435,7 +476,7 @@ end;
 
 function TTaurusTLS_EncryptedBytes.DecryptBytes: TBytes;
 begin
-  FEnv.Decrypt(FData, Result);
+  FEnv.Decrypt(FBytes, Result);
 end;
 
 destructor TTaurusTLS_EncryptedBytes.Destroy;
@@ -474,10 +515,10 @@ begin
   Result:=GetPlainBytes.NewBio;
 end;
 
-procedure TTaurusTLS_EncryptedBytes.ReleaseNotify(const ASender: TTaurusTLS_CustomBytes);
+procedure TTaurusTLS_EncryptedBytes.ReleaseNotify(const ASender: TTaurusTLS_Bytes);
 {$IFDEF DEBUG}
 var
-  lOldBytes: TTaurusTLS_CustomBytes;
+  lOldBytes: TTaurusTLS_Bytes;
 {$ENDIF}
 begin
   if ASender <> FPlainBytes then
@@ -487,6 +528,19 @@ begin
 {$ENDIF}
   TInterlocked.CompareExchange(Pointer(FPlainBytes), nil,
     Pointer(ASender));
+end;
+
+procedure TTaurusTLS_EncryptedBytes.SetBytes(const ABytes: TBytes);
+var
+  lBytes: TBytes;
+
+begin
+  lBytes:=ABytes;
+  try
+    inherited SetBytes(EncrypBytes(ABytes));
+  finally
+    WipeData(lBytes);
+  end;
 end;
 
 { TOSSLCipher }
@@ -508,7 +562,7 @@ constructor TTaurusTLS_Cipher.Create(ACipher: PEVP_CIPHER; AOwnCipher: boolean);
 begin
   inherited Create;
   if not Assigned(ACipher) then
-     EETaurusTLSCipherError.RaiseWithMessage(REVP_Cipher_NoCipherProvided);
+     ETaurusTLSCipherError.RaiseWithMessage(REVP_Cipher_NoCipherProvided);
   FCipher:=ACipher;
   FOwnCipher:=AOwnCipher;
   FKeyLen:=EVP_CIPHER_get_key_length(ACipher);
@@ -574,7 +628,7 @@ constructor TTaurusTLS_CustomEncryptor.Create(ACipher: TTaurusTLS_Cipher);
 begin
   inherited Create;
   if not Assigned(ACipher) then
-    raise EETaurusTLSEncryptorError.Create(REVP_EncryptDecrypt_InitNoCipher);
+    raise ETaurusTLSEncryptorError.Create(REVP_EncryptDecrypt_InitNoCipher);
   FCipher:=ACipher;
   FKey:=ACipher.NewKey;
   FIV:=ACipher.NewIV;
@@ -601,7 +655,7 @@ var
 
   procedure RaiseException;
   begin
-    EETaurusTLSEncryptorError.RaiseException(REVP_Encryptor_Encrypt_Error);
+    ETaurusTLSEncryptorError.RaiseException(REVP_Encryptor_Encrypt_Error);
   end;
 
 begin
@@ -639,7 +693,7 @@ var
 
   procedure RaiseException;
   begin
-    EETaurusTLSEncryptorError.RaiseException(REVP_Encryptor_Decrypt_Error);
+    ETaurusTLSEncryptorError.RaiseException(REVP_Encryptor_Decrypt_Error);
   end;
 
 begin
@@ -714,7 +768,7 @@ function TTaurusTLS_CustomEncryptor.NewContext: PEVP_CIPHER_CTX;
 begin
   Result:=EVP_CIPHER_CTX_new;
   if not Assigned(Result) then
-    EETaurusTLSEncryptorError.RaiseException(REVP_Encryptor_CtxInitError);
+    ETaurusTLSEncryptorError.RaiseException(REVP_Encryptor_CtxInitError);
 end;
 
 class procedure TTaurusTLS_CustomEncryptor.ReleaseCipher(ACipher: PEVP_CIPHER);
@@ -894,41 +948,53 @@ end;
 
 { TTaurusTLS_CustomBytesHelper }
 
-class function TTaurusTLS_CustomBytesHelper.NewBytes(ASize: NativeUInt): TBytes;
+class function TTaurusTLS_BytesHelper.NewBytes(ASize: NativeUInt): TBytes;
 begin
   if ASize > 0 then
     SetLength(Result, ASize);
 end;
 
-class function TTaurusTLS_CustomBytesHelper.LoadFromBytes(
+class function TTaurusTLS_BytesHelper.LoadFromBytes<T>(
   const ASrc: TBytes): ITaurusTLS_Bytes;
+var
+  lResult: T;
+
 begin
-  Result:=TTaurusTLS_PlainBytes.Create(ASrc);
+  Result:=nil;
+  lResult:=nil;
+  try
+    lResult:=T.Create;
+    lResult.SetBytes(ASrc);
+  except
+    lResult.Free;
+  end;
+  Result:=lResult;
 end;
 
-class function TTaurusTLS_CustomBytesHelper.LoadFromString(
+class function TTaurusTLS_BytesHelper.LoadFromString<T>(
   const ASrc: string): ITaurusTLS_Bytes;
 begin
-  Result:=LoadFromString(RawByteString(ASrc));
+  Result:=LoadFromRawByteString<T>(RawByteString(ASrc));
 end;
 
-class function TTaurusTLS_CustomBytesHelper.LoadFromString(
+class function TTaurusTLS_BytesHelper.LoadFromRawByteString<T>(
   const ASrc: RawByteString): ITaurusTLS_Bytes;
 begin
-  Result:=LoadFromString(PIdAnsiChar(ASrc));
+  Result:=LoadFromPChar<T>(PIdAnsiChar(ASrc));
 end;
 
-class function TTaurusTLS_CustomBytesHelper.LoadFromString(
+class function TTaurusTLS_BytesHelper.LoadFromPchar<T>(
   const ASrc: PIdAnsiChar): ITaurusTLS_Bytes;
 begin
-  Result:=TTaurusTLS_PlainBytes(BytesOf(ASrc));
+  Result:=LoadFromBytes<T>(BytesOf(ASrc));
 end;
 
-class function TTaurusTLS_CustomBytesHelper.LoadFromStream(
+class function TTaurusTLS_BytesHelper.LoadFromStream<T>(
   const AStream: TStream): ITaurusTLS_Bytes;
 var
   lStream: TBytesStream;
   lBytes: TBytes;
+  lResult: T;
 
 begin
   if not Assigned(AStream) then
@@ -948,7 +1014,14 @@ begin
       lStream.Free;
     end;
   end;
-  TTaurusTLS_PlainBytes.Create(lBytes);
+  lResult:=nil;
+  try
+    lResult:=T.Create;
+    lResult.SetBytes(lBytes);
+    Result:=lResult;
+  except
+    lResult.Free;
+  end;
 end;
 
 type

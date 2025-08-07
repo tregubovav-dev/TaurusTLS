@@ -82,7 +82,7 @@ type
 //  TEncodeMode = TTaurusTLS_EncodeMode;
 
   [TestFixture]
-  [Category('EncryptDecrypt')]
+  [Category('Encryptor')]
   TSimpleAESEncryptorFixture = class(TOsslBaseFixture)
   private var
     FKeySizeNames: array[TTaurusTLS_AESKeySize] of string;
@@ -144,8 +144,8 @@ type
   end;
 
   [TestFixture]
-  [Category('PlainBytes')]
-  TPlainBytesFixture = class(TCustomBytesFixture)
+  [Category('Bytes')]
+  TBytesFixture = class(TCustomBytesFixture)
   public
     [AutoNameTestCase('e2')]
     [AutoNameTestCase('026ca6b4d0761ebfcd933a3f7b379e')]
@@ -252,7 +252,7 @@ type
 
   [TestFixture]
   [Category('SimpleAESFactory')]
-  TSimpleAESFactoryFixture = class(TCustomBytesFixture)
+  TSimpleAESFactoryFixture = class(TOsslBaseFixture)
   public
     [Test]
     procedure KeySizeNameAll;
@@ -271,6 +271,23 @@ type
     [AutoNameTestCase('192,CBC')]
     [AutoNameTestCase('256,CFB')]
     procedure NewEncyptorDefault(AKeySizeName, AEncodeMode: string);
+  end;
+
+  [TestFixture]
+  [Category('BytesHelpers')]
+  TBytesHelperFixture = class(TCustomBytesFixture)
+    [AutoNameTestCase('026ca6b4d0761ebfcd933a3f7b379e')]
+    procedure LoadFromBytes(AHexStr: string);
+    [AutoNameTestCase('0123456789ABCDEF')]
+    procedure LoadFromPAnsiStr(AData: RawByteString);
+    [AutoNameTestCase('0123456789ABCDEF')]
+    procedure LoadFromString(AData: string);
+
+    [AutoNameTestCase('0123456789ABCDEF')]
+    procedure LoadFromMemStream(AHexStr: string);
+    [AutoNameTestCase('0123456789ABCDEF')]
+    procedure LoadFromByteStream(AHexStr: string);
+
   end;
 
 implementation
@@ -758,59 +775,59 @@ end;
 
 { TPlainBytesFixture }
 
-procedure TPlainBytesFixture.BytesSame(AHexStr: string);
+procedure TBytesFixture.BytesSame(AHexStr: string);
 begin
   InitData(HexToBytes(AHexStr));
-  TestBytesIntf(TTaurusTLS_PlainBytes.Create(Data));
+  TestBytesIntf(TTaurusTLS_Bytes.Create(Data));
 end;
 
-procedure TPlainBytesFixture.BytesSame(ASize: NativeUInt);
+procedure TBytesFixture.BytesSame(ASize: NativeUInt);
 begin
   InitData(ASize);
-  TestBytesIntf(TTaurusTLS_PlainBytes.Create(Data));
+  TestBytesIntf(TTaurusTLS_Bytes.Create(Data));
 end;
 
-procedure TPlainBytesFixture.BytesCopy(AHexStr: string);
+procedure TBytesFixture.BytesCopy(AHexStr: string);
 begin
   InitData(HexToBytes(AHexStr));
-  TestBytesIntf(TTaurusTLS_PlainBytes.Create(CopyData));
+  TestBytesIntf(TTaurusTLS_Bytes.Create(CopyData));
 end;
 
-procedure TPlainBytesFixture.BytesCopy(ASize: NativeUInt);
+procedure TBytesFixture.BytesCopy(ASize: NativeUInt);
 begin
   InitData(ASize);
-  TestBytesIntf(TTaurusTLS_PlainBytes.Create(CopyData));
+  TestBytesIntf(TTaurusTLS_Bytes.Create(CopyData));
 end;
 
-procedure TPlainBytesFixture.BioNull(ASize: NativeUInt);
+procedure TBytesFixture.BioNull(ASize: NativeUInt);
 begin
   InitData(0);
-  Assert.IsNull((TTaurusTLS_PlainBytes.Create(Data) as ITaurusTLS_Bytes).NewBio,
+  Assert.IsNull((TTaurusTLS_Bytes.Create(Data) as ITaurusTLS_Bytes).NewBio,
     'Excpected ''nil'' Bio.');
 end;
 
-procedure TPlainBytesFixture.BioSame(AHexStr: string);
+procedure TBytesFixture.BioSame(AHexStr: string);
 begin
   InitData(HexToBytes(AHexStr));
-  TestBioIntf((TTaurusTLS_PlainBytes.Create(Data) as ITaurusTLS_Bytes).NewBio);
+  TestBioIntf((TTaurusTLS_Bytes.Create(Data) as ITaurusTLS_Bytes).NewBio);
 end;
 
-procedure TPlainBytesFixture.BioSame(ASize: NativeUInt);
+procedure TBytesFixture.BioSame(ASize: NativeUInt);
 begin
   InitData(ASize);
-  TestBioIntf((TTaurusTLS_PlainBytes.Create(Data) as ITaurusTLS_Bytes).NewBio);
+  TestBioIntf((TTaurusTLS_Bytes.Create(Data) as ITaurusTLS_Bytes).NewBio);
 end;
 
-procedure TPlainBytesFixture.BioCopy(ASize: NativeUInt);
+procedure TBytesFixture.BioCopy(ASize: NativeUInt);
 begin
   InitData(ASize);
-  TestBioIntf((TTaurusTLS_PlainBytes.Create(CopyData) as ITaurusTLS_Bytes).NewBio);
+  TestBioIntf((TTaurusTLS_Bytes.Create(CopyData) as ITaurusTLS_Bytes).NewBio);
 end;
 
-procedure TPlainBytesFixture.BioCopy(AHexStr: string);
+procedure TBytesFixture.BioCopy(AHexStr: string);
 begin
   InitData(HexToBytes(AHexStr));
-  TestBioIntf((TTaurusTLS_PlainBytes.Create(CopyData) as ITaurusTLS_Bytes).NewBio);
+  TestBioIntf((TTaurusTLS_Bytes.Create(CopyData) as ITaurusTLS_Bytes).NewBio);
 end;
 
 { TWipingBytesFixture }
@@ -1096,12 +1113,113 @@ begin
   end;
 end;
 
+{ TCustomBytesHelperFixture }
+
+procedure TBytesHelperFixture.LoadFromBytes(AHexStr: string);
+var
+  lIBytes: ITaurusTLS_Bytes;
+  lSrc, lBytes: TBytes;
+  lLen: NativeUInt;
+
+begin
+  lSrc:=HexToBytes(AHexStr);
+  lLen:=Length(lSrc);
+  Assert.AreNotEqual<NativeUInt>(0, lLen, 'AData is empty string.');
+  lIBytes:=TTaurusTLS_Bytes.LoadFromBytes<TTaurusTLS_Bytes>(lSrc);
+  lBytes:=lIBytes.Bytes;
+  Assert.AreEqual<NativeUInt>(lLen, Length(lBytes),
+    'Length of AData and lBytes are not equal.');
+  TestData(lSrc, lBytes, lLen);
+end;
+
+procedure TBytesHelperFixture.LoadFromPAnsiStr(AData: RawByteString);
+var
+  lIBytes: ITaurusTLS_Bytes;
+  lBytes: TBytes;
+  lLen: NativeUInt;
+
+begin
+  lLen:=Length(AData);
+  Assert.AreNotEqual<NativeUInt>(0, lLen, 'AData is empty string.');
+  lIBytes:=TTaurusTLS_Bytes.LoadFromString<TTaurusTLS_Bytes>(PIdAnsiChar(AData));
+  lBytes:=lIBytes.Bytes;
+  Assert.AreEqual<NativeUInt>(lLen, Length(lBytes),
+    'Length of AData and lBytes are not equal.');
+  TestData(lBytes, @AData[1], lLen);
+end;
+
+procedure TBytesHelperFixture.LoadFromString(AData: string);
+var
+  lIBytes: ITaurusTLS_Bytes;
+  lBytes: TBytes;
+  lLen: NativeUInt;
+  lBytesStr: string;
+
+begin
+  lLen:=Length(AData);
+  Assert.AreNotEqual<NativeUInt>(0, lLen, 'AData is empty string.');
+  lIBytes:=TTaurusTLS_Bytes.LoadFromString<TTaurusTLS_Bytes>(AData);
+  lBytes:=lIBytes.Bytes;
+  Assert.AreEqual<NativeUInt>(lLen, Length(lBytes),
+    'Length of AData and lBytes are not equal.');
+  lBytesStr:=StringOf(lBytes);
+  Assert.AreEqual(AData, lBytesStr, 'AData and lBytes are not equal.')
+end;
+
+procedure TBytesHelperFixture.LoadFromMemStream(AHexStr: string);
+var
+  lStream: TMemoryStream;
+  lSrcBytes, lBytes: TBytes;
+  lIBytes: ITaurusTLS_Bytes;
+
+begin
+  lSrcBytes:=HexToBytes(AHexStr);
+  lStream:=nil;
+  try
+    lStream:=TMemoryStream.Create;
+    lStream.Write(lSrcBytes, Length(lSrcBytes));
+
+    lIBytes:=TTaurusTLS_Bytes.LoadFromStream<TTaurusTLS_Bytes>(lStream);
+    Assert.IsNotNull(lIBytes, 'Failed to create a ITaurusTLS_Bytes instance '+
+      'from a TStream.');
+    lBytes:=lIBytes.Bytes;
+    TestBytes(lSrcBytes, lBytes);
+  finally
+    lStream.Free;
+  end;
+end;
+
+procedure TBytesHelperFixture.LoadFromByteStream(AHexStr: string);
+var
+  lStream: TBytesStream;
+  lSrcBytes, lBytes: TBytes;
+  lIBytes: ITaurusTLS_Bytes;
+
+begin
+  lSrcBytes:=HexToBytes(AHexStr);
+  lStream:=nil;
+  try
+    lStream:=TBytesStream.Create(lSrcBytes);
+    lStream.Write(lSrcBytes, Length(lSrcBytes));
+
+    lIBytes:=TTaurusTLS_Bytes.LoadFromStream<TTaurusTLS_Bytes>(lStream);
+    Assert.IsNotNull(lIBytes, 'Failed to create a ITaurusTLS_Bytes instance '+
+      'from a TStream.');
+    lBytes:=lIBytes.Bytes;
+    Assert.AreEqual(@lSrcBytes[0], @lBytes[0], 'lSrcBytes and lBytes are not equal. ');
+//    TestBytes(lSrcBytes, lBytes);
+  finally
+    lStream.Free;
+  end;
+end;
+
 initialization
   TDUnitX.RegisterTestFixture(TCipherFixture);
   TDUnitX.RegisterTestFixture(TSimpleAESEncryptorFixture);
-  TDUnitX.RegisterTestFixture(TPlainBytesFixture);
+  TDUnitX.RegisterTestFixture(TBytesFixture);
   TDUnitX.RegisterTestFixture(TWipingBytesFixture);
   TDUnitX.RegisterTestFixture(TEnryptedBytesFixture);
   TDUnitX.RegisterTestFixture(TSimpleAESFactoryFixture);
-  
+  TDUnitX.RegisterTestFixture(TBytesHelperFixture);
+
 end.

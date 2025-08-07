@@ -59,7 +59,7 @@ type
   protected
     function GetBytes: TBytes; virtual;
     function NewBio: ITaurusTLS_Bio; virtual;
-    procedure SetBytes(const ABytes: TBytes); virtual;
+    procedure SetBytes(const ABytes: TBytes); {$IFDEF USE_INLINE}inline;{$ENDIF}
   public
     constructor Create(const ABytes: TBytes); overload;
     constructor Create(ASize: TIdC_SIZET); overload;
@@ -80,7 +80,8 @@ type
     procedure ReleaseNotify(const ASender: TTaurusTLS_Bytes);
   end;
 
-  TTaurusTLS_EncryptedBytes = class(TTaurusTLS_WipingBytes, ITaurusTLS_BytesHost)
+  TTaurusTLS_EncryptedBytes = class(TInterfacedObject, ITaurusTLS_Bytes,
+    ITaurusTLS_BytesHost)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected type
     TPlainBytes = class(TTaurusTLS_WipingBytes)
     {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} private
@@ -89,20 +90,20 @@ type
       constructor Create(ABytes: TBytes; AHost: ITaurusTLS_BytesHost);
       destructor Destroy; override;
     end;
-
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} private
     [volatile]
     FPlainBytes: TPlainBytes;
-    FEnv: TTaurusTLS_CustomEncryptor;
-
+    FEncryptedBytes: TBytes;
+    FEncryptor: TTaurusTLS_CustomEncryptor;
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
-    function NewBio: ITaurusTLS_Bio; override;
+    function GetBytes: TBytes;
+    function NewBio: ITaurusTLS_Bio;
     procedure ReleaseNotify(const ASender: TTaurusTLS_Bytes);
 
     function DecryptBytes: TBytes;
     function EncrypBytes(ASrc: TBytes): TBytes;
     function GetPlainBytes: ITaurusTLS_Bytes;
-    procedure SetBytes(const ABytes: TBytes); override;
+    procedure SetBytes(const ABytes: TBytes);
   public
     constructor Create(ABytes: TBytes; AEncryptor: TTaurusTLS_CustomEncryptor);
     destructor Destroy; override;
@@ -279,7 +280,7 @@ type
   TTaurusTLS_EncryptedBytesHelper = class helper for TTaurusTLS_EncryptedBytes
   public
     class function LoadFromStream(const AStream: TStream; AWipeSrcMem: boolean;
-      AEncryptor: TTaurusTLS_CustomEncryptor = nil):ITaurusTLS_Bytes;
+      AEncryptor: TTaurusTLS_CustomEncryptor = nil): ITaurusTLS_Bytes;
       overload; static;
     class function LoadFromStream(const AStream: TStream; AWipeSrcMem: boolean;
       AKeySize: TTaurusTLS_AESKeySize; AEncodeMode: TTaurusTLS_EncodeMode):
@@ -388,38 +389,6 @@ begin
     Result:=nil;
 end;
 
-(*
-{ TTaurusTLS_PlainBytes }
-
-constructor TTaurusTLS_PlainBytes.Create(const AData: TBytes);
-begin
-  inherited Create;
-  FData:=AData;
-end;
-
-constructor TTaurusTLS_PlainBytes.Create(ASize: TIdC_SIZET);
-var
-  lData: TBytes;
-
-begin
-  SetLength(lData, ASize);
-  Create(lData);
-end;
-
-function TTaurusTLS_PlainBytes.GetBytes: TBytes;
-begin
-  Result:=FData;
-end;
-
-function TTaurusTLS_PlainBytes.NewBio: ITaurusTLS_Bio;
-begin
-  if Length(FData) > 0 then
-    Result:=TBio.Create(FData, Self)
-  else
-    Result:=nil;
-end;
-*)
-
 { TTaurusTLS_WipedBytes }
 
 destructor TTaurusTLS_WipingBytes.Destroy;
@@ -470,24 +439,29 @@ begin
   // Assert is added intentionally to avoid this class improper usage.
   Assert(Assigned(AEncryptor),
     ClassName+'.Create: parameter AEncryptor must not be ''nil''.');
-  FEnv:=AEncryptor;
-  inherited Create(EncrypBytes(ABytes));
-end;
-
-function TTaurusTLS_EncryptedBytes.DecryptBytes: TBytes;
-begin
-  FEnv.Decrypt(FBytes, Result);
+  FEncryptor:=AEncryptor;
+  SetBytes(ABytes);
 end;
 
 destructor TTaurusTLS_EncryptedBytes.Destroy;
 begin
-  FreeAndNil(FEnv);
+  FreeAndNil(FEncryptor);
   inherited;
+end;
+
+function TTaurusTLS_EncryptedBytes.DecryptBytes: TBytes;
+begin
+  FEncryptor.Decrypt(FEncryptedBytes, Result);
 end;
 
 function TTaurusTLS_EncryptedBytes.EncrypBytes(ASrc: TBytes): TBytes;
 begin
-  FEnv.Encrypt(ASrc, Result);
+  FEncryptor.Encrypt(ASrc, Result);
+end;
+
+function TTaurusTLS_EncryptedBytes.GetBytes: TBytes;
+begin
+  Result:=FEncryptedBytes;
 end;
 
 function TTaurusTLS_EncryptedBytes.GetPlainBytes: ITaurusTLS_Bytes;
@@ -502,11 +476,11 @@ begin
   begin
     lNewPlainData:=DecryptBytes;
     lNewPlainBytes:=TPlainBytes.Create(lNewPlainData, Self);
-    if TInterlocked.CompareExchange(Pointer(FPlainBytes), Pointer(lNewPlainData),
-    Pointer(lOldPlainBytes)) <> nil then
-      lNewPlainBytes.Free
-    else
-      Result:=lNewPlainBytes;
+    if TInterlocked.CompareExchange(Pointer(FPlainBytes), Pointer(lNewPlainBytes),
+      Pointer(lOldPlainBytes)) <> nil then
+        lNewPlainBytes.Free
+      else
+        Result:=lNewPlainBytes;
   end;
 end;
 
@@ -537,9 +511,9 @@ var
 begin
   lBytes:=ABytes;
   try
-    inherited SetBytes(EncrypBytes(ABytes));
+    FEncryptedBytes:=EncrypBytes(ABytes);
   finally
-    WipeData(lBytes);
+    TPlainBytes.WipeData(lBytes); // clean-up source data always
   end;
 end;
 

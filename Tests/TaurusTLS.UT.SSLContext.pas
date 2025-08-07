@@ -187,6 +187,12 @@ type
     [AutoNameTestCase('177')]
     [AutoNameTestCase('383')]
     procedure BioCopy(ASize: NativeUInt); overload;
+    [AutoNameTestCase('383, 1')]
+    [AutoNameTestCase('383, 15')]
+    procedure BioRepeat(ASize, ACount: NativeUInt);
+    [AutoNameTestCase('383, 1')]
+    [AutoNameTestCase('383, 15')]
+    procedure BioRepeatOneLock(ASize, ACount: NativeUInt);
   end;
 
   [TestFixture]
@@ -248,6 +254,12 @@ type
     [AutoNameTestCase('177')]
     [AutoNameTestCase('383')]
     procedure Bio(ASize: NativeUInt); overload;
+    [AutoNameTestCase('383, 1')]
+    [AutoNameTestCase('383, 15')]
+    procedure BioRepeat(ASize, ACount: NativeUInt);
+    [AutoNameTestCase('383, 1')]
+    [AutoNameTestCase('383, 15')]
+    procedure BioRepeatOneLock(ASize, ACount: NativeUInt);
   end;
 
   [TestFixture]
@@ -276,19 +288,33 @@ type
   [TestFixture]
   [Category('BytesHelpers')]
   TBytesHelperFixture = class(TCustomBytesFixture)
+    [AutoNameTestCase('e2')]
     [AutoNameTestCase('026ca6b4d0761ebfcd933a3f7b379e')]
+    [AutoNameTestCase('941833f8ffd98ea2861d8c9f718d3f4d'+
+      '7ca37f0214e733d1bd1426bfa03fa2c0')]
     procedure LoadFromBytes(AHexStr: string);
     [AutoNameTestCase('0123456789ABCDEF')]
     procedure LoadFromPAnsiStr(AData: RawByteString);
     [AutoNameTestCase('0123456789ABCDEF')]
     procedure LoadFromString(AData: string);
-
-    [AutoNameTestCase('0123456789ABCDEF')]
+    [AutoNameTestCase('e2')]
+    [AutoNameTestCase('026ca6b4d0761ebfcd933a3f7b379e')]
+    [AutoNameTestCase('941833f8ffd98ea2861d8c9f718d3f4d'+
+      '7ca37f0214e733d1bd1426bfa03fa2c0')]
     procedure LoadFromMemStream(AHexStr: string);
-    [AutoNameTestCase('0123456789ABCDEF')]
+    [AutoNameTestCase('e2')]
+    [AutoNameTestCase('026ca6b4d0761ebfcd933a3f7b379e')]
+    [AutoNameTestCase('941833f8ffd98ea2861d8c9f718d3f4d'+
+      '7ca37f0214e733d1bd1426bfa03fa2c0')]
     procedure LoadFromByteStream(AHexStr: string);
+  end;
+
+  [TestFixture]
+  [Category('EncyptedBytesHelpers')]
+  TEncyptedBytesHelperFixture = class(TCustomBytesFixture)
 
   end;
+
 
 implementation
 
@@ -806,6 +832,29 @@ begin
     'Excpected ''nil'' Bio.');
 end;
 
+procedure TBytesFixture.BioRepeat(ASize, ACount: NativeUInt);
+var
+  i: NativeUInt;
+
+begin
+  InitData(ASize);
+  for i:=0 to ACount-1 do
+    TestBioIntf((TTaurusTLS_Bytes.Create(Data) as ITaurusTLS_Bytes).NewBio);
+end;
+
+procedure TBytesFixture.BioRepeatOneLock(ASize, ACount: NativeUInt);
+var
+  lBio: ITaurusTLS_Bio;
+  i: NativeUInt;
+
+begin
+  InitData(ASize);
+  lBio:=(TTaurusTLS_Bytes.Create(Data) as ITaurusTLS_Bytes).NewBio;
+  TestBioIntf(lBio);
+  for i:=0 to ACount-1 do
+    TestBioIntf((TTaurusTLS_Bytes.Create(Data) as ITaurusTLS_Bytes).NewBio);
+end;
+
 procedure TBytesFixture.BioSame(AHexStr: string);
 begin
   InitData(HexToBytes(AHexStr));
@@ -981,7 +1030,7 @@ end;
 class function TEnryptedBytesFixture.NewBytes(ABytes: TBytes): ITaurusTLS_Bytes;
 begin
   Result:=TTaurusTLS_EncryptedBytes.Create(ABytes,
-    TTaurusTLS_SimpleAESEncryptor.Create(aks192, emCFB));
+    TTaurusTLS_SimpleAESEncryptor.Create(aks192, emOFB));
 end;
 
 procedure TEnryptedBytesFixture.Bytes(ASize: NativeUInt);
@@ -1014,6 +1063,33 @@ begin
   lBytes:=NewBytes(CopyData);
   lBio:=lBytes.NewBio;
   IsUnencrypted(lBio);
+end;
+
+procedure TEnryptedBytesFixture.BioRepeat(ASize, ACount: NativeUInt);
+var
+  lBytes: ITaurusTLS_Bytes;
+  i: NativeUInt;
+
+begin
+  InitData(ASize);
+  lBytes:=NewBytes(CopyData);
+  for i:=0 to ACount-1 do
+    TestBioIntf(lBytes.NewBio);
+end;
+
+procedure TEnryptedBytesFixture.BioRepeatOneLock(ASize, ACount: NativeUInt);
+var
+  lBytes: ITaurusTLS_Bytes;
+  lBio: ITaurusTLS_Bio;
+  i: NativeUInt;
+
+begin
+  InitData(ASize);
+  lBytes:=NewBytes(CopyData);
+  lBio:=lBytes.NewBio;
+  TestBioIntf(lBio);
+  for i:=0 to ACount-1 do
+    TestBioIntf(lBytes.NewBio);
 end;
 
 procedure TEnryptedBytesFixture.Bio(AHexStr: string);
@@ -1207,7 +1283,6 @@ begin
       'from a TStream.');
     lBytes:=lIBytes.Bytes;
     Assert.AreEqual(@lSrcBytes[0], @lBytes[0], 'lSrcBytes and lBytes are not equal. ');
-//    TestBytes(lSrcBytes, lBytes);
   finally
     lStream.Free;
   end;
@@ -1221,5 +1296,6 @@ initialization
   TDUnitX.RegisterTestFixture(TEnryptedBytesFixture);
   TDUnitX.RegisterTestFixture(TSimpleAESFactoryFixture);
   TDUnitX.RegisterTestFixture(TBytesHelperFixture);
+  TDUnitX.RegisterTestFixture(TEncyptedBytesHelperFixture);
 
 end.

@@ -2,7 +2,7 @@ object frmMainForm: TfrmMainForm
   Left = 0
   Top = 0
   Caption = 'frmMainForm'
-  ClientHeight = 280
+  ClientHeight = 379
   ClientWidth = 624
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -12,7 +12,7 @@ object frmMainForm: TfrmMainForm
   Font.Style = []
   DesignSize = (
     624
-    280)
+    379)
   TextHeight = 15
   object lblMajorVersion: TLabel
     Left = 16
@@ -129,14 +129,14 @@ object frmMainForm: TfrmMainForm
   end
   object btnGenerateFiles: TButton
     Left = 16
-    Top = 248
+    Top = 347
     Width = 153
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = '&Generate Files'
     TabOrder = 7
     OnClick = btnGenerateFilesClick
-    ExplicitTop = 240
+    ExplicitTop = 339
   end
   object edtProductName: TEdit
     Left = 16
@@ -144,5 +144,16 @@ object frmMainForm: TfrmMainForm
     Width = 577
     Height = 23
     TabOrder = 4
+  end
+  object mmoLog: TMemo
+    Left = 16
+    Top = 245
+    Width = 577
+    Height = 89
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    ReadOnly = True
+    ScrollBars = ssBoth
+    TabOrder = 8
+    WordWrap = False
   end
 end

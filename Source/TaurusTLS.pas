@@ -1421,7 +1421,7 @@ type
     //This needs to be private, not strict private
     //so we can set it in the clone method for FTP data
     //channel SNI.
-    {$IFNDEF USE_STRICT_PRIVATE_PROTECTED} fHostname : String{$ENDIF}
+    {$IFNDEF USE_STRICT_PRIVATE_PROTECTED} fHostname : String;{$ENDIF}
     // function GetPeerCert: TTaurusTLSX509;
     // procedure CreateSSLContext(axMode: TTaurusTLSSSLMode);
     //
@@ -1876,12 +1876,16 @@ type
       write FOnDebugMessage;
   published
     /// <summary>
-    /// Default Server Certificate to send to the client.
+    ///   Default Server Certificate to send to the client if a SNI (Server Name
+    ///   Indicator) is not specified or if the <see
+    ///   cref="TaurusTLS|TTaurusTLSServerIOHandler.Certificates" /> property
+    ///   is empty.
     /// </summary>
     property DefaultCert: TTaurusTLSX509File read fDefaultCert;
     /// <summary>
-    /// Certificates for domains that the TLS Client may request from the
-    /// server.
+    ///   Certificates for domains that the TLS Client may request from the
+    ///   server through a SNI (Server Name Indicator).  Leave empty if you do
+    ///   not wish to support SNI for virtual hosting.
     /// </summary>
     property Certificates: TTaurusTLSX509Files read fCertificates
       write SetCertificates;

@@ -28,9 +28,11 @@ type
     btnGenerateFiles: TButton;
     edtProductName: TEdit;
     lblProductName: TLabel;
+    mmoLog: TMemo;
     procedure btnGenerateFilesClick(Sender: TObject);
   private
     { Private declarations }
+    procedure OnDebugLog(ASender : TObject; const AText : String);
   public
     { Public declarations }
     constructor Create(AOwner : TComponent);  override;
@@ -49,6 +51,7 @@ uses IniFiles, dmod_main;
 
 procedure TfrmMainForm.btnGenerateFilesClick(Sender: TObject);
 begin
+  dmod_main.dmodMain.OnDebugLog := OnDebugLog;
   dmod_main.dmodMain.CreateFromTemplates;
 
   dmod_main.dmodMain.UpdateIncFile(spnMajorVersion.Value,
@@ -103,6 +106,11 @@ begin
      FreeAndNil(Lini);
    end;
   inherited;
+end;
+
+procedure TfrmMainForm.OnDebugLog(ASender: TObject; const AText: String);
+begin
+  Self.mmoLog.Lines.Add(AText);
 end;
 
 end.

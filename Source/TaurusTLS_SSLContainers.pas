@@ -133,11 +133,14 @@ type
       AEncryptor: TTaurusTLS_CustomEncryptor = nil): ITaurusTLS_Bytes;
       overload; static;
     class function LoadFromStream(const AStream: TStream; AWipeSrcMem: boolean;
-      AKeySize: TTaurusTLS_AESKeySize; AEncodeMode: TTaurusTLS_EncodeMode):
+      AKeySize: TTaurusTLS_AESKeySize; AEncodeMode: TTaurusTLS_SimleAESEncodeMode):
       ITaurusTLS_Bytes; overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
   end;
 
 implementation
+
+uses
+  TaurusTLS_ResourceStrings;
 
 { TTaurusTLS_CustomBytes.TBioIntf }
 
@@ -182,7 +185,7 @@ end;
 procedure TTaurusTLS_Bytes.SetBytes(const ABytes: TBytes);
 begin
   if Length(FBytes) <> 0 then
-    ETaurusTLSIBytesError.RaiseWithMessage('Error Message');
+    ETaurusTLSIBytesError.RaiseWithMessage(RIB_Bytes_CanNotChange);
   FBytes:=ABytes;
 end;
 
@@ -463,7 +466,7 @@ end;
 
 class function TTaurusTLS_EncryptedBytesHelper.LoadFromStream(
   const AStream: TStream; AWipeSrcMem: boolean; AKeySize: TTaurusTLS_AESKeySize;
-  AEncodeMode: TTaurusTLS_EncodeMode): ITaurusTLS_Bytes;
+  AEncodeMode: TTaurusTLS_SimleAESEncodeMode): ITaurusTLS_Bytes;
 begin
   LoadFromStream(AStream, AWipeSrcMem,
     TTaurusTLS_SimpleAESFactory.NewEncryptor(AKeySize, AEncodeMode));

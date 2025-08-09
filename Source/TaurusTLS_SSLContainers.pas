@@ -392,7 +392,7 @@ begin
   begin
     lStream:=TBytesStream.Create(NewBytes(AStream.Size));
     try
-      lStream.CopyFrom(AStream);
+      lStream.CopyFrom(AStream, 0);
       lBytes:=lStream.Bytes;
     finally
       lStream.Free;
@@ -454,7 +454,7 @@ begin
     SetLength(lBytes, lSize);
     lStream := TBytesStream.Create(lBytes);
     try
-      lStream.CopyFrom(AStream);
+      lStream.CopyFrom(AStream, 0);
     finally
       if AWipeSrcMem then
         lStream.WipeMemoryData;

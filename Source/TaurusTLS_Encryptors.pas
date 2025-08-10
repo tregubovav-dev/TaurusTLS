@@ -348,8 +348,8 @@ type
     emCCM=EVP_CIPH_CCM_MODE);
   ///  <summary>
   ///  Enum type defines subset of <c>cipher algorithm</c> encode modes
-  ///  from <see cref="emCFB">Cipher Feedback (CFB)"</see>
-  ///  to <see cref="emCTR">Counter (CTR)"</see>
+  ///  from <see cref="emCFB">Cipher Feedback (CFB)</see>
+  ///  to <see cref="emCTR">Counter (CTR)</see>
   ///  used by <see cref="TTaurusTLS_SimpleAESEncryptor" /> class.
   ///  </summary>
   TTaurusTLS_SimleAESEncodeMode = emCBC..emCTR;

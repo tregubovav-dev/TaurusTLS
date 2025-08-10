@@ -37,7 +37,7 @@ type
   ETaurusTLSEncryptorError = class(ETaurusTLSAPICryptoError);
 
   ///  <summary>
-  ///  Manages OpenSSL the <c>cipher algorythm</c> used in
+  ///  Manages OpenSSL the <c>cipher algorithm</c> used in
   ///  symmetric Encryption and Decription operations.
   ///  </summary>
   TTaurusTLS_Cipher = class
@@ -52,7 +52,7 @@ type
     FMode: TIdC_INT;
   public
     ///  <summary>
-    ///  Initializes the instance internal fileds based on <paramref name="ACipher" /> value
+    ///  Initializes the instance internal fileds based on <see name="ACipher">value</see>
     ///  </summary>
     ///  <param name="ACipher">
     ///  Pointer to the <c>EVP_CIPHER</c> initialized by one of
@@ -66,18 +66,18 @@ type
     ///  </param>
     constructor Create(ACipher: PEVP_CIPHER; AOwnCipher: boolean); overload;
     ///  <summary>
-    ///  Initializes the instance using a <c>cipher algorythm</c> name registered in the
-    ///  </c>OpenSSL</c> libray
+    ///  Initializes the instance using a <c>cipher algorithm</c> name registered in the
+    ///  <c>OpenSSL</c> library
     ///  </summary>
-    ///  <param name="ACipherName"> a Unicode string with a <c>cipher algorythm</c> name
+    ///  <param name="ACipherName"> a Unicode string with a <c>cipher algorithm</c> name
     ///  </param>
     constructor Create(ACipherName: string); overload;
     ///  <summary>
-    ///  Initializes the instance using a <c>cipher algorythm</c> name
-    ///   registered in the </c>OpenSSL</c> libray
+    ///  Initializes the instance using a <c>cipher algorithm</c> name
+    ///   registered in the <c>OpenSSL</c> library
     ///  </summary>
     ///  <param name="ACipherName"> a pointer to the null-terminated Ansi string
-    ///  with a <c>cipher algorythm</c> name>
+    ///  with a <c>cipher algorithm</c> name>
     ///  </param>
     constructor Create(ACipherName: PIdAnsiChar); overload;
     ///  <summary>
@@ -87,10 +87,10 @@ type
     destructor Destroy; override;
 
     ///  <summary>
-    ///  Lookups a <c>cipher algorythm</c> by its name, initialize and returns
+    ///  Lookups a <c>cipher algorithm</c> by its name, initialize and returns
     ///  the pointer to <c>EVP_CIPHER</c> structure
     ///  </summary>
-    ///  <param name="ACipherName"> a Unicode string with a <c>cipher algorythm</c> name
+    ///  <param name="ACipherName"> a Unicode string with a <c>cipher algorithm</c> name
     ///  </param>
     ///  <returns>
     ///  The pointer to <c>EVP_CIPHER</c> structure
@@ -98,11 +98,11 @@ type
     class function GetCipherByName(ACipherName: string): PEVP_CIPHER;
       overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
     ///  <summary>
-    ///  Lookups a <c>cipher algorythm</c> by its name, initialize and returns
+    ///  Lookups a <c>cipher algorithm</c> by its name, initialize and returns
     ///  pointer to <c>EVP_CIPHER</c> structure
     ///  </summary>
     ///  <param name="ACipherName"> a pointer to the null-terminated Ansi string
-    ///  with a <c>cipher algorythm</c> name
+    ///  with a <c>cipher algorithm</c> name
     ///  </param>
     ///  <returns>
     ///  The pointer to <c>EVP_CIPHER</c> structure
@@ -113,7 +113,7 @@ type
     ///  <summary>
     ///  Creates <c>array of bytes</c> with length needed to be a <c>Key</c>
     ///  for symmetric Encryption and Decryption operations
-    ///  with this <c>cipher algorythm</c>.
+    ///  with this <c>cipher algorithm</c>.
     ///  </summary>
     ///  <returns>
     ///  array of <c>random byte</c> values of length to be a <c>Key</c>
@@ -123,12 +123,12 @@ type
     ///  <summary>
     ///  Creates <c>array of bytes</c> with length needed to be
     ///  an <c>Initialization Vector</c> for symmetric Encryption and Decryption
-    ///  operations with this <c>cipher algorythm</c>.
+    ///  operations with this <c>cipher algorithm</c>.
     ///  </summary>
     ///  <returns>
     ///  array of <c>random byte</c> values of length to be
     ///  an <c>Initialization Vector</c> for symmetric Encryption and Decryption
-    ///  operations with this <c>cipher algorythm</c>.
+    ///  operations with this <c>cipher algorithm</c>.
     ///  </returns>
     function NewIV: TBytes; {$IFDEF USE_INLINE}inline;{$ENDIF}
 
@@ -157,12 +157,12 @@ type
     ///  </summary>
     property BlockPower2: TIdC_UINT read FBlock2P;
     ///  <summary>
-    ///  Returns the <c>flags</c> value configured for the <c>cipher algorythm</c>
+    ///  Returns the <c>flags</c> value configured for the <c>cipher algorithm</c>
     ///  </summary>
     ///  <seealso href="https://docs.openssl.org/3.3/man3/EVP_EncryptInit/#flags" />
     property Flags: TIdC_ULONG read FFlags;
     ///  <summary>
-    ///  Returns the <c>mode</c> associated with the <c>cipher algorythm</c>
+    ///  Returns the <c>mode</c> associated with the <c>cipher algorithm</c>
     ///  </summary>
     ///  <seealso href="https://docs.openssl.org/3.3/man3/EVP_EncryptInit/#flags" />
     property Mode: TIdC_INT read FMode;
@@ -229,7 +229,7 @@ type
     ///  <summary>
     ///  Create the class instance and initialize internal fields
     ///  </summary>
-    ///  <param name="ACipher">An instance of <c>TTaurusTLS_Cipher</c>
+    ///  <param name="ACipher"> An instance of <c>TTaurusTLS_Cipher</c>
     ///  <seealso cref="TTaurusTLS_Cipher" />
     ///  </param>
     constructor Create(ACipher: TTaurusTLS_Cipher);
@@ -241,24 +241,24 @@ type
     ///  Abstract method must be implemented by inherited class(es).
     ///  Implements an symmetric Encryption operation on <c>array of bytes</c>
     ///  </summary>
-    ///  <param name="APlain">An <c>array of bytes</c> should be encrypted.
+    ///  <param name="APlain"> An <c>array of bytes</c> should be encrypted.
     ///  </param>
-    ///  <param name="AEncrypted">An <c>array of bytes</c> where Encrypted data
+    ///  <param name="AEncrypted"> An <c>array of bytes</c> where Encrypted data
     ///  will be stored.
     ///  <remarks>The size of array is automatically asjustes based on
-    ///  the <c>cipher algorythm</c> used.</remarks>
+    ///  the <c>cipher algorithm</c> used.</remarks>
     ///  </param>
     procedure Encrypt(const APlain: TBytes; out AEncrypted: TBytes); virtual; abstract;
     ///  <summary>
     ///  Abstract method must be implemented by inherited class(es).
     ///  Implements an symmetric Decryption operation on <c>array of bytes</c>
     ///  </summary>
-    ///  <param name="AEncrypted">An <c>array of bytes</c> should be decrypted.
+    ///  <param name="AEncrypted"> An <c>array of bytes</c> should be decrypted.
     ///  </param>
-    ///  <param name="APlain">An <c>array of bytes</c> where Decrypted data
+    ///  <param name="APlain"> An <c>array of bytes</c> where Decrypted data
     ///  will be stored.
     ///  <remarks>The size of array is automatically asjustes based on
-    ///  the <c>cipher algorythm</c> used.</remarks>
+    ///  the <c>cipher algorithm</c> used.</remarks>
     ///  </param>
     procedure Decrypt(const AEncrypted: TBytes; out APlain: TBytes); virtual; abstract;
 
@@ -282,45 +282,90 @@ type
     ///  </summary>
     property BlockPower2: TIdC_UINT read GetBlockPower2;
     ///  <summary>
-    ///  Returns the <c>flags</c> value configured for the <c>cipher algorythm</c>
+    ///  Returns the <c>flags</c> value configured for the <c>cipher algorithm</c>
     ///  </summary>
     ///  <seealso href="https://docs.openssl.org/3.3/man3/EVP_EncryptInit/#flags" />
     property Flags: TIdC_ULONG read GetFlags;
     ///  <summary>
-    ///  Returns the <c>mode</c> associated with the <c>cipher algorythm</c>
+    ///  Returns the <c>mode</c> associated with the <c>cipher algorithm</c>
     ///  </summary>
     ///  <seealso href="https://docs.openssl.org/3.3/man3/EVP_EncryptInit/#flags" />
     property Mode: TIdC_INT read GetMode;
   end;
 
   ///  <summary>
-  ///  Enum type defines the <c>AES cipher algorithm</c> family <c>cipher</c> sizes
+  ///  Enum type defines the <c>Advanced Encryption Standard (AES) cipher algorithm</c> family <c>cipher</c> sizes
   ///  </summary>
-  TTaurusTLS_AESKeySize = (aks128, aks192, aks256);
+  TTaurusTLS_AESKeySize = (
+    ///  <summary>
+    ///  Advanced Encryption Standard (AES) 128 bits
+    ///  </summary>
+    aks128,
+    ///  <summary>
+    ///  Advanced Encryption Standard (AES) 192 bits
+    ///  </summary>
+    aks192,
+    ///  <summary>
+    ///  Advanced Encryption Standard (AES) 256 bits
+    ///  </summary>
+    aks256);
   ///  <summary>
-  ///  Enum type defines <c>cipher algorythm</c> encode modes
+  ///  Enum type defines <c>cipher algorithm</c> encode modes
   ///  </summary>
-  TTaurusTLS_EncodeModeWide = (emStream=EVP_CIPH_STREAM_CIPHER, emECB=EVP_CIPH_ECB_MODE,
-    emCBC=EVP_CIPH_CBC_MODE, emCFB=EVP_CIPH_CFB_MODE, emOFB=EVP_CIPH_OFB_MODE,
-    emCTR=EVP_CIPH_CTR_MODE, emGCM=EVP_CIPH_GCM_MODE, emCCM=EVP_CIPH_CCM_MODE);
+  TTaurusTLS_EncodeModeWide = (
+    ///  <summary>
+    ///  Stream Cipher
+    ///  </summary>
+    emStream=EVP_CIPH_STREAM_CIPHER,
+    ///  <summary>
+    ///  Electronic Codebook (ECB)
+    ///  </summary>
+    emECB=EVP_CIPH_ECB_MODE,
+    ///  <summary>
+    ///  Cipher block chaining (CBC)
+    ///  </summary>
+    emCBC=EVP_CIPH_CBC_MODE,
+    ///  <summary>
+    ///  Cipher Feedback (CFB)
+    ///  </summary>
+    emCFB=EVP_CIPH_CFB_MODE,
+    ///  <summary>
+    ///  Output Feedback (OFB)
+    ///  </summary>
+    emOFB=EVP_CIPH_OFB_MODE,
+    ///  <summary>
+    ///  Counter (CTR)
+    ///  </summary>
+    emCTR=EVP_CIPH_CTR_MODE,
+    ///  <summary>
+    ///  Galois/Counter Mode (GCM)
+    ///  </summary>
+    emGCM=EVP_CIPH_GCM_MODE,
+    ///  <summary>
+    ///  Counter with Cipher block chaining Message authentication code;
+    ///  counter (CCM)
+    ///  </summary>
+    emCCM=EVP_CIPH_CCM_MODE);
   ///  <summary>
-  ///  Enum type defines subset of <c>cipher algorythm</c> encode modes
-  ///  used by <seealso cref="TTaurusTLS_SimpleAESEncryptor" /> class.
+  ///  Enum type defines subset of <c>cipher algorithm</c> encode modes
+  ///  from <see cref="emCFB">Cipher Feedback (CFB)"</see>
+  ///  to <see cref="emCTR">Counter (CTR)"</see>
+  ///  used by <see cref="TTaurusTLS_SimpleAESEncryptor" /> class.
   ///  </summary>
   TTaurusTLS_SimleAESEncodeMode = emCBC..emCTR;
 
   ///  <summary>
   ///  Implements symmetric Encryption and Decryption functionality
-  ///  using subset of <c>cipher algorythms</c>
+  ///  using subset of <c>cipher algorithms</c>
   ///  </summary>
   TTaurusTLS_SimpleAESEncryptor = class(TTaurusTLS_CustomEncryptor)
   protected
     ///  <summary>
-    ///  Builds the AES <c>cipher algorythm</c> name using parameters
+    ///  Builds the Advanced Encryption Standard (AES) <c>cipher algorithm</c> name using parameters
     ///  </summary>
-    ///  <param name="AKeySize">AES <c>cipher algorythm</c> key size.
+    ///  <param name="AKeySize">Advanced Encryption Standard (AES) <c>cipher algorithm</c> key size.
     ///  </param>
-    ///  <param name="AEncoderMode">AES <c>cipher algorythm</c> encode mode.
+    ///  <param name="AEncoderMode">Advanced Encryption Standard (AES) <c>cipher algorithm</c> encode mode.
     ///  </param>
     class function BuildCipherName(AKeySize: TTaurusTLS_AESKeySize;
       AEncoderMode: TTaurusTLS_SimleAESEncodeMode): string; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
@@ -329,27 +374,25 @@ type
     ///  Creates instance of <c>TTaurusTLS_SimpleAESEncryptor</c> type
     ///  with provided parameters.
     ///  </summary>
-    ///  <param name="AKeySize">AES <c>cipher algorythm</c> key size.
+    ///  <param name="AKeySize">Advanced Encryption Standard (AES) <c>cipher algorithm</c> key size.
     ///  </param>
-    ///  <param name="AEncoderMode">AES <c>cipher algorythm</c> encode mode.
+    ///  <param name="AEncoderMode">Advanced Encryption Standard (AES) <c>cipher algorithm</c> encode mode.
     ///  </param>
     constructor Create(AKeySize: TTaurusTLS_AESKeySize;
       AEncoderMode: TTaurusTLS_SimleAESEncodeMode);
     ///  <summary>
-    ///  Implements <c>AES</c> encryption mechanism with using
-    ///  <c>cipher algorithm</c>
+    ///  Implements <c>Advanced Encryption Standard (AES)</c> encryption mechanism
     ///  </summary>
     procedure Encrypt(const APlain: TBytes; out AEncrypted: TBytes); override;
     ///  <summary>
-    ///  Implements <c>AES</c> decryption mechanism with using
-    ///  <c>cipher algorithm</c>
+    ///  Implements <c>Advanced Encryption Standard (AES)</c> decryption mechanism
     ///  </summary>
     procedure Decrypt(const AEncrypted: TBytes; out APlain: TBytes); override;
   end;
 
   ///  <summary>
   ///  This class implements singleton factory to issue instances of
-  ///  <seealso cref="TTaurusTLS_SimpleAESEncryptor" type.>
+  ///  <see cref="TTaurusTLS_SimpleAESEncryptor"> type.</see>
   ///  </summary>
   TTaurusTLS_SimpleAESFactory = class
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} private class var
@@ -399,57 +442,57 @@ type
     ///  </summary>
     class destructor Destroy;
     ///  <summary>
-    ///  Changes the factory default <c>cipher algorythm</c> will be used
-    ///  in the instances of <seealso cref="TTaurusTLS_SimpleAESEncryptor"> class
+    ///  Changes the factory default <c>cipher algorithm</c> will be used
+    ///  in the instances of <seealso cref="TTaurusTLS_SimpleAESEncryptor" /> class
     ///  issed after this call.
     ///  </summary>
-    ///  <params name="AKeySize"> An <c>AES cipher algorythm</c> key size
+    ///  <param name="AKeySize"> An <c>Advanced Encryption Standard (AES) cipher algorithm</c> key size
     ///  </param>
-    ///  <params name="AEncoderMode"> An <c>AES cipher algorythm</c> encode mode
+    ///  <param name="AEncoderMode"> An <c>Advanced Encryption Standard (AES) cipher algorithm</c> encode mode
     ///  </param>
     class procedure SetDefaultCipher(AKeySize: TTaurusTLS_AESKeySize;
       AEncoderMode: TTaurusTLS_SimleAESEncodeMode);
     ///  <summary>
-    ///  Initializes and issues new instance of <seealso cref="TTaurusTLS_SimpleAESEncryptor">
-    ///  type with defualt <c>AES cipher algorythm</c>.
+    ///  Initializes and issues new instance of <seealso cref="TTaurusTLS_SimpleAESEncryptor" />
+    ///  type with defualt <c>Advanced Encryption Standard (AES) cipher algorithm</c>.
     ///  </summary>
     ///  <returns>
-    ///  An instance of <seealso cref="TTaurusTLS_SimpleAESEncryptor"> type.
+    ///  An instance of <seealso cref="TTaurusTLS_SimpleAESEncryptor" /> type.
     ///  </returns>
     class function NewEncryptor: TTaurusTLS_SimpleAESEncryptor; overload;
       static; {$IFDEF USE_INLINE}inline;{$ENDIF}
     ///  <summary>
-    ///  Initializes and issues new instance of <seealso cref="TTaurusTLS_SimpleAESEncryptor">
-    ///  type with cpecific <c>AES cipher algorythm</c>.
+    ///  Initializes and issues new instance of <seealso cref="TTaurusTLS_SimpleAESEncryptor" />
+    ///  type with cpecific <c>Advanced Encryption Standard (AES) cipher algorithm</c>.
     ///  </summary>
-    ///  <params name="AKeySize"> An <c>AES cipher algorythm</c> key size
+    ///  <param name="AKeySize"> An <c>Advanced Encryption Standard (AES) cipher algorithm</c> key size
     ///  </param>
-    ///  <params name="AEncoderMode"> An <c>AES cipher algorythm</c> encode mode
+    ///  <param name="AEncoderMode"> An <c>Advanced Encryption Standard (AES) cipher algorithm</c> encode mode
     ///  </param>
     ///  <returns>
-    ///  An instance of <seealso cref="TTaurusTLS_SimpleAESEncryptor"> type.
+    ///  An instance of <seealso cref="TTaurusTLS_SimpleAESEncryptor" /> type.
     ///  </returns>
     class function NewEncryptor(AKeySize: TTaurusTLS_AESKeySize;
       AEncoderMode: TTaurusTLS_SimleAESEncodeMode): TTaurusTLS_SimpleAESEncryptor;
       overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
 
     ///  <summary>
-    ///  Returns the encyption key size of default <c>AES cipher algorythm</c>
-    ///  used to issue <seealso cref="TTaurusTLS_SimpleAESEncryptor"> instances.
+    ///  Returns the encyption key size of default <c>Advanced Encryption Standard (AES) cipher algorithm</c>
+    ///  used to issue <seealso cref="TTaurusTLS_SimpleAESEncryptor" /> instances.
     ///  </summary>
     class property DefaultKeySize: TTaurusTLS_AESKeySize read GetKeySize;
     ///  <summary>
-    ///  Returns the encyption encode mode of default <c>AES cipher algorythm</c>
-    ///  used to issue <seealso cref="TTaurusTLS_SimpleAESEncryptor"> instances.
+    ///  Returns the encyption encode mode of default <c>Advanced Encryption Standard (AES) cipher algorithm</c>
+    ///  used to issue <seealso cref="TTaurusTLS_SimpleAESEncryptor" /> instances.
     ///  </summary>
     class property DefaultEncodeMode: TTaurusTLS_SimleAESEncodeMode read GetEncoderMode;
     ///  <summary>
-    ///  Returns string representing symbol name of <paramref name="AKeySize" />
+    ///  Returns string representing symbol name of <see name="AKeySize">property</see>
     ///  </summary>
     class property KeySizeName[AKeySize: TTaurusTLS_AESKeySize]: string
       read GetKeySizeName;
     ///  <summary>
-    ///  Returns string representing symbol name of <paramref name="AEncoderMode" />
+    ///  Returns string representing symbol name of <see name="AEncoderMode">property</see>
     ///  </summary>
     class property EncodeModeName[AEncoderMode: TTaurusTLS_SimleAESEncodeMode]: string
       read GetEncodingModeName;

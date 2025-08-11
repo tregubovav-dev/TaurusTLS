@@ -2168,28 +2168,10 @@ type
   /// </seealso>
   ETaurusTLSConnectError = class(ETaurusTLSAPISSLError);
   /// <summary>
-  /// Raised if <c>SSL_write_ex2</c> or <c>SSL_write_ex</c> fails.
-  /// </summary>
-  /// <seealso href="https://docs.openssl.org/3.3/man3/SSL_write/">
-  /// SSL_write_ex2
-  /// </seealso>
-  /// <seealso href="https://docs.openssl.org/3.3/man3/SSL_write/">
-  /// SSL_write_ex
-  /// </seealso>
-  ETaurusTLSWriteEx2Error = class(ETaurusTLSAPISSLError);
-  /// <summary>
-  /// Raised if <c>SSL_read_ex</c> fails.
-  /// </summary>
-  /// <seealso href="https://docs.openssl.org/3.0/man3/SSL_read/">
-  /// SSL_read_ex
-  /// </seealso>
-  ETaurusTLSReadExError = class(ETaurusTLSAPISSLError);
-  /// <summary>
   /// Raised if certificate validation failed and the message breifly
   /// describes the failure.
   /// </summary>
   ETaurusTLSCertValidationError = class(ETaurusTLSError);
-{$IFNDEF OPENSSL_NO_TLSEXT}
   /// <summary>
   /// Raised if <c>SSL_set_tlsext_host_name</c> failed.
   /// </summary>
@@ -2198,7 +2180,6 @@ type
   /// SSL_set_tlsext_host_name
   /// </seealso>
   ETaurusTLSSettingTLSHostNameError = class(ETaurusTLSAPISSLError);
-{$ENDIF}
   /// <summary>
   /// Raised if <c>SSL_CTX_set_min_proto_version</c> failed.
   /// </summary>
@@ -3094,11 +3075,13 @@ procedure TTaurusTLSX509File.AssignTo(Destination: TPersistent);
 var
   LDest: TTaurusTLSX509File;
 begin
-  if Destination is TTaurusTLSOptions then
+  if Destination is TTaurusTLSX509File then
   begin
     LDest := Destination as TTaurusTLSX509File;
     LDest.PrivateKey := FPrivateKey;
     LDest.PublicKey := FPublicKey;
+    LDest.RootKey := FRootKey;
+    LDest.DHParamsFile := fDHParamsFile;
   end
   else
   begin
@@ -4705,7 +4688,6 @@ begin
   // Literal IPv4 and IPv6 addresses are not permitted in "HostName".
   if (fHostName <> '') and (not IsValidIP(fHostName)) then
   begin
-{$IFNDEF OPENSSL_NO_TLSEXT}
     { Delphi appears to need the extra AnsiString coerction. Otherwise, only the
       first character to the hostname is passed }
     LRetCode := SSL_set_tlsext_host_name(fSSL, @LHostname[0]);
@@ -4714,7 +4696,6 @@ begin
       ETaurusTLSSettingTLSHostNameError.RaiseException(fSSL, LRetCode,
         RSSSLSettingTLSHostNameError_2);
     end;
-{$ENDIF}
   end;
 
   if fVerifyHostname then
@@ -4806,9 +4787,14 @@ begin
     begin
       Continue;
     end;
+    // From: Remy Lebeau
+    // The error condition is first returned to the base IOHandler, which
+    // handles disconnects and timeouts, then passed back down to the
+    // SSLIOHandler (virtual CheckForError() method) to raise a TLS or
+    // system exception.
     if LErr <> SSL_ERROR_ZERO_RETURN then
     begin
-      ETaurusTLSReadExError.RaiseExceptionCode(LErr, Lret, RSDSSLReadExFailed);
+      Result := LRet;
     end;
     break;
   until False;
@@ -4841,14 +4827,14 @@ begin
     begin
       Continue;
     end;
-    if LErr = SSL_ERROR_ZERO_RETURN then
+    // From: Remy Lebeau
+    // The error condition is first returned to the base IOHandler, which
+    // handles disconnects and timeouts, then passed back down to the
+    // SSLIOHandler (virtual CheckForError() method) to raise a TLS or
+    // system exception.
+    if LErr <> SSL_ERROR_ZERO_RETURN then
     begin
-      Result := 0;
-    end
-    else
-    begin
-      ETaurusTLSWriteEx2Error.RaiseExceptionCode(LErr, Lret,
-        RSDSSLWriteExFailed);
+      Result := LRet;
     end;
     break;
   until False;

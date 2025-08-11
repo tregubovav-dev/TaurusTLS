@@ -294,7 +294,7 @@ type
   end;
 
   ///  <summary>
-  ///  Enum type defines the <c>Advanced Encryption Standard (AES) cipher algorithm</c> family <c>cipher</c> sizes
+  ///  Enum type defines the <c>Advanced Encryption Standard (AES) cipher algorithm</c> family <c>cipher algorithm</c> sizes
   ///  </summary>
   TTaurusTLS_AESKeySize = (
     ///  <summary>

@@ -7,7 +7,6 @@
 {* Portions of this software are Copyright (c) 1993 – 2018,                   *}
 {* Chad Z. Hower (Kudzu) and the Indy Pit Crew – http://www.IndyProject.org/  *}
 {******************************************************************************}
-
 {$I TaurusTLSCompilerDefines.inc}
 ///  <summary>
 ///  Declares classes to Encrypt/Decrypt sensitive configuration values
@@ -430,8 +429,16 @@ type
       {$IFDEF USE_INLINE}inline;{$ENDIF}
     class property Factory: TTaurusTLS_SimpleAESFactory read GetFactory;
 
+{$IFDEF FPC}
+  {$WARN 3018 off : Constructor should be public}
+{$ENDIF}
+    // constructor defined i protected section intentionally
+    // the Factory instance can be created only by class Factory methods.
     constructor Create(AKeySize: TTaurusTLS_AESKeySize;
       AEncoderMode: TTaurusTLS_SimleAESEncodeMode);
+{$IFDEF FPC}
+  {$WARN 3018 on : Constructor should be public}
+{$ENDIF}
   public
     ///  <summary>
     ///  Initializes the factory
@@ -639,8 +646,14 @@ begin
     if OsslFailed(EVP_CipherInit_ex(lCtx, lCipher, nil, @FKey[0], @FIV[0],
       Ord(True))) then
       RaiseException;
+{$IFDEF FPC}
+  {$warn 5057 OFF}
+{$ENDIF}
     if OsslFailed(EVP_CipherUpdate(lCtx, ASecret[0], lResultLen, APlain[0],
       lLen)) then
+{$IFDEF FPC}
+  {$warn 5057 ON}
+{$ENDIF}
       RaiseException;
     if OsslFailed(EVP_CipherFinal_ex(lCtx, ASecret[lResultLen], lLen)) then
       RaiseException;
@@ -677,8 +690,14 @@ begin
     if OsslFailed(EVP_CipherInit_ex(lCtx, lCipher, nil, @FKey[0], @FIV[0],
       Ord(False))) then
       RaiseException;
+{$IFDEF FPC}
+  {$warn 5057 OFF}
+{$ENDIF}
     if OsslFailed(EVP_CipherUpdate(lCtx, APlain[0], lResultLen, ASecret[0],
       lLen)) then
+{$IFDEF FPC}
+  {$warn 5057 ON}
+{$ENDIF}
       RaiseException;
     if OsslFailed(EVP_CipherFinal_ex(lCtx, APlain[lResultLen], lLen)) then
       RaiseException;
@@ -750,13 +769,25 @@ end;
 procedure TTaurusTLS_SimpleAESEncryptor.Encrypt(const APlain: TBytes;
   out AEncrypted: TBytes);
 begin
+{$IFDEF FPC}
+  {$warn 5092 OFF}
+{$ENDIF}
   DefaultEncrypt(APlain, AEncrypted);
+{$IFDEF FPC}
+  {$warn 5092 ON}
+{$ENDIF}
 end;
 
 procedure TTaurusTLS_SimpleAESEncryptor.Decrypt(const AEncrypted: TBytes;
   out APlain: TBytes);
 begin
+{$IFDEF FPC}
+  {$warn 5092 OFF}
+{$ENDIF}
   DefaultDecrypt(AEncrypted, APlain);
+{$IFDEF FPC}
+  {$warn 5092 ON}
+{$ENDIF}
 end;
 
 class function TTaurusTLS_SimpleAESEncryptor.BuildCipherName(

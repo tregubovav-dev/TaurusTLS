@@ -19,7 +19,7 @@ unit TaurusTLS_SSLContainers;
 interface
 
 uses
-  Classes, SysUtils, SyncObjs, TaurusTLS_Encryptors,
+  Classes, {$IFDEF DCC}SyncObjs,{$ENDIF}SysUtils, TaurusTLS_Encryptors,
   TaurusTLSHeaders_types, TaurusTLSHeaders_bio, TaurusTLSExceptionHandlers,
   IdGlobal, IdCTypes;
 
@@ -235,7 +235,9 @@ type
       destructor Destroy; override;
     end;
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} private
+{$IFDEF DCC}
     [volatile]
+{$ENDIF}
     FPlainBytes: TPlainBytes;
     FEncryptedBytes: TBytes;
     FEncryptor: TTaurusTLS_CustomEncryptor;
@@ -521,8 +523,14 @@ var
   lBytes: TBytes;
 
 begin
+{$IFDEF FPC}
+  {$warn 5091 OFF}
+{$ENDIF}
   SetLength(lBytes, ASize);
   Create(lBytes);
+{$IFDEF FPC}
+  {$warn 5091 ON}
+{$ENDIF}
 end;
 
 procedure TTaurusTLS_Bytes.SetBytes(const ABytes: TBytes);
@@ -633,8 +641,13 @@ begin
   begin
     lNewPlainData:=DecryptBytes;
     lNewPlainBytes:=TPlainBytes.Create(lNewPlainData, Self);
+{$IFDEF DCC}
     if TInterlocked.CompareExchange(Pointer(FPlainBytes), Pointer(lNewPlainBytes),
       Pointer(lOldPlainBytes)) <> nil then
+{$ELSE}
+    if InterlockedCompareExchangePointer(Pointer(FPlainBytes), Pointer(lNewPlainBytes),
+      Pointer(lOldPlainBytes)) <> nil then
+{$ENDIF}
         lNewPlainBytes.Free
       else
         Result:=lNewPlainBytes;
@@ -657,8 +670,13 @@ begin
 {$IFDEF DEBUG}
   lOldBytes:=
 {$ENDIF}
+{$IFDEF DCC}
   TInterlocked.CompareExchange(Pointer(FPlainBytes), nil,
     Pointer(ASender));
+{$ELSE}
+  InterlockedCompareExchangePointer(Pointer(FPlainBytes), nil,
+    Pointer(ASender));
+{$ENDIF}
 end;
 
 procedure TTaurusTLS_EncryptedBytes.SetBytes(const ABytes: TBytes);
@@ -678,7 +696,13 @@ end;
 class function TTaurusTLS_BytesHelper.NewBytes(ASize: NativeUInt): TBytes;
 begin
   if ASize > 0 then
+{$IFDEF FPC}
+  {$warn 5093 OFF}
+{$ENDIF}
     SetLength(Result, ASize);
+{$IFDEF FPC}
+  {$warn 5093 ON}
+{$ENDIF}
 end;
 
 class function TTaurusTLS_BytesHelper.LoadFromBytes<T>(
@@ -785,7 +809,13 @@ begin
   if not Assigned(AEncryptor) then
     AEncryptor:=TTaurusTLS_SimpleAESFactory.NewEncryptor;
   lSize:= AStream.Size;
+{$IFDEF FPC}
+  {$warn 5091 OFF}
+{$ENDIF}
   SetLength(lBytes, lSize);
+{$IFDEF FPC}
+  {$warn 5091 ON}
+{$ENDIF}
   lStream := TBytesStream.Create(lBytes);
   try
     lStream.CopyFrom(AStream, 0);
@@ -801,7 +831,7 @@ class function TTaurusTLS_EncryptedBytesHelper.LoadFromStream(
   const AStream: TStream; AWipeSrcMem: boolean; AKeySize: TTaurusTLS_AESKeySize;
   AEncodeMode: TTaurusTLS_SimleAESEncodeMode): ITaurusTLS_Bytes;
 begin
-  LoadFromStream(AStream, AWipeSrcMem,
+  Result:=LoadFromStream(AStream, AWipeSrcMem,
     TTaurusTLS_SimpleAESFactory.NewEncryptor(AKeySize, AEncodeMode));
 end;
 

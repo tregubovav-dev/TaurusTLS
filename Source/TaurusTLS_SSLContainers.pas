@@ -10,55 +10,7 @@
 
 {$I TaurusTLSCompilerDefines.inc}
 ///   <summary>
-///   Declares "container" classes to operate with OpenSSL public and private entities.
-///   There are several points on how to use these containers
-///   <list type="bullet">
-///     <item>
-///       <term>Consistence</term>
-///       <description>
-///         Keep data in a single place and avoid copying it multiple times.
-///         We use <c>managed data type</c> <see name="System.SysUtils.TBytes" />
-///         as a storage container for the certificate/key pairs, CRLs, etc.
-///         This type ensures that the data can be shared among multiple consumer
-///         and it is continues be available while at least one its consumer exists.
-///       </description>
-///     </item>
-///     <item>
-///       <term>Unification</term>
-///       <description>
-///         The <c>memory storage container</c> defined as an <c>Interface</c>
-///         which allows us to make different implementations for specific needs.
-///         <c>Containes</c> provide access to the memory storage(s)
-///         for the <c>OpenSSLusing</c> functions using standard <c>OpenSSL</c>
-///         <see href="https://docs.openssl.org/3.0/man7/bio/">BIO</see> interface.
-///       </description>
-///     </item>
-///     <item>
-///       <term>Security</term>
-///       <description>
-///       Sensitive data like <c>private keys</c>, <c>hdparams</c>, etc.
-///       are stored in encrypted memory storage until they are needed
-///       for the supporting encrypted network connection.
-///       The sensitive data in unecrypted form is automatically wiped
-///       from memory when it's not used.
-///       </description>
-///     </item>
-///     <item>
-///       <term>Flexibility</term>
-///       <description>
-///         Containers allows to load or update certificates not only from the filesystem
-///         but directly in the memory. Which opens door to use dynamically loaded
-///         certificates from the Certificate Authority using modern technologies
-///         like <see href="https://en.wikipedia.org/wiki/Automatic_Certificate_Management_Environment">Automatic Certificate Management Environment (ACME)</see>
-///         or <c>RestAPI</c>.
-///       </description>
-///     </item>
-///     <item>
-///       <term></term>
-///       <description>
-///       </description>
-///     </item>
-///   </list>
+///   Implements "container" classes to operate with OpenSSL public and private entities.
 ///   </summary>
 
 unit TaurusTLS_SSLContainers;
@@ -125,7 +77,7 @@ type
     protected type
       ///  <summary>
       ///  The implementation of <see cref="ITaurusTLS_Bio" /> interface
-      ///  used by <see cref="TTaurusTLS_Bytes" </c> and its descendant(s).
+      ///  used by <see cref="TTaurusTLS_Bytes" /> and its descendant(s).
       ///  </summary>
       TBio = class(TInterfacedObject, ITaurusTLS_Bio)
       private
@@ -357,21 +309,20 @@ type
     procedure SetBytes(const ABytes: TBytes);
   public
     ///  <summary>
-    ///  Create the instance of <see cref="ITaurusTLS_Bytes" /> to store a sensitive
-    ///  data in <c>encrypted form</c> and provide access to this data in <c>decrypted form</c>
-    ///  for the <c>OpenSSL BIO</c> functions.
+    ///  Create the instance of <see cref="ITaurusTLS_Bytes" /> to store a
+    ///  sensitive data in <c>encrypted form</c> and provide access to this
+    ///  data in <c>decrypted form</c> for the <c>OpenSSL BIO</c> functions.
     ///  </summary>
     ///  <param name="ABytes">
-    ///  Encrypts the provided data and initialize the internal <c>array of bytes</c>
-    ///  storage with it.
-    ///  <remarks>
-    ///  The content of parameter <c>ABytes</c> will be filled with a "zero" values
-    ///  after setting the internal storage up.
-    ///  </remarks>
+    ///  Encrypts the provided data and initialize the internal <c>array of
+    ///  bytes</c> storage with it. The content of parameter <c>ABytes</c> will
+    ///  be filled with a "zero" values after setting the internal storage up.
     ///  </param>
-    ///  <param name="AEncryptor">The instance of class derived from <see cref="TTaurusTLS_CustomEncryptor" />
-    ///  The <c>AEncryptor</c> instance executes <c>encryption</c> and <c>decryption</c>
-    ///  on <c>internal array of bytes</c> storage.
+    ///  <param name="AEncryptor">
+    ///  The instance of class derived from <see
+    ///  cref="TTaurusTLS_CustomEncryptor" />. The <c>AEncryptor</c> instance
+    ///  executes <c>encryption</c> and <c>decryption</c> on <c>internal array
+    ///  of bytes</c> storage.
     ///  </param>
     constructor Create(ABytes: TBytes; AEncryptor: TTaurusTLS_CustomEncryptor);
     destructor Destroy; override;

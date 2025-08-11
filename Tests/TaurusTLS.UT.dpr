@@ -39,7 +39,6 @@ uses
   TaurusTLS.UT.TestClasses in 'TaurusTLS.UT.TestClasses.pas',
   TaurusTLS.UT.Random in 'TaurusTLS.UT.Random.pas',
   TaurusTLS.UT.Headers.Bio in 'TaurusTLS.UT.Headers.Bio.pas',
-  TaurusTLS.UT.SSLContext in 'TaurusTLS.UT.SSLContext.pas',
   TaurusTLS.UT.SSLContainers in 'TaurusTLS.UT.SSLContainers.pas',
   TaurusTLS.UT.Encryptors in 'TaurusTLS.UT.Encryptors.pas';
 

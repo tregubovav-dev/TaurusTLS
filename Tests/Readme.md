@@ -35,6 +35,7 @@ end.
 ```
 ## Compiling unit test
 Please set up your build environment to use the correct version of the DUnitX framework. The simplest way to do this is to add the path to the DUnitX repository source files to the Search Files path of this project (Project> Options> Delphi Compiler> Search Path).
+
 The **MEMLEAK_CHECK** conditional symbol controls the memory leak check on every test execution. Please declare it in the IDE (Project>Options>Delphi Compiler>Conditional Defines), or add the command-line switch **/p:DCC_Define=MEMLEAK_CHECK** to the **msbuild** if you build it in a CI/CD pipeline.
 
 ## Running Your Unit Tests

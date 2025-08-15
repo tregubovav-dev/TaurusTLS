@@ -208,6 +208,7 @@ var
 {$ENDIF}
 
 begin
+  Log('----- SetupFixture start -----');
 {$IFDEF MSWINDOWS}
   {$IFDEF MEMLEAK_DETAILS}
   TFastMMDebugLog.DebugModeActive:=True;
@@ -215,24 +216,33 @@ begin
   lDebugActive:=TFastMMDebugLog.DebugModeActive; // To enforce linker add the TFastMMDebugLog class
   {$ENDIF MEMLEAK_DETAILS}
 {$ENDIF}
+  Log('TFastMMDebugLog.DebugModeActive = '+TFastMMDebugLog.DebugModeActive.ToString(True));
   try
+    Log('Loading OpenSSL');
     SetOssLibLoaded(TOsslLoader.Load);
+    Log(Format('Flags after loading = %x', [Cardinal(FFlags)]));
     CheckAllFailures;
   except
+    Log('Exception raised.');
     SetGlobalFail(True);
     raise
   end;
+  Log('----- SetupFixture ends  -----');
 end;
 
 procedure TOsslBaseFixture.TearDownFixture;
 begin
+  Log('----- TearDownFixture start -----');
+  Log('OssLibLoaded = '+OssLibLoaded.ToString(True));
   if OssLibLoaded then
   try
     TOsslLoader.Unload;
   except
+    Log('Exception raised.');
     SetGlobalFail(True);
     raise;
   end;
+  Log('----- TearDownFixture ends  -----');
 end;
 
 initialization

@@ -9,7 +9,7 @@
         <Filename Value="taurusHTTPServer.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <CursorPos Y="7"/>
+        <CursorPos X="27" Y="3"/>
         <UsageCount Value="22"/>
       </Unit>
       <Unit>
@@ -22,7 +22,6 @@
       </Unit>
       <Unit>
         <Filename Value="..\..\Source\TaurusTLS.pas"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="3501"/>
         <CursorPos X="5" Y="3511"/>
@@ -63,7 +62,6 @@
         <TopLine Value="327"/>
         <CursorPos X="65" Y="339"/>
         <UsageCount Value="10"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit>
       <Unit>
         <Filename Value="..\..\Source\TaurusTLS_NTLM.pas"/>
@@ -73,10 +71,15 @@
         <CursorPos X="19" Y="149"/>
         <UsageCount Value="10"/>
       </Unit>
+      <Unit>
+        <Filename Value="C:\Users\jpmug\AppData\Local\lazarus\onlinepackagemanager\packages\Indy10\Protocols\IdCustomHTTPServer.pas"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="13" Y="10"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit>
     </Units>
-    <General>
-      <ActiveWindowIndexAtStart Value="-1"/>
-    </General>
     <JumpHistory HistoryIndex="-1"/>
     <RunParams>
       <FormatVersion Value="2"/>

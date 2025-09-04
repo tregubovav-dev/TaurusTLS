@@ -19,7 +19,8 @@ unit TaurusTLS_SSLContainers;
 interface
 
 uses
-  Classes, {$IFDEF DCC}SyncObjs,{$ENDIF}SysUtils, TaurusTLS_Encryptors,
+  Classes, {$IFDEF DCC}SyncObjs,{$ENDIF}SysUtils,
+  TaurusTLS_SSLContainersHelpers, TaurusTLS_Encryptors,
   TaurusTLSHeaders_types, TaurusTLSHeaders_bio, TaurusTLSExceptionHandlers,
   IdGlobal, IdCTypes;
 
@@ -171,17 +172,7 @@ type
   protected
     procedure WipeData; overload;
   public
-    ///  <summary>
-    ///  This <c>class method</c> fills <c>array of bytes</c> with a value
-    ///  provided in <c>AValue</c> parameter value.
-    ///  </summary>
-    ///  <param name = "AData"><c>array of bytes</c> to be filled with a
-    ///  <c>AValue</c> parameter value.
-    ///  </param>
-    ///  <param name="AValue">An integer value the <c>array of bytes</c> to be filled with.
-    ///  </param>
-    class procedure WipeData(var AData: TBytes; AValue: integer = $0); overload;
-      static; {$IFDEF USE_INLINE}inline;{$ENDIF}
+    ///  <inheritdoc />
     destructor Destroy; override;
   end;
 
@@ -570,19 +561,7 @@ end;
 
 procedure TTaurusTLS_WipingBytes.WipeData;
 begin
-  WipeData(FBytes);
-end;
-
-class procedure TTaurusTLS_WipingBytes.WipeData(var AData: TBytes; AValue: integer);
-var
-  lLen: NativeUInt;
-
-begin
-  lLen:=Length(AData);
-  if lLen = 0 then
-    Exit;
-  FillChar(AData[0], lLen, AValue);
-  SetLength(AData, 0);
+  TWiper.Wipe(FBytes);
 end;
 
 { TTaurusTLS_EncryptedBytes.TPlainBytes }
@@ -701,7 +680,7 @@ begin
     ETaurusTLSIBytesError.RaiseWithMessage(RIB_Bytes_CanNotChange);
   lBytes := ABytes;
   FEncryptedBytes := EncrypBytes(ABytes);
-  TPlainBytes.WipeData(lBytes); // clean-up source data always
+  TWiper.Wipe(lBytes); // force clean-up source data
 end;
 
 { TTaurusTLS_CustomBytesHelper }

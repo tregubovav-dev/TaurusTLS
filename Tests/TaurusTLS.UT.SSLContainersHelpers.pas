@@ -3,7 +3,8 @@ unit TaurusTLS.UT.SSLContainersHelpers;
 interface
 
 uses
-  System.Classes, System.SysUtils, DUnitX.TestFramework, DUnitX.Types,
+  System.Classes, System.SysUtils, System.IOUtils,
+  DUnitX.TestFramework, DUnitX.Types,
   DUnitX.InternalDataProvider, DUnitX.TestDataProvider,
   IdGlobal, IdCTypes,
   TaurusTLS_SSLContainersHelpers;
@@ -36,13 +37,31 @@ type
   end;
 
   TBytesValidator = record
+  public type
+    TTrailingNulls = TBytesFactory.TTrailingNulls;
   public
     class procedure AreEqual(const ABytes: TBytes; const AStr: string;
       AWithTrailingNull: boolean); overload; static;
     class procedure AreEqual(const ABytes: TBytes; const AStr: RawByteString;
       AWithTrailingNull: boolean); overload; static;
+    class procedure AreEqual(const ABytes, ASrcBytes: TBytes;
+      AOffset: NativeUInt; ATrailingNulls: TTrailingNulls); overload; static;
     class procedure AreEqual(const ABytes: TBytes; const AStream: TStream;
-      ACount: NativeUInt); overload; static;
+      AOffset: Longint; ATrailingNulls: TTrailingNulls); overload; static;
+  end;
+
+  TStreamFactory = class
+    class function SetupStream(AStream: TStream; ABytes: TBytes): TStream;
+      overload; static;
+    class function SetupStream(AStream: TStream; AHexStr: UnicodeString): TStream;
+      overload; static;
+    class function NewMemoryStream(ASize: Int64 = 0): TStream; static;
+    class function NewBytesStream(ASize: NativeUInt = 0): TStream; overload; static;
+    class function NewBytesStream(ABytes: TBytes): TStream; overload; static;
+    class function NewFileStream(AFileName: string; AMode: word): TStream; static;
+    class procedure SaveToFile(AFileName: string; AHexStr: UnicodeString;
+      AMode: word = fmCreate+fmShareDenyWrite); static;
+    class function SaveToFileTempFile(AHexStr: UnicodeString): string; static;
   end;
 
 //  Hex-encoded UTF16LE string constants for tests cases.
@@ -127,20 +146,24 @@ type
     [TestCase('Cyrillic_Chars', cCyrChars)]
     [TestCase('Greek_Chars', cGreekChars)]
     procedure WipeBytes(AHexStr: string);
+
     [TestCase('Empty', '')]
     [TestCase('Latin_Chars', cLatinChars)]
     procedure WipeAnsiStr(AHexStr: string);
+
     [TestCase('Empty', '')]
     [TestCase('''Test string''', cTestString)]
     [TestCase('Latin_Chars', cLatinChars)]
     [TestCase('Cyrillic_Chars', cCyrChars)]
     [TestCase('Greek_Chars', cGreekChars)]
     procedure WipeUTF8Str(AHexStr: string);
+
     [TestCase('Empty', '')]
     [TestCase('Single_byte', 'e2')]
     [TestCase('''Test string''', cTestString)]
     [TestCase('Latin_Chars', cLatinChars)]
     procedure WipeRawByteStr(AHexStr: string);
+
     [TestCase('Empty', '')]
     [TestCase('Single_char', '0020')]
     [TestCase('''Test string''', cTestString)]
@@ -151,7 +174,7 @@ type
   end;
 
   [TestFixture]
-  [Category('BytesHelpers')]
+  [Category('BytesHelper')]
   TBytesHelpersFixture = class
   public
     [TestCase('Empty_WithoutTermNull',',False')]
@@ -165,6 +188,7 @@ type
     [TestCase('Greek_WithoutTermNull', cGreekChars+',False')]
     [TestCase('Greek_WithTermNull', cGreekChars+',True')]
     procedure CreateUnicodeStr(AHexStr: string; AWithTrailingNull: boolean);
+
     [TestCase('CP_ACP_Empty_WithoutTermNull',',False,0')]
     [TestCase('CP_ACP_Empty_WithTermNull',',True,0')]
     [TestCase('CP_ACP_English_WithoutTermNull', cTestString+',False,0')]
@@ -177,6 +201,7 @@ type
     [TestCase('CP_1253_Greek_WithTermNull', cGreekChars+',True,1253')]
     procedure CreateAnsiStr(AHexStr: string; AWithTrailingNull: boolean;
       ACodePage: cardinal = CP_ACP);
+
     [TestCase('Empty_WithoutTermNull',',False')]
     [TestCase('Empty_WithTermNull',',True')]
     [TestCase('English_WithoutTermNull', cTestString+',False')]
@@ -198,6 +223,7 @@ type
     [TestCase('Cyrillic_WithTermNull', cCyrChars+',True')]
     [TestCase('Greek_WithoutTermNull', cGreekChars+',False')]
     [TestCase('Greek_WithTermNull', cGreekChars+',True')]
+
     procedure CreateAndWipeUnicodeStr(AHexStr: string; AWithTrailingNull: boolean);
     [TestCase('English_WithoutTermNull', cRBTestString+',False')]
     [TestCase('English_WithTermNull', cRBTestString+',True')]
@@ -207,6 +233,7 @@ type
     [TestCase('Cyrillic_WithTermNull', cRBCyrChars+',True')]
     [TestCase('Greek_WithoutTermNull', cRBGreekChars+',False')]
     [TestCase('Greek_WithTermNull', cRBGreekChars+',True')]
+
     procedure CreateAndWipeRBStr(AHexStr: string; AWithTrailingNull: boolean);
     [TestCase('CP_ACP_Empty_WithoutTermNull',',False,0')]
     [TestCase('CP_ACP_Empty_WithTermNull',',True,0')]
@@ -220,6 +247,7 @@ type
     [TestCase('CP_1253_Greek_WithTermNull', cGreekChars+',True,1253')]
     procedure CreateAndWipeAnsiStr(AHexStr: string; AWithTrailingNull: boolean;
       ACodePage: cardinal = CP_ACP);
+
     [TestCase('Empty_WithoutTermNull',',False')]
     [TestCase('Empty_WithTermNull',',True')]
     [TestCase('English_WithoutTermNull', cTestString+',False')]
@@ -231,6 +259,7 @@ type
     [TestCase('Greek_WithoutTermNull', cGreekChars+',False')]
     [TestCase('Greek_WithTermNull', cGreekChars+',True')]
     procedure CreateAndWipeUTF8Str(AHexStr: string; AWithTrailingNull: boolean);
+
     [TestCase('Empty_WithoutTermNull',',False')]
     [TestCase('Empty_WithTermNull',',True')]
     [TestCase('English_WithoutTermNull', cTestString+',False')]
@@ -242,6 +271,7 @@ type
     [TestCase('Greek_WithoutTermNull', cGreekChars+',False')]
     [TestCase('Greek_WithTermNull', cGreekChars+',True')]
     procedure CreateAsUTF8UnicodeStr(AHexStr: string; AWithTrailingNull: boolean);
+
     [TestCase('CP_ACP_Empty_WithoutTermNull',',False,0')]
     [TestCase('CP_ACP_Empty_WithTermNull',',True,0')]
     [TestCase('CP_ACP_English_WithoutTermNull', cTestString+',False,0')]
@@ -280,10 +310,33 @@ type
       ACodePage: cardinal = CP_ACP);
   end;
 
+  [TestFixture]
+  [Category('BytesHelperStream')]
   TBytesHelpersStreamFixture = class
-
+  public type
+    TTrailingNulls = TBytesFactory.TTrailingNulls;
+  private
+    FStream: TStream;
+    procedure FreeStream;
+    procedure SetStream(AStream: TStream);
+  protected
+    procedure CheckStream;
+    property Stream: TStream read FStream write SetStream;
+  public
+    [Teardown]
+    procedure Teardown;
+    [TestCase('Empty_WithoutTermNull',',0,0,0')]
+    [TestCase('Empty_WithOneTermNull',',0,0,1')]
+    [TestCase('Empty_WithTwoTermNulls',',0,0,2')]
+    [TestCase('English_WithoutTermNull_ReadAll', cTestString+',0,0,0')]
+    [TestCase('English_WithTwoTermNulls_ReadAll', cTestString+',0,0,2')]
+    [TestCase('English_WithoutTermNull_Read_2_6', cTestString+',2,6,0')]
+    [TestCase('English_WithTwoTermNulls_Read_1_8', cTestString+',1,8,2')]
+    [TestCase('Latin_WithoutTermNull_Read_8_64', cLatinChars+',0,8,64')]
+    [TestCase('Latin_WithOneTermNull_Read_16_32', cLatinChars+',1,16,32')]
+    procedure CreateFromStream(AHexStr: UnicodeString; AOffset, ACount: Longint;
+      AAddTrailingNulls: TTrailingNulls);
   end;
-
 
 implementation
 
@@ -537,23 +590,142 @@ begin
   Assert.AreEqualMemory(PByte(ABytes), PAnsiChar(AStr), lBLen);
 end;
 
-class procedure TBytesValidator.AreEqual(const ABytes: TBytes;
-  const AStream: TStream; ACount: NativeUInt);
+class procedure TBytesValidator.AreEqual(const ABytes, ASrcBytes: TBytes;
+  AOffset: NativeUInt; ATrailingNulls: TTrailingNulls);
 var
-  lBLen, lSLen: NativeUInt;
+  lALen, lBLen, lSrcLen: NativeUInt;
+  i: integer;
+
+begin
+  lALen:=Length(ABytes);
+  Assert.IsTrue(lALen-ATrailingNulls >= 0,
+    Format('Length(ABytes): "%d" should be greater or equal ATrailingNulls: "%d".',
+    [lALen, ATrailingNulls]));
+  if lALen > ATrailingNulls then
+  begin
+    lBLen:=lALen-ATrailingNulls;
+    lSrcLen:=Length(ASrcBytes);
+    Assert.IsTrue(lSrcLen >= AOffset+lBLen,
+      Format('Trying to read outside of ASrcBytes boundary. '+
+      'Length(ASrcBytes): %d bytes, less than Length(ASrcBytes)+ACount: %d bytes(s)',
+      [lSrcLen, AOffset+lBLen]));
+    Assert.AreEqualMemory(PByte(ABytes), PByte(@ASrcBytes[AOffset]), lBLen,
+      'ASrcBytes and ABytes are not equal.');
+  end;
+  for i := ATrailingNulls-1 downto Low(TTrailingNulls) do
+    Assert.AreEqual<byte>(0, ABytes[lALen-i-1],
+      Format('No trailing null at position', [lALen-i-1]));
+end;
+
+class procedure TBytesValidator.AreEqual(const ABytes: TBytes;
+  const AStream: TStream; AOffset: Longint; ATrailingNulls: TTrailingNulls);
+var
+  lALen, lBLen: NativeUInt;
+  lBytes: TBytes;
+  lStreamPos, lStreamSize: Int64;
+  i: integer;
+
+begin
+  Assert.IsNotNull(AStream, 'AStream must not be ''nil''.');
+  lALen:=Length(ABytes);
+  Assert.IsTrue(lALen-ATrailingNulls >= 0,
+    Format('Length(ABytes): "%d" should be greater or equal ATrailingNulls: "%d".',
+    [lALen, ATrailingNulls]));
+  lStreamSize:=AStream.Size;
+  SetLength(lBytes, lALen);
+  if lALen > ATrailingNulls then
+  begin
+    lBLen:=lALen-ATrailingNulls;
+    Assert.IsTrue(lStreamSize >= AOffset+lBLen,
+      Format('Trying to read behind the End of File. File Size: %d bytes '+
+      'less than File Size+ACount: %d byte(s)', [lStreamSize, AOffset+lBLen]));
+    lStreamPos:=AStream.Position;
+    try
+      Assert.AreEqual<Int64>(lBLen, AStream.Read(lBytes, lBLen),
+        'Data has read less than reguested.');
+    finally
+      AStream.Position:=lStreamPos;
+    end;
+  end;
+  Assert.AreEqualMemory(PByte(lBytes), PByte(ABytes), lALen,
+    'ABytes and content of AStream are not equal.');
+end;
+
+{ TStreamFactory }
+
+class function TStreamFactory.SetupStream(AStream: TStream;
+  ABytes: TBytes): TStream;
+begin
+  Assert.IsNotNull(AStream, 'AStream shouldn''t be ''nil''.');
+  Result:=AStream;
+  AStream.Size:=0;
+  AStream.Write(ABytes, Length(ABytes));
+end;
+
+class function TStreamFactory.SetupStream(AStream: TStream;
+  AHexStr: UnicodeString): TStream;
+var
   lBytes: TBytes;
 
 begin
-  lBLen:=Length(ABytes);
-  lSLen:=AStream.Size-AStream.Position;
-  Assert.IsTrue(lSLen >= ACount,
-    Format('Remaining AStream size (%d), less than ACount (%d)', [lSLen, ACount]));
-  Assert.AreEqual(ACount, lBLen, 'ACount and Length(ABytes) are not equal.');
-  if lBLen = 0 then
-    Exit;
-  SetLength(lBytes, lBLen);
-  AStream.Read(lBytes, ACount);
-  Assert.AreEqual(lBytes, ABytes, 'ABytes and content of AStream are not equal.');
+  THexStrTestTool.FromHex(AHexStr, lBytes);
+  SetupStream(AStream, lBytes);
+end;
+
+class function TStreamFactory.NewMemoryStream(ASize: Int64): TStream;
+begin
+  Result:=TMemoryStream.Create;
+  TMemoryStream(Result).SetSize(ASize);
+end;
+
+class function TStreamFactory.NewBytesStream(ASize: NativeUInt): TStream;
+var
+  lBytes: TBytes;
+
+begin
+  SetLength(lBytes, ASize);
+  Result:=NewBytesStream(lBytes);
+end;
+
+class function TStreamFactory.NewBytesStream(ABytes: TBytes): TStream;
+begin
+  Result:=TBytesStream.Create(ABytes);
+end;
+
+class function TStreamFactory.NewFileStream(AFileName: string;
+  AMode: word): TStream;
+begin
+  Result:=TFileStream.Create(AFileName, AMode);
+end;
+
+class procedure TStreamFactory.SaveToFile(AFileName: string;
+  AHexStr: UnicodeString; AMode: word);
+var
+  lStream: TStream;
+
+begin
+  lStream:=nil;
+  try
+    lStream:=NewFileStream(AFileName, AMode);
+    SetupStream(lStream, AHexStr);
+  finally
+    lStream.Free;
+  end;
+end;
+
+class function TStreamFactory.SaveToFileTempFile(
+  AHexStr: UnicodeString): string;
+var
+  lFileName: string;
+
+begin
+  lFileName:=TPath.GetTempFileName;
+  try
+    SaveToFile(lFileName, AHexStr, fmOpenWrite+fmShareExclusive)
+  except
+    TFile.Delete(lFileName);
+  end;
+
 end;
 
 { TBytesHelpersFixture }
@@ -711,6 +883,72 @@ begin
   TWipeTestTool.CheckWiped(lCopyStr);
   TBytesValidator.AreEqual(lBytes, lUTF8Str, AWithTrailingNull);
 end;
+
+{ TBytesHelpersStreamFixture }
+
+procedure TBytesHelpersStreamFixture.CheckStream;
+begin
+  Assert.IsNotNull(FStream, 'Stream is ''nil''. Unable to execute test.');
+end;
+
+procedure TBytesHelpersStreamFixture.FreeStream;
+var
+  lFileName: string;
+
+begin
+  if not Assigned(FStream) then
+    Exit;
+  if FStream is TFileStream then
+    lFileName:=TFileStream(FStream).FileName
+  else
+    lFileName:='';
+  try
+    FreeAndNil(FStream);
+  finally
+    if not lFileName.IsEmpty then
+      TFile.Delete(lFileName);
+  end;
+end;
+
+procedure TBytesHelpersStreamFixture.SetStream(AStream: TStream);
+begin
+  if AStream = FStream then
+    Exit;
+  FreeStream;
+  FStream:=AStream;
+  CheckStream;
+end;
+
+procedure TBytesHelpersStreamFixture.Teardown;
+begin
+  FreeStream;
+end;
+
+procedure TBytesHelpersStreamFixture.CreateFromStream(AHexStr: UnicodeString;
+  AOffset, ACount: Longint; AAddTrailingNulls: TTrailingNulls);
+var
+  lBytes, lReadBytes: TBytes;
+  lBLen: NativeUInt;
+  lStreamLen: Int64;
+
+begin
+  THexStrTestTool.FromHex(AHexStr, lBytes);
+  lBLen:=Length(lBytes);
+  if (AOffset = 0) and (ACount = 0) then
+    ACount:=lBLen;
+  Assert.IsTrue(lBLen >= AOffset+ACount,
+    Format('Read size is bigger than source data. Source Size: %d bytes, '+
+      'Read request is between %d and %d bytes.',
+      [lBLen, AOffset, AOffset+ACount]));
+
+  Stream:=TStreamFactory.NewBytesStream(lBytes);
+  Stream.Position:=AOffset;
+  lReadBytes:=TBytesFactory.Create(Stream, ACount, AAddTrailingNulls);
+  Assert.AreEqual<Int64>(ACount, Length(lReadBytes)-AAddTrailingNulls,
+    'Number of requested and actaully read bytes are not equal.');
+  TBytesValidator.AreEqual(lReadBytes, lBytes, AOffset, AAddTrailingNulls);
+end;
+
 
 // To avoid false positive "memory leak" error we explicitly initialize
 // TEncoding.Unicode.

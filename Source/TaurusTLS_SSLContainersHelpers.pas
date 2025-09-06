@@ -88,18 +88,124 @@ type
   ///  with various sources
   ///  </summary>
   TBytesFactory = class
+  public type
+    /// <summary>
+    ///  Number of trailing null bytes to add to the <c>array of bytes</c>
+    ///  to represent it as a <see cref="PAnsiChar" /> or <see cref="PWideChar" />
+    ///  null-terminated string.
+    ///  </summary>
+    TTrailingNulls = 0..2;
   protected
+    ///  <summary>
+    ///  Creates <c>array of bytes</c> from content of
+    ///  <see cref="UnicodeString" />.
+    ///  </summary>
+    ///  <param name="AStr">
+    ///  An <see cref="UnicodeString" /> which content is copied to the
+    ///  <c>array of bytes</c>.
+    ///  </param>
+    ///  <param name="AWithTrailingNull">
+    ///  Indicates whether to add a zero-value bytes at the end of <see cref="TBytes" />
+    ///  array. Adding this byte allows to represent <see cref="TBytes" /> array
+    ///  as null-terminated <see cref="UnicodeString" />.
+    ///  </param>
+    ///  <returns>
+    ///  <c>Array of bytes</c> filled with content of <see cref="UnicodeString" />.
+    ///  Size of <c>array</c> is equal <c>length(AStr)*2</c> if
+    ///  <c>AWithTrailingNull</c> parameter value is <c>False</c>,
+    ///  or it's equal to <c>(length(AStr)+1)*2</c> otherwise.
+    ///  </returns>
     class function CreateUnicode(const AStr: UnicodeString;
       AWithTrailingNull: boolean): TBytes; overload; static;
       {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+    ///  <summary>
+    ///  Creates <c>array of bytes</c> from content of
+    ///  <see cref="AnsiString" />.
+    ///  </summary>
+    ///  <param name="AStr">
+    ///  An <see cref="AnsiString" /> which content is copied to the
+    ///  <c>array of bytes</c>.
+    ///  </param>
+    ///  <param name="AWithTrailingNull">
+    ///  Indicates whether to add a zero-value byte at the end of <see cref="TBytes" />
+    ///  array. Adding this byte allows to represent <see cref="TBytes" /> array
+    ///  as null-terminated <see cref="AnsiString" />.
+    ///  </param>
+    ///  <returns>
+    ///  <c>Array of bytes</c> filled with content of <see cref="AnsiString" />.
+    ///  Size of <c>array</c> is equal <c>length(AStr)</c> if
+    ///  <c>AWithTrailingNull</c> parameter value is <c>False</c>,
+    ///  or it's equal to <c>length(AStr)+1</c> otherwise.
+    ///  </returns>
     class function CreateAnsi(const AStr: AnsiString;
       AWithTrailingNull: boolean): TBytes; overload; static;
       {$IFDEF USE_INLINE}inline;{$ENDIF}
-    class function CreateUTF8(const AStr: UTF8String;
-      AWithTrailingNull: boolean): TBytes; overload; static;
-      {$IFDEF USE_INLINE}inline;{$ENDIF}
+    ///  <summary>
+    ///  Converts content of <c>Unicode null-terminated string</c> to the
+    ///  <c>array of bytes</c> representing <c>Unicode characters</c> in
+    ///  <c>UTF8</c> encoding.
+    ///  <remarks>
+    ///  This method fills temporary conversion buffer with zeros.
+    ///  </remarks>
+    ///  </summary>
+    ///  <param name="AStr">
+    ///  A pointer to the <see cref="UnicodeString" /> null-terminated string.
+    ///  </param>
+    ///  <param name="ALen">
+    ///  A number of <c>Unicode characters</c> to be converted.
+    ///  </param>
+    ///  <param name="AWithTrailingNull">
+    ///  Indicates whether to add a zero-value bytes at the end of <see cref="TBytes" />
+    ///  array. Adding these bytes allows to represent <see cref="TBytes" /> array
+    ///  as null-terminated <see cref="UnicodeString" />.
+    ///  </param>
+    ///  <returns>
+    ///  <c>Array of bytes</c> filled with content of <see cref="UnicodeString" />.
+    ///  converted to the sequence of bytes in <c>UTF8 encoding</c>.
+    ///  Size of <c>array</c> is vary depending on characters in the <c>AStr</c>
+    ///  and <c>AWithTrailingNull</c> parameters.
+    ///  </returns>
     class function UnicodeToUTF8(AStr: PWideChar; ALen: integer;
       AWithTrailingNull: boolean): TBytes; static;
+
+    class function CreateFromStream(const AStream: TStream;
+      out ABytes: TBytes; ACount: NativeUInt;
+      AAddTrailingNulls: TTrailingNulls = 0): NativeInt;
+      overload; static;
+
+    ///  <summary>
+    ///  Converts content of <c>Ansi null-terminated string</c> to the
+    ///  <c>array of bytes</c> representing <c>Unicode characters</c> in
+    ///  <c>UTF8</c> encoding.
+    ///  <remarks>
+    ///  This method fills temporary conversion buffer with zeros.
+    ///  </remarks>
+    ///  </summary>
+    ///  <param name="AStr">
+    ///  A pointer to the <see cref="AnsiString" /> null-terminated string.
+    ///  </param>
+    ///  <param name="ALen">
+    ///  A number of <c>characters</c> to be converted.
+    ///  </param>
+    ///  <param name="AWithTrailingNull">
+    ///  Indicates whether to add a zero-value bytes at the end of <see cref="TBytes" />
+    ///  array. Adding this byte allows to represent <see cref="TBytes" /> array
+    ///  as null-terminated <see cref="AnsiString" />.
+    ///  </param>
+    ///  <param name="cp">
+    ///  A <c>CodePage</c> of <c>AStr</c> string.
+    ///  </param>
+    ///  <param name="AWipe">
+    ///  Indicates whether a method should fills a temporary converion
+    ///  buffer(s) with zeros.
+    ///  </param>
+    ///  <returns>
+    ///  <c>Array of bytes</c> filled with content of <see cref="AnsiString" />.
+    ///  converted to the sequence of bytes in <c>UTF8 encoding</c>.
+    ///  Size of <c>array</c> is vary depending on CodePage of the <c>AStr</c>
+    ///  parameter and <c>AWithTrailingNull</c> parameter values.
+    ///  </returns>
 {$IFDEF DCC}
     class function AnsiToUTF8(AStr: PAnsiChar; ALen: integer;
       AWithTrailingNull: boolean; cp: cardinal; AWipe: boolean = False): TBytes;
@@ -118,15 +224,24 @@ type
     ///  Pointer to the memory region which will be copied to the <see cref="TBytes" />
     ///  array.
     ///  </param>
-    ///  <param name="ALen">
-    ///  Size of created array and <see cref="TBytes" /> number of bytes
+    ///  <param name="ADataLen">
+    ///  Number of bytes to be copied from <c>AData</c> into <c>array of bytes</c>.
+    ///  </param>
+    ///  <param name="AResultLen">
+    ///  Size of created array. <br /> If <c>AResultLen</c> is <c>0</c>
+    ///  the length of returned <c>array of bytes</c> will be equal
+    ///  value of <c>ADataLen</c> parameter.
     ///  copied to it
     ///  </param>
     ///  <remarks>
-    ///  Function returns empty array with length of <c>ALen</c> parameter
-    ///  when <c>AData</c> parameter is <c>nil</c>
+    ///  Function returns empty array when <c>AData</c> parameter is <c>nil</c>
     ///  </remarks>
-    class function Create(const AData: pointer; ALen: NativeUInt): TBytes;
+    ///  <returns>
+    ///  An <c>array of bytes</c> initialized with <c>ADataLen</c> bytes
+    ///  from the address pointed in <c>AData</c>
+    ///  </returns>
+    class function Create(const AData: pointer; ADataLen: NativeUInt;
+       AResultLen: NativeUInt = 0): TBytes;
       overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
   public
 
@@ -140,10 +255,15 @@ type
     ///  array.
     ///  </param>
     ///  <param name="AWithTrailingNull">
-    ///  Indicates whether to add a zero-value byte at the end of <see cref="TBytes" />
+    ///  Indicates whether to add a zero-value bytes at the end of <see cref="TBytes" />
     ///  array. Adding this byte allows to represent <see cref="TBytes" /> array
     ///  as null-terminated <see cref="UnicodeString" />.
     ///  </param>
+    ///  <returns>
+    ///  <c>Array of bytes</c> filled with content of <see cref="UnicodeString" />.
+    ///  Size of <c>array</c> is a twice bigger than length of <c>AStr</c> as
+    ///  each <c>Unicode character</c> occupies two <c>bytes</c>.
+    ///  </returns>
     class function Create(const AStr: UnicodeString; AWithTrailingNull: boolean): TBytes;
       overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
 
@@ -179,33 +299,6 @@ type
     class function Create(const AStr: UTF8String; AWithTrailingNull: boolean): TBytes;
       overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
 
-    ///  Creates instance of <see cref="TBytes" /> with lenght of <c>ACount</c>,
-    ///  copies number of <c>bytes</c> from the <c>AStream</c> into
-    ///  created <see cref="TBytes" /> array.
-    ///  <para>
-    ///  Method copies <c>ACount</c> bytes from the stream specified
-    ///  by <c>AStream</c> into the <c>array of bytes</c>. It then moves
-    ///  the current position by <c>ACount</c> bytes and returns
-    ///  the instance of <see cref="TBytes" />.
-    ///  </para>
-    ///  <para>
-    ///  If <c>ACount</c> is 0, method sets <c>AStream</c> position to 0 before reading
-    ///  and then copies the entire contents of <c>AStream</c> into
-    ///  the <c>array of bytes</c>.
-    ///  If <c>ACount</c> is greater than 0, method reads from the current position
-    ///  in <c>AStream</c>.
-    ///  </para>
-    ///  </summary>
-    ///  <param name="AStream">
-    ///  A <see cref="TStream" /> which content is copied to the
-    ///  the <c>array of bytes</c>.
-    ///  </param>
-    ///  <param name="ACount">
-    ///  Number of <c>bytes</c> to copy from the <c>AStream</c>.
-    ///  </param>
-    class function Create(const AStream: TStream; ACount: NativeUInt): TBytes;
-      overload; static;
-
     ///  <summary>
     ///  Creates instance of <see cref="TBytes" />, converts content of
     ///  <c>AStr</c> string to <see cref="UnicodeString" />, copies its
@@ -225,6 +318,7 @@ type
     class function CreateAndWipe(var AStr: UnicodeString;
       AWithTrailingNull: boolean): TBytes; overload; static;
       {$IFDEF USE_INLINE}inline;{$ENDIF}
+
     ///  <summary>
     ///  Creates instance of <see cref="TBytes" />, copies conntent of <c>AStr</c>
     ///  into created <see cref="TBytes" /> array, and fills
@@ -244,6 +338,7 @@ type
       AWithTrailingNull: boolean): TBytes; overload; static;
       {$IFDEF USE_INLINE}inline;{$ENDIF}
 
+    ///  <summary>
     ///  Creates instance of <see cref="TBytes" />, copies conntent of <c>AStr</c>
     ///  into created <see cref="TBytes" /> array, and fills
     ///  the origianl string with <c>zeros</c>.
@@ -262,6 +357,7 @@ type
       AWithTrailingNull: boolean): TBytes; overload; static;
       {$IFDEF USE_INLINE}inline;{$ENDIF}
 
+    ///  <summary>
     ///  Creates instance of <see cref="TBytes" />, copies conntent of <c>AStr</c>
     ///  into created <see cref="TBytes" /> array, and fills
     ///  the origianl string with <c>zeros</c>.
@@ -279,39 +375,6 @@ type
     class function CreateAndWipe(var AStr: UTF8String;
       AWithTrailingNull: boolean): TBytes; overload; static;
       {$IFDEF USE_INLINE}inline;{$ENDIF}
-
-    ///  Creates instance of <see cref="TBytes" /> with lenght of <c>ACount</c>,
-    ///  copies number of <c>bytes</c> from the <c>AStream</c> into
-    ///  created <see cref="TBytes" /> array.
-    ///  This method fills the memory buffer of instance
-    ///  of <see cref="TMemoryStream" /> class and its descendant(s) with <c>zeros</c>.
-    ///  <para>
-    ///  Method copies <c>ACount</c> bytes from the stream specified
-    ///  by <c>AStream</c> into the <c>array of bytes</c>. It then moves
-    ///  the current position by <c>ACount</c> bytes and returns it.
-    ///  If <c>AStream</c> as the instance of <see cref="TMemoryStream" />,
-    ///  method fills see cref="TMemoryStream.Memory" /> with zeros
-    ///  <c>ACount</c> of bytes starting the initial <c>AStream.Position</c>.
-    ///  </para>
-    ///  <para>
-    ///  If <c>ACount</c> is 0, method sets <c>AStream</c> position to 0 before reading
-    ///  and then copies the entire contents of <c>AStream</c> into
-    ///  the <c>array of bytes</c> then and returns it.
-    ///  If <c>AStream</c> as the instance of <see cref="TMemoryStream" />,
-    ///  method fills entire <see cref="TMemoryStream.Memory" /> with zeros.
-    ///  If <c>ACount</c> is greater than 0, method reads from the current position
-    ///  in <c>AStream</c>.
-    ///  </para>
-    ///  </summary>
-    ///  <param name="AStream">
-    ///  A <see cref="TStream" /> which content is copied to the
-    ///  the <c>array of bytes</c>.
-    ///  </param>
-    ///  <param name="ACount">
-    ///  Number of <c>bytes</c> to copy from the <c>AStream</c>.
-    ///  </param>
-    class function CreateAndWipeMemBuf(const AStream: TStream;
-      ACount: NativeUInt): TBytes; overload; static;
 
     ///  <summary>
     ///  Creates instance of <see cref="TBytes" />, converts content of
@@ -344,9 +407,6 @@ type
     ///  Indicates whether to add a zero-value byte at the end of <see cref="TBytes" />
     ///  array. Adding this byte allows to represent <see cref="TBytes" /> array
     ///  as null-terminated <see cref="AnsiString" />.
-    ///  </param>
-    ///  <param name="cp">
-    ///  Indicates to the <c>AStr CodePage</c>.
     ///  </param>
 {$IFDEF DCC}
     class function CreateAsUTF8(const AStr: AnsiString;
@@ -395,21 +455,123 @@ type
     class function CreateAsUTF8AndWipe(var AStr: AnsiString;
       AWithTrailingNull: boolean): TBytes; overload; static;
       {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+    /// <summary>
+    ///  Creates instance of <see cref="TBytes" /> with lenght of <c>ACount</c>,
+    ///  copies number of <c>bytes</c> from the <c>AStream</c> into
+    ///  created <see cref="TBytes" /> array.
+    ///  <para>
+    ///  Method copies <c>ACount</c> bytes from the stream specified
+    ///  by <c>AStream</c> into the <c>array of bytes</c>. It then moves
+    ///  the current position by <c>ACount</c> bytes and returns
+    ///  the instance of <see cref="TBytes" />.
+    ///  </para>
+    ///  <para>
+    ///  If <c>ACount</c> is 0, method sets <c>AStream</c> position to 0 before reading
+    ///  and then copies the entire contents of <c>AStream</c> into
+    ///  the <c>array of bytes</c>.
+    ///  If <c>ACount</c> is greater than 0, method reads from the current position
+    ///  in <c>AStream</c>.
+    ///  </para>
+    ///  </summary>
+    ///  <param name="AStream">
+    ///  A <see cref="TStream" /> which content is copied to the
+    ///  the <c>array of bytes</c>.
+    ///  </param>
+    ///  <param name="ACount">
+    ///  Number of <c>bytes</c> to copy from the <c>AStream</c>.
+    ///  </param>
+    ///  <param name="AAddTrailingNulls">
+    ///  Indicates how many trailing null characters to add to the
+    ///  <c>array of bytes</c>. Non-zero parameter value allows to cast
+    ///  returning <c>array of bytes</c> as null-terminated string.
+    ///  <remarks>
+    ///  Allowed values are between <c>0</c> and <c>2</c>.
+    ///  * <c>0</c> - no null-terminated symbols are added after content
+    ///  * <c>1</c> - a single terminated symbols are added after content
+    ///  to allow represent the <c>array of bytes</c> as a single-byte or
+    ///  multibyte-encoded character string.
+    ///  * <c>2</c> - two zero bytes are added after content
+    ///  to allow represent the <c>array of bytes</c> as a Unicode (UTF16)
+    ///  character string. <br />
+    ///  Please note that the content length must have even number of bytes.
+    ///  </remarks>
+    ///  </param>
+    class function Create(const AStream: TStream; ACount: NativeInt;
+      AAddTrailingNulls: TTrailingNulls = 0): TBytes;
+      overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+    ///  <summary>
+    ///  Creates instance of <see cref="TBytes" /> with lenght of <c>ACount</c>,
+    ///  copies number of <c>bytes</c> from the <c>AStream</c> into
+    ///  created <see cref="TBytes" /> array.
+    ///  This method fills the memory buffer of instance
+    ///  of <see cref="TMemoryStream" /> class and its descendant(s) with <c>zeros</c>.
+    ///  <para>
+    ///  Method copies <c>ACount</c> bytes from the stream specified
+    ///  by <c>AStream</c> into the <c>array of bytes</c>. It then moves
+    ///  the current position by <c>ACount</c> bytes and returns it.
+    ///  If <c>AStream</c> as the instance of <see cref="TMemoryStream" />,
+    ///  method fills see cref="TMemoryStream.Memory" /> with zeros
+    ///  <c>ACount</c> of bytes starting the initial <c>AStream.Position</c>.
+    ///  </para>
+    ///  <para>
+    ///  If <c>ACount</c> is 0, method sets <c>AStream</c> position to 0 before reading
+    ///  and then copies the entire contents of <c>AStream</c> into
+    ///  the <c>array of bytes</c> then and returns it.
+    ///  If <c>AStream</c> as the instance of <see cref="TMemoryStream" />,
+    ///  method fills entire <see cref="TMemoryStream.Memory" /> with zeros.
+    ///  If <c>ACount</c> is greater than 0, method reads from the current position
+    ///  in <c>AStream</c>.
+    ///  </para>
+    ///  </summary>
+    ///  <param name="AStream">
+    ///  A <see cref="TStream" /> which content is copied to the
+    ///  the <c>array of bytes</c>.
+    ///  </param>
+    ///  <param name="ACount">
+    ///  Number of <c>bytes</c> to copy from the <c>AStream</c>.
+    ///  </param>
+    ///  <param name="AAddTrailingNulls">
+    ///  Indicates how many trailing null characters to add to the
+    ///  <c>array of bytes</c>. Non-zero parameter value allows to cast
+    ///  returning <c>array of bytes</c> as null-terminated string.
+    ///  <remarks>
+    ///  Allowed values are between <c>0</c> and <c>2</c>.
+    ///  * <c>0</c> - no null-terminated symbols are added after content
+    ///  * <c>1</c> - a single terminated symbols are added after content
+    ///  to allow represent the <c>array of bytes</c> as a single-byte or
+    ///  multibyte-encoded character string.
+    ///  * <c>2</c> - two zero bytes are added after content
+    ///  to allow represent the <c>array of bytes</c> as a Unicode (UTF16)
+    ///  character string. <br />
+    ///  Please note that the content length must have even number of bytes.
+    ///  </remarks>
+    ///  </param>
+    class function CreateAndWipeMemBuf(const AStream: TStream;
+      ACount: NativeInt; AAddTrailingNulls: TTrailingNulls = 0): TBytes;
+      overload; static;
   end;
 
 implementation
 
 uses
+{$IFDEF DCC}
+  System.SysConst,
+{$ENDIF}
+{$IFDEF FPC}
+  rtlconsts,
+{$ENDIF}
   TaurusTLS_ResourceStrings;
 
 type
   TStreamHelper = class helper for TStream
-    procedure WipeMemoryData(AStart, ACount: NativeUInt);
+    procedure WipeMemoryData(AStart, ACount: Int64);
   end;
 
 { TStreamHelper }
 
-procedure TStreamHelper.WipeMemoryData(AStart, ACount: NativeUInt);
+procedure TStreamHelper.WipeMemoryData(AStart, ACount: Int64);
 var
   lStartPos: PByte;
 
@@ -465,54 +627,37 @@ end;
 class function TBytesFactory.CreateUnicode(const AStr: UnicodeString;
   AWithTrailingNull: boolean): TBytes;
 var
-  lLen: NativeUInt;
-  lPtr: pointer;
+  lDataLen, lResultLen: NativeUInt;
+  lPtr: PWideChar;
 
 begin
-  lLen:=Length(AStr);
-  if lLen = 0  then
+  lDataLen:=Length(AStr)*SizeOf(WideChar);
+  if lDataLen = 0  then
     lPtr:=nil
   else
     lPtr:=PWideChar(Astr);
+  lResultLen:=lDataLen;
   if AWithTrailingNull then
-    Inc(lLen);
-  Result:=Create(lPtr, lLen*SizeOf(WideChar));
+    Inc(lResultLen, SizeOf(WideChar));
+  Result:=Create(lPtr, lDataLen, lResultLen);
 end;
 
 class function TBytesFactory.CreateAnsi(const AStr: AnsiString;
   AWithTrailingNull: boolean): TBytes;
 var
-  lLen: NativeUInt;
-  lPtr: pointer;
+  lDataLen, lResultLen: NativeUInt;
+  lPtr: PAnsiChar;
 
 begin
-  lLen:=Length(AStr);
-  if lLen = 0  then
+  lDataLen:=Length(AStr)*SizeOf(AnsiChar);
+  if lDataLen = 0  then
     lPtr:=nil
   else
     lPtr:=PAnsiChar(Astr);
+  lResultLen:=lDataLen;
   if AWithTrailingNull then
-    Inc(lLen);
-  Result:=Create(lPtr, lLen*SizeOf(AnsiChar));
-end;
-
-// we have to add CreateUtf8 explicitly to avoid implicit string conversion
-// in AnsiString(var_UTF8String).
-class function TBytesFactory.CreateUTF8(const AStr: UTF8String;
-  AWithTrailingNull: boolean): TBytes;
-var
-  lLen: NativeUInt;
-  lPtr: pointer;
-
-begin
-  lLen:=Length(AStr);
-  if lLen = 0  then
-    lPtr:=nil
-  else
-    lPtr:=PAnsiChar(Astr);
-  if AWithTrailingNull then
-    Inc(lLen);
-  Result:=Create(lPtr, lLen*SizeOf(AnsiChar));
+    Inc(lResultLen, SizeOf(AnsiChar));
+  Result:=Create(lPtr, lDataLen, lResultLen);
 end;
 
 class function TBytesFactory.UnicodeToUTF8(AStr: PWideChar; ALen: integer;
@@ -627,17 +772,22 @@ end;
 {$ENDIF}
 
 class function TBytesFactory.Create(const AData: pointer;
-  ALen: NativeUInt): TBytes;
+  ADataLen, AResultLen: NativeUInt): TBytes;
 begin
+  if AResultLen = 0 then
+    AResultLen:=ADataLen
+  else
+  if ADataLen > AResultLen then
+    raise ERangeError.CreateRes(@SRangeError);
 {$IFDEF FPC}
   {$WARN 5093 off}
 {$ENDIF}
-  SetLength(Result, ALen);
+  SetLength(Result, AResultLen);
 {$IFDEF FPC}
   {$WARN 5093 on}
 {$ENDIF}
   if Assigned(AData) then
-    Move(AData^, Result[0], ALen);
+    Move(AData^, Result[0], ADataLen);
 end;
 
 class function TBytesFactory.Create(const AStr: UnicodeString;
@@ -655,37 +805,7 @@ end;
 class function TBytesFactory.Create(const AStr: UTF8String;
   AWithTrailingNull: boolean): TBytes;
 begin
-  Result:=CreateUTF8(AStr, AWithTrailingNull);
-end;
-
-class function TBytesFactory.Create(const AStream: TStream;
-  ACount: NativeUInt): TBytes;
-var
-  lStream: TBytesStream;
-
-begin
-  if (ACount = 0) or (not Assigned(AStream)) then
-    Exit;
-
-{$IFDEF FPC}
-  {$WARN 5093 off}
-{$ENDIF}
-  SetLength(Result, ACount);
-{$IFDEF FPC}
-  {$WARN 5093 on}
-{$ENDIF}
-  lStream:=TBytesStream.Create(Result);
-  try
-    try
-      lStream.CopyFrom(AStream, ACount);
-      Result:=lStream.Bytes;
-    finally
-      lStream.Free;
-    end;
-  except
-    SetLength(Result, 0);
-    raise;
-  end;
+  Result:=CreateAnsi(AnsiString(AStr), AWithTrailingNull);
 end;
 
 class function TBytesFactory.CreateAndWipe(var AStr: UnicodeString;
@@ -698,14 +818,14 @@ end;
 class function TBytesFactory.CreateAndWipe(var AStr: RawByteString;
   AWithTrailingNull: boolean): TBytes;
 begin
-  Result:=Create(AnsiString(AStr), AWithTrailingNull);
-  TWiper.Wipe(AStr);
+  Result:=CreateAndWipe(AnsiString(AStr), AWithTrailingNull);
 end;
 
 class function TBytesFactory.CreateAndWipe(var AStr: AnsiString;
   AWithTrailingNull: boolean): TBytes;
 begin
-  Result:=CreateAndWipe(RawByteString(AStr), AWithTrailingNull);
+  Result:=Create(AnsiString(AStr), AWithTrailingNull);
+  TWiper.Wipe(AStr);
 end;
 
 class function TBytesFactory.CreateAndWipe(var AStr: UTF8String;
@@ -713,27 +833,6 @@ class function TBytesFactory.CreateAndWipe(var AStr: UTF8String;
 begin
   Result:=Create(Astr, AWithTrailingNull);
   TWiper.Wipe(AStr);
-end;
-
-class function TBytesFactory.CreateAndWipeMemBuf(const AStream: TStream;
-  ACount: NativeUInt): TBytes;
-var
-  lPos: Int64;
-  lCount: NativeUInt;
-
-begin
-  if ACount = 0 then
-  begin
-    lPos:=0;
-    lCount:=ACount;
-  end
-  else
-  begin
-    lPos:=AStream.Position;
-    lCount:=AStream.Size-lPos;
-  end;
-  Result:=Create(AStream, ACount);
-  AStream.WipeMemoryData(lPos, lCount);
 end;
 
 class function TBytesFactory.CreateAsUTF8(
@@ -766,6 +865,43 @@ class function TBytesFactory.CreateAsUTF8AndWipe(var AStr: AnsiString;
 begin
   Result:=CreateAsUTF8(AStr, AWithTrailingNull);
   TWiper.Wipe(AStr);
+end;
+
+class function TBytesFactory.CreateFromStream(const AStream: TStream;
+  out ABytes: TBytes; ACount: NativeUInt;
+  AAddTrailingNulls: TTrailingNulls = 0): NativeInt;
+begin
+  if (ACount <= 0) and (not Assigned(AStream)) then
+    ACount:=AStream.Size;
+  Result:=ACount;
+{$IFDEF FPC}
+  {$WARN 5093 off}
+{$ENDIF}
+  SetLength(ABytes, ACount+AAddTrailingNulls);
+{$IFDEF FPC}
+  {$WARN 5093 on}
+{$ENDIF}
+  if Result > 0 then
+    Result:=AStream.Read(ABytes, ACount);
+  if Result < ACount then
+    SetLength(ABytes, AAddTrailingNulls);
+end;
+
+class function TBytesFactory.Create(const AStream: TStream;
+  ACount: NativeInt; AAddTrailingNulls: TTrailingNulls): TBytes;
+begin
+  CreateFromStream(AStream, Result, ACount, AAddTrailingNulls);
+end;
+
+class function TBytesFactory.CreateAndWipeMemBuf(const AStream: TStream;
+  ACount: NativeInt; AAddTrailingNulls: TTrailingNulls): TBytes;
+var
+  lPos: Int64;
+
+begin
+  lPos:=AStream.Position;
+  AStream.WipeMemoryData(lPos,
+    CreateFromStream(AStream, Result, ACount, AAddTrailingNulls));
 end;
 
 end.

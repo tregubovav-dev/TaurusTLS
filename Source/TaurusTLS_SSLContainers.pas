@@ -274,7 +274,7 @@ type
     ///  Return instance of <see cref="ITaurusTLS_Bytes" /> which keeps
     ///  <c>decrypted array of bytes</c>.
     ///  </returns>
-    function GetPlainBytes: ITaurusTLS_Bytes;
+    function GetPlainBytes: TPlainBytes;
 
     class procedure CheckEncryptor(AEncryptor: TTaurusTLS_CustomEncryptor); static;
     ///  <summary>
@@ -632,7 +632,7 @@ begin
   APlainBytes:=TPlainBytes.Create(ABytes, Self);
 end;
 
-function TTaurusTLS_BytesVault.GetPlainBytes: ITaurusTLS_Bytes;
+function TTaurusTLS_BytesVault.GetPlainBytes: TPlainBytes;
 var
   lOldPlainBytes, lNewPlainBytes: TPlainBytes;
   lNewPlainData: TBytes;
@@ -659,7 +659,7 @@ end;
 
 function TTaurusTLS_BytesVault.NewBio: ITaurusTLS_Bio;
 begin
-  Result:=GetPlainBytes.NewBio;
+  Result:=(GetPlainBytes as ITaurusTLS_Bytes).NewBio;
 end;
 
 procedure TTaurusTLS_BytesVault.ReleaseNotify(const ASender: TTaurusTLS_Bytes);

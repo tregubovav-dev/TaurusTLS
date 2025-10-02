@@ -620,11 +620,12 @@ type
 
 //  i2d_of_void = type Pointer;
 //  Pi2d_of_void = ^i2d_of_void;
-  i2d_of_void = function(const data: Pointer; pp: PPIdAnsiChar): Pointer;
+  i2d_of_void = function(const data: Pointer; pp: PPIdAnsiChar): Pointer; cdecl;
 
 //  d2i_of_void = type Pointer;
 //  Pd2i_of_void = ^d2i_of_void;
   d2i_of_void = function(data: PPointer; pp: PPIdAnsiChar; length: TIdC_Long): pointer;
+    cdecl;
 
   {OSSL_LIB_CTX is defined in types.h from 3.0.0 onwards}
   //  typedef struct ossl_lib_ctx_st OSSL_LIB_CTX;
@@ -649,9 +650,9 @@ type
   OSSL_DECODER_CTX  = record end;
   POSSL_DECODER_CTX = ^OSSL_DECODER_CTX;
 
-  OSSL_PARAM = record end;
-  POSSL_PARAM = ^OSSL_PARAM;
-  POSSL_PARAM_ARRAY = POSSL_PARAM; // declaration of "array of OSSL_PARAM"
+//  OSSL_PARAM = record end;
+//  POSSL_PARAM = ^OSSL_PARAM;
+//  POSSL_PARAM_ARRAY = POSSL_PARAM; // declaration of "array of OSSL_PARAM"
 
   pem_password_cb = function(buf: PIdAnsiChar; size: TIdC_INT; rwflag: TIdC_INT; userdata: Pointer): TIdC_INT; cdecl;
 

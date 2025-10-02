@@ -618,11 +618,13 @@ type
   PX509_ALGOR = ^X509_ALGOR;
   PPX509_ALGOR = ^PX509_ALGOR;
 
-  i2d_of_void = type Pointer;
-  Pi2d_of_void = ^i2d_of_void;
+//  i2d_of_void = type Pointer;
+//  Pi2d_of_void = ^i2d_of_void;
+  i2d_of_void = function(const data: Pointer; pp: PPIdAnsiChar): Pointer;
 
-  d2i_of_void = type Pointer;
-  Pd2i_of_void = ^d2i_of_void;
+//  d2i_of_void = type Pointer;
+//  Pd2i_of_void = ^d2i_of_void;
+  d2i_of_void = function(data: PPointer; pp: PPIdAnsiChar; length: TIdC_Long): pointer;
 
   {OSSL_LIB_CTX is defined in types.h from 3.0.0 onwards}
   //  typedef struct ossl_lib_ctx_st OSSL_LIB_CTX;

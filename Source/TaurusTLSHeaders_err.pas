@@ -435,7 +435,8 @@ procedure  _ERR_put_error(lib: TIdC_INT; func: TIdC_INT; reason: TIdC_INT; file_
 begin
   ERR_new;
   ERR_set_debug(file_,line, '');
-  ERR_set_error(lib,reason,'',[]);
+//  ERR_set_error(lib,reason,'',[]);
+    ERR_set_error(lib,reason,'');
 end;
 
 procedure  _X509err(const f,r : TIdC_INT); cdecl;

@@ -651,6 +651,7 @@ type
 
   OSSL_PARAM = record end;
   POSSL_PARAM = ^OSSL_PARAM;
+  POSSL_PARAM_ARRAY = POSSL_PARAM; // declaration of "array of OSSL_PARAM"
 
   pem_password_cb = function(buf: PIdAnsiChar; size: TIdC_INT; rwflag: TIdC_INT; userdata: Pointer): TIdC_INT; cdecl;
 

@@ -1873,73 +1873,74 @@ const
 
 
   {$I TaurusTLSNoRetValOff.inc} 
-function  ERR_ASN1_TYPE_get(const a: PASN1_TYPE): TIdC_INT; 
+function  ERR_ASN1_TYPE_get(const a: PASN1_TYPE): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_get_procname);
 end;
 
 
-procedure  ERR_ASN1_TYPE_set(a: PASN1_TYPE; type_: TIdC_INT; value: Pointer); 
+procedure  ERR_ASN1_TYPE_set(a: PASN1_TYPE; type_: TIdC_INT; value: Pointer);  cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_set_procname);
 end;
 
 
-function  ERR_ASN1_TYPE_set1(a: PASN1_TYPE; type_: TIdC_INT; const value: Pointer): TIdC_INT; 
+function  ERR_ASN1_TYPE_set1(a: PASN1_TYPE; type_: TIdC_INT; const value: Pointer): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_set1_procname);
 end;
 
 
-function  ERR_ASN1_TYPE_cmp(const a: PASN1_TYPE; const b: PASN1_TYPE): TIdC_INT; 
+function  ERR_ASN1_TYPE_cmp(const a: PASN1_TYPE; const b: PASN1_TYPE): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_cmp_procname);
 end;
 
 
 
-function  ERR_ASN1_TYPE_pack_sequence(const it: PASN1_ITEM; s: Pointer; t: PPASN1_TYPE): PASN1_TYPE; 
+function  ERR_ASN1_TYPE_pack_sequence(const it: PASN1_ITEM; s: Pointer; t: PPASN1_TYPE): PASN1_TYPE; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_pack_sequence_procname);
 end;
 
  {introduced 1.1.0}
-function  ERR_ASN1_TYPE_unpack_sequence(const it: PASN1_ITEM; const t: PASN1_TYPE): Pointer; 
+function  ERR_ASN1_TYPE_unpack_sequence(const it: PASN1_ITEM; const t: PASN1_TYPE): Pointer; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_unpack_sequence_procname);
 end;
 
  {introduced 1.1.0}
 
-function  ERR_ASN1_OBJECT_new: PASN1_OBJECT; 
+function  ERR_ASN1_OBJECT_new: PASN1_OBJECT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_OBJECT_new_procname);
 end;
 
 
-procedure  ERR_ASN1_OBJECT_free(a: PASN1_OBJECT); 
+procedure  ERR_ASN1_OBJECT_free(a: PASN1_OBJECT); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_OBJECT_free_procname);
 end;
 
 
-function  ERR_i2d_ASN1_OBJECT(const a: PASN1_OBJECT; pp: PPByte): TIdC_INT; 
+function  ERR_i2d_ASN1_OBJECT(const a: PASN1_OBJECT; pp: PPByte): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_ASN1_OBJECT_procname);
 end;
 
 
-function  ERR_d2i_ASN1_OBJECT(a: PPASN1_OBJECT; const pp: PPByte; _length: TIdC_LONG): PASN1_OBJECT; 
+function  ERR_d2i_ASN1_OBJECT(a: PPASN1_OBJECT; const pp: PPByte; _length: TIdC_LONG): PASN1_OBJECT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_ASN1_OBJECT_procname);
 end;
 
-function ERR_i2d_ASN1_BIT_STRING(val_in : PASN1_BIT_STRING; der_out : PPIdAnsiChar) : TIdC_long;
+function ERR_i2d_ASN1_BIT_STRING(val_in : PASN1_BIT_STRING; der_out : PPIdAnsiChar) : TIdC_long; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_ASN1_BIT_STRING_procname);
 end;
 
-function ERR_d2i_ASN1_BIT_STRING(val_out : PPASN1_BIT_STRING; const der_in : PPIdAnsiChar; _length : TIdC_LONG) : PASN1_BIT_STRING;
+function ERR_d2i_ASN1_BIT_STRING(val_out : PPASN1_BIT_STRING;
+  const der_in : PPIdAnsiChar; _length : TIdC_LONG) : PASN1_BIT_STRING; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_ASN1_BIT_STRING_procname);
 end;
@@ -1948,43 +1949,43 @@ end;
   //
   //DEFINE_STACK_OF(ASN1_OBJECT)
 
-function  ERR_ASN1_STRING_new: PASN1_STRING; 
+function  ERR_ASN1_STRING_new: PASN1_STRING; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_new_procname);
 end;
 
 
-procedure  ERR_ASN1_STRING_free(a: PASN1_STRING);
+procedure  ERR_ASN1_STRING_free(a: PASN1_STRING); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_free_procname);
 end;
 
 
-procedure  ERR_ASN1_STRING_clear_free(a: PASN1_STRING); 
+procedure  ERR_ASN1_STRING_clear_free(a: PASN1_STRING); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_clear_free_procname);
 end;
 
 
-function  ERR_ASN1_STRING_copy(dst: PASN1_STRING; const _str: PASN1_STRING): TIdC_INT; 
+function  ERR_ASN1_STRING_copy(dst: PASN1_STRING; const _str: PASN1_STRING): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_copy_procname);
 end;
 
 
-function  ERR_ASN1_STRING_dup(const a: PASN1_STRING): PASN1_STRING; 
+function  ERR_ASN1_STRING_dup(const a: PASN1_STRING): PASN1_STRING; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_dup_procname);
 end;
 
 
-function  ERR_ASN1_STRING_type_new(type_: TIdC_INT): PASN1_STRING; 
+function  ERR_ASN1_STRING_type_new(type_: TIdC_INT): PASN1_STRING; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_type_new_procname);
 end;
 
 
-function  ERR_ASN1_STRING_cmp(const a: PASN1_STRING; const b: PASN1_STRING): TIdC_INT; 
+function  ERR_ASN1_STRING_cmp(const a: PASN1_STRING; const b: PASN1_STRING): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_cmp_procname);
 end;
@@ -1995,37 +1996,37 @@ end;
    * Since this is used to store all sorts of things, via macros, for now,
    * make its data void *
    *)
-function  ERR_ASN1_STRING_set(_str: PASN1_STRING; const data: Pointer; len: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_STRING_set(_str: PASN1_STRING; const data: Pointer; len: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_set_procname);
 end;
 
 
-procedure  ERR_ASN1_STRING_set0(_str: PASN1_STRING; data: Pointer; len: TIdC_INT); 
+procedure  ERR_ASN1_STRING_set0(_str: PASN1_STRING; data: Pointer; len: TIdC_INT); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_set0_procname);
 end;
 
 
-function  ERR_ASN1_STRING_length(const x: PASN1_STRING): TIdC_INT; 
+function  ERR_ASN1_STRING_length(const x: PASN1_STRING): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_length_procname);
 end;
 
 
-procedure  ERR_ASN1_STRING_length_set(x: PASN1_STRING; n: TIdC_INT); 
+procedure  ERR_ASN1_STRING_length_set(x: PASN1_STRING; n: TIdC_INT); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_length_set_procname);
 end;
 
 
-function  ERR_ASN1_STRING_type(const x: PASN1_STRING): TIdC_INT; 
+function  ERR_ASN1_STRING_type(const x: PASN1_STRING): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_type_procname);
 end;
 
 
-function  ERR_ASN1_STRING_get0_data(const x: PASN1_STRING): PByte; 
+function  ERR_ASN1_STRING_get0_data(const x: PASN1_STRING): PByte; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_get0_data_procname);
 end;
@@ -2033,88 +2034,91 @@ end;
  {introduced 1.1.0}
 
   //DECLARE_ASN1_FUNCTIONS(ASN1_BIT_STRING)
-function  ERR_ASN1_BIT_STRING_set(a: PASN1_BIT_STRING; d: PByte; _length: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_BIT_STRING_set(a: PASN1_BIT_STRING; d: PByte; _length: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_set_procname);
 end;
 
 
-function  ERR_ASN1_BIT_STRING_set_bit(a: PASN1_BIT_STRING; n: TIdC_INT; value: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_BIT_STRING_set_bit(a: PASN1_BIT_STRING; n: TIdC_INT; value: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_set_bit_procname);
 end;
 
 
-function  ERR_ASN1_BIT_STRING_get_bit(const a: PASN1_BIT_STRING; n: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_BIT_STRING_get_bit(const a: PASN1_BIT_STRING; n: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_get_bit_procname);
 end;
 
 
-function  ERR_ASN1_BIT_STRING_check(const a: PASN1_BIT_STRING; const flags: PByte; flags_len: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_BIT_STRING_check(const a: PASN1_BIT_STRING;
+  const flags: PByte; flags_len: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_check_procname);
 end;
 
 
 
-function  ERR_ASN1_BIT_STRING_name_print(out_: PBIO; bs: PASN1_BIT_STRING; tbl: PBIT_STRING_BITNAME; indent: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_BIT_STRING_name_print(out_: PBIO; bs: PASN1_BIT_STRING; tbl: PBIT_STRING_BITNAME;
+  indent: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_name_print_procname);
 end;
 
 
-function  ERR_ASN1_BIT_STRING_num_asc(const name: PIdAnsiChar; tbl: PBIT_STRING_BITNAME): TIdC_INT; 
+function  ERR_ASN1_BIT_STRING_num_asc(const name: PIdAnsiChar; tbl: PBIT_STRING_BITNAME): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_num_asc_procname);
 end;
 
 
-function  ERR_ASN1_BIT_STRING_set_asc(bs: PASN1_BIT_STRING; const name: PIdAnsiChar; value: TIdC_INT; tbl: PBIT_STRING_BITNAME): TIdC_INT; 
+function  ERR_ASN1_BIT_STRING_set_asc(bs: PASN1_BIT_STRING; const name: PIdAnsiChar;
+  value: TIdC_INT; tbl: PBIT_STRING_BITNAME): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_BIT_STRING_set_asc_procname);
 end;
 
 
 
-function  ERR_ASN1_INTEGER_new: PASN1_INTEGER; 
+function  ERR_ASN1_INTEGER_new: PASN1_INTEGER; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_new_procname);
 end;
 
 
-procedure  ERR_ASN1_INTEGER_free(a: PASN1_INTEGER); 
+procedure  ERR_ASN1_INTEGER_free(a: PASN1_INTEGER); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_free_procname);
 end;
 
 
-function  ERR_d2i_ASN1_INTEGER(a: PPASN1_INTEGER; const in_: PPByte; len: TIdC_Long): PASN1_INTEGER; 
+function  ERR_d2i_ASN1_INTEGER(a: PPASN1_INTEGER; const in_: PPByte; len: TIdC_Long): PASN1_INTEGER; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_ASN1_INTEGER_procname);
 end;
 
 
-function  ERR_i2d_ASN1_INTEGER(a: PASN1_INTEGER; out_: PPByte): TIdC_Int; 
+function  ERR_i2d_ASN1_INTEGER(a: PASN1_INTEGER; out_: PPByte): TIdC_Int; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_ASN1_INTEGER_procname);
 end;
 
 
 
-function  ERR_d2i_ASN1_UINTEGER(a: PPASN1_INTEGER; const pp: PPByte; _length: TIdC_LONG): PASN1_INTEGER; 
+function  ERR_d2i_ASN1_UINTEGER(a: PPASN1_INTEGER; const pp: PPByte; _length: TIdC_LONG): PASN1_INTEGER; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_ASN1_UINTEGER_procname);
 end;
 
 
-function  ERR_ASN1_INTEGER_dup(const x: PASN1_INTEGER): PASN1_INTEGER; 
+function  ERR_ASN1_INTEGER_dup(const x: PASN1_INTEGER): PASN1_INTEGER; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_dup_procname);
 end;
 
 
-function  ERR_ASN1_INTEGER_cmp(const x: PASN1_INTEGER; const y: PASN1_INTEGER): TIdC_INT;
+function  ERR_ASN1_INTEGER_cmp(const x: PASN1_INTEGER; const y: PASN1_INTEGER): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_cmp_procname);
 end;
@@ -2123,63 +2127,66 @@ end;
 
   // DECLARE_ASN1_FUNCTIONS(ASN1_ENUMERATED)
 
-function  ERR_ASN1_UTCTIME_check(const a: PASN1_UTCTIME): TIdC_INT; 
+function  ERR_ASN1_UTCTIME_check(const a: PASN1_UTCTIME): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_check_procname);
 end;
 
 
-function  ERR_ASN1_UTCTIME_set(s: PASN1_UTCTIME; t: TIdC_TIMET): PASN1_UTCTIME; 
+function  ERR_ASN1_UTCTIME_set(s: PASN1_UTCTIME; t: TIdC_TIMET): PASN1_UTCTIME; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_set_procname);
 end;
 
 
-function  ERR_ASN1_UTCTIME_adj(s: PASN1_UTCTIME; t: TIdC_TIMET; offset_day: TIdC_INT; offset_sec: TIdC_LONG): PASN1_UTCTIME; 
+function  ERR_ASN1_UTCTIME_adj(s: PASN1_UTCTIME; t: TIdC_TIMET; offset_day: TIdC_INT;
+  offset_sec: TIdC_LONG): PASN1_UTCTIME; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_adj_procname);
 end;
 
 
-function  ERR_ASN1_UTCTIME_set_string(s: PASN1_UTCTIME; const _str: PIdAnsiChar): TIdC_INT;
+function  ERR_ASN1_UTCTIME_set_string(s: PASN1_UTCTIME; const _str: PIdAnsiChar): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_set_string_procname);
 end;
 
 
-function  ERR_ASN1_UTCTIME_cmp_time_t(const s: PASN1_UTCTIME; t: TIdC_TIMET): TIdC_INT; 
+function  ERR_ASN1_UTCTIME_cmp_time_t(const s: PASN1_UTCTIME; t: TIdC_TIMET): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_cmp_time_t_procname);
 end;
 
 
 
-function  ERR_ASN1_GENERALIZEDTIME_check(const a: PASN1_GENERALIZEDTIME): TIdC_INT;
+function  ERR_ASN1_GENERALIZEDTIME_check(const a: PASN1_GENERALIZEDTIME): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_check_procname);
 end;
 
 
-function  ERR_ASN1_GENERALIZEDTIME_set(s: PASN1_GENERALIZEDTIME; t: TIdC_TIMET): PASN1_GENERALIZEDTIME; 
+function  ERR_ASN1_GENERALIZEDTIME_set(s: PASN1_GENERALIZEDTIME; t: TIdC_TIMET): PASN1_GENERALIZEDTIME; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_set_procname);
 end;
 
 
-function  ERR_ASN1_GENERALIZEDTIME_adj(s: PASN1_GENERALIZEDTIME; t: TIdC_TIMET; offset_day: TIdC_INT; offset_sec: TIdC_LONG): PASN1_GENERALIZEDTIME; 
+function  ERR_ASN1_GENERALIZEDTIME_adj(s: PASN1_GENERALIZEDTIME; t: TIdC_TIMET;
+  offset_day: TIdC_INT; offset_sec: TIdC_LONG): PASN1_GENERALIZEDTIME; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_adj_procname);
 end;
 
 
-function  ERR_ASN1_GENERALIZEDTIME_set_string(s: pASN1_GENERALIZEDTIME; const _str: PIdAnsiChar): TIdC_INT;
+function  ERR_ASN1_GENERALIZEDTIME_set_string(s: pASN1_GENERALIZEDTIME; const _str: PIdAnsiChar): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_set_string_procname);
 end;
 
 
 
-function  ERR_ASN1_TIME_diff(pday: PIdC_INT; psec: PIdC_INT; const from: PASN1_TIME; const to_: PASN1_TIME): TIdC_INT; 
+function  ERR_ASN1_TIME_diff(pday: PIdC_INT; psec: PIdC_INT; const from: PASN1_TIME;
+  const to_: PASN1_TIME): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_diff_procname);
 end;
@@ -2187,34 +2194,35 @@ end;
 
 
   // DECLARE_ASN1_FUNCTIONS(ASN1_OCTET_STRING)
-function  ERR_ASN1_OCTET_STRING_dup(const a: PASN1_OCTET_STRING): PASN1_OCTET_STRING; 
+function  ERR_ASN1_OCTET_STRING_dup(const a: PASN1_OCTET_STRING): PASN1_OCTET_STRING; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_OCTET_STRING_dup_procname);
 end;
 
 
-function  ERR_ASN1_OCTET_STRING_cmp(const a: PASN1_OCTET_STRING; const b: PASN1_OCTET_STRING): TIdC_INT; 
+function  ERR_ASN1_OCTET_STRING_cmp(const a: PASN1_OCTET_STRING; const b: PASN1_OCTET_STRING): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_OCTET_STRING_cmp_procname);
 end;
 
 
-function  ERR_ASN1_OCTET_STRING_set(_str: PASN1_OCTET_STRING; const data: PByte; len: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_OCTET_STRING_set(_str: PASN1_OCTET_STRING; const data: PByte; len: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_OCTET_STRING_set_procname);
 end;
 
-function ERR_d2i_ASN1_OCTET_STRING(val_out : PPASN1_OCTET_STRING; der_in : PPIdAnsiChar; _length : TIdC_LONG) : PASN1_OCTET_STRING;
+function ERR_d2i_ASN1_OCTET_STRING(val_out : PPASN1_OCTET_STRING; der_in : PPIdAnsiChar;
+  _length : TIdC_LONG) : PASN1_OCTET_STRING; cdecl;
 begin
    ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_ASN1_OCTET_STRING_procname);
 end;
 
-function ERR_i2d_ASN1_OCTET_STRING(val_in : PASN1_OCTET_STRING; der_out : PPIdAnsiChar) : TIdC_INT;
+function ERR_i2d_ASN1_OCTET_STRING(val_in : PASN1_OCTET_STRING; der_out : PPIdAnsiChar) : TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_ASN1_OCTET_STRING_procname);
 end;
 
-procedure ERR_ASN1_OCTET_STRING_free (a : PASN1_OCTET_STRING);
+procedure ERR_ASN1_OCTET_STRING_free (a : PASN1_OCTET_STRING); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_OCTET_STRING_free_procname);
 end;
@@ -2225,13 +2233,13 @@ end;
   //DECLARE_ASN1_FUNCTIONS(ASN1_NULL)
   //DECLARE_ASN1_FUNCTIONS(ASN1_BMPSTRING)
 
-function  ERR_UTF8_getc(const _str: PByte; len: TIdC_INT; _val: PIdC_ULONG): TIdC_INT; 
+function  ERR_UTF8_getc(const _str: PByte; len: TIdC_INT; _val: PIdC_ULONG): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(UTF8_getc_procname);
 end;
 
 
-function  ERR_UTF8_putc(_str: PIdAnsiChar; len: TIdC_INT; value: TIdC_ULONG): TIdC_INT; 
+function  ERR_UTF8_putc(_str: PIdAnsiChar; len: TIdC_INT; value: TIdC_ULONG): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(UTF8_putc_procname);
 end;
@@ -2247,75 +2255,76 @@ end;
   //DECLARE_ASN1_FUNCTIONS(ASN1_IA5STRING)
   //DECLARE_ASN1_FUNCTIONS(ASN1_GENERALSTRING)
 
-function  ERR_ASN1_UTCTIME_new: PASN1_UTCTIME; 
+function  ERR_ASN1_UTCTIME_new: PASN1_UTCTIME; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_new_procname);
 end;
 
 
-procedure  ERR_ASN1_UTCTIME_free(a: PASN1_UTCTIME); 
+procedure  ERR_ASN1_UTCTIME_free(a: PASN1_UTCTIME); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_free_procname);
 end;
 
 
-function  ERR_d2i_ASN1_UTCTIME(a: PPASN1_UTCTIME; const in_: PPByte; len: TIdC_LONG): PASN1_UTCTIME; 
+function  ERR_d2i_ASN1_UTCTIME(a: PPASN1_UTCTIME; const in_: PPByte; len: TIdC_LONG): PASN1_UTCTIME; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_ASN1_UTCTIME_procname);
 end;
 
 
-function  ERR_i2d_ASN1_UTCTIME(a: PASN1_UTCTIME; out_: PPByte): TIdC_INT; 
+function  ERR_i2d_ASN1_UTCTIME(a: PASN1_UTCTIME; out_: PPByte): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_ASN1_UTCTIME_procname);
 end;
 
 
 
-function  ERR_ASN1_GENERALIZEDTIME_new: PASN1_GENERALIZEDTIME; 
+function  ERR_ASN1_GENERALIZEDTIME_new: PASN1_GENERALIZEDTIME; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_new_procname);
 end;
 
 
-procedure  ERR_ASN1_GENERALIZEDTIME_free(a: PASN1_GENERALIZEDTIME); 
+procedure  ERR_ASN1_GENERALIZEDTIME_free(a: PASN1_GENERALIZEDTIME); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_free_procname);
 end;
 
 
-function  ERR_d2i_ASN1_GENERALIZEDTIME(a: PPASN1_GENERALIZEDTIME; const in_: PPByte; len: TIdC_LONG): PASN1_GENERALIZEDTIME; 
+function  ERR_d2i_ASN1_GENERALIZEDTIME(a: PPASN1_GENERALIZEDTIME;
+  const in_: PPByte; len: TIdC_LONG): PASN1_GENERALIZEDTIME; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_ASN1_GENERALIZEDTIME_procname);
 end;
 
 
-function  ERR_i2d_ASN1_GENERALIZEDTIME(a: PASN1_GENERALIZEDTIME; out_: PPByte): TIdC_INT; 
+function  ERR_i2d_ASN1_GENERALIZEDTIME(a: PASN1_GENERALIZEDTIME; out_: PPByte): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_ASN1_GENERALIZEDTIME_procname);
 end;
 
 
 
-function  ERR_ASN1_TIME_new: PASN1_TIME; 
+function  ERR_ASN1_TIME_new: PASN1_TIME; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_new_procname);
 end;
 
 
-procedure  ERR_ASN1_TIME_free(a: PASN1_TIME); 
+procedure  ERR_ASN1_TIME_free(a: PASN1_TIME); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_free_procname);
 end;
 
 
-function  ERR_d2i_ASN1_TIME(a: PPASN1_TIME; const in_: PPByte; len: TIdC_LONG): PASN1_TIME; 
+function  ERR_d2i_ASN1_TIME(a: PPASN1_TIME; const in_: PPByte; len: TIdC_LONG): PASN1_TIME; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(d2i_ASN1_TIME_procname);
 end;
 
 
-function  ERR_i2d_ASN1_TIME(a: PASN1_TIME; out_: PPByte): TIdC_INT; 
+function  ERR_i2d_ASN1_TIME(a: PASN1_TIME; out_: PPByte): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_ASN1_TIME_procname);
 end;
@@ -2324,186 +2333,188 @@ end;
 
   // DECLARE_ASN1_ITEM(ASN1_OCTET_STRING_NDEF)
 
-function  ERR_ASN1_TIME_set(s: PASN1_TIME; t: TIdC_TIMET): PASN1_TIME; 
+function  ERR_ASN1_TIME_set(s: PASN1_TIME; t: TIdC_TIMET): PASN1_TIME; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_set_procname);
 end;
 
 
-function  ERR_ASN1_TIME_adj(s: PASN1_TIME; t: TIdC_TIMET; offset_day: TIdC_INT; offset_sec: TIdC_LONG): PASN1_TIME; 
+function  ERR_ASN1_TIME_adj(s: PASN1_TIME; t: TIdC_TIMET; offset_day: TIdC_INT;
+  offset_sec: TIdC_LONG): PASN1_TIME; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_adj_procname);
 end;
 
 
-function  ERR_ASN1_TIME_check(const t: PASN1_TIME): TIdC_INT; 
+function  ERR_ASN1_TIME_check(const t: PASN1_TIME): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_check_procname);
 end;
 
 
-function  ERR_ASN1_TIME_to_generalizedtime(const t: PASN1_TIME; out_: PPASN1_GENERALIZEDTIME): PASN1_GENERALIZEDTIME; 
+function  ERR_ASN1_TIME_to_generalizedtime(const t: PASN1_TIME;
+  out_: PPASN1_GENERALIZEDTIME): PASN1_GENERALIZEDTIME; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_to_generalizedtime_procname);
 end;
 
 
-function  ERR_ASN1_TIME_set_string(s: PASN1_TIME; const _str: PIdAnsiChar): TIdC_INT; 
+function  ERR_ASN1_TIME_set_string(s: PASN1_TIME; const _str: PIdAnsiChar): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_set_string_procname);
 end;
 
 
-function  ERR_ASN1_TIME_set_string_X509(s: PASN1_TIME; const _str: PIdAnsiChar): TIdC_INT;
+function  ERR_ASN1_TIME_set_string_X509(s: PASN1_TIME; const _str: PIdAnsiChar): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_set_string_X509_procname);
 end;
 
  {introduced 1.1.0}
-function  ERR_ASN1_TIME_to_tm(const s: PASN1_TIME; tm: PIdC_TM): TIdC_INT; 
+function  ERR_ASN1_TIME_to_tm(const s: PASN1_TIME; tm: PIdC_TM): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_to_tm_procname);
 end;
 
  {introduced 1.1.0}
-function  ERR_ASN1_TIME_normalize(s: PASN1_TIME): TIdC_INT; 
+function  ERR_ASN1_TIME_normalize(s: PASN1_TIME): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_normalize_procname);
 end;
 
  {introduced 1.1.0}
-function  ERR_ASN1_TIME_cmp_time_t(const s: PASN1_TIME; t: TIdC_TIMET): TIdC_INT; 
+function  ERR_ASN1_TIME_cmp_time_t(const s: PASN1_TIME; t: TIdC_TIMET): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_cmp_time_t_procname);
 end;
 
  {introduced 1.1.0}
-function  ERR_ASN1_TIME_compare(const a: PASN1_TIME; const b: PASN1_TIME): TIdC_INT; 
+function  ERR_ASN1_TIME_compare(const a: PASN1_TIME; const b: PASN1_TIME): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_compare_procname);
 end;
 
  {introduced 1.1.0}
 
-function  ERR_i2a_ASN1_INTEGER(bp: PBIO; const a: PASN1_INTEGER): TIdC_INT; 
+function  ERR_i2a_ASN1_INTEGER(bp: PBIO; const a: PASN1_INTEGER): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(i2a_ASN1_INTEGER_procname);
 end;
 
 
-function  ERR_a2i_ASN1_INTEGER(bp: PBIO; bs: PASN1_INTEGER; buf: PIdAnsiChar; size: TIdC_INT): TIdC_INT; 
+function  ERR_a2i_ASN1_INTEGER(bp: PBIO; bs: PASN1_INTEGER; buf: PIdAnsiChar; size: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(a2i_ASN1_INTEGER_procname);
 end;
 
 
-function  ERR_i2a_ASN1_ENUMERATED(bp: PBIO; const a: PASN1_ENUMERATED): TIdC_INT; 
+function  ERR_i2a_ASN1_ENUMERATED(bp: PBIO; const a: PASN1_ENUMERATED): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(i2a_ASN1_ENUMERATED_procname);
 end;
 
 
-function  ERR_a2i_ASN1_ENUMERATED(bp: PBIO; bs: PASN1_ENUMERATED; buf: PIdAnsiChar; size: TIdC_INT): TIdC_INT; 
+function  ERR_a2i_ASN1_ENUMERATED(bp: PBIO; bs: PASN1_ENUMERATED; buf: PIdAnsiChar; size: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(a2i_ASN1_ENUMERATED_procname);
 end;
 
 
-function  ERR_i2a_ASN1_OBJECT(bp: PBIO; const a: PASN1_OBJECT): TIdC_INT; 
+function  ERR_i2a_ASN1_OBJECT(bp: PBIO; const a: PASN1_OBJECT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(i2a_ASN1_OBJECT_procname);
 end;
 
 
-function  ERR_a2i_ASN1_STRING(bp: PBIO; bs: PASN1_STRING; buf: PIdAnsiChar; size: TIdC_INT): TIdC_INT;
+function  ERR_a2i_ASN1_STRING(bp: PBIO; bs: PASN1_STRING; buf: PIdAnsiChar; size: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(a2i_ASN1_STRING_procname);
 end;
 
 
-function  ERR_i2a_ASN1_STRING(bp: PBIO; const a: PASN1_STRING; type_: TIdC_INT): TIdC_INT; 
+function  ERR_i2a_ASN1_STRING(bp: PBIO; const a: PASN1_STRING; type_: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(i2a_ASN1_STRING_procname);
 end;
 
 
-function  ERR_i2t_ASN1_OBJECT(buf: PIdAnsiChar; buf_len: TIdC_INT; const a: PASN1_OBJECT): TIdC_INT;
+function  ERR_i2t_ASN1_OBJECT(buf: PIdAnsiChar; buf_len: TIdC_INT; const a: PASN1_OBJECT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(i2t_ASN1_OBJECT_procname);
 end;
 
 
 
-function  ERR_a2d_ASN1_OBJECT(out_: PByte; olen: TIdC_INT; const buf: PIdAnsiChar; num: TIdC_INT): TIdC_INT;
+function  ERR_a2d_ASN1_OBJECT(out_: PByte; olen: TIdC_INT; const buf: PIdAnsiChar; num: TIdC_INT): TIdC_INT;  cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(a2d_ASN1_OBJECT_procname);
 end;
 
 
-function  ERR_ASN1_OBJECT_create(nid: TIdC_INT; data: PByte; len: TIdC_INT; const sn: PIdAnsiChar; const _ln: PIdAnsiChar): PASN1_OBJECT;
+function  ERR_ASN1_OBJECT_create(nid: TIdC_INT; data: PByte; len: TIdC_INT;
+  const sn: PIdAnsiChar; const _ln: PIdAnsiChar): PASN1_OBJECT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_OBJECT_create_procname);
 end;
 
 
-
-function  ERR_ASN1_INTEGER_get_int64(pr: PIdC_Int64; const a: PASN1_INTEGER): TIdC_INT; 
+function  ERR_ASN1_INTEGER_get_int64(pr: PIdC_Int64; const a: PASN1_INTEGER): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_get_int64_procname);
 end;
 
  {introduced 1.1.0}
-function  ERR_ASN1_INTEGER_set_int64(a: PASN1_INTEGER; r: TIdC_Int64): TIdC_INT; 
+function  ERR_ASN1_INTEGER_set_int64(a: PASN1_INTEGER; r: TIdC_Int64): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_set_int64_procname);
 end;
 
  {introduced 1.1.0}
-function  ERR_ASN1_INTEGER_get_uint64(pr: PIdC_UInt64; const a: PASN1_INTEGER): TIdC_INT; 
+function  ERR_ASN1_INTEGER_get_uint64(pr: PIdC_UInt64; const a: PASN1_INTEGER): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_get_uint64_procname);
 end;
 
  {introduced 1.1.0}
-function  ERR_ASN1_INTEGER_set_uint64(a: PASN1_INTEGER; r: TIdC_UInt64): TIdC_INT; 
+function  ERR_ASN1_INTEGER_set_uint64(a: PASN1_INTEGER; r: TIdC_UInt64): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_set_uint64_procname);
 end;
 
  {introduced 1.1.0}
 
-function  ERR_ASN1_INTEGER_set(a: PASN1_INTEGER; v: TIdC_LONG): TIdC_INT; 
+function  ERR_ASN1_INTEGER_set(a: PASN1_INTEGER; v: TIdC_LONG): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_set_procname);
 end;
 
 
-function  ERR_ASN1_INTEGER_get(const a: PASN1_INTEGER): TIdC_LONG; 
+function  ERR_ASN1_INTEGER_get(const a: PASN1_INTEGER): TIdC_LONG; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_get_procname);
 end;
 
 
-function  ERR_BN_to_ASN1_INTEGER(const bn: PBIGNUM; ai: PASN1_INTEGER): PASN1_INTEGER; 
+function  ERR_BN_to_ASN1_INTEGER(const bn: PBIGNUM; ai: PASN1_INTEGER): PASN1_INTEGER; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_to_ASN1_INTEGER_procname);
 end;
 
 
-function  ERR_ASN1_INTEGER_to_BN(const ai: PASN1_INTEGER; bn: PBIGNUM): PBIGNUM; 
+function  ERR_ASN1_INTEGER_to_BN(const ai: PASN1_INTEGER; bn: PBIGNUM): PBIGNUM; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_INTEGER_to_BN_procname);
 end;
 
 
 
-function  ERR_ASN1_ENUMERATED_get_int64(pr: PIdC_Int64; const a: PASN1_ENUMERATED): TIdC_INT; 
+function  ERR_ASN1_ENUMERATED_get_int64(pr: PIdC_Int64; const a: PASN1_ENUMERATED): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_ENUMERATED_get_int64_procname);
 end;
 
  {introduced 1.1.0}
-function  ERR_ASN1_ENUMERATED_set_int64(a: PASN1_ENUMERATED; r: TIdC_Int64): TIdC_INT; 
+function  ERR_ASN1_ENUMERATED_set_int64(a: PASN1_ENUMERATED; r: TIdC_Int64): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_ENUMERATED_set_int64_procname);
 end;
@@ -2511,25 +2522,25 @@ end;
  {introduced 1.1.0}
 
 
-function  ERR_ASN1_ENUMERATED_set(a: PASN1_ENUMERATED; v: TIdC_LONG): TIdC_INT; 
+function  ERR_ASN1_ENUMERATED_set(a: PASN1_ENUMERATED; v: TIdC_LONG): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_ENUMERATED_set_procname);
 end;
 
 
-function  ERR_ASN1_ENUMERATED_get(const a: PASN1_ENUMERATED): TIdC_LONG; 
+function  ERR_ASN1_ENUMERATED_get(const a: PASN1_ENUMERATED): TIdC_LONG; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_ENUMERATED_get_procname);
 end;
 
 
-function  ERR_BN_to_ASN1_ENUMERATED(const bn: PBIGNUM; ai: PASN1_ENUMERATED): PASN1_ENUMERATED; 
+function  ERR_BN_to_ASN1_ENUMERATED(const bn: PBIGNUM; ai: PASN1_ENUMERATED): PASN1_ENUMERATED; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(BN_to_ASN1_ENUMERATED_procname);
 end;
 
 
-function  ERR_ASN1_ENUMERATED_to_BN(const ai: PASN1_ENUMERATED; bn: PBIGNUM): PBIGNUM; 
+function  ERR_ASN1_ENUMERATED_to_BN(const ai: PASN1_ENUMERATED; bn: PBIGNUM): PBIGNUM; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_ENUMERATED_to_BN_procname);
 end;
@@ -2538,14 +2549,14 @@ end;
 
   (* General *)
   (* given a string, return the correct type, max is the maximum length *)
-function  ERR_ASN1_PRINTABLE_type(const s: PByte; max: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_PRINTABLE_type(const s: PByte; max: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PRINTABLE_type_procname);
 end;
 
 
 
-function  ERR_ASN1_tag2bit(tag: TIdC_INT): TIdC_ULONG; 
+function  ERR_ASN1_tag2bit(tag: TIdC_INT): TIdC_ULONG; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_tag2bit_procname);
 end;
@@ -2553,37 +2564,39 @@ end;
 
 
   (* SPECIALS *)
-function  ERR_ASN1_get_object(const pp: PPByte; plength: PIdC_LONG; ptag: PIdC_INT; pclass: PIdC_INT; omax: TIdC_LONG): TIdC_INT; 
+function  ERR_ASN1_get_object(const pp: PPByte; plength: PIdC_LONG; ptag: PIdC_INT;
+  pclass: PIdC_INT; omax: TIdC_LONG): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_get_object_procname);
 end;
 
 
-function  ERR_ASN1_check_infinite_end(p: PPByte; len: TIdC_LONG): TIdC_INT; 
+function  ERR_ASN1_check_infinite_end(p: PPByte; len: TIdC_LONG): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_check_infinite_end_procname);
 end;
 
 
-function  ERR_ASN1_const_check_infinite_end(const p: PPByte; len: TIdC_LONG): TIdC_INT; 
+function  ERR_ASN1_const_check_infinite_end(const p: PPByte; len: TIdC_LONG): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_const_check_infinite_end_procname);
 end;
 
 
-procedure  ERR_ASN1_put_object(pp: PPByte; constructed: TIdC_INT; _length: TIdC_INT; tag: TIdC_INT; xclass: TIdC_INT); 
+procedure  ERR_ASN1_put_object(pp: PPByte; constructed: TIdC_INT; _length: TIdC_INT;
+  tag: TIdC_INT; xclass: TIdC_INT); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_put_object_procname);
 end;
 
 
-function  ERR_ASN1_put_eoc(pp: PPByte): TIdC_INT; 
+function  ERR_ASN1_put_eoc(pp: PPByte): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_put_eoc_procname);
 end;
 
 
-function  ERR_ASN1_object_size(constructed: TIdC_INT; _length: TIdC_INT; tag: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_object_size(constructed: TIdC_INT; _length: TIdC_INT; tag: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_object_size_procname);
 end;
@@ -2603,7 +2616,7 @@ end;
   //                     CHECKED_D2I_OF(type, d2i), \
   //                     CHECKED_PTR_OF(const type, x)))
   //
-function  ERR_ASN1_item_dup(const it: PASN1_ITEM; x: Pointer): Pointer; 
+function  ERR_ASN1_item_dup(const it: PASN1_ITEM; x: Pointer): Pointer; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_dup_procname);
 end;
@@ -2642,12 +2655,12 @@ end;
   //function ASN1_STRING_print_ex_fp(&fp: PFILE; const _str: PASN1_STRING; flags: TIdC_ULONG): TIdC_INT;
   //# endif
 
-function  ERR_ASN1_STRING_to_UTF8(out_: PPByte; const in_: PASN1_STRING): TIdC_INT;
+function  ERR_ASN1_STRING_to_UTF8(out_: PPByte; const in_: PASN1_STRING): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_to_UTF8_procname);
 end;
 
-function ERR_ASN1_d2i_bio(xnew: pxnew; d2i: pd2i_of_void; in_: PBIO; x: PPointer): Pointer; cdecl;
+function ERR_ASN1_d2i_bio(const it: PASN1_ITEM; in_: PBIO; x: Pointer): Pointer; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_d2i_bio_procname);
 end;
@@ -2660,13 +2673,13 @@ end;
   //                          in, \
   //                          CHECKED_PPTR_OF(type, x)))
 
-function  ERR_ASN1_item_d2i_bio(const it: PASN1_ITEM; in_: PBIO; x: Pointer): Pointer; 
+function  ERR_ASN1_item_d2i_bio(const it: PASN1_ITEM; in_: PBIO; x: Pointer): Pointer; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_d2i_bio_procname);
 end;
 
 
-function  ERR_ASN1_i2d_bio(i2d: i2d_of_void; out_: PBIO; x: PByte): TIdC_INT;
+function  ERR_ASN1_i2d_bio(i2d: i2d_of_void; out_: PBIO; x: PByte): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_i2d_bio_procname);
 end;
@@ -2683,67 +2696,69 @@ end;
   //                  out, \
   //                  CHECKED_PTR_OF(const type, x)))
 
-function  ERR_ASN1_item_i2d_bio(const it: PASN1_ITEM; out_: PBIO; x: Pointer): TIdC_INT; 
+function  ERR_ASN1_item_i2d_bio(const it: PASN1_ITEM; out_: PBIO; x: Pointer): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_i2d_bio_procname);
 end;
 
 
-function  ERR_ASN1_UTCTIME_print(fp: PBIO; const a: PASN1_UTCTIME): TIdC_INT; 
+function  ERR_ASN1_UTCTIME_print(fp: PBIO; const a: PASN1_UTCTIME): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UTCTIME_print_procname);
 end;
 
 
-function  ERR_ASN1_GENERALIZEDTIME_print(fp: PBIO; const a: PASN1_GENERALIZEDTIME): TIdC_INT; 
+function  ERR_ASN1_GENERALIZEDTIME_print(fp: PBIO; const a: PASN1_GENERALIZEDTIME): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_GENERALIZEDTIME_print_procname);
 end;
 
 
-function  ERR_ASN1_TIME_print(fp: PBIO; const a: PASN1_TIME): TIdC_INT; 
+function  ERR_ASN1_TIME_print(fp: PBIO; const a: PASN1_TIME): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TIME_print_procname);
 end;
 
 
-function  ERR_ASN1_STRING_print(bp: PBIO; const v: PASN1_STRING): TIdC_INT; 
+function  ERR_ASN1_STRING_print(bp: PBIO; const v: PASN1_STRING): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_print_procname);
 end;
 
 
-function  ERR_ASN1_STRING_print_ex(out_: PBIO; const _str: PASN1_STRING; flags: TIdC_ULONG): TIdC_INT; 
+function  ERR_ASN1_STRING_print_ex(out_: PBIO; const _str: PASN1_STRING; flags: TIdC_ULONG): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_print_ex_procname);
 end;
 
 
-function  ERR_ASN1_buf_print(bp: PBIO; const buf: PByte; buflen: TIdC_SIZET; off: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_buf_print(bp: PBIO; const buf: PByte; buflen: TIdC_SIZET; off: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_buf_print_procname);
 end;
 
  {introduced 1.1.0}
-function  ERR_ASN1_bn_print(bp: PBIO; const number: PIdAnsiChar; const num: PBIGNUM; buf: PByte; off: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_bn_print(bp: PBIO; const number: PIdAnsiChar; const num: PBIGNUM;
+  buf: PByte; off: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_bn_print_procname);
 end;
 
 
-function  ERR_ASN1_parse(bp: PBIO; const pp: PByte; len: TIdC_LONG; indent: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_parse(bp: PBIO; const pp: PByte; len: TIdC_LONG; indent: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_parse_procname);
 end;
 
 
-function  ERR_ASN1_parse_dump(bp: PPBIO; const pp: PByte; len: TIdC_LONG; indent: TIdC_INT; dump: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_parse_dump(bp: PPBIO; const pp: PByte; len: TIdC_LONG;
+  indent: TIdC_INT; dump: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_parse_dump_procname);
 end;
 
 
-function  ERR_ASN1_tag2str(tag: TIdC_INT): PIdAnsiChar; 
+function  ERR_ASN1_tag2str(tag: TIdC_INT): PIdAnsiChar; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_tag2str_procname);
 end;
@@ -2752,102 +2767,108 @@ end;
 
   (* Used to load and write Netscape format cert *)
 
-function  ERR_ASN1_UNIVERSALSTRING_to_string(s: PASN1_UNIVERSALSTRING): TIdC_INT; 
+function  ERR_ASN1_UNIVERSALSTRING_to_string(s: PASN1_UNIVERSALSTRING): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_UNIVERSALSTRING_to_string_procname);
 end;
 
 
 
-function  ERR_ASN1_TYPE_set_octetstring(a: PASN1_TYPE; data: PByte; len: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_TYPE_set_octetstring(a: PASN1_TYPE; data: PByte; len: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_set_octetstring_procname);
 end;
 
 
-function  ERR_ASN1_TYPE_get_octetstring(const a: PASN1_TYPE; data: PByte; max_len: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_TYPE_get_octetstring(const a: PASN1_TYPE; data: PByte; max_len: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_get_octetstring_procname);
 end;
 
 
-function  ERR_ASN1_TYPE_set_int_octetstring(a: PASN1_TYPE; num: TIdC_LONG; data: PByte; len: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_TYPE_set_int_octetstring(a: PASN1_TYPE; num: TIdC_LONG;
+  data: PByte; len: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_set_int_octetstring_procname);
 end;
 
 
-function  ERR_ASN1_TYPE_get_int_octetstring(const a: PASN1_TYPE; num: PIdC_LONG; data: PByte; max_len: TIdC_INT): TIdC_INT; 
+function  ERR_ASN1_TYPE_get_int_octetstring(const a: PASN1_TYPE; num: PIdC_LONG;
+  data: PByte; max_len: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_TYPE_get_int_octetstring_procname);
 end;
 
 
 
-function  ERR_ASN1_item_unpack(const oct: PASN1_STRING; const it: PASN1_ITEM): Pointer; 
+function  ERR_ASN1_item_unpack(const oct: PASN1_STRING; const it: PASN1_ITEM): Pointer; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_unpack_procname);
 end;
 
 
 
-function  ERR_ASN1_item_pack(obj: Pointer; const it: PASN1_ITEM; oct: PPASN1_OCTET_STRING): PASN1_STRING; 
+function  ERR_ASN1_item_pack(obj: Pointer; const it: PASN1_ITEM; oct: PPASN1_OCTET_STRING): PASN1_STRING; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_pack_procname);
 end;
 
 
 
-procedure  ERR_ASN1_STRING_set_default_mask(mask: TIdC_ULONG); 
+procedure  ERR_ASN1_STRING_set_default_mask(mask: TIdC_ULONG); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_set_default_mask_procname);
 end;
 
 
-function  ERR_ASN1_STRING_set_default_mask_asc(const p: PIdAnsiChar): TIdC_INT;
+function  ERR_ASN1_STRING_set_default_mask_asc(const p: PIdAnsiChar): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_set_default_mask_asc_procname);
 end;
 
 
-function  ERR_ASN1_STRING_get_default_mask: TIdC_ULONG; 
+function  ERR_ASN1_STRING_get_default_mask: TIdC_ULONG; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_get_default_mask_procname);
 end;
 
 
-function  ERR_ASN1_mbstring_copy(out_: PPASN1_STRING; const in_: PByte; len: TIdC_INT; inform: TIdC_INT; mask: TIdC_ULONG): TIdC_INT; 
+function  ERR_ASN1_mbstring_copy(out_: PPASN1_STRING; const in_: PByte; len: TIdC_INT;
+  inform: TIdC_INT; mask: TIdC_ULONG): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_mbstring_copy_procname);
 end;
 
 
-function  ERR_ASN1_mbstring_ncopy(out_: PPASN1_STRING; const in_: PByte; len: TIdC_INT; inform: TIdC_INT; mask: TIdC_ULONG; minsize: TIdC_LONG; maxsize: TIdC_LONG): TIdC_INT; 
+function  ERR_ASN1_mbstring_ncopy(out_: PPASN1_STRING; const in_: PByte; len: TIdC_INT;
+  inform: TIdC_INT; mask: TIdC_ULONG; minsize: TIdC_LONG; maxsize: TIdC_LONG): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_mbstring_ncopy_procname);
 end;
 
 
 
-function  ERR_ASN1_STRING_set_by_NID(out_: PPASN1_STRING; const in_: PByte; inlen: TIdC_INT; inform: TIdC_INT; nid: TIdC_INT): PASN1_STRING; 
+function  ERR_ASN1_STRING_set_by_NID(out_: PPASN1_STRING; const in_: PByte; inlen: TIdC_INT;
+  inform: TIdC_INT; nid: TIdC_INT): PASN1_STRING; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_set_by_NID_procname);
 end;
 
 
-function  ERR_ASN1_STRING_TABLE_get(nid: TIdC_INT): PASN1_STRING_TABLE; 
+function  ERR_ASN1_STRING_TABLE_get(nid: TIdC_INT): PASN1_STRING_TABLE; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_TABLE_get_procname);
 end;
 
 
-function  ERR_ASN1_STRING_TABLE_add(v1: TIdC_INT; v2: TIdC_LONG; v3: TIdC_LONG; v4: TIdC_ULONG; v5: TIdC_ULONG): TIdC_INT; 
+function  ERR_ASN1_STRING_TABLE_add(v1: TIdC_INT; v2: TIdC_LONG; v3: TIdC_LONG;
+  v4: TIdC_ULONG; v5: TIdC_ULONG): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_TABLE_add_procname);
 end;
 
 
-procedure  ERR_ASN1_STRING_TABLE_cleanup; 
+procedure  ERR_ASN1_STRING_TABLE_cleanup; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_STRING_TABLE_cleanup_procname);
 end;
@@ -2857,142 +2878,144 @@ end;
   (* ASN1 template functions *)
 
   (* Old API compatible functions *)
-function  ERR_ASN1_item_new(const it: PASN1_ITEM): PASN1_VALUE; 
+function  ERR_ASN1_item_new(const it: PASN1_ITEM): PASN1_VALUE; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_new_procname);
 end;
 
 
-procedure  ERR_ASN1_item_free(_val: PASN1_VALUE; const it: PASN1_ITEM); 
+procedure  ERR_ASN1_item_free(_val: PASN1_VALUE; const it: PASN1_ITEM); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_free_procname);
 end;
 
 
-function  ERR_ASN1_item_d2i(_val: PPASN1_VALUE; const in_: PPByte; len: TIdC_LONG; const it: PASN1_ITEM): PASN1_VALUE; 
+function  ERR_ASN1_item_d2i(_val: PPASN1_VALUE; const in_: PPByte; len: TIdC_LONG;
+  const it: PASN1_ITEM): PASN1_VALUE; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_d2i_procname);
 end;
 
 
-function  ERR_ASN1_item_i2d(_val: PASN1_VALUE; out_: PPByte; const it: PASN1_ITEM): TIdC_INT; 
+function  ERR_ASN1_item_i2d(_val: PASN1_VALUE; out_: PPByte; const it: PASN1_ITEM): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_i2d_procname);
 end;
 
 
-function  ERR_ASN1_item_ndef_i2d(_val: PASN1_VALUE; out_: PPByte; const it: PASN1_ITEM): TIdC_INT; 
+function  ERR_ASN1_item_ndef_i2d(_val: PASN1_VALUE; out_: PPByte; const it: PASN1_ITEM): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_ndef_i2d_procname);
 end;
 
 
 
-procedure  ERR_ASN1_add_oid_module; 
+procedure  ERR_ASN1_add_oid_module; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_add_oid_module_procname);
 end;
 
 
-procedure  ERR_ASN1_add_stable_module;
+procedure  ERR_ASN1_add_stable_module; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_add_stable_module_procname);
 end;
 
  {introduced 1.1.0}
 
-function  ERR_ASN1_generate_nconf(const _str: PIdAnsiChar; nconf: PCONF): PASN1_TYPE;
+function  ERR_ASN1_generate_nconf(const _str: PIdAnsiChar; nconf: PCONF): PASN1_TYPE; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_generate_nconf_procname);
 end;
 
 
-function  ERR_ASN1_generate_v3(const _str: PIdAnsiChar; cnf: PX509V3_CTX): PASN1_TYPE;
+function  ERR_ASN1_generate_v3(const _str: PIdAnsiChar; cnf: PX509V3_CTX): PASN1_TYPE; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_generate_v3_procname);
 end;
 
 
-function  ERR_ASN1_str2mask(const _str: PByte; pmask: PIdC_ULONG): TIdC_INT; 
+function  ERR_ASN1_str2mask(const _str: PByte; pmask: PIdC_ULONG): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_str2mask_procname);
 end;
 
  {introduced 1.1.0}
 
-function  ERR_ASN1_item_print(out_: PBIO; ifld: PASN1_VALUE; indent: TIdC_INT; const it: PASN1_ITEM; const pctx: PASN1_PCTX): TIdC_INT; 
+function  ERR_ASN1_item_print(out_: PBIO; ifld: PASN1_VALUE; indent: TIdC_INT;
+  const it: PASN1_ITEM; const pctx: PASN1_PCTX): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_item_print_procname);
 end;
 
 
-function  ERR_ASN1_PCTX_new: PASN1_PCTX; 
+function  ERR_ASN1_PCTX_new: PASN1_PCTX; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_new_procname);
 end;
 
 
-procedure  ERR_ASN1_PCTX_free(p: PASN1_PCTX); 
+procedure  ERR_ASN1_PCTX_free(p: PASN1_PCTX); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_free_procname);
 end;
 
 
-function  ERR_ASN1_PCTX_get_flags(const p: PASN1_PCTX): TIdC_ULONG; 
+function  ERR_ASN1_PCTX_get_flags(const p: PASN1_PCTX): TIdC_ULONG; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_get_flags_procname);
 end;
 
 
-procedure  ERR_ASN1_PCTX_set_flags(p: PASN1_PCTX; flags: TIdC_ULONG); 
+procedure  ERR_ASN1_PCTX_set_flags(p: PASN1_PCTX; flags: TIdC_ULONG); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_set_flags_procname);
 end;
 
 
-function  ERR_ASN1_PCTX_get_nm_flags(const p: PASN1_PCTX): TIdC_ULONG; 
+function  ERR_ASN1_PCTX_get_nm_flags(const p: PASN1_PCTX): TIdC_ULONG; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_get_nm_flags_procname);
 end;
 
 
-procedure  ERR_ASN1_PCTX_set_nm_flags(p: PASN1_PCTX; flags: TIdC_ULONG); 
+procedure  ERR_ASN1_PCTX_set_nm_flags(p: PASN1_PCTX; flags: TIdC_ULONG); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_set_nm_flags_procname);
 end;
 
 
-function  ERR_ASN1_PCTX_get_cert_flags(const p: PASN1_PCTX): TIdC_ULONG; 
+function  ERR_ASN1_PCTX_get_cert_flags(const p: PASN1_PCTX): TIdC_ULONG; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_get_cert_flags_procname);
 end;
 
 
-procedure  ERR_ASN1_PCTX_set_cert_flags(p: PASN1_PCTX; flags: TIdC_ULONG); 
+procedure  ERR_ASN1_PCTX_set_cert_flags(p: PASN1_PCTX; flags: TIdC_ULONG); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_set_cert_flags_procname);
 end;
 
 
-function  ERR_ASN1_PCTX_get_oid_flags(const p: PASN1_PCTX): TIdC_ULONG;
+function  ERR_ASN1_PCTX_get_oid_flags(const p: PASN1_PCTX): TIdC_ULONG; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_get_oid_flags_procname);
 end;
 
 
-procedure  ERR_ASN1_PCTX_set_oid_flags(p: PASN1_PCTX; flags: TIdC_ULONG); 
+procedure  ERR_ASN1_PCTX_set_oid_flags(p: PASN1_PCTX; flags: TIdC_ULONG); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_set_oid_flags_procname);
 end;
 
 
-function  ERR_ASN1_PCTX_get_str_flags(const p: PASN1_PCTX): TIdC_ULONG; 
+function  ERR_ASN1_PCTX_get_str_flags(const p: PASN1_PCTX): TIdC_ULONG; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_get_str_flags_procname);
 end;
 
 
-procedure  ERR_ASN1_PCTX_set_str_flags(p: PASN1_PCTX; flags: TIdC_ULONG); 
+procedure  ERR_ASN1_PCTX_set_str_flags(p: PASN1_PCTX; flags: TIdC_ULONG); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_PCTX_set_str_flags_procname);
 end;
@@ -3000,64 +3023,66 @@ end;
 
 
   //ASN1_SCTX *ASN1_SCTX_new(int (*scan_cb) (ASN1_SCTX *ctx));
-procedure  ERR_ASN1_SCTX_free(p: PASN1_SCTX); 
+procedure  ERR_ASN1_SCTX_free(p: PASN1_SCTX); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_SCTX_free_procname);
 end;
 
  {introduced 1.1.0}
-function  ERR_ASN1_SCTX_get_item(p: PASN1_SCTX): PASN1_ITEM; 
+function  ERR_ASN1_SCTX_get_item(p: PASN1_SCTX): PASN1_ITEM; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_SCTX_get_item_procname);
 end;
 
  {introduced 1.1.0}
-function  ERR_ASN1_SCTX_get_template(p: PASN1_SCTX): PASN1_TEMPLATE; 
+function  ERR_ASN1_SCTX_get_template(p: PASN1_SCTX): PASN1_TEMPLATE; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_SCTX_get_template_procname);
 end;
 
  {introduced 1.1.0}
-function  ERR_ASN1_SCTX_get_flags(p: PASN1_SCTX): TIdC_ULONG; 
+function  ERR_ASN1_SCTX_get_flags(p: PASN1_SCTX): TIdC_ULONG; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_SCTX_get_flags_procname);
 end;
 
  {introduced 1.1.0}
-procedure  ERR_ASN1_SCTX_set_app_data(p: PASN1_SCTX; data: Pointer); 
+procedure  ERR_ASN1_SCTX_set_app_data(p: PASN1_SCTX; data: Pointer); cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_SCTX_set_app_data_procname);
 end;
 
  {introduced 1.1.0}
-function  ERR_ASN1_SCTX_get_app_data(p: PASN1_SCTX): Pointer; 
+function  ERR_ASN1_SCTX_get_app_data(p: PASN1_SCTX): Pointer; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_SCTX_get_app_data_procname);
 end;
 
  {introduced 1.1.0}
 
-function  ERR_BIO_f_asn1: PBIO_METHOD; 
+function  ERR_BIO_f_asn1: PBIO_METHOD; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_f_asn1_procname);
 end;
 
 
 
-function  ERR_BIO_new_NDEF(out_: PBIO; _val: PASN1_VALUE; const it: PASN1_ITEM): PBIO; 
+function  ERR_BIO_new_NDEF(out_: PBIO; _val: PASN1_VALUE; const it: PASN1_ITEM): PBIO; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(BIO_new_NDEF_procname);
 end;
 
 
 
-function  ERR_i2d_ASN1_bio_stream(out_: PBIO; _val: PASN1_VALUE; in_: PBIO; flags: TIdC_INT; const it: PASN1_ITEM): TIdC_INT; 
+function  ERR_i2d_ASN1_bio_stream(out_: PBIO; _val: PASN1_VALUE; in_: PBIO; flags: TIdC_INT;
+  const it: PASN1_ITEM): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(i2d_ASN1_bio_stream_procname);
 end;
 
 
-function  ERR_PEM_write_bio_ASN1_stream(out_: PBIO; _val: PASN1_VALUE; in_: PBIO; flags: TIdC_INT; const hdr: PIdAnsiChar; const it: PASN1_ITEM): TIdC_INT;
+function  ERR_PEM_write_bio_ASN1_stream(out_: PBIO; _val: PASN1_VALUE; in_: PBIO; flags: TIdC_INT;
+  const hdr: PIdAnsiChar; const it: PASN1_ITEM): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(PEM_write_bio_ASN1_stream_procname);
 end;
@@ -3066,32 +3091,32 @@ end;
   //function SMIME_write_ASN1(bio: PBIO; _val: PASN1_VALUE; data: PBIO; flags: TIdC_INT;
   //                     ctype_nid: TIdC_INT; econt_nid: TIdC_INT;
   //                     STACK_OF(X509_ALGOR) *mdalgs, const ASN1_ITEM *it): TIdC_INT;
-function  ERR_SMIME_read_ASN1(bio: PBIO; bcont: PPBIO; const it: PASN1_ITEM): PASN1_VALUE; 
+function  ERR_SMIME_read_ASN1(bio: PBIO; bcont: PPBIO; const it: PASN1_ITEM): PASN1_VALUE; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(SMIME_read_ASN1_procname);
 end;
 
 
-function  ERR_SMIME_crlf_copy(in_: PBIO; out_: PBIO; flags: TIdC_INT): TIdC_INT; 
+function  ERR_SMIME_crlf_copy(in_: PBIO; out_: PBIO; flags: TIdC_INT): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(SMIME_crlf_copy_procname);
 end;
 
 
-function  ERR_SMIME_text(in_: PBIO; out_: PBIO): TIdC_INT; 
+function  ERR_SMIME_text(in_: PBIO; out_: PBIO): TIdC_INT; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(SMIME_text_procname);
 end;
 
 
 
-function  ERR_ASN1_ITEM_lookup(const name: PIdAnsiChar): PASN1_ITEM; 
+function  ERR_ASN1_ITEM_lookup(const name: PIdAnsiChar): PASN1_ITEM; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_ITEM_lookup_procname);
 end;
 
  {introduced 1.1.0}
-function  ERR_ASN1_ITEM_get(i: TIdC_SIZET): PASN1_ITEM; 
+function  ERR_ASN1_ITEM_get(i: TIdC_SIZET): PASN1_ITEM; cdecl;
 begin
   ETaurusTLSAPIFunctionNotPresent.RaiseException(ASN1_ITEM_get_procname);
 end;
@@ -3110,13 +3135,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TYPE_get_allownil)}
-    ASN1_TYPE_get := @ERR_ASN1_TYPE_get;
+    ASN1_TYPE_get := ERR_ASN1_TYPE_get;
     {$ifend}
     {$if declared(ASN1_TYPE_get_introduced)}
     if LibVersion < ASN1_TYPE_get_introduced then
     begin
       {$if declared(FC_ASN1_TYPE_get)}
-      ASN1_TYPE_get := @FC_ASN1_TYPE_get;
+      ASN1_TYPE_get := FC_ASN1_TYPE_get;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3125,7 +3150,7 @@ begin
     if ASN1_TYPE_get_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TYPE_get)}
-      ASN1_TYPE_get := @_ASN1_TYPE_get;
+      ASN1_TYPE_get := _ASN1_TYPE_get;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3142,13 +3167,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TYPE_set_allownil)}
-    ASN1_TYPE_set := @ERR_ASN1_TYPE_set;
+    ASN1_TYPE_set := ERR_ASN1_TYPE_set;
     {$ifend}
     {$if declared(ASN1_TYPE_set_introduced)}
     if LibVersion < ASN1_TYPE_set_introduced then
     begin
       {$if declared(FC_ASN1_TYPE_set)}
-      ASN1_TYPE_set := @FC_ASN1_TYPE_set;
+      ASN1_TYPE_set := FC_ASN1_TYPE_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3157,7 +3182,7 @@ begin
     if ASN1_TYPE_set_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TYPE_set)}
-      ASN1_TYPE_set := @_ASN1_TYPE_set;
+      ASN1_TYPE_set := _ASN1_TYPE_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3174,13 +3199,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TYPE_set1_allownil)}
-    ASN1_TYPE_set1 := @ERR_ASN1_TYPE_set1;
+    ASN1_TYPE_set1 := ERR_ASN1_TYPE_set1;
     {$ifend}
     {$if declared(ASN1_TYPE_set1_introduced)}
     if LibVersion < ASN1_TYPE_set1_introduced then
     begin
       {$if declared(FC_ASN1_TYPE_set1)}
-      ASN1_TYPE_set1 := @FC_ASN1_TYPE_set1;
+      ASN1_TYPE_set1 := FC_ASN1_TYPE_set1;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3189,7 +3214,7 @@ begin
     if ASN1_TYPE_set1_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TYPE_set1)}
-      ASN1_TYPE_set1 := @_ASN1_TYPE_set1;
+      ASN1_TYPE_set1 := _ASN1_TYPE_set1;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3206,13 +3231,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TYPE_cmp_allownil)}
-    ASN1_TYPE_cmp := @ERR_ASN1_TYPE_cmp;
+    ASN1_TYPE_cmp := ERR_ASN1_TYPE_cmp;
     {$ifend}
     {$if declared(ASN1_TYPE_cmp_introduced)}
     if LibVersion < ASN1_TYPE_cmp_introduced then
     begin
       {$if declared(FC_ASN1_TYPE_cmp)}
-      ASN1_TYPE_cmp := @FC_ASN1_TYPE_cmp;
+      ASN1_TYPE_cmp := FC_ASN1_TYPE_cmp;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3221,7 +3246,7 @@ begin
     if ASN1_TYPE_cmp_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TYPE_cmp)}
-      ASN1_TYPE_cmp := @_ASN1_TYPE_cmp;
+      ASN1_TYPE_cmp := _ASN1_TYPE_cmp;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3238,13 +3263,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TYPE_pack_sequence_allownil)}
-    ASN1_TYPE_pack_sequence := @ERR_ASN1_TYPE_pack_sequence;
+    ASN1_TYPE_pack_sequence := ERR_ASN1_TYPE_pack_sequence;
     {$ifend}
     {$if declared(ASN1_TYPE_pack_sequence_introduced)}
     if LibVersion < ASN1_TYPE_pack_sequence_introduced then
     begin
       {$if declared(FC_ASN1_TYPE_pack_sequence)}
-      ASN1_TYPE_pack_sequence := @FC_ASN1_TYPE_pack_sequence;
+      ASN1_TYPE_pack_sequence := FC_ASN1_TYPE_pack_sequence;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3253,7 +3278,7 @@ begin
     if ASN1_TYPE_pack_sequence_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TYPE_pack_sequence)}
-      ASN1_TYPE_pack_sequence := @_ASN1_TYPE_pack_sequence;
+      ASN1_TYPE_pack_sequence := _ASN1_TYPE_pack_sequence;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3270,13 +3295,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TYPE_unpack_sequence_allownil)}
-    ASN1_TYPE_unpack_sequence := @ERR_ASN1_TYPE_unpack_sequence;
+    ASN1_TYPE_unpack_sequence := ERR_ASN1_TYPE_unpack_sequence;
     {$ifend}
     {$if declared(ASN1_TYPE_unpack_sequence_introduced)}
     if LibVersion < ASN1_TYPE_unpack_sequence_introduced then
     begin
       {$if declared(FC_ASN1_TYPE_unpack_sequence)}
-      ASN1_TYPE_unpack_sequence := @FC_ASN1_TYPE_unpack_sequence;
+      ASN1_TYPE_unpack_sequence := FC_ASN1_TYPE_unpack_sequence;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3285,7 +3310,7 @@ begin
     if ASN1_TYPE_unpack_sequence_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TYPE_unpack_sequence)}
-      ASN1_TYPE_unpack_sequence := @_ASN1_TYPE_unpack_sequence;
+      ASN1_TYPE_unpack_sequence := _ASN1_TYPE_unpack_sequence;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3302,13 +3327,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_OBJECT_new_allownil)}
-    ASN1_OBJECT_new := @ERR_ASN1_OBJECT_new;
+    ASN1_OBJECT_new := ERR_ASN1_OBJECT_new;
     {$ifend}
     {$if declared(ASN1_OBJECT_new_introduced)}
     if LibVersion < ASN1_OBJECT_new_introduced then
     begin
       {$if declared(FC_ASN1_OBJECT_new)}
-      ASN1_OBJECT_new := @FC_ASN1_OBJECT_new;
+      ASN1_OBJECT_new := FC_ASN1_OBJECT_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3317,7 +3342,7 @@ begin
     if ASN1_OBJECT_new_removed <= LibVersion then
     begin
       {$if declared(_ASN1_OBJECT_new)}
-      ASN1_OBJECT_new := @_ASN1_OBJECT_new;
+      ASN1_OBJECT_new := _ASN1_OBJECT_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3334,13 +3359,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_OBJECT_free_allownil)}
-    ASN1_OBJECT_free := @ERR_ASN1_OBJECT_free;
+    ASN1_OBJECT_free := ERR_ASN1_OBJECT_free;
     {$ifend}
     {$if declared(ASN1_OBJECT_free_introduced)}
     if LibVersion < ASN1_OBJECT_free_introduced then
     begin
       {$if declared(FC_ASN1_OBJECT_free)}
-      ASN1_OBJECT_free := @FC_ASN1_OBJECT_free;
+      ASN1_OBJECT_free := FC_ASN1_OBJECT_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3349,7 +3374,7 @@ begin
     if ASN1_OBJECT_free_removed <= LibVersion then
     begin
       {$if declared(_ASN1_OBJECT_free)}
-      ASN1_OBJECT_free := @_ASN1_OBJECT_free;
+      ASN1_OBJECT_free := _ASN1_OBJECT_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3366,13 +3391,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(i2d_ASN1_OBJECT_allownil)}
-    i2d_ASN1_OBJECT := @ERR_i2d_ASN1_OBJECT;
+    i2d_ASN1_OBJECT := ERR_i2d_ASN1_OBJECT;
     {$ifend}
     {$if declared(i2d_ASN1_OBJECT_introduced)}
     if LibVersion < i2d_ASN1_OBJECT_introduced then
     begin
       {$if declared(FC_i2d_ASN1_OBJECT)}
-      i2d_ASN1_OBJECT := @FC_i2d_ASN1_OBJECT;
+      i2d_ASN1_OBJECT := FC_i2d_ASN1_OBJECT;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3381,7 +3406,7 @@ begin
     if i2d_ASN1_OBJECT_removed <= LibVersion then
     begin
       {$if declared(_i2d_ASN1_OBJECT)}
-      i2d_ASN1_OBJECT := @_i2d_ASN1_OBJECT;
+      i2d_ASN1_OBJECT := _i2d_ASN1_OBJECT;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3398,13 +3423,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(d2i_ASN1_OBJECT_allownil)}
-    d2i_ASN1_OBJECT := @ERR_d2i_ASN1_OBJECT;
+    d2i_ASN1_OBJECT := ERR_d2i_ASN1_OBJECT;
     {$ifend}
     {$if declared(d2i_ASN1_OBJECT_introduced)}
     if LibVersion < d2i_ASN1_OBJECT_introduced then
     begin
       {$if declared(FC_d2i_ASN1_OBJECT)}
-      d2i_ASN1_OBJECT := @FC_d2i_ASN1_OBJECT;
+      d2i_ASN1_OBJECT := FC_d2i_ASN1_OBJECT;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3413,7 +3438,7 @@ begin
     if d2i_ASN1_OBJECT_removed <= LibVersion then
     begin
       {$if declared(_d2i_ASN1_OBJECT)}
-      d2i_ASN1_OBJECT := @_d2i_ASN1_OBJECT;
+      d2i_ASN1_OBJECT := _d2i_ASN1_OBJECT;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3429,13 +3454,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(d2i_ASN1_OBJECT_allownil)}
-    d2i_ASN1_BIT_STRING := @ERR_d2i_ASN1_BIT_STRING;
+    d2i_ASN1_BIT_STRING := ERR_d2i_ASN1_BIT_STRING;
     {$ifend}
     {$if declared(d2i_ASN1_OBJECT_introduced)}
     if LibVersion < d2i_ASN1_BIT_STRING_introduced then
     begin
       {$if declared(FC_d2i_ASN1_OBJECT)}
-      d2i_ASN1_OBJECT := @FC_d2i_ASN1_OBJECT;
+      d2i_ASN1_OBJECT := FC_d2i_ASN1_OBJECT;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3444,7 +3469,7 @@ begin
     if d2i_ASN1_BIT_STRING_removed <= LibVersion then
     begin
       {$if declared(_d2i_ASN1_OBJECT)}
-      d2i_ASN1_BIT_STRING := @d2i_ASN1_BIT_STRING;
+      d2i_ASN1_BIT_STRING := d2i_ASN1_BIT_STRING;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3460,13 +3485,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(i2d_ASN1_BIT_STRING_allownil)}
-    i2d_ASN1_BIT_STRING := @ERR_i2d_ASN1_BIT_STRING;
+    i2d_ASN1_BIT_STRING := ERR_i2d_ASN1_BIT_STRING;
     {$ifend}
     {$if declared(i2d_ASN1_BIT_STRING_introduced)}
     if LibVersion < i2d_ASN1_BIT_STRING_introduced then
     begin
       {$if declared(FC_i2d_ASN1_BIT_STRING)}
-      i2d_ASN1_BIT_STRING := @FC_i2d_ASN1_BIT_STRING;
+      i2d_ASN1_BIT_STRING := FC_i2d_ASN1_BIT_STRING;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3475,7 +3500,7 @@ begin
     if i2d_ASN1_BIT_STRING_removed <= LibVersion then
     begin
       {$if declared(_i2d_ASN1_BIT_STRING)}
-      d2i_ASN1_OBJECT := @_d2i_ASN1_OBJECT;
+      d2i_ASN1_OBJECT := _d2i_ASN1_OBJECT;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3491,13 +3516,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_new_allownil)}
-    ASN1_STRING_new := @ERR_ASN1_STRING_new;
+    ASN1_STRING_new := ERR_ASN1_STRING_new;
     {$ifend}
     {$if declared(ASN1_STRING_new_introduced)}
     if LibVersion < ASN1_STRING_new_introduced then
     begin
       {$if declared(FC_ASN1_STRING_new)}
-      ASN1_STRING_new := @FC_ASN1_STRING_new;
+      ASN1_STRING_new := FC_ASN1_STRING_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3506,7 +3531,7 @@ begin
     if ASN1_STRING_new_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_new)}
-      ASN1_STRING_new := @_ASN1_STRING_new;
+      ASN1_STRING_new := _ASN1_STRING_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3523,13 +3548,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_free_allownil)}
-    ASN1_STRING_free := @ERR_ASN1_STRING_free;
+    ASN1_STRING_free := ERR_ASN1_STRING_free;
     {$ifend}
     {$if declared(ASN1_STRING_free_introduced)}
     if LibVersion < ASN1_STRING_free_introduced then
     begin
       {$if declared(FC_ASN1_STRING_free)}
-      ASN1_STRING_free := @FC_ASN1_STRING_free;
+      ASN1_STRING_free := FC_ASN1_STRING_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3538,7 +3563,7 @@ begin
     if ASN1_STRING_free_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_free)}
-      ASN1_STRING_free := @_ASN1_STRING_free;
+      ASN1_STRING_free := _ASN1_STRING_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3555,13 +3580,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_clear_free_allownil)}
-    ASN1_STRING_clear_free := @ERR_ASN1_STRING_clear_free;
+    ASN1_STRING_clear_free := ERR_ASN1_STRING_clear_free;
     {$ifend}
     {$if declared(ASN1_STRING_clear_free_introduced)}
     if LibVersion < ASN1_STRING_clear_free_introduced then
     begin
       {$if declared(FC_ASN1_STRING_clear_free)}
-      ASN1_STRING_clear_free := @FC_ASN1_STRING_clear_free;
+      ASN1_STRING_clear_free := FC_ASN1_STRING_clear_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3570,7 +3595,7 @@ begin
     if ASN1_STRING_clear_free_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_clear_free)}
-      ASN1_STRING_clear_free := @_ASN1_STRING_clear_free;
+      ASN1_STRING_clear_free := _ASN1_STRING_clear_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3587,13 +3612,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_copy_allownil)}
-    ASN1_STRING_copy := @ERR_ASN1_STRING_copy;
+    ASN1_STRING_copy := ERR_ASN1_STRING_copy;
     {$ifend}
     {$if declared(ASN1_STRING_copy_introduced)}
     if LibVersion < ASN1_STRING_copy_introduced then
     begin
       {$if declared(FC_ASN1_STRING_copy)}
-      ASN1_STRING_copy := @FC_ASN1_STRING_copy;
+      ASN1_STRING_copy := FC_ASN1_STRING_copy;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3602,7 +3627,7 @@ begin
     if ASN1_STRING_copy_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_copy)}
-      ASN1_STRING_copy := @_ASN1_STRING_copy;
+      ASN1_STRING_copy := _ASN1_STRING_copy;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3619,13 +3644,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_dup_allownil)}
-    ASN1_STRING_dup := @ERR_ASN1_STRING_dup;
+    ASN1_STRING_dup := ERR_ASN1_STRING_dup;
     {$ifend}
     {$if declared(ASN1_STRING_dup_introduced)}
     if LibVersion < ASN1_STRING_dup_introduced then
     begin
       {$if declared(FC_ASN1_STRING_dup)}
-      ASN1_STRING_dup := @FC_ASN1_STRING_dup;
+      ASN1_STRING_dup := FC_ASN1_STRING_dup;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3634,7 +3659,7 @@ begin
     if ASN1_STRING_dup_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_dup)}
-      ASN1_STRING_dup := @_ASN1_STRING_dup;
+      ASN1_STRING_dup := _ASN1_STRING_dup;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3651,13 +3676,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_type_new_allownil)}
-    ASN1_STRING_type_new := @ERR_ASN1_STRING_type_new;
+    ASN1_STRING_type_new := ERR_ASN1_STRING_type_new;
     {$ifend}
     {$if declared(ASN1_STRING_type_new_introduced)}
     if LibVersion < ASN1_STRING_type_new_introduced then
     begin
       {$if declared(FC_ASN1_STRING_type_new)}
-      ASN1_STRING_type_new := @FC_ASN1_STRING_type_new;
+      ASN1_STRING_type_new := FC_ASN1_STRING_type_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3666,7 +3691,7 @@ begin
     if ASN1_STRING_type_new_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_type_new)}
-      ASN1_STRING_type_new := @_ASN1_STRING_type_new;
+      ASN1_STRING_type_new := _ASN1_STRING_type_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3683,13 +3708,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_cmp_allownil)}
-    ASN1_STRING_cmp := @ERR_ASN1_STRING_cmp;
+    ASN1_STRING_cmp := ERR_ASN1_STRING_cmp;
     {$ifend}
     {$if declared(ASN1_STRING_cmp_introduced)}
     if LibVersion < ASN1_STRING_cmp_introduced then
     begin
       {$if declared(FC_ASN1_STRING_cmp)}
-      ASN1_STRING_cmp := @FC_ASN1_STRING_cmp;
+      ASN1_STRING_cmp := FC_ASN1_STRING_cmp;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3698,7 +3723,7 @@ begin
     if ASN1_STRING_cmp_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_cmp)}
-      ASN1_STRING_cmp := @_ASN1_STRING_cmp;
+      ASN1_STRING_cmp := _ASN1_STRING_cmp;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3715,13 +3740,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_set_allownil)}
-    ASN1_STRING_set := @ERR_ASN1_STRING_set;
+    ASN1_STRING_set := ERR_ASN1_STRING_set;
     {$ifend}
     {$if declared(ASN1_STRING_set_introduced)}
     if LibVersion < ASN1_STRING_set_introduced then
     begin
       {$if declared(FC_ASN1_STRING_set)}
-      ASN1_STRING_set := @FC_ASN1_STRING_set;
+      ASN1_STRING_set := FC_ASN1_STRING_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3730,7 +3755,7 @@ begin
     if ASN1_STRING_set_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_set)}
-      ASN1_STRING_set := @_ASN1_STRING_set;
+      ASN1_STRING_set := _ASN1_STRING_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3747,13 +3772,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_set0_allownil)}
-    ASN1_STRING_set0 := @ERR_ASN1_STRING_set0;
+    ASN1_STRING_set0 := ERR_ASN1_STRING_set0;
     {$ifend}
     {$if declared(ASN1_STRING_set0_introduced)}
     if LibVersion < ASN1_STRING_set0_introduced then
     begin
       {$if declared(FC_ASN1_STRING_set0)}
-      ASN1_STRING_set0 := @FC_ASN1_STRING_set0;
+      ASN1_STRING_set0 := FC_ASN1_STRING_set0;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3762,7 +3787,7 @@ begin
     if ASN1_STRING_set0_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_set0)}
-      ASN1_STRING_set0 := @_ASN1_STRING_set0;
+      ASN1_STRING_set0 := _ASN1_STRING_set0;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3779,13 +3804,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_length_allownil)}
-    ASN1_STRING_length := @ERR_ASN1_STRING_length;
+    ASN1_STRING_length := ERR_ASN1_STRING_length;
     {$ifend}
     {$if declared(ASN1_STRING_length_introduced)}
     if LibVersion < ASN1_STRING_length_introduced then
     begin
       {$if declared(FC_ASN1_STRING_length)}
-      ASN1_STRING_length := @FC_ASN1_STRING_length;
+      ASN1_STRING_length := FC_ASN1_STRING_length;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3794,7 +3819,7 @@ begin
     if ASN1_STRING_length_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_length)}
-      ASN1_STRING_length := @_ASN1_STRING_length;
+      ASN1_STRING_length := _ASN1_STRING_length;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3811,13 +3836,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_length_set_allownil)}
-    ASN1_STRING_length_set := @ERR_ASN1_STRING_length_set;
+    ASN1_STRING_length_set := ERR_ASN1_STRING_length_set;
     {$ifend}
     {$if declared(ASN1_STRING_length_set_introduced)}
     if LibVersion < ASN1_STRING_length_set_introduced then
     begin
       {$if declared(FC_ASN1_STRING_length_set)}
-      ASN1_STRING_length_set := @FC_ASN1_STRING_length_set;
+      ASN1_STRING_length_set := FC_ASN1_STRING_length_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3826,7 +3851,7 @@ begin
     if ASN1_STRING_length_set_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_length_set)}
-      ASN1_STRING_length_set := @_ASN1_STRING_length_set;
+      ASN1_STRING_length_set := _ASN1_STRING_length_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3843,13 +3868,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_type_allownil)}
-    ASN1_STRING_type := @ERR_ASN1_STRING_type;
+    ASN1_STRING_type := ERR_ASN1_STRING_type;
     {$ifend}
     {$if declared(ASN1_STRING_type_introduced)}
     if LibVersion < ASN1_STRING_type_introduced then
     begin
       {$if declared(FC_ASN1_STRING_type)}
-      ASN1_STRING_type := @FC_ASN1_STRING_type;
+      ASN1_STRING_type := FC_ASN1_STRING_type;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3858,7 +3883,7 @@ begin
     if ASN1_STRING_type_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_type)}
-      ASN1_STRING_type := @_ASN1_STRING_type;
+      ASN1_STRING_type := _ASN1_STRING_type;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3875,13 +3900,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_get0_data_allownil)}
-    ASN1_STRING_get0_data := @ERR_ASN1_STRING_get0_data;
+    ASN1_STRING_get0_data := ERR_ASN1_STRING_get0_data;
     {$ifend}
     {$if declared(ASN1_STRING_get0_data_introduced)}
     if LibVersion < ASN1_STRING_get0_data_introduced then
     begin
       {$if declared(FC_ASN1_STRING_get0_data)}
-      ASN1_STRING_get0_data := @FC_ASN1_STRING_get0_data;
+      ASN1_STRING_get0_data := FC_ASN1_STRING_get0_data;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3890,7 +3915,7 @@ begin
     if ASN1_STRING_get0_data_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_get0_data)}
-      ASN1_STRING_get0_data := @_ASN1_STRING_get0_data;
+      ASN1_STRING_get0_data := _ASN1_STRING_get0_data;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3907,13 +3932,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_BIT_STRING_set_allownil)}
-    ASN1_BIT_STRING_set := @ERR_ASN1_BIT_STRING_set;
+    ASN1_BIT_STRING_set := ERR_ASN1_BIT_STRING_set;
     {$ifend}
     {$if declared(ASN1_BIT_STRING_set_introduced)}
     if LibVersion < ASN1_BIT_STRING_set_introduced then
     begin
       {$if declared(FC_ASN1_BIT_STRING_set)}
-      ASN1_BIT_STRING_set := @FC_ASN1_BIT_STRING_set;
+      ASN1_BIT_STRING_set := FC_ASN1_BIT_STRING_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3922,7 +3947,7 @@ begin
     if ASN1_BIT_STRING_set_removed <= LibVersion then
     begin
       {$if declared(_ASN1_BIT_STRING_set)}
-      ASN1_BIT_STRING_set := @_ASN1_BIT_STRING_set;
+      ASN1_BIT_STRING_set := _ASN1_BIT_STRING_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3939,13 +3964,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_BIT_STRING_set_bit_allownil)}
-    ASN1_BIT_STRING_set_bit := @ERR_ASN1_BIT_STRING_set_bit;
+    ASN1_BIT_STRING_set_bit := ERR_ASN1_BIT_STRING_set_bit;
     {$ifend}
     {$if declared(ASN1_BIT_STRING_set_bit_introduced)}
     if LibVersion < ASN1_BIT_STRING_set_bit_introduced then
     begin
       {$if declared(FC_ASN1_BIT_STRING_set_bit)}
-      ASN1_BIT_STRING_set_bit := @FC_ASN1_BIT_STRING_set_bit;
+      ASN1_BIT_STRING_set_bit := FC_ASN1_BIT_STRING_set_bit;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3954,7 +3979,7 @@ begin
     if ASN1_BIT_STRING_set_bit_removed <= LibVersion then
     begin
       {$if declared(_ASN1_BIT_STRING_set_bit)}
-      ASN1_BIT_STRING_set_bit := @_ASN1_BIT_STRING_set_bit;
+      ASN1_BIT_STRING_set_bit := _ASN1_BIT_STRING_set_bit;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3971,13 +3996,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_BIT_STRING_get_bit_allownil)}
-    ASN1_BIT_STRING_get_bit := @ERR_ASN1_BIT_STRING_get_bit;
+    ASN1_BIT_STRING_get_bit := ERR_ASN1_BIT_STRING_get_bit;
     {$ifend}
     {$if declared(ASN1_BIT_STRING_get_bit_introduced)}
     if LibVersion < ASN1_BIT_STRING_get_bit_introduced then
     begin
       {$if declared(FC_ASN1_BIT_STRING_get_bit)}
-      ASN1_BIT_STRING_get_bit := @FC_ASN1_BIT_STRING_get_bit;
+      ASN1_BIT_STRING_get_bit := FC_ASN1_BIT_STRING_get_bit;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -3986,7 +4011,7 @@ begin
     if ASN1_BIT_STRING_get_bit_removed <= LibVersion then
     begin
       {$if declared(_ASN1_BIT_STRING_get_bit)}
-      ASN1_BIT_STRING_get_bit := @_ASN1_BIT_STRING_get_bit;
+      ASN1_BIT_STRING_get_bit := _ASN1_BIT_STRING_get_bit;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4003,13 +4028,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_BIT_STRING_check_allownil)}
-    ASN1_BIT_STRING_check := @ERR_ASN1_BIT_STRING_check;
+    ASN1_BIT_STRING_check := ERR_ASN1_BIT_STRING_check;
     {$ifend}
     {$if declared(ASN1_BIT_STRING_check_introduced)}
     if LibVersion < ASN1_BIT_STRING_check_introduced then
     begin
       {$if declared(FC_ASN1_BIT_STRING_check)}
-      ASN1_BIT_STRING_check := @FC_ASN1_BIT_STRING_check;
+      ASN1_BIT_STRING_check := FC_ASN1_BIT_STRING_check;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4018,7 +4043,7 @@ begin
     if ASN1_BIT_STRING_check_removed <= LibVersion then
     begin
       {$if declared(_ASN1_BIT_STRING_check)}
-      ASN1_BIT_STRING_check := @_ASN1_BIT_STRING_check;
+      ASN1_BIT_STRING_check := _ASN1_BIT_STRING_check;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4035,13 +4060,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_BIT_STRING_name_print_allownil)}
-    ASN1_BIT_STRING_name_print := @ERR_ASN1_BIT_STRING_name_print;
+    ASN1_BIT_STRING_name_print := ERR_ASN1_BIT_STRING_name_print;
     {$ifend}
     {$if declared(ASN1_BIT_STRING_name_print_introduced)}
     if LibVersion < ASN1_BIT_STRING_name_print_introduced then
     begin
       {$if declared(FC_ASN1_BIT_STRING_name_print)}
-      ASN1_BIT_STRING_name_print := @FC_ASN1_BIT_STRING_name_print;
+      ASN1_BIT_STRING_name_print := FC_ASN1_BIT_STRING_name_print;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4050,7 +4075,7 @@ begin
     if ASN1_BIT_STRING_name_print_removed <= LibVersion then
     begin
       {$if declared(_ASN1_BIT_STRING_name_print)}
-      ASN1_BIT_STRING_name_print := @_ASN1_BIT_STRING_name_print;
+      ASN1_BIT_STRING_name_print := _ASN1_BIT_STRING_name_print;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4067,13 +4092,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_BIT_STRING_num_asc_allownil)}
-    ASN1_BIT_STRING_num_asc := @ERR_ASN1_BIT_STRING_num_asc;
+    ASN1_BIT_STRING_num_asc := ERR_ASN1_BIT_STRING_num_asc;
     {$ifend}
     {$if declared(ASN1_BIT_STRING_num_asc_introduced)}
     if LibVersion < ASN1_BIT_STRING_num_asc_introduced then
     begin
       {$if declared(FC_ASN1_BIT_STRING_num_asc)}
-      ASN1_BIT_STRING_num_asc := @FC_ASN1_BIT_STRING_num_asc;
+      ASN1_BIT_STRING_num_asc := FC_ASN1_BIT_STRING_num_asc;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4082,7 +4107,7 @@ begin
     if ASN1_BIT_STRING_num_asc_removed <= LibVersion then
     begin
       {$if declared(_ASN1_BIT_STRING_num_asc)}
-      ASN1_BIT_STRING_num_asc := @_ASN1_BIT_STRING_num_asc;
+      ASN1_BIT_STRING_num_asc := _ASN1_BIT_STRING_num_asc;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4099,13 +4124,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_BIT_STRING_set_asc_allownil)}
-    ASN1_BIT_STRING_set_asc := @ERR_ASN1_BIT_STRING_set_asc;
+    ASN1_BIT_STRING_set_asc := ERR_ASN1_BIT_STRING_set_asc;
     {$ifend}
     {$if declared(ASN1_BIT_STRING_set_asc_introduced)}
     if LibVersion < ASN1_BIT_STRING_set_asc_introduced then
     begin
       {$if declared(FC_ASN1_BIT_STRING_set_asc)}
-      ASN1_BIT_STRING_set_asc := @FC_ASN1_BIT_STRING_set_asc;
+      ASN1_BIT_STRING_set_asc := FC_ASN1_BIT_STRING_set_asc;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4114,7 +4139,7 @@ begin
     if ASN1_BIT_STRING_set_asc_removed <= LibVersion then
     begin
       {$if declared(_ASN1_BIT_STRING_set_asc)}
-      ASN1_BIT_STRING_set_asc := @_ASN1_BIT_STRING_set_asc;
+      ASN1_BIT_STRING_set_asc := _ASN1_BIT_STRING_set_asc;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4131,13 +4156,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_INTEGER_new_allownil)}
-    ASN1_INTEGER_new := @ERR_ASN1_INTEGER_new;
+    ASN1_INTEGER_new := ERR_ASN1_INTEGER_new;
     {$ifend}
     {$if declared(ASN1_INTEGER_new_introduced)}
     if LibVersion < ASN1_INTEGER_new_introduced then
     begin
       {$if declared(FC_ASN1_INTEGER_new)}
-      ASN1_INTEGER_new := @FC_ASN1_INTEGER_new;
+      ASN1_INTEGER_new := FC_ASN1_INTEGER_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4146,7 +4171,7 @@ begin
     if ASN1_INTEGER_new_removed <= LibVersion then
     begin
       {$if declared(_ASN1_INTEGER_new)}
-      ASN1_INTEGER_new := @_ASN1_INTEGER_new;
+      ASN1_INTEGER_new := _ASN1_INTEGER_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4163,13 +4188,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_INTEGER_free_allownil)}
-    ASN1_INTEGER_free := @ERR_ASN1_INTEGER_free;
+    ASN1_INTEGER_free := ERR_ASN1_INTEGER_free;
     {$ifend}
     {$if declared(ASN1_INTEGER_free_introduced)}
     if LibVersion < ASN1_INTEGER_free_introduced then
     begin
       {$if declared(FC_ASN1_INTEGER_free)}
-      ASN1_INTEGER_free := @FC_ASN1_INTEGER_free;
+      ASN1_INTEGER_free := FC_ASN1_INTEGER_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4178,7 +4203,7 @@ begin
     if ASN1_INTEGER_free_removed <= LibVersion then
     begin
       {$if declared(_ASN1_INTEGER_free)}
-      ASN1_INTEGER_free := @_ASN1_INTEGER_free;
+      ASN1_INTEGER_free := _ASN1_INTEGER_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4195,13 +4220,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(d2i_ASN1_INTEGER_allownil)}
-    d2i_ASN1_INTEGER := @ERR_d2i_ASN1_INTEGER;
+    d2i_ASN1_INTEGER := ERR_d2i_ASN1_INTEGER;
     {$ifend}
     {$if declared(d2i_ASN1_INTEGER_introduced)}
     if LibVersion < d2i_ASN1_INTEGER_introduced then
     begin
       {$if declared(FC_d2i_ASN1_INTEGER)}
-      d2i_ASN1_INTEGER := @FC_d2i_ASN1_INTEGER;
+      d2i_ASN1_INTEGER := FC_d2i_ASN1_INTEGER;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4210,7 +4235,7 @@ begin
     if d2i_ASN1_INTEGER_removed <= LibVersion then
     begin
       {$if declared(_d2i_ASN1_INTEGER)}
-      d2i_ASN1_INTEGER := @_d2i_ASN1_INTEGER;
+      d2i_ASN1_INTEGER := _d2i_ASN1_INTEGER;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4227,13 +4252,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(i2d_ASN1_INTEGER_allownil)}
-    i2d_ASN1_INTEGER := @ERR_i2d_ASN1_INTEGER;
+    i2d_ASN1_INTEGER := ERR_i2d_ASN1_INTEGER;
     {$ifend}
     {$if declared(i2d_ASN1_INTEGER_introduced)}
     if LibVersion < i2d_ASN1_INTEGER_introduced then
     begin
       {$if declared(FC_i2d_ASN1_INTEGER)}
-      i2d_ASN1_INTEGER := @FC_i2d_ASN1_INTEGER;
+      i2d_ASN1_INTEGER := FC_i2d_ASN1_INTEGER;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4242,7 +4267,7 @@ begin
     if i2d_ASN1_INTEGER_removed <= LibVersion then
     begin
       {$if declared(_i2d_ASN1_INTEGER)}
-      i2d_ASN1_INTEGER := @_i2d_ASN1_INTEGER;
+      i2d_ASN1_INTEGER := _i2d_ASN1_INTEGER;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4259,13 +4284,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(d2i_ASN1_UINTEGER_allownil)}
-    d2i_ASN1_UINTEGER := @ERR_d2i_ASN1_UINTEGER;
+    d2i_ASN1_UINTEGER := ERR_d2i_ASN1_UINTEGER;
     {$ifend}
     {$if declared(d2i_ASN1_UINTEGER_introduced)}
     if LibVersion < d2i_ASN1_UINTEGER_introduced then
     begin
       {$if declared(FC_d2i_ASN1_UINTEGER)}
-      d2i_ASN1_UINTEGER := @FC_d2i_ASN1_UINTEGER;
+      d2i_ASN1_UINTEGER := FC_d2i_ASN1_UINTEGER;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4274,7 +4299,7 @@ begin
     if d2i_ASN1_UINTEGER_removed <= LibVersion then
     begin
       {$if declared(_d2i_ASN1_UINTEGER)}
-      d2i_ASN1_UINTEGER := @_d2i_ASN1_UINTEGER;
+      d2i_ASN1_UINTEGER := _d2i_ASN1_UINTEGER;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4291,13 +4316,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_INTEGER_dup_allownil)}
-    ASN1_INTEGER_dup := @ERR_ASN1_INTEGER_dup;
+    ASN1_INTEGER_dup := ERR_ASN1_INTEGER_dup;
     {$ifend}
     {$if declared(ASN1_INTEGER_dup_introduced)}
     if LibVersion < ASN1_INTEGER_dup_introduced then
     begin
       {$if declared(FC_ASN1_INTEGER_dup)}
-      ASN1_INTEGER_dup := @FC_ASN1_INTEGER_dup;
+      ASN1_INTEGER_dup := FC_ASN1_INTEGER_dup;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4306,7 +4331,7 @@ begin
     if ASN1_INTEGER_dup_removed <= LibVersion then
     begin
       {$if declared(_ASN1_INTEGER_dup)}
-      ASN1_INTEGER_dup := @_ASN1_INTEGER_dup;
+      ASN1_INTEGER_dup := _ASN1_INTEGER_dup;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4323,13 +4348,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_INTEGER_cmp_allownil)}
-    ASN1_INTEGER_cmp := @ERR_ASN1_INTEGER_cmp;
+    ASN1_INTEGER_cmp := ERR_ASN1_INTEGER_cmp;
     {$ifend}
     {$if declared(ASN1_INTEGER_cmp_introduced)}
     if LibVersion < ASN1_INTEGER_cmp_introduced then
     begin
       {$if declared(FC_ASN1_INTEGER_cmp)}
-      ASN1_INTEGER_cmp := @FC_ASN1_INTEGER_cmp;
+      ASN1_INTEGER_cmp := FC_ASN1_INTEGER_cmp;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4338,7 +4363,7 @@ begin
     if ASN1_INTEGER_cmp_removed <= LibVersion then
     begin
       {$if declared(_ASN1_INTEGER_cmp)}
-      ASN1_INTEGER_cmp := @_ASN1_INTEGER_cmp;
+      ASN1_INTEGER_cmp := _ASN1_INTEGER_cmp;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4355,13 +4380,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_UTCTIME_check_allownil)}
-    ASN1_UTCTIME_check := @ERR_ASN1_UTCTIME_check;
+    ASN1_UTCTIME_check := ERR_ASN1_UTCTIME_check;
     {$ifend}
     {$if declared(ASN1_UTCTIME_check_introduced)}
     if LibVersion < ASN1_UTCTIME_check_introduced then
     begin
       {$if declared(FC_ASN1_UTCTIME_check)}
-      ASN1_UTCTIME_check := @FC_ASN1_UTCTIME_check;
+      ASN1_UTCTIME_check := FC_ASN1_UTCTIME_check;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4370,7 +4395,7 @@ begin
     if ASN1_UTCTIME_check_removed <= LibVersion then
     begin
       {$if declared(_ASN1_UTCTIME_check)}
-      ASN1_UTCTIME_check := @_ASN1_UTCTIME_check;
+      ASN1_UTCTIME_check := _ASN1_UTCTIME_check;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4387,13 +4412,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_UTCTIME_set_allownil)}
-    ASN1_UTCTIME_set := @ERR_ASN1_UTCTIME_set;
+    ASN1_UTCTIME_set := ERR_ASN1_UTCTIME_set;
     {$ifend}
     {$if declared(ASN1_UTCTIME_set_introduced)}
     if LibVersion < ASN1_UTCTIME_set_introduced then
     begin
       {$if declared(FC_ASN1_UTCTIME_set)}
-      ASN1_UTCTIME_set := @FC_ASN1_UTCTIME_set;
+      ASN1_UTCTIME_set := FC_ASN1_UTCTIME_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4402,7 +4427,7 @@ begin
     if ASN1_UTCTIME_set_removed <= LibVersion then
     begin
       {$if declared(_ASN1_UTCTIME_set)}
-      ASN1_UTCTIME_set := @_ASN1_UTCTIME_set;
+      ASN1_UTCTIME_set := _ASN1_UTCTIME_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4419,13 +4444,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_UTCTIME_adj_allownil)}
-    ASN1_UTCTIME_adj := @ERR_ASN1_UTCTIME_adj;
+    ASN1_UTCTIME_adj := ERR_ASN1_UTCTIME_adj;
     {$ifend}
     {$if declared(ASN1_UTCTIME_adj_introduced)}
     if LibVersion < ASN1_UTCTIME_adj_introduced then
     begin
       {$if declared(FC_ASN1_UTCTIME_adj)}
-      ASN1_UTCTIME_adj := @FC_ASN1_UTCTIME_adj;
+      ASN1_UTCTIME_adj := FC_ASN1_UTCTIME_adj;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4434,7 +4459,7 @@ begin
     if ASN1_UTCTIME_adj_removed <= LibVersion then
     begin
       {$if declared(_ASN1_UTCTIME_adj)}
-      ASN1_UTCTIME_adj := @_ASN1_UTCTIME_adj;
+      ASN1_UTCTIME_adj := _ASN1_UTCTIME_adj;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4451,13 +4476,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_UTCTIME_set_string_allownil)}
-    ASN1_UTCTIME_set_string := @ERR_ASN1_UTCTIME_set_string;
+    ASN1_UTCTIME_set_string := ERR_ASN1_UTCTIME_set_string;
     {$ifend}
     {$if declared(ASN1_UTCTIME_set_string_introduced)}
     if LibVersion < ASN1_UTCTIME_set_string_introduced then
     begin
       {$if declared(FC_ASN1_UTCTIME_set_string)}
-      ASN1_UTCTIME_set_string := @FC_ASN1_UTCTIME_set_string;
+      ASN1_UTCTIME_set_string := FC_ASN1_UTCTIME_set_string;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4466,7 +4491,7 @@ begin
     if ASN1_UTCTIME_set_string_removed <= LibVersion then
     begin
       {$if declared(_ASN1_UTCTIME_set_string)}
-      ASN1_UTCTIME_set_string := @_ASN1_UTCTIME_set_string;
+      ASN1_UTCTIME_set_string := _ASN1_UTCTIME_set_string;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4483,13 +4508,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_UTCTIME_cmp_time_t_allownil)}
-    ASN1_UTCTIME_cmp_time_t := @ERR_ASN1_UTCTIME_cmp_time_t;
+    ASN1_UTCTIME_cmp_time_t := ERR_ASN1_UTCTIME_cmp_time_t;
     {$ifend}
     {$if declared(ASN1_UTCTIME_cmp_time_t_introduced)}
     if LibVersion < ASN1_UTCTIME_cmp_time_t_introduced then
     begin
       {$if declared(FC_ASN1_UTCTIME_cmp_time_t)}
-      ASN1_UTCTIME_cmp_time_t := @FC_ASN1_UTCTIME_cmp_time_t;
+      ASN1_UTCTIME_cmp_time_t := FC_ASN1_UTCTIME_cmp_time_t;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4498,7 +4523,7 @@ begin
     if ASN1_UTCTIME_cmp_time_t_removed <= LibVersion then
     begin
       {$if declared(_ASN1_UTCTIME_cmp_time_t)}
-      ASN1_UTCTIME_cmp_time_t := @_ASN1_UTCTIME_cmp_time_t;
+      ASN1_UTCTIME_cmp_time_t := _ASN1_UTCTIME_cmp_time_t;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4515,13 +4540,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_GENERALIZEDTIME_check_allownil)}
-    ASN1_GENERALIZEDTIME_check := @ERR_ASN1_GENERALIZEDTIME_check;
+    ASN1_GENERALIZEDTIME_check := ERR_ASN1_GENERALIZEDTIME_check;
     {$ifend}
     {$if declared(ASN1_GENERALIZEDTIME_check_introduced)}
     if LibVersion < ASN1_GENERALIZEDTIME_check_introduced then
     begin
       {$if declared(FC_ASN1_GENERALIZEDTIME_check)}
-      ASN1_GENERALIZEDTIME_check := @FC_ASN1_GENERALIZEDTIME_check;
+      ASN1_GENERALIZEDTIME_check := FC_ASN1_GENERALIZEDTIME_check;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4530,7 +4555,7 @@ begin
     if ASN1_GENERALIZEDTIME_check_removed <= LibVersion then
     begin
       {$if declared(_ASN1_GENERALIZEDTIME_check)}
-      ASN1_GENERALIZEDTIME_check := @_ASN1_GENERALIZEDTIME_check;
+      ASN1_GENERALIZEDTIME_check := _ASN1_GENERALIZEDTIME_check;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4547,13 +4572,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_GENERALIZEDTIME_set_allownil)}
-    ASN1_GENERALIZEDTIME_set := @ERR_ASN1_GENERALIZEDTIME_set;
+    ASN1_GENERALIZEDTIME_set := ERR_ASN1_GENERALIZEDTIME_set;
     {$ifend}
     {$if declared(ASN1_GENERALIZEDTIME_set_introduced)}
     if LibVersion < ASN1_GENERALIZEDTIME_set_introduced then
     begin
       {$if declared(FC_ASN1_GENERALIZEDTIME_set)}
-      ASN1_GENERALIZEDTIME_set := @FC_ASN1_GENERALIZEDTIME_set;
+      ASN1_GENERALIZEDTIME_set := FC_ASN1_GENERALIZEDTIME_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4562,7 +4587,7 @@ begin
     if ASN1_GENERALIZEDTIME_set_removed <= LibVersion then
     begin
       {$if declared(_ASN1_GENERALIZEDTIME_set)}
-      ASN1_GENERALIZEDTIME_set := @_ASN1_GENERALIZEDTIME_set;
+      ASN1_GENERALIZEDTIME_set := _ASN1_GENERALIZEDTIME_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4579,13 +4604,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_GENERALIZEDTIME_adj_allownil)}
-    ASN1_GENERALIZEDTIME_adj := @ERR_ASN1_GENERALIZEDTIME_adj;
+    ASN1_GENERALIZEDTIME_adj := ERR_ASN1_GENERALIZEDTIME_adj;
     {$ifend}
     {$if declared(ASN1_GENERALIZEDTIME_adj_introduced)}
     if LibVersion < ASN1_GENERALIZEDTIME_adj_introduced then
     begin
       {$if declared(FC_ASN1_GENERALIZEDTIME_adj)}
-      ASN1_GENERALIZEDTIME_adj := @FC_ASN1_GENERALIZEDTIME_adj;
+      ASN1_GENERALIZEDTIME_adj := FC_ASN1_GENERALIZEDTIME_adj;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4594,7 +4619,7 @@ begin
     if ASN1_GENERALIZEDTIME_adj_removed <= LibVersion then
     begin
       {$if declared(_ASN1_GENERALIZEDTIME_adj)}
-      ASN1_GENERALIZEDTIME_adj := @_ASN1_GENERALIZEDTIME_adj;
+      ASN1_GENERALIZEDTIME_adj := _ASN1_GENERALIZEDTIME_adj;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4611,13 +4636,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_GENERALIZEDTIME_set_string_allownil)}
-    ASN1_GENERALIZEDTIME_set_string := @ERR_ASN1_GENERALIZEDTIME_set_string;
+    ASN1_GENERALIZEDTIME_set_string := ERR_ASN1_GENERALIZEDTIME_set_string;
     {$ifend}
     {$if declared(ASN1_GENERALIZEDTIME_set_string_introduced)}
     if LibVersion < ASN1_GENERALIZEDTIME_set_string_introduced then
     begin
       {$if declared(FC_ASN1_GENERALIZEDTIME_set_string)}
-      ASN1_GENERALIZEDTIME_set_string := @FC_ASN1_GENERALIZEDTIME_set_string;
+      ASN1_GENERALIZEDTIME_set_string := FC_ASN1_GENERALIZEDTIME_set_string;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4626,7 +4651,7 @@ begin
     if ASN1_GENERALIZEDTIME_set_string_removed <= LibVersion then
     begin
       {$if declared(_ASN1_GENERALIZEDTIME_set_string)}
-      ASN1_GENERALIZEDTIME_set_string := @_ASN1_GENERALIZEDTIME_set_string;
+      ASN1_GENERALIZEDTIME_set_string := _ASN1_GENERALIZEDTIME_set_string;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4643,13 +4668,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TIME_diff_allownil)}
-    ASN1_TIME_diff := @ERR_ASN1_TIME_diff;
+    ASN1_TIME_diff := ERR_ASN1_TIME_diff;
     {$ifend}
     {$if declared(ASN1_TIME_diff_introduced)}
     if LibVersion < ASN1_TIME_diff_introduced then
     begin
       {$if declared(FC_ASN1_TIME_diff)}
-      ASN1_TIME_diff := @FC_ASN1_TIME_diff;
+      ASN1_TIME_diff := FC_ASN1_TIME_diff;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4658,7 +4683,7 @@ begin
     if ASN1_TIME_diff_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TIME_diff)}
-      ASN1_TIME_diff := @_ASN1_TIME_diff;
+      ASN1_TIME_diff := _ASN1_TIME_diff;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4675,13 +4700,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_OCTET_STRING_dup_allownil)}
-    ASN1_OCTET_STRING_dup := @ERR_ASN1_OCTET_STRING_dup;
+    ASN1_OCTET_STRING_dup := ERR_ASN1_OCTET_STRING_dup;
     {$ifend}
     {$if declared(ASN1_OCTET_STRING_dup_introduced)}
     if LibVersion < ASN1_OCTET_STRING_dup_introduced then
     begin
       {$if declared(FC_ASN1_OCTET_STRING_dup)}
-      ASN1_OCTET_STRING_dup := @FC_ASN1_OCTET_STRING_dup;
+      ASN1_OCTET_STRING_dup := FC_ASN1_OCTET_STRING_dup;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4690,7 +4715,7 @@ begin
     if ASN1_OCTET_STRING_dup_removed <= LibVersion then
     begin
       {$if declared(_ASN1_OCTET_STRING_dup)}
-      ASN1_OCTET_STRING_dup := @_ASN1_OCTET_STRING_dup;
+      ASN1_OCTET_STRING_dup := _ASN1_OCTET_STRING_dup;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4707,13 +4732,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_OCTET_STRING_cmp_allownil)}
-    ASN1_OCTET_STRING_cmp := @ERR_ASN1_OCTET_STRING_cmp;
+    ASN1_OCTET_STRING_cmp := ERR_ASN1_OCTET_STRING_cmp;
     {$ifend}
     {$if declared(ASN1_OCTET_STRING_cmp_introduced)}
     if LibVersion < ASN1_OCTET_STRING_cmp_introduced then
     begin
       {$if declared(FC_ASN1_OCTET_STRING_cmp)}
-      ASN1_OCTET_STRING_cmp := @FC_ASN1_OCTET_STRING_cmp;
+      ASN1_OCTET_STRING_cmp := FC_ASN1_OCTET_STRING_cmp;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4722,7 +4747,7 @@ begin
     if ASN1_OCTET_STRING_cmp_removed <= LibVersion then
     begin
       {$if declared(_ASN1_OCTET_STRING_cmp)}
-      ASN1_OCTET_STRING_cmp := @_ASN1_OCTET_STRING_cmp;
+      ASN1_OCTET_STRING_cmp := _ASN1_OCTET_STRING_cmp;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4739,13 +4764,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_OCTET_STRING_set_allownil)}
-    ASN1_OCTET_STRING_set := @ERR_ASN1_OCTET_STRING_set;
+    ASN1_OCTET_STRING_set := ERR_ASN1_OCTET_STRING_set;
     {$ifend}
     {$if declared(ASN1_OCTET_STRING_set_introduced)}
     if LibVersion < ASN1_OCTET_STRING_set_introduced then
     begin
       {$if declared(FC_ASN1_OCTET_STRING_set)}
-      ASN1_OCTET_STRING_set := @FC_ASN1_OCTET_STRING_set;
+      ASN1_OCTET_STRING_set := FC_ASN1_OCTET_STRING_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4754,7 +4779,7 @@ begin
     if ASN1_OCTET_STRING_set_removed <= LibVersion then
     begin
       {$if declared(_ASN1_OCTET_STRING_set)}
-      ASN1_OCTET_STRING_set := @_ASN1_OCTET_STRING_set;
+      ASN1_OCTET_STRING_set := _ASN1_OCTET_STRING_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4771,13 +4796,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(d2i_ASN1_OCTET_STRING_allownil)}
-    UTF8_getc := @ERR_d2i_ASN1_OCTET_STRING;
+    d2i_ASN1_OCTET_STRING := ERR_d2i_ASN1_OCTET_STRING;
     {$ifend}
     {$if declared(d2i_ASN1_OCTET_STRING_introduced)}
     if LibVersion < d2i_ASN1_OCTET_STRING_introduced then
     begin
       {$if declared(d2i_ASN1_OCTET_STRING)}
-      d2i_ASN1_OCTET_STRING := @FC_d2i_ASN1_OCTET_STRING;
+      d2i_ASN1_OCTET_STRING := FC_d2i_ASN1_OCTET_STRING;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4786,7 +4811,7 @@ begin
     if UTF8_getc_removed <= LibVersion then
     begin
       {$if declared(_d2i_ASN1_OCTET_STRING)}
-      d2i_ASN1_OCTET_STRING := @d2i_ASN1_OCTET_STRING;
+      d2i_ASN1_OCTET_STRING := d2i_ASN1_OCTET_STRING;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4803,13 +4828,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(i2d_ASN1_OCTET_STRING_allownil)}
-    UTF8_getc := @ERR_i2d_ASN1_OCTET_STRING;
+    i2d_ASN1_OCTET_STRING := ERR_i2d_ASN1_OCTET_STRING;
     {$ifend}
     {$if declared(i2d_ASN1_OCTET_STRING_introduced)}
     if LibVersion < i2d_ASN1_OCTET_STRING_introduced then
     begin
       {$if declared(i2d_ASN1_OCTET_STRING)}
-      i2d_ASN1_OCTET_STRING := @FC_i2d_ASN1_OCTET_STRING;
+      i2d_ASN1_OCTET_STRING := FC_i2d_ASN1_OCTET_STRING;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4818,7 +4843,7 @@ begin
     if UTF8_getc_removed <= LibVersion then
     begin
       {$if declared(_i2d_ASN1_OCTET_STRING)}
-      i2d_ASN1_OCTET_STRING := @i2d_ASN1_OCTET_STRING;
+      i2d_ASN1_OCTET_STRING := i2d_ASN1_OCTET_STRING;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4836,13 +4861,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_OCTET_STRING_free_allownil)}
-    UTF8_getc := @ASN1_OCTET_STRING_free;
+    ASN1_OCTET_STRING_free := ERR_ASN1_OCTET_STRING_free;
     {$ifend}
     {$if declared(ASN1_OCTET_STRING_free_introduced)}
     if LibVersion < ASN1_OCTET_STRING_free_introduced then
     begin
       {$if declared(ASN1_OCTET_STRING_free)}
-      i2d_ASN1_OCTET_STRING := @FC_ASN1_OCTET_STRING_free;
+      i2d_ASN1_OCTET_STRING := FC_ASN1_OCTET_STRING_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4851,7 +4876,7 @@ begin
     if UTF8_getc_removed <= LibVersion then
     begin
       {$if declared(_ASN1_OCTET_STRING_free)}
-      ASN1_OCTET_STRING_free := @ASN1_OCTET_STRING_free;
+      ASN1_OCTET_STRING_free := ASN1_OCTET_STRING_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4869,13 +4894,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(UTF8_getc_allownil)}
-    UTF8_getc := @ERR_UTF8_getc;
+    UTF8_getc := ERR_UTF8_getc;
     {$ifend}
     {$if declared(UTF8_getc_introduced)}
     if LibVersion < UTF8_getc_introduced then
     begin
       {$if declared(FC_UTF8_getc)}
-      UTF8_getc := @FC_UTF8_getc;
+      UTF8_getc := FC_UTF8_getc;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4884,7 +4909,7 @@ begin
     if UTF8_getc_removed <= LibVersion then
     begin
       {$if declared(_UTF8_getc)}
-      UTF8_getc := @_UTF8_getc;
+      UTF8_getc := _UTF8_getc;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4901,13 +4926,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(UTF8_putc_allownil)}
-    UTF8_putc := @ERR_UTF8_putc;
+    UTF8_putc := ERR_UTF8_putc;
     {$ifend}
     {$if declared(UTF8_putc_introduced)}
     if LibVersion < UTF8_putc_introduced then
     begin
       {$if declared(FC_UTF8_putc)}
-      UTF8_putc := @FC_UTF8_putc;
+      UTF8_putc := FC_UTF8_putc;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4916,7 +4941,7 @@ begin
     if UTF8_putc_removed <= LibVersion then
     begin
       {$if declared(_UTF8_putc)}
-      UTF8_putc := @_UTF8_putc;
+      UTF8_putc := _UTF8_putc;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4933,13 +4958,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_UTCTIME_new_allownil)}
-    ASN1_UTCTIME_new := @ERR_ASN1_UTCTIME_new;
+    ASN1_UTCTIME_new := ERR_ASN1_UTCTIME_new;
     {$ifend}
     {$if declared(ASN1_UTCTIME_new_introduced)}
     if LibVersion < ASN1_UTCTIME_new_introduced then
     begin
       {$if declared(FC_ASN1_UTCTIME_new)}
-      ASN1_UTCTIME_new := @FC_ASN1_UTCTIME_new;
+      ASN1_UTCTIME_new := FC_ASN1_UTCTIME_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4948,7 +4973,7 @@ begin
     if ASN1_UTCTIME_new_removed <= LibVersion then
     begin
       {$if declared(_ASN1_UTCTIME_new)}
-      ASN1_UTCTIME_new := @_ASN1_UTCTIME_new;
+      ASN1_UTCTIME_new := _ASN1_UTCTIME_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4965,13 +4990,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_UTCTIME_free_allownil)}
-    ASN1_UTCTIME_free := @ERR_ASN1_UTCTIME_free;
+    ASN1_UTCTIME_free := ERR_ASN1_UTCTIME_free;
     {$ifend}
     {$if declared(ASN1_UTCTIME_free_introduced)}
     if LibVersion < ASN1_UTCTIME_free_introduced then
     begin
       {$if declared(FC_ASN1_UTCTIME_free)}
-      ASN1_UTCTIME_free := @FC_ASN1_UTCTIME_free;
+      ASN1_UTCTIME_free := FC_ASN1_UTCTIME_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4980,7 +5005,7 @@ begin
     if ASN1_UTCTIME_free_removed <= LibVersion then
     begin
       {$if declared(_ASN1_UTCTIME_free)}
-      ASN1_UTCTIME_free := @_ASN1_UTCTIME_free;
+      ASN1_UTCTIME_free := _ASN1_UTCTIME_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -4997,13 +5022,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(d2i_ASN1_UTCTIME_allownil)}
-    d2i_ASN1_UTCTIME := @ERR_d2i_ASN1_UTCTIME;
+    d2i_ASN1_UTCTIME := ERR_d2i_ASN1_UTCTIME;
     {$ifend}
     {$if declared(d2i_ASN1_UTCTIME_introduced)}
     if LibVersion < d2i_ASN1_UTCTIME_introduced then
     begin
       {$if declared(FC_d2i_ASN1_UTCTIME)}
-      d2i_ASN1_UTCTIME := @FC_d2i_ASN1_UTCTIME;
+      d2i_ASN1_UTCTIME := FC_d2i_ASN1_UTCTIME;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5012,7 +5037,7 @@ begin
     if d2i_ASN1_UTCTIME_removed <= LibVersion then
     begin
       {$if declared(_d2i_ASN1_UTCTIME)}
-      d2i_ASN1_UTCTIME := @_d2i_ASN1_UTCTIME;
+      d2i_ASN1_UTCTIME := _d2i_ASN1_UTCTIME;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5029,13 +5054,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(i2d_ASN1_UTCTIME_allownil)}
-    i2d_ASN1_UTCTIME := @ERR_i2d_ASN1_UTCTIME;
+    i2d_ASN1_UTCTIME := ERR_i2d_ASN1_UTCTIME;
     {$ifend}
     {$if declared(i2d_ASN1_UTCTIME_introduced)}
     if LibVersion < i2d_ASN1_UTCTIME_introduced then
     begin
       {$if declared(FC_i2d_ASN1_UTCTIME)}
-      i2d_ASN1_UTCTIME := @FC_i2d_ASN1_UTCTIME;
+      i2d_ASN1_UTCTIME := FC_i2d_ASN1_UTCTIME;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5044,7 +5069,7 @@ begin
     if i2d_ASN1_UTCTIME_removed <= LibVersion then
     begin
       {$if declared(_i2d_ASN1_UTCTIME)}
-      i2d_ASN1_UTCTIME := @_i2d_ASN1_UTCTIME;
+      i2d_ASN1_UTCTIME := _i2d_ASN1_UTCTIME;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5061,13 +5086,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_GENERALIZEDTIME_new_allownil)}
-    ASN1_GENERALIZEDTIME_new := @ERR_ASN1_GENERALIZEDTIME_new;
+    ASN1_GENERALIZEDTIME_new := ERR_ASN1_GENERALIZEDTIME_new;
     {$ifend}
     {$if declared(ASN1_GENERALIZEDTIME_new_introduced)}
     if LibVersion < ASN1_GENERALIZEDTIME_new_introduced then
     begin
       {$if declared(FC_ASN1_GENERALIZEDTIME_new)}
-      ASN1_GENERALIZEDTIME_new := @FC_ASN1_GENERALIZEDTIME_new;
+      ASN1_GENERALIZEDTIME_new := FC_ASN1_GENERALIZEDTIME_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5076,7 +5101,7 @@ begin
     if ASN1_GENERALIZEDTIME_new_removed <= LibVersion then
     begin
       {$if declared(_ASN1_GENERALIZEDTIME_new)}
-      ASN1_GENERALIZEDTIME_new := @_ASN1_GENERALIZEDTIME_new;
+      ASN1_GENERALIZEDTIME_new := _ASN1_GENERALIZEDTIME_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5093,13 +5118,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_GENERALIZEDTIME_free_allownil)}
-    ASN1_GENERALIZEDTIME_free := @ERR_ASN1_GENERALIZEDTIME_free;
+    ASN1_GENERALIZEDTIME_free := ERR_ASN1_GENERALIZEDTIME_free;
     {$ifend}
     {$if declared(ASN1_GENERALIZEDTIME_free_introduced)}
     if LibVersion < ASN1_GENERALIZEDTIME_free_introduced then
     begin
       {$if declared(FC_ASN1_GENERALIZEDTIME_free)}
-      ASN1_GENERALIZEDTIME_free := @FC_ASN1_GENERALIZEDTIME_free;
+      ASN1_GENERALIZEDTIME_free := FC_ASN1_GENERALIZEDTIME_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5108,7 +5133,7 @@ begin
     if ASN1_GENERALIZEDTIME_free_removed <= LibVersion then
     begin
       {$if declared(_ASN1_GENERALIZEDTIME_free)}
-      ASN1_GENERALIZEDTIME_free := @_ASN1_GENERALIZEDTIME_free;
+      ASN1_GENERALIZEDTIME_free := _ASN1_GENERALIZEDTIME_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5125,13 +5150,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(d2i_ASN1_GENERALIZEDTIME_allownil)}
-    d2i_ASN1_GENERALIZEDTIME := @ERR_d2i_ASN1_GENERALIZEDTIME;
+    d2i_ASN1_GENERALIZEDTIME := ERR_d2i_ASN1_GENERALIZEDTIME;
     {$ifend}
     {$if declared(d2i_ASN1_GENERALIZEDTIME_introduced)}
     if LibVersion < d2i_ASN1_GENERALIZEDTIME_introduced then
     begin
       {$if declared(FC_d2i_ASN1_GENERALIZEDTIME)}
-      d2i_ASN1_GENERALIZEDTIME := @FC_d2i_ASN1_GENERALIZEDTIME;
+      d2i_ASN1_GENERALIZEDTIME := FC_d2i_ASN1_GENERALIZEDTIME;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5140,7 +5165,7 @@ begin
     if d2i_ASN1_GENERALIZEDTIME_removed <= LibVersion then
     begin
       {$if declared(_d2i_ASN1_GENERALIZEDTIME)}
-      d2i_ASN1_GENERALIZEDTIME := @_d2i_ASN1_GENERALIZEDTIME;
+      d2i_ASN1_GENERALIZEDTIME := _d2i_ASN1_GENERALIZEDTIME;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5157,13 +5182,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(i2d_ASN1_GENERALIZEDTIME_allownil)}
-    i2d_ASN1_GENERALIZEDTIME := @ERR_i2d_ASN1_GENERALIZEDTIME;
+    i2d_ASN1_GENERALIZEDTIME := ERR_i2d_ASN1_GENERALIZEDTIME;
     {$ifend}
     {$if declared(i2d_ASN1_GENERALIZEDTIME_introduced)}
     if LibVersion < i2d_ASN1_GENERALIZEDTIME_introduced then
     begin
       {$if declared(FC_i2d_ASN1_GENERALIZEDTIME)}
-      i2d_ASN1_GENERALIZEDTIME := @FC_i2d_ASN1_GENERALIZEDTIME;
+      i2d_ASN1_GENERALIZEDTIME := FC_i2d_ASN1_GENERALIZEDTIME;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5172,7 +5197,7 @@ begin
     if i2d_ASN1_GENERALIZEDTIME_removed <= LibVersion then
     begin
       {$if declared(_i2d_ASN1_GENERALIZEDTIME)}
-      i2d_ASN1_GENERALIZEDTIME := @_i2d_ASN1_GENERALIZEDTIME;
+      i2d_ASN1_GENERALIZEDTIME := _i2d_ASN1_GENERALIZEDTIME;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5189,13 +5214,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TIME_new_allownil)}
-    ASN1_TIME_new := @ERR_ASN1_TIME_new;
+    ASN1_TIME_new := ERR_ASN1_TIME_new;
     {$ifend}
     {$if declared(ASN1_TIME_new_introduced)}
     if LibVersion < ASN1_TIME_new_introduced then
     begin
       {$if declared(FC_ASN1_TIME_new)}
-      ASN1_TIME_new := @FC_ASN1_TIME_new;
+      ASN1_TIME_new := FC_ASN1_TIME_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5204,7 +5229,7 @@ begin
     if ASN1_TIME_new_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TIME_new)}
-      ASN1_TIME_new := @_ASN1_TIME_new;
+      ASN1_TIME_new := _ASN1_TIME_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5221,13 +5246,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TIME_free_allownil)}
-    ASN1_TIME_free := @ERR_ASN1_TIME_free;
+    ASN1_TIME_free := ERR_ASN1_TIME_free;
     {$ifend}
     {$if declared(ASN1_TIME_free_introduced)}
     if LibVersion < ASN1_TIME_free_introduced then
     begin
       {$if declared(FC_ASN1_TIME_free)}
-      ASN1_TIME_free := @FC_ASN1_TIME_free;
+      ASN1_TIME_free := FC_ASN1_TIME_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5236,7 +5261,7 @@ begin
     if ASN1_TIME_free_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TIME_free)}
-      ASN1_TIME_free := @_ASN1_TIME_free;
+      ASN1_TIME_free := _ASN1_TIME_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5253,13 +5278,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(d2i_ASN1_TIME_allownil)}
-    d2i_ASN1_TIME := @ERR_d2i_ASN1_TIME;
+    d2i_ASN1_TIME := ERR_d2i_ASN1_TIME;
     {$ifend}
     {$if declared(d2i_ASN1_TIME_introduced)}
     if LibVersion < d2i_ASN1_TIME_introduced then
     begin
       {$if declared(FC_d2i_ASN1_TIME)}
-      d2i_ASN1_TIME := @FC_d2i_ASN1_TIME;
+      d2i_ASN1_TIME := FC_d2i_ASN1_TIME;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5268,7 +5293,7 @@ begin
     if d2i_ASN1_TIME_removed <= LibVersion then
     begin
       {$if declared(_d2i_ASN1_TIME)}
-      d2i_ASN1_TIME := @_d2i_ASN1_TIME;
+      d2i_ASN1_TIME := _d2i_ASN1_TIME;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5285,13 +5310,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(i2d_ASN1_TIME_allownil)}
-    i2d_ASN1_TIME := @ERR_i2d_ASN1_TIME;
+    i2d_ASN1_TIME := ERR_i2d_ASN1_TIME;
     {$ifend}
     {$if declared(i2d_ASN1_TIME_introduced)}
     if LibVersion < i2d_ASN1_TIME_introduced then
     begin
       {$if declared(FC_i2d_ASN1_TIME)}
-      i2d_ASN1_TIME := @FC_i2d_ASN1_TIME;
+      i2d_ASN1_TIME := FC_i2d_ASN1_TIME;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5300,7 +5325,7 @@ begin
     if i2d_ASN1_TIME_removed <= LibVersion then
     begin
       {$if declared(_i2d_ASN1_TIME)}
-      i2d_ASN1_TIME := @_i2d_ASN1_TIME;
+      i2d_ASN1_TIME := _i2d_ASN1_TIME;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5317,13 +5342,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TIME_set_allownil)}
-    ASN1_TIME_set := @ERR_ASN1_TIME_set;
+    ASN1_TIME_set := ERR_ASN1_TIME_set;
     {$ifend}
     {$if declared(ASN1_TIME_set_introduced)}
     if LibVersion < ASN1_TIME_set_introduced then
     begin
       {$if declared(FC_ASN1_TIME_set)}
-      ASN1_TIME_set := @FC_ASN1_TIME_set;
+      ASN1_TIME_set := FC_ASN1_TIME_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5332,7 +5357,7 @@ begin
     if ASN1_TIME_set_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TIME_set)}
-      ASN1_TIME_set := @_ASN1_TIME_set;
+      ASN1_TIME_set := _ASN1_TIME_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5349,13 +5374,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TIME_adj_allownil)}
-    ASN1_TIME_adj := @ERR_ASN1_TIME_adj;
+    ASN1_TIME_adj := ERR_ASN1_TIME_adj;
     {$ifend}
     {$if declared(ASN1_TIME_adj_introduced)}
     if LibVersion < ASN1_TIME_adj_introduced then
     begin
       {$if declared(FC_ASN1_TIME_adj)}
-      ASN1_TIME_adj := @FC_ASN1_TIME_adj;
+      ASN1_TIME_adj := FC_ASN1_TIME_adj;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5364,7 +5389,7 @@ begin
     if ASN1_TIME_adj_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TIME_adj)}
-      ASN1_TIME_adj := @_ASN1_TIME_adj;
+      ASN1_TIME_adj := _ASN1_TIME_adj;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5381,13 +5406,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TIME_check_allownil)}
-    ASN1_TIME_check := @ERR_ASN1_TIME_check;
+    ASN1_TIME_check := ERR_ASN1_TIME_check;
     {$ifend}
     {$if declared(ASN1_TIME_check_introduced)}
     if LibVersion < ASN1_TIME_check_introduced then
     begin
       {$if declared(FC_ASN1_TIME_check)}
-      ASN1_TIME_check := @FC_ASN1_TIME_check;
+      ASN1_TIME_check := FC_ASN1_TIME_check;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5396,7 +5421,7 @@ begin
     if ASN1_TIME_check_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TIME_check)}
-      ASN1_TIME_check := @_ASN1_TIME_check;
+      ASN1_TIME_check := _ASN1_TIME_check;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5413,13 +5438,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TIME_to_generalizedtime_allownil)}
-    ASN1_TIME_to_generalizedtime := @ERR_ASN1_TIME_to_generalizedtime;
+    ASN1_TIME_to_generalizedtime := ERR_ASN1_TIME_to_generalizedtime;
     {$ifend}
     {$if declared(ASN1_TIME_to_generalizedtime_introduced)}
     if LibVersion < ASN1_TIME_to_generalizedtime_introduced then
     begin
       {$if declared(FC_ASN1_TIME_to_generalizedtime)}
-      ASN1_TIME_to_generalizedtime := @FC_ASN1_TIME_to_generalizedtime;
+      ASN1_TIME_to_generalizedtime := FC_ASN1_TIME_to_generalizedtime;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5428,7 +5453,7 @@ begin
     if ASN1_TIME_to_generalizedtime_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TIME_to_generalizedtime)}
-      ASN1_TIME_to_generalizedtime := @_ASN1_TIME_to_generalizedtime;
+      ASN1_TIME_to_generalizedtime := _ASN1_TIME_to_generalizedtime;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5445,13 +5470,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TIME_set_string_allownil)}
-    ASN1_TIME_set_string := @ERR_ASN1_TIME_set_string;
+    ASN1_TIME_set_string := ERR_ASN1_TIME_set_string;
     {$ifend}
     {$if declared(ASN1_TIME_set_string_introduced)}
     if LibVersion < ASN1_TIME_set_string_introduced then
     begin
       {$if declared(FC_ASN1_TIME_set_string)}
-      ASN1_TIME_set_string := @FC_ASN1_TIME_set_string;
+      ASN1_TIME_set_string := FC_ASN1_TIME_set_string;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5460,7 +5485,7 @@ begin
     if ASN1_TIME_set_string_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TIME_set_string)}
-      ASN1_TIME_set_string := @_ASN1_TIME_set_string;
+      ASN1_TIME_set_string := _ASN1_TIME_set_string;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5477,13 +5502,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TIME_set_string_X509_allownil)}
-    ASN1_TIME_set_string_X509 := @ERR_ASN1_TIME_set_string_X509;
+    ASN1_TIME_set_string_X509 := ERR_ASN1_TIME_set_string_X509;
     {$ifend}
     {$if declared(ASN1_TIME_set_string_X509_introduced)}
     if LibVersion < ASN1_TIME_set_string_X509_introduced then
     begin
       {$if declared(FC_ASN1_TIME_set_string_X509)}
-      ASN1_TIME_set_string_X509 := @FC_ASN1_TIME_set_string_X509;
+      ASN1_TIME_set_string_X509 := FC_ASN1_TIME_set_string_X509;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5492,7 +5517,7 @@ begin
     if ASN1_TIME_set_string_X509_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TIME_set_string_X509)}
-      ASN1_TIME_set_string_X509 := @_ASN1_TIME_set_string_X509;
+      ASN1_TIME_set_string_X509 := _ASN1_TIME_set_string_X509;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5509,13 +5534,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TIME_to_tm_allownil)}
-    ASN1_TIME_to_tm := @ERR_ASN1_TIME_to_tm;
+    ASN1_TIME_to_tm := ERR_ASN1_TIME_to_tm;
     {$ifend}
     {$if declared(ASN1_TIME_to_tm_introduced)}
     if LibVersion < ASN1_TIME_to_tm_introduced then
     begin
       {$if declared(FC_ASN1_TIME_to_tm)}
-      ASN1_TIME_to_tm := @FC_ASN1_TIME_to_tm;
+      ASN1_TIME_to_tm := FC_ASN1_TIME_to_tm;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5524,7 +5549,7 @@ begin
     if ASN1_TIME_to_tm_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TIME_to_tm)}
-      ASN1_TIME_to_tm := @_ASN1_TIME_to_tm;
+      ASN1_TIME_to_tm := _ASN1_TIME_to_tm;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5541,13 +5566,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TIME_normalize_allownil)}
-    ASN1_TIME_normalize := @ERR_ASN1_TIME_normalize;
+    ASN1_TIME_normalize := ERR_ASN1_TIME_normalize;
     {$ifend}
     {$if declared(ASN1_TIME_normalize_introduced)}
     if LibVersion < ASN1_TIME_normalize_introduced then
     begin
       {$if declared(FC_ASN1_TIME_normalize)}
-      ASN1_TIME_normalize := @FC_ASN1_TIME_normalize;
+      ASN1_TIME_normalize := FC_ASN1_TIME_normalize;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5556,7 +5581,7 @@ begin
     if ASN1_TIME_normalize_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TIME_normalize)}
-      ASN1_TIME_normalize := @_ASN1_TIME_normalize;
+      ASN1_TIME_normalize := _ASN1_TIME_normalize;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5573,13 +5598,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TIME_cmp_time_t_allownil)}
-    ASN1_TIME_cmp_time_t := @ERR_ASN1_TIME_cmp_time_t;
+    ASN1_TIME_cmp_time_t := ERR_ASN1_TIME_cmp_time_t;
     {$ifend}
     {$if declared(ASN1_TIME_cmp_time_t_introduced)}
     if LibVersion < ASN1_TIME_cmp_time_t_introduced then
     begin
       {$if declared(FC_ASN1_TIME_cmp_time_t)}
-      ASN1_TIME_cmp_time_t := @FC_ASN1_TIME_cmp_time_t;
+      ASN1_TIME_cmp_time_t := FC_ASN1_TIME_cmp_time_t;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5588,7 +5613,7 @@ begin
     if ASN1_TIME_cmp_time_t_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TIME_cmp_time_t)}
-      ASN1_TIME_cmp_time_t := @_ASN1_TIME_cmp_time_t;
+      ASN1_TIME_cmp_time_t := _ASN1_TIME_cmp_time_t;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5605,13 +5630,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TIME_compare_allownil)}
-    ASN1_TIME_compare := @ERR_ASN1_TIME_compare;
+    ASN1_TIME_compare := ERR_ASN1_TIME_compare;
     {$ifend}
     {$if declared(ASN1_TIME_compare_introduced)}
     if LibVersion < ASN1_TIME_compare_introduced then
     begin
       {$if declared(FC_ASN1_TIME_compare)}
-      ASN1_TIME_compare := @FC_ASN1_TIME_compare;
+      ASN1_TIME_compare := FC_ASN1_TIME_compare;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5620,7 +5645,7 @@ begin
     if ASN1_TIME_compare_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TIME_compare)}
-      ASN1_TIME_compare := @_ASN1_TIME_compare;
+      ASN1_TIME_compare := _ASN1_TIME_compare;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5637,13 +5662,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(i2a_ASN1_INTEGER_allownil)}
-    i2a_ASN1_INTEGER := @ERR_i2a_ASN1_INTEGER;
+    i2a_ASN1_INTEGER := ERR_i2a_ASN1_INTEGER;
     {$ifend}
     {$if declared(i2a_ASN1_INTEGER_introduced)}
     if LibVersion < i2a_ASN1_INTEGER_introduced then
     begin
       {$if declared(FC_i2a_ASN1_INTEGER)}
-      i2a_ASN1_INTEGER := @FC_i2a_ASN1_INTEGER;
+      i2a_ASN1_INTEGER := FC_i2a_ASN1_INTEGER;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5652,7 +5677,7 @@ begin
     if i2a_ASN1_INTEGER_removed <= LibVersion then
     begin
       {$if declared(_i2a_ASN1_INTEGER)}
-      i2a_ASN1_INTEGER := @_i2a_ASN1_INTEGER;
+      i2a_ASN1_INTEGER := _i2a_ASN1_INTEGER;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5669,13 +5694,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(a2i_ASN1_INTEGER_allownil)}
-    a2i_ASN1_INTEGER := @ERR_a2i_ASN1_INTEGER;
+    a2i_ASN1_INTEGER := ERR_a2i_ASN1_INTEGER;
     {$ifend}
     {$if declared(a2i_ASN1_INTEGER_introduced)}
     if LibVersion < a2i_ASN1_INTEGER_introduced then
     begin
       {$if declared(FC_a2i_ASN1_INTEGER)}
-      a2i_ASN1_INTEGER := @FC_a2i_ASN1_INTEGER;
+      a2i_ASN1_INTEGER := FC_a2i_ASN1_INTEGER;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5684,7 +5709,7 @@ begin
     if a2i_ASN1_INTEGER_removed <= LibVersion then
     begin
       {$if declared(_a2i_ASN1_INTEGER)}
-      a2i_ASN1_INTEGER := @_a2i_ASN1_INTEGER;
+      a2i_ASN1_INTEGER := _a2i_ASN1_INTEGER;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5701,13 +5726,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(i2a_ASN1_ENUMERATED_allownil)}
-    i2a_ASN1_ENUMERATED := @ERR_i2a_ASN1_ENUMERATED;
+    i2a_ASN1_ENUMERATED := ERR_i2a_ASN1_ENUMERATED;
     {$ifend}
     {$if declared(i2a_ASN1_ENUMERATED_introduced)}
     if LibVersion < i2a_ASN1_ENUMERATED_introduced then
     begin
       {$if declared(FC_i2a_ASN1_ENUMERATED)}
-      i2a_ASN1_ENUMERATED := @FC_i2a_ASN1_ENUMERATED;
+      i2a_ASN1_ENUMERATED := FC_i2a_ASN1_ENUMERATED;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5716,7 +5741,7 @@ begin
     if i2a_ASN1_ENUMERATED_removed <= LibVersion then
     begin
       {$if declared(_i2a_ASN1_ENUMERATED)}
-      i2a_ASN1_ENUMERATED := @_i2a_ASN1_ENUMERATED;
+      i2a_ASN1_ENUMERATED := _i2a_ASN1_ENUMERATED;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5733,13 +5758,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(a2i_ASN1_ENUMERATED_allownil)}
-    a2i_ASN1_ENUMERATED := @ERR_a2i_ASN1_ENUMERATED;
+    a2i_ASN1_ENUMERATED := ERR_a2i_ASN1_ENUMERATED;
     {$ifend}
     {$if declared(a2i_ASN1_ENUMERATED_introduced)}
     if LibVersion < a2i_ASN1_ENUMERATED_introduced then
     begin
       {$if declared(FC_a2i_ASN1_ENUMERATED)}
-      a2i_ASN1_ENUMERATED := @FC_a2i_ASN1_ENUMERATED;
+      a2i_ASN1_ENUMERATED := FC_a2i_ASN1_ENUMERATED;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5748,7 +5773,7 @@ begin
     if a2i_ASN1_ENUMERATED_removed <= LibVersion then
     begin
       {$if declared(_a2i_ASN1_ENUMERATED)}
-      a2i_ASN1_ENUMERATED := @_a2i_ASN1_ENUMERATED;
+      a2i_ASN1_ENUMERATED := _a2i_ASN1_ENUMERATED;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5765,13 +5790,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(i2a_ASN1_OBJECT_allownil)}
-    i2a_ASN1_OBJECT := @ERR_i2a_ASN1_OBJECT;
+    i2a_ASN1_OBJECT := ERR_i2a_ASN1_OBJECT;
     {$ifend}
     {$if declared(i2a_ASN1_OBJECT_introduced)}
     if LibVersion < i2a_ASN1_OBJECT_introduced then
     begin
       {$if declared(FC_i2a_ASN1_OBJECT)}
-      i2a_ASN1_OBJECT := @FC_i2a_ASN1_OBJECT;
+      i2a_ASN1_OBJECT := FC_i2a_ASN1_OBJECT;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5780,7 +5805,7 @@ begin
     if i2a_ASN1_OBJECT_removed <= LibVersion then
     begin
       {$if declared(_i2a_ASN1_OBJECT)}
-      i2a_ASN1_OBJECT := @_i2a_ASN1_OBJECT;
+      i2a_ASN1_OBJECT := _i2a_ASN1_OBJECT;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5797,13 +5822,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(a2i_ASN1_STRING_allownil)}
-    a2i_ASN1_STRING := @ERR_a2i_ASN1_STRING;
+    a2i_ASN1_STRING := ERR_a2i_ASN1_STRING;
     {$ifend}
     {$if declared(a2i_ASN1_STRING_introduced)}
     if LibVersion < a2i_ASN1_STRING_introduced then
     begin
       {$if declared(FC_a2i_ASN1_STRING)}
-      a2i_ASN1_STRING := @FC_a2i_ASN1_STRING;
+      a2i_ASN1_STRING := FC_a2i_ASN1_STRING;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5812,7 +5837,7 @@ begin
     if a2i_ASN1_STRING_removed <= LibVersion then
     begin
       {$if declared(_a2i_ASN1_STRING)}
-      a2i_ASN1_STRING := @_a2i_ASN1_STRING;
+      a2i_ASN1_STRING := _a2i_ASN1_STRING;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5829,13 +5854,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(i2a_ASN1_STRING_allownil)}
-    i2a_ASN1_STRING := @ERR_i2a_ASN1_STRING;
+    i2a_ASN1_STRING := ERR_i2a_ASN1_STRING;
     {$ifend}
     {$if declared(i2a_ASN1_STRING_introduced)}
     if LibVersion < i2a_ASN1_STRING_introduced then
     begin
       {$if declared(FC_i2a_ASN1_STRING)}
-      i2a_ASN1_STRING := @FC_i2a_ASN1_STRING;
+      i2a_ASN1_STRING := FC_i2a_ASN1_STRING;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5844,7 +5869,7 @@ begin
     if i2a_ASN1_STRING_removed <= LibVersion then
     begin
       {$if declared(_i2a_ASN1_STRING)}
-      i2a_ASN1_STRING := @_i2a_ASN1_STRING;
+      i2a_ASN1_STRING := _i2a_ASN1_STRING;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5861,13 +5886,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(i2t_ASN1_OBJECT_allownil)}
-    i2t_ASN1_OBJECT := @ERR_i2t_ASN1_OBJECT;
+    i2t_ASN1_OBJECT := ERR_i2t_ASN1_OBJECT;
     {$ifend}
     {$if declared(i2t_ASN1_OBJECT_introduced)}
     if LibVersion < i2t_ASN1_OBJECT_introduced then
     begin
       {$if declared(FC_i2t_ASN1_OBJECT)}
-      i2t_ASN1_OBJECT := @FC_i2t_ASN1_OBJECT;
+      i2t_ASN1_OBJECT := FC_i2t_ASN1_OBJECT;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5876,7 +5901,7 @@ begin
     if i2t_ASN1_OBJECT_removed <= LibVersion then
     begin
       {$if declared(_i2t_ASN1_OBJECT)}
-      i2t_ASN1_OBJECT := @_i2t_ASN1_OBJECT;
+      i2t_ASN1_OBJECT := _i2t_ASN1_OBJECT;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5893,13 +5918,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(a2d_ASN1_OBJECT_allownil)}
-    a2d_ASN1_OBJECT := @ERR_a2d_ASN1_OBJECT;
+    a2d_ASN1_OBJECT := ERR_a2d_ASN1_OBJECT;
     {$ifend}
     {$if declared(a2d_ASN1_OBJECT_introduced)}
     if LibVersion < a2d_ASN1_OBJECT_introduced then
     begin
       {$if declared(FC_a2d_ASN1_OBJECT)}
-      a2d_ASN1_OBJECT := @FC_a2d_ASN1_OBJECT;
+      a2d_ASN1_OBJECT := FC_a2d_ASN1_OBJECT;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5908,7 +5933,7 @@ begin
     if a2d_ASN1_OBJECT_removed <= LibVersion then
     begin
       {$if declared(_a2d_ASN1_OBJECT)}
-      a2d_ASN1_OBJECT := @_a2d_ASN1_OBJECT;
+      a2d_ASN1_OBJECT := _a2d_ASN1_OBJECT;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5925,13 +5950,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_OBJECT_create_allownil)}
-    ASN1_OBJECT_create := @ERR_ASN1_OBJECT_create;
+    ASN1_OBJECT_create := ERR_ASN1_OBJECT_create;
     {$ifend}
     {$if declared(ASN1_OBJECT_create_introduced)}
     if LibVersion < ASN1_OBJECT_create_introduced then
     begin
       {$if declared(FC_ASN1_OBJECT_create)}
-      ASN1_OBJECT_create := @FC_ASN1_OBJECT_create;
+      ASN1_OBJECT_create := FC_ASN1_OBJECT_create;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5940,7 +5965,7 @@ begin
     if ASN1_OBJECT_create_removed <= LibVersion then
     begin
       {$if declared(_ASN1_OBJECT_create)}
-      ASN1_OBJECT_create := @_ASN1_OBJECT_create;
+      ASN1_OBJECT_create := _ASN1_OBJECT_create;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5957,13 +5982,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_INTEGER_get_int64_allownil)}
-    ASN1_INTEGER_get_int64 := @ERR_ASN1_INTEGER_get_int64;
+    ASN1_INTEGER_get_int64 := ERR_ASN1_INTEGER_get_int64;
     {$ifend}
     {$if declared(ASN1_INTEGER_get_int64_introduced)}
     if LibVersion < ASN1_INTEGER_get_int64_introduced then
     begin
       {$if declared(FC_ASN1_INTEGER_get_int64)}
-      ASN1_INTEGER_get_int64 := @FC_ASN1_INTEGER_get_int64;
+      ASN1_INTEGER_get_int64 := FC_ASN1_INTEGER_get_int64;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5972,7 +5997,7 @@ begin
     if ASN1_INTEGER_get_int64_removed <= LibVersion then
     begin
       {$if declared(_ASN1_INTEGER_get_int64)}
-      ASN1_INTEGER_get_int64 := @_ASN1_INTEGER_get_int64;
+      ASN1_INTEGER_get_int64 := _ASN1_INTEGER_get_int64;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -5989,13 +6014,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_INTEGER_set_int64_allownil)}
-    ASN1_INTEGER_set_int64 := @ERR_ASN1_INTEGER_set_int64;
+    ASN1_INTEGER_set_int64 := ERR_ASN1_INTEGER_set_int64;
     {$ifend}
     {$if declared(ASN1_INTEGER_set_int64_introduced)}
     if LibVersion < ASN1_INTEGER_set_int64_introduced then
     begin
       {$if declared(FC_ASN1_INTEGER_set_int64)}
-      ASN1_INTEGER_set_int64 := @FC_ASN1_INTEGER_set_int64;
+      ASN1_INTEGER_set_int64 := FC_ASN1_INTEGER_set_int64;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6004,7 +6029,7 @@ begin
     if ASN1_INTEGER_set_int64_removed <= LibVersion then
     begin
       {$if declared(_ASN1_INTEGER_set_int64)}
-      ASN1_INTEGER_set_int64 := @_ASN1_INTEGER_set_int64;
+      ASN1_INTEGER_set_int64 := _ASN1_INTEGER_set_int64;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6021,13 +6046,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_INTEGER_get_uint64_allownil)}
-    ASN1_INTEGER_get_uint64 := @ERR_ASN1_INTEGER_get_uint64;
+    ASN1_INTEGER_get_uint64 := ERR_ASN1_INTEGER_get_uint64;
     {$ifend}
     {$if declared(ASN1_INTEGER_get_uint64_introduced)}
     if LibVersion < ASN1_INTEGER_get_uint64_introduced then
     begin
       {$if declared(FC_ASN1_INTEGER_get_uint64)}
-      ASN1_INTEGER_get_uint64 := @FC_ASN1_INTEGER_get_uint64;
+      ASN1_INTEGER_get_uint64 := FC_ASN1_INTEGER_get_uint64;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6036,7 +6061,7 @@ begin
     if ASN1_INTEGER_get_uint64_removed <= LibVersion then
     begin
       {$if declared(_ASN1_INTEGER_get_uint64)}
-      ASN1_INTEGER_get_uint64 := @_ASN1_INTEGER_get_uint64;
+      ASN1_INTEGER_get_uint64 := _ASN1_INTEGER_get_uint64;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6053,13 +6078,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_INTEGER_set_uint64_allownil)}
-    ASN1_INTEGER_set_uint64 := @ERR_ASN1_INTEGER_set_uint64;
+    ASN1_INTEGER_set_uint64 := ERR_ASN1_INTEGER_set_uint64;
     {$ifend}
     {$if declared(ASN1_INTEGER_set_uint64_introduced)}
     if LibVersion < ASN1_INTEGER_set_uint64_introduced then
     begin
       {$if declared(FC_ASN1_INTEGER_set_uint64)}
-      ASN1_INTEGER_set_uint64 := @FC_ASN1_INTEGER_set_uint64;
+      ASN1_INTEGER_set_uint64 := FC_ASN1_INTEGER_set_uint64;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6068,7 +6093,7 @@ begin
     if ASN1_INTEGER_set_uint64_removed <= LibVersion then
     begin
       {$if declared(_ASN1_INTEGER_set_uint64)}
-      ASN1_INTEGER_set_uint64 := @_ASN1_INTEGER_set_uint64;
+      ASN1_INTEGER_set_uint64 := _ASN1_INTEGER_set_uint64;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6085,13 +6110,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_INTEGER_set_allownil)}
-    ASN1_INTEGER_set := @ERR_ASN1_INTEGER_set;
+    ASN1_INTEGER_set := ERR_ASN1_INTEGER_set;
     {$ifend}
     {$if declared(ASN1_INTEGER_set_introduced)}
     if LibVersion < ASN1_INTEGER_set_introduced then
     begin
       {$if declared(FC_ASN1_INTEGER_set)}
-      ASN1_INTEGER_set := @FC_ASN1_INTEGER_set;
+      ASN1_INTEGER_set := FC_ASN1_INTEGER_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6100,7 +6125,7 @@ begin
     if ASN1_INTEGER_set_removed <= LibVersion then
     begin
       {$if declared(_ASN1_INTEGER_set)}
-      ASN1_INTEGER_set := @_ASN1_INTEGER_set;
+      ASN1_INTEGER_set := _ASN1_INTEGER_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6117,13 +6142,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_INTEGER_get_allownil)}
-    ASN1_INTEGER_get := @ERR_ASN1_INTEGER_get;
+    ASN1_INTEGER_get := ERR_ASN1_INTEGER_get;
     {$ifend}
     {$if declared(ASN1_INTEGER_get_introduced)}
     if LibVersion < ASN1_INTEGER_get_introduced then
     begin
       {$if declared(FC_ASN1_INTEGER_get)}
-      ASN1_INTEGER_get := @FC_ASN1_INTEGER_get;
+      ASN1_INTEGER_get := FC_ASN1_INTEGER_get;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6132,7 +6157,7 @@ begin
     if ASN1_INTEGER_get_removed <= LibVersion then
     begin
       {$if declared(_ASN1_INTEGER_get)}
-      ASN1_INTEGER_get := @_ASN1_INTEGER_get;
+      ASN1_INTEGER_get := _ASN1_INTEGER_get;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6149,13 +6174,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(BN_to_ASN1_INTEGER_allownil)}
-    BN_to_ASN1_INTEGER := @ERR_BN_to_ASN1_INTEGER;
+    BN_to_ASN1_INTEGER := ERR_BN_to_ASN1_INTEGER;
     {$ifend}
     {$if declared(BN_to_ASN1_INTEGER_introduced)}
     if LibVersion < BN_to_ASN1_INTEGER_introduced then
     begin
       {$if declared(FC_BN_to_ASN1_INTEGER)}
-      BN_to_ASN1_INTEGER := @FC_BN_to_ASN1_INTEGER;
+      BN_to_ASN1_INTEGER := FC_BN_to_ASN1_INTEGER;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6164,7 +6189,7 @@ begin
     if BN_to_ASN1_INTEGER_removed <= LibVersion then
     begin
       {$if declared(_BN_to_ASN1_INTEGER)}
-      BN_to_ASN1_INTEGER := @_BN_to_ASN1_INTEGER;
+      BN_to_ASN1_INTEGER := _BN_to_ASN1_INTEGER;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6181,13 +6206,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_INTEGER_to_BN_allownil)}
-    ASN1_INTEGER_to_BN := @ERR_ASN1_INTEGER_to_BN;
+    ASN1_INTEGER_to_BN := ERR_ASN1_INTEGER_to_BN;
     {$ifend}
     {$if declared(ASN1_INTEGER_to_BN_introduced)}
     if LibVersion < ASN1_INTEGER_to_BN_introduced then
     begin
       {$if declared(FC_ASN1_INTEGER_to_BN)}
-      ASN1_INTEGER_to_BN := @FC_ASN1_INTEGER_to_BN;
+      ASN1_INTEGER_to_BN := FC_ASN1_INTEGER_to_BN;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6196,7 +6221,7 @@ begin
     if ASN1_INTEGER_to_BN_removed <= LibVersion then
     begin
       {$if declared(_ASN1_INTEGER_to_BN)}
-      ASN1_INTEGER_to_BN := @_ASN1_INTEGER_to_BN;
+      ASN1_INTEGER_to_BN := _ASN1_INTEGER_to_BN;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6213,13 +6238,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_ENUMERATED_get_int64_allownil)}
-    ASN1_ENUMERATED_get_int64 := @ERR_ASN1_ENUMERATED_get_int64;
+    ASN1_ENUMERATED_get_int64 := ERR_ASN1_ENUMERATED_get_int64;
     {$ifend}
     {$if declared(ASN1_ENUMERATED_get_int64_introduced)}
     if LibVersion < ASN1_ENUMERATED_get_int64_introduced then
     begin
       {$if declared(FC_ASN1_ENUMERATED_get_int64)}
-      ASN1_ENUMERATED_get_int64 := @FC_ASN1_ENUMERATED_get_int64;
+      ASN1_ENUMERATED_get_int64 := FC_ASN1_ENUMERATED_get_int64;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6228,7 +6253,7 @@ begin
     if ASN1_ENUMERATED_get_int64_removed <= LibVersion then
     begin
       {$if declared(_ASN1_ENUMERATED_get_int64)}
-      ASN1_ENUMERATED_get_int64 := @_ASN1_ENUMERATED_get_int64;
+      ASN1_ENUMERATED_get_int64 := _ASN1_ENUMERATED_get_int64;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6245,13 +6270,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_ENUMERATED_set_int64_allownil)}
-    ASN1_ENUMERATED_set_int64 := @ERR_ASN1_ENUMERATED_set_int64;
+    ASN1_ENUMERATED_set_int64 := ERR_ASN1_ENUMERATED_set_int64;
     {$ifend}
     {$if declared(ASN1_ENUMERATED_set_int64_introduced)}
     if LibVersion < ASN1_ENUMERATED_set_int64_introduced then
     begin
       {$if declared(FC_ASN1_ENUMERATED_set_int64)}
-      ASN1_ENUMERATED_set_int64 := @FC_ASN1_ENUMERATED_set_int64;
+      ASN1_ENUMERATED_set_int64 := FC_ASN1_ENUMERATED_set_int64;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6260,7 +6285,7 @@ begin
     if ASN1_ENUMERATED_set_int64_removed <= LibVersion then
     begin
       {$if declared(_ASN1_ENUMERATED_set_int64)}
-      ASN1_ENUMERATED_set_int64 := @_ASN1_ENUMERATED_set_int64;
+      ASN1_ENUMERATED_set_int64 := _ASN1_ENUMERATED_set_int64;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6277,13 +6302,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_ENUMERATED_set_allownil)}
-    ASN1_ENUMERATED_set := @ERR_ASN1_ENUMERATED_set;
+    ASN1_ENUMERATED_set := ERR_ASN1_ENUMERATED_set;
     {$ifend}
     {$if declared(ASN1_ENUMERATED_set_introduced)}
     if LibVersion < ASN1_ENUMERATED_set_introduced then
     begin
       {$if declared(FC_ASN1_ENUMERATED_set)}
-      ASN1_ENUMERATED_set := @FC_ASN1_ENUMERATED_set;
+      ASN1_ENUMERATED_set := FC_ASN1_ENUMERATED_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6292,7 +6317,7 @@ begin
     if ASN1_ENUMERATED_set_removed <= LibVersion then
     begin
       {$if declared(_ASN1_ENUMERATED_set)}
-      ASN1_ENUMERATED_set := @_ASN1_ENUMERATED_set;
+      ASN1_ENUMERATED_set := _ASN1_ENUMERATED_set;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6309,13 +6334,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_ENUMERATED_get_allownil)}
-    ASN1_ENUMERATED_get := @ERR_ASN1_ENUMERATED_get;
+    ASN1_ENUMERATED_get := ERR_ASN1_ENUMERATED_get;
     {$ifend}
     {$if declared(ASN1_ENUMERATED_get_introduced)}
     if LibVersion < ASN1_ENUMERATED_get_introduced then
     begin
       {$if declared(FC_ASN1_ENUMERATED_get)}
-      ASN1_ENUMERATED_get := @FC_ASN1_ENUMERATED_get;
+      ASN1_ENUMERATED_get := FC_ASN1_ENUMERATED_get;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6324,7 +6349,7 @@ begin
     if ASN1_ENUMERATED_get_removed <= LibVersion then
     begin
       {$if declared(_ASN1_ENUMERATED_get)}
-      ASN1_ENUMERATED_get := @_ASN1_ENUMERATED_get;
+      ASN1_ENUMERATED_get := _ASN1_ENUMERATED_get;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6341,13 +6366,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(BN_to_ASN1_ENUMERATED_allownil)}
-    BN_to_ASN1_ENUMERATED := @ERR_BN_to_ASN1_ENUMERATED;
+    BN_to_ASN1_ENUMERATED := ERR_BN_to_ASN1_ENUMERATED;
     {$ifend}
     {$if declared(BN_to_ASN1_ENUMERATED_introduced)}
     if LibVersion < BN_to_ASN1_ENUMERATED_introduced then
     begin
       {$if declared(FC_BN_to_ASN1_ENUMERATED)}
-      BN_to_ASN1_ENUMERATED := @FC_BN_to_ASN1_ENUMERATED;
+      BN_to_ASN1_ENUMERATED := FC_BN_to_ASN1_ENUMERATED;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6356,7 +6381,7 @@ begin
     if BN_to_ASN1_ENUMERATED_removed <= LibVersion then
     begin
       {$if declared(_BN_to_ASN1_ENUMERATED)}
-      BN_to_ASN1_ENUMERATED := @_BN_to_ASN1_ENUMERATED;
+      BN_to_ASN1_ENUMERATED := _BN_to_ASN1_ENUMERATED;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6373,13 +6398,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_ENUMERATED_to_BN_allownil)}
-    ASN1_ENUMERATED_to_BN := @ERR_ASN1_ENUMERATED_to_BN;
+    ASN1_ENUMERATED_to_BN := ERR_ASN1_ENUMERATED_to_BN;
     {$ifend}
     {$if declared(ASN1_ENUMERATED_to_BN_introduced)}
     if LibVersion < ASN1_ENUMERATED_to_BN_introduced then
     begin
       {$if declared(FC_ASN1_ENUMERATED_to_BN)}
-      ASN1_ENUMERATED_to_BN := @FC_ASN1_ENUMERATED_to_BN;
+      ASN1_ENUMERATED_to_BN := FC_ASN1_ENUMERATED_to_BN;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6388,7 +6413,7 @@ begin
     if ASN1_ENUMERATED_to_BN_removed <= LibVersion then
     begin
       {$if declared(_ASN1_ENUMERATED_to_BN)}
-      ASN1_ENUMERATED_to_BN := @_ASN1_ENUMERATED_to_BN;
+      ASN1_ENUMERATED_to_BN := _ASN1_ENUMERATED_to_BN;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6405,13 +6430,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_PRINTABLE_type_allownil)}
-    ASN1_PRINTABLE_type := @ERR_ASN1_PRINTABLE_type;
+    ASN1_PRINTABLE_type := ERR_ASN1_PRINTABLE_type;
     {$ifend}
     {$if declared(ASN1_PRINTABLE_type_introduced)}
     if LibVersion < ASN1_PRINTABLE_type_introduced then
     begin
       {$if declared(FC_ASN1_PRINTABLE_type)}
-      ASN1_PRINTABLE_type := @FC_ASN1_PRINTABLE_type;
+      ASN1_PRINTABLE_type := FC_ASN1_PRINTABLE_type;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6420,7 +6445,7 @@ begin
     if ASN1_PRINTABLE_type_removed <= LibVersion then
     begin
       {$if declared(_ASN1_PRINTABLE_type)}
-      ASN1_PRINTABLE_type := @_ASN1_PRINTABLE_type;
+      ASN1_PRINTABLE_type := _ASN1_PRINTABLE_type;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6437,13 +6462,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_tag2bit_allownil)}
-    ASN1_tag2bit := @ERR_ASN1_tag2bit;
+    ASN1_tag2bit := ERR_ASN1_tag2bit;
     {$ifend}
     {$if declared(ASN1_tag2bit_introduced)}
     if LibVersion < ASN1_tag2bit_introduced then
     begin
       {$if declared(FC_ASN1_tag2bit)}
-      ASN1_tag2bit := @FC_ASN1_tag2bit;
+      ASN1_tag2bit := FC_ASN1_tag2bit;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6452,7 +6477,7 @@ begin
     if ASN1_tag2bit_removed <= LibVersion then
     begin
       {$if declared(_ASN1_tag2bit)}
-      ASN1_tag2bit := @_ASN1_tag2bit;
+      ASN1_tag2bit := _ASN1_tag2bit;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6469,13 +6494,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_get_object_allownil)}
-    ASN1_get_object := @ERR_ASN1_get_object;
+    ASN1_get_object := ERR_ASN1_get_object;
     {$ifend}
     {$if declared(ASN1_get_object_introduced)}
     if LibVersion < ASN1_get_object_introduced then
     begin
       {$if declared(FC_ASN1_get_object)}
-      ASN1_get_object := @FC_ASN1_get_object;
+      ASN1_get_object := FC_ASN1_get_object;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6484,7 +6509,7 @@ begin
     if ASN1_get_object_removed <= LibVersion then
     begin
       {$if declared(_ASN1_get_object)}
-      ASN1_get_object := @_ASN1_get_object;
+      ASN1_get_object := _ASN1_get_object;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6501,13 +6526,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_check_infinite_end_allownil)}
-    ASN1_check_infinite_end := @ERR_ASN1_check_infinite_end;
+    ASN1_check_infinite_end := ERR_ASN1_check_infinite_end;
     {$ifend}
     {$if declared(ASN1_check_infinite_end_introduced)}
     if LibVersion < ASN1_check_infinite_end_introduced then
     begin
       {$if declared(FC_ASN1_check_infinite_end)}
-      ASN1_check_infinite_end := @FC_ASN1_check_infinite_end;
+      ASN1_check_infinite_end := FC_ASN1_check_infinite_end;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6516,7 +6541,7 @@ begin
     if ASN1_check_infinite_end_removed <= LibVersion then
     begin
       {$if declared(_ASN1_check_infinite_end)}
-      ASN1_check_infinite_end := @_ASN1_check_infinite_end;
+      ASN1_check_infinite_end := _ASN1_check_infinite_end;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6533,13 +6558,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_const_check_infinite_end_allownil)}
-    ASN1_const_check_infinite_end := @ERR_ASN1_const_check_infinite_end;
+    ASN1_const_check_infinite_end := ERR_ASN1_const_check_infinite_end;
     {$ifend}
     {$if declared(ASN1_const_check_infinite_end_introduced)}
     if LibVersion < ASN1_const_check_infinite_end_introduced then
     begin
       {$if declared(FC_ASN1_const_check_infinite_end)}
-      ASN1_const_check_infinite_end := @FC_ASN1_const_check_infinite_end;
+      ASN1_const_check_infinite_end := FC_ASN1_const_check_infinite_end;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6548,7 +6573,7 @@ begin
     if ASN1_const_check_infinite_end_removed <= LibVersion then
     begin
       {$if declared(_ASN1_const_check_infinite_end)}
-      ASN1_const_check_infinite_end := @_ASN1_const_check_infinite_end;
+      ASN1_const_check_infinite_end := _ASN1_const_check_infinite_end;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6565,13 +6590,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_put_object_allownil)}
-    ASN1_put_object := @ERR_ASN1_put_object;
+    ASN1_put_object := ERR_ASN1_put_object;
     {$ifend}
     {$if declared(ASN1_put_object_introduced)}
     if LibVersion < ASN1_put_object_introduced then
     begin
       {$if declared(FC_ASN1_put_object)}
-      ASN1_put_object := @FC_ASN1_put_object;
+      ASN1_put_object := FC_ASN1_put_object;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6580,7 +6605,7 @@ begin
     if ASN1_put_object_removed <= LibVersion then
     begin
       {$if declared(_ASN1_put_object)}
-      ASN1_put_object := @_ASN1_put_object;
+      ASN1_put_object := _ASN1_put_object;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6597,13 +6622,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_put_eoc_allownil)}
-    ASN1_put_eoc := @ERR_ASN1_put_eoc;
+    ASN1_put_eoc := ERR_ASN1_put_eoc;
     {$ifend}
     {$if declared(ASN1_put_eoc_introduced)}
     if LibVersion < ASN1_put_eoc_introduced then
     begin
       {$if declared(FC_ASN1_put_eoc)}
-      ASN1_put_eoc := @FC_ASN1_put_eoc;
+      ASN1_put_eoc := FC_ASN1_put_eoc;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6612,7 +6637,7 @@ begin
     if ASN1_put_eoc_removed <= LibVersion then
     begin
       {$if declared(_ASN1_put_eoc)}
-      ASN1_put_eoc := @_ASN1_put_eoc;
+      ASN1_put_eoc := _ASN1_put_eoc;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6629,13 +6654,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_object_size_allownil)}
-    ASN1_object_size := @ERR_ASN1_object_size;
+    ASN1_object_size := ERR_ASN1_object_size;
     {$ifend}
     {$if declared(ASN1_object_size_introduced)}
     if LibVersion < ASN1_object_size_introduced then
     begin
       {$if declared(FC_ASN1_object_size)}
-      ASN1_object_size := @FC_ASN1_object_size;
+      ASN1_object_size := FC_ASN1_object_size;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6644,7 +6669,7 @@ begin
     if ASN1_object_size_removed <= LibVersion then
     begin
       {$if declared(_ASN1_object_size)}
-      ASN1_object_size := @_ASN1_object_size;
+      ASN1_object_size := _ASN1_object_size;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6661,13 +6686,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_item_dup_allownil)}
-    ASN1_item_dup := @ERR_ASN1_item_dup;
+    ASN1_item_dup := ERR_ASN1_item_dup;
     {$ifend}
     {$if declared(ASN1_item_dup_introduced)}
     if LibVersion < ASN1_item_dup_introduced then
     begin
       {$if declared(FC_ASN1_item_dup)}
-      ASN1_item_dup := @FC_ASN1_item_dup;
+      ASN1_item_dup := FC_ASN1_item_dup;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6676,7 +6701,7 @@ begin
     if ASN1_item_dup_removed <= LibVersion then
     begin
       {$if declared(_ASN1_item_dup)}
-      ASN1_item_dup := @_ASN1_item_dup;
+      ASN1_item_dup := _ASN1_item_dup;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6693,13 +6718,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_to_UTF8_allownil)}
-    ASN1_STRING_to_UTF8 := @ERR_ASN1_STRING_to_UTF8;
+    ASN1_STRING_to_UTF8 := ERR_ASN1_STRING_to_UTF8;
     {$ifend}
     {$if declared(ASN1_STRING_to_UTF8_introduced)}
     if LibVersion < ASN1_STRING_to_UTF8_introduced then
     begin
       {$if declared(FC_ASN1_STRING_to_UTF8)}
-      ASN1_STRING_to_UTF8 := @FC_ASN1_STRING_to_UTF8;
+      ASN1_STRING_to_UTF8 := FC_ASN1_STRING_to_UTF8;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6708,7 +6733,7 @@ begin
     if ASN1_STRING_to_UTF8_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_to_UTF8)}
-      ASN1_STRING_to_UTF8 := @_ASN1_STRING_to_UTF8;
+      ASN1_STRING_to_UTF8 := _ASN1_STRING_to_UTF8;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6724,13 +6749,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_item_d2i_bio_allownil)}
-    ASN1_item_d2i_bio := @ERR_ASN1_d2i_bio;
+    ASN1_item_d2i_bio := ERR_ASN1_d2i_bio;
     {$ifend}
     {$if declared(ASN1_d2i_bio_introduced)}
     if LibVersion < ASN1_d2i_bio_introduced then
     begin
       {$if declared(FC_ASN1_d2i_bio)}
-      ASN1_item_d2i_bio := @FC_ASN1_d2i_bio;
+      ASN1_item_d2i_bio := FC_ASN1_d2i_bio;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6739,7 +6764,7 @@ begin
     if ASN1_item_d2i_bio_removed <= LibVersion then
     begin
       {$if declared(_ASN1_item_d2i_bio)}
-      ASN1_item_d2i_bio := @_ASN1_item_d2i_bio;
+      ASN1_item_d2i_bio := _ASN1_item_d2i_bio;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6754,13 +6779,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_item_d2i_bio_allownil)}
-    ASN1_item_d2i_bio := @ERR_ASN1_item_d2i_bio;
+    ASN1_item_d2i_bio := ERR_ASN1_item_d2i_bio;
     {$ifend}
     {$if declared(ASN1_item_d2i_bio_introduced)}
     if LibVersion < ASN1_item_d2i_bio_introduced then
     begin
       {$if declared(FC_ASN1_item_d2i_bio)}
-      ASN1_item_d2i_bio := @FC_ASN1_item_d2i_bio;
+      ASN1_item_d2i_bio := FC_ASN1_item_d2i_bio;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6769,7 +6794,7 @@ begin
     if ASN1_item_d2i_bio_removed <= LibVersion then
     begin
       {$if declared(_ASN1_item_d2i_bio)}
-      ASN1_item_d2i_bio := @_ASN1_item_d2i_bio;
+      ASN1_item_d2i_bio := _ASN1_item_d2i_bio;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6786,13 +6811,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_i2d_bio_allownil)}
-    ASN1_i2d_bio := @ERR_ASN1_i2d_bio;
+    ASN1_i2d_bio := ERR_ASN1_i2d_bio;
     {$ifend}
     {$if declared(ASN1_i2d_bio_introduced)}
     if LibVersion < ASN1_i2d_bio_introduced then
     begin
       {$if declared(FC_ASN1_i2d_bio)}
-      ASN1_i2d_bio := @FC_ASN1_i2d_bio;
+      ASN1_i2d_bio := FC_ASN1_i2d_bio;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6801,7 +6826,7 @@ begin
     if ASN1_i2d_bio_removed <= LibVersion then
     begin
       {$if declared(_ASN1_i2d_bio)}
-      ASN1_i2d_bio := @_ASN1_i2d_bio;
+      ASN1_i2d_bio := _ASN1_i2d_bio;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6818,13 +6843,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_item_i2d_bio_allownil)}
-    ASN1_item_i2d_bio := @ERR_ASN1_item_i2d_bio;
+    ASN1_item_i2d_bio := ERR_ASN1_item_i2d_bio;
     {$ifend}
     {$if declared(ASN1_item_i2d_bio_introduced)}
     if LibVersion < ASN1_item_i2d_bio_introduced then
     begin
       {$if declared(FC_ASN1_item_i2d_bio)}
-      ASN1_item_i2d_bio := @FC_ASN1_item_i2d_bio;
+      ASN1_item_i2d_bio := FC_ASN1_item_i2d_bio;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6833,7 +6858,7 @@ begin
     if ASN1_item_i2d_bio_removed <= LibVersion then
     begin
       {$if declared(_ASN1_item_i2d_bio)}
-      ASN1_item_i2d_bio := @_ASN1_item_i2d_bio;
+      ASN1_item_i2d_bio := _ASN1_item_i2d_bio;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6850,13 +6875,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_UTCTIME_print_allownil)}
-    ASN1_UTCTIME_print := @ERR_ASN1_UTCTIME_print;
+    ASN1_UTCTIME_print := ERR_ASN1_UTCTIME_print;
     {$ifend}
     {$if declared(ASN1_UTCTIME_print_introduced)}
     if LibVersion < ASN1_UTCTIME_print_introduced then
     begin
       {$if declared(FC_ASN1_UTCTIME_print)}
-      ASN1_UTCTIME_print := @FC_ASN1_UTCTIME_print;
+      ASN1_UTCTIME_print := FC_ASN1_UTCTIME_print;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6865,7 +6890,7 @@ begin
     if ASN1_UTCTIME_print_removed <= LibVersion then
     begin
       {$if declared(_ASN1_UTCTIME_print)}
-      ASN1_UTCTIME_print := @_ASN1_UTCTIME_print;
+      ASN1_UTCTIME_print := _ASN1_UTCTIME_print;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6882,13 +6907,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_GENERALIZEDTIME_print_allownil)}
-    ASN1_GENERALIZEDTIME_print := @ERR_ASN1_GENERALIZEDTIME_print;
+    ASN1_GENERALIZEDTIME_print := ERR_ASN1_GENERALIZEDTIME_print;
     {$ifend}
     {$if declared(ASN1_GENERALIZEDTIME_print_introduced)}
     if LibVersion < ASN1_GENERALIZEDTIME_print_introduced then
     begin
       {$if declared(FC_ASN1_GENERALIZEDTIME_print)}
-      ASN1_GENERALIZEDTIME_print := @FC_ASN1_GENERALIZEDTIME_print;
+      ASN1_GENERALIZEDTIME_print := FC_ASN1_GENERALIZEDTIME_print;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6897,7 +6922,7 @@ begin
     if ASN1_GENERALIZEDTIME_print_removed <= LibVersion then
     begin
       {$if declared(_ASN1_GENERALIZEDTIME_print)}
-      ASN1_GENERALIZEDTIME_print := @_ASN1_GENERALIZEDTIME_print;
+      ASN1_GENERALIZEDTIME_print := _ASN1_GENERALIZEDTIME_print;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6914,13 +6939,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TIME_print_allownil)}
-    ASN1_TIME_print := @ERR_ASN1_TIME_print;
+    ASN1_TIME_print := ERR_ASN1_TIME_print;
     {$ifend}
     {$if declared(ASN1_TIME_print_introduced)}
     if LibVersion < ASN1_TIME_print_introduced then
     begin
       {$if declared(FC_ASN1_TIME_print)}
-      ASN1_TIME_print := @FC_ASN1_TIME_print;
+      ASN1_TIME_print := FC_ASN1_TIME_print;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6929,7 +6954,7 @@ begin
     if ASN1_TIME_print_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TIME_print)}
-      ASN1_TIME_print := @_ASN1_TIME_print;
+      ASN1_TIME_print := _ASN1_TIME_print;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6946,13 +6971,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_print_allownil)}
-    ASN1_STRING_print := @ERR_ASN1_STRING_print;
+    ASN1_STRING_print := ERR_ASN1_STRING_print;
     {$ifend}
     {$if declared(ASN1_STRING_print_introduced)}
     if LibVersion < ASN1_STRING_print_introduced then
     begin
       {$if declared(FC_ASN1_STRING_print)}
-      ASN1_STRING_print := @FC_ASN1_STRING_print;
+      ASN1_STRING_print := FC_ASN1_STRING_print;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6961,7 +6986,7 @@ begin
     if ASN1_STRING_print_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_print)}
-      ASN1_STRING_print := @_ASN1_STRING_print;
+      ASN1_STRING_print := _ASN1_STRING_print;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6978,13 +7003,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_print_ex_allownil)}
-    ASN1_STRING_print_ex := @ERR_ASN1_STRING_print_ex;
+    ASN1_STRING_print_ex := ERR_ASN1_STRING_print_ex;
     {$ifend}
     {$if declared(ASN1_STRING_print_ex_introduced)}
     if LibVersion < ASN1_STRING_print_ex_introduced then
     begin
       {$if declared(FC_ASN1_STRING_print_ex)}
-      ASN1_STRING_print_ex := @FC_ASN1_STRING_print_ex;
+      ASN1_STRING_print_ex := FC_ASN1_STRING_print_ex;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -6993,7 +7018,7 @@ begin
     if ASN1_STRING_print_ex_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_print_ex)}
-      ASN1_STRING_print_ex := @_ASN1_STRING_print_ex;
+      ASN1_STRING_print_ex := _ASN1_STRING_print_ex;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7010,13 +7035,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_buf_print_allownil)}
-    ASN1_buf_print := @ERR_ASN1_buf_print;
+    ASN1_buf_print := ERR_ASN1_buf_print;
     {$ifend}
     {$if declared(ASN1_buf_print_introduced)}
     if LibVersion < ASN1_buf_print_introduced then
     begin
       {$if declared(FC_ASN1_buf_print)}
-      ASN1_buf_print := @FC_ASN1_buf_print;
+      ASN1_buf_print := FC_ASN1_buf_print;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7025,7 +7050,7 @@ begin
     if ASN1_buf_print_removed <= LibVersion then
     begin
       {$if declared(_ASN1_buf_print)}
-      ASN1_buf_print := @_ASN1_buf_print;
+      ASN1_buf_print := _ASN1_buf_print;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7042,13 +7067,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_bn_print_allownil)}
-    ASN1_bn_print := @ERR_ASN1_bn_print;
+    ASN1_bn_print := ERR_ASN1_bn_print;
     {$ifend}
     {$if declared(ASN1_bn_print_introduced)}
     if LibVersion < ASN1_bn_print_introduced then
     begin
       {$if declared(FC_ASN1_bn_print)}
-      ASN1_bn_print := @FC_ASN1_bn_print;
+      ASN1_bn_print := FC_ASN1_bn_print;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7057,7 +7082,7 @@ begin
     if ASN1_bn_print_removed <= LibVersion then
     begin
       {$if declared(_ASN1_bn_print)}
-      ASN1_bn_print := @_ASN1_bn_print;
+      ASN1_bn_print := _ASN1_bn_print;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7074,13 +7099,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_parse_allownil)}
-    ASN1_parse := @ERR_ASN1_parse;
+    ASN1_parse := ERR_ASN1_parse;
     {$ifend}
     {$if declared(ASN1_parse_introduced)}
     if LibVersion < ASN1_parse_introduced then
     begin
       {$if declared(FC_ASN1_parse)}
-      ASN1_parse := @FC_ASN1_parse;
+      ASN1_parse := FC_ASN1_parse;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7089,7 +7114,7 @@ begin
     if ASN1_parse_removed <= LibVersion then
     begin
       {$if declared(_ASN1_parse)}
-      ASN1_parse := @_ASN1_parse;
+      ASN1_parse := _ASN1_parse;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7106,13 +7131,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_parse_dump_allownil)}
-    ASN1_parse_dump := @ERR_ASN1_parse_dump;
+    ASN1_parse_dump := ERR_ASN1_parse_dump;
     {$ifend}
     {$if declared(ASN1_parse_dump_introduced)}
     if LibVersion < ASN1_parse_dump_introduced then
     begin
       {$if declared(FC_ASN1_parse_dump)}
-      ASN1_parse_dump := @FC_ASN1_parse_dump;
+      ASN1_parse_dump := FC_ASN1_parse_dump;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7121,7 +7146,7 @@ begin
     if ASN1_parse_dump_removed <= LibVersion then
     begin
       {$if declared(_ASN1_parse_dump)}
-      ASN1_parse_dump := @_ASN1_parse_dump;
+      ASN1_parse_dump := _ASN1_parse_dump;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7138,13 +7163,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_tag2str_allownil)}
-    ASN1_tag2str := @ERR_ASN1_tag2str;
+    ASN1_tag2str := ERR_ASN1_tag2str;
     {$ifend}
     {$if declared(ASN1_tag2str_introduced)}
     if LibVersion < ASN1_tag2str_introduced then
     begin
       {$if declared(FC_ASN1_tag2str)}
-      ASN1_tag2str := @FC_ASN1_tag2str;
+      ASN1_tag2str := FC_ASN1_tag2str;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7153,7 +7178,7 @@ begin
     if ASN1_tag2str_removed <= LibVersion then
     begin
       {$if declared(_ASN1_tag2str)}
-      ASN1_tag2str := @_ASN1_tag2str;
+      ASN1_tag2str := _ASN1_tag2str;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7170,13 +7195,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_UNIVERSALSTRING_to_string_allownil)}
-    ASN1_UNIVERSALSTRING_to_string := @ERR_ASN1_UNIVERSALSTRING_to_string;
+    ASN1_UNIVERSALSTRING_to_string := ERR_ASN1_UNIVERSALSTRING_to_string;
     {$ifend}
     {$if declared(ASN1_UNIVERSALSTRING_to_string_introduced)}
     if LibVersion < ASN1_UNIVERSALSTRING_to_string_introduced then
     begin
       {$if declared(FC_ASN1_UNIVERSALSTRING_to_string)}
-      ASN1_UNIVERSALSTRING_to_string := @FC_ASN1_UNIVERSALSTRING_to_string;
+      ASN1_UNIVERSALSTRING_to_string := FC_ASN1_UNIVERSALSTRING_to_string;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7185,7 +7210,7 @@ begin
     if ASN1_UNIVERSALSTRING_to_string_removed <= LibVersion then
     begin
       {$if declared(_ASN1_UNIVERSALSTRING_to_string)}
-      ASN1_UNIVERSALSTRING_to_string := @_ASN1_UNIVERSALSTRING_to_string;
+      ASN1_UNIVERSALSTRING_to_string := _ASN1_UNIVERSALSTRING_to_string;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7202,13 +7227,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TYPE_set_octetstring_allownil)}
-    ASN1_TYPE_set_octetstring := @ERR_ASN1_TYPE_set_octetstring;
+    ASN1_TYPE_set_octetstring := ERR_ASN1_TYPE_set_octetstring;
     {$ifend}
     {$if declared(ASN1_TYPE_set_octetstring_introduced)}
     if LibVersion < ASN1_TYPE_set_octetstring_introduced then
     begin
       {$if declared(FC_ASN1_TYPE_set_octetstring)}
-      ASN1_TYPE_set_octetstring := @FC_ASN1_TYPE_set_octetstring;
+      ASN1_TYPE_set_octetstring := FC_ASN1_TYPE_set_octetstring;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7217,7 +7242,7 @@ begin
     if ASN1_TYPE_set_octetstring_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TYPE_set_octetstring)}
-      ASN1_TYPE_set_octetstring := @_ASN1_TYPE_set_octetstring;
+      ASN1_TYPE_set_octetstring := _ASN1_TYPE_set_octetstring;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7234,13 +7259,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TYPE_get_octetstring_allownil)}
-    ASN1_TYPE_get_octetstring := @ERR_ASN1_TYPE_get_octetstring;
+    ASN1_TYPE_get_octetstring := ERR_ASN1_TYPE_get_octetstring;
     {$ifend}
     {$if declared(ASN1_TYPE_get_octetstring_introduced)}
     if LibVersion < ASN1_TYPE_get_octetstring_introduced then
     begin
       {$if declared(FC_ASN1_TYPE_get_octetstring)}
-      ASN1_TYPE_get_octetstring := @FC_ASN1_TYPE_get_octetstring;
+      ASN1_TYPE_get_octetstring := FC_ASN1_TYPE_get_octetstring;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7249,7 +7274,7 @@ begin
     if ASN1_TYPE_get_octetstring_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TYPE_get_octetstring)}
-      ASN1_TYPE_get_octetstring := @_ASN1_TYPE_get_octetstring;
+      ASN1_TYPE_get_octetstring := _ASN1_TYPE_get_octetstring;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7266,13 +7291,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TYPE_set_int_octetstring_allownil)}
-    ASN1_TYPE_set_int_octetstring := @ERR_ASN1_TYPE_set_int_octetstring;
+    ASN1_TYPE_set_int_octetstring := ERR_ASN1_TYPE_set_int_octetstring;
     {$ifend}
     {$if declared(ASN1_TYPE_set_int_octetstring_introduced)}
     if LibVersion < ASN1_TYPE_set_int_octetstring_introduced then
     begin
       {$if declared(FC_ASN1_TYPE_set_int_octetstring)}
-      ASN1_TYPE_set_int_octetstring := @FC_ASN1_TYPE_set_int_octetstring;
+      ASN1_TYPE_set_int_octetstring := FC_ASN1_TYPE_set_int_octetstring;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7281,7 +7306,7 @@ begin
     if ASN1_TYPE_set_int_octetstring_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TYPE_set_int_octetstring)}
-      ASN1_TYPE_set_int_octetstring := @_ASN1_TYPE_set_int_octetstring;
+      ASN1_TYPE_set_int_octetstring := _ASN1_TYPE_set_int_octetstring;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7298,13 +7323,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_TYPE_get_int_octetstring_allownil)}
-    ASN1_TYPE_get_int_octetstring := @ERR_ASN1_TYPE_get_int_octetstring;
+    ASN1_TYPE_get_int_octetstring := ERR_ASN1_TYPE_get_int_octetstring;
     {$ifend}
     {$if declared(ASN1_TYPE_get_int_octetstring_introduced)}
     if LibVersion < ASN1_TYPE_get_int_octetstring_introduced then
     begin
       {$if declared(FC_ASN1_TYPE_get_int_octetstring)}
-      ASN1_TYPE_get_int_octetstring := @FC_ASN1_TYPE_get_int_octetstring;
+      ASN1_TYPE_get_int_octetstring := FC_ASN1_TYPE_get_int_octetstring;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7313,7 +7338,7 @@ begin
     if ASN1_TYPE_get_int_octetstring_removed <= LibVersion then
     begin
       {$if declared(_ASN1_TYPE_get_int_octetstring)}
-      ASN1_TYPE_get_int_octetstring := @_ASN1_TYPE_get_int_octetstring;
+      ASN1_TYPE_get_int_octetstring := _ASN1_TYPE_get_int_octetstring;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7330,13 +7355,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_item_unpack_allownil)}
-    ASN1_item_unpack := @ERR_ASN1_item_unpack;
+    ASN1_item_unpack := ERR_ASN1_item_unpack;
     {$ifend}
     {$if declared(ASN1_item_unpack_introduced)}
     if LibVersion < ASN1_item_unpack_introduced then
     begin
       {$if declared(FC_ASN1_item_unpack)}
-      ASN1_item_unpack := @FC_ASN1_item_unpack;
+      ASN1_item_unpack := FC_ASN1_item_unpack;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7345,7 +7370,7 @@ begin
     if ASN1_item_unpack_removed <= LibVersion then
     begin
       {$if declared(_ASN1_item_unpack)}
-      ASN1_item_unpack := @_ASN1_item_unpack;
+      ASN1_item_unpack := _ASN1_item_unpack;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7362,13 +7387,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_item_pack_allownil)}
-    ASN1_item_pack := @ERR_ASN1_item_pack;
+    ASN1_item_pack := ERR_ASN1_item_pack;
     {$ifend}
     {$if declared(ASN1_item_pack_introduced)}
     if LibVersion < ASN1_item_pack_introduced then
     begin
       {$if declared(FC_ASN1_item_pack)}
-      ASN1_item_pack := @FC_ASN1_item_pack;
+      ASN1_item_pack := FC_ASN1_item_pack;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7377,7 +7402,7 @@ begin
     if ASN1_item_pack_removed <= LibVersion then
     begin
       {$if declared(_ASN1_item_pack)}
-      ASN1_item_pack := @_ASN1_item_pack;
+      ASN1_item_pack := _ASN1_item_pack;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7394,13 +7419,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_set_default_mask_allownil)}
-    ASN1_STRING_set_default_mask := @ERR_ASN1_STRING_set_default_mask;
+    ASN1_STRING_set_default_mask := ERR_ASN1_STRING_set_default_mask;
     {$ifend}
     {$if declared(ASN1_STRING_set_default_mask_introduced)}
     if LibVersion < ASN1_STRING_set_default_mask_introduced then
     begin
       {$if declared(FC_ASN1_STRING_set_default_mask)}
-      ASN1_STRING_set_default_mask := @FC_ASN1_STRING_set_default_mask;
+      ASN1_STRING_set_default_mask := FC_ASN1_STRING_set_default_mask;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7409,7 +7434,7 @@ begin
     if ASN1_STRING_set_default_mask_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_set_default_mask)}
-      ASN1_STRING_set_default_mask := @_ASN1_STRING_set_default_mask;
+      ASN1_STRING_set_default_mask := _ASN1_STRING_set_default_mask;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7426,13 +7451,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_set_default_mask_asc_allownil)}
-    ASN1_STRING_set_default_mask_asc := @ERR_ASN1_STRING_set_default_mask_asc;
+    ASN1_STRING_set_default_mask_asc := ERR_ASN1_STRING_set_default_mask_asc;
     {$ifend}
     {$if declared(ASN1_STRING_set_default_mask_asc_introduced)}
     if LibVersion < ASN1_STRING_set_default_mask_asc_introduced then
     begin
       {$if declared(FC_ASN1_STRING_set_default_mask_asc)}
-      ASN1_STRING_set_default_mask_asc := @FC_ASN1_STRING_set_default_mask_asc;
+      ASN1_STRING_set_default_mask_asc := FC_ASN1_STRING_set_default_mask_asc;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7441,7 +7466,7 @@ begin
     if ASN1_STRING_set_default_mask_asc_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_set_default_mask_asc)}
-      ASN1_STRING_set_default_mask_asc := @_ASN1_STRING_set_default_mask_asc;
+      ASN1_STRING_set_default_mask_asc := _ASN1_STRING_set_default_mask_asc;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7458,13 +7483,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_get_default_mask_allownil)}
-    ASN1_STRING_get_default_mask := @ERR_ASN1_STRING_get_default_mask;
+    ASN1_STRING_get_default_mask := ERR_ASN1_STRING_get_default_mask;
     {$ifend}
     {$if declared(ASN1_STRING_get_default_mask_introduced)}
     if LibVersion < ASN1_STRING_get_default_mask_introduced then
     begin
       {$if declared(FC_ASN1_STRING_get_default_mask)}
-      ASN1_STRING_get_default_mask := @FC_ASN1_STRING_get_default_mask;
+      ASN1_STRING_get_default_mask := FC_ASN1_STRING_get_default_mask;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7473,7 +7498,7 @@ begin
     if ASN1_STRING_get_default_mask_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_get_default_mask)}
-      ASN1_STRING_get_default_mask := @_ASN1_STRING_get_default_mask;
+      ASN1_STRING_get_default_mask := _ASN1_STRING_get_default_mask;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7490,13 +7515,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_mbstring_copy_allownil)}
-    ASN1_mbstring_copy := @ERR_ASN1_mbstring_copy;
+    ASN1_mbstring_copy := ERR_ASN1_mbstring_copy;
     {$ifend}
     {$if declared(ASN1_mbstring_copy_introduced)}
     if LibVersion < ASN1_mbstring_copy_introduced then
     begin
       {$if declared(FC_ASN1_mbstring_copy)}
-      ASN1_mbstring_copy := @FC_ASN1_mbstring_copy;
+      ASN1_mbstring_copy := FC_ASN1_mbstring_copy;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7505,7 +7530,7 @@ begin
     if ASN1_mbstring_copy_removed <= LibVersion then
     begin
       {$if declared(_ASN1_mbstring_copy)}
-      ASN1_mbstring_copy := @_ASN1_mbstring_copy;
+      ASN1_mbstring_copy := _ASN1_mbstring_copy;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7522,13 +7547,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_mbstring_ncopy_allownil)}
-    ASN1_mbstring_ncopy := @ERR_ASN1_mbstring_ncopy;
+    ASN1_mbstring_ncopy := ERR_ASN1_mbstring_ncopy;
     {$ifend}
     {$if declared(ASN1_mbstring_ncopy_introduced)}
     if LibVersion < ASN1_mbstring_ncopy_introduced then
     begin
       {$if declared(FC_ASN1_mbstring_ncopy)}
-      ASN1_mbstring_ncopy := @FC_ASN1_mbstring_ncopy;
+      ASN1_mbstring_ncopy := FC_ASN1_mbstring_ncopy;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7537,7 +7562,7 @@ begin
     if ASN1_mbstring_ncopy_removed <= LibVersion then
     begin
       {$if declared(_ASN1_mbstring_ncopy)}
-      ASN1_mbstring_ncopy := @_ASN1_mbstring_ncopy;
+      ASN1_mbstring_ncopy := _ASN1_mbstring_ncopy;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7554,13 +7579,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_set_by_NID_allownil)}
-    ASN1_STRING_set_by_NID := @ERR_ASN1_STRING_set_by_NID;
+    ASN1_STRING_set_by_NID := ERR_ASN1_STRING_set_by_NID;
     {$ifend}
     {$if declared(ASN1_STRING_set_by_NID_introduced)}
     if LibVersion < ASN1_STRING_set_by_NID_introduced then
     begin
       {$if declared(FC_ASN1_STRING_set_by_NID)}
-      ASN1_STRING_set_by_NID := @FC_ASN1_STRING_set_by_NID;
+      ASN1_STRING_set_by_NID := FC_ASN1_STRING_set_by_NID;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7569,7 +7594,7 @@ begin
     if ASN1_STRING_set_by_NID_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_set_by_NID)}
-      ASN1_STRING_set_by_NID := @_ASN1_STRING_set_by_NID;
+      ASN1_STRING_set_by_NID := _ASN1_STRING_set_by_NID;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7586,13 +7611,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_TABLE_get_allownil)}
-    ASN1_STRING_TABLE_get := @ERR_ASN1_STRING_TABLE_get;
+    ASN1_STRING_TABLE_get := ERR_ASN1_STRING_TABLE_get;
     {$ifend}
     {$if declared(ASN1_STRING_TABLE_get_introduced)}
     if LibVersion < ASN1_STRING_TABLE_get_introduced then
     begin
       {$if declared(FC_ASN1_STRING_TABLE_get)}
-      ASN1_STRING_TABLE_get := @FC_ASN1_STRING_TABLE_get;
+      ASN1_STRING_TABLE_get := FC_ASN1_STRING_TABLE_get;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7601,7 +7626,7 @@ begin
     if ASN1_STRING_TABLE_get_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_TABLE_get)}
-      ASN1_STRING_TABLE_get := @_ASN1_STRING_TABLE_get;
+      ASN1_STRING_TABLE_get := _ASN1_STRING_TABLE_get;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7618,13 +7643,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_TABLE_add_allownil)}
-    ASN1_STRING_TABLE_add := @ERR_ASN1_STRING_TABLE_add;
+    ASN1_STRING_TABLE_add := ERR_ASN1_STRING_TABLE_add;
     {$ifend}
     {$if declared(ASN1_STRING_TABLE_add_introduced)}
     if LibVersion < ASN1_STRING_TABLE_add_introduced then
     begin
       {$if declared(FC_ASN1_STRING_TABLE_add)}
-      ASN1_STRING_TABLE_add := @FC_ASN1_STRING_TABLE_add;
+      ASN1_STRING_TABLE_add := FC_ASN1_STRING_TABLE_add;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7633,7 +7658,7 @@ begin
     if ASN1_STRING_TABLE_add_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_TABLE_add)}
-      ASN1_STRING_TABLE_add := @_ASN1_STRING_TABLE_add;
+      ASN1_STRING_TABLE_add := _ASN1_STRING_TABLE_add;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7650,13 +7675,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_STRING_TABLE_cleanup_allownil)}
-    ASN1_STRING_TABLE_cleanup := @ERR_ASN1_STRING_TABLE_cleanup;
+    ASN1_STRING_TABLE_cleanup := ERR_ASN1_STRING_TABLE_cleanup;
     {$ifend}
     {$if declared(ASN1_STRING_TABLE_cleanup_introduced)}
     if LibVersion < ASN1_STRING_TABLE_cleanup_introduced then
     begin
       {$if declared(FC_ASN1_STRING_TABLE_cleanup)}
-      ASN1_STRING_TABLE_cleanup := @FC_ASN1_STRING_TABLE_cleanup;
+      ASN1_STRING_TABLE_cleanup := FC_ASN1_STRING_TABLE_cleanup;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7665,7 +7690,7 @@ begin
     if ASN1_STRING_TABLE_cleanup_removed <= LibVersion then
     begin
       {$if declared(_ASN1_STRING_TABLE_cleanup)}
-      ASN1_STRING_TABLE_cleanup := @_ASN1_STRING_TABLE_cleanup;
+      ASN1_STRING_TABLE_cleanup := _ASN1_STRING_TABLE_cleanup;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7682,13 +7707,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_item_new_allownil)}
-    ASN1_item_new := @ERR_ASN1_item_new;
+    ASN1_item_new := ERR_ASN1_item_new;
     {$ifend}
     {$if declared(ASN1_item_new_introduced)}
     if LibVersion < ASN1_item_new_introduced then
     begin
       {$if declared(FC_ASN1_item_new)}
-      ASN1_item_new := @FC_ASN1_item_new;
+      ASN1_item_new := FC_ASN1_item_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7697,7 +7722,7 @@ begin
     if ASN1_item_new_removed <= LibVersion then
     begin
       {$if declared(_ASN1_item_new)}
-      ASN1_item_new := @_ASN1_item_new;
+      ASN1_item_new := _ASN1_item_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7714,13 +7739,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_item_free_allownil)}
-    ASN1_item_free := @ERR_ASN1_item_free;
+    ASN1_item_free := ERR_ASN1_item_free;
     {$ifend}
     {$if declared(ASN1_item_free_introduced)}
     if LibVersion < ASN1_item_free_introduced then
     begin
       {$if declared(FC_ASN1_item_free)}
-      ASN1_item_free := @FC_ASN1_item_free;
+      ASN1_item_free := FC_ASN1_item_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7729,7 +7754,7 @@ begin
     if ASN1_item_free_removed <= LibVersion then
     begin
       {$if declared(_ASN1_item_free)}
-      ASN1_item_free := @_ASN1_item_free;
+      ASN1_item_free := _ASN1_item_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7746,13 +7771,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_item_d2i_allownil)}
-    ASN1_item_d2i := @ERR_ASN1_item_d2i;
+    ASN1_item_d2i := ERR_ASN1_item_d2i;
     {$ifend}
     {$if declared(ASN1_item_d2i_introduced)}
     if LibVersion < ASN1_item_d2i_introduced then
     begin
       {$if declared(FC_ASN1_item_d2i)}
-      ASN1_item_d2i := @FC_ASN1_item_d2i;
+      ASN1_item_d2i := FC_ASN1_item_d2i;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7761,7 +7786,7 @@ begin
     if ASN1_item_d2i_removed <= LibVersion then
     begin
       {$if declared(_ASN1_item_d2i)}
-      ASN1_item_d2i := @_ASN1_item_d2i;
+      ASN1_item_d2i := _ASN1_item_d2i;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7778,13 +7803,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_item_i2d_allownil)}
-    ASN1_item_i2d := @ERR_ASN1_item_i2d;
+    ASN1_item_i2d := ERR_ASN1_item_i2d;
     {$ifend}
     {$if declared(ASN1_item_i2d_introduced)}
     if LibVersion < ASN1_item_i2d_introduced then
     begin
       {$if declared(FC_ASN1_item_i2d)}
-      ASN1_item_i2d := @FC_ASN1_item_i2d;
+      ASN1_item_i2d := FC_ASN1_item_i2d;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7793,7 +7818,7 @@ begin
     if ASN1_item_i2d_removed <= LibVersion then
     begin
       {$if declared(_ASN1_item_i2d)}
-      ASN1_item_i2d := @_ASN1_item_i2d;
+      ASN1_item_i2d := _ASN1_item_i2d;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7810,13 +7835,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_item_ndef_i2d_allownil)}
-    ASN1_item_ndef_i2d := @ERR_ASN1_item_ndef_i2d;
+    ASN1_item_ndef_i2d := ERR_ASN1_item_ndef_i2d;
     {$ifend}
     {$if declared(ASN1_item_ndef_i2d_introduced)}
     if LibVersion < ASN1_item_ndef_i2d_introduced then
     begin
       {$if declared(FC_ASN1_item_ndef_i2d)}
-      ASN1_item_ndef_i2d := @FC_ASN1_item_ndef_i2d;
+      ASN1_item_ndef_i2d := FC_ASN1_item_ndef_i2d;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7825,7 +7850,7 @@ begin
     if ASN1_item_ndef_i2d_removed <= LibVersion then
     begin
       {$if declared(_ASN1_item_ndef_i2d)}
-      ASN1_item_ndef_i2d := @_ASN1_item_ndef_i2d;
+      ASN1_item_ndef_i2d := _ASN1_item_ndef_i2d;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7842,13 +7867,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_add_oid_module_allownil)}
-    ASN1_add_oid_module := @ERR_ASN1_add_oid_module;
+    ASN1_add_oid_module := ERR_ASN1_add_oid_module;
     {$ifend}
     {$if declared(ASN1_add_oid_module_introduced)}
     if LibVersion < ASN1_add_oid_module_introduced then
     begin
       {$if declared(FC_ASN1_add_oid_module)}
-      ASN1_add_oid_module := @FC_ASN1_add_oid_module;
+      ASN1_add_oid_module := FC_ASN1_add_oid_module;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7857,7 +7882,7 @@ begin
     if ASN1_add_oid_module_removed <= LibVersion then
     begin
       {$if declared(_ASN1_add_oid_module)}
-      ASN1_add_oid_module := @_ASN1_add_oid_module;
+      ASN1_add_oid_module := _ASN1_add_oid_module;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7874,13 +7899,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_add_stable_module_allownil)}
-    ASN1_add_stable_module := @ERR_ASN1_add_stable_module;
+    ASN1_add_stable_module := ERR_ASN1_add_stable_module;
     {$ifend}
     {$if declared(ASN1_add_stable_module_introduced)}
     if LibVersion < ASN1_add_stable_module_introduced then
     begin
       {$if declared(FC_ASN1_add_stable_module)}
-      ASN1_add_stable_module := @FC_ASN1_add_stable_module;
+      ASN1_add_stable_module := FC_ASN1_add_stable_module;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7889,7 +7914,7 @@ begin
     if ASN1_add_stable_module_removed <= LibVersion then
     begin
       {$if declared(_ASN1_add_stable_module)}
-      ASN1_add_stable_module := @_ASN1_add_stable_module;
+      ASN1_add_stable_module := _ASN1_add_stable_module;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7906,13 +7931,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_generate_nconf_allownil)}
-    ASN1_generate_nconf := @ERR_ASN1_generate_nconf;
+    ASN1_generate_nconf := ERR_ASN1_generate_nconf;
     {$ifend}
     {$if declared(ASN1_generate_nconf_introduced)}
     if LibVersion < ASN1_generate_nconf_introduced then
     begin
       {$if declared(FC_ASN1_generate_nconf)}
-      ASN1_generate_nconf := @FC_ASN1_generate_nconf;
+      ASN1_generate_nconf := FC_ASN1_generate_nconf;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7921,7 +7946,7 @@ begin
     if ASN1_generate_nconf_removed <= LibVersion then
     begin
       {$if declared(_ASN1_generate_nconf)}
-      ASN1_generate_nconf := @_ASN1_generate_nconf;
+      ASN1_generate_nconf := _ASN1_generate_nconf;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7938,13 +7963,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_generate_v3_allownil)}
-    ASN1_generate_v3 := @ERR_ASN1_generate_v3;
+    ASN1_generate_v3 := ERR_ASN1_generate_v3;
     {$ifend}
     {$if declared(ASN1_generate_v3_introduced)}
     if LibVersion < ASN1_generate_v3_introduced then
     begin
       {$if declared(FC_ASN1_generate_v3)}
-      ASN1_generate_v3 := @FC_ASN1_generate_v3;
+      ASN1_generate_v3 := FC_ASN1_generate_v3;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7953,7 +7978,7 @@ begin
     if ASN1_generate_v3_removed <= LibVersion then
     begin
       {$if declared(_ASN1_generate_v3)}
-      ASN1_generate_v3 := @_ASN1_generate_v3;
+      ASN1_generate_v3 := _ASN1_generate_v3;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7970,13 +7995,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_str2mask_allownil)}
-    ASN1_str2mask := @ERR_ASN1_str2mask;
+    ASN1_str2mask := ERR_ASN1_str2mask;
     {$ifend}
     {$if declared(ASN1_str2mask_introduced)}
     if LibVersion < ASN1_str2mask_introduced then
     begin
       {$if declared(FC_ASN1_str2mask)}
-      ASN1_str2mask := @FC_ASN1_str2mask;
+      ASN1_str2mask := FC_ASN1_str2mask;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -7985,7 +8010,7 @@ begin
     if ASN1_str2mask_removed <= LibVersion then
     begin
       {$if declared(_ASN1_str2mask)}
-      ASN1_str2mask := @_ASN1_str2mask;
+      ASN1_str2mask := _ASN1_str2mask;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8002,13 +8027,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_item_print_allownil)}
-    ASN1_item_print := @ERR_ASN1_item_print;
+    ASN1_item_print := ERR_ASN1_item_print;
     {$ifend}
     {$if declared(ASN1_item_print_introduced)}
     if LibVersion < ASN1_item_print_introduced then
     begin
       {$if declared(FC_ASN1_item_print)}
-      ASN1_item_print := @FC_ASN1_item_print;
+      ASN1_item_print := FC_ASN1_item_print;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8017,7 +8042,7 @@ begin
     if ASN1_item_print_removed <= LibVersion then
     begin
       {$if declared(_ASN1_item_print)}
-      ASN1_item_print := @_ASN1_item_print;
+      ASN1_item_print := _ASN1_item_print;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8034,13 +8059,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_PCTX_new_allownil)}
-    ASN1_PCTX_new := @ERR_ASN1_PCTX_new;
+    ASN1_PCTX_new := ERR_ASN1_PCTX_new;
     {$ifend}
     {$if declared(ASN1_PCTX_new_introduced)}
     if LibVersion < ASN1_PCTX_new_introduced then
     begin
       {$if declared(FC_ASN1_PCTX_new)}
-      ASN1_PCTX_new := @FC_ASN1_PCTX_new;
+      ASN1_PCTX_new := FC_ASN1_PCTX_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8049,7 +8074,7 @@ begin
     if ASN1_PCTX_new_removed <= LibVersion then
     begin
       {$if declared(_ASN1_PCTX_new)}
-      ASN1_PCTX_new := @_ASN1_PCTX_new;
+      ASN1_PCTX_new := _ASN1_PCTX_new;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8066,13 +8091,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_PCTX_free_allownil)}
-    ASN1_PCTX_free := @ERR_ASN1_PCTX_free;
+    ASN1_PCTX_free := ERR_ASN1_PCTX_free;
     {$ifend}
     {$if declared(ASN1_PCTX_free_introduced)}
     if LibVersion < ASN1_PCTX_free_introduced then
     begin
       {$if declared(FC_ASN1_PCTX_free)}
-      ASN1_PCTX_free := @FC_ASN1_PCTX_free;
+      ASN1_PCTX_free := FC_ASN1_PCTX_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8081,7 +8106,7 @@ begin
     if ASN1_PCTX_free_removed <= LibVersion then
     begin
       {$if declared(_ASN1_PCTX_free)}
-      ASN1_PCTX_free := @_ASN1_PCTX_free;
+      ASN1_PCTX_free := _ASN1_PCTX_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8098,13 +8123,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_PCTX_get_flags_allownil)}
-    ASN1_PCTX_get_flags := @ERR_ASN1_PCTX_get_flags;
+    ASN1_PCTX_get_flags := ERR_ASN1_PCTX_get_flags;
     {$ifend}
     {$if declared(ASN1_PCTX_get_flags_introduced)}
     if LibVersion < ASN1_PCTX_get_flags_introduced then
     begin
       {$if declared(FC_ASN1_PCTX_get_flags)}
-      ASN1_PCTX_get_flags := @FC_ASN1_PCTX_get_flags;
+      ASN1_PCTX_get_flags := FC_ASN1_PCTX_get_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8113,7 +8138,7 @@ begin
     if ASN1_PCTX_get_flags_removed <= LibVersion then
     begin
       {$if declared(_ASN1_PCTX_get_flags)}
-      ASN1_PCTX_get_flags := @_ASN1_PCTX_get_flags;
+      ASN1_PCTX_get_flags := _ASN1_PCTX_get_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8130,13 +8155,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_PCTX_set_flags_allownil)}
-    ASN1_PCTX_set_flags := @ERR_ASN1_PCTX_set_flags;
+    ASN1_PCTX_set_flags := ERR_ASN1_PCTX_set_flags;
     {$ifend}
     {$if declared(ASN1_PCTX_set_flags_introduced)}
     if LibVersion < ASN1_PCTX_set_flags_introduced then
     begin
       {$if declared(FC_ASN1_PCTX_set_flags)}
-      ASN1_PCTX_set_flags := @FC_ASN1_PCTX_set_flags;
+      ASN1_PCTX_set_flags := FC_ASN1_PCTX_set_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8145,7 +8170,7 @@ begin
     if ASN1_PCTX_set_flags_removed <= LibVersion then
     begin
       {$if declared(_ASN1_PCTX_set_flags)}
-      ASN1_PCTX_set_flags := @_ASN1_PCTX_set_flags;
+      ASN1_PCTX_set_flags := _ASN1_PCTX_set_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8162,13 +8187,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_PCTX_get_nm_flags_allownil)}
-    ASN1_PCTX_get_nm_flags := @ERR_ASN1_PCTX_get_nm_flags;
+    ASN1_PCTX_get_nm_flags := ERR_ASN1_PCTX_get_nm_flags;
     {$ifend}
     {$if declared(ASN1_PCTX_get_nm_flags_introduced)}
     if LibVersion < ASN1_PCTX_get_nm_flags_introduced then
     begin
       {$if declared(FC_ASN1_PCTX_get_nm_flags)}
-      ASN1_PCTX_get_nm_flags := @FC_ASN1_PCTX_get_nm_flags;
+      ASN1_PCTX_get_nm_flags := FC_ASN1_PCTX_get_nm_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8177,7 +8202,7 @@ begin
     if ASN1_PCTX_get_nm_flags_removed <= LibVersion then
     begin
       {$if declared(_ASN1_PCTX_get_nm_flags)}
-      ASN1_PCTX_get_nm_flags := @_ASN1_PCTX_get_nm_flags;
+      ASN1_PCTX_get_nm_flags := _ASN1_PCTX_get_nm_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8194,13 +8219,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_PCTX_set_nm_flags_allownil)}
-    ASN1_PCTX_set_nm_flags := @ERR_ASN1_PCTX_set_nm_flags;
+    ASN1_PCTX_set_nm_flags := ERR_ASN1_PCTX_set_nm_flags;
     {$ifend}
     {$if declared(ASN1_PCTX_set_nm_flags_introduced)}
     if LibVersion < ASN1_PCTX_set_nm_flags_introduced then
     begin
       {$if declared(FC_ASN1_PCTX_set_nm_flags)}
-      ASN1_PCTX_set_nm_flags := @FC_ASN1_PCTX_set_nm_flags;
+      ASN1_PCTX_set_nm_flags := FC_ASN1_PCTX_set_nm_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8209,7 +8234,7 @@ begin
     if ASN1_PCTX_set_nm_flags_removed <= LibVersion then
     begin
       {$if declared(_ASN1_PCTX_set_nm_flags)}
-      ASN1_PCTX_set_nm_flags := @_ASN1_PCTX_set_nm_flags;
+      ASN1_PCTX_set_nm_flags := _ASN1_PCTX_set_nm_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8226,13 +8251,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_PCTX_get_cert_flags_allownil)}
-    ASN1_PCTX_get_cert_flags := @ERR_ASN1_PCTX_get_cert_flags;
+    ASN1_PCTX_get_cert_flags := ERR_ASN1_PCTX_get_cert_flags;
     {$ifend}
     {$if declared(ASN1_PCTX_get_cert_flags_introduced)}
     if LibVersion < ASN1_PCTX_get_cert_flags_introduced then
     begin
       {$if declared(FC_ASN1_PCTX_get_cert_flags)}
-      ASN1_PCTX_get_cert_flags := @FC_ASN1_PCTX_get_cert_flags;
+      ASN1_PCTX_get_cert_flags := FC_ASN1_PCTX_get_cert_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8241,7 +8266,7 @@ begin
     if ASN1_PCTX_get_cert_flags_removed <= LibVersion then
     begin
       {$if declared(_ASN1_PCTX_get_cert_flags)}
-      ASN1_PCTX_get_cert_flags := @_ASN1_PCTX_get_cert_flags;
+      ASN1_PCTX_get_cert_flags := _ASN1_PCTX_get_cert_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8258,13 +8283,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_PCTX_set_cert_flags_allownil)}
-    ASN1_PCTX_set_cert_flags := @ERR_ASN1_PCTX_set_cert_flags;
+    ASN1_PCTX_set_cert_flags := ERR_ASN1_PCTX_set_cert_flags;
     {$ifend}
     {$if declared(ASN1_PCTX_set_cert_flags_introduced)}
     if LibVersion < ASN1_PCTX_set_cert_flags_introduced then
     begin
       {$if declared(FC_ASN1_PCTX_set_cert_flags)}
-      ASN1_PCTX_set_cert_flags := @FC_ASN1_PCTX_set_cert_flags;
+      ASN1_PCTX_set_cert_flags := FC_ASN1_PCTX_set_cert_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8273,7 +8298,7 @@ begin
     if ASN1_PCTX_set_cert_flags_removed <= LibVersion then
     begin
       {$if declared(_ASN1_PCTX_set_cert_flags)}
-      ASN1_PCTX_set_cert_flags := @_ASN1_PCTX_set_cert_flags;
+      ASN1_PCTX_set_cert_flags := _ASN1_PCTX_set_cert_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8290,13 +8315,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_PCTX_get_oid_flags_allownil)}
-    ASN1_PCTX_get_oid_flags := @ERR_ASN1_PCTX_get_oid_flags;
+    ASN1_PCTX_get_oid_flags := ERR_ASN1_PCTX_get_oid_flags;
     {$ifend}
     {$if declared(ASN1_PCTX_get_oid_flags_introduced)}
     if LibVersion < ASN1_PCTX_get_oid_flags_introduced then
     begin
       {$if declared(FC_ASN1_PCTX_get_oid_flags)}
-      ASN1_PCTX_get_oid_flags := @FC_ASN1_PCTX_get_oid_flags;
+      ASN1_PCTX_get_oid_flags := FC_ASN1_PCTX_get_oid_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8305,7 +8330,7 @@ begin
     if ASN1_PCTX_get_oid_flags_removed <= LibVersion then
     begin
       {$if declared(_ASN1_PCTX_get_oid_flags)}
-      ASN1_PCTX_get_oid_flags := @_ASN1_PCTX_get_oid_flags;
+      ASN1_PCTX_get_oid_flags := _ASN1_PCTX_get_oid_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8322,13 +8347,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_PCTX_set_oid_flags_allownil)}
-    ASN1_PCTX_set_oid_flags := @ERR_ASN1_PCTX_set_oid_flags;
+    ASN1_PCTX_set_oid_flags := ERR_ASN1_PCTX_set_oid_flags;
     {$ifend}
     {$if declared(ASN1_PCTX_set_oid_flags_introduced)}
     if LibVersion < ASN1_PCTX_set_oid_flags_introduced then
     begin
       {$if declared(FC_ASN1_PCTX_set_oid_flags)}
-      ASN1_PCTX_set_oid_flags := @FC_ASN1_PCTX_set_oid_flags;
+      ASN1_PCTX_set_oid_flags := FC_ASN1_PCTX_set_oid_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8337,7 +8362,7 @@ begin
     if ASN1_PCTX_set_oid_flags_removed <= LibVersion then
     begin
       {$if declared(_ASN1_PCTX_set_oid_flags)}
-      ASN1_PCTX_set_oid_flags := @_ASN1_PCTX_set_oid_flags;
+      ASN1_PCTX_set_oid_flags := _ASN1_PCTX_set_oid_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8354,13 +8379,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_PCTX_get_str_flags_allownil)}
-    ASN1_PCTX_get_str_flags := @ERR_ASN1_PCTX_get_str_flags;
+    ASN1_PCTX_get_str_flags := ERR_ASN1_PCTX_get_str_flags;
     {$ifend}
     {$if declared(ASN1_PCTX_get_str_flags_introduced)}
     if LibVersion < ASN1_PCTX_get_str_flags_introduced then
     begin
       {$if declared(FC_ASN1_PCTX_get_str_flags)}
-      ASN1_PCTX_get_str_flags := @FC_ASN1_PCTX_get_str_flags;
+      ASN1_PCTX_get_str_flags := FC_ASN1_PCTX_get_str_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8369,7 +8394,7 @@ begin
     if ASN1_PCTX_get_str_flags_removed <= LibVersion then
     begin
       {$if declared(_ASN1_PCTX_get_str_flags)}
-      ASN1_PCTX_get_str_flags := @_ASN1_PCTX_get_str_flags;
+      ASN1_PCTX_get_str_flags := _ASN1_PCTX_get_str_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8386,13 +8411,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_PCTX_set_str_flags_allownil)}
-    ASN1_PCTX_set_str_flags := @ERR_ASN1_PCTX_set_str_flags;
+    ASN1_PCTX_set_str_flags := ERR_ASN1_PCTX_set_str_flags;
     {$ifend}
     {$if declared(ASN1_PCTX_set_str_flags_introduced)}
     if LibVersion < ASN1_PCTX_set_str_flags_introduced then
     begin
       {$if declared(FC_ASN1_PCTX_set_str_flags)}
-      ASN1_PCTX_set_str_flags := @FC_ASN1_PCTX_set_str_flags;
+      ASN1_PCTX_set_str_flags := FC_ASN1_PCTX_set_str_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8401,7 +8426,7 @@ begin
     if ASN1_PCTX_set_str_flags_removed <= LibVersion then
     begin
       {$if declared(_ASN1_PCTX_set_str_flags)}
-      ASN1_PCTX_set_str_flags := @_ASN1_PCTX_set_str_flags;
+      ASN1_PCTX_set_str_flags := _ASN1_PCTX_set_str_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8418,13 +8443,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_SCTX_free_allownil)}
-    ASN1_SCTX_free := @ERR_ASN1_SCTX_free;
+    ASN1_SCTX_free := ERR_ASN1_SCTX_free;
     {$ifend}
     {$if declared(ASN1_SCTX_free_introduced)}
     if LibVersion < ASN1_SCTX_free_introduced then
     begin
       {$if declared(FC_ASN1_SCTX_free)}
-      ASN1_SCTX_free := @FC_ASN1_SCTX_free;
+      ASN1_SCTX_free := FC_ASN1_SCTX_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8433,7 +8458,7 @@ begin
     if ASN1_SCTX_free_removed <= LibVersion then
     begin
       {$if declared(_ASN1_SCTX_free)}
-      ASN1_SCTX_free := @_ASN1_SCTX_free;
+      ASN1_SCTX_free := _ASN1_SCTX_free;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8450,13 +8475,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_SCTX_get_item_allownil)}
-    ASN1_SCTX_get_item := @ERR_ASN1_SCTX_get_item;
+    ASN1_SCTX_get_item := ERR_ASN1_SCTX_get_item;
     {$ifend}
     {$if declared(ASN1_SCTX_get_item_introduced)}
     if LibVersion < ASN1_SCTX_get_item_introduced then
     begin
       {$if declared(FC_ASN1_SCTX_get_item)}
-      ASN1_SCTX_get_item := @FC_ASN1_SCTX_get_item;
+      ASN1_SCTX_get_item := FC_ASN1_SCTX_get_item;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8465,7 +8490,7 @@ begin
     if ASN1_SCTX_get_item_removed <= LibVersion then
     begin
       {$if declared(_ASN1_SCTX_get_item)}
-      ASN1_SCTX_get_item := @_ASN1_SCTX_get_item;
+      ASN1_SCTX_get_item := _ASN1_SCTX_get_item;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8482,13 +8507,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_SCTX_get_template_allownil)}
-    ASN1_SCTX_get_template := @ERR_ASN1_SCTX_get_template;
+    ASN1_SCTX_get_template := ERR_ASN1_SCTX_get_template;
     {$ifend}
     {$if declared(ASN1_SCTX_get_template_introduced)}
     if LibVersion < ASN1_SCTX_get_template_introduced then
     begin
       {$if declared(FC_ASN1_SCTX_get_template)}
-      ASN1_SCTX_get_template := @FC_ASN1_SCTX_get_template;
+      ASN1_SCTX_get_template := FC_ASN1_SCTX_get_template;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8497,7 +8522,7 @@ begin
     if ASN1_SCTX_get_template_removed <= LibVersion then
     begin
       {$if declared(_ASN1_SCTX_get_template)}
-      ASN1_SCTX_get_template := @_ASN1_SCTX_get_template;
+      ASN1_SCTX_get_template := _ASN1_SCTX_get_template;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8514,13 +8539,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_SCTX_get_flags_allownil)}
-    ASN1_SCTX_get_flags := @ERR_ASN1_SCTX_get_flags;
+    ASN1_SCTX_get_flags := ERR_ASN1_SCTX_get_flags;
     {$ifend}
     {$if declared(ASN1_SCTX_get_flags_introduced)}
     if LibVersion < ASN1_SCTX_get_flags_introduced then
     begin
       {$if declared(FC_ASN1_SCTX_get_flags)}
-      ASN1_SCTX_get_flags := @FC_ASN1_SCTX_get_flags;
+      ASN1_SCTX_get_flags := FC_ASN1_SCTX_get_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8529,7 +8554,7 @@ begin
     if ASN1_SCTX_get_flags_removed <= LibVersion then
     begin
       {$if declared(_ASN1_SCTX_get_flags)}
-      ASN1_SCTX_get_flags := @_ASN1_SCTX_get_flags;
+      ASN1_SCTX_get_flags := _ASN1_SCTX_get_flags;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8546,13 +8571,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_SCTX_set_app_data_allownil)}
-    ASN1_SCTX_set_app_data := @ERR_ASN1_SCTX_set_app_data;
+    ASN1_SCTX_set_app_data := ERR_ASN1_SCTX_set_app_data;
     {$ifend}
     {$if declared(ASN1_SCTX_set_app_data_introduced)}
     if LibVersion < ASN1_SCTX_set_app_data_introduced then
     begin
       {$if declared(FC_ASN1_SCTX_set_app_data)}
-      ASN1_SCTX_set_app_data := @FC_ASN1_SCTX_set_app_data;
+      ASN1_SCTX_set_app_data := FC_ASN1_SCTX_set_app_data;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8561,7 +8586,7 @@ begin
     if ASN1_SCTX_set_app_data_removed <= LibVersion then
     begin
       {$if declared(_ASN1_SCTX_set_app_data)}
-      ASN1_SCTX_set_app_data := @_ASN1_SCTX_set_app_data;
+      ASN1_SCTX_set_app_data := _ASN1_SCTX_set_app_data;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8578,13 +8603,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_SCTX_get_app_data_allownil)}
-    ASN1_SCTX_get_app_data := @ERR_ASN1_SCTX_get_app_data;
+    ASN1_SCTX_get_app_data := ERR_ASN1_SCTX_get_app_data;
     {$ifend}
     {$if declared(ASN1_SCTX_get_app_data_introduced)}
     if LibVersion < ASN1_SCTX_get_app_data_introduced then
     begin
       {$if declared(FC_ASN1_SCTX_get_app_data)}
-      ASN1_SCTX_get_app_data := @FC_ASN1_SCTX_get_app_data;
+      ASN1_SCTX_get_app_data := FC_ASN1_SCTX_get_app_data;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8593,7 +8618,7 @@ begin
     if ASN1_SCTX_get_app_data_removed <= LibVersion then
     begin
       {$if declared(_ASN1_SCTX_get_app_data)}
-      ASN1_SCTX_get_app_data := @_ASN1_SCTX_get_app_data;
+      ASN1_SCTX_get_app_data := _ASN1_SCTX_get_app_data;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8610,13 +8635,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(BIO_f_asn1_allownil)}
-    BIO_f_asn1 := @ERR_BIO_f_asn1;
+    BIO_f_asn1 := ERR_BIO_f_asn1;
     {$ifend}
     {$if declared(BIO_f_asn1_introduced)}
     if LibVersion < BIO_f_asn1_introduced then
     begin
       {$if declared(FC_BIO_f_asn1)}
-      BIO_f_asn1 := @FC_BIO_f_asn1;
+      BIO_f_asn1 := FC_BIO_f_asn1;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8625,7 +8650,7 @@ begin
     if BIO_f_asn1_removed <= LibVersion then
     begin
       {$if declared(_BIO_f_asn1)}
-      BIO_f_asn1 := @_BIO_f_asn1;
+      BIO_f_asn1 := _BIO_f_asn1;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8642,13 +8667,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(BIO_new_NDEF_allownil)}
-    BIO_new_NDEF := @ERR_BIO_new_NDEF;
+    BIO_new_NDEF := ERR_BIO_new_NDEF;
     {$ifend}
     {$if declared(BIO_new_NDEF_introduced)}
     if LibVersion < BIO_new_NDEF_introduced then
     begin
       {$if declared(FC_BIO_new_NDEF)}
-      BIO_new_NDEF := @FC_BIO_new_NDEF;
+      BIO_new_NDEF := FC_BIO_new_NDEF;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8657,7 +8682,7 @@ begin
     if BIO_new_NDEF_removed <= LibVersion then
     begin
       {$if declared(_BIO_new_NDEF)}
-      BIO_new_NDEF := @_BIO_new_NDEF;
+      BIO_new_NDEF := _BIO_new_NDEF;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8674,13 +8699,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(i2d_ASN1_bio_stream_allownil)}
-    i2d_ASN1_bio_stream := @ERR_i2d_ASN1_bio_stream;
+    i2d_ASN1_bio_stream := ERR_i2d_ASN1_bio_stream;
     {$ifend}
     {$if declared(i2d_ASN1_bio_stream_introduced)}
     if LibVersion < i2d_ASN1_bio_stream_introduced then
     begin
       {$if declared(FC_i2d_ASN1_bio_stream)}
-      i2d_ASN1_bio_stream := @FC_i2d_ASN1_bio_stream;
+      i2d_ASN1_bio_stream := FC_i2d_ASN1_bio_stream;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8689,7 +8714,7 @@ begin
     if i2d_ASN1_bio_stream_removed <= LibVersion then
     begin
       {$if declared(_i2d_ASN1_bio_stream)}
-      i2d_ASN1_bio_stream := @_i2d_ASN1_bio_stream;
+      i2d_ASN1_bio_stream := _i2d_ASN1_bio_stream;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8706,13 +8731,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(PEM_write_bio_ASN1_stream_allownil)}
-    PEM_write_bio_ASN1_stream := @ERR_PEM_write_bio_ASN1_stream;
+    PEM_write_bio_ASN1_stream := ERR_PEM_write_bio_ASN1_stream;
     {$ifend}
     {$if declared(PEM_write_bio_ASN1_stream_introduced)}
     if LibVersion < PEM_write_bio_ASN1_stream_introduced then
     begin
       {$if declared(FC_PEM_write_bio_ASN1_stream)}
-      PEM_write_bio_ASN1_stream := @FC_PEM_write_bio_ASN1_stream;
+      PEM_write_bio_ASN1_stream := FC_PEM_write_bio_ASN1_stream;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8721,7 +8746,7 @@ begin
     if PEM_write_bio_ASN1_stream_removed <= LibVersion then
     begin
       {$if declared(_PEM_write_bio_ASN1_stream)}
-      PEM_write_bio_ASN1_stream := @_PEM_write_bio_ASN1_stream;
+      PEM_write_bio_ASN1_stream := _PEM_write_bio_ASN1_stream;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8738,13 +8763,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(SMIME_read_ASN1_allownil)}
-    SMIME_read_ASN1 := @ERR_SMIME_read_ASN1;
+    SMIME_read_ASN1 := ERR_SMIME_read_ASN1;
     {$ifend}
     {$if declared(SMIME_read_ASN1_introduced)}
     if LibVersion < SMIME_read_ASN1_introduced then
     begin
       {$if declared(FC_SMIME_read_ASN1)}
-      SMIME_read_ASN1 := @FC_SMIME_read_ASN1;
+      SMIME_read_ASN1 := FC_SMIME_read_ASN1;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8753,7 +8778,7 @@ begin
     if SMIME_read_ASN1_removed <= LibVersion then
     begin
       {$if declared(_SMIME_read_ASN1)}
-      SMIME_read_ASN1 := @_SMIME_read_ASN1;
+      SMIME_read_ASN1 := _SMIME_read_ASN1;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8770,13 +8795,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(SMIME_crlf_copy_allownil)}
-    SMIME_crlf_copy := @ERR_SMIME_crlf_copy;
+    SMIME_crlf_copy := ERR_SMIME_crlf_copy;
     {$ifend}
     {$if declared(SMIME_crlf_copy_introduced)}
     if LibVersion < SMIME_crlf_copy_introduced then
     begin
       {$if declared(FC_SMIME_crlf_copy)}
-      SMIME_crlf_copy := @FC_SMIME_crlf_copy;
+      SMIME_crlf_copy := FC_SMIME_crlf_copy;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8785,7 +8810,7 @@ begin
     if SMIME_crlf_copy_removed <= LibVersion then
     begin
       {$if declared(_SMIME_crlf_copy)}
-      SMIME_crlf_copy := @_SMIME_crlf_copy;
+      SMIME_crlf_copy := _SMIME_crlf_copy;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8802,13 +8827,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(SMIME_text_allownil)}
-    SMIME_text := @ERR_SMIME_text;
+    SMIME_text := ERR_SMIME_text;
     {$ifend}
     {$if declared(SMIME_text_introduced)}
     if LibVersion < SMIME_text_introduced then
     begin
       {$if declared(FC_SMIME_text)}
-      SMIME_text := @FC_SMIME_text;
+      SMIME_text := FC_SMIME_text;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8817,7 +8842,7 @@ begin
     if SMIME_text_removed <= LibVersion then
     begin
       {$if declared(_SMIME_text)}
-      SMIME_text := @_SMIME_text;
+      SMIME_text := _SMIME_text;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8834,13 +8859,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_ITEM_lookup_allownil)}
-    ASN1_ITEM_lookup := @ERR_ASN1_ITEM_lookup;
+    ASN1_ITEM_lookup := ERR_ASN1_ITEM_lookup;
     {$ifend}
     {$if declared(ASN1_ITEM_lookup_introduced)}
     if LibVersion < ASN1_ITEM_lookup_introduced then
     begin
       {$if declared(FC_ASN1_ITEM_lookup)}
-      ASN1_ITEM_lookup := @FC_ASN1_ITEM_lookup;
+      ASN1_ITEM_lookup := FC_ASN1_ITEM_lookup;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8849,7 +8874,7 @@ begin
     if ASN1_ITEM_lookup_removed <= LibVersion then
     begin
       {$if declared(_ASN1_ITEM_lookup)}
-      ASN1_ITEM_lookup := @_ASN1_ITEM_lookup;
+      ASN1_ITEM_lookup := _ASN1_ITEM_lookup;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8866,13 +8891,13 @@ begin
   if FuncLoadError then
   begin
     {$if not defined(ASN1_ITEM_get_allownil)}
-    ASN1_ITEM_get := @ERR_ASN1_ITEM_get;
+    ASN1_ITEM_get := ERR_ASN1_ITEM_get;
     {$ifend}
     {$if declared(ASN1_ITEM_get_introduced)}
     if LibVersion < ASN1_ITEM_get_introduced then
     begin
       {$if declared(FC_ASN1_ITEM_get)}
-      ASN1_ITEM_get := @FC_ASN1_ITEM_get;
+      ASN1_ITEM_get := FC_ASN1_ITEM_get;
       {$ifend}
       FuncLoadError := false;
     end;
@@ -8881,7 +8906,7 @@ begin
     if ASN1_ITEM_get_removed <= LibVersion then
     begin
       {$if declared(_ASN1_ITEM_get)}
-      ASN1_ITEM_get := @_ASN1_ITEM_get;
+      ASN1_ITEM_get := _ASN1_ITEM_get;
       {$ifend}
       FuncLoadError := false;
     end;

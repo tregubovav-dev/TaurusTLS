@@ -544,19 +544,22 @@ end;
 function ERR_OSSL_DECODER_CTX_set_passphrase(ctx : POSSL_DECODER_CTX;
   kstr : TIdAnsiChar; klen : TIdC_SIZET) : TIdC_INT; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_CTX_set_passphrase_procname);
 end;
 
 function ERR_OSSL_DECODER_CTX_set_pem_password_cb(ctx : POSSL_DECODER_CTX;
     cb : pem_password_cb; cbarg : Pointer) : TIdC_INT; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_CTX_set_pem_password_cb_procname);
 end;
 
 function ERR_OSSL_DECODER_CTX_set_passphrase_cb(ctx : POSSL_DECODER_CTX;
     cb : OSSL_PASSPHRASE_CALLBACK; cbarg : Pointer) : TIdC_INT; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_CTX_set_passphrase_cb_procname);
 end;
 
 function ERR_OSSL_DECODER_CTX_set_passphrase_ui(ctx : POSSL_DECODER_CTX;
@@ -573,108 +576,126 @@ end;
 function ERR_OSSL_DECODER_CTX_set_selection(ctx : POSSL_DECODER_CTX;
   selection : TIdC_INT) : TIdC_INT; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_CTX_set_selection_procname);
 end;
 
 function ERR_OSSL_DECODER_CTX_set_input_type(ctx : POSSL_DECODER_CTX;
   input_type : PIdAnsiChar) : TIdC_INT; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_CTX_set_input_type_procname);
 end;
 
 function ERR_OSSL_DECODER_CTX_set_input_structure(ctx : POSSL_DECODER_CTX;
   input_structure : PIdAnsiChar) : TIdC_INT; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_CTX_set_input_structure_procname);
 end;
 
 function ERR_OSSL_DECODER_CTX_add_decoder(ctx : POSSL_DECODER_CTX;
   decoder : POSSL_DECODER) : TIdC_INT; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_CTX_add_decoder_procname);
 end;
 
 function ERR_OSSL_DECODER_CTX_add_extra(ctx : POSSL_DECODER_CTX;
   libctx : POSSL_LIB_CTX;  propq : PIdAnsiChar) : TIdC_INT; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_CTX_add_extra_procname);
 end;
 
 function ERR_OSSL_DECODER_CTX_get_num_decoders(ctx : POSSL_DECODER_CTX)
   : TIdC_INT; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_CTX_get_num_decoders_procname);
 end;
 
 function ERR_OSSL_DECODER_INSTANCE_get_decoder
   (decoder_inst : POSSL_DECODER_INSTANCE) : POSSL_DECODER; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_INSTANCE_get_decoder_procname);
 end;
 
 function ERR_OSSL_DECODER_INSTANCE_get_decoder_ctx
   (decoder_inst : POSSL_DECODER_INSTANCE) : Pointer; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_INSTANCE_get_decoder_ctx_procname);
 end;
 
 function ERR_OSSL_DECODER_INSTANCE_get_input_type
   (decoder_inst : POSSL_DECODER_INSTANCE) : PIdAnsiChar; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_INSTANCE_get_input_type_procname);
 end;
 
 function ERR_OSSL_DECODER_INSTANCE_get_input_structure(
   decoder_inst : POSSL_DECODER_INSTANCE;  was_set : PIdC_INT) : PIdAnsiChar; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_INSTANCE_get_input_structure_procname);
 end;
 
 function ERR_OSSL_DECODER_CTX_set_construct(ctx : POSSL_DECODER_CTX;
   construct : OSSL_DECODER_CONSTRUCT) : TIdC_INT; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_CTX_set_construct_procname);
 end;
 
 function ERR_OSSL_DECODER_CTX_set_construct_data(ctx : POSSL_DECODER_CTX;
   construct_data : Pointer) : TIdC_INT; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_CTX_set_construct_data_procname);
 end;
 
 function ERR_OSSL_DECODER_CTX_set_cleanup(ctx : POSSL_DECODER_CTX;
   cleanup : OSSL_DECODER_CLEANUP) : TIdC_INT; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_CTX_set_cleanup_procname);
 end;
 
 function ERR_OSSL_DECODER_CTX_get_construct(ctx : POSSL_DECODER_CTX)
    : OSSL_DECODER_CONSTRUCT; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_CTX_get_construct_procname);
 end;
 
 function ERR_OSSL_DECODER_CTX_get_construct_data(ctx : POSSL_DECODER_CTX) : Pointer; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_CTX_get_construct_data_procname);
 end;
 
 function ERR_OSSL_DECODER_CTX_get_cleanup(ctx : POSSL_DECODER_CTX)
    : OSSL_DECODER_CLEANUP; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_CTX_get_cleanup_procname);
 end;
 
 function ERR_OSSL_DECODER_export(decoder_inst : POSSL_DECODER_INSTANCE;
    _reference : Pointer; reference_sz : TIdC_SIZET; export_cb : OSSL_CALLBACK;
    export_cbarg : Pointer) : TIdC_INT; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_export_procname);
 end;
 
 function ERR_OSSL_DECODER_from_bio(ctx : POSSL_DECODER_CTX; _in : PBIO) : TIdC_INT; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_from_bio_procname);
 end;
 
 //#ifndef OPENSSL_NO_STDIO
@@ -683,7 +704,8 @@ end;
 function ERR_OSSL_DECODER_from_data(ctx : POSSL_DECODER_CTX;
   pdata : PPIdAnsiChar; pdata_len : PIdC_SIZET) : TIdC_INT; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_from_data_procname);
 end;
 
 {*
@@ -694,7 +716,8 @@ function ERR_OSSL_DECODER_CTX_new_for_pkey(pkey : PPEVP_PKEY;
   input_type, input_struct, keytype : PIdAnsiChar; selection : TIdC_INT;
   libctx : POSSL_LIB_CTX; propquery : PIdAnsiChar) : POSSL_DECODER_CTX; cdecl;
 begin
-
+    ETaurusTLSAPIFunctionNotPresent.RaiseException
+      (OSSL_DECODER_CTX_new_for_pkey_procname);
 end;
 
 {$I TaurusTLSNoRetValOn.inc}

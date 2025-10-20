@@ -71,11 +71,11 @@ type
     ///  <summary>
     ///  Returns internal data storage size in bytes
     ///  </summary>
-    function GetSize: TIdC_SizeT;
+    function GetSize: TIdC_UInt;
     ///  <summary>
     ///  Returns internal data storage size in bytes
     ///  </summary>
-    property Size: TIdC_SizeT read GetSize;
+    property Size: TIdC_UInt read GetSize;
   end;
 
   ///  <summary>
@@ -137,7 +137,7 @@ type
     ///  <returns>
     ///  A size of the internal <c>array of bytes</c> storage.
     ///  </returns>
-    function GetSize: TIdC_SizeT; virtual;
+    function GetSize: TIdC_UInt; virtual;
     ///  <summary>
     ///  Implements the <see cref="ITaurusTLS_Bytes.NewBio" /> method
     ///  Creates a instance of <see cref="TTaurusTLS_Bytes.TBio" /> class,
@@ -264,7 +264,7 @@ type
     ///  <remarks>The content of the <c>array of bytes</c> is encrypted
     ///  </remarks>
     ///  </returns>
-    function GetSize: TIdC_SizeT;
+    function GetSize: TIdC_UInt;
 
     ///  <summary>
     ///  Implements the <see cref="ITaurusTLS_Bytes.NewBio" /> method.
@@ -732,7 +732,7 @@ begin
   Result:=FBytes;
 end;
 
-function TTaurusTLS_Bytes.GetSize: TIdC_SizeT;
+function TTaurusTLS_Bytes.GetSize: TIdC_UInt;
 begin
   Result:=Length(FBytes);
 end;
@@ -841,7 +841,7 @@ begin
   end;
 end;
 
-function TTaurusTLS_BytesVault.GetSize: TIdC_SizeT;
+function TTaurusTLS_BytesVault.GetSize: TIdC_UInt;
 begin
   Result:=FPlainBytesSize;
 end;

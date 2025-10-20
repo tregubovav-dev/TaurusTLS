@@ -524,7 +524,7 @@ type
   ///  provide access to decrypted string only on time when they are needed
   ///  to pass to the <c>OpenSSL</c> functions.
   ///  </summary>
-  ITaurusTLS_PassphraseVault = interface
+  ITaurusTLS_PassphraseVault = interface(ITaurusTLS_Bytes)
   ['{43197D9D-2D60-40DD-B3D5-EE0B7504EDD3}']
     ///  <summary>
     ///  Returns instance of <see cref="ITaurusTLS_Passphrase" /> interface

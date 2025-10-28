@@ -1134,19 +1134,19 @@ type
     /// <summary>
     ///   if application data pending, or if it looks like we have disconnected
     /// </summary>
-    DataAvailable,
+   sslDataAvailable,
     /// <summary>
    ///   try again later
    /// </summary>
-    NoData,
+   sslNoData,
    /// <summary>
    ///   if the connection has been shutdown
    /// </summary>
-   EOF,
+   sslEOF,
    /// <summary>
    ///   error state indicated
    /// </summary>
-   UnrecoverableError);
+   sslUnrecoverableError);
   { TTaurusTLSSocket }
   /// <summary>
   /// Properties and methods for dealing with a TLS Socket.
@@ -2256,17 +2256,33 @@ procedure UnLoadOpenSSLLibrary;
 /// </summary>
 function OpenSSLVersion: string;
 /// <summary>
-/// The OpenSSL directory. This is the directory that was configured when
-/// OpenSSL was built.
+/// The OpenSSL configuration directory.
 /// </summary>
 /// <returns>
-/// The OpenSSL directory. Do <b>NOT</b> assume that this is the directory
+/// The OpenSSL configuration directory. Do <b>NOT</b> assume that this is the directory
 /// where the library is located. The library itslef is loaded based on the
 /// operating system's defaults or the <see
 /// cref="TaurusTLSLoader|GetOpenSSLLoader" />'s <see
 /// cref="TaurusTLSLoader|IOpenSSLLoader.GetOpenSSLPath" /> property.
 /// </returns>
-function OpenSSLDir: string;
+function OpenSSLDir: string;   {$IFDEF USE_INLINE}inline; {$ENDIF}
+
+/// <summary>
+/// The default directory for OpenSSL dynamically loaded modules that are not engines.
+/// </summary>
+///  <returns>
+///  The default directory for OpenSSL dynamically loaded modules that are not engines
+///  or an empty string if this is not supported.
+///  </returns>
+function OpenSSLModulesDir : String;  {$IFDEF USE_INLINE}inline; {$ENDIF}
+/// <summary>
+/// The default directory for OpenSSL dynamically loaded engine modules.
+/// </summary>
+///  <returns>
+///  he default directory for OpenSSL dynamically loaded engine modules or an
+///  empty string if this is not supported.
+///  </returns>
+function OpenSSLEnginesDir : String; {$IFDEF USE_INLINE}inline; {$ENDIF}
 
 implementation
 
@@ -3058,24 +3074,10 @@ begin
 {$ENDIF}
 end;
 
-function OpenSSLDir: string;
-var
-  i: Integer;
+function GetDirFromOpenSSLVerString(const AStr : String) : String;  {$IFDEF USE_INLINE}inline; {$ENDIF}
+var i: Integer;
 begin
-  Result := '';
-  if LoadOpenSSLLibrary then
-  begin
-    // redundant but here to avoid PAL warning about functions called as procedures.
-    Result := '';
-  end;
-{$IFNDEF OPENSSL_STATIC_LINK_MODEL}
-  if Assigned(SSLeay_version) then
-  begin
-{$ENDIF}
-    Result := AnsiStringToString(SSLeay_version(OPENSSL_DIR));
-{$IFNDEF OPENSSL_STATIC_LINK_MODEL}
-  end;
-{$ENDIF}
+  Result := AStr;
   { assumed format is 'OPENSSLDIR: "<dir>"' }
   i := Pos('"', Result);
   if i < 0 then
@@ -3088,6 +3090,44 @@ begin
       Result := ''
     else
       Delete(Result, i, Length(Result) - i + 1);
+  end;
+  {$IFDEF WINDOWS}
+  Result := StringReplace(Result,'/','\',[rfReplaceAll]);
+  {$ENDIF}
+end;
+
+function OpenSSLEnginesDir : String;  {$IFDEF USE_INLINE}inline; {$ENDIF}
+begin
+  Result := '';
+  if LoadOpenSSLLibrary then
+  begin
+    Result := AnsiStringToString(OPENSSL_info(OPENSSL_INFO_ENGINES_DIR));
+    if Result = '' then
+    begin
+      Result := GetDirFromOpenSSLVerString(AnsiStringToString(SSLeay_version(OPENSSL_ENGINES_DIR)));
+    end;
+  end;
+end;
+
+function OpenSSLModulesDir : String;  {$IFDEF USE_INLINE}inline; {$ENDIF}
+begin
+  Result := '';
+  if LoadOpenSSLLibrary then
+  begin
+    Result := AnsiStringToString(OPENSSL_info(OPENSSL_INFO_MODULES_DIR));
+  end;
+end;
+
+function OpenSSLDir: string; {$IFDEF USE_INLINE}inline; {$ENDIF}
+begin
+  Result := '';
+  if LoadOpenSSLLibrary then
+  begin
+    Result :=  AnsiStringToString(OPENSSL_info(OPENSSL_INFO_CONFIG_DIR));
+    if Result = '' then
+    begin
+      Result := GetDirFromOpenSSLVerString(AnsiStringToString(SSLeay_version(OPENSSL_DIR)));
+    end;
   end;
 end;
 
@@ -3645,8 +3685,8 @@ begin
     if not Result then
       Exit;
 
-    if not fPassThrough and (fSSLSocket <> nil) then
-      Result := fSSLSocket.Readable in [DataAvailable,UnRecoverableError,EOF];
+    if (not fPassThrough) and (fSSLSocket <> nil) then
+      Result := fSSLSocket.Readable in [sslDataAvailable,sslUnRecoverableError,sslEOF];
   until Result;
 end;
 
@@ -4749,7 +4789,7 @@ function TTaurusTLSSocket.Readable: TTaurusTLSReadStatus;
 var buf : byte;
     Lr: integer;
 begin
-  Result := NoData;
+  Result := sslNoData;
   {Confirm that there is application data to be read.}
   Lr := SSL_peek(fSSL, buf, 1);
   {Return DataAvailable if application data pending, or if it looks like we have disconnected,
@@ -4757,19 +4797,19 @@ begin
           EOF if the connection has been shutdown, or
           NoData otherwise => try again later}
   if Lr > 0 then
-    Result := DataAvailable
+    Result := sslDataAvailable
   else
   begin
     case SSL_get_error(fSSL,Lr) of
       SSL_ERROR_SSL, SSL_ERROR_SYSCALL:
           if SSL_get_shutdown(fSSL) = SSL_RECEIVED_SHUTDOWN then
-            Result := EOF
+            Result := sslEOF
           else
-            Result := UnrecoverableError;
+            Result := sslUnrecoverableError;
 
       SSL_ERROR_ZERO_RETURN:
           if SSL_get_shutdown(fSSL) = SSL_RECEIVED_SHUTDOWN then
-            Result := EOF;
+            Result := sslEOF;
 
       {anything else return the function default - sslNoData (yet)}
     end;
@@ -4817,7 +4857,7 @@ begin
   LOffset := AOffset;
   LLength := ALength;
   repeat
-    Lret := SSL_write_ex2(fSSL, ABuffer[LOffset], LLength, 0, LWritten);
+    Lret := SSL_write_ex(fSSL, ABuffer[LOffset], LLength, LWritten);
     if Lret > 0 then
     begin
       Result := Result + LWritten;

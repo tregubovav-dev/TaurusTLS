@@ -233,11 +233,11 @@ interface
 uses
   // facilitate inlining only.
 {$IFDEF WINDOWS}
-{$IFDEF DCC}
+  {$IFDEF VCL_XE2_OR_ABOVE}
   WinAPI.Windows,
-{$ELSE}
+  {$ELSE}
   Windows,
-{$ENDIF}
+  {$ENDIF}
 {$ENDIF}
   Classes,
   IdCTypes,
@@ -2318,6 +2318,9 @@ uses
   IdStack,
   IdThreadSafe,
   IdCustomTransparentProxy,
+{$IFDEF WINDOWS}
+  IdIDN,
+{$ENDIF}
   IdURI,
   SyncObjs,
   TaurusTLSHeaders_asn1,
@@ -2555,8 +2558,8 @@ begin
 end;
 {$I TaurusTLSUnusedParamOn.inc}
 
-function g_PasswordCallback(var buf: PIdAnsiChar; size: TIdC_INT;
-  rwflag: TIdC_INT; userdata: Pointer): TIdC_INT; cdecl;
+function g_PasswordCallback(buf: PIdAnsiChar; size: TIdC_INT; rwflag:
+    TIdC_INT; userdata: Pointer): TIdC_INT; cdecl;
 {$IFDEF USE_MARSHALLED_PTRS}
 type
   TBytesPtr = ^TBytes;
@@ -3108,9 +3111,6 @@ begin
     else
       Delete(Result, i, Length(Result) - i + 1);
   end;
-  {$IFDEF WINDOWS}
-  Result := StringReplace(Result,'/','\',[rfReplaceAll]);
-  {$ENDIF}
 end;
 
 function OpenSSLEnginesDir : String;  {$IFDEF USE_INLINE}inline; {$ENDIF}
@@ -3123,6 +3123,9 @@ begin
     begin
       Result := GetDirFromOpenSSLVerString(AnsiStringToString(SSLeay_version(OPENSSL_ENGINES_DIR)));
     end;
+    {$IFDEF WINDOWS}
+    Result := StringReplace(Result, '/','\',[rfReplaceAll]);
+    {$ENDIF}
   end;
 end;
 
@@ -3132,6 +3135,9 @@ begin
   if LoadOpenSSLLibrary then
   begin
     Result := AnsiStringToString(OPENSSL_info(OPENSSL_INFO_MODULES_DIR));
+    {$IFDEF WINDOWS}
+    Result := StringReplace(Result, '/','\',[rfReplaceAll]);
+    {$ENDIF}
   end;
 end;
 
@@ -3145,6 +3151,9 @@ begin
     begin
       Result := GetDirFromOpenSSLVerString(AnsiStringToString(SSLeay_version(OPENSSL_DIR)));
     end;
+    {$IFDEF WINDOWS}
+    Result := StringReplace(Result, '/','\',[rfReplaceAll]);
+    {$ENDIF}
   end;
 end;
 
@@ -4261,6 +4270,7 @@ var
   M: TMarshaller;
 {$ENDIF}
   LRes: Boolean;
+  LFunc:  SSL_verify_cb;
 begin
   // Destroy the context first
   DestroyContext;
@@ -4311,7 +4321,7 @@ begin
 
   // assign a password lookup routine
   // if PasswordRoutineOn then begin
-  SSL_CTX_set_default_passwd_cb(fContext, @g_PasswordCallback);
+  SSL_CTX_set_default_passwd_cb(fContext, g_PasswordCallback);
   SSL_CTX_set_default_passwd_cb_userdata(fContext, Self);
   // end;
   if fUseSystemRootCACertificateStore then
@@ -4439,17 +4449,17 @@ begin
   if fVerifyMode <> [] then
   begin
     // SSL_CTX_set_default_verify_paths(fContext);
-    { if VerifyOn then
-      begin
-      Func := VerifyCallback;
-      end
-      else
-      begin
-      Func := nil;
-      end; }
+    if VerifyOn then
+    begin
+      LFunc := g_VerifyCallback;
+    end
+    else
+    begin
+      LFunc := nil;
+    end;
 
     SSL_CTX_set_verify(fContext,
-      TranslateInternalVerifyToSSL(fVerifyMode), nil);
+      TranslateInternalVerifyToSSL(fVerifyMode), LFunc);
     SSL_CTX_set_verify_depth(fContext, fVerifyDepth);
   end;
 
@@ -4677,7 +4687,7 @@ var
   Lpeercert: PX509;
   LCertificate: TTaurusTLSX509;
   LHostname: TBytes;
-  LFunc: SSL_verify_cb;
+
 begin
   Assert(fSSL = nil);
   Assert(fSSLContext <> nil);
@@ -4717,8 +4727,27 @@ begin
       ETaurusTLSSSLCopySessionId.RaiseWithMessage(RSOSSLCopySessionIdError);
     end;
   end;
-
+  {$IFNDEF WINDOWS}
   LHostname := BytesOf(fHostName + #0);
+  {$ELSE}
+  {In Windows 8.1 or later, getaddrinfo will by default, resolve IDN hostnames
+  directly into IP Addresses.  We need to resolve Unicode IDN hostnames into
+  punnycode hostnames.
+  }
+  if Assigned(IdnToAscii) then
+  begin
+    LHostname := BytesOf(IDNToPunnyCode(
+      {$IFDEF STRING_IS_UNICODE}
+      fHostName
+      {$ELSE}
+      TIdUnicodeString(fHostName) // explicit convert to Unicode
+      {$ENDIF}) + #0);
+  end
+  else
+  begin
+    LHostname := BytesOf(fHostName + #0);
+  end;
+  {$ENDIF}
   // RFC 3546 states:
   // Literal IPv4 and IPv6 addresses are not permitted in "HostName".
   if (fHostName <> '') and (not IsValidIP(fHostName)) then
@@ -4747,17 +4776,6 @@ begin
     end;
   end;
 
-  if fSSLContext.VerifyOn then
-  begin
-    LFunc := g_VerifyCallback;
-  end
-  else
-  begin
-    LFunc := nil;
-  end;
-  SSL_set_verify(fSSL, TranslateInternalVerifyToSSL
-    (fSSLContext.VerifyMode), LFunc);
-  SSL_set_verify_depth(fSSL, fSSLContext.VerifyDepth);
 
   LRetCode := SSL_connect(fSSL);
   if LRetCode <= 0 then

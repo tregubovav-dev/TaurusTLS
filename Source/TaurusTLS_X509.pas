@@ -317,9 +317,17 @@ type
   TTaurusTLSX509Exts = class(TTaurusTLSX509Info)
 {$IFDEF USE_STRICT_PRIVATE_PROTECTED}strict{$ENDIF} protected
     // X509_get_ext
-    function GetExtension(const AIndex: TIdC_INT): PX509_EXTENSION; {$IFDEF USE_INLINE}inline; {$ENDIF}
-    function GetExtensionByNid(const ANid: TIdC_INT): PX509_EXTENSION; {$IFDEF USE_INLINE}inline; {$ENDIF}
+    function GetExtension(const AIndex: TIdC_INT): PX509_EXTENSION;
+      {$IFDEF USE_INLINE}inline; {$ENDIF}
+    function GetExtensionByNid(const ANid: TIdC_INT): PX509_EXTENSION;
+      {$IFDEF USE_INLINE}inline; {$ENDIF}
     function GetCount: TIdC_INT; {$IFDEF USE_INLINE}inline; {$ENDIF}
+    function GetExtentionCritical(const AIndex: TIdC_INT): boolean;
+      {$IFDEF USE_INLINE}inline; {$ENDIF}
+    function GetExtentionName(const AIndex: TIdC_INT): string;
+      {$IFDEF USE_INLINE}inline; {$ENDIF}
+    function GetExtentionValues(const AIndex: TIdC_INT): string;
+      {$IFDEF USE_INLINE}inline; {$ENDIF}
   public
     /// <summary>
     ///   OpenSSL X509 Extention object by numeric identifier (NID).
@@ -334,6 +342,30 @@ type
     /// </summary>
     property Extensions[const AIndex: TIdC_INT]: PX509_EXTENSION
       read GetExtension; default;
+    /// <summary>
+    ///   True if the extention is critical or False if it is not critical.
+    /// </summary>
+    /// <param name="AIndex">
+    ///   Position of the extention in the list.
+    /// </param>
+    property ExtentionCritical[const AIndex: TIdC_INT]: boolean
+      read GetExtentionCritical;
+    /// <summary>
+    ///   Extention name
+    /// </summary>
+    /// <param name="AIndex">
+    ///   Position of the extention in the list.
+    /// </param>
+    property ExtentionName[const AIndex: TIdC_INT]: string
+      read GetExtentionName;
+    /// <summary>
+    ///   Value of the extension expressed as a hexidecimal string.
+    /// </summary>
+    /// <param name="AIndex">
+    ///   Position of the extention in the list.
+    /// </param>
+    property ExtentionValues[const AIndex: TIdC_INT]: string
+      read GetExtentionValues;
     /// <summary>
     ///   Number of X509 Extentions in Certificcate.
     /// </summary>
@@ -621,6 +653,7 @@ type
     function GetWarnings: TTaurusTLSX509Warnings; {$IFDEF USE_INLINE}inline; {$ENDIF}
     function GetAltSubjectNames: TTaurusTLSX509AltSubjectNames;
        {$IFDEF USE_INLINE}inline; {$ENDIF}
+    function GetExtensions: TTaurusTLSX509Exts; {$IFDEF USE_INLINE}inline; {$ENDIF}
 
     function GetVersion: TIdC_LONG; {$IFDEF USE_INLINE}inline; {$ENDIF}
     function GetDisplayInfo: TStrings;
@@ -639,6 +672,8 @@ type
     function GetHasBasicConstaints: Boolean; {$IFDEF USE_INLINE}inline; {$ENDIF}
     function GetCertificateAuthorityPathLen: TIdC_LONG; {$IFDEF USE_INLINE}inline; {$ENDIF}
     function GetHasFreshestCRL: Boolean; {$IFDEF USE_INLINE}inline; {$ENDIF}
+
+    property Extensions: TTaurusTLSX509Exts read GetExtensions;
   public
     /// <summary>
     ///   Creates a new instance of TTaurusTLS.
@@ -1167,6 +1202,35 @@ begin
   end;
 end;
 
+function TTaurusTLSX509Exts.GetExtentionCritical(
+  const AIndex: TIdC_INT): boolean;
+begin
+  if AIndex < 0 then
+    Result := False
+  else
+    Result := X509_EXTENSION_get_critical(X509_get_ext(FX509, AIndex)) > 0;
+end;
+
+function TTaurusTLSX509Exts.GetExtentionName(const AIndex: TIdC_INT): string;
+begin
+  if AIndex < 0 then
+    Result := ''
+  else
+    Result := ASN1_OBJECT_ToStr(
+      X509_EXTENSION_get_object(X509_get_ext(FX509, AIndex))
+    );
+end;
+
+function TTaurusTLSX509Exts.GetExtentionValues(const AIndex: TIdC_INT): string;
+begin
+  if AIndex < 0 then
+    Result := ''
+  else
+    Result := ASN1_STRING_ToHexStr(
+      X509_EXTENSION_get_data(X509_get_ext(FX509, AIndex))
+    );
+end;
+
 { TTaurusTLSX509 }
 
 constructor TTaurusTLSX509.Create(aX509: PX509; aCanFreeX509: Boolean = True);
@@ -1175,8 +1239,8 @@ begin
   FX509 := aX509;
   FCanFreeX509 := aCanFreeX509;
   FPublicKey := TTaurusTLSX509PublicKey.Create(FX509);
-  FExtensions := TTaurusTLSX509Exts.Create(FX509);
   // don't create following instances unless specifically requested.
+  FExtensions := nil;
   FDisplayInfo := nil;
   FSubject := nil;
   FIssuer := nil;
@@ -1310,48 +1374,26 @@ begin
   Result := FExtensions.Count;
 end;
 
-function TTaurusTLSX509.GetExtentionCritical(const AIndex: TIdC_INT): Boolean;
-var
-  LExt: PX509_EXTENSION;
-
+function TTaurusTLSX509.GetExtensions: TTaurusTLSX509Exts;
 begin
-  Result := False;
-  if AIndex > -1 then
-  begin
-    LExt := X509_get_ext(FX509, AIndex);
-    Result := X509_EXTENSION_get_critical(LExt) > 0;
-  end;
+  if not Assigned(FExtensions) then
+    FExtensions:=TTaurusTLSX509Exts.Create(FX509);
+  Result:=FExtensions;
+end;
+
+function TTaurusTLSX509.GetExtentionCritical(const AIndex: TIdC_INT): Boolean;
+begin
+  Result:=Extensions.ExtentionCritical[AIndex];
 end;
 
 function TTaurusTLSX509.GetExtentionName(const AIndex: TIdC_INT): string;
-var
-  LExt: PX509_EXTENSION;
-  LASN1: PASN1_OBJECT;
 begin
-  Result := '';
-  if AIndex > -1 then
-  begin
-    LExt := X509_get_ext(FX509, AIndex);
-    LASN1 := X509_EXTENSION_get_object(LExt);
-    Result := ASN1_OBJECT_ToStr(LASN1);
-  end;
+  Result:=Extensions.ExtentionName[AIndex];
 end;
 
 function TTaurusTLSX509.GetExtentionValues(const AIndex: TIdC_INT): string;
-var
-  LExt: PX509_EXTENSION;
-  LASN1: PASN1_OCTET_STRING;
 begin
-  Result := '';
-  if AIndex > -1 then
-  begin
-    LExt := X509_get_ext(FX509, AIndex);
-    LASN1 := X509_EXTENSION_get_data(LExt);
-    if Assigned(LASN1) then
-    begin
-      Result := ASN1_STRING_ToHexStr(LASN1);
-    end;
-  end;
+  Result:=Extensions.ExtentionValues[AIndex];
 end;
 
 function TTaurusTLSX509.GetExtKeyUsage: TTaurusTLSX509ExtKeyUsage;

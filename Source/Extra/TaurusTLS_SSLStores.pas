@@ -425,21 +425,24 @@ type
 
   private
     FStore: PX509_STORE;
+    FVfyParam: TaurusTLS_CustomX509VerifyParam;
     procedure SetParam(AVfyParam: TaurusTLS_CustomX509VerifyParam);
     function GetParam: TaurusTLS_CustomX509VerifyParam;
   protected
     procedure DoException(AMessage: string); {$IFDEF USE_INLINE}inline;{$ENDIF}
-
     property Store: PX509_STORE read FStore;
-    property VfyParam: TaurusTLS_CustomX509VerifyParam read GetParam write SetParam;
   public
-    constructor Create;
+    constructor Create; overload;
+    constructor Create(AStore: TTaurusTLS_OSSLStore; AFilter: TX509Elements);
+      overload;
     destructor Destroy; override;
 
     procedure AddCert(ACert: PX509); {$IFDEF USE_INLINE}inline;{$ENDIF}
     procedure AddCrl(ACrl: PX509_CRL); {$IFDEF USE_INLINE}inline;{$ENDIF}
     procedure LoadFromStore(AStore: TTaurusTLS_OSSLStore; AFilter: TX509Elements);
       overload;
+
+    property VfyParam: TaurusTLS_CustomX509VerifyParam read GetParam write SetParam;
   end;
 
 implementation
@@ -1327,7 +1330,15 @@ constructor TaurusTLS_X509Store.Create;
 begin
   FStore:=X509_STORE_new;
   if not Assigned(FStore) then
-    DoException('');
+    DoException('Unable to create X509_STORE instance.');
+  inherited;
+end;
+
+constructor TaurusTLS_X509Store.Create(AStore: TTaurusTLS_OSSLStore;
+  AFilter: TX509Elements);
+begin
+  Create;
+  LoadFromStore(AStore, AFilter);
 end;
 
 destructor TaurusTLS_X509Store.Destroy;
@@ -1339,18 +1350,6 @@ end;
 procedure TaurusTLS_X509Store.DoException(AMessage: string);
 begin
   ETaurusTLSX509StoreError.RaiseException(AMessage);
-end;
-
-procedure TaurusTLS_X509Store.AddCert(ACert: PX509);
-begin
-  if X509_STORE_add_cert(FStore, ACert) <> 1 then
-    DoException('Unable to add certificate to the X509_STORE.')
-end;
-
-procedure TaurusTLS_X509Store.AddCrl(ACrl: PX509_CRL);
-begin
-  if X509_STORE_add_crl(FStore, ACrl) <> 1 then
-    DoException('Unable to add CRL to the X509_STORE.')
 end;
 
 procedure TaurusTLS_X509Store.LoadFromStore(AStore: TTaurusTLS_OSSLStore;
@@ -1371,18 +1370,33 @@ begin
   end;
 end;
 
+procedure TaurusTLS_X509Store.AddCert(ACert: PX509);
+begin
+  if X509_STORE_add_cert(FStore, ACert) <> 1 then
+    DoException('Unable to add certificate to the X509_STORE.')
+end;
+
+procedure TaurusTLS_X509Store.AddCrl(ACrl: PX509_CRL);
+begin
+  if X509_STORE_add_crl(FStore, ACrl) <> 1 then
+    DoException('Unable to add CRL to the X509_STORE.')
+end;
+
 procedure TaurusTLS_X509Store.SetParam(
   AVfyParam: TaurusTLS_CustomX509VerifyParam);
 begin
   if not Assigned(AVfyParam) then
     Exit;
   if X509_STORE_set1_param(FStore, AVfyParam.VfyParam) <> 1 then
-    DoException('Unable to set X509_Verify_Params to X509_Store.')
+    DoException('Unable to set X509_Verify_Params to X509_Store.');
+  FVfyParam:=nil;
 end;
 
 function TaurusTLS_X509Store.GetParam: TaurusTLS_CustomX509VerifyParam;
 begin
-  Result:=TVfyParam.Create(FStore);
+  if not Assigned(FVfyParam) then
+    FVfyParam:=TVfyParam.Create(FStore);
+  Result:=FVfyParam;
 end;
 
 end.

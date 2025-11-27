@@ -45,175 +45,9 @@ uses
 type
   ETaurusTLSX509StoreError = class(ETaurusTLSAPICryptoError);
   ETaurusTLSX509StoreThreadError = class(Exception);
-
-type
   ETaurusTLSOSSLStoreError = class(ETaurusTLSAPICryptoError);
 
-  TTaurusTLS_OSSLStore = class
-  public type
-  TStoreInfoType = (sitNone=0, sitName=1, sitParams=2, sitPubKey=3,
-    sitPrivKey=4, sitCert=5, sitCRL=6);
-  TStoreInfoTypes = set of TStoreInfoType;
-
-    TStoreInfoHelper = record helper for POSSL_STORE_INFO
-    public
-      class function GetType(AInfo: POSSL_STORE_INFO): TStoreInfoType; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function GetTypeName(AInfo: POSSL_STORE_INFO): PIdAnsiChar; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function IsExist(AInfo: POSSL_STORE_INFO): boolean; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function GetName(AInfo: POSSL_STORE_INFO): PIdAnsiChar; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function GetParams(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function GetPubKey(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function GetPrivKey(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function GetCert(AInfo: POSSL_STORE_INFO): PX509; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function GetCrl(AInfo: POSSL_STORE_INFO): PX509_CRL; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-
-      class function CloneNameA(AInfo: POSSL_STORE_INFO): AnsiString; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function CloneNameW(AInfo: POSSL_STORE_INFO): UnicodeString; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function CloneParams(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function ClonePubKey(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function ClonePrivKey(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function CloneCert(AInfo: POSSL_STORE_INFO): PX509; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function CloneCrl(AInfo: POSSL_STORE_INFO): PX509_CRL; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-
-      class procedure Free(var AInfo: POSSL_STORE_INFO); static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-    end;
-
-    TStoreHelper = record helper for POSSL_STORE_CTX
-    public
-      class function Open(AUri: PIdAnsiChar; AUi: TTaurusTLS_CustomOsslUi): POSSL_STORE_CTX;
-        overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function Open(ABio: ITaurusTLS_Bio; AUi: TTaurusTLS_CustomOsslUi): POSSL_STORE_CTX;
-        overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class procedure Close(ACtx: POSSL_STORE_CTX); static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function Eof(ACtx: POSSL_STORE_CTX): boolean; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function IsLoadError(ACtx: POSSL_STORE_CTX): boolean; static;
-        {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function Load(ACtx: POSSL_STORE_CTX): POSSL_STORE_INFO; static;
-    end;
-
-    TStoreElement = sitName..sitCrl;
-    TStoreElements = set of TStoreElement;
-
-    TStoreItem = class
-    private type
-      TItemData = record
-      private
-        FName: AnsiString; // managed type can't be used in variant part of the record.
-        case FType: TStoreInfoType of
-        sitParams:  (FParams:   PEVP_PKEY);
-        sitPubKey:  (FPubKey:   PEVP_PKEY);
-        sitPrivKey: (FPrivKey:  PEVP_PKEY);
-        sitCert:    (FCert:     PX509);
-        sitCrl:     (FCrl:      PX509_CRL);
-      end;
-    private
-      FData: TItemData;
-        function GetType: TStoreInfoType; {$IFDEF USE_INLINE}inline;{$ENDIF}
-        function GetName: AnsiString; {$IFDEF USE_INLINE}inline;{$ENDIF}
-        function GetParams: PEVP_PKEY; {$IFDEF USE_INLINE}inline;{$ENDIF}
-        function GetPubKey: PEVP_PKEY;  {$IFDEF USE_INLINE}inline;{$ENDIF}
-        function GetPrivKey: PEVP_PKEY; {$IFDEF USE_INLINE}inline;{$ENDIF}
-        function GetCert: PX509; {$IFDEF USE_INLINE}inline;{$ENDIF}
-        function GetCrl: PX509_CRL; {$IFDEF USE_INLINE}inline;{$ENDIF}
-    public
-      constructor Create(AInfo: POSSL_STORE_INFO); overload;
-      destructor Destroy; override;
-
-      property &Type: TStoreInfoType read GetType;
-      property Name: AnsiString read GetName;
-      property Params: PEVP_PKEY read GetParams;
-      property PubKey: PEVP_PKEY read GetPubKey;
-      property PrivKey: PEVP_PKEY read GetPrivKey;
-      property Cert: PX509 read GetCert;
-      property Crl: PX509_CRL read GetCrl;
-    end;
-
-  public const
-    cStoreAElementsll = [sitName..sitCRL];
-
-  private type
-    TCounters = array [TStoreElement] of TIdC_Uint;
-    TListInfo = TObjectList<TStoreItem>;
-
-    TFilterEnumerator = class
-    private
-      FList: TListInfo;
-      FFilter: TStoreElements;
-      FIdx: Integer;
-      constructor Create(AList: TListInfo; AFilter: TStoreElements); overload;
-    public
-      constructor Create; overload;
-      function GetCurrent: TStoreItem;
-      function  MoveNext: boolean;
-      property Current: TStoreItem read GetCurrent;
-    end;
-
-  private
-    FCtx: POSSL_STORE_CTX;
-    FList: TListInfo;
-    FCounters: TCounters;
-    FFilter: TStoreElements;
-    function GetCount(AType: TStoreElement): TIdC_Uint;
-      {$IFDEF USE_INLINE}inline;{$ENDIF}
-
-  protected
-    constructor Create(ACtx: POSSL_STORE_CTX;
-        ALoadFilter: TStoreElements = cStoreAElementsll); overload;
-    procedure DoException(AMessage: string);
-    procedure DoLoad(ALoadFilter: TStoreElements);
-  public
-    constructor Create(AUri: AnsiString; AUi: TTaurusTLS_CustomOsslUi;
-      ALoadFilter: TStoreElements = cStoreAElementsll); overload;
-    constructor Create(AUri: UnicodeString; AUi: TTaurusTLS_CustomOsslUi;
-      ALoadFilter: TStoreElements = cStoreAElementsll); overload;
-    constructor Create(ABio: ITaurusTLS_Bio; AUi: TTaurusTLS_CustomOsslUi;
-      ALoadFilter: TStoreElements = cStoreAElementsll); overload;
-    destructor Destroy; override;
-
-    function GetEnumerator: TFilterEnumerator; overload;
-    property Count[AType: TStoreElement]: TIdC_Uint read GetCount;
-  end;
-
-  TTaurusTLS_OSSLStoreHelper = class helper for TTaurusTLS_OSSLStore
-  public type
-    IStoreEnumFactory = interface
-      function GetEnumerator: TFilterEnumerator;
-    end;
-
-    TStoreEnumFactory = class(TInterfacedObject, IStoreEnumFactory)
-    private
-      FEnum: TFilterEnumerator;
-    protected
-      constructor Create(AStore: TTaurusTLS_OSSLStore; AFilter: TStoreElements);
-        overload;
-      function GetEnumerator: TFilterEnumerator; overload;
-    public
-      constructor Create; overload;
-    end;
-  public
-    function GetEnum(AFilter: TTaurusTLS_OSSLStore.TStoreElements):
-      IStoreEnumFactory;
-  end;
-
+type
   TaurusTLS_CustomX509VerifyParam = class abstract
   public type
     TAuthLevel = 0..5;
@@ -291,7 +125,7 @@ type
       function IsEqualTo(Value: TIdC_Int): boolean;
     end;
 
-    TPurposeFlag = (
+    TPurpose = (
       prpDefaultAny     = 0, //X509_PURPOSE_DEFAULT_ANY
       prpSslClient      = X509_PURPOSE_SSL_CLIENT,
       prpSslServer      = X509_PURPOSE_SSL_SERVER,
@@ -304,9 +138,9 @@ type
       prpTimeStampSign  = X509_PURPOSE_TIMESTAMP_SIGN,
       prpCodeSign       = X509_PURPOSE_CODE_SIGN
     );
-    TPurposeFlagHelper = record helper for TPurposeFlag
+    TPurposeHelper = record helper for TPurpose
       function ToInt: TIdC_Int;
-      class function FromInt(Value: TIdC_Int): TPurposeFlag; static;
+      class function FromInt(Value: TIdC_Int): TPurpose; static;
       function IsEqualTo(Value: TIdC_Int): boolean;
     end;
 
@@ -364,56 +198,55 @@ type
     procedure SetTime(const Value: TDateTime);
     function GetHostCheckFlags: THostCheckFlags;
     procedure SetHostCheckFlags(const Value: THostCheckFlags);
+    function GetPurpose: TPurpose;
+    procedure SetPurpose(Value: TPurpose);
 
   protected
     constructor Create(AParam: PX509_VERIFY_PARAM);
     procedure DoException(AMessage: string);
-    function AnsiToIDN(Value: UnicodeString): AnsiString;
-    function UTF8ToIDN(Value: UnicodeString): AnsiString;
-    function UnicodeToIDN(Value: UnicodeString): AnsiString;
-{$IFDEF DCC}
-    function IDNToLocal(Value: PIdAnsiChar; cp: integer): AnsiString; overload;
-{$ENDIF}
-{$IFDEF FPC}
-    function IDNToLocal(Value: PIdAnsiChar; cp: TCodePage): AnsiString; overload;
-{$ENDIF}
-    function IDNToUTF8(Value: PIdAnsiChar): UTF8String; overload;
-    function IDNToUnicode(Value: PIdAnsiChar): UnicodeString; overload;
+
+    property VfyParam: PX509_VERIFY_PARAM read FParam;
   public
-    function GetHostAnsi(ANumber: TIdC_Int): PIdAnsiChar; overload;
-{$IFDEF DCC}
-    function GetHostAnsi(ANumber: TIdC_Int; cp: integer): AnsiString; overload;
-{$ENDIF}
-{$IFDEF FPC}
-    function GetHostAnsi(ANumber: TIdC_Int: cp TCodePage): AnsiString; overload;
-{$ENDIF}
-    function GetHostUTF8(ANumber: TIdC_Int): UTF8String;
-    function GetHostUnicode(ANumber: TIdC_Int): UnicodeString;
-    procedure SetHost(Value: AnsiString); overload;
-    procedure SetHost(Value: UTF8String); overload;
-    procedure SetHost(Value: UnicodeString); overload;
-    procedure AddHost(Value: AnsiString); overload;
-    procedure AddHost(Value: UTF8String); overload;
-    procedure AddHost(Value: UnicodeString); overload;
-    function GetPerNameUTF8: UTF8String;
-    function GetPerNameUnicode: UnicodeString;
-    procedure SetEMail(Value: UTF8String); overload;
-    procedure SetEMail(Value: UnicodeString); overload;
+    function GetHostRaw(ANumber: TIdC_Int): PIdAnsiChar;
+    function GetHostA(ANumber: TIdC_Int): RawByteString;
+    function GetHostW(ANumber: TIdC_Int): UnicodeString;
+    procedure SetHostA(Value: RawByteString);
+    procedure SetHostW(Value: UnicodeString);
+    procedure AddHostA(Value: RawByteString);
+    procedure AddHostW(Value: UnicodeString);
+    function GetPerNameA: RawByteString;
+    function GetPerNameW: UnicodeString;
+    function GetEmailRaw: PIdAnsiChar;
+    function GetEmailA: RawByteString;
+    function GetEmailW: UnicodeString;
+    procedure SetEMailA(Value: RawByteString);
+    procedure SetEMailW(Value: UnicodeString);
     procedure SetIpAddress(Value: TIdIPAddress);
+    procedure SetIpAddressA(Value: RawByteString);
+    procedure SetIpAddressW(Value: UnicodeString);
+    function GetIpAddressA: RawByteString;
+    function GetIpAddressW: UnicodeString;
 
     property VerifyFlags: TVerifyFlags read GetVerifyFlags write SetVerifyFlags;
     property InheritanceFlags: TInheritanceFlags read GetInheritanceFlags
       write SetInheritanceFlags;
+    property HostCheckFlags: THostCheckFlags read GetHostCheckFlags
+      write SetHostCheckFlags;
+    property Purpose: TPurpose read GetPurpose write SetPurpose;
     property Depth: TIdC_Int read GetDepht write SetDepth;
     property AuthLevel: TAuthLevel read GetAuthLevel write SetAuthLevel;
     property Time: TDateTime read GetTime write SetTime;
-    property HostCheckFlags: THostCheckFlags read GetHostCheckFlags
-      write SetHostCheckFlags;
 {$IFDEF DCC}
-    property PerName: UnicodeString read GetPerNameUnicode;
+    property PerName: UnicodeString read GetPerNameW;
+    property Host[i: TIdC_Int]: UnicodeString read GetHostW;
+    property Email: UnicodeString read GetEmailW;
+    property IPAddress: UnicodeString read GetIpAddressW;
 {$ENDIF}
 {$IFDEF FPC}
-    property PerName: UTF8String read GetPerNameUTF8;
+    property PerName: UTF8String read GetPerNameA;
+    property Host[i: TIdC_Int]: RawbyteString read GetHostA;
+    property Email: RawbyteString read GetEmailW;
+    property IPAddress: UnicodeString read GetIpAddressA;
 {$ENDIF}
   end;
 
@@ -423,19 +256,182 @@ type
     destructor Destroy; override;
   end;
 
+  TTaurusTLS_OSSLStore = class
+  public type
+  TStoreInfoType = (sitNone=0, sitName=1, sitParams=2, sitPubKey=3,
+    sitPrivKey=4, sitCert=5, sitCRL=6);
+  TStoreInfoTypes = set of TStoreInfoType;
+
+    TStoreInfoHelper = record helper for POSSL_STORE_INFO
+    public
+      class function GetType(AInfo: POSSL_STORE_INFO): TStoreInfoType; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function GetTypeName(AInfo: POSSL_STORE_INFO): PIdAnsiChar; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function IsExist(AInfo: POSSL_STORE_INFO): boolean; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function GetName(AInfo: POSSL_STORE_INFO): PIdAnsiChar; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function GetParams(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function GetPubKey(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function GetPrivKey(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function GetCert(AInfo: POSSL_STORE_INFO): PX509; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function GetCrl(AInfo: POSSL_STORE_INFO): PX509_CRL; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      class function CloneNameA(AInfo: POSSL_STORE_INFO): AnsiString; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function CloneNameW(AInfo: POSSL_STORE_INFO): UnicodeString; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function CloneParams(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function ClonePubKey(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function ClonePrivKey(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function CloneCert(AInfo: POSSL_STORE_INFO): PX509; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function CloneCrl(AInfo: POSSL_STORE_INFO): PX509_CRL; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      class procedure Free(var AInfo: POSSL_STORE_INFO); static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+    end;
+
+    TStoreHelper = record helper for POSSL_STORE_CTX
+    public
+      class function Open(AUri: PIdAnsiChar; AUi: TTaurusTLS_CustomOsslUi): POSSL_STORE_CTX;
+        overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function Open(ABio: ITaurusTLS_Bio; AUi: TTaurusTLS_CustomOsslUi): POSSL_STORE_CTX;
+        overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class procedure Close(ACtx: POSSL_STORE_CTX); static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function Eof(ACtx: POSSL_STORE_CTX): boolean; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function IsLoadError(ACtx: POSSL_STORE_CTX): boolean; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+      class function Load(ACtx: POSSL_STORE_CTX): POSSL_STORE_INFO; static;
+    end;
+
+    TStoreElement = sitName..sitCrl;
+    TStoreElements = set of TStoreElement;
+
+    TStoreItem = class
+    private type
+      TItemData = record
+      private
+        FName: RawByteString; // managed type can't be used in variant part of the record.
+        case FType: TStoreInfoType of
+        sitParams:  (FParams:   PEVP_PKEY);
+        sitPubKey:  (FPubKey:   PEVP_PKEY);
+        sitPrivKey: (FPrivKey:  PEVP_PKEY);
+        sitCert:    (FCert:     PX509);
+        sitCrl:     (FCrl:      PX509_CRL);
+      end;
+    private
+      FData: TItemData;
+        function GetType: TStoreInfoType; {$IFDEF USE_INLINE}inline;{$ENDIF}
+        function GetName: RawByteString; {$IFDEF USE_INLINE}inline;{$ENDIF}
+        function GetParams: PEVP_PKEY; {$IFDEF USE_INLINE}inline;{$ENDIF}
+        function GetPubKey: PEVP_PKEY;  {$IFDEF USE_INLINE}inline;{$ENDIF}
+        function GetPrivKey: PEVP_PKEY; {$IFDEF USE_INLINE}inline;{$ENDIF}
+        function GetCert: PX509; {$IFDEF USE_INLINE}inline;{$ENDIF}
+        function GetCrl: PX509_CRL; {$IFDEF USE_INLINE}inline;{$ENDIF}
+    public
+      constructor Create(AInfo: POSSL_STORE_INFO); overload;
+      destructor Destroy; override;
+
+      property &Type: TStoreInfoType read GetType;
+      property Name: RawByteString read GetName;
+      property Params: PEVP_PKEY read GetParams;
+      property PubKey: PEVP_PKEY read GetPubKey;
+      property PrivKey: PEVP_PKEY read GetPrivKey;
+      property Cert: PX509 read GetCert;
+      property Crl: PX509_CRL read GetCrl;
+    end;
+
+  public const
+    cStoreAElementsAll = [sitName..sitCRL];
+
+  private type
+    TCounters = array [TStoreElement] of TIdC_Uint;
+    TListInfo = TObjectList<TStoreItem>;
+
+  private
+    FStore: POSSL_STORE_CTX;
+    FList: TListInfo;
+    FCounters: TCounters;
+    FFilter: TStoreElements;
+    function GetCount(AType: TStoreElement): TIdC_Uint;
+      {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+  protected
+    constructor Create(ACtx: POSSL_STORE_CTX;
+        ALoadFilter: TStoreElements = cStoreAElementsAll); overload;
+    procedure DoException(AMessage: string);
+    procedure DoLoad(ALoadFilter: TStoreElements);
+
+    property Store: POSSL_STORE_CTX read FStore;
+  public
+    constructor Create(AUri: RawByteString; AUi: TTaurusTLS_CustomOsslUi;
+      ALoadFilter: TStoreElements = cStoreAElementsAll); overload;
+    constructor Create(AUri: UnicodeString; AUi: TTaurusTLS_CustomOsslUi;
+      ALoadFilter: TStoreElements = cStoreAElementsAll); overload;
+    constructor Create(ABio: ITaurusTLS_Bio; AUi: TTaurusTLS_CustomOsslUi;
+      ALoadFilter: TStoreElements = cStoreAElementsAll); overload;
+    destructor Destroy; override;
+
+    property Count[AType: TStoreElement]: TIdC_Uint read GetCount;
+  end;
+
+  TTaurusTLS_OSSLStoreHelper = class helper for TTaurusTLS_OSSLStore
+  public type
+    TEnumerator = class
+    private
+      FEnum: TListInfo.TEnumerator;
+      FFilter: TStoreElements;
+      FCurrent: TStoreItem;
+    protected
+      function GetCurrent: TStoreItem;
+    public
+      constructor Create(AList: TListInfo; AFilter: TStoreElements);
+      function GetEnumerator: TEnumerator;
+      function MoveNext: boolean;
+      property Current: TStoreItem read GetCurrent;
+    end;
+  public
+    function GetEnumerator: TEnumerator; overload;
+    function GetEnumerator(const AFilter: TTaurusTLS_OSSLStore.TStoreElements):
+      TEnumerator; overload;
+  end;
 
   TaurusTLS_X509Store = class
   public type
     TX509Element = sitCert..sitCRL;
     TX509Elements = set of TX509Element;
 
-  private type
-    TVerifyParam = class(TaurusTLS_CustomX509VerifyParam);
+  public const
+    cX509ElementsAll = [sitCert..sitCRL];
+
+  protected type
+    TVfyParam = class(TaurusTLS_CustomX509VerifyParam)
+    public
+      constructor Create(AStore: PX509_STORE);
+    end;
 
   private
     FStore: PX509_STORE;
+    procedure SetParam(AVfyParam: TaurusTLS_CustomX509VerifyParam);
+    function GetParam: TaurusTLS_CustomX509VerifyParam;
   protected
     procedure DoException(AMessage: string); {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+    property Store: PX509_STORE read FStore;
+    property VfyParam: TaurusTLS_CustomX509VerifyParam read GetParam write SetParam;
   public
     constructor Create;
     destructor Destroy; override;
@@ -444,15 +440,443 @@ type
     procedure AddCrl(ACrl: PX509_CRL); {$IFDEF USE_INLINE}inline;{$ENDIF}
     procedure LoadFromStore(AStore: TTaurusTLS_OSSLStore; AFilter: TX509Elements);
       overload;
-
   end;
 
 implementation
 
 uses
-  TaurusTLS_ResourceStrings;
+  TaurusTLSHeaders_crypto, TaurusTLS_ResourceStrings;
 
-{ TTaurusTLS_OsslStoreInfoHelper }
+{ TaurusTLS_CustomX509VerifyParam.TVerifyFlagHelper }
+
+function TaurusTLS_CustomX509VerifyParam.TVerifyFlagHelper.IsEqualTo(
+  Value: TIdC_ULONG): boolean;
+begin
+  Result:=Value = ToInt;
+end;
+
+function TaurusTLS_CustomX509VerifyParam.TVerifyFlagHelper.ToInt: TIdC_ULONG;
+begin
+  Result:=TIdC_ULONG(1 shl Ord(Self)) and cX509vfMask;
+end;
+
+class function TaurusTLS_CustomX509VerifyParam.TVerifyFlagHelper.FromInt(
+  Value: TIdC_ULONG): TVerifyFlag;
+var
+  i: TIdC_ULONG;
+
+begin
+  // check if AVal in range of OpenSSL X509_V_FLAG_* constants
+  // and a single bit is set.
+  if (Value = 0) or ((Value and (Value-1)) <> 0)
+    or ((Value or cX509vfMask) <> cX509vfMask) then
+    raise EInvalidCast.Create('Invalid X509 Verify Flag.');
+  i:=X509_V_FLAG_USE_CHECK_TIME;
+  while (1 shl i) <= Value do
+    Inc(i);
+  Result:=TVerifyFlag(Pred(i));
+end;
+
+{ TaurusTLS_X509VerifyParam.TVerifyFlagsHelper }
+
+function TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.IsEqualTo(
+  Value: TIdC_ULONG): boolean;
+begin
+  Result:=Value = ToInt;
+end;
+
+function TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.ToInt: TIdC_ULONG;
+begin
+  Result:=(TIdC_ULONG((@Self)^) and cX509vfMask);
+end;
+
+class function TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.FromInt(
+  Value: TIdC_ULONG): TVerifyFlags;
+begin
+  Result:=TVerifyFlags(Value and cX509vfMask);
+end;
+
+{ TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper }
+
+function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper.IsEqualTo(
+  Value: TIdC_UINT32): boolean;
+begin
+  Result:=Value = ToInt;
+end;
+
+class function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper.FromInt(
+  Value: TIdC_UINT32): TInheritanceFlag;
+var
+  i: TIdC_UINT32;
+
+begin
+  // check if AVal in range of OpenSSL X509_VP_FLAG_* constants
+  // and a single bit is set.
+  if (Value = 0) or ((Value and (Value-1)) <> 0)
+    or ((Value or cX509ihfMask) <> cX509ihfMask) then
+    raise EInvalidCast.Create('Invalid X509 Verify Flag.');
+  i:=X509_VP_FLAG_DEFAULT;
+  while (1 shl i) <= Value do
+    Inc(i);
+  Result:=TInheritanceFlag(Pred(i));
+end;
+
+function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper.ToInt: TIdC_UINT32;
+begin
+  Result:=TIdC_UINT32(1 shl Ord(Self)) and cX509ihfMask;
+end;
+
+{ TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper }
+
+function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper.IsEqualTo(
+  Value: TIdC_UINT32): boolean;
+begin
+  Result:=Value = ToInt;
+end;
+
+function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper.ToInt: TIdC_UINT32;
+begin
+  Result:=(TIdC_UINT32((@Self)^) and cX509vfMask);
+end;
+
+class function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper.FromInt(
+  Value: TIdC_UINT32): TInheritanceFlags;
+begin
+  Value:=Value and cX509ihfMask;
+  Result:=TInheritanceFlags((@Value)^);
+end;
+
+{ TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper }
+
+class function TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.FromInt(
+  Value: TIdC_Int): TTrustFlag;
+begin
+  Result:=TTrustFlag(Value);
+end;
+
+function TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.IsEqualTo(
+  Value: TIdC_Int): boolean;
+begin
+  Result:=Value = ToInt;
+end;
+
+function TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.ToInt: TIdC_Int;
+begin
+  Result:=Ord(Self);
+end;
+
+{ TaurusTLS_CustomX509VerifyParam.TPurposeHelper }
+
+class function TaurusTLS_CustomX509VerifyParam.TPurposeHelper.FromInt(
+  Value: TIdC_Int): TPurpose;
+begin
+  Result:=TPurpose(Value);
+end;
+
+function TaurusTLS_CustomX509VerifyParam.TPurposeHelper.IsEqualTo(
+  Value: TIdC_Int): boolean;
+begin
+  Result:=Value = ToInt;
+end;
+
+function TaurusTLS_CustomX509VerifyParam.TPurposeHelper.ToInt: TIdC_Int;
+begin
+  Result:=Ord(Self);
+end;
+
+{ TaurusTLS_CustomX509VerifyParam.THostCheckFlagHelper }
+
+class function TaurusTLS_CustomX509VerifyParam.THostCheckFlagHelper.FromInt(
+  Value: TIdC_UINT): THostCheckFlag;
+var
+  i: TIdC_UINT;
+
+begin
+  // check if AVal in range of OpenSSL X509_CHECK_FLAG_* constants
+  // and a single bit is set.
+  if (Value = 0) or ((Value and (Value-1)) <> 0)
+    or ((Value or cX509hckMask) <> cX509hckMask) then
+    raise EInvalidCast.Create('Invalid X509 Host Check Verify Flag.');
+  i:=X509_CHECK_FLAG_ALWAYS_CHECK_SUBJECT;
+  while (1 shl i) <= Value do
+    Inc(i);
+  Result:=THostCheckFlag(Pred(i));
+end;
+
+function TaurusTLS_CustomX509VerifyParam.THostCheckFlagHelper.IsEqualTo(
+  Value: TIdC_UINT): boolean;
+begin
+  Result:=Value = ToInt;
+end;
+
+function TaurusTLS_CustomX509VerifyParam.THostCheckFlagHelper.ToInt: TIdC_UINT;
+begin
+  Result:=TIdC_UINT(1 shl Ord(Self));
+end;
+
+{ TaurusTLS_CustomX509VerifyParam.THostCheckFlagsHelper }
+
+class function TaurusTLS_CustomX509VerifyParam.THostCheckFlagsHelper.FromInt(
+  Value: TIdC_UINT): THostCheckFlags;
+begin
+  Value:=Value and cX509hckMask;
+  Result:=THostCheckFlags((@Value)^);
+end;
+
+function TaurusTLS_CustomX509VerifyParam.THostCheckFlagsHelper.IsEqualTo(
+  Value: TIdC_UINT): boolean;
+begin
+  Result:=Value = ToInt;
+end;
+
+function TaurusTLS_CustomX509VerifyParam.THostCheckFlagsHelper.ToInt: TIdC_UINT;
+begin
+  Result:=(TIdC_UINT((@Self)^) and cX509hckMask);
+end;
+
+{ TaurusTLS_CustomX509VerifyParam }
+
+constructor TaurusTLS_CustomX509VerifyParam.Create(AParam: PX509_VERIFY_PARAM);
+begin
+  if not Assigned(AParam) then
+    DoException('PX509_VERIFY_PARAM is nil');
+  inherited Create;
+  FParam:=AParam;
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.DoException(AMessage: string);
+begin
+  raise ETaurusTLSX509StoreError.Create(AMessage);
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetVerifyFlags: TVerifyFlags;
+begin
+  Result:=TVerifyFlags.FromInt(X509_VERIFY_PARAM_get_flags(FParam));
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.SetVerifyFlags(const Value: TVerifyFlags);
+var
+  lFlags, lClearFlags: TVerifyFlags;
+
+begin
+  lFlags:=VerifyFlags;
+  if X509_VERIFY_PARAM_set_flags(FParam, Value.ToInt) <> 1 then
+    DoException('Unable to set X509_VERIFY_PARAM flags');
+  lClearFlags:=lFlags-Value;
+  if lClearFlags <> [] then
+    if X509_VERIFY_PARAM_clear_flags(FParam, lClearFlags.ToInt) <> 1 then
+      DoException('Unable to set X509_VERIFY_PARAM flags');
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetInheritanceFlags: TInheritanceFlags;
+begin
+  Result:=TInheritanceFlags.FromInt(X509_VERIFY_PARAM_get_inh_flags(Fparam));
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.SetInheritanceFlags(
+  const Value: TInheritanceFlags);
+begin
+  if X509_VERIFY_PARAM_set_inh_flags(FParam, Value.ToInt) <> 1 then
+    DoException('Unable to set X509_VERIFY_PARAM Inheritance Flags');
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetDepht: TIdC_Int;
+begin
+  Result:=X509_VERIFY_PARAM_get_depth(FParam);
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.SetDepth(const Value: TIdC_Int);
+begin
+  X509_VERIFY_PARAM_set_depth(FParam, Value);
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetAuthLevel: TAuthLevel;
+begin
+  Result:=X509_VERIFY_PARAM_get_auth_level(FParam);
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.SetAuthLevel(const Value: TAuthLevel);
+begin
+  X509_VERIFY_PARAM_set_auth_level(FParam, Value);
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetTime: TDateTime;
+begin
+  Result:=UnixToDateTime(X509_VERIFY_PARAM_get_time(FParam), True);
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.SetTime(const Value: TDateTime);
+begin
+  X509_VERIFY_PARAM_set_time(FParam, DateTimeToUnix(Value, True));
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetHostCheckFlags: THostCheckFlags;
+begin
+  Result:=THostCheckFlags.FromInt(X509_VERIFY_PARAM_get_hostflags(FParam));
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.SetHostCheckFlags(
+  const Value: THostCheckFlags);
+begin
+  X509_VERIFY_PARAM_set_hostflags(FParam, Value.ToInt);
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetHostRaw(
+  ANumber: TIdC_Int): PIdAnsiChar;
+begin
+  Result:=X509_VERIFY_PARAM_get0_host(FParam, ANumber);
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetHostA(
+  ANumber: TIdC_Int): RawByteString;
+begin
+  Result:=RawByteString(GetHostRaw(ANumber));
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetHostW(
+  ANumber: TIdC_Int): UnicodeString;
+begin
+  Result:=UnicodeString(GetHostRaw(ANumber));
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.SetHostA(Value: RawByteString);
+begin
+  if X509_VERIFY_PARAM_set1_host(FParam, PIdAnsiChar(Value), 0) <> 1 then
+    DoException('Unable to set HostName for certificate validation.')
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.SetHostW(Value: UnicodeString);
+begin
+  SetHostA(RawByteString(Value));
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.AddHostA(Value: RawByteString);
+begin
+  if Value = '' then
+    Exit;
+  if X509_VERIFY_PARAM_add1_host(FParam, PIdAnsiChar(Value), 0) <> 1 then
+    DoException('Unable to add HostName for certificate validation.')
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.AddHostW(Value: UnicodeString);
+begin
+  AddHostA(RawByteString(Value));
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetPerNameA: RawByteString;
+begin
+  Result:=RawByteString(X509_VERIFY_PARAM_get0_peername(FParam));
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetPerNameW: UnicodeString;
+begin
+  Result:=UnicodeString(X509_VERIFY_PARAM_get0_peername(FParam));
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetEmailRaw: PIdAnsiChar;
+begin
+  Result:=X509_VERIFY_PARAM_get0_email(FParam);
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetEmailA: RawByteString;
+begin
+  Result:=RawByteString(GetEmailRaw);
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetEmailW: UnicodeString;
+begin
+  Result:=UnicodeString(GetEmailRaw);
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.SetEMailA(Value: RawByteString);
+begin
+  if X509_VERIFY_PARAM_set1_email(FParam, PIdAnsiChar(Value),
+    Length(Value)) <> 1 then
+    DoException('Unable to add E-Mail address for certificate validation.')
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.SetEMailW(Value: UnicodeString);
+begin
+  SetEMailA(RawByteString(Value));
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.SetIpAddress(Value: TIdIPAddress);
+var
+  lData: Pointer;
+  lIpv4: UInt32;
+  lSize: TIdC_SizeT;
+
+begin
+  lData:=nil;
+  lSize:=0;
+  case Value.AddrType of
+  Id_IPv4:
+    begin
+      lIpv4:=Value.IPv4;
+      lData:=@lIpv4;
+      lSize:=SizeOf(lIpv4);
+    end;
+  Id_IPv6:
+    begin
+      lData:=@Value.IPv6;
+      lSize:=SizeOf(Value.IPv6);
+    end;
+  end;
+  if X509_VERIFY_PARAM_set1_ip(FParam, lData, lSize) <> 1 then
+    DoException('Unable to add IP address for certificate validation.')
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.SetIpAddressA(Value: RawByteString);
+begin
+  if X509_VERIFY_PARAM_set1_ip_asc(FParam, PIdAnsiChar(Value)) <> 1 then
+    DoException('Unable to add IP address for certificate validation.')
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.SetIpAddressW(Value: UnicodeString);
+begin
+  SetIpAddressA(RawByteString(Value));
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetIpAddressA: RawByteString;
+var
+  lResult: PIdAnsiChar;
+
+begin
+  lResult:=nil;
+  try
+    lResult:=X509_VERIFY_PARAM_get1_ip_asc(FParam);
+    Result:=RawByteString(lResult);
+  finally
+    OPENSSL_free(lResult);
+  end;
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetIpAddressW: UnicodeString;
+var
+  lResult: PIdAnsiChar;
+
+begin
+  lResult:=nil;
+  try
+    lResult:=X509_VERIFY_PARAM_get1_ip_asc(FParam);
+    Result:=UnicodeString(lResult);
+  finally
+    OPENSSL_free(lResult);
+  end;
+end;
+
+function TaurusTLS_CustomX509VerifyParam.GetPurpose: TPurpose;
+begin
+  Result:=TPurpose.FromInt(X509_VERIFY_PARAM_get_purpose(FParam));
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.SetPurpose(Value: TPurpose);
+begin
+  if X509_VERIFY_PARAM_set_purpose(FParam, Value.ToInt) <> 0 then
+    DoException('Unable to set or change certificate validation purpose.')
+end;
+
+{ TTaurusTLS_OSSLStore.TStoreInfoHelper }
 
 class function TTaurusTLS_OSSLStore.TStoreInfoHelper.GetType(AInfo:
     POSSL_STORE_INFO): TStoreInfoType;
@@ -707,7 +1131,7 @@ begin
   Result:=FData.FType;
 end;
 
-function TTaurusTLS_OSSLStore.TStoreItem.GetName: AnsiString;
+function TTaurusTLS_OSSLStore.TStoreItem.GetName: RawByteString;
 begin
   Result:=FData.FName;
 end;
@@ -752,65 +1176,6 @@ begin
     Result:=nil;
 end;
 
-{ TTaurusTLS_OSSLStore.TFilterEnumerator }
-
-constructor TTaurusTLS_OSSLStore.TFilterEnumerator.Create(
-  AList: TListInfo; AFilter: TStoreElements);
-begin
-  FList:=AList;
-  FFilter:=AFilter;
-  FIdx:=-1;
-end;
-
-constructor TTaurusTLS_OSSLStore.TFilterEnumerator.Create;
-begin
-  Assert(False, 'Constructor TFilterEnumerator.Create can not be called.');
-end;
-
-function TTaurusTLS_OSSLStore.TFilterEnumerator.GetCurrent: TStoreItem;
-begin
-  Result:=FList[FIdx];
-end;
-
-function TTaurusTLS_OSSLStore.TFilterEnumerator.MoveNext: boolean;
-begin
-  while FIdx < FList.Count do
-  begin
-    Inc(FIdx);
-    if (FIdx >= FList.Count) then
-      Exit(False);
-    if FList[FIdx].&Type in FFilter then
-      Exit(True);
-  end;
-  Result:=False;
-end;
-
-{ TTaurusTLS_OSSLStoreHelper.TStoreEnumFactory }
-
-constructor TTaurusTLS_OSSLStoreHelper.TStoreEnumFactory.Create;
-begin
-  Assert(False, 'TStoreEnumFactory.Create can not be called.');
-end;
-
-constructor TTaurusTLS_OSSLStoreHelper.TStoreEnumFactory.Create(
-  AStore: TTaurusTLS_OSSLStore; AFilter: TStoreElements);
-begin
-  FEnum:=TFilterEnumerator.Create(AStore.FList, AFilter);
-end;
-
-function TTaurusTLS_OSSLStoreHelper.TStoreEnumFactory.GetEnumerator: TFilterEnumerator;
-begin
-  Result:=FEnum;
-end;
-
-{ TTaurusTLS_OSSLStoreHelper }
-
-function TTaurusTLS_OSSLStoreHelper.GetEnum(
-  AFilter: TTaurusTLS_OSSLStore.TStoreElements): IStoreEnumFactory;
-begin
-  Result:=TStoreEnumFactory.Create(Self, AFilter);
-end;
-
 { TTaurusTLS_OSSLStore }
 
 constructor TTaurusTLS_OSSLStore.Create(ACtx: POSSL_STORE_CTX;
@@ -820,12 +1185,12 @@ begin
     DoException('OSSL Context was not initialized.');
   inherited Create;
   FList:=TListInfo.Create;
-  FCtx:=ACtx;
+  FStore:=ACtx;
   FFilter:= ALoadFilter;
   DoLoad(ALoadFilter);
 end;
 
-constructor TTaurusTLS_OSSLStore.Create(AUri: AnsiString;
+constructor TTaurusTLS_OSSLStore.Create(AUri: RawByteString;
   AUi:TTaurusTLS_CustomOsslUi; ALoadFilter: TStoreElements);
 var
   lCtx: POSSL_STORE_CTX;
@@ -855,7 +1220,7 @@ destructor TTaurusTLS_OSSLStore.Destroy;
 begin
   inherited;
   FreeAndNil(FList);
-  if OSSL_STORE_close(Fctx) <> 1 then
+  if OSSL_STORE_close(FStore) <> 1 then
     DoException('');
 end;
 
@@ -877,7 +1242,7 @@ var
   lItem: TStoreItem;
 
 begin
-  lCtx:=FCtx;
+  lCtx:=FStore;
   lFilter:=FFilter;
   while not POSSL_STORE_CTX.Eof(lCtx) do
   begin
@@ -895,477 +1260,45 @@ begin
   end;
 end;
 
-function TTaurusTLS_OSSLStore.GetEnumerator: TFilterEnumerator;
+{ TTaurusTLS_OSSLStoreHelper.TEnumerator }
+
+constructor TTaurusTLS_OSSLStoreHelper.TEnumerator.Create(AList: TListInfo;
+  AFilter: TStoreElements);
 begin
-  Result:=TFilterEnumerator.Create(FList, FFilter);
+  FEnum:=AList.GetEnumerator;
+  FFilter:=AFilter;
+  FCurrent:=nil;
 end;
 
-{ TaurusTLS_CustomX509VerifyParam.TVerifyFlagHelper }
-
-function TaurusTLS_CustomX509VerifyParam.TVerifyFlagHelper.IsEqualTo(
-  Value: TIdC_ULONG): boolean;
+function TTaurusTLS_OSSLStoreHelper.TEnumerator.GetCurrent: TStoreItem;
 begin
-  Result:=Value = ToInt;
+  Result:=FEnum.Current;
 end;
 
-function TaurusTLS_CustomX509VerifyParam.TVerifyFlagHelper.ToInt: TIdC_ULONG;
+function TTaurusTLS_OSSLStoreHelper.TEnumerator.GetEnumerator: TEnumerator;
 begin
-  Result:=TIdC_ULONG(1 shl Ord(Self)) and cX509vfMask;
+  Result:=Self;
 end;
 
-class function TaurusTLS_CustomX509VerifyParam.TVerifyFlagHelper.FromInt(
-  Value: TIdC_ULONG): TVerifyFlag;
-var
-  i: TIdC_ULONG;
-
+function TTaurusTLS_OSSLStoreHelper.TEnumerator.MoveNext: boolean;
 begin
-  // check if AVal in range of OpenSSL X509_V_FLAG_* constants
-  // and a single bit is set.
-  if (Value = 0) or ((Value and (Value-1)) <> 0)
-    or ((Value or cX509vfMask) <> cX509vfMask) then
-    raise EInvalidCast.Create('Invalid X509 Verify Flag.');
-  i:=X509_V_FLAG_USE_CHECK_TIME;
-  while (1 shl i) <= Value do
-    Inc(i);
-  Result:=TVerifyFlag(Pred(i));
+  Result:=False;
+  while FEnum.MoveNext do
+    if FEnum.Current.&Type in FFilter then
+      Exit(True);
 end;
 
-{ TaurusTLS_X509VerifyParam.TVerifyFlagsHelper }
+{ TTaurusTLS_OSSLStoreHelper }
 
-function TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.IsEqualTo(
-  Value: TIdC_ULONG): boolean;
+function TTaurusTLS_OSSLStoreHelper.GetEnumerator(
+  const AFilter: TTaurusTLS_OSSLStore.TStoreElements): TEnumerator;
 begin
-  Result:=Value = ToInt;
+  Result:=TEnumerator.Create(FList, AFilter);
 end;
 
-function TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.ToInt: TIdC_ULONG;
+function TTaurusTLS_OSSLStoreHelper.GetEnumerator: TEnumerator;
 begin
-  Result:=(TIdC_ULONG((@Self)^) and cX509vfMask);
-end;
-
-class function TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.FromInt(
-  Value: TIdC_ULONG): TVerifyFlags;
-begin
-  Result:=TVerifyFlags(Value and cX509vfMask);
-end;
-
-{ TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper }
-
-function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper.IsEqualTo(
-  Value: TIdC_UINT32): boolean;
-begin
-  Result:=Value = ToInt;
-end;
-
-class function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper.FromInt(
-  Value: TIdC_UINT32): TInheritanceFlag;
-var
-  i: TIdC_UINT32;
-
-begin
-  // check if AVal in range of OpenSSL X509_VP_FLAG_* constants
-  // and a single bit is set.
-  if (Value = 0) or ((Value and (Value-1)) <> 0)
-    or ((Value or cX509ihfMask) <> cX509ihfMask) then
-    raise EInvalidCast.Create('Invalid X509 Verify Flag.');
-  i:=X509_VP_FLAG_DEFAULT;
-  while (1 shl i) <= Value do
-    Inc(i);
-  Result:=TInheritanceFlag(Pred(i));
-end;
-
-function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper.ToInt: TIdC_UINT32;
-begin
-  Result:=TIdC_UINT32(1 shl Ord(Self)) and cX509ihfMask;
-end;
-
-{ TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper }
-
-function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper.IsEqualTo(
-  Value: TIdC_UINT32): boolean;
-begin
-  Result:=Value = ToInt;
-end;
-
-function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper.ToInt: TIdC_UINT32;
-begin
-  Result:=(TIdC_UINT32((@Self)^) and cX509vfMask);
-end;
-
-class function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper.FromInt(
-  Value: TIdC_UINT32): TInheritanceFlags;
-begin
-  Value:=Value and cX509ihfMask;
-  Result:=TInheritanceFlags((@Value)^);
-end;
-
-{ TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper }
-
-class function TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.FromInt(
-  Value: TIdC_Int): TTrustFlag;
-begin
-  Result:=TTrustFlag(Value);
-end;
-
-function TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.IsEqualTo(
-  Value: TIdC_Int): boolean;
-begin
-  Result:=Value = ToInt;
-end;
-
-function TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.ToInt: TIdC_Int;
-begin
-  Result:=Ord(Self);
-end;
-
-{ TaurusTLS_CustomX509VerifyParam.TPurposeFlagHelper }
-
-class function TaurusTLS_CustomX509VerifyParam.TPurposeFlagHelper.FromInt(
-  Value: TIdC_Int): TPurposeFlag;
-begin
-  Result:=TPurposeFlag(Value);
-end;
-
-function TaurusTLS_CustomX509VerifyParam.TPurposeFlagHelper.IsEqualTo(
-  Value: TIdC_Int): boolean;
-begin
-  Result:=Value = ToInt;
-end;
-
-function TaurusTLS_CustomX509VerifyParam.TPurposeFlagHelper.ToInt: TIdC_Int;
-begin
-  Result:=Ord(Self);
-end;
-
-{ TaurusTLS_CustomX509VerifyParam.THostCheckFlagHelper }
-
-class function TaurusTLS_CustomX509VerifyParam.THostCheckFlagHelper.FromInt(
-  Value: TIdC_UINT): THostCheckFlag;
-var
-  i: TIdC_UINT;
-
-begin
-  // check if AVal in range of OpenSSL X509_CHECK_FLAG_* constants
-  // and a single bit is set.
-  if (Value = 0) or ((Value and (Value-1)) <> 0)
-    or ((Value or cX509hckMask) <> cX509hckMask) then
-    raise EInvalidCast.Create('Invalid X509 Host Check Verify Flag.');
-  i:=X509_CHECK_FLAG_ALWAYS_CHECK_SUBJECT;
-  while (1 shl i) <= Value do
-    Inc(i);
-  Result:=THostCheckFlag(Pred(i));
-end;
-
-function TaurusTLS_CustomX509VerifyParam.THostCheckFlagHelper.IsEqualTo(
-  Value: TIdC_UINT): boolean;
-begin
-  Result:=Value = ToInt;
-end;
-
-function TaurusTLS_CustomX509VerifyParam.THostCheckFlagHelper.ToInt: TIdC_UINT;
-begin
-  Result:=TIdC_UINT(1 shl Ord(Self));
-end;
-
-{ TaurusTLS_CustomX509VerifyParam.THostCheckFlagsHelper }
-
-class function TaurusTLS_CustomX509VerifyParam.THostCheckFlagsHelper.FromInt(
-  Value: TIdC_UINT): THostCheckFlags;
-begin
-  Value:=Value and cX509hckMask;
-  Result:=THostCheckFlags((@Value)^);
-end;
-
-function TaurusTLS_CustomX509VerifyParam.THostCheckFlagsHelper.IsEqualTo(
-  Value: TIdC_UINT): boolean;
-begin
-  Result:=Value = ToInt;
-end;
-
-function TaurusTLS_CustomX509VerifyParam.THostCheckFlagsHelper.ToInt: TIdC_UINT;
-begin
-  Result:=(TIdC_UINT((@Self)^) and cX509hckMask);
-end;
-
-{ TaurusTLS_CustomX509VerifyParam }
-
-constructor TaurusTLS_CustomX509VerifyParam.Create(AParam: PX509_VERIFY_PARAM);
-begin
-  if not Assigned(AParam) then
-    DoException('PX509_VERIFY_PARAM is nil');
-  inherited Create;
-  FParam:=AParam;
-end;
-
-procedure TaurusTLS_CustomX509VerifyParam.DoException(AMessage: string);
-begin
-  raise ETaurusTLSX509StoreError.Create(AMessage);
-end;
-
-function TaurusTLS_CustomX509VerifyParam.AnsiToIDN(
-  Value: UnicodeString): AnsiString;
-begin
-  Result:=Value;
-end;
-
-function TaurusTLS_CustomX509VerifyParam.UTF8ToIDN(
-  Value: UnicodeString): AnsiString;
-begin
-  Result:=AnsiString(Value);
-end;
-
-function TaurusTLS_CustomX509VerifyParam.UnicodeToIDN(
-  Value: UnicodeString): AnsiString;
-begin
-  // encoding not implemented yet.
-  Result:=AnsiString(Value);
-end;
-
-{$IFDEF DCC}
-function TaurusTLS_CustomX509VerifyParam.IDNToLocal(
-  Value: PIdAnsiChar; cp: integer): AnsiString;
-{$ENDIF}
-{$IFDEF FPC}
-function IDNToLocal(PIdAnsiChar: AnsiString; cp: TCodePage): AnsiString;
-{$ENDIF}
-var
-  lStr: RawByteString;
-
-begin
-  // decoding not implemented yet.
-  lStr:=AnsiString(Value);
-  SetCodePage(lStr, cp, False);
-  Result:=lStr;
-end;
-
-function TaurusTLS_CustomX509VerifyParam.IDNToUTF8(Value: PIdAnsiChar): UTF8String;
-begin
-  // decoding not implemented yet.
-  Result:=UTF8String(Value);
-end;
-
-function TaurusTLS_CustomX509VerifyParam.IDNToUnicode(
-  Value: PIdAnsiChar): UnicodeString;
-begin
-  // decoding not implemented yet.
-  Result:=UnicodeString(Value);
-end;
-
-function TaurusTLS_CustomX509VerifyParam.GetVerifyFlags: TVerifyFlags;
-begin
-  Result:=TVerifyFlags.FromInt(X509_VERIFY_PARAM_get_flags(FParam));
-end;
-
-procedure TaurusTLS_CustomX509VerifyParam.SetVerifyFlags(const Value: TVerifyFlags);
-var
-  lFlags, lClearFlags: TVerifyFlags;
-
-begin
-  lFlags:=VerifyFlags;
-  if X509_VERIFY_PARAM_set_flags(FParam, Value.ToInt) <> 1 then
-    DoException('Unable to set X509_VERIFY_PARAM flags');
-  lClearFlags:=lFlags-Value;
-  if lClearFlags <> [] then
-    if X509_VERIFY_PARAM_clear_flags(FParam, lClearFlags.ToInt) <> 1 then
-      DoException('Unable to set X509_VERIFY_PARAM flags');
-end;
-
-function TaurusTLS_CustomX509VerifyParam.GetInheritanceFlags: TInheritanceFlags;
-begin
-  Result:=TInheritanceFlags.FromInt(X509_VERIFY_PARAM_get_inh_flags(Fparam));
-end;
-
-procedure TaurusTLS_CustomX509VerifyParam.SetInheritanceFlags(
-  const Value: TInheritanceFlags);
-begin
-  if X509_VERIFY_PARAM_set_inh_flags(FParam, Value.ToInt) <> 1 then
-    DoException('Unable to set X509_VERIFY_PARAM Inheritance Flags');
-end;
-
-function TaurusTLS_CustomX509VerifyParam.GetDepht: TIdC_Int;
-begin
-  Result:=X509_VERIFY_PARAM_get_depth(FParam);
-end;
-
-procedure TaurusTLS_CustomX509VerifyParam.SetDepth(const Value: TIdC_Int);
-begin
-  X509_VERIFY_PARAM_set_depth(FParam, Value);
-end;
-
-function TaurusTLS_CustomX509VerifyParam.GetAuthLevel: TAuthLevel;
-begin
-  Result:=X509_VERIFY_PARAM_get_auth_level(FParam);
-end;
-
-procedure TaurusTLS_CustomX509VerifyParam.SetAuthLevel(const Value: TAuthLevel);
-begin
-  X509_VERIFY_PARAM_set_auth_level(FParam, Value);
-end;
-
-function TaurusTLS_CustomX509VerifyParam.GetTime: TDateTime;
-begin
-  Result:=UnixToDateTime(X509_VERIFY_PARAM_get_time(FParam), True);
-end;
-
-procedure TaurusTLS_CustomX509VerifyParam.SetTime(const Value: TDateTime);
-begin
-  X509_VERIFY_PARAM_set_time(FParam, DateTimeToUnix(Value, True));
-end;
-
-function TaurusTLS_CustomX509VerifyParam.GetHostCheckFlags: THostCheckFlags;
-begin
-  Result:=THostCheckFlags.FromInt(X509_VERIFY_PARAM_get_hostflags(FParam));
-end;
-
-procedure TaurusTLS_CustomX509VerifyParam.SetHostCheckFlags(
-  const Value: THostCheckFlags);
-begin
-  X509_VERIFY_PARAM_set_hostflags(FParam, Value.ToInt);
-end;
-
-function TaurusTLS_CustomX509VerifyParam.GetHostAnsi(
-  ANumber: TIdC_Int): PIdAnsiChar;
-begin
-  Result:=X509_VERIFY_PARAM_get0_host(FParam, ANumber);
-end;
-
-{$IFDEF DCC}
-function TaurusTLS_CustomX509VerifyParam.GetHostAnsi(ANumber: TIdC_Int;
-  cp: integer): AnsiString;
-{$ENDIF}
-{$IFDEF FPC}
-function TaurusTLS_CustomX509VerifyParam.GetHostAnsi(ANumber: TIdC_Int;
-  cp: TCodePage): AnsiString;
-{$ENDIF}
-begin
-  Result:=IDNToLocal(GetHostAnsi(ANumber), cp);
-end;
-
-function TaurusTLS_CustomX509VerifyParam.GetHostUTF8(
-  ANumber: TIdC_Int): UTF8String;
-begin
-  Result:=IDNToUTF8(GetHostAnsi(ANumber));
-end;
-
-function TaurusTLS_CustomX509VerifyParam.GetHostUnicode(
-  ANumber: TIdC_Int): UnicodeString;
-begin
-  Result:=IDNToUnicode(GetHostAnsi(ANumber));
-end;
-
-procedure TaurusTLS_CustomX509VerifyParam.SetHost(Value: AnsiString);
-var
-  lStr: PAnsiChar;
-
-begin
-  if Value = '' then
-    lStr:=nil
-  else
-    lStr:=PAnsiChar(AnsiToIDN(Value));
-  if X509_VERIFY_PARAM_set1_host(FParam, lStr, 0) <> 1 then
-    DoException('Unable to set HostName for certificate validation.')
-end;
-
-procedure TaurusTLS_CustomX509VerifyParam.SetHost(Value: UTF8String);
-var
-  lStr: PAnsiChar;
-
-begin
-  if Value = '' then
-    lStr:=nil
-  else
-    lStr:=PAnsiChar(UTF8ToIDN(Value));
-  if X509_VERIFY_PARAM_set1_host(FParam, lStr, 0) <> 1 then
-    DoException('Unable to set HostName for certificate validation.')
-end;
-
-procedure TaurusTLS_CustomX509VerifyParam.SetHost(Value: UnicodeString);
-var
-  lStr: PAnsiChar;
-
-begin
-  if Value = '' then
-    lStr:=nil
-  else
-    lStr:=PAnsiChar(UnicodeToIDN(Value));
-  if X509_VERIFY_PARAM_set1_host(FParam, lStr, 0) <> 1 then
-    DoException('Unable to set HostName for certificate validation.')
-end;
-
-procedure TaurusTLS_CustomX509VerifyParam.AddHost(Value: AnsiString);
-begin
-  if Value = '' then
-    Exit;
-  if X509_VERIFY_PARAM_add1_host(FParam, PAnsiChar(AnsiToIDN(Value)), 0) <> 1 then
-    DoException('Unable to add HostName for certificate validation.')
-end;
-
-procedure TaurusTLS_CustomX509VerifyParam.AddHost(Value: UTF8String);
-begin
-  if Value = '' then
-    Exit;
-  if X509_VERIFY_PARAM_add1_host(FParam, PAnsiChar(UTF8ToIDN(Value)), 0) <> 1 then
-    DoException('Unable to add HostName for certificate validation.')
-end;
-
-procedure TaurusTLS_CustomX509VerifyParam.AddHost(Value: UnicodeString);
-begin
-  if Value = '' then
-    Exit;
-  if X509_VERIFY_PARAM_add1_host(FParam, PAnsiChar(UnicodeToIDN(Value)), 0) <> 1 then
-    DoException('Unable to add HostName for certificate validation.')
-end;
-
-function TaurusTLS_CustomX509VerifyParam.GetPerNameUTF8: UTF8String;
-begin
-  Result:=IDNToUTF8(X509_VERIFY_PARAM_get0_peername(FParam));
-end;
-
-function TaurusTLS_CustomX509VerifyParam.GetPerNameUnicode: UnicodeString;
-begin
-  Result:=IDNToUnicode(X509_VERIFY_PARAM_get0_peername(FParam));
-end;
-
-procedure TaurusTLS_CustomX509VerifyParam.SetEMail(Value: UTF8String);
-begin
-  if X509_VERIFY_PARAM_set1_email(FParam, PAnsiChar(UTF8ToIDN(Value)), 0) <> 1 then
-    DoException('Unable to add E-Mail address for certificate validation.')
-end;
-
-procedure TaurusTLS_CustomX509VerifyParam.SetEMail(Value: UnicodeString);
-begin
-  if X509_VERIFY_PARAM_set1_email(FParam, PAnsiChar(UnicodeToIDN(Value)), 0) <> 1 then
-    DoException('Unable to add E-Mail address for certificate validation.')
-end;
-
-procedure TaurusTLS_CustomX509VerifyParam.SetIpAddress(Value: TIdIPAddress);
-var
-  lData: Pointer;
-  lIpv4: UInt32;
-  lSize: TIdC_SizeT;
-
-begin
-  if Assigned(Value) then
-  begin
-    lData:=nil;
-    lSize:=0;
-  end
-  else
-  case Value.AddrType of
-  Id_IPv4:
-    begin
-      lIpv4:=Value.IPv4;
-      lData:=@lIpv4;
-      lSize:=SizeOf(lIpv4);
-    end;
-  Id_IPv6:
-    begin
-      lData:=@Value.IPv6;
-      lSize:=SizeOf(Value.IPv6);
-    end;
-  end;
-  if X509_VERIFY_PARAM_set1_ip(FParam, lData, lSize) <> 1 then
-    DoException('Unable to add IP address for certificate validation.')
+  Result:=GetEnumerator(cStoreAElementsAll);
 end;
 
 { TaurusTLS_X509VerifyParam }
@@ -1379,6 +1312,13 @@ destructor TaurusTLS_X509VerifyParam.Destroy;
 begin
   X509_VERIFY_PARAM_free(FParam);
   inherited;
+end;
+
+{ TaurusTLS_X509Store.TVfyParam }
+
+constructor TaurusTLS_X509Store.TVfyParam.Create(AStore: PX509_STORE);
+begin
+  inherited Create(X509_STORE_get0_param(AStore));
 end;
 
 { TaurusTLS_X509Store }
@@ -1421,13 +1361,28 @@ var
 begin
   if not Assigned(AStore) then
     Exit;
-  for lElement in AStore.GetEnum(AFilter) do
+  AFilter:=AFilter*cX509ElementsAll; //Only Certificates and CRLs can be added
+  for lElement in AStore.GetEnumerator(AFilter) do
   begin
     case lElement.&Type of
     sitCert: AddCert(lElement.Cert);
     sitCrl:  AddCrl(lElement.GetCrl);
     end;
   end;
+end;
+
+procedure TaurusTLS_X509Store.SetParam(
+  AVfyParam: TaurusTLS_CustomX509VerifyParam);
+begin
+  if not Assigned(AVfyParam) then
+    Exit;
+  if X509_STORE_set1_param(FStore, AVfyParam.VfyParam) <> 1 then
+    DoException('Unable to set X509_Verify_Params to X509_Store.')
+end;
+
+function TaurusTLS_X509Store.GetParam: TaurusTLS_CustomX509VerifyParam;
+begin
+  Result:=TVfyParam.Create(FStore);
 end;
 
 end.

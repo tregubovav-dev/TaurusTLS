@@ -613,6 +613,14 @@ type
     function GetFingerprint: TTaurusTLSLEVP_MD; {$IFDEF USE_INLINE}inline; {$ENDIF}
     function GetFingerprintAsString: String; {$IFDEF USE_INLINE}inline; {$ENDIF}
     function GetSerialNumber: String; {$IFDEF USE_INLINE}inline; {$ENDIF}
+    function GetSigInfo: TTaurusTLSX509SigInfo; {$IFDEF USE_INLINE}inline; {$ENDIF}
+    function GetFingerprints: TTaurusTLSX509Fingerprints; {$IFDEF USE_INLINE}inline; {$ENDIF}
+    function GetAuthorityKeyID: TTaurusTLSX509AuthorityKeyID;
+      {$IFDEF USE_INLINE}inline; {$ENDIF}
+    function GetErrors: TTaurusTLSX509Errors; {$IFDEF USE_INLINE}inline; {$ENDIF}
+    function GetWarnings: TTaurusTLSX509Warnings; {$IFDEF USE_INLINE}inline; {$ENDIF}
+    function GetAltSubjectNames: TTaurusTLSX509AltSubjectNames;
+       {$IFDEF USE_INLINE}inline; {$ENDIF}
 
     function GetVersion: TIdC_LONG; {$IFDEF USE_INLINE}inline; {$ENDIF}
     function GetDisplayInfo: TStrings;
@@ -642,7 +650,7 @@ type
     ///   True if the OpenSSL X509 Certificate object associated with the new
     ///   instance can be freed by the destructor.
     /// </param>
-    Constructor Create(aX509: PX509; aCanFreeX509: Boolean = True); virtual;
+    Constructor Create(aX509: PX509; aCanFreeX509: Boolean = True);
     /// <summary>
     ///   Frees resources and destroys the current instance.
     /// </summary>
@@ -658,11 +666,11 @@ type
     /// <summary>
     ///   Information about the certificate's signature.
     /// </summary>
-    property SigInfo: TTaurusTLSX509SigInfo read FSigInfo;
+    property SigInfo: TTaurusTLSX509SigInfo read GetSigInfo;
     /// <summary>
     ///   Fingerprints for certificate using various hashing algorithms.
     /// </summary>
-    property Fingerprints: TTaurusTLSX509Fingerprints read FFingerprints;
+    property Fingerprints: TTaurusTLSX509Fingerprints read GetFingerprints;
     /// <summary>
     ///   Certificate fingerprint in binary format.
     /// </summary>
@@ -684,7 +692,7 @@ type
     ///   Alternative Subject names.
     /// </summary>
     property AltSubjectNames: TTaurusTLSX509AltSubjectNames
-      read FAltSubjectNames;
+      read GetAltSubjectNames;
     /// <summary>
     ///   Certificate issuer name.
     /// </summary>
@@ -768,7 +776,7 @@ type
     /// <summary>
     ///   Authority Key Identifier.
     /// </summary>
-    property AuthorityKeyID: TTaurusTLSX509AuthorityKeyID read FAuthorityKeyID;
+    property AuthorityKeyID: TTaurusTLSX509AuthorityKeyID read GetAuthorityKeyID;
     /// <summary>
     ///   Key Usage X509 Extension information.
     /// </summary>
@@ -787,11 +795,11 @@ type
     /// <summary>
     ///   Certificate errors.
     /// </summary>
-    property Errors: TTaurusTLSX509Errors read FErrors;
+    property Errors: TTaurusTLSX509Errors read GetErrors;
     /// <summary>
     ///   Certificate warnings.
     /// </summary>
-    property Warnings: TTaurusTLSX509Warnings read FWarnings;
+    property Warnings: TTaurusTLSX509Warnings read GetWarnings;
   end;
 
 implementation
@@ -1164,20 +1172,20 @@ end;
 constructor TTaurusTLSX509.Create(aX509: PX509; aCanFreeX509: Boolean = True);
 begin
   inherited Create;
-  // don't create FDisplayInfo unless specifically requested.
-  FDisplayInfo := nil;
   FX509 := aX509;
   FCanFreeX509 := aCanFreeX509;
-  FAltSubjectNames := TTaurusTLSX509AltSubjectNames.Create(FX509);
-  FErrors := TTaurusTLSX509Errors.Create(FX509);
-  FFingerprints := TTaurusTLSX509Fingerprints.Create(FX509);
-  FSigInfo := TTaurusTLSX509SigInfo.Create(FX509);
   FPublicKey := TTaurusTLSX509PublicKey.Create(FX509);
   FExtensions := TTaurusTLSX509Exts.Create(FX509);
+  // don't create following instances unless specifically requested.
+  FDisplayInfo := nil;
   FSubject := nil;
   FIssuer := nil;
-  FAuthorityKeyID := TTaurusTLSX509AuthorityKeyID.Create(FX509);
-  FWarnings := TTaurusTLSX509Warnings.Create(FX509);
+  FAltSubjectNames := nil;
+  FErrors := nil;
+  FFingerprints := nil;
+  FSigInfo := nil;
+  FAuthorityKeyID := nil;
+  FWarnings := nil;
 end;
 
 destructor TTaurusTLSX509.Destroy;
@@ -1207,6 +1215,20 @@ end;
 function TTaurusTLSX509.GetSubjectKeyIdentifier: String;
 begin
   Result := ASN1_STRING_ToHexStr(X509_get0_subject_key_id(FX509));
+end;
+
+function TTaurusTLSX509.GetAltSubjectNames: TTaurusTLSX509AltSubjectNames;
+begin
+  if not Assigned(FAltSubjectNames) then
+    FAltSubjectNames:=TTaurusTLSX509AltSubjectNames.Create(FX509);
+  Result:=FAltSubjectNames;
+end;
+
+function TTaurusTLSX509.GetAuthorityKeyID: TTaurusTLSX509AuthorityKeyID;
+begin
+  if not Assigned(FAuthorityKeyID) then
+    FAuthorityKeyID:=TTaurusTLSX509AuthorityKeyID.Create(FX509);
+  Result:=FAuthorityKeyID;
 end;
 
 function TTaurusTLSX509.GetCertificateAuthorityFlag: Boolean;
@@ -1274,6 +1296,13 @@ begin
 {$ENDIF}
   end;
   Result := FDisplayInfo;
+end;
+
+function TTaurusTLSX509.GetErrors: TTaurusTLSX509Errors;
+begin
+  if not Assigned(FErrors) then
+    FErrors:=TTaurusTLSX509Errors.Create(FX509);
+  Result:=FErrors;
 end;
 
 function TTaurusTLSX509.GetExtensionCount: TIdC_LONG;
@@ -1406,9 +1435,23 @@ begin
   end;
 end;
 
+function TTaurusTLSX509.GetSigInfo: TTaurusTLSX509SigInfo;
+begin
+  if not Assigned(FSigInfo) then
+    FSigInfo:=TTaurusTLSX509SigInfo.Create(FX509);
+  Result:=FSigInfo;
+end;
+
 function TTaurusTLSX509.GetVersion: TIdC_LONG;
 begin
   Result := X509_get_version(FX509);
+end;
+
+function TTaurusTLSX509.GetWarnings: TTaurusTLSX509Warnings;
+begin
+  if not Assigned(FWarnings) then
+    FWarnings:=TTaurusTLSX509Warnings.Create(FX509);
+  Result:=FWarnings;
 end;
 
 class function TTaurusTLSX509.X509ToTTaurusTLSX509Name(aX509: PX509_NAME)
@@ -1448,6 +1491,13 @@ end;
 function TTaurusTLSX509.GetFingerprintAsString: String;
 begin
   Result := MDAsString(Fingerprint);
+end;
+
+function TTaurusTLSX509.GetFingerprints: TTaurusTLSX509Fingerprints;
+begin
+  if not Assigned(FFingerprints) then
+    FFingerprints:=TTaurusTLSX509Fingerprints.Create(FX509);
+  Result:=FFingerprints;
 end;
 
 function TTaurusTLSX509.GetHasBasicConstaints: Boolean;

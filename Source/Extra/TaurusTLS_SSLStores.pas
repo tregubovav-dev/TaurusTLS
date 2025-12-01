@@ -326,21 +326,21 @@ type
       private
         FName: RawByteString; // managed type can't be used in variant part of the record.
         case FType: TStoreInfoType of
-        sitParams:  (FParams:   PEVP_PKEY);
-        sitPubKey:  (FPubKey:   PEVP_PKEY);
-        sitPrivKey: (FPrivKey:  PEVP_PKEY);
+        sitParams,
+        sitPubKey,
+        sitPrivKey: (FPKey:   PEVP_PKEY);
         sitCert:    (FCert:     PX509);
         sitCrl:     (FCrl:      PX509_CRL);
       end;
     private
       FData: TItemData;
-        function GetType: TStoreInfoType; {$IFDEF USE_INLINE}inline;{$ENDIF}
-        function GetName: RawByteString; {$IFDEF USE_INLINE}inline;{$ENDIF}
-        function GetParams: PEVP_PKEY; {$IFDEF USE_INLINE}inline;{$ENDIF}
-        function GetPubKey: PEVP_PKEY;  {$IFDEF USE_INLINE}inline;{$ENDIF}
-        function GetPrivKey: PEVP_PKEY; {$IFDEF USE_INLINE}inline;{$ENDIF}
-        function GetCert: PX509; {$IFDEF USE_INLINE}inline;{$ENDIF}
-        function GetCrl: PX509_CRL; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      function GetType: TStoreInfoType; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      function GetName: RawByteString; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      function GetParams: PEVP_PKEY; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      function GetPubKey: PEVP_PKEY;  {$IFDEF USE_INLINE}inline;{$ENDIF}
+      function GetPrivKey: PEVP_PKEY; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      function GetCert: PX509; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      function GetCrl: PX509_CRL; {$IFDEF USE_INLINE}inline;{$ENDIF}
     public
       constructor Create(AInfo: POSSL_STORE_INFO); overload;
       destructor Destroy; override;
@@ -362,10 +362,10 @@ type
     TListInfo = TObjectList<TStoreItem>;
 
   private
-    FStore: POSSL_STORE_CTX;
+//    FStore: POSSL_STORE_CTX;
     FList: TListInfo;
     FCounters: TCounters;
-    FFilter: TStoreElements;
+//    FFilter: TStoreElements;
     function GetCount(AType: TStoreElement): TIdC_Uint;
       {$IFDEF USE_INLINE}inline;{$ENDIF}
 
@@ -373,9 +373,9 @@ type
     constructor Create(ACtx: POSSL_STORE_CTX;
         ALoadFilter: TStoreElements = cStoreAElementsAll); overload;
     procedure DoException(AMessage: string);
-    procedure DoLoad(ALoadFilter: TStoreElements);
+    procedure DoLoad(ACtx: POSSL_STORE_CTX; ALoadFilter: TStoreElements);
 
-    property Store: POSSL_STORE_CTX read FStore;
+//    property Store: POSSL_STORE_CTX read FStore;
   public
     constructor Create(AUri: RawByteString; AUi: TTaurusTLS_CustomOsslUi;
       ALoadFilter: TStoreElements = cStoreAElementsAll); overload;
@@ -399,6 +399,7 @@ type
       function GetCurrent: TStoreItem;
     public
       constructor Create(AList: TListInfo; AFilter: TStoreElements);
+      destructor Destroy; override;
       function GetEnumerator: TEnumerator;
       function MoveNext: boolean;
       property Current: TStoreItem read GetCurrent;
@@ -496,7 +497,8 @@ end;
 class function TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.FromInt(
   Value: TIdC_ULONG): TVerifyFlags;
 begin
-  Result:=TVerifyFlags(Value and cX509vfMask);
+  Value:=Value and cX509vfMask;
+  Result:=TVerifyFlags((@Value)^);
 end;
 
 { TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper }
@@ -1093,11 +1095,11 @@ begin
     sitName:
       FData.FName:=POSSL_STORE_INFO.CloneNameA(AInfo);
     sitParams:
-      FData.FParams:=POSSL_STORE_INFO.CloneParams(AInfo);
+      FData.FPKey:=POSSL_STORE_INFO.CloneParams(AInfo);
     sitPubKey:
-      FData.FPubKey:=POSSL_STORE_INFO.ClonePubKey(AInfo);
+      FData.FPKey:=POSSL_STORE_INFO.ClonePubKey(AInfo);
     sitPrivKey:
-      FData.FPrivKey:=POSSL_STORE_INFO.ClonePrivKey(AInfo);
+      FData.FPKey:=POSSL_STORE_INFO.ClonePrivKey(AInfo);
     sitCert:
       FData.FCert:=POSSL_STORE_INFO.CloneCert(AInfo);
     sitCRL:
@@ -1106,21 +1108,10 @@ begin
 end;
 
 destructor TTaurusTLS_OSSLStore.TStoreItem.Destroy;
-var
-  lKey: PEVP_PKEY;
-
 begin
   case FData.FType of
     sitParams, sitPubKey, sitPrivKey:
-    begin
-      lKey:=nil;
-      case FData.FType of
-        sitParams:   lKey:=FData.FParams;
-        sitPubKey:   lKey:=FData.FPubKey;
-        sitPrivKey:  lKey:=FData.FPrivKey;
-      end;
-      EVP_PKEY_free(lKey);
-    end;
+      EVP_PKEY_free(FData.FPKey);
     sitCert:
       X509_free(FData.FCert);
     sitCRL:
@@ -1142,7 +1133,7 @@ end;
 function TTaurusTLS_OSSLStore.TStoreItem.GetParams: PEVP_PKEY;
 begin
   if FData.FType = sitParams then
-    Result:=FData.FParams
+    Result:=FData.FPKey
   else
     Result:=nil;
 end;
@@ -1150,7 +1141,7 @@ end;
 function TTaurusTLS_OSSLStore.TStoreItem.GetPubKey: PEVP_PKEY;
 begin
   if FData.FType = sitPubKey then
-    Result:=FData.FPubKey
+    Result:=FData.FPKey
   else
     Result:=nil;
 end;
@@ -1158,7 +1149,7 @@ end;
 function TTaurusTLS_OSSLStore.TStoreItem.GetPrivKey: PEVP_PKEY;
 begin
   if FData.FType = sitPrivKey then
-    Result:=FData.FPrivKey
+    Result:=FData.FPKey
   else
     Result:=nil;
 end;
@@ -1188,9 +1179,12 @@ begin
     DoException('OSSL Context was not initialized.');
   inherited Create;
   FList:=TListInfo.Create;
-  FStore:=ACtx;
-  FFilter:= ALoadFilter;
-  DoLoad(ALoadFilter);
+//  FStore:=ACtx;
+//  FFilter:= ALoadFilter;
+  DoLoad(ACtx, ALoadFilter);
+// Just for test
+  if OSSL_STORE_close(ACtx) <> 1 then
+    DoException('');
 end;
 
 constructor TTaurusTLS_OSSLStore.Create(AUri: RawByteString;
@@ -1223,8 +1217,8 @@ destructor TTaurusTLS_OSSLStore.Destroy;
 begin
   inherited;
   FreeAndNil(FList);
-  if OSSL_STORE_close(FStore) <> 1 then
-    DoException('');
+//  if OSSL_STORE_close(FStore) <> 1 then
+//    DoException('');
 end;
 
 function TTaurusTLS_OSSLStore.GetCount(AType: TStoreElement): TIdC_Uint;
@@ -1237,7 +1231,8 @@ begin
   ETaurusTLSOSSLStoreError.RaiseException(AMessage);
 end;
 
-procedure TTaurusTLS_OSSLStore.DoLoad(ALoadFilter: TStoreElements);
+procedure TTaurusTLS_OSSLStore.DoLoad(ACtx: POSSL_STORE_CTX;
+  ALoadFilter: TStoreElements);
 var
   lCtx: POSSL_STORE_CTX;
   lFilter: TStoreElements;
@@ -1245,8 +1240,10 @@ var
   lItem: TStoreItem;
 
 begin
-  lCtx:=FStore;
-  lFilter:=FFilter;
+//  lCtx:=FStore;
+  lCtx:=ACtx;
+//  lFilter:=FFilter;
+  lFilter:=ALoadFilter;
   while not POSSL_STORE_CTX.Eof(lCtx) do
   begin
     lInfo:=POSSL_STORE_CTX.Load(lCtx);
@@ -1271,6 +1268,12 @@ begin
   FEnum:=AList.GetEnumerator;
   FFilter:=AFilter;
   FCurrent:=nil;
+end;
+
+destructor TTaurusTLS_OSSLStoreHelper.TEnumerator.Destroy;
+begin
+  FreeAndNil(FEnum);
+  inherited;
 end;
 
 function TTaurusTLS_OSSLStoreHelper.TEnumerator.GetCurrent: TStoreItem;

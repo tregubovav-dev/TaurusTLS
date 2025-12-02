@@ -76,16 +76,34 @@ type
       x509vfNoCheckTime               = $15  // 1 shl $15 = X509_V_FLAG_NO_CHECK_TIME
     );
     TVerifyFlagHelper = record helper for TVerifyFlag
-      function ToInt: TIdC_ULONG;
+    private
+      function GetAsInt: TIdC_ULONG; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      procedure SetAsInt(Value: TIdC_ULONG); {$IFDEF USE_INLINE}inline;{$ENDIF}
+    public
+      class function ToInt(Value: TVerifyFlag): TIdC_ULONG; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
       class function FromInt(Value: TIdC_ULONG): TVerifyFlag; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
       function IsEqualTo(Value: TIdC_ULONG): boolean;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      property AsInt: TIdC_ULONG read GetAsInt write SetAsInt;
     end;
 
     TVerifyFlags = set of TVerifyFlag;
     TVerifyFlagsHelper = record helper for TVerifyFlags
-      function ToInt: TIdC_ULONG;
+    private
+      function GetAsInt: TIdC_ULONG; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      procedure SetAsInt(Value: TIdC_ULONG); {$IFDEF USE_INLINE}inline;{$ENDIF}
+    public
+      class function ToInt(Value: TVerifyFlags): TIdC_ULONG; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
       class function FromInt(Value: TIdC_ULONG): TVerifyFlags; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
       function IsEqualTo(Value: TIdC_ULONG): boolean;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      property AsInt: TIdC_ULONG read GetAsInt write SetAsInt;
     end;
 
     TInheritanceFlag = (
@@ -96,16 +114,34 @@ type
       x509ihfOnce                     = $4  // 1 shl $4 = X509_VP_FLAG_ONCE
     );
     TInheritanceFlagHelper = record helper for TInheritanceFlag
-      function ToInt: TIdC_UINT32;
+    private
+      function GetAsInt: TIdC_UINT32; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      procedure SetAsInt(Value: TIdC_UINT32); {$IFDEF USE_INLINE}inline;{$ENDIF}
+    public
+      class function ToInt(Value: TInheritanceFlag): TIdC_UINT32; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
       class function FromInt(Value: TIdC_UINT32): TInheritanceFlag; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
       function IsEqualTo(Value: TIdC_UINT32): boolean;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      property AsInt: TIdC_UINT32 read GetAsInt write SetAsInt;
     end;
 
     TInheritanceFlags = set of TInheritanceFlag;
     TInheritanceFlagsHelper = record helper for TInheritanceFlags
-      function ToInt: TIdC_UINT32;
+    private
+      function GetAsInt: TIdC_UINT32; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      procedure SetAsInt(Value: TIdC_UINT32); {$IFDEF USE_INLINE}inline;{$ENDIF}
+    public
+      class function ToInt(Value: TInheritanceFlags): TIdC_UINT32; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
       class function FromInt(Value: TIdC_UINT32): TInheritanceFlags; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
       function IsEqualTo(Value: TIdC_UINT32): boolean;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      property AsInt: TIdC_UINT32 read GetAsInt write SetAsInt;
     end;
 
     TTrustFlag = (
@@ -120,9 +156,18 @@ type
       trTsa         = X509_TRUST_TSA
     );
     TTrustFlagHelper = record helper for TTrustFlag
-      function ToInt: TIdC_Int;
+    private
+      function GetAsInt: TIdC_Int; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      procedure SetAsInt(Value: TIdC_Int); {$IFDEF USE_INLINE}inline;{$ENDIF}
+    public
+      class function ToInt(Value: TTrustFlag): TIdC_Int; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
       class function FromInt(Value: TIdC_Int): TTrustFlag; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
       function IsEqualTo(Value: TIdC_Int): boolean;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      property AsInt: TIdC_Int read GetAsInt write SetAsInt;
     end;
 
     TPurpose = (
@@ -139,9 +184,18 @@ type
       prpCodeSign       = X509_PURPOSE_CODE_SIGN
     );
     TPurposeHelper = record helper for TPurpose
-      function ToInt: TIdC_Int;
+    private
+      function GetAsInt: TIdC_Int; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      procedure SetAsInt(Value: TIdC_Int); {$IFDEF USE_INLINE}inline;{$ENDIF}
+    public
+      class function ToInt(Value: TPurpose): TIdC_Int; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
       class function FromInt(Value: TIdC_Int): TPurpose; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
       function IsEqualTo(Value: TIdC_Int): boolean;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      property AsInt: TIdC_Int read GetAsInt write SetAsInt;
     end;
 
     THostCheckFlag = (
@@ -152,16 +206,34 @@ type
       hckSingleLblSubDomain = $4  // 1 shl $4 = X509_CHECK_FLAG_SINGLE_LABEL_SUBDOMAINS
     );
     THostCheckFlagHelper = record helper for THostCheckFlag
-      function ToInt: TIdC_UINT;
+    private
+      function GetAsInt: TIdC_UINT; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      procedure SetAsInt(Value: TIdC_UINT); {$IFDEF USE_INLINE}inline;{$ENDIF}
+    public
+      class function ToInt(Value: THostCheckFlag): TIdC_UINT; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
       class function FromInt(Value: TIdC_UINT): THostCheckFlag; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
       function IsEqualTo(Value: TIdC_UINT): boolean;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      property AsInt: TIdC_UINT read GetAsInt write SetAsInt;
     end;
 
    THostCheckFlags = set of THostCheckFlag;
    THostCheckFlagsHelper = record helper for THostCheckFlags
-      function ToInt: TIdC_UINT;
+    private
+      function GetAsInt: TIdC_UINT; {$IFDEF USE_INLINE}inline;{$ENDIF}
+      procedure SetAsInt(Value: TIdC_UINT); {$IFDEF USE_INLINE}inline;{$ENDIF}
+    public
+      class function ToInt(Value: THostCheckFlags): TIdC_UINT; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
       class function FromInt(Value: TIdC_UINT): THostCheckFlags; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
       function IsEqualTo(Value: TIdC_UINT): boolean;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      property AsInt: TIdC_UINT read GetAsInt write SetAsInt;
    end;
 
   public const
@@ -453,15 +525,21 @@ uses
 
 { TaurusTLS_CustomX509VerifyParam.TVerifyFlagHelper }
 
-function TaurusTLS_CustomX509VerifyParam.TVerifyFlagHelper.IsEqualTo(
-  Value: TIdC_ULONG): boolean;
+function TaurusTLS_CustomX509VerifyParam.TVerifyFlagHelper.GetAsInt: TIdC_ULONG;
 begin
-  Result:=Value = ToInt;
+  Result:=ToInt(Self);
 end;
 
-function TaurusTLS_CustomX509VerifyParam.TVerifyFlagHelper.ToInt: TIdC_ULONG;
+procedure TaurusTLS_CustomX509VerifyParam.TVerifyFlagHelper.SetAsInt(
+  Value: TIdC_ULONG);
 begin
-  Result:=TIdC_ULONG(1 shl Ord(Self)) and cX509vfMask;
+  Self:=FromInt(Value);
+end;
+
+class function TaurusTLS_CustomX509VerifyParam.TVerifyFlagHelper.ToInt(
+  Value: TVerifyFlag): TIdC_ULONG;
+begin
+  Result:=TIdC_ULONG(1 shl Ord(Value)) and cX509vfMask;
 end;
 
 class function TaurusTLS_CustomX509VerifyParam.TVerifyFlagHelper.FromInt(
@@ -475,38 +553,70 @@ begin
   if (Value = 0) or ((Value and (Value-1)) <> 0)
     or ((Value or cX509vfMask) <> cX509vfMask) then
     raise EInvalidCast.Create('Invalid X509 Verify Flag.');
-  i:=X509_V_FLAG_USE_CHECK_TIME;
+  i:=Ord(Low(TVerifyFlag));
   while (1 shl i) <= Value do
     Inc(i);
-  Result:=TVerifyFlag(Pred(i));
+  Result:=TVerifyFlag(i);
+end;
+
+function TaurusTLS_CustomX509VerifyParam.TVerifyFlagHelper.IsEqualTo(
+  Value: TIdC_ULONG): boolean;
+begin
+  Result:=Value = AsInt;
 end;
 
 { TaurusTLS_X509VerifyParam.TVerifyFlagsHelper }
 
-function TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.IsEqualTo(
-  Value: TIdC_ULONG): boolean;
+function TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.GetAsInt: TIdC_ULONG;
 begin
-  Result:=Value = ToInt;
+  Result:=ToInt(Self);
 end;
 
-function TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.ToInt: TIdC_ULONG;
+procedure TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.SetAsInt(
+  Value: TIdC_ULONG);
 begin
-  Result:=(TIdC_ULONG((@Self)^) and cX509vfMask);
+  Self:=FromInt(Value);
+end;
+
+class function TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.ToInt(
+  Value: TVerifyFlags): TIdC_ULONG;
+begin
+  Result:=(TIdC_ULONG((@Value)^) and cX509vfMask);
 end;
 
 class function TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.FromInt(
   Value: TIdC_ULONG): TVerifyFlags;
 begin
-  Value:=Value and cX509vfMask;
+  if (Value or cX509vfMask) <> cX509vfMask then
+    raise EInvalidCast.Create('Invalid X509 Verify Flags.');
+{$I RangeCheck-OFF.inc}
   Result:=TVerifyFlags((@Value)^);
+{$I RangeCheck-ON.inc}
+end;
+
+function TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.IsEqualTo(
+  Value: TIdC_ULONG): boolean;
+begin
+  Result:=Value = AsInt;
 end;
 
 { TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper }
 
-function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper.IsEqualTo(
-  Value: TIdC_UINT32): boolean;
+function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper.GetAsInt: TIdC_UINT32;
 begin
-  Result:=Value = ToInt;
+  Result:=ToInt(Self);
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper.SetAsInt(
+  Value: TIdC_UINT32);
+begin
+  Self:=FromInt(Value);
+end;
+
+class function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper.ToInt(
+  Value: TInheritanceFlag): TIdC_UINT32;
+begin
+  Result:=TIdC_UINT32(1 shl Ord(Value)) and cX509ihfMask;
 end;
 
 class function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper.FromInt(
@@ -519,77 +629,138 @@ begin
   // and a single bit is set.
   if (Value = 0) or ((Value and (Value-1)) <> 0)
     or ((Value or cX509ihfMask) <> cX509ihfMask) then
-    raise EInvalidCast.Create('Invalid X509 Verify Flag.');
-  i:=X509_VP_FLAG_DEFAULT;
+    raise EInvalidCast.Create('Invalid X509 Inheritance Flag.');
+  i:=Ord(Low(TInheritanceFlag));
   while (1 shl i) <= Value do
     Inc(i);
-  Result:=TInheritanceFlag(Pred(i));
+{$I RangeCheck-OFF.inc}
+  Result:=TInheritanceFlag(i);
+{$I RangeCheck-ON.inc}
 end;
 
-function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper.ToInt: TIdC_UINT32;
+function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagHelper.IsEqualTo(
+  Value: TIdC_UINT32): boolean;
 begin
-  Result:=TIdC_UINT32(1 shl Ord(Self)) and cX509ihfMask;
+  Result:=Value = AsInt;
 end;
 
 { TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper }
 
-function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper.IsEqualTo(
-  Value: TIdC_UINT32): boolean;
+function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper.GetAsInt: TIdC_UINT32;
 begin
-  Result:=Value = ToInt;
+  Result:=ToInt(Self);
 end;
 
-function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper.ToInt: TIdC_UINT32;
+procedure TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper.SetAsInt(
+  Value: TIdC_UINT32);
 begin
-  Result:=(TIdC_UINT32((@Self)^) and cX509vfMask);
+  Self:=FromInt(Value);
+end;
+
+class function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper.ToInt(
+  Value: TInheritanceFlags): TIdC_UINT32;
+begin
+  Result:=(TIdC_UINT32((@Value)^) and cX509vfMask);
 end;
 
 class function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper.FromInt(
   Value: TIdC_UINT32): TInheritanceFlags;
 begin
-  Value:=Value and cX509ihfMask;
+  if (Value or cX509ihfMask) <> cX509ihfMask then
+    raise EInvalidCast.Create('Invalid X509 Inheritance Flags.');
+{$I RangeCheck-OFF.inc}
   Result:=TInheritanceFlags((@Value)^);
+{$I RangeCheck-ON.inc}
+end;
+
+function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper.IsEqualTo(
+  Value: TIdC_UINT32): boolean;
+begin
+  Result:=Value = AsInt;
 end;
 
 { TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper }
 
+function TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.GetAsInt: TIdC_Int;
+begin
+  Result:=ToInt(Self);
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.SetAsInt(
+  Value: TIdC_Int);
+begin
+  Self:=FromInt(Value);
+end;
+
 class function TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.FromInt(
   Value: TIdC_Int): TTrustFlag;
 begin
+  if (Value < Ord(Low(TTrustFlag))) or (Value > Ord(High(TTrustFlag))) then
+    raise EInvalidCast.Create('Invalid X509 Trust Flag.');
+{$I RangeCheck-OFF.inc}
   Result:=TTrustFlag(Value);
+{$I RangeCheck-ON.inc}
+end;
+
+class function TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.ToInt(
+  Value: TTrustFlag): TIdC_Int;
+begin
+  Result:=Ord(Value);
 end;
 
 function TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.IsEqualTo(
   Value: TIdC_Int): boolean;
 begin
-  Result:=Value = ToInt;
-end;
-
-function TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.ToInt: TIdC_Int;
-begin
-  Result:=Ord(Self);
+  Result:=Value = AsInt;
 end;
 
 { TaurusTLS_CustomX509VerifyParam.TPurposeHelper }
 
+function TaurusTLS_CustomX509VerifyParam.TPurposeHelper.GetAsInt: TIdC_Int;
+begin
+  Result:=ToInt(Self);
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.TPurposeHelper.SetAsInt(
+  Value: TIdC_Int);
+begin
+  Self:=FromInt(Value);
+end;
+
 class function TaurusTLS_CustomX509VerifyParam.TPurposeHelper.FromInt(
   Value: TIdC_Int): TPurpose;
 begin
+  if (Value < Ord(Low(TPurpose))) or (Value > Ord(High(TPurpose))) then
+    raise EInvalidCast.Create('Invalid X509 Trust Flag.');
+{$I RangeCheck-OFF.inc}
   Result:=TPurpose(Value);
+{$I RangeCheck-ON.inc}
+end;
+
+class function TaurusTLS_CustomX509VerifyParam.TPurposeHelper.ToInt(
+  Value: TPurpose): TIdC_Int;
+begin
+  Result:=Ord(Value);
 end;
 
 function TaurusTLS_CustomX509VerifyParam.TPurposeHelper.IsEqualTo(
   Value: TIdC_Int): boolean;
 begin
-  Result:=Value = ToInt;
-end;
-
-function TaurusTLS_CustomX509VerifyParam.TPurposeHelper.ToInt: TIdC_Int;
-begin
-  Result:=Ord(Self);
+  Result:=Value = AsInt;
 end;
 
 { TaurusTLS_CustomX509VerifyParam.THostCheckFlagHelper }
+
+function TaurusTLS_CustomX509VerifyParam.THostCheckFlagHelper.GetAsInt: TIdC_UINT;
+begin
+  Result:=ToInt(Self);
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.THostCheckFlagHelper.SetAsInt(
+  Value: TIdC_UINT);
+begin
+  Self:=FromInt(Value);
+end;
 
 class function TaurusTLS_CustomX509VerifyParam.THostCheckFlagHelper.FromInt(
   Value: TIdC_UINT): THostCheckFlag;
@@ -602,41 +773,61 @@ begin
   if (Value = 0) or ((Value and (Value-1)) <> 0)
     or ((Value or cX509hckMask) <> cX509hckMask) then
     raise EInvalidCast.Create('Invalid X509 Host Check Verify Flag.');
-  i:=X509_CHECK_FLAG_ALWAYS_CHECK_SUBJECT;
+  i:=Ord(Low(THostCheckFlag));
   while (1 shl i) <= Value do
     Inc(i);
-  Result:=THostCheckFlag(Pred(i));
+{$I RangeCheck-OFF.inc}
+  Result:=THostCheckFlag(i);
+{$I RangeCheck-ON.inc}
+end;
+
+class function TaurusTLS_CustomX509VerifyParam.THostCheckFlagHelper.ToInt(
+  Value: THostCheckFlag): TIdC_UINT;
+begin
+  Result:=TIdC_UINT(1 shl Ord(Value));
 end;
 
 function TaurusTLS_CustomX509VerifyParam.THostCheckFlagHelper.IsEqualTo(
   Value: TIdC_UINT): boolean;
 begin
-  Result:=Value = ToInt;
-end;
-
-function TaurusTLS_CustomX509VerifyParam.THostCheckFlagHelper.ToInt: TIdC_UINT;
-begin
-  Result:=TIdC_UINT(1 shl Ord(Self));
+  Result:=Value = AsInt;
 end;
 
 { TaurusTLS_CustomX509VerifyParam.THostCheckFlagsHelper }
 
+function TaurusTLS_CustomX509VerifyParam.THostCheckFlagsHelper.GetAsInt: TIdC_UINT;
+begin
+  Result:=ToInt(Self);
+end;
+
+procedure TaurusTLS_CustomX509VerifyParam.THostCheckFlagsHelper.SetAsInt(
+  Value: TIdC_UINT);
+begin
+  Self:=FromInt(Value);
+end;
+
 class function TaurusTLS_CustomX509VerifyParam.THostCheckFlagsHelper.FromInt(
   Value: TIdC_UINT): THostCheckFlags;
 begin
-  Value:=Value and cX509hckMask;
+  // check if AVal in range of OpenSSL X509_CHECK_FLAG_* constants
+  // and a single bit is set.
+  if ((Value or cX509hckMask) <> cX509hckMask) then
+    raise EInvalidCast.Create('Invalid X509 Host Check Verify Flags.');
+{$I RangeCheck-OFF.inc}
   Result:=THostCheckFlags((@Value)^);
+{$I RangeCheck-ON.inc}
+end;
+
+class function TaurusTLS_CustomX509VerifyParam.THostCheckFlagsHelper.ToInt(
+  Value: THostCheckFlags): TIdC_UINT;
+begin
+  Result:=(TIdC_UINT((@Value)^) and cX509hckMask);
 end;
 
 function TaurusTLS_CustomX509VerifyParam.THostCheckFlagsHelper.IsEqualTo(
   Value: TIdC_UINT): boolean;
 begin
-  Result:=Value = ToInt;
-end;
-
-function TaurusTLS_CustomX509VerifyParam.THostCheckFlagsHelper.ToInt: TIdC_UINT;
-begin
-  Result:=(TIdC_UINT((@Self)^) and cX509hckMask);
+  Result:=Value = AsInt;
 end;
 
 { TaurusTLS_CustomX509VerifyParam }
@@ -665,11 +856,11 @@ var
 
 begin
   lFlags:=VerifyFlags;
-  if X509_VERIFY_PARAM_set_flags(FParam, Value.ToInt) <> 1 then
+  if X509_VERIFY_PARAM_set_flags(FParam, Value.AsInt) <> 1 then
     DoException('Unable to set X509_VERIFY_PARAM flags');
   lClearFlags:=lFlags-Value;
   if lClearFlags <> [] then
-    if X509_VERIFY_PARAM_clear_flags(FParam, lClearFlags.ToInt) <> 1 then
+    if X509_VERIFY_PARAM_clear_flags(FParam, lClearFlags.AsInt) <> 1 then
       DoException('Unable to set X509_VERIFY_PARAM flags');
 end;
 
@@ -681,7 +872,7 @@ end;
 procedure TaurusTLS_CustomX509VerifyParam.SetInheritanceFlags(
   const Value: TInheritanceFlags);
 begin
-  if X509_VERIFY_PARAM_set_inh_flags(FParam, Value.ToInt) <> 1 then
+  if X509_VERIFY_PARAM_set_inh_flags(FParam, Value.AsInt) <> 1 then
     DoException('Unable to set X509_VERIFY_PARAM Inheritance Flags');
 end;
 
@@ -723,7 +914,7 @@ end;
 procedure TaurusTLS_CustomX509VerifyParam.SetHostCheckFlags(
   const Value: THostCheckFlags);
 begin
-  X509_VERIFY_PARAM_set_hostflags(FParam, Value.ToInt);
+  X509_VERIFY_PARAM_set_hostflags(FParam, Value.AsInt);
 end;
 
 function TaurusTLS_CustomX509VerifyParam.GetHostRaw(
@@ -877,7 +1068,7 @@ end;
 
 procedure TaurusTLS_CustomX509VerifyParam.SetPurpose(Value: TPurpose);
 begin
-  if X509_VERIFY_PARAM_set_purpose(FParam, Value.ToInt) <> 0 then
+  if X509_VERIFY_PARAM_set_purpose(FParam, Value.AsInt) <> 0 then
     DoException('Unable to set or change certificate validation purpose.')
 end;
 

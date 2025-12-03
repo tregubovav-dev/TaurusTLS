@@ -250,7 +250,7 @@ type
       or X509_V_FLAG_NO_CHECK_TIME;
 
     cX509ihfMask = X509_VP_FLAG_DEFAULT or X509_VP_FLAG_OVERWRITE
-      or X509_VP_FLAG_LOCKED or X509_VP_FLAG_ONCE;
+      or X509_VP_FLAG_RESET_FLAGS or X509_VP_FLAG_LOCKED or X509_VP_FLAG_ONCE;
 
     cX509hckMask = X509_CHECK_FLAG_ALWAYS_CHECK_SUBJECT
       or X509_CHECK_FLAG_NO_WILDCARDS or X509_CHECK_FLAG_NO_PARTIAL_WILDCARDS
@@ -554,7 +554,7 @@ begin
     or ((Value or cX509vfMask) <> cX509vfMask) then
     raise EInvalidCast.Create('Invalid X509 Verify Flag.');
   i:=Ord(Low(TVerifyFlag));
-  while (1 shl i) <= Value do
+  while (1 shl i) < Value do
     Inc(i);
   Result:=TVerifyFlag(i);
 end;
@@ -631,7 +631,7 @@ begin
     or ((Value or cX509ihfMask) <> cX509ihfMask) then
     raise EInvalidCast.Create('Invalid X509 Inheritance Flag.');
   i:=Ord(Low(TInheritanceFlag));
-  while (1 shl i) <= Value do
+  while (1 shl i) < Value do
     Inc(i);
 {$I RangeCheck-OFF.inc}
   Result:=TInheritanceFlag(i);
@@ -660,7 +660,7 @@ end;
 class function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper.ToInt(
   Value: TInheritanceFlags): TIdC_UINT32;
 begin
-  Result:=(TIdC_UINT32((@Value)^) and cX509vfMask);
+  Result:=(TIdC_UINT32((@Value)^) and cX509ihfMask);
 end;
 
 class function TaurusTLS_CustomX509VerifyParam.TInheritanceFlagsHelper.FromInt(
@@ -774,7 +774,7 @@ begin
     or ((Value or cX509hckMask) <> cX509hckMask) then
     raise EInvalidCast.Create('Invalid X509 Host Check Verify Flag.');
   i:=Ord(Low(THostCheckFlag));
-  while (1 shl i) <= Value do
+  while (1 shl i) < Value do
     Inc(i);
 {$I RangeCheck-OFF.inc}
   Result:=THostCheckFlag(i);
@@ -1370,12 +1370,9 @@ begin
     DoException('OSSL Context was not initialized.');
   inherited Create;
   FList:=TListInfo.Create;
-//  FStore:=ACtx;
-//  FFilter:= ALoadFilter;
   DoLoad(ACtx, ALoadFilter);
-// Just for test
   if OSSL_STORE_close(ACtx) <> 1 then
-    DoException('');
+    DoException('Error closing OSSL_STORE');
 end;
 
 constructor TTaurusTLS_OSSLStore.Create(AUri: RawByteString;
@@ -1408,8 +1405,6 @@ destructor TTaurusTLS_OSSLStore.Destroy;
 begin
   inherited;
   FreeAndNil(FList);
-//  if OSSL_STORE_close(FStore) <> 1 then
-//    DoException('');
 end;
 
 function TTaurusTLS_OSSLStore.GetCount(AType: TStoreElement): TIdC_Uint;
@@ -1425,19 +1420,15 @@ end;
 procedure TTaurusTLS_OSSLStore.DoLoad(ACtx: POSSL_STORE_CTX;
   ALoadFilter: TStoreElements);
 var
-  lCtx: POSSL_STORE_CTX;
   lFilter: TStoreElements;
   lInfo: POSSL_STORE_INFO;
   lItem: TStoreItem;
 
 begin
-//  lCtx:=FStore;
-  lCtx:=ACtx;
-//  lFilter:=FFilter;
   lFilter:=ALoadFilter;
-  while not POSSL_STORE_CTX.Eof(lCtx) do
+  while not POSSL_STORE_CTX.Eof(ACtx) do
   begin
-    lInfo:=POSSL_STORE_CTX.Load(lCtx);
+    lInfo:=POSSL_STORE_CTX.Load(ACtx);
     if not ((POSSL_STORE_INFO.IsExist(lInfo) and
       (POSSL_STORE_INFO.GetType(lInfo) in ALoadFilter))) then
       continue;

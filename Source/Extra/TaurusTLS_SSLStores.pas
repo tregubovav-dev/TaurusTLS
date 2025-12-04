@@ -333,16 +333,61 @@ type
       property AsInt: TIdC_UINT32 read GetAsInt write SetAsInt;
     end;
 
+    ///  <summary>
+    ///  Represents a set of X.509 verification parameter inheritance flags,
+    ///  equivalent to the full OpenSSL integer bitmask.
+    ///  </summary>
     TInheritanceFlags = set of TInheritanceFlag;
+
+    ///  <summary>
+    ///  Provides methods for converting a TInheritanceFlags set to and
+    ///  from its native C integer bitmask representation.
+    ///  </summary>
     TInheritanceFlagsHelper = record helper for TInheritanceFlags
     private
       function GetAsInt: TIdC_UINT32; {$IFDEF USE_INLINE}inline;{$ENDIF}
       procedure SetAsInt(Value: TIdC_UINT32); {$IFDEF USE_INLINE}inline;{$ENDIF}
     public
+      ///  <summary>
+      ///  Converts the TInheritanceFlags set into a single OpenSSL
+      ///  TIdC_UINT32 integer bitmask.
+      ///  </summary>
+      ///  <param name="Value">The set of flags to convert.</param>
+      ///  <returns>
+      ///  The combined TIdC_UINT32 bitmask value ready for OpenSSL functions.
+      ///  </returns>
       class function ToInt(Value: TInheritanceFlags): TIdC_UINT32; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Converts an OpenSSL TIdC_UINT32 integer bitmask into a
+      ///  TInheritanceFlags set.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_UINT32 bitmask containing flags.
+      ///  </param>
+      ///  <returns>
+      ///  The resulting TInheritanceFlags set.
+      ///  </returns>
+      ///  <remarks>
+      ///  This method validates that the input integer only contains bits
+      ///  defined within the <see cref="TInheritanceFlag" /> enumeration
+      ///  range. If the value contains any extraneous bits, an
+      ///  <see cref="EInvalidCast" /> exception is raised.
+      ///  </remarks>
       class function FromInt(Value: TIdC_UINT32): TInheritanceFlags; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Checks if the current TInheritanceFlags set, when converted to an
+      ///  integer mask, exactly matches the provided OpenSSL flag value.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_UINT32 value to compare against.
+      ///  </param>
+      ///  <returns>
+      ///  True if the integer bitmasks are identical.
+      ///  </returns>
       function IsEqualTo(Value: TIdC_UINT32): boolean;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
 
@@ -436,6 +481,15 @@ type
       property AsInt: TIdC_Int read GetAsInt write SetAsInt;
     end;
 
+    ///  <summary>
+    ///  Defines the certificate verification purpose, corresponding to
+    ///  OpenSSL X509_PURPOSE_* constants.
+    ///  </summary>
+    ///  <remarks>
+    ///  This is used in the certificate verification context to check key
+    ///  usage and extended key usage constraints against the intended role
+    ///  (e.g., SSL Server, SMIME Signing).
+    ///  </remarks>
     TPurpose = (
       prpDefaultAny     = 0, //X509_PURPOSE_DEFAULT_ANY
       prpSslClient      = X509_PURPOSE_SSL_CLIENT,

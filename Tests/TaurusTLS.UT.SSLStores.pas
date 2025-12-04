@@ -169,7 +169,6 @@ type
     [AutoNameTestCase('$3BFFFE,'+cNamesAll)]
     procedure PositiveFlagsAsIntSet(AIntVal: TIdC_ULONG; AFlags: string);
 
-    [Category('Debug')]
     [AutoNameTestCase('$3FFFFF,'+cNamesAll)]
     [AutoNameTestCase('$FFFFFF,'+cNamesAll)]
     [AutoNameTestCase('$020000,x509vfSuiteB192')]
@@ -187,7 +186,7 @@ type
   end;
 
   [TestFixture]
-  TX509FvyParamVerifyInteritanceFlagsFixture = class
+  TX509FvyParamInteritanceFlagsFixture = class
   public type
     TInheritanceFlag = TaurusTLS_CustomX509VerifyParam.TInheritanceFlag;
     TInheritanceFlags = TaurusTLS_CustomX509VerifyParam.TInheritanceFlags;
@@ -260,7 +259,7 @@ type
   end;
 
   [TestFixture]
-  TX509FvyParamVerifyHostCheckFlagsFixture = class
+  TX509FvyParamHostCheckFlagsFixture = class
   public type
     THostCheckFlag = TaurusTLS_CustomX509VerifyParam.THostCheckFlag;
     THostCheckFlags = TaurusTLS_CustomX509VerifyParam.THostCheckFlags;
@@ -339,7 +338,7 @@ type
   end;
 
   [TestFixture]
-  TX509FvyParamVerifyPurposeFixture = class
+  TX509FvyParamPurposeFixture = class
   public type
     TPurpose = TaurusTLS_CustomX509VerifyParam.TPurpose;
   protected
@@ -375,7 +374,7 @@ type
   end;
 
   [TestFixture]
-  TX509FvyTrustVerifyPurposeFixture = class
+  TX509FvyParamTrustFixture = class
   public type
     TTrust = TaurusTLS_CustomX509VerifyParam.TTrust;
   protected
@@ -401,9 +400,9 @@ type
     procedure NegativePurposeAsIntSet(AIntVal: TIdC_Int);
 
     [AutoNameTestCase('trDefault,$00')]
-    [AutoNameTestCase('prpNsSSLServer,$03')]
+    [AutoNameTestCase('trSslClient,$02')]
     [AutoNameTestCase('trObjectSign,$05')]
-    [AutoNameTestCase('prpAny,$07')]
+    [AutoNameTestCase('trOspSign,$06')]
     [AutoNameTestCase('trTsa,$08')]
     procedure TrustIsEqualTo(ATrust: TTrust; AIntVal: TIdC_Int);
   end;
@@ -561,27 +560,27 @@ begin
   Assert.IsTrue(lFlags.IsEqualTo(AIntVal));
 end;
 
-{ TX509FvyParamVerifyInteritanceFlagsFixture }
+{ TX509FvyParamInteritanceFlagsFixture }
 
-function TX509FvyParamVerifyInteritanceFlagsFixture.GetFlagName(
+function TX509FvyParamInteritanceFlagsFixture.GetFlagName(
   Value: TInheritanceFlag): string;
 begin
   Result:=TRttiEnumerationType.GetName<TInheritanceFlag>(Value);
 end;
 
-function TX509FvyParamVerifyInteritanceFlagsFixture.GetFlagValue(
+function TX509FvyParamInteritanceFlagsFixture.GetFlagValue(
   AName: string): TInheritanceFlag;
 begin
   Result:=TRttiEnumerationType.GetValue<TInheritanceFlag>(AName);
 end;
 
-function TX509FvyParamVerifyInteritanceFlagsFixture.GetIntValue(
+function TX509FvyParamInteritanceFlagsFixture.GetIntValue(
   Value: TInheritanceFlag): integer;
 begin
   Result:=1 shl Ord(Value);
 end;
 
-function TX509FvyParamVerifyInteritanceFlagsFixture.GetFlagsFromString(
+function TX509FvyParamInteritanceFlagsFixture.GetFlagsFromString(
   ANames: string): TInheritanceFlags;
 var
   lStrings: TStringDynArray;
@@ -594,7 +593,7 @@ begin
     Include(Result, GetFlagValue(lStr));
 end;
 
-procedure TX509FvyParamVerifyInteritanceFlagsFixture.PositiveFlagAsIntSet(
+procedure TX509FvyParamInteritanceFlagsFixture.PositiveFlagAsIntSet(
   AIntVal: TIdC_UINT32; AFlag: TInheritanceFlag);
 var
   lFlag: TInheritanceFlag;
@@ -604,7 +603,7 @@ begin
   Assert.AreEqual<TInheritanceFlag>(AFlag, lFlag);
 end;
 
-procedure TX509FvyParamVerifyInteritanceFlagsFixture.PositiveFlagAsIntGet(
+procedure TX509FvyParamInteritanceFlagsFixture.PositiveFlagAsIntGet(
   AFlag: string; AIntVal: TIdC_UINT32);
 var
   lFlag: TInheritanceFlag;
@@ -616,7 +615,7 @@ begin
   Assert.AreEqual<TIdC_UINT32>(AIntVal, lVal);
 end;
 
-procedure TX509FvyParamVerifyInteritanceFlagsFixture.NegativeFlagAsIntSet(
+procedure TX509FvyParamInteritanceFlagsFixture.NegativeFlagAsIntSet(
   AIntVal: TIdC_UINT32; AFlag: TInheritanceFlag);
 begin
   Assert.WillRaise(
@@ -631,13 +630,13 @@ begin
   );
 end;
 
-procedure TX509FvyParamVerifyInteritanceFlagsFixture.FlagIsEqualTo(
+procedure TX509FvyParamInteritanceFlagsFixture.FlagIsEqualTo(
   AFlag: TInheritanceFlag; AIntVal: TIdC_UINT32);
 begin
   Assert.IsTrue(AFlag.IsEqualTo(AIntVal));
 end;
 
-procedure TX509FvyParamVerifyInteritanceFlagsFixture.PositiveFlagsAsIntSet(
+procedure TX509FvyParamInteritanceFlagsFixture.PositiveFlagsAsIntSet(
   AIntVal: TIdC_UINT32; AFlags: string);
 var
   lFlags: TInheritanceFlags;
@@ -649,7 +648,7 @@ begin
   Assert.AreEqual(lFlags, lValues);
 end;
 
-procedure TX509FvyParamVerifyInteritanceFlagsFixture.PositiveFlagsAsIntGet(
+procedure TX509FvyParamInteritanceFlagsFixture.PositiveFlagsAsIntGet(
   AFlags: string; AIntVal: TIdC_UINT32);
 var
   lFlags: TInheritanceFlags;
@@ -661,7 +660,7 @@ begin
   Assert.AreEqual<TIdC_UINT32>(AIntVal, lVal);
 end;
 
-procedure TX509FvyParamVerifyInteritanceFlagsFixture.NegativeFlagsAsIntSet(
+procedure TX509FvyParamInteritanceFlagsFixture.NegativeFlagsAsIntSet(
   AIntVal: TIdC_UINT32);
 begin
   Assert.WillRaise(
@@ -676,7 +675,7 @@ begin
   );
 end;
 
-procedure TX509FvyParamVerifyInteritanceFlagsFixture.FlagsIsEqualTo(
+procedure TX509FvyParamInteritanceFlagsFixture.FlagsIsEqualTo(
   AFlags: string; AIntVal: TIdC_UINT32);
 var
   lFlags: TInheritanceFlags;
@@ -688,25 +687,25 @@ end;
 
 { TX509FvyParamVerifyHostCheckFlagsFixture }
 
-function TX509FvyParamVerifyHostCheckFlagsFixture.GetFlagName(
+function TX509FvyParamHostCheckFlagsFixture.GetFlagName(
   Value: THostCheckFlag): string;
 begin
   Result:=TRttiEnumerationType.GetName<THostCheckFlag>(Value);
 end;
 
-function TX509FvyParamVerifyHostCheckFlagsFixture.GetFlagValue(
+function TX509FvyParamHostCheckFlagsFixture.GetFlagValue(
   AName: string): THostCheckFlag;
 begin
   Result:=TRttiEnumerationType.GetValue<THostCheckFlag>(AName);
 end;
 
-function TX509FvyParamVerifyHostCheckFlagsFixture.GetIntValue(
+function TX509FvyParamHostCheckFlagsFixture.GetIntValue(
   Value: THostCheckFlag): integer;
 begin
   Result:= 1 shl Ord(Value);
 end;
 
-function TX509FvyParamVerifyHostCheckFlagsFixture.GetFlagsFromString(
+function TX509FvyParamHostCheckFlagsFixture.GetFlagsFromString(
   ANames: string): THostCheckFlags;
 var
   lStrings: TStringDynArray;
@@ -719,7 +718,7 @@ begin
     Include(Result, GetFlagValue(lStr));
 end;
 
-procedure TX509FvyParamVerifyHostCheckFlagsFixture.PositiveFlagAsIntSet(
+procedure TX509FvyParamHostCheckFlagsFixture.PositiveFlagAsIntSet(
   AIntVal: TIdC_UINT; AFlag: THostCheckFlag);
 var
   lFlag: THostCheckFlag;
@@ -729,7 +728,7 @@ begin
   Assert.AreEqual<THostCheckFlag>(AFlag, lFlag);
 end;
 
-procedure TX509FvyParamVerifyHostCheckFlagsFixture.PositiveFlagAsIntGet(
+procedure TX509FvyParamHostCheckFlagsFixture.PositiveFlagAsIntGet(
   AFlag: string; AIntVal: TIdC_UINT);
 var
   lFlag: THostCheckFlag;
@@ -741,7 +740,7 @@ begin
   Assert.AreEqual<TIdC_UINT>(AIntVal, lVal);
 end;
 
-procedure TX509FvyParamVerifyHostCheckFlagsFixture.NegativeFlagAsIntSet(
+procedure TX509FvyParamHostCheckFlagsFixture.NegativeFlagAsIntSet(
   AIntVal: TIdC_UINT; AFlag: THostCheckFlag);
 begin
   Assert.WillRaise(
@@ -756,13 +755,13 @@ begin
   );
 end;
 
-procedure TX509FvyParamVerifyHostCheckFlagsFixture.FlagIsEqualTo(
+procedure TX509FvyParamHostCheckFlagsFixture.FlagIsEqualTo(
   AFlag: THostCheckFlag; AIntVal: TIdC_UINT32);
 begin
   Assert.IsTrue(AFlag.IsEqualTo(AIntVal));
 end;
 
-procedure TX509FvyParamVerifyHostCheckFlagsFixture.PositiveFlagsAsIntSet(
+procedure TX509FvyParamHostCheckFlagsFixture.PositiveFlagsAsIntSet(
   AIntVal: TIdC_UINT; AFlags: string);
 var
   lFlags: THostCheckFlags;
@@ -774,7 +773,7 @@ begin
   Assert.AreEqual(lFlags, lValues);
 end;
 
-procedure TX509FvyParamVerifyHostCheckFlagsFixture.PositiveFlagsAsIntGet(
+procedure TX509FvyParamHostCheckFlagsFixture.PositiveFlagsAsIntGet(
   AFlags: string; AIntVal: TIdC_UINT);
 var
   lFlags: THostCheckFlags;
@@ -786,7 +785,7 @@ begin
   Assert.AreEqual<TIdC_UINT>(AIntVal, lVal);
 end;
 
-procedure TX509FvyParamVerifyHostCheckFlagsFixture.NegativeFlagsAsIntSet(
+procedure TX509FvyParamHostCheckFlagsFixture.NegativeFlagsAsIntSet(
   AIntVal: TIdC_UINT);
 begin
   Assert.WillRaise(
@@ -801,7 +800,7 @@ begin
   );
 end;
 
-procedure TX509FvyParamVerifyHostCheckFlagsFixture.FlagsIsEqualTo(
+procedure TX509FvyParamHostCheckFlagsFixture.FlagsIsEqualTo(
   AFlags: string; AIntVal: TIdC_UINT);
 var
   lFlags: THostCheckFlags;
@@ -811,26 +810,26 @@ begin
   Assert.IsTrue(lFlags.IsEqualTo(AIntVal));
 end;
 
-{ TX509FvyParamVerifyPurposeFixture }
+{ TX509FvyParamPurposeFixture }
 
-function TX509FvyParamVerifyPurposeFixture.GetFlagName(Value: TPurpose): string;
+function TX509FvyParamPurposeFixture.GetFlagName(Value: TPurpose): string;
 begin
   Result:=TRttiEnumerationType.GetName<TPurpose>(Value);
 end;
 
-function TX509FvyParamVerifyPurposeFixture.GetFlagValue(
+function TX509FvyParamPurposeFixture.GetFlagValue(
   AName: string): TPurpose;
 begin
   Result:=TRttiEnumerationType.GetValue<TPurpose>(AName);
 end;
 
-function TX509FvyParamVerifyPurposeFixture.GetIntValue(
+function TX509FvyParamPurposeFixture.GetIntValue(
   Value: TPurpose): integer;
 begin
   Result:=Ord(Value);
 end;
 
-procedure TX509FvyParamVerifyPurposeFixture.PositivePurposeAsIntSet(
+procedure TX509FvyParamPurposeFixture.PositivePurposeAsIntSet(
   AIntVal: TIdC_UINT; APurpose: TPurpose);
 var
   lPurpose: TPurpose;
@@ -840,7 +839,7 @@ begin
   Assert.AreEqual<TPurpose>(APurpose, lPurpose);
 end;
 
-procedure TX509FvyParamVerifyPurposeFixture.PositivePurposeAsIntGet(
+procedure TX509FvyParamPurposeFixture.PositivePurposeAsIntGet(
   APurpose: TPurpose; AIntVal: TIdC_UINT);
 var
   lVal: TIdC_UINT;
@@ -850,7 +849,7 @@ begin
   Assert.AreEqual<TIdC_UINT>(AIntVal, lVal);
 end;
 
-procedure TX509FvyParamVerifyPurposeFixture.NegativePurposeAsIntSet(
+procedure TX509FvyParamPurposeFixture.NegativePurposeAsIntSet(
   AIntVal: TIdC_UINT);
 begin
   Assert.WillRaise(
@@ -865,30 +864,30 @@ begin
   );
 end;
 
-procedure TX509FvyParamVerifyPurposeFixture.PurposeIsEqualTo(APurpose: TPurpose;
+procedure TX509FvyParamPurposeFixture.PurposeIsEqualTo(APurpose: TPurpose;
   AIntVal: TIdC_UINT);
 begin
   Assert.IsTrue(APurpose.IsEqualTo(AIntVal));
 end;
 
-{ TX509FvyTrustVerifyPurposeFixture }
+{ TX509FvyParamTrustFixture }
 
-function TX509FvyTrustVerifyPurposeFixture.GetFlagName(Value: TTrust): string;
+function TX509FvyParamTrustFixture.GetFlagName(Value: TTrust): string;
 begin
   Result:=TRttiEnumerationType.GetName<TTrust>(Value);
 end;
 
-function TX509FvyTrustVerifyPurposeFixture.GetFlagValue(AName: string): TTrust;
+function TX509FvyParamTrustFixture.GetFlagValue(AName: string): TTrust;
 begin
   Result:=TRttiEnumerationType.GetValue<TTrust>(AName);
 end;
 
-function TX509FvyTrustVerifyPurposeFixture.GetIntValue(Value: TTrust): TIdC_Int;
+function TX509FvyParamTrustFixture.GetIntValue(Value: TTrust): TIdC_Int;
 begin
   Result:=Ord(Value);
 end;
 
-procedure TX509FvyTrustVerifyPurposeFixture.PositivePurposeAsIntSet(
+procedure TX509FvyParamTrustFixture.PositivePurposeAsIntSet(
   AIntVal: TIdC_Int; ATrust: TTrust);
 var
   lTrust: TTrust;
@@ -898,7 +897,7 @@ begin
   Assert.AreEqual<TTrust>(ATrust, lTrust);
 end;
 
-procedure TX509FvyTrustVerifyPurposeFixture.PositivePurposeAsIntGet(
+procedure TX509FvyParamTrustFixture.PositivePurposeAsIntGet(
   ATrust: TTrust; AIntVal: TIdC_Int);
 var
   lVal: TIdC_Int;
@@ -908,7 +907,7 @@ begin
   Assert.AreEqual<TIdC_Int>(AIntVal, lVal);
 end;
 
-procedure TX509FvyTrustVerifyPurposeFixture.NegativePurposeAsIntSet(
+procedure TX509FvyParamTrustFixture.NegativePurposeAsIntSet(
   AIntVal: TIdC_Int);
 begin
   Assert.WillRaise(
@@ -923,7 +922,7 @@ begin
   );
 end;
 
-procedure TX509FvyTrustVerifyPurposeFixture.TrustIsEqualTo(ATrust: TTrust;
+procedure TX509FvyParamTrustFixture.TrustIsEqualTo(ATrust: TTrust;
   AIntVal: TIdC_Int);
 begin
   Assert.IsTrue(ATrust.IsEqualTo(AIntVal));
@@ -931,7 +930,8 @@ end;
 
 initialization
   TDUnitX.RegisterTestFixture(TX509FvyParamVerifyFlagsFixture);
-  TDUnitX.RegisterTestFixture(TX509FvyParamVerifyInteritanceFlagsFixture);
-  TDUnitX.RegisterTestFixture(TX509FvyParamVerifyHostCheckFlagsFixture);
-  TDUnitX.RegisterTestFixture(TX509FvyParamVerifyPurposeFixture);
+  TDUnitX.RegisterTestFixture(TX509FvyParamInteritanceFlagsFixture);
+  TDUnitX.RegisterTestFixture(TX509FvyParamHostCheckFlagsFixture);
+  TDUnitX.RegisterTestFixture(TX509FvyParamPurposeFixture);
+  TDUnitX.RegisterTestFixture(TX509FvyParamTrustFixture);
 end.

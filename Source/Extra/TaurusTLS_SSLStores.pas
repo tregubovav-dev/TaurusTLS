@@ -371,8 +371,9 @@ type
       ///  </returns>
       ///  <remarks>
       ///  This method validates that the input integer only contains bits
-      ///  defined within the <see cref="TInheritanceFlag" /> enumeration
-      ///  range. If the value contains any extraneous bits, an
+      ///  defined within
+      ///  the <see cref="TaurusTLS_CustomX509VerifyParam.TInheritanceFlag" />
+      ///  enumeration range. If the value contains any extraneous bits, an
       ///  <see cref="EInvalidCast" /> exception is raised.
       ///  </remarks>
       class function FromInt(Value: TIdC_UINT32): TInheritanceFlags; static;
@@ -724,6 +725,16 @@ type
    end;
 
   public const
+    ///  <summary>
+    ///  A bitmask containing the logical OR of all OpenSSL
+    ///  X.509 verification flags (X509_V_FLAG_*).
+    ///  </summary>
+    ///  <remarks>
+    ///  This mask is used internally to validate that an integer value
+    ///  being converted to a <see cref="TVerifyFlags" /> set contains
+    ///  only bits corresponding to the defined <see cref="TVerifyFlag" />
+    ///  enumeration members.
+    ///  </remarks>
     cX509vfMask = X509_V_FLAG_USE_CHECK_TIME or X509_V_FLAG_CRL_CHECK
       or X509_V_FLAG_CRL_CHECK_ALL or X509_V_FLAG_IGNORE_CRITICAL
       or X509_V_FLAG_X509_STRICT or X509_V_FLAG_ALLOW_PROXY_CERTS
@@ -736,9 +747,28 @@ type
       or X509_V_FLAG_PARTIAL_CHAIN or X509_V_FLAG_NO_ALT_CHAINS
       or X509_V_FLAG_NO_CHECK_TIME;
 
+    ///  <summary>
+    ///  A bitmask containing the logical OR of all OpenSSL X.509
+    ///  verification parameter inheritance flags (X509_VP_FLAG_*).
+    ///  </summary>
+    ///  <remarks>
+    ///  This mask is used internally to ensure that a converted integer
+    ///  value contains only bits defined in the
+    ///  <see cref="TInheritanceFlag" /> enumeration.
+    ///  </remarks>
     cX509ihfMask = X509_VP_FLAG_DEFAULT or X509_VP_FLAG_OVERWRITE
       or X509_VP_FLAG_RESET_FLAGS or X509_VP_FLAG_LOCKED or X509_VP_FLAG_ONCE;
 
+    ///  <summary>
+    ///  A bitmask containing the logical OR of all OpenSSL X.509
+    ///  hostname checking flags (X509_CHECK_FLAG_*).
+    ///  </summary>
+    ///  <remarks>
+    ///  This mask is used internally to validate that an integer value
+    ///  being converted to a <see cref="THostCheckFlags" /> set contains
+    ///  only bits corresponding to the defined <see cref="THostCheckFlag" />
+    ///  enumeration members.
+    ///  </remarks>
     cX509hckMask = X509_CHECK_FLAG_ALWAYS_CHECK_SUBJECT
       or X509_CHECK_FLAG_NO_WILDCARDS or X509_CHECK_FLAG_NO_PARTIAL_WILDCARDS
       or X509_CHECK_FLAG_MULTI_LABEL_WILDCARDS or X509_CHECK_FLAG_SINGLE_LABEL_SUBDOMAINS;

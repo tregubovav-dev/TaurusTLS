@@ -52,6 +52,16 @@ type
   public type
     TAuthLevel = 0..5;
 
+    ///  <summary>
+    ///  Represents a single X.509 certificate verification flag,
+    ///  corresponding to an OpenSSL X509_V_FLAG_* constant.
+    ///  </summary>
+    ///  <remarks>
+    ///  The ordinal value of each enumeration member represents the bit
+    ///  position (N) in the underlying integer flag set, where the actual
+    ///  OpenSSL constant is 1 &lt;&lt; N. This design allows for seamless
+    ///  typecasting to and from the integer bitmask.
+    ///  </remarks>
     TVerifyFlag = (
       x509vfCheckTime                 = $01, // 1 shl $01 = X509_V_FLAG_USE_CHECK_TIME
       x509vfCheckCrl                  = $02, // 1 shl $02 = X509_V_FLAG_CRL_CHECK
@@ -75,37 +85,182 @@ type
       x509vfNoAlternativeChain        = $14, // 1 shl $14 = X509_V_FLAG_NO_ALT_CHAINS
       x509vfNoCheckTime               = $15  // 1 shl $15 = X509_V_FLAG_NO_CHECK_TIME
     );
+
+    ///  <summary>
+    ///  Provides methods for converting a single TVerifyFlag enumeration member
+    ///  to and from its native C integer representation.
+    ///  </summary>
     TVerifyFlagHelper = record helper for TVerifyFlag
     private
       function GetAsInt: TIdC_ULONG; {$IFDEF USE_INLINE}inline;{$ENDIF}
       procedure SetAsInt(Value: TIdC_ULONG); {$IFDEF USE_INLINE}inline;{$ENDIF}
+
     public
+      ///  <summary>
+      ///  Converts a single TVerifyFlag enumeration member into its
+      ///  corresponding OpenSSL integer flag value.
+      ///  </summary>
+      ///  <param name="Value">The enumeration member to convert.</param>
+      ///  <returns>
+      ///  The OpenSSL TIdC_ULONG (unsigned long) flag value.
+      ///  </returns>
       class function ToInt(Value: TVerifyFlag): TIdC_ULONG; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Converts an OpenSSL integer flag value into its corresponding
+      ///  TVerifyFlag enumeration member.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_ULONG value (must be an exact power of 2).
+      ///  </param>
+      ///  <returns>
+      ///  The TVerifyFlag member.
+      ///  </returns>
+      ///  <remarks>
+      ///  This method validates that the input integer value is a single,
+      ///  valid flag defined in TVerifyFlag. If the value does not represent
+      ///  exactly one valid flag bit, an EInvalidCast exception is raised.
+      ///  </remarks>
       class function FromInt(Value: TIdC_ULONG): TVerifyFlag; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Checks if the current TVerifyFlag instance's integer value matches
+      ///  the provided OpenSSL flag value.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_ULONG value to compare against.
+      ///  </param>
+      ///  <returns>
+      ///  True if the values are equal.
+      ///  </returns>
       function IsEqualTo(Value: TIdC_ULONG): boolean;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
 
+      ///  <summary>
+      ///  Gets or sets the corresponding OpenSSL integer flag value
+      ///  (1 &lt;&lt; Ordinal).
+      ///  </summary>
+      ///  <remarks>
+      ///  When writing (Set), the input value must be an exact match for one
+      ///  defined flag bit; otherwise, an EInvalidCast exception is raised.
+      ///  </remarks>
       property AsInt: TIdC_ULONG read GetAsInt write SetAsInt;
     end;
 
+    ///  <summary>
+    ///  Represents a set of X.509 verification flags, equivalent to the full
+    ///  OpenSSL integer bitmask used by X509_VERIFY_PARAM_set_flags.
+    ///  </summary>
     TVerifyFlags = set of TVerifyFlag;
+
+    ///  <summary>
+    ///  Provides methods for converting a TVerifyFlags set to and
+    ///  from its native C integer bitmask representation.
+    ///  </summary>
     TVerifyFlagsHelper = record helper for TVerifyFlags
     private
       function GetAsInt: TIdC_ULONG; {$IFDEF USE_INLINE}inline;{$ENDIF}
       procedure SetAsInt(Value: TIdC_ULONG); {$IFDEF USE_INLINE}inline;{$ENDIF}
+      procedure SetSafeAsInt(Value: TIdC_ULONG); {$IFDEF USE_INLINE}inline;{$ENDIF}
+
     public
+      ///  <summary>
+      ///  Converts the TVerifyFlags set into a single OpenSSL TIdC_ULONG
+      ///  integer bitmask.
+      ///  </summary>
+      ///  <param name="Value">The set of flags to convert.</param>
+      ///  <returns>
+      ///  The combined TIdC_ULONG bitmask value ready for OpenSSL functions.
+      ///  </returns>
       class function ToInt(Value: TVerifyFlags): TIdC_ULONG; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Converts an OpenSSL TIdC_ULONG integer bitmask into a
+      ///  TVerifyFlags set.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_ULONG bitmask containing flags.
+      ///  </param>
+      ///  <returns>
+      ///  The resulting TVerifyFlags set.
+      ///  </returns>
+      ///  <remarks>
+      ///  This method validates that the input integer only contains bits
+      ///  defined within the TVerifyFlag enumeration range. If the value
+      ///  contains any bits corresponding to undefined flags (internal OpenSSL
+      ///  constants), an <see cref="EInvalidCast" /> exception is raised.
+      ///  </remarks>
       class function FromInt(Value: TIdC_ULONG): TVerifyFlags; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Converts an OpenSSL TIdC_ULONG integer bitmask into a
+      ///  TVerifyFlags set without strict validation.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_ULONG bitmask containing flags.
+      ///  </param>
+      ///  <returns>
+      ///  The resulting TVerifyFlags set, with undefined bits being ignored.
+      ///  </returns>
+      ///  <remarks>
+      ///  This method is useful when dealing with values returned by OpenSSL
+      ///  which may contain internal, undocumented, or non-public flags.
+      ///  Any undefined bit is simply masked out and suppressed.
+      ///  </remarks>
+      class function SafeFromInt(Value: TIdC_ULONG): TVerifyFlags; static;
+        {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Checks if the current TVerifyFlags set, when converted to an
+      ///  integer mask, exactly matches the provided OpenSSL flag value.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_ULONG value to compare against.
+      ///  </param>
+      ///  <returns>
+      ///  True if the integer bitmasks are identical.
+      ///  </returns>
       function IsEqualTo(Value: TIdC_ULONG): boolean;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
 
+      ///  <summary>
+      ///  Gets or sets the flags as an OpenSSL TIdC_ULONG integer bitmask.
+      ///  </summary>
+      ///  <remarks>
+      ///  When writing (Set), the input value is strictly validated to
+      ///  ensure only defined flags are present. If undefined bits are
+      ///  found, an EInvalidCast exception is raised. To ignore undefined
+      ///  bits, use <see cref="SafeAsInt" /> property.
+      ///  </remarks>
       property AsInt: TIdC_ULONG read GetAsInt write SetAsInt;
+
+      ///  <summary>
+      ///  Gets or sets the corresponding OpenSSL integer flag value
+      ///  (1 &lt;&lt; Ordinal).
+      ///  </summary>
+      ///  <remarks>
+      ///  When writing (Set), the input value must represent exactly one
+      ///  valid flag bit; otherwise, an <see cref="EInvalidCast" /> exception
+      ///  is raised.
+      ///  </remarks>
+      property SafeAsInt: TIdC_ULONG read GetAsInt write SetSafeAsInt;
     end;
 
+    ///  <summary>
+    ///  Represents a single X.509 verification parameter inheritance flag,
+    ///  corresponding to an OpenSSL X509_VP_FLAG_* constant.
+    ///  </summary>
+    ///  <remarks>
+    ///  These flags control how verification parameters are inherited,
+    ///  set, or reset within an OpenSSL verification context. The ordinal
+    ///  value of each member represents the bit position (N) in the
+    ///  underlying integer flag set, where the actual OpenSSL constant is
+    ///  1 &lt;&lt; N.
+    ///  </remarks>
     TInheritanceFlag = (
       x509ihfDefault                  = $0, // 1 shl $0 = X509_VP_FLAG_DEFAULT
       x509ihfOverrite                 = $1, // 1 shl $1 = X509_VP_FLAG_OVERWRITE
@@ -113,18 +268,68 @@ type
       x509ihfLocked                   = $3, // 1 shl $3 = X509_VP_FLAG_LOCKED
       x509ihfOnce                     = $4  // 1 shl $4 = X509_VP_FLAG_ONCE
     );
+
+
+    ///  <summary>
+    ///  Provides methods for converting a single TInheritanceFlag
+    ///  enumeration member to and from its native C integer representation.
+    ///  </summary>
     TInheritanceFlagHelper = record helper for TInheritanceFlag
     private
       function GetAsInt: TIdC_UINT32; {$IFDEF USE_INLINE}inline;{$ENDIF}
       procedure SetAsInt(Value: TIdC_UINT32); {$IFDEF USE_INLINE}inline;{$ENDIF}
     public
+      ///  <summary>
+      ///  Converts a single TInheritanceFlag member into its corresponding
+      ///  OpenSSL integer flag value (1 &lt;&lt; Ordinal).
+      ///  </summary>
+      ///  <param name="Value">The enumeration member to convert.</param>
+      ///  <returns>
+      ///  The OpenSSL TIdC_UINT32 (unsigned 32-bit integer) flag value.
+      ///  </returns>
       class function ToInt(Value: TInheritanceFlag): TIdC_UINT32; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Converts an OpenSSL integer flag value into its corresponding
+      ///  TInheritanceFlag enumeration member.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_UINT32 value (must be an exact power of 2).
+      ///  </param>
+      ///  <returns>
+      ///  The TInheritanceFlag member.
+      ///  </returns>
+      ///  <remarks>
+      ///  This method validates that the input integer value is a single,
+      ///  valid flag defined in TInheritanceFlag. If the value does not
+      ///  represent exactly one valid flag bit, an <see cref="EInvalidCast" />
+      ///  exception is raised.
+      ///  </remarks>
       class function FromInt(Value: TIdC_UINT32): TInheritanceFlag; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Checks if the current TInheritanceFlag instance's integer value
+      ///  matches the provided OpenSSL flag value.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_UINT32 value to compare against.
+      ///  </param>
+      ///  <returns>
+      ///  True if the values are equal.
+      ///  </returns>
       function IsEqualTo(Value: TIdC_UINT32): boolean;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
 
+      ///  <summary>
+      ///  Gets or sets the corresponding OpenSSL integer flag value
+      ///  (1 &lt;&lt; Ordinal).
+      ///  </summary>
+      ///  <remarks>
+      ///  When writing (Set), the input value must be an exact match for one
+      ///  defined flag bit; otherwise, an EInvalidCast exception is raised.
+      ///  </remarks>
       property AsInt: TIdC_UINT32 read GetAsInt write SetAsInt;
     end;
 
@@ -144,7 +349,16 @@ type
       property AsInt: TIdC_UINT32 read GetAsInt write SetAsInt;
     end;
 
-    TTrustFlag = (
+    ///  <summary>
+    ///  Defines the acceptable trust settings for a certificate, corresponding
+    ///  to OpenSSL X509_TRUST_* constants.
+    ///  </summary>
+    ///  <remarks>
+    ///  These constants are used by the certificate store to determine if
+    ///  a certificate is acceptable for a specific application usage (e.g.,
+    ///  a client certificate, or a timestamping authority).
+    ///  </remarks>
+    TTrust = (
       trDefault     = X509_TRUST_DEFAULT,
       trCompat      = X509_TRUST_COMPAT,
       trSslClient   = X509_TRUST_SSL_CLIENT,
@@ -155,18 +369,70 @@ type
       trOspReq      = X509_TRUST_OCSP_REQUEST,
       trTsa         = X509_TRUST_TSA
     );
-    TTrustFlagHelper = record helper for TTrustFlag
+
+    ///  <summary>
+    ///  Provides methods for converting a TTrust enumeration member to and
+    ///  from its native C integer value.
+    ///  </summary>
+    TTrustHelper = record helper for TTrust
     private
       function GetAsInt: TIdC_Int; {$IFDEF USE_INLINE}inline;{$ENDIF}
       procedure SetAsInt(Value: TIdC_Int); {$IFDEF USE_INLINE}inline;{$ENDIF}
     public
-      class function ToInt(Value: TTrustFlag): TIdC_Int; static;
+      ///  <summary>
+      ///  Converts a TTrust member into its corresponding OpenSSL integer
+      ///  constant value.
+      ///  </summary>
+      ///  <param name="Value">The enumeration member to convert.</param>
+      ///  <returns>
+      ///  The OpenSSL TIdC_Int value.
+      ///  </returns>
+      class function ToInt(Value: TTrust): TIdC_Int; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function FromInt(Value: TIdC_Int): TTrustFlag; static;
+
+      ///  <summary>
+      ///  Converts an OpenSSL integer value into its corresponding TTrust
+      ///  enumeration member.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_Int value.
+      ///  </param>
+      ///  <returns>
+      ///  The TTrust member.
+      ///  </returns>
+      ///  <remarks>
+      ///  This method validates that the input integer value maps to one
+      ///  of the explicitly defined
+      ///  <see cref="TaurusTLS_CustomX509VerifyParam.TTrust" /> constants. If no
+      ///  corresponding constant is found, an <see cref="EInvalidCast" />
+      ///  exception is raised.
+      ///  </remarks>
+      class function FromInt(Value: TIdC_Int): TTrust; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Checks if the current TTrust instance's integer value matches
+      ///  the provided OpenSSL integer value.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_Int value to compare against.
+      ///  </param>
+      ///  <returns>
+      ///  True if the values are equal.
+      ///  </returns>
       function IsEqualTo(Value: TIdC_Int): boolean;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
 
+      ///  <summary>
+      ///  Gets or sets the corresponding OpenSSL integer constant value.
+      ///  </summary>
+      ///  <remarks>
+      ///  This property maps the enumeration member to and from its native
+      ///  OpenSSL integer constant. When writing, the input integer
+      ///  must map exactly to one defined
+      ///  <see cref="TaurusTLS_CustomX509VerifyParam.TTrust" /> constant;
+      ///  otherwise, an <see cref="EInvalidCast" /> exception is raised.
+      ///  </remarks>
       property AsInt: TIdC_Int read GetAsInt write SetAsInt;
     end;
 
@@ -183,21 +449,84 @@ type
       prpTimeStampSign  = X509_PURPOSE_TIMESTAMP_SIGN,
       prpCodeSign       = X509_PURPOSE_CODE_SIGN
     );
+
+    ///  <summary>
+    ///  Provides methods for converting a TPurpose enumeration member to and
+    ///  from its native C integer value.
+    ///  </summary>
     TPurposeHelper = record helper for TPurpose
     private
       function GetAsInt: TIdC_Int; {$IFDEF USE_INLINE}inline;{$ENDIF}
       procedure SetAsInt(Value: TIdC_Int); {$IFDEF USE_INLINE}inline;{$ENDIF}
     public
+      ///  <summary>
+      ///  Converts a TPurpose member into its corresponding OpenSSL integer
+      ///  constant value.
+      ///  </summary>
+      ///  <param name="Value">The enumeration member to convert.</param>
+      ///  <returns>
+      ///  The OpenSSL TIdC_Int value.
+      ///  </returns>
       class function ToInt(Value: TPurpose): TIdC_Int; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Converts an OpenSSL integer value into its corresponding TPurpose
+      ///  enumeration member.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_Int value.
+      ///  </param>
+      ///  <returns>
+      ///  The TPurpose member.
+      ///  </returns>
+      ///  <remarks>
+      ///  This method validates that the input integer value maps to one
+      ///  of the explicitly defined
+      ///  <see cref="TaurusTLS_CustomX509VerifyParam.TPurpose" /> constants. If no
+      ///  corresponding constant is found, an <see cref="EInvalidCast" />
+      ///  exception is raised.
+      ///  </remarks>
       class function FromInt(Value: TIdC_Int): TPurpose; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Checks if the current TPurpose instance's integer value matches
+      ///  the provided OpenSSL integer value.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_Int value to compare against.
+      ///  </param>
+      ///  <returns>
+      ///  True if the values are equal.
+      ///  </returns>
       function IsEqualTo(Value: TIdC_Int): boolean;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
 
+      ///  <summary>
+      ///  Gets or sets the corresponding OpenSSL integer constant value.
+      ///  </summary>
+      ///  <remarks>
+      ///  This property maps the enumeration member to and from its native
+      ///  OpenSSL integer constant. When writing, the input integer
+      ///  must map exactly to one defined
+      ///  <see cref="TaurusTLS_CustomX509VerifyParam.TPurpose" /> constant;
+      ///  otherwise, an <see cref="EInvalidCast" /> exception is raised.
+      ///  </remarks>
       property AsInt: TIdC_Int read GetAsInt write SetAsInt;
     end;
 
+    ///  <summary>
+    ///  Represents a single X.509 hostname checking flag, corresponding
+    ///  to an OpenSSL X509_CHECK_FLAG_* constant.
+    ///  </summary>
+    ///  <remarks>
+    ///  These flags modify the strictness and behavior of certificate
+    ///  hostname verification (e.g., wildcard allowance, subject check).
+    ///  The ordinal value of each member represents the bit position (N)
+    ///  in the underlying integer flag set, where the actual OpenSSL
+    ///  constant is 1 &lt;&lt; N.
+    ///  </remarks>
     THostCheckFlag = (
       hckAlwaysChkSubj      = $0, // 1 shl $0 = X509_CHECK_FLAG_ALWAYS_CHECK_SUBJECT
       hckNoWildcard         = $1, // 1 shl $1 = X509_CHECK_FLAG_NO_WILDCARDS
@@ -205,34 +534,138 @@ type
       hckMultiLblWildcard   = $3, // 1 shl $3 = X509_CHECK_FLAG_MULTI_LABEL_WILDCARDS
       hckSingleLblSubDomain = $4  // 1 shl $4 = X509_CHECK_FLAG_SINGLE_LABEL_SUBDOMAINS
     );
+
+    ///  <summary>
+    ///  Provides methods for converting a single THostCheckFlag
+    ///  enumeration member to and from its native C integer representation.
+    ///  </summary>
     THostCheckFlagHelper = record helper for THostCheckFlag
     private
       function GetAsInt: TIdC_UINT; {$IFDEF USE_INLINE}inline;{$ENDIF}
       procedure SetAsInt(Value: TIdC_UINT); {$IFDEF USE_INLINE}inline;{$ENDIF}
     public
+      ///  <summary>
+      ///  Converts a single THostCheckFlag member into its corresponding
+      ///  OpenSSL integer flag value (1 &lt;&lt; Ordinal).
+      ///  </summary>
+      ///  <param name="Value">The enumeration member to convert.</param>
+      ///  <returns>
+      ///  The OpenSSL TIdC_UINT (unsigned integer) flag value.
+      ///  </returns>
       class function ToInt(Value: THostCheckFlag): TIdC_UINT; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Converts an OpenSSL integer flag value into its corresponding
+      ///  THostCheckFlag enumeration member.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_UINT value (must be an exact power of 2).
+      ///  </param>
+      ///  <returns>
+      ///  The THostCheckFlag member.
+      ///  </returns>
+      ///  <remarks>
+      ///  This method validates that the input integer value represents
+      ///  exactly one valid flag bit. If the value does not represent
+      ///  exactly one valid flag bit, an <see cref="EInvalidCast" />
+      ///  exception is raised.
+      ///  </remarks>
       class function FromInt(Value: TIdC_UINT): THostCheckFlag; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Checks if the current THostCheckFlag instance's integer value
+      ///  matches the provided OpenSSL flag value.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_UINT value to compare against.
+      ///  </param>
+      ///  <returns>
+      ///  True if the values are equal.
+      ///  </returns>
       function IsEqualTo(Value: TIdC_UINT): boolean;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
 
+      ///  <summary>
+      ///  Gets or sets the corresponding OpenSSL integer flag value
+      ///  (1 &lt;&lt; Ordinal).
+      ///  </summary>
+      ///  <remarks>
+      ///  When writing (Set), the input value must represent exactly one
+      ///  valid flag bit; otherwise, an <see cref="EInvalidCast" /> exception
+      ///  is raised.
+      ///  </remarks>
       property AsInt: TIdC_UINT read GetAsInt write SetAsInt;
     end;
 
+    ///  <summary>
+    ///  Represents a set of X.509 hostname checking flags, equivalent to
+    ///  the full OpenSSL integer bitmask used in hostname verification.
+    ///  </summary>
    THostCheckFlags = set of THostCheckFlag;
+
+    ///  <summary>
+    ///  Provides methods for converting a THostCheckFlags set to and
+    ///  from its native C integer bitmask representation.
+    ///  </summary>
    THostCheckFlagsHelper = record helper for THostCheckFlags
     private
       function GetAsInt: TIdC_UINT; {$IFDEF USE_INLINE}inline;{$ENDIF}
       procedure SetAsInt(Value: TIdC_UINT); {$IFDEF USE_INLINE}inline;{$ENDIF}
     public
+      ///  <summary>
+      ///  Converts the THostCheckFlags set into a single OpenSSL
+      ///  TIdC_UINT integer bitmask.
+      ///  </summary>
+      ///  <param name="Value">The set of flags to convert.</param>
+      ///  <returns>
+      ///  The combined TIdC_UINT bitmask value ready for OpenSSL functions.
+      ///  </returns>
       class function ToInt(Value: THostCheckFlags): TIdC_UINT; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Converts an OpenSSL TIdC_UINT integer bitmask into a
+      ///  THostCheckFlags set.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_UINT bitmask containing flags.
+      ///  </param>
+      ///  <returns>
+      ///  The resulting THostCheckFlags set.
+      ///  </returns>
+      ///  <remarks>
+      ///  This method validates that the input integer only contains bits
+      ///  defined within the
+      ///  <see cref="TaurusTLS_CustomX509VerifyParam.THostCheckFlag" /> enumeration
+      ///  range. If the value contains any extraneous bits, an
+      ///  <see cref="EInvalidCast" /> exception is raised.
+      ///  </remarks>
       class function FromInt(Value: TIdC_UINT): THostCheckFlags; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Checks if the current THostCheckFlags set, when converted to an
+      ///  integer mask, exactly matches the provided OpenSSL flag value.
+      ///  </summary>
+      ///  <param name="Value">
+      ///  The OpenSSL TIdC_UINT value to compare against.
+      ///  </param>
+      ///  <returns>
+      ///  True if the integer bitmasks are identical.
+      ///  </returns>
       function IsEqualTo(Value: TIdC_UINT): boolean;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
 
+      ///  <summary>
+      ///  Gets or sets the flags as an OpenSSL TIdC_UINT integer bitmask.
+      ///  </summary>
+      ///  <remarks>
+      ///  When writing (Set), the input value must exclusively contain bits
+      ///  defined by the set. If any extraneous bits are present, an
+      ///  <see cref="EInvalidCast" /> exception is raised.
+      ///  </remarks>
       property AsInt: TIdC_UINT read GetAsInt write SetAsInt;
    end;
 
@@ -434,10 +867,8 @@ type
     TListInfo = TObjectList<TStoreItem>;
 
   private
-//    FStore: POSSL_STORE_CTX;
     FList: TListInfo;
     FCounters: TCounters;
-//    FFilter: TStoreElements;
     function GetCount(AType: TStoreElement): TIdC_Uint;
       {$IFDEF USE_INLINE}inline;{$ENDIF}
 
@@ -447,7 +878,6 @@ type
     procedure DoException(AMessage: string);
     procedure DoLoad(ACtx: POSSL_STORE_CTX; ALoadFilter: TStoreElements);
 
-//    property Store: POSSL_STORE_CTX read FStore;
   public
     constructor Create(AUri: RawByteString; AUi: TTaurusTLS_CustomOsslUi;
       ALoadFilter: TStoreElements = cStoreAElementsAll); overload;
@@ -578,6 +1008,12 @@ begin
   Self:=FromInt(Value);
 end;
 
+procedure TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.SetSafeAsInt(
+  Value: TIdC_ULONG);
+begin
+  Self:=SafeFromInt(Value);
+end;
+
 class function TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.ToInt(
   Value: TVerifyFlags): TIdC_ULONG;
 begin
@@ -589,6 +1025,15 @@ class function TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.FromInt(
 begin
   if (Value or cX509vfMask) <> cX509vfMask then
     raise EInvalidCast.Create('Invalid X509 Verify Flags.');
+{$I RangeCheck-OFF.inc}
+  Result:=TVerifyFlags((@Value)^);
+{$I RangeCheck-ON.inc}
+end;
+
+class function TaurusTLS_CustomX509VerifyParam.TVerifyFlagsHelper.SafeFromInt(
+  Value: TIdC_ULONG): TVerifyFlags;
+begin
+  Value:=Value and cX509vfMask;
 {$I RangeCheck-OFF.inc}
   Result:=TVerifyFlags((@Value)^);
 {$I RangeCheck-ON.inc}
@@ -679,36 +1124,36 @@ begin
   Result:=Value = AsInt;
 end;
 
-{ TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper }
+{ TaurusTLS_CustomX509VerifyParam.TTrustHelper }
 
-function TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.GetAsInt: TIdC_Int;
+function TaurusTLS_CustomX509VerifyParam.TTrustHelper.GetAsInt: TIdC_Int;
 begin
   Result:=ToInt(Self);
 end;
 
-procedure TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.SetAsInt(
+procedure TaurusTLS_CustomX509VerifyParam.TTrustHelper.SetAsInt(
   Value: TIdC_Int);
 begin
   Self:=FromInt(Value);
 end;
 
-class function TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.FromInt(
-  Value: TIdC_Int): TTrustFlag;
+class function TaurusTLS_CustomX509VerifyParam.TTrustHelper.FromInt(
+  Value: TIdC_Int): TTrust;
 begin
-  if (Value < Ord(Low(TTrustFlag))) or (Value > Ord(High(TTrustFlag))) then
+  if (Value < Ord(Low(TTrust))) or (Value > Ord(High(TTrust))) then
     raise EInvalidCast.Create('Invalid X509 Trust Flag.');
 {$I RangeCheck-OFF.inc}
-  Result:=TTrustFlag(Value);
+  Result:=TTrust(Value);
 {$I RangeCheck-ON.inc}
 end;
 
-class function TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.ToInt(
-  Value: TTrustFlag): TIdC_Int;
+class function TaurusTLS_CustomX509VerifyParam.TTrustHelper.ToInt(
+  Value: TTrust): TIdC_Int;
 begin
   Result:=Ord(Value);
 end;
 
-function TaurusTLS_CustomX509VerifyParam.TTrustFlagHelper.IsEqualTo(
+function TaurusTLS_CustomX509VerifyParam.TTrustHelper.IsEqualTo(
   Value: TIdC_Int): boolean;
 begin
   Result:=Value = AsInt;

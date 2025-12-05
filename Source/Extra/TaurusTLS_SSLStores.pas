@@ -48,8 +48,22 @@ type
   ETaurusTLSOSSLStoreError = class(ETaurusTLSAPICryptoError);
 
 type
+  ///  <summary>
+  ///  Abstract base class providing an object-oriented interface for
+  ///  managing certificate verification parameters.
+  ///  </summary>
+  ///  <remarks>
+  ///  This class encapsulates all settings (flags, hostnames, IP address,
+  ///  time, and depth) required for checking the validity and trust
+  ///  of a certificate chain during an SSL/TLS handshake.
+  ///  </remarks>
   TaurusTLS_CustomX509VerifyParam = class abstract
   public type
+    { Could be converted to enumeartion later...}
+    ///  <summary>
+    ///  Defines the required security level for peer authentication,
+    ///  ranging from 0 (no security checks) to 5 (highest level).
+    ///  </summary>
     TAuthLevel = 0..5;
 
     ///  <summary>
@@ -791,44 +805,207 @@ type
     procedure SetPurpose(Value: TPurpose);
 
   protected
+    ///  <summary>
+    ///  Initializes instance using the native verification parameter
+    ///  structure pointer.
+    ///  </summary>
+    ///  <param name="AParam">The native pointer to the structure.</param>
     constructor Create(AParam: PX509_VERIFY_PARAM);
+
+    ///  <summary>
+    ///  Raises an exception with a custom message.
+    ///  </summary>
+    ///  <param name="AMessage">The message to include in the exception.</param>
     procedure DoException(AMessage: string);
 
+    ///  <summary>
+    ///  Provides direct access to the native verification parameter pointer.
+    ///  </summary>
     property VfyParam: PX509_VERIFY_PARAM read FParam;
   public
+    ///  <summary>
+    ///  Retrieves the raw C-style string pointer to a hostname set for
+    ///  verification.
+    ///  </summary>
+    ///  <param name="ANumber">Index of the hostname to retrieve.</param>
+    ///  <returns>A PIdAnsiChar pointer to the string data.</returns>
     function GetHostRaw(ANumber: TIdC_Int): PIdAnsiChar;
+
+    ///  <summary>
+    ///  Retrieves a hostname stored for verification as an AnsiString.
+    ///  </summary>
+    ///  <param name="ANumber">Index of the hostname to retrieve.</param>
     function GetHostA(ANumber: TIdC_Int): RawByteString;
+
+    ///  <summary>
+    ///  Retrieves a hostname stored for verification as a Unicode string.
+    ///  </summary>
+    ///  <param name="ANumber">Index of the hostname to retrieve.</param>
     function GetHostW(ANumber: TIdC_Int): UnicodeString;
+
+    ///  <summary>
+    ///  Sets a single hostname for verification (AnsiString).
+    ///  </summary>
+    ///  <param name="Value">The hostname string.</param>
+    ///  <remarks>
+    ///  Method value clears hostnames list before setting new one.
+    ///  Emtpy value <c>Value</c> keeps it empty.
+    ///  </remarks>
     procedure SetHostA(Value: RawByteString);
+
+    ///  <summary>
+    ///  Sets a single hostname for verification (UnicodeString).
+    ///  </summary>
+    ///  <param name="Value">The hostname string.</param>
+    ///  <remarks>
+    ///  Method value clears hostnames list before setting new one.
+    ///  Emtpy value <c>Value</c> keeps it empty.
+    ///  </remarks>
     procedure SetHostW(Value: UnicodeString);
+
+    ///  <summary>
+    ///  Adds a hostname (AnsiString) to the list checked during
+    ///  verification.
+    ///  </summary>
+    ///  <param name="Value">The hostname string.</param>
     procedure AddHostA(Value: RawByteString);
+
+    ///  <summary>
+    ///  Adds a hostname (UnicodeString) to the list checked during
+    ///  verification.
+    ///  </summary>
+    ///  <param name="Value">The hostname string.</param>
     procedure AddHostW(Value: UnicodeString);
+
+    ///  <summary>
+    ///  Retrieves the PerName identity for application domain checks
+    ///  as an AnsiString.
+    ///  </summary>
     function GetPerNameA: RawByteString;
+
+    ///  <summary>
+    ///  Retrieves the PerName identity for application domain checks
+    ///  as a Unicode string.
+    ///  </summary>
     function GetPerNameW: UnicodeString;
+
+    ///  <summary>
+    ///  Retrieves the raw C-style string pointer to the email address set for
+    ///  identity checking.
+    ///  </summary>
+    ///  <returns>A PIdAnsiChar pointer to the string data.</returns>
     function GetEmailRaw: PIdAnsiChar;
+
+    ///  <summary>
+    ///  Retrieves the expected email address as an Ansi or UTF8 string.
+    ///  </summary>
     function GetEmailA: RawByteString;
+
+    ///  <summary>
+    ///  Retrieves the expected email address as a Unicode string.
+    ///  </summary>
     function GetEmailW: UnicodeString;
+
+    ///  <summary>
+    ///  Sets the expected email address (Ansi or UTF8 String) for identity
+    ///  checking.
+    ///  </summary>
+    ///  <param name="Value">The email address string.</param>
     procedure SetEMailA(Value: RawByteString);
+
+    ///  <summary>
+    ///  Sets the expected email address (UnicodeString) for identity
+    ///  checking.
+    ///  </summary>
+    ///  <param name="Value">The email address string.</param>
     procedure SetEMailW(Value: UnicodeString);
+
+    ///  <summary>
+    ///  Sets the expected IP address using a TIdIPAddress record.
+    ///  </summary>
+    ///  <param name="Value">The IP address structure.</param>
     procedure SetIpAddress(Value: TIdIPAddress);
+
+    ///  <summary>
+    ///  Sets the expected IP address (AnsiString) for identity
+    ///  checking.
+    ///  </summary>
+    ///  <param name="Value">The IP address string.</param>
     procedure SetIpAddressA(Value: RawByteString);
+
+    ///  <summary>
+    ///  Sets the expected IP address (UnicodeString) for identity
+    ///  checking.
+    ///  </summary>
+    ///  <param name="Value">The IP address string.</param>
     procedure SetIpAddressW(Value: UnicodeString);
+
+    ///  <summary>
+    ///  Retrieves the expected IP address as an AnsiString.
+    ///  </summary>
     function GetIpAddressA: RawByteString;
+
+    ///  <summary>
+    ///  Retrieves the expected IP address as a Unicode string.
+    ///  </summary>
     function GetIpAddressW: UnicodeString;
 
+    ///  <summary>
+    ///  Gets or sets flags controlling certificate path validation
+    ///  (e.g., CRL checking, policy enforcement).
+    ///  </summary>
     property VerifyFlags: TVerifyFlags read GetVerifyFlags write SetVerifyFlags;
+
+    ///  <summary>
+    ///  Gets or sets flags controlling how verification parameters are
+    ///  inherited or reset in subordinate contexts.
+    ///  </summary>
     property InheritanceFlags: TInheritanceFlags read GetInheritanceFlags
       write SetInheritanceFlags;
+
+    ///  <summary>
+    ///  Gets or sets flags controlling the strictness of hostname and
+    ///  IP address matching.
+    ///  </summary>
     property HostCheckFlags: THostCheckFlags read GetHostCheckFlags
       write SetHostCheckFlags;
+
+    ///  <summary>
+    ///  Gets or sets the expected role or usage of the certificate
+    ///  (e.g., SSL Server, SMIME Signing).
+    ///  </summary>
     property Purpose: TPurpose read GetPurpose write SetPurpose;
+
+    ///  <summary>
+    ///  Gets or sets the maximum acceptable chain length for verification.
+    ///  </summary>
     property Depth: TIdC_Int read GetDepht write SetDepth;
+
+    ///  <summary>
+    ///  Gets or sets the required security level (0-5) for key strength
+    ///  and acceptable cryptography.
+    ///  </summary>
     property AuthLevel: TAuthLevel read GetAuthLevel write SetAuthLevel;
+
+    ///  <summary>
+    ///  Gets or sets the specific time used for certificate validity
+    ///  checks (instead of the system time).
+    ///  </summary>
     property Time: TDateTime read GetTime write SetTime;
 {$IFDEF DCC}
-    property PerName: UnicodeString read GetPerNameW;
+    ///  <summary>
+    ///  Retrieves the PerName identity string.
+    ///  </summary>    property PerName: UnicodeString read GetPerNameW;
     property Host[i: TIdC_Int]: UnicodeString read GetHostW;
+
+    ///  <summary>
+    ///  Retrieves a hostname by index.
+    ///  </summary>
     property Email: UnicodeString read GetEmailW;
+
+    ///  <summary>
+    ///  Retrieves the email address identity.
+    ///  </summary>
     property IPAddress: UnicodeString read GetIpAddressW;
 {$ENDIF}
 {$IFDEF FPC}
@@ -839,76 +1016,392 @@ type
 {$ENDIF}
   end;
 
+  ///  <summary>
+  ///  Concrete class implementation that wraps and owns a native OpenSSL
+  ///  X509_VERIFY_PARAM structure.
+  ///  </summary>
+  ///  <remarks>
+  ///  This instance manages the full lifecycle of the verification
+  ///  parameters, including allocation upon <see cref="Create" /> and
+  ///  release upon <see cref="Destroy" />.
+  ///  </remarks>
   TaurusTLS_X509VerifyParam = class(TaurusTLS_CustomX509VerifyParam)
   public
+    ///  <summary>
+    ///  Creates and initializes a new instance of the verification
+    ///  parameters.
+    ///  </summary>
+    ///  <returns>A new <see cref="TaurusTLS_X509VerifyParam" /> instance.</returns>
+    ///  <remarks>
+    ///  This constructor allocates and initializes the underlying native
+    ///  X509_VERIFY_PARAM structure using X509_VERIFY_PARAM_new().
+    ///  </remarks>
     constructor Create;
+
+    ///  <summary>
+    ///  Destroys the instance and releases the underlying native
+    ///  X509_VERIFY_PARAM structure.
+    ///  </summary>
     destructor Destroy; override;
   end;
 
+  ///  <summary>
+  ///  A container class that loads, stores, and manages a collection of
+  ///  cryptographic objects (certificates, keys, parameters, CRLs) obtained
+  ///  from a single OSSL Store operation.
+  ///  </summary>
+  ///  <remarks>
+  ///  This instance automatically opens the store, loads all objects
+  ///  matching the filter into internal memory (via <see cref="TStoreItem" />),
+  ///  and ensures their cleanup. The native OSSL Store Context is closed
+  ///  immediately after loading completes, minimizing the time that
+  ///  cryptographic objects (such as private keys) remain in memory
+  ///  in open, unencrypted form.
+  ///  </remarks>
   TTaurusTLS_OSSLStore = class
   public type
-  TStoreInfoType = (sitNone=0, sitName=1, sitParams=2, sitPubKey=3,
-    sitPrivKey=4, sitCert=5, sitCRL=6);
-  TStoreInfoTypes = set of TStoreInfoType;
+    ///  <summary>
+    ///  Defines the type of cryptographic object contained within an
+    ///  OSSL_STORE_INFO structure, corresponding to the OpenSSL types.
+    ///  </summary>
+    ///  <remarks>
+    ///  This enumeration determines the type of data retrieved from an
+    ///  OSSL Store stream (e.g., Certificate, Private Key, Parameters).
+    ///  </remarks>
+    TStoreInfoType = (
+      /// <summary>No data type or unknown type.</summary>
+      sitNone=0,
 
+      ///  <summary>
+      ///  The URI or path used to locate the cryptographic object (e.g., a file path).
+      ///  </summary>
+      sitName=1,
+
+      ///  <summary>Parameters, e.g., DH parameters or EC group (EVP_PKEY).</summary>
+      sitParams=2,
+
+      ///  <summary>A public key (EVP_PKEY).</summary>
+      sitPubKey=3,
+
+      ///  <summary>A private key (EVP_PKEY).</summary>
+      sitPrivKey=4,
+
+      ///  <summary>An X.509 certificate (X509).</summary>
+      sitCert=5,
+
+      ///  <summary>A Certificate Revocation List (X509_CRL).</summary>
+      sitCRL=6
+    );
+
+    ///  <summary>
+    ///  Represents a set of possible cryptographic object types retrieved
+    ///  from an OSSL Store.
+    ///  </summary>
+    TStoreInfoTypes = set of TStoreInfoType;
+
+    ///  <summary>
+    ///  Provides methods for extracting cryptographic objects and metadata
+    ///  from a native OpenSSL OSSL_STORE_INFO structure.
+    ///  </summary>
+    ///  <remarks>
+    ///  The OSSL_STORE_INFO structure acts as a temporary container for the
+    ///  object retrieved during a single iteration of the OSSL Store stream.
+    ///  </remarks>
     TStoreInfoHelper = record helper for POSSL_STORE_INFO
     public
+
+      ///  <summary>
+      ///  Retrieves the object type of the stored item.
+      ///  </summary>
+      ///  <param name="AInfo">The native OSSL_STORE_INFO instance.</param>
+      ///  <returns>
+      ///  The object type as <see cref="TTaurusTLS_OSSLStore.TStoreInfoType" />.
+      ///  </returns>
       class function GetType(AInfo: POSSL_STORE_INFO): TStoreInfoType; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Retrieves the raw C-style string pointer identifying the object type.
+      ///  </summary>
+      ///  <param name="AInfo">The native OSSL_STORE_INFO instance.</param>
+      ///  <returns>A C-style string pointer to the type name (e.g., 'CERT').</returns>
+      ///  <remarks>The returned pointer is internally managed and must not be freed.</remarks>
       class function GetTypeName(AInfo: POSSL_STORE_INFO): PIdAnsiChar; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Checks if the native OSSL_STORE_INFO pointer is valid (not nil).
+      ///  </summary>
+      ///  <param name="AInfo">The native OSSL_STORE_INFO instance.</param>
+      ///  <returns>True if the pointer is not nil.</returns>
       class function IsExist(AInfo: POSSL_STORE_INFO): boolean; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Retrieves the raw C-style string pointer to the name/URI of the
+      ///  stored object.
+      ///  </summary>
+      ///  <param name="AInfo">The native OSSL_STORE_INFO instance.</param>
+      ///  <returns>A C-style string pointer to the name/URI.</returns>
+      ///  <remarks>The returned pointer is internally managed and must not be freed.</remarks>
       class function GetName(AInfo: POSSL_STORE_INFO): PIdAnsiChar; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Retrieves the parameters structure (PEVP_PKEY)
+      ///  that holds Key Material Parameters
+      ///  </summary>
+      ///  <param name="AInfo">The native OSSL_STORE_INFO instance.</param>
+      ///  <returns>A pointer to the parameter set.</returns>
+      ///  <remarks>No ownership is transferred. Do not free this pointer.</remarks>
       class function GetParams(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Retrieves the public key structure (<see cref="PEVP_PKEY" />).
+      ///  </summary>
+      ///  <returns>A pointer to the public key component.</returns>
+      ///  <remarks>No ownership is transferred. Do not free this pointer.</remarks>
       class function GetPubKey(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Retrieves the private key structure (<see cref="PEVP_PKEY" />).
+      ///  </summary>
+      ///  <returns>A pointer to the private key component.</returns>
+      ///  <remarks>No ownership is transferred. Do not free this pointer.</remarks>
       class function GetPrivKey(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Retrieves the certificate structure (PX509).
+      ///  </summary>
+      ///  <param name="AInfo">The native OSSL_STORE_INFO instance.</param>
+      ///  <returns>A pointer to the certificate.</returns>
+      ///  <remarks>No ownership is transferred. Do not free this pointer.</remarks>
       class function GetCert(AInfo: POSSL_STORE_INFO): PX509; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Retrieves the CRL structure (PX509_CRL).
+      ///  </summary>
+      ///  <param name="AInfo">The native OSSL_STORE_INFO instance.</param>
+      ///  <returns>A pointer to the CRL.</returns>
+      ///  <remarks>No ownership is transferred. Do not free this pointer.</remarks>
       class function GetCrl(AInfo: POSSL_STORE_INFO): PX509_CRL; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
 
+      ///  <summary>
+      ///  Retrieves the name/URI of the stored object as an AnsiString.
+      ///  </summary>
+      ///  <param name="AInfo">The native OSSL_STORE_INFO instance.</param>
+      ///  <returns>The name/URI string.</returns>
+      ///  <remarks>The memory for the resulting string is internally managed.</remarks>
       class function CloneNameA(AInfo: POSSL_STORE_INFO): AnsiString; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Retrieves the name/URI of the stored object as a Unicode string.
+      ///  </summary>
+      ///  <param name="AInfo">The native OSSL_STORE_INFO instance.</param>
+      ///  <returns>The name/URI string.</returns>
+      ///  <remarks>The memory for the resulting string is internally managed.</remarks>
       class function CloneNameW(AInfo: POSSL_STORE_INFO): UnicodeString; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Creates a new copy of the parameters structure (<see cref="PEVP_PKEY" />).
+      ///  </summary>
+      ///  <returns>A new pointer to the parameter set.</returns>
+      ///  <remarks>Ownership is transferred. The caller must free the pointer
+      ///  using EVP_PKEY_free or equivalent routine.</remarks>
       class function CloneParams(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Creates a new copy of the public key structure (<see cref="PEVP_PKEY" />).
+      ///  </summary>
+      ///  <returns>A new pointer to the public key component.</returns>
+      ///  <remarks>Ownership is transferred. The caller must free the pointer
+      ///  using EVP_PKEY_free or equivalent routine.</remarks>
       class function ClonePubKey(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Creates a new copy of the private key structure (<see cref="PEVP_PKEY" />).
+      ///  </summary>
+      ///  <returns>A new pointer to the private key component.</returns>
+      ///  <remarks>Ownership is transferred. The caller must free the pointer
+      ///  using EVP_PKEY_free or equivalent routine.</remarks>
       class function ClonePrivKey(AInfo: POSSL_STORE_INFO): PEVP_PKEY; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Creates a new copy of the certificate structure (PX509).
+      ///  </summary>
+      ///  <param name="AInfo">The native OSSL_STORE_INFO instance.</param>
+      ///  <returns>A new pointer to the certificate.</returns>
+      ///  <remarks>Ownership is transferred. The caller must free the pointer
+      ///  using X509_free or equivalent routine.</remarks>
       class function CloneCert(AInfo: POSSL_STORE_INFO): PX509; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Creates a new copy of the CRL structure (PX509_CRL).
+      ///  </summary>
+      ///  <param name="AInfo">The native OSSL_STORE_INFO instance.</param>
+      ///  <returns>A new pointer to the CRL.</returns>
+      ///  <remarks>Ownership is transferred. The caller must free the pointer
+      ///  using X509_CRL_free or equivalent routine.</remarks>
       class function CloneCrl(AInfo: POSSL_STORE_INFO): PX509_CRL; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
 
+      ///  <summary>
+      ///  Frees the native OSSL_STORE_INFO instance pointer.
+      ///  </summary>
+      ///  <param name="AInfo">The native OSSL_STORE_INFO pointer, which will be set to nil.</param>
+      ///  <remarks>This should be called when finished with the temporary
+      ///  information structure retrieved during store iteration.</remarks>
       class procedure Free(var AInfo: POSSL_STORE_INFO); static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
     end;
 
+    ///  <summary>
+    ///  Provides methods for managing the native OpenSSL
+    ///  OSSL_STORE_CTX instance lifecycle and stream operations.
+    ///  </summary>
+    ///  <remarks>
+    ///  The OSSL Store Context (<see cref="POSSL_STORE_CTX" />) manages the
+    ///  process of reading cryptographic objects from a URI or BIO.
+    ///  </remarks>
     TStoreHelper = record helper for POSSL_STORE_CTX
     public
+
+      ///  <summary>
+      ///  Opens a new OSSL Store Context loading cryptographic objects (PEM, DER, etc.)
+      ///  from supporting by OpenSSL URI (e.g., a file path).
+      ///  </summary>
+      ///  <param name="AUri">The C-style string pointer representing the URI.</param>
+      ///  <param name="AUi">
+      ///  An instance handling user interaction (e.g., password prompts).
+      ///  </param>
+      ///  <returns>
+      ///  A new <see cref="POSSL_STORE_CTX" /> instance. Ownership is transferred.
+      ///  </returns>
       class function Open(AUri: PIdAnsiChar; AUi: TTaurusTLS_CustomOsslUi): POSSL_STORE_CTX;
         overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Opens a new OSSL Store Context using a custom BIO interface
+      ///  containing cryptographic objects (PEM, DER, etc.).
+      ///  </summary>
+      ///  <param name="ABio">The custom BIO interface instance.</param>
+      ///  <param name="AUi">
+      ///  An instance handling user interaction (e.g., password prompts).
+      ///  </param>
+      ///  <returns>
+      ///  A new <see cref="POSSL_STORE_CTX" /> instance. Ownership is transferred.
+      ///  </returns>
       class function Open(ABio: ITaurusTLS_Bio; AUi: TTaurusTLS_CustomOsslUi): POSSL_STORE_CTX;
         overload; static; {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class procedure Close(ACtx: POSSL_STORE_CTX); static;
+
+      ///  <summary>
+      ///  Closes and frees the native OSSL Store Context instance.
+      ///  </summary>
+      ///  <param name="ACtx">The <see cref="POSSL_STORE_CTX" /> instance to close.</param>
+      ///  <remarks>
+      ///  This method releases all internal resources associated with the
+      ///  context.
+      ///  </remarks>
+      class procedure Close(ACtx: POSSL_STORE_CTX); overload; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function Eof(ACtx: POSSL_STORE_CTX): boolean; static;
+
+      ///  <summary>
+      ///  Closes and frees the native OSSL Store Context instance.
+      ///  </summary>
+      procedure Close; overload; {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Checks if the store has reached the end-of-stream (EOF).
+      ///  </summary>
+      ///  <param name="ACtx">The <see cref="POSSL_STORE_CTX" /> instance.</param>
+      ///  <returns>True if there are no more objects to load.</returns>
+      class function Eof(ACtx: POSSL_STORE_CTX): boolean; overload; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function IsLoadError(ACtx: POSSL_STORE_CTX): boolean; static;
+
+      ///  <summary>
+      ///  Checks if this store context instance has reached the
+      ///  end-of-stream (EOF).
+      ///  </summary>
+      ///  <returns>True if there are no more objects to load.</returns>
+      function Eof: boolean; overload; {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Checks if an error occurred during the last store operation.
+      ///  </summary>
+      ///  <param name="ACtx">The <see cref="POSSL_STORE_CTX" /> instance.</param>
+      ///  <returns>True if an error flag is set.</returns>
+      class function IsLoadError(ACtx: POSSL_STORE_CTX): boolean; overload; static;
         {$IFDEF USE_INLINE}inline;{$ENDIF}
-      class function Load(ACtx: POSSL_STORE_CTX): POSSL_STORE_INFO; static;
+
+      ///  <summary>
+      ///  Checks if an error occurred during the last store operation
+      ///  on this context instance.
+      ///  </summary>
+      ///  <returns>True if an error flag is set.</returns>
+      function IsLoadError: boolean; overload; {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Attempts to load the next cryptographic object from the store.
+      ///  </summary>
+      ///  <param name="ACtx">The <see cref="POSSL_STORE_CTX" /> instance.</param>
+      ///  <returns>
+      ///  A pointer to the temporary <see cref="POSSL_STORE_INFO" /> instance
+      ///  containing the loaded object, or nil on error or EOF.
+      ///  </returns>
+      ///  <remarks>
+      ///  The returned object is temporary. Use methods from
+      ///  <see cref="TTaurusTLS_OSSLStore.TStoreInfoHelper" /> (e.g., CloneCert) to take ownership
+      ///  of the payload.
+      ///  </remarks>
+      class function Load(ACtx: POSSL_STORE_CTX): POSSL_STORE_INFO; overload;
+        static; {$IFDEF USE_INLINE}inline;{$ENDIF}
+
+      ///  <summary>
+      ///  Attempts to load the next cryptographic object from this store
+      ///  context.
+      ///  </summary>
+      ///  <returns>
+      ///  A pointer to the temporary <see cref="POSSL_STORE_INFO" /> instance
+      ///  containing the loaded object, or nil on error or EOF.
+      ///  </returns>
+      function Load: POSSL_STORE_INFO; overload; {$IFDEF USE_INLINE}inline;{$ENDIF}
     end;
 
-    TStoreElement = sitName..sitCrl;
-    TStoreElements = set of TStoreElement;
+    ///  <summary>
+    ///  Defines the range of valid cryptographic object types that can be
+    ///  retrieved from an OSSL Store, excluding the "None" type.
+    ///  </summary>
+    TStoreItemType = sitName..sitCrl;
 
+    ///  <summary>
+    ///  Represents a set of valid cryptographic object types retrieved
+    ///  from an OSSL Store.
+    ///  </summary>
+    TStoreItemTypes = set of TStoreItemType;
+
+    ///  <summary>
+    ///  Represents a single cryptographic object loaded from an OSSL Store,
+    ///  providing persistent storage for the native pointer and associated
+    ///  metadata.
+    ///  </summary>
+    ///  <remarks>
+    ///  This class clones the cryptographic object payload from the
+    ///  temporary <see cref="POSSL_STORE_INFO" /> container. Consequently,
+    ///  this class takes ownership of the underlying native OpenSSL pointer
+    ///  (e.g., <see cref="PEVP_PKEY" />, <see cref="PX509" />) and is
+    ///  responsible for freeing it in its <see cref="Destroy" /> method.
+    ///  </remarks>
     TStoreItem = class
     private type
       TItemData = record
@@ -931,70 +1424,246 @@ type
       function GetCert: PX509; {$IFDEF USE_INLINE}inline;{$ENDIF}
       function GetCrl: PX509_CRL; {$IFDEF USE_INLINE}inline;{$ENDIF}
     public
+      ///  <summary>
+      ///  Creates a new store item by cloning the cryptographic object
+      ///  from the provided OSSL_STORE_INFO.
+      ///  </summary>
+      ///  <param name="AInfo">
+      ///  The temporary <see cref="POSSL_STORE_INFO" /> pointer returned
+      ///  by OSSL_STORE_load.
+      ///  </param>
+      ///  <remarks>
+      ///  The native object contained in AInfo is cloned and the new
+      ///  pointer's ownership is taken by this instance.
+      ///  </remarks>
       constructor Create(AInfo: POSSL_STORE_INFO); overload;
+
+      ///  <summary>
+      ///  Destroys the instance and frees the owned native OpenSSL pointer
+      ///  (e.g., PEVP_PKEY, PX509) based on the stored item type.
+      ///  </summary>
       destructor Destroy; override;
 
+      ///  <summary>
+      ///  Retrieves the type of cryptographic object stored in this item.
+      ///  </summary>
       property &Type: TStoreInfoType read GetType;
+
+      ///  <summary>
+      ///  Retrieves the name or URI associated with the loaded object.
+      ///  </summary>
       property Name: RawByteString read GetName;
+
+      ///  <summary>
+      ///  Retrieves the Key Material Parameters pointer, if the item is a
+      ///  parameter set.
+      ///  </summary>
+      ///  <remarks>
+      ///  The caller must not free this pointer. Check the <see cref="Type" />
+      ///  property before accessing.
+      ///  </remarks>
       property Params: PEVP_PKEY read GetParams;
+
+      ///  <summary>
+      ///  Retrieves the Public Key pointer, if the item is a public key.
+      ///  </summary>
+      ///  <remarks>
+      ///  The caller must not free this pointer. Check the <see cref="Type" />
+      ///  property before accessing.
+      ///  </remarks>
       property PubKey: PEVP_PKEY read GetPubKey;
+
+      ///  <summary>
+      ///  Retrieves the Private Key pointer, if the item is a private key.
+      ///  </summary>
+      ///  <remarks>
+      ///  The caller must not free this pointer. Check the <see cref="Type" />
+      ///  property before accessing.
+      ///  </remarks>
       property PrivKey: PEVP_PKEY read GetPrivKey;
+
+      ///  <summary>
+      ///  Retrieves the X.509 Certificate pointer, if the item is a certificate.
+      ///  </summary>
+      ///  <remarks>
+      ///  The caller must not free this pointer. Check the <see cref="Type" />
+      ///  property before accessing.
+      ///  </remarks>
       property Cert: PX509 read GetCert;
+
+      ///  <summary>
+      ///  Retrieves the X.509 Certificate Revocation List (CRL) pointer.
+      ///  </summary>
+      ///  <remarks>
+      ///  The caller must not free this pointer. Check the <see cref="Type" />
+      ///  property before accessing.
+      ///  </remarks>
       property Crl: PX509_CRL read GetCrl;
     end;
 
   public const
+    ///  <summary>
+    ///  Bitmask representing all valid, retrievable cryptographic object
+    ///  types (Name, Params, Keys, Certs, CRLs).
+    ///  </summary>
     cStoreAElementsAll = [sitName..sitCRL];
 
   private type
-    TCounters = array [TStoreElement] of TIdC_Uint;
+    TCounters = array [TStoreItemType] of TIdC_Uint;
     TListInfo = TObjectList<TStoreItem>;
 
   private
     FList: TListInfo;
     FCounters: TCounters;
-    function GetCount(AType: TStoreElement): TIdC_Uint;
+    function GetCount(AType: TStoreItemType): TIdC_Uint;
       {$IFDEF USE_INLINE}inline;{$ENDIF}
 
   protected
+    ///  <summary>
+    ///  Internal constructor used when the native OSSL_STORE_CTX is already
+    ///  open. Performs the loading operation.
+    ///  </summary>
+    ///  <param name="ACtx">The pre-opened native OSSL Store Context pointer.</param>
+    ///  <param name="ALoadFilter">
+    ///  A set of <see cref="TStoreItemType" /> to filter which objects are
+    ///  cloned and stored. Defaults to all types.
+    ///  </param>
     constructor Create(ACtx: POSSL_STORE_CTX;
-        ALoadFilter: TStoreElements = cStoreAElementsAll); overload;
+        ALoadFilter: TStoreItemTypes = cStoreAElementsAll); overload;
+
+    ///  <summary>
+    ///  Raises a structured exception related to store operations.
+    ///  </summary>
+    ///  <param name="AMessage">The exception message.</param>
     procedure DoException(AMessage: string);
-    procedure DoLoad(ACtx: POSSL_STORE_CTX; ALoadFilter: TStoreElements);
+
+    ///  <summary>
+    ///  Loads of objects from the native OpenSSL Store context and clone
+    ///  them into the internal list.
+    ///  </summary>
+    ///  <param name="ACtx">The native OSSL Store Context pointer.</param>
+    ///  <param name="ALoadFilter">The set of types to load.</param>
+    procedure DoLoad(ACtx: POSSL_STORE_CTX; ALoadFilter: TStoreItemTypes);
 
   public
+    ///  <summary>
+    ///  Creates an instance by opening the store using an Ansi or UTF8
+    ///  String URI.
+    ///  </summary>
+    ///  <param name="AUri">The URI (Ansi or UTF8 String).</param>
+    ///  <param name="AUi">The User Interaction instance for password prompts.</param>
+    ///  <param name="ALoadFilter">The set of types to load.</param>
     constructor Create(AUri: RawByteString; AUi: TTaurusTLS_CustomOsslUi;
-      ALoadFilter: TStoreElements = cStoreAElementsAll); overload;
+      ALoadFilter: TStoreItemTypes = cStoreAElementsAll); overload;
+
+    ///  <summary>
+    ///  Creates an instance by opening the store using a URI (UnicodeString).
+    ///  </summary>
+    ///  <param name="AUri">The URI (e.g., file path).</param>
+    ///  <param name="AUi">The User Interaction instance for password prompts.</param>
+    ///  <param name="ALoadFilter">The set of types to load.</param>
     constructor Create(AUri: UnicodeString; AUi: TTaurusTLS_CustomOsslUi;
-      ALoadFilter: TStoreElements = cStoreAElementsAll); overload;
+      ALoadFilter: TStoreItemTypes = cStoreAElementsAll); overload;
+
+    ///  <summary>
+    ///  Creates an instance by opening the store from a memory
+    ///  using a <see cref="ITaurusTLS_Bio" /> interface.
+    ///  </summary>
+    ///  <param name="ABio">The custom BIO stream interface.</param>
+    ///  <param name="AUi">The User Interaction instance for password prompts.</param>
+    ///  <param name="ALoadFilter">The set of types to load.</param>
     constructor Create(ABio: ITaurusTLS_Bio; AUi: TTaurusTLS_CustomOsslUi;
-      ALoadFilter: TStoreElements = cStoreAElementsAll); overload;
+      ALoadFilter: TStoreItemTypes = cStoreAElementsAll); overload;
+
+    ///  <summary>
+    ///  Destroys the instance and frees all loaded
+    ///  <see cref="TTaurusTLS_OSSLStore.TStoreItem" /> objects
+    ///  and their native OpenSSL payloads.
+    ///  </summary>
     destructor Destroy; override;
 
-    property Count[AType: TStoreElement]: TIdC_Uint read GetCount;
+    ///  <summary>
+    ///  Retrieves the count of loaded cryptographic objects matching a
+    ///  specific type.
+    ///  </summary>
+    ///  <param name="AType">The specific <see cref="TStoreItemType" /> to count.</param>
+    ///  <returns>The number of items of the specified type.</returns>
+    property Count[AType: TStoreItemType]: TIdC_Uint read GetCount;
   end;
 
+  ///  <summary>
+  ///  Provides iteration capabilities for accessing and processing
+  ///  loaded cryptographic objects in a <see cref="TTaurusTLS_OSSLStore" />
+  ///  instance.
+  ///  </summary>
+  ///  <remarks>
+  ///  This helper defines methods that return an enumerator, allowing the
+  ///  store contents to be processed using a 'for in' loop.
+  ///  </remarks>
   TTaurusTLS_OSSLStoreHelper = class helper for TTaurusTLS_OSSLStore
   public type
+
+    ///  <summary>
+    ///  Enumerator class for iterating over loaded
+    ///  <see cref="TTaurusTLS_OSSLStore.TStoreItem" /> objects,
+    ///  optionally filtering by type.
+    ///  </summary>
     TEnumerator = class
     private
       FEnum: TListInfo.TEnumerator;
-      FFilter: TStoreElements;
+      FFilter: TStoreItemTypes;
       FCurrent: TStoreItem;
     protected
       function GetCurrent: TStoreItem;
     public
-      constructor Create(AList: TListInfo; AFilter: TStoreElements);
+      ///  <summary>
+      ///  Creates the enumerator, initializing it with the internal list
+      ///  and a set of types to include.
+      ///  </summary>
+      ///  <param name="AList">The internal TObjectList&lt;TStoreItem&gt;.</param>
+      ///  <param name="AFilter">The set of types to iterate over.</param>
+      constructor Create(AList: TListInfo; AFilter: TStoreItemTypes);
+
+      ///  <summary>
+      ///  Destroys the enumerator instance.
+      ///  </summary>
       destructor Destroy; override;
+
+      ///  <summary>
+      ///  Standard method required for 'for in' loops; returns the enumerator itself.
+      ///  </summary>
       function GetEnumerator: TEnumerator;
+
+      ///  <summary>
+      ///  Advances the enumerator to the next item matching the filter.
+      ///  </summary>
+      ///  <returns>True if the move was successful and <see cref="Current" /> is valid.</returns>
       function MoveNext: boolean;
+
+      ///  <summary>
+      ///  Retrieves the item at the enumerator's current position.
+      ///  </summary>
       property Current: TStoreItem read GetCurrent;
     end;
   public
+    ///  <summary>
+    ///  Retrieves a new enumerator for iterating over ALL loaded items.
+    ///  </summary>
+    ///  <returns>A new <see cref="TEnumerator" /> instance.</returns>
     function GetEnumerator: TEnumerator; overload;
-    function GetEnumerator(const AFilter: TTaurusTLS_OSSLStore.TStoreElements):
+
+    ///  <summary>
+    ///  Retrieves a new enumerator, filtered to iterate only over items
+    ///  matching the specified types.
+    ///  </summary>
+    ///  <param name="AFilter">
+    ///  The set of <see cref="TTaurusTLS_OSSLStore.TStoreItemType" /> to include.
+    ///  </param>
+    ///  <returns>A new <see cref="TEnumerator" /> instance.</returns>
+    function GetEnumerator(const AFilter: TTaurusTLS_OSSLStore.TStoreItemTypes):
       TEnumerator; overload;
   end;
+
 
   TaurusTLS_X509Store = class
   public type
@@ -1786,10 +2455,20 @@ begin
   OSSL_STORE_close(ACtx);
 end;
 
+procedure TTaurusTLS_OSSLStore.TStoreHelper.Close;
+begin
+  Close(Self);
+end;
+
 class function TTaurusTLS_OSSLStore.TStoreHelper.Eof(
   ACtx: POSSL_STORE_CTX): boolean;
 begin
   Result:=OSSL_STORE_eof(ACtx) = 1;
+end;
+
+function TTaurusTLS_OSSLStore.TStoreHelper.Eof: boolean;
+begin
+  Result:=Eof(Self);
 end;
 
 class function TTaurusTLS_OSSLStore.TStoreHelper.IsLoadError(
@@ -1798,10 +2477,20 @@ begin
   Result:=OSSL_STORE_error(ACtx) = 1;
 end;
 
+function TTaurusTLS_OSSLStore.TStoreHelper.IsLoadError: boolean;
+begin
+  Result:=IsLoadError(Self);
+end;
+
 class function TTaurusTLS_OSSLStore.TStoreHelper.Load(
   ACtx: POSSL_STORE_CTX): POSSL_STORE_INFO;
 begin
   Result:=OSSL_STORE_load(ACtx);
+end;
+
+function TTaurusTLS_OSSLStore.TStoreHelper.Load: POSSL_STORE_INFO;
+begin
+  Result:=Load(Self);
 end;
 
 { TTaurusTLS_OSSLStore.TStoreItem }
@@ -1893,7 +2582,7 @@ end;
 { TTaurusTLS_OSSLStore }
 
 constructor TTaurusTLS_OSSLStore.Create(ACtx: POSSL_STORE_CTX;
-  ALoadFilter: TStoreElements);
+  ALoadFilter: TStoreItemTypes);
 begin
   if not Assigned(ACtx) then
     DoException('OSSL Context was not initialized.');
@@ -1905,7 +2594,7 @@ begin
 end;
 
 constructor TTaurusTLS_OSSLStore.Create(AUri: RawByteString;
-  AUi:TTaurusTLS_CustomOsslUi; ALoadFilter: TStoreElements);
+  AUi:TTaurusTLS_CustomOsslUi; ALoadFilter: TStoreItemTypes);
 var
   lCtx: POSSL_STORE_CTX;
 
@@ -1915,13 +2604,13 @@ begin
 end;
 
 constructor TTaurusTLS_OSSLStore.Create(AUri: UnicodeString;
-  AUi: TTaurusTLS_CustomOsslUi; ALoadFilter: TStoreElements);
+  AUi: TTaurusTLS_CustomOsslUi; ALoadFilter: TStoreItemTypes);
 begin
   Create(AnsiString(AUri), AUi, ALoadFilter);
 end;
 
 constructor TTaurusTLS_OSSLStore.Create(ABio: ITaurusTLS_Bio;
-  AUi: TTaurusTLS_CustomOsslUi; ALoadFilter: TStoreElements);
+  AUi: TTaurusTLS_CustomOsslUi; ALoadFilter: TStoreItemTypes);
 var
   lCtx: POSSL_STORE_CTX;
 
@@ -1936,7 +2625,7 @@ begin
   FreeAndNil(FList);
 end;
 
-function TTaurusTLS_OSSLStore.GetCount(AType: TStoreElement): TIdC_Uint;
+function TTaurusTLS_OSSLStore.GetCount(AType: TStoreItemType): TIdC_Uint;
 begin
   Result:=FCounters[AType];
 end;
@@ -1947,9 +2636,9 @@ begin
 end;
 
 procedure TTaurusTLS_OSSLStore.DoLoad(ACtx: POSSL_STORE_CTX;
-  ALoadFilter: TStoreElements);
+  ALoadFilter: TStoreItemTypes);
 var
-  lFilter: TStoreElements;
+  lFilter: TStoreItemTypes;
   lInfo: POSSL_STORE_INFO;
   lItem: TStoreItem;
 
@@ -1974,7 +2663,7 @@ end;
 { TTaurusTLS_OSSLStoreHelper.TEnumerator }
 
 constructor TTaurusTLS_OSSLStoreHelper.TEnumerator.Create(AList: TListInfo;
-  AFilter: TStoreElements);
+  AFilter: TStoreItemTypes);
 begin
   FEnum:=AList.GetEnumerator;
   FFilter:=AFilter;
@@ -2008,7 +2697,7 @@ end;
 { TTaurusTLS_OSSLStoreHelper }
 
 function TTaurusTLS_OSSLStoreHelper.GetEnumerator(
-  const AFilter: TTaurusTLS_OSSLStore.TStoreElements): TEnumerator;
+  const AFilter: TTaurusTLS_OSSLStore.TStoreItemTypes): TEnumerator;
 begin
   Result:=TEnumerator.Create(FList, AFilter);
 end;
